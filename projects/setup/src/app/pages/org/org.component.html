@@ -1,0 +1,599 @@
+<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
+  <div fxFlex="30%" fxFlex.lt-md="100%" class="details">
+    <div class="inner">
+      <mat-nav-list>
+        <mat-list-item>
+          <div matLine>
+            <h1 class="mat-display-1">Welcome, Let's Get Started</h1>
+          </div>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+
+        <ng-container *ngIf="State.Step">
+          <ng-container>
+            <mat-list-item *ngIf="State.Step == SetupStepTypes.OrgDetails">
+              <mat-icon matListIcon>chevron_right</mat-icon>
+
+              <div matLine>
+                <h1 class="mat-headline">Organization Details</h1>
+
+                <h2 class="mat-subheading-2">Your organization serves as the backbone for organizing the solutions you build.</h2>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.OrgDetails && NewForm.valid">
+              <mat-icon matListIcon>check_box</mat-icon>
+
+              <a matLine (click)="SetStep(SetupStepTypes.OrgDetails)">Organization Details Configured</a>
+            </mat-list-item>
+          </ng-container>
+
+          <mat-divider></mat-divider>
+
+          <ng-container>
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureStep && !InfraConfigFormGroup.valid">
+              <mat-icon matListIcon>check_box_outline_blank</mat-icon>
+
+              <h1 matLine>Setup Enterprise Infrastructure</h1>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step == SetupStepTypes.AzureSetup">
+              <mat-icon matListIcon>chevron_right</mat-icon>
+
+              <div matLine>
+                <h1 class="mat-headline">Setup Enterprise Infrastructure</h1>
+
+                <h2 class="mat-subheading-2">
+                  Infrastructure Setup currently requires an Azure tenant and subscription to get started. Use the button below to create
+                  your free Azure account.
+                </h2>
+
+                <div class="spread">
+                  <a mat-raised-button href="https://azure.microsoft.com/free/" color="primary" class="mat-full-width" target="_blank">
+                    <img matListIcon src="assets/img/Azure-logo.png" />
+
+                    Create a Free Azure Account
+                  </a>
+                </div>
+
+                <h2 class="mat-subheading-2">
+                  From your newly created subscription or one that already exists, Fathym needs access to your Azure subscription to help
+                  you manage your infrastructure. Follow the instructions in the link below (create a secret and ignore the section on
+                  certificates) to located your authorization information, and enter it in the form inputs.
+                </h2>
+
+                <div class="spread">
+                  <a
+                    mat-raised-button
+                    href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal"
+                    color="accent"
+                    class="mat-full-width"
+                    target="_blank"
+                  >
+                    <mat-icon>settings</mat-icon>
+
+                    Locate your configuration information
+                  </a>
+                </div>
+
+                <div class="spread">
+                  <h3 class="mat-subheading-1">Additional infrastructure options coming soon!</h3>
+                </div>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureStep && InfraConfigFormGroup.valid">
+              <mat-icon matListIcon>check_box</mat-icon>
+
+              <a matLine (click)="SetStep(SetupStepTypes.AzureSetup)">Setup Enterprise Infrastructure</a>
+            </mat-list-item>
+          </ng-container>
+
+          <mat-divider></mat-divider>
+
+          <ng-container>
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureOAuth && !DevOpsSetupFormGroup.valid">
+              <mat-icon matListIcon>check_box_outline_blank</mat-icon>
+
+              <h1 matLine>Setup Dev Ops Authorization</h1>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step == SetupStepTypes.AzureOAuth">
+              <mat-icon matListIcon>chevron_right</mat-icon>
+
+              <div matLine>
+                <h1 class="mat-headline">Setup Dev Ops Authorization</h1>
+
+                <p class="mat-subheading-2">
+                  Use the link below to Start a New Azure DevOps OAuth App. The values in the input fields should be copied into the form on
+                  the newly opened page.
+                </p>
+
+                <div class="spread">
+                  <a
+                    mat-raised-button
+                    href="https://aex.dev.azure.com/app/register?mkt=en-US"
+                    color="primary"
+                    class="mat-full-width"
+                    target="_blank"
+                  >
+                    <img matListIcon src="assets/img/Azure-logo.png" />
+
+                    Start New DevOps OAuth App
+                  </a>
+                </div>
+
+                <p class="mat-subheading-2">
+                  For more information on OAuth apps with Azure, checkout the following:
+                </p>
+
+                <div class="spread">
+                  <a
+                    mat-raised-button
+                    href="https://docs.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops"
+                    color="accent"
+                    class="mat-full-width"
+                    target="_blank"
+                  >
+                    <mat-icon matListIcon>add</mat-icon>
+
+                    Documentation on DevOps OAuth App
+                  </a>
+                </div>
+
+                <div class="spread">
+                  <h3 class="mat-subheading-1">Additional Dev/Ops options coming soon!</h3>
+                </div>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureOAuth && DevOpsSetupFormGroup.valid">
+              <mat-icon matListIcon>check_box</mat-icon>
+
+              <a matLine (click)="SetStep(SetupStepTypes.AzureOAuth)">Setup Dev Ops Authorization</a>
+            </mat-list-item>
+          </ng-container>
+
+          <mat-divider></mat-divider>
+
+          <ng-container>
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.HostConfig && !HostForm.valid">
+              <mat-icon matListIcon>check_box_outline_blank</mat-icon>
+
+              <h1 matLine>Create Organization Host</h1>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step == SetupStepTypes.HostConfig">
+              <mat-icon matListIcon>chevron_right</mat-icon>
+
+              <div matLine>
+                <h1 class="mat-headline">Create Organization Host</h1>
+
+                <ng-container *ngIf="State.HostFlow == null">
+                  <h2 class="mat-subheading-2">
+                    If you have your own organization domain, follow that flow to validate domain ownership.
+                  </h2>
+
+                  <h2 class="mat-subheading-2">
+                    If you would like to use a shared domain, please follow that flow to secure your unused domain.
+                  </h2>
+                </ng-container>
+
+                <ng-container *ngIf="State.HostFlow == 'shared'">
+                  <h2 class="mat-subheading-2">Select the root domain for your shared site.</h2>
+
+                  <h2 class="mat-subheading-2">
+                    Choose the desired subdomain for your shared site, and click confirm to verify it is available and secure it.
+                  </h2>
+                </ng-container>
+
+                <ng-container *ngIf="State.HostFlow == 'private'">
+                  <h2 class="mat-subheading-2">
+                    Enter the full domain that you would like to use for your site. Something like:
+                  </h2>
+
+                  <h2 class="mat-subheading-2">
+                    www.my-domain.com
+                  </h2>
+
+                  <h2 *ngIf="HostValid" class="mat-subheading-2">
+                    Then you will need to add a CNAME record for your domain provider. The record should have '{{ Subdomain }}' point to
+                    'lcu-prd.fathym.com'
+                  </h2>
+                </ng-container>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.HostConfig && HostForm.valid">
+              <mat-icon matListIcon>check_box</mat-icon>
+
+              <a matLine (click)="SetStep(SetupStepTypes.HostConfig)">Create Organization Host</a>
+            </mat-list-item>
+          </ng-container>
+
+          <mat-divider></mat-divider>
+
+          <ng-container>
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.Provisioning">
+              <mat-icon matListIcon>check_box_outline_blank</mat-icon>
+
+              <h1 matLine>Review & Setup</h1>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step == SetupStepTypes.Review">
+              <mat-icon matListIcon>chevron_right</mat-icon>
+
+              <div matLine>
+                <h1 class="mat-headline">Review & Setup</h1>
+
+                <h2 class="mat-subheading-2">
+                  ...
+                </h2>
+
+                <h2 class="mat-subheading-2">
+                  ...
+                </h2>
+              </div>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step == SetupStepTypes.Provisioning">
+              <mat-icon matListIcon>chevron_right</mat-icon>
+
+              <div matLine>
+                <h1 class="mat-headline">Provisioning</h1>
+
+                <h2 class="mat-subheading-2">
+                  ...
+                </h2>
+
+                <h2 class="mat-subheading-2">
+                  ...
+                </h2>
+              </div>
+            </mat-list-item>
+
+
+            <mat-list-item *ngIf="State.Step == SetupStepTypes.Complete">
+              <mat-icon matListIcon>check_box</mat-icon>
+
+              <a matLine>Provisioned</a>
+            </mat-list-item>
+          </ng-container>
+        </ng-container>
+      </mat-nav-list>
+
+      <div *ngIf="State.Step == SetupStepTypes.Provisioning">
+        <h1 class="mat-display-2">Thank You for working with us</h1>
+
+        <h2 class="mat-subheading-2">{{ State.Provisioning }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
+    <div class="inner">
+      <div>
+        <div *ngIf="!State.Loading">
+          <form *ngIf="State.Step == SetupStepTypes.OrgDetails" [formGroup]="NewForm" (ngSubmit)="SetOrgDetails()">
+            <h1 class="mat-display-3">Setup Your Organization</h1>
+
+            <mat-form-field class="mat-full-width">
+              <input matInput placeholder="Organization Name" formControlName="name" required />
+
+              <mat-icon matSuffix matTooltip="Enter a unique name for your new organization">live_help</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="mat-full-width">
+              <textarea matInput placeholder="Description" formControlName="desc" required></textarea>
+
+              <mat-icon matSuffix matTooltip="Enter a useful description for your new organization">live_help</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="mat-full-width">
+              <input matInput placeholder="Organization Lookup" formControlName="lookup" required />
+
+              <mat-icon matSuffix matTooltip="Enter a valid organization lookup (lowercase alpha characters and '-' accepted)">
+                live_help
+              </mat-icon>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!NewForm.valid">
+              Continue to Infrastructure Setup
+            </button>
+          </form>
+
+          <form *ngIf="State.Step == SetupStepTypes.AzureSetup" [formGroup]="InfraConfigFormGroup" (ngSubmit)="SetOrgDetails()">
+            <div class="spread">
+              <h2 class="mat-headline title" style="text-align: center">Microsoft Azure Subscription Setup</h2>
+
+              <div>
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="Azure Tenant (Directory) ID" formControlName="azureTenantId" required />
+
+                  <mat-hint>32 Character Limit</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="Azure Subscription ID" formControlName="azureSubId" required />
+
+                  <mat-hint>32 Character Limit</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="Azure App ID" formControlName="azureAppId" required />
+
+                  <mat-hint>32 Character Limit</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="Azure App Auth key" formControlName="azureAppAuthKey" required />
+
+                  <mat-hint>32 Character Limit</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <div class="spread">
+                <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()" [disabled]="!InfraConfigFormGroup.valid">
+                  Continue to Dev Ops Setup
+                </a>
+
+                <a mat-button class="mat-full-width" color="warn" (click)="SetStep(SetupStepTypes.OrgDetails)">Rename Organization</a>
+              </div>
+            </div>
+          </form>
+
+          <form *ngIf="State.Step == SetupStepTypes.AzureOAuth" [formGroup]="DevOpsSetupFormGroup" (ngSubmit)="SetOrgDetails()">
+            <div class="spread">
+              <h2 class="mat-headline title" style="text-align: center">Microsoft Azure Subscription Setup</h2>
+
+              <p class="mat-subheading-2">
+                To setup Azure DevOps on your new domain, you'll first have to setup an Azure DevOps OAuth Application. This application
+                will create a secure way for you to mange your enterprise DevOps across a vast number of users (internal and external).
+              </p>
+
+              <div fxLayout="row wrap" fxLayoutAlign="center center">
+                <div fxFlex="40%" fxFlex.lt-md="80%" class="spread">
+                  <mat-list>
+                    <mat-list-item>
+                      <mat-form-field matLine class="mat-full-width">
+                        <input matInput placeholder="Company name:" [value]="State.OrganizationName" [disabled]="true" #doaCompanyName />
+
+                        <a mat-icon-button matSuffix (click)="Copy(doaCompanyName)">
+                          <mat-icon matSuffix>file_copy</mat-icon>
+                        </a>
+                      </mat-form-field>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                      <mat-form-field matLine class="mat-full-width">
+                        <input matInput placeholder="Company website:" [value]="RootURL" [disabled]="true" #doaCompanyWebsite />
+
+                        <a mat-icon-button matSuffix (click)="Copy(doaCompanyWebsite)">
+                          <mat-icon matSuffix>file_copy</mat-icon>
+                        </a>
+                      </mat-form-field>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                      <mat-form-field matLine class="mat-full-width">
+                        <input matInput placeholder="Terms of service URL:" value="{{ RootURL }}/terms" [disabled]="true" #doaTerms />
+
+                        <a mat-icon-button matSuffix (click)="Copy(doaTerms)">
+                          <mat-icon matSuffix>file_copy</mat-icon>
+                        </a>
+                      </mat-form-field>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                      <mat-form-field matLine class="mat-full-width">
+                        <input matInput placeholder="Privacy statement URL:" value="{{ RootURL }}/privacy" [disabled]="true" #doaTerms />
+
+                        <a mat-icon-button matSuffix (click)="Copy(doaTerms)">
+                          <mat-icon matSuffix>file_copy</mat-icon>
+                        </a>
+                      </mat-form-field>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+
+                <div fxFlex="40%" fxFlex.lt-md="80%" class="spread">
+                  <mat-list>
+                    <mat-list-item>
+                      <mat-form-field matLine class="mat-full-width">
+                        <input
+                          matInput
+                          placeholder="Application name:"
+                          value="{{ State.OrganizationName }} - LCU"
+                          [disabled]="true"
+                          #doaAppName
+                        />
+
+                        <a mat-icon-button matSuffix (click)="Copy(doaAppName)">
+                          <mat-icon matSuffix>file_copy</mat-icon>
+                        </a>
+                      </mat-form-field>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                      <mat-form-field matLine class="mat-full-width">
+                        <input
+                          matInput
+                          placeholder="Description:"
+                          value="{{ State.OrganizationName }} - Low Code Unit"
+                          [disabled]="true"
+                          #doaAppDesc
+                        />
+
+                        <a mat-icon-button matSuffix (click)="Copy(doaAppDesc)">
+                          <mat-icon matSuffix>file_copy</mat-icon>
+                        </a>
+                      </mat-form-field>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                      <mat-form-field matLine class="mat-full-width">
+                        <input matInput placeholder="Logo URL:" value="{{ RootURL }}/img/logo" [disabled]="true" #doaLogo />
+
+                        <a mat-icon-button matSuffix (click)="Copy(doaLogo)">
+                          <mat-icon matSuffix>file_copy</mat-icon>
+                        </a>
+                      </mat-form-field>
+                      <span matLine>:</span>
+
+                      <strong matLine></strong>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                      <mat-form-field matLine class="mat-full-width">
+                        <input matInput placeholder="Application website:" value="{{ RootURL }}" [disabled]="true" #doaAppWebsite />
+
+                        <a mat-icon-button matSuffix (click)="Copy(doaAppWebsite)">
+                          <mat-icon matSuffix>file_copy</mat-icon>
+                        </a>
+                      </mat-form-field>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                      <mat-form-field matLine class="mat-full-width">
+                        <input
+                          matInput
+                          placeholder="Authorization callback URL:"
+                          value="{{ RootURL }}/.devops/authorize"
+                          [disabled]="true"
+                          #doaAuthCallback
+                        />
+
+                        <a mat-icon-button matSuffix (click)="Copy(doaAuthCallback)">
+                          <mat-icon matSuffix>file_copy</mat-icon>
+                        </a>
+                      </mat-form-field>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+              </div>
+
+              <p class="mat-subheading-2" matLine>
+                Once the new application is created, copy and paste the required values into the input fields below:
+              </p>
+
+              <mat-form-field class="mat-full-width">
+                <input matInput placeholder="Dev Ops App ID" formControlName="devOpsAppId" required />
+
+                <!-- <mat-hint>...</mat-hint> -->
+              </mat-form-field>
+
+              <mat-form-field class="mat-full-width">
+                <input matInput placeholder="Dev Ops Client Secret" formControlName="devOpsClientSecret" required />
+
+                <!-- <mat-hint>...</mat-hint> -->
+              </mat-form-field>
+
+              <mat-form-field class="mat-full-width">
+                <input matInput placeholder="Dev Ops Scopes" formControlName="devOpsScopes" required />
+
+                <!-- <mat-hint>...</mat-hint> -->
+              </mat-form-field>
+
+              <div class="spread">
+                <a mat-raised-button class="mat-full-width" color="primary" (click)="SetupDevOpsOAuth()">
+                  Continue to Host Setup
+                </a>
+              </div>
+            </div>
+          </form>
+
+          <form *ngIf="State.Step == SetupStepTypes.HostConfig" [formGroup]="HostForm" (ngSubmit)="SecureHost()">
+            <h1 class="mat-display-3">Establish {{ State.OrganizationName }} Host</h1>
+
+            <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.HostFlow">
+              <div fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-card>
+                  <h2 class="mat-subheading-2">Use a Fathym Domain</h2>
+
+                  <p class="mat-subtitle paragraph-title paragraph-title">
+                    Don't have your own domain? Or just want to get started quickly? This is the route for you.
+                  </p>
+
+                  <p class="mat-subtitle paragraph-title paragraph-title">
+                    You'll be able to add your own domain later on, click below to get started.
+                  </p>
+
+                  <a mat-raised-button color="accent" (click)="SetHostFlow('shared')">Use Fathym Domain</a>
+                </mat-card>
+              </div>
+
+              <div fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-card>
+                  <h2 class="mat-subheading-2">Bring Your Own Domain</h2>
+
+                  <p class="mat-subtitle paragraph-title paragraph-title">
+                    Ready to get started forging your own domain? We'll walk you through getting started here.
+                  </p>
+
+                  <p class="mat-subtitle paragraph-title paragraph-title">
+                    You'll be able to add more domains later on, so click below to get started
+                  </p>
+
+                  <a mat-raised-button color="primary" (click)="SetHostFlow('private')">Use Custom Domain</a>
+                </mat-card>
+              </div>
+            </div>
+
+            <ng-container *ngIf="State.HostFlow">
+              <mat-form-field class="mat-full-width" *ngIf="State.HostFlow == 'shared'">
+                <mat-select placeholder="Root Domain" formControlName="root">
+                  <mat-option [value]="host" *ngFor="let host of State.HostOptions">{{ host }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <ng-container *ngIf="HostForm.controls['root'].value || State.HostFlow == 'private'">
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="Host Address" (ngModelChange)="onChanges()" formControlName="host" required />
+
+                  <span matSuffix *ngIf="State.HostFlow == 'shared'">.{{ HostForm.controls['root'].value }}</span>
+
+                  <mat-icon
+                    matSuffix
+                    matTooltip="Select a domain. You can choose your own domain or one of Fathym’s domains. Fathym’s domains allow you to use a sub-domain, for example, yourcompany.{{
+                      HostForm.controls['root'].value
+                    }}."
+                    >live_help</mat-icon
+                  >
+                </mat-form-field>
+
+                <div *ngIf="State.HostApprovalMessage">
+                  <h2>{{ State.HostApprovalMessage }}</h2>
+                </div>
+
+                <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!HostForm.valid || !HostValid">
+                  Continue to Review and Setup
+                </button>
+              </ng-container>
+
+              <div>
+                <a mat-button (click)="SetHostFlow(null)"><mat-icon>cancel</mat-icon> Back To Host Options</a>
+              </div>
+            </ng-container>
+          </form>
+
+          <div *ngIf="State.Step == SetupStepTypes.Provisioning">
+            <h1 class="mat-display-3">Creating Your {{ State.OrganizationName }} Forge</h1>
+
+            <a mat-button href="https://{{ State.Host }}/forge" class="mat-headline title">{{ State.Host }}</a>
+
+            <p class="mat-body-2 plain-text">
+              Redirecting in 5 seconds...
+            </p>
+          </div>
+        </div>
+
+        <div *ngIf="State.Loading || State.Step == SetupStepTypes.Provisioning">
+          <p class="Organization Details box">
+            <mat-spinner></mat-spinner>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

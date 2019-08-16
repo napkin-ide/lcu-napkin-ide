@@ -1,0 +1,28 @@
+@import '../../common/src/styles/theme';
+
+@include mat-core();
+
+@mixin nide($theme) {
+  @include angular-material-theme($theme);
+
+  $config: mat-typography-config();
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  @include defaults($theme);
+
+  html,
+  body {
+    color: $nide-black;
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    // font-family: Roboto, 'Helvetica Neue', sans-serif;
+  }
+}
+
+@include nide($nide-theme);
