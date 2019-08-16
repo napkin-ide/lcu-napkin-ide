@@ -83,7 +83,7 @@
               </div>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureStep && InfraConfigFormGroup.valid">
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureSetup && InfraConfigFormGroup.valid">
               <mat-icon matListIcon>check_box</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.AzureSetup)">Setup Enterprise Infrastructure</a>
@@ -228,46 +228,18 @@
                 <h1 class="mat-headline">Review & Setup</h1>
 
                 <h2 class="mat-subheading-2">
-                  ...
+                  We are going to setup a fairly opinionated starting infrastructure for your project.  This screen gives you a good idea
+                  of what we are doing for you.
                 </h2>
 
                 <h2 class="mat-subheading-2">
-                  ...
+                  For more information, checkout the following documentation link...
                 </h2>
               </div>
-            </mat-list-item>
-
-            <mat-list-item *ngIf="State.Step == SetupStepTypes.Provisioning">
-              <mat-icon matListIcon>chevron_right</mat-icon>
-
-              <div matLine>
-                <h1 class="mat-headline">Provisioning</h1>
-
-                <h2 class="mat-subheading-2">
-                  ...
-                </h2>
-
-                <h2 class="mat-subheading-2">
-                  ...
-                </h2>
-              </div>
-            </mat-list-item>
-
-
-            <mat-list-item *ngIf="State.Step == SetupStepTypes.Complete">
-              <mat-icon matListIcon>check_box</mat-icon>
-
-              <a matLine>Provisioned</a>
             </mat-list-item>
           </ng-container>
         </ng-container>
       </mat-nav-list>
-
-      <div *ngIf="State.Step == SetupStepTypes.Provisioning">
-        <h1 class="mat-display-2">Thank You for working with us</h1>
-
-        <h2 class="mat-subheading-2">{{ State.Provisioning }}</h2>
-      </div>
     </div>
   </div>
 
@@ -577,14 +549,10 @@
             </ng-container>
           </form>
 
-          <div *ngIf="State.Step == SetupStepTypes.Provisioning">
-            <h1 class="mat-display-3">Creating Your {{ State.OrganizationName }} Forge</h1>
+          <div *ngIf="State.Step == SetupStepTypes.Review">
+            <h1 class="mat-display-3">Adding {{ State.OrganizationName }} to the Ecosystem</h1>
 
-            <a mat-button href="https://{{ State.Host }}/forge" class="mat-headline title">{{ State.Host }}</a>
-
-            <p class="mat-body-2 plain-text">
-              Redirecting in 5 seconds...
-            </p>
+            <h2 class="mat-display-1">If you can Fathym It, you can Build It.</h2>
           </div>
         </div>
 

@@ -5,9 +5,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { OrgComponent } from './org/org.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CompleteComponent } from './complete/complete.component';
 
 @NgModule({
-  declarations: [OrgComponent],
+  declarations: [OrgComponent, CompleteComponent],
   imports: [
     CommonModule,
     FormsModule,

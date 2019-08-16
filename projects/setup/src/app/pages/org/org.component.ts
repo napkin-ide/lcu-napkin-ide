@@ -187,15 +187,19 @@ export class OrgComponent implements OnInit {
   //  Helpers
   protected stateChanged() {
     if (this.State.OrganizationName) {
-      this.NewForm.controls.name.setValue(this.State.OrganizationName || '');
-
-      this.NewForm.controls.desc.setValue(this.State.OrganizationDescription || '');
-
-      this.NewForm.controls.lookup.setValue(this.State.OrganizationLookup || '');
+      this.NewForm.patchValue({
+        name: this.State.OrganizationName || '',
+        desc: this.State.OrganizationDescription || '',
+        lookup: this.State.OrganizationLookup || ''
+      });
     }
 
     if (this.State.Host) {
-      this.HostForm.controls.host.setValue(this.State.Host || '');
+      this.HostForm.controls.root.setValue([this.State.Host.split('.')[1], this.State.Host.split('.')[2]].join('.'));
+
+      this.HostForm.controls.host.setValue(this.State.Host.split('.')[0] || '');
+
+      setTimeout(() => this.HostForm.updateValueAndValidity());
     }
 
     if (this.State.EnvSettings) {
@@ -206,6 +210,8 @@ export class OrgComponent implements OnInit {
       this.InfraConfigFormGroup.controls.azureAppId.setValue(this.State.EnvSettings.AzureAppID || '');
 
       this.InfraConfigFormGroup.controls.azureAppAuthKey.setValue(this.State.EnvSettings.AzureAppAuthKey || '');
+
+      setTimeout(() => this.InfraConfigFormGroup.updateValueAndValidity());
     }
 
     if (this.State.DevOpsAppID) {
@@ -214,12 +220,13 @@ export class OrgComponent implements OnInit {
       this.DevOpsSetupFormGroup.controls.devOpsClientSecret.setValue(this.State.DevOpsClientSecret || '');
 
       this.DevOpsSetupFormGroup.controls.devOpsScopes.setValue(this.State.DevOpsScopes || '');
-    }
 
-    if (this.State.Step === 'Provisioning') {
-      setTimeout(() => {
-        // location.href = `https://${this.State.Host}/forge`;
-      }, 10000);
+      setTimeout(() => this.DevOpsSetupFormGroup.updateValueAndValidity());
     }
+    // if (this.State.Step === 'Provisioning') {
+    //   setTimeout(() => {
+    //     // location.href = `https://${this.State.Host}/forge`;
+    //   }, 10000);
+    // }
   }
 }
