@@ -25,7 +25,6 @@
           min-height: 600px;
           padding: 2rem;
           display: flex;
-          text-align: center;
           align-items: center;
           min-height: inherit;
           box-sizing: border-box;
@@ -34,8 +33,14 @@
       }
 
       .details .inner {
+        position: sticky;
+        top: 0;
+        padding-top: 5px;
+        padding-bottom: 2em;
+
         .mat-list,
         .mat-nav-list {
+
           .mat-list-text {
             color: $nide-white;
           }
@@ -49,12 +54,22 @@
       }
 
       .inner {
-        text-align: center;
+        text-align: left;
+
+        .spread {
+          overflow: auto;
+        }
 
         .mat-list,
         .mat-nav-list {
           text-align: left;
           width: 100%;
+        }
+
+        .mat-button,
+        .mat-raised-button,
+        .mat-stroked-button {
+          white-space: normal !important;
         }
 
         .mat-list-base {

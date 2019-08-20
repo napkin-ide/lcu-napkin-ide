@@ -14,6 +14,10 @@ export class OrgComponent implements OnInit {
   //  Fields
 
   //  Properties
+  public get AzureDevOpsOAuthURL(): string {
+    return `/.devops/oauth?redirectUri=${this.OAuthRedirectURL}`;
+  }
+
   public DevOpsSetupFormGroup: FormGroup;
 
   public HostForm: FormGroup;
@@ -23,6 +27,10 @@ export class OrgComponent implements OnInit {
   public HostValid: boolean;
 
   public InfraConfigFormGroup: FormGroup;
+
+  public get OAuthRedirectURL(): string {
+    return `${location.href}`;
+  }
 
   public get RootURL(): string {
     const port = location.port ? `:${location.port}` : '';
@@ -88,6 +96,12 @@ export class OrgComponent implements OnInit {
   }
 
   //  API methods
+  public Boot() {
+    this.State.Loading = true;
+
+    this.nideState.BootEnterprise();
+  }
+
   public Configure() {
     this.State.Loading = true;
 

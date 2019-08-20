@@ -90,7 +90,7 @@
             </mat-list-item>
           </ng-container>
 
-          <mat-divider></mat-divider>
+          <!-- <mat-divider></mat-divider>
 
           <ng-container>
             <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureOAuth && !DevOpsSetupFormGroup.valid">
@@ -153,7 +153,7 @@
 
               <a matLine (click)="SetStep(SetupStepTypes.AzureOAuth)">Setup Dev Ops Authorization</a>
             </mat-list-item>
-          </ng-container>
+          </ng-container> -->
 
           <mat-divider></mat-divider>
 
@@ -215,10 +215,16 @@
           <mat-divider></mat-divider>
 
           <ng-container>
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.Review">
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && (!HostForm.valid || !State.Host)">
               <mat-icon matListIcon>check_box_outline_blank</mat-icon>
 
               <h1 matLine>Review & Setup</h1>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && State.Host">
+              <mat-icon matListIcon>chevron_right</mat-icon>
+
+              <a matLine (click)="SetStep(SetupStepTypes.Review)">Review & Setup</a>
             </mat-list-item>
 
             <mat-list-item *ngIf="State.Step == SetupStepTypes.Review">
@@ -228,8 +234,8 @@
                 <h1 class="mat-headline">Review & Setup</h1>
 
                 <h2 class="mat-subheading-2">
-                  We are going to setup a fairly opinionated starting infrastructure for your project.  This screen gives you a good idea
-                  of what we are doing for you.
+                  We are going to setup a fairly opinionated starting infrastructure for your project. This screen gives you a good idea of
+                  what we are doing for you.
                 </h2>
 
                 <h2 class="mat-subheading-2">
@@ -237,6 +243,25 @@
                 </h2>
               </div>
             </mat-list-item>
+
+            <ng-container *ngIf="InfraConfigFormGroup.valid">
+              <mat-list-item *ngIf="!State.HasDevOpsOAuth">
+                <div class="spread" style="width: 100%;">
+                  <a mat-raised-button color="primary" style="width: 100%;" class="mat-button-lg" [href]="AzureDevOpsOAuthURL">
+                    Get Connected with Azure Dev Ops
+                  </a>
+                </div>
+              </mat-list-item>
+
+              <mat-list-item *ngIf="State.HasDevOpsOAuth">
+                <div class="spread" style="width: 100%;">
+                  <a mat-raised-button style="width: 100%;" class="mat-button-lg" color="primary" [href]="AzureDevOpsOAuthURL">
+                    Get Connected <br />
+                    Boot your Enterprise
+                  </a>
+                </div>
+              </mat-list-item>
+            </ng-container>
           </ng-container>
         </ng-container>
       </mat-nav-list>
@@ -315,7 +340,7 @@
             </div>
           </form>
 
-          <form *ngIf="State.Step == SetupStepTypes.AzureOAuth" [formGroup]="DevOpsSetupFormGroup" (ngSubmit)="SetOrgDetails()">
+          <!-- <form *ngIf="State.Step == SetupStepTypes.AzureOAuth" [formGroup]="DevOpsSetupFormGroup" (ngSubmit)="SetOrgDetails()">
             <div class="spread">
               <h2 class="mat-headline title" style="text-align: center">Microsoft Azure Subscription Setup</h2>
 
@@ -452,19 +477,19 @@
               <mat-form-field class="mat-full-width">
                 <input matInput placeholder="Dev Ops App ID" formControlName="devOpsAppId" required />
 
-                <!-- <mat-hint>...</mat-hint> -->
+                <mat-hint>...</mat-hint>
               </mat-form-field>
 
               <mat-form-field class="mat-full-width">
                 <input matInput placeholder="Dev Ops Client Secret" formControlName="devOpsClientSecret" required />
 
-                <!-- <mat-hint>...</mat-hint> -->
+                <mat-hint>...</mat-hint>
               </mat-form-field>
 
               <mat-form-field class="mat-full-width">
                 <input matInput placeholder="Dev Ops Scopes" formControlName="devOpsScopes" required />
 
-                <!-- <mat-hint>...</mat-hint> -->
+                <mat-hint>...</mat-hint>
               </mat-form-field>
 
               <div class="spread">
@@ -473,10 +498,10 @@
                 </a>
               </div>
             </div>
-          </form>
+          </form> -->
 
           <form *ngIf="State.Step == SetupStepTypes.HostConfig" [formGroup]="HostForm" (ngSubmit)="SecureHost()">
-            <h1 class="mat-display-3">Establish {{ State.OrganizationName }} Host</h1>
+            <h1 class="mat-display-3">Establish {{ State.OrganizationName }} Host {{ State.Host }}</h1>
 
             <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.HostFlow">
               <div fxFlex="50%" fxFlex.lt-md="100%">
@@ -552,57 +577,89 @@
           <div *ngIf="State.Step == SetupStepTypes.Review">
             <h1 class="mat-display-3">Adding {{ State.OrganizationName }} to the Ecosystem</h1>
 
-            <h2 class="mat-display-1">If you can Fathym It, you can Build It.</h2>
+            <h2 class="mat-headline">If you can Fathym It, you can Build It.</h2>
 
             <div class="spread">
-              <div fxLayout="row wrap" fxLayoutAlign="center center">
-                <div fxFlex="40%" fxFlex.lt-md="80%" fxFlex.lt-sm="90%">
-                  <mat-card>
-                    <mat-list>
-                      <mat-list-item>
-                        <h3 class="mat-headline" matLine>
-                          Scalable Infrastructure
-                        </h3>
-                      </mat-list-item>
-                    </mat-list>
-                  </mat-card>
-                </div>
+              <h3 class="mat-display-1">
+                Scalable Infrastructure
+              </h3>
 
-                <div fxFlex="40%" fxFlex.lt-md="80%" fxFlex.lt-sm="90%">
-                  <mat-card>
-                    <mat-list>
-                      <mat-list-item>
-                        <h3 class="mat-headline" matLine>
-                          Comprehensive Dev/Ops
-                        </h3>
-                      </mat-list-item>
-                    </mat-list>
-                  </mat-card>
-                </div>
+              <div>
+                <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="assets/img/Azure-logo.png" />
 
-                <div fxFlex="40%" fxFlex.lt-md="80%" fxFlex.lt-sm="90%">
-                  <mat-card>
-                    <mat-list>
-                      <mat-list-item>
-                        <h3 class="mat-headline" matLine>
-                          Application Hosting
-                        </h3>
-                      </mat-list-item>
-                    </mat-list>
-                  </mat-card>
-                </div>
+                <p class="mat-subheading-2">
+                  Configure an enterprise scalable, and cost effective solution for getting on the Azure cloud. Free until you scale.
+                </p>
 
-                <div fxFlex="40%" fxFlex.lt-md="80%" fxFlex.lt-sm="90%">
-                  <mat-card>
-                    <mat-list>
-                      <mat-list-item>
-                        <h3 class="mat-headline">
-                          What Happens Next?
-                        </h3>
-                      </mat-list-item>
-                    </mat-list>
-                  </mat-card>
-                </div>
+                <p class="mat-subheading-2">
+                  We'll deploy a <a href="https://letsencrypt.org/" target="_blank">Let's Encrypt (Open Surce) SSL Certificate</a> and will
+                  manage it's renewal.
+                </p>
+
+                <p class="mat-subheading-2">
+                  Manage Azure, other clouds and legacy infrastructure with our Enterprise Orchestration tools.
+                </p>
+              </div>
+            </div>
+
+            <div class="spread">
+              <h3 class="mat-display-1">
+                Comprehensive Dev/Ops
+              </h3>
+
+              <div>
+                <img style="float: left; height: 150px; margin: 0 1rem 1rem 0;" src="assets/img/azure-dev-ops-logo.png" />
+
+                <p class="mat-subheading-2">
+                  We've gotten connected with your Azure Dev Ops instance and will help manage your code, builds, releases, and more.
+                </p>
+
+                <p class="mat-subheading-2">
+                  We'll get some git based source control setup for your infrastructure, and connect it to builds for auto deploying your
+                  infrastructure to Azure.
+                </p>
+              </div>
+            </div>
+
+            <div class="spread">
+                <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="https://www.fathym-it.com/img/logo" />
+
+              <h3 class="mat-display-1">
+                Application Hosting
+              </h3>
+
+              <div>
+                <p class="mat-subheading-2">
+                  The Dynamic Application Framework will provide a backbone for deliver javascript based front ends in a secure and scalable
+                  manner. Simplifying the developer experience to just solving customer problems.
+                </p>
+
+                <p class="mat-subheading-2">
+                  We'll take care of security, SSL hosting, and application serving as long as you want us to. Then we'll help you upgrade
+                  your infrastructure to the services and scale you need.
+                </p>
+              </div>
+            </div>
+
+            <div class="spread">
+              <h3 class="mat-display-1">
+                What Happens Next?
+              </h3>
+
+              <div>
+                <p class="mat-subheading-2">
+                  First we'll take the Azure Dev Ops information you provided, and get connected so that we can start building what we need
+                  to.
+                </p>
+
+                <p class="mat-subheading-2">
+                  After authorizing your Azure Dev Ops, we'll create a project, repositories, and package feeds as the default configuration
+                  for your infrastructure.
+                </p>
+
+                <p class="mat-subheading-2">
+                  Finally we'll provision and deploy your infrastructure and services in order to start your Low Code Unit Runtime.
+                </p>
               </div>
             </div>
           </div>

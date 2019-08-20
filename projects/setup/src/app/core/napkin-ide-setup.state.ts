@@ -7,6 +7,8 @@ export class NapkinIDESetupState {
 
   public EnvSettings?: AzureInfaSettings;
 
+  public HasDevOpsOAuth?: boolean;
+
   public Host?: string;
 
   public HostFlow?: 'shared' | 'private';
@@ -32,7 +34,7 @@ export class NapkinIDESetupState {
 
 export enum NapkinIDESetupStepTypes {
   OrgDetails = 'OrgDetails',
-  AzureOAuth = 'AzureOAuth',
+  // AzureOAuth = 'AzureOAuth',
   AzureSetup = 'AzureSetup',
   HostConfig = 'HostConfig',
   Review = 'Review',

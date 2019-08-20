@@ -14,6 +14,13 @@ export class NapkinIDESetupStateManagerContext extends StateManagerContext<Napki
   }
 
   //  API Methods
+  public BootEnterprise() {
+    this.Execute({
+      Arguments: {},
+      Type: 'BootEnterprise'
+    });
+  }
+
   public CommitInfrastructure(template: string) {
     this.Execute({
       Arguments: {
