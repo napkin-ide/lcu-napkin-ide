@@ -244,7 +244,7 @@
               </div>
             </mat-list-item>
 
-            <ng-container *ngIf="InfraConfigFormGroup.valid">
+            <ng-container *ngIf="InfraConfigFormGroup.valid && !State.Loading">
               <mat-list-item *ngIf="!State.HasDevOpsOAuth">
                 <div class="spread" style="width: 100%;">
                   <a mat-raised-button color="primary" style="width: 100%;" class="mat-button-lg" [href]="AzureDevOpsOAuthURL">
@@ -255,7 +255,7 @@
 
               <mat-list-item *ngIf="State.HasDevOpsOAuth">
                 <div class="spread" style="width: 100%;">
-                  <a mat-raised-button style="width: 100%;" class="mat-button-lg" color="primary" [href]="AzureDevOpsOAuthURL">
+                  <a mat-raised-button style="width: 100%;" class="mat-button-lg" color="primary" (click)="Boot()">
                     Get Connected <br />
                     Boot your Enterprise
                   </a>
