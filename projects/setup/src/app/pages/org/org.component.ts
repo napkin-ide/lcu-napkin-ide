@@ -44,6 +44,8 @@ export class OrgComponent implements OnInit {
 
   public Subdomain: string;
 
+  public TermsAccepted: boolean;
+
   //  Constructors
   constructor(protected formBldr: FormBuilder, protected nideState: NapkinIDESetupStateManagerContext) {
     this.HostValid = false;
@@ -142,6 +144,12 @@ export class OrgComponent implements OnInit {
     selection.removeAllRanges();
 
     document.body.removeChild(textarea);
+  }
+
+  public Finalize() {
+    this.State.Loading = true;
+
+    this.nideState.Finalize();
   }
 
   public ResetOrgDetails() {

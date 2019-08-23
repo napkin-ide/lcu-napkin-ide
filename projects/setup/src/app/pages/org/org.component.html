@@ -241,6 +241,15 @@
                 <h2 class="mat-subheading-2">
                   For more information, checkout the following documentation link...
                 </h2>
+
+                <h2 class="mat-subheading-2" *ngIf="State.EnterpriseBooted">
+                  The initial aspects of your Organization are setup. The final step will deploy and configure the Fathym Framework on the
+                  domain you've chosen.
+                </h2>
+
+                <div>
+                  <mat-checkbox [(ngModel)]="TermsAccepted" required>I accept the <a href="" target="_blank">Fathym Framework Terms & Conditions</a></mat-checkbox>
+                </div>
               </div>
             </mat-list-item>
 
@@ -253,12 +262,20 @@
                 </div>
               </mat-list-item>
 
-              <mat-list-item *ngIf="State.HasDevOpsOAuth">
+              <mat-list-item *ngIf="State.HasDevOpsOAuth && !State.EnterpriseBooted">
                 <div class="spread" style="width: 100%;">
                   <a mat-raised-button style="width: 100%;" class="mat-button-lg" color="primary" (click)="Boot()">
                     Get Connected <br />
                     Boot your Enterprise
                   </a>
+                </div>
+              </mat-list-item>
+
+              <mat-list-item *ngIf="State.HasDevOpsOAuth && State.EnterpriseBooted">
+                <div class="spread" style="width: 100%;">
+                  <button mat-raised-button style="width: 100%;" class="mat-button-lg" color="primary" (click)="Finalize()" [disabled]="!TermsAccepted">
+                    Finalize and Deploy your Enterprise
+                  </button>
                 </div>
               </mat-list-item>
             </ng-container>
@@ -622,7 +639,7 @@
             </div>
 
             <div class="spread">
-                <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="https://www.fathym-it.com/img/logo" />
+              <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="https://www.fathym-it.com/img/logo" />
 
               <h3 class="mat-display-1">
                 Application Hosting

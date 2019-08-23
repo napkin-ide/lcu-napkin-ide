@@ -5,6 +5,10 @@ export class NapkinIDESetupState {
 
   public DevOpsScopes?: string;
 
+  public EnterpriseBooted?: boolean;
+
+  public EnvironmentLookup?: string;
+
   public EnvSettings?: AzureInfaSettings;
 
   public HasDevOpsOAuth?: boolean;
@@ -18,6 +22,8 @@ export class NapkinIDESetupState {
   public HostOptions: string[];
 
   public Loading?: boolean;
+
+  public NewEnterpriseAPIKey?: string;
 
   public OrganizationDescription?: string;
 
@@ -34,11 +40,9 @@ export class NapkinIDESetupState {
 
 export enum NapkinIDESetupStepTypes {
   OrgDetails = 'OrgDetails',
-  // AzureOAuth = 'AzureOAuth',
   AzureSetup = 'AzureSetup',
   HostConfig = 'HostConfig',
   Review = 'Review',
-  Provisioning = 'Provisioning',
   Complete = 'Complete'
 }
 

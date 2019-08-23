@@ -41,6 +41,13 @@ export class NapkinIDESetupStateManagerContext extends StateManagerContext<Napki
     });
   }
 
+  public Finalize() {
+    this.Execute({
+      Arguments: {},
+      Type: 'Finalize'
+    });
+  }
+
   public SecureHost(host: string) {
     return this.Execute({
       Arguments: {
