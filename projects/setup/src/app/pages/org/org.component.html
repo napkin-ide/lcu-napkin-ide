@@ -246,10 +246,14 @@
                   The initial aspects of your Organization are setup. The final step will deploy and configure the Fathym Framework on the
                   domain you've chosen.
                 </h2>
+              </div>
+            </mat-list-item>
 
-                <div>
-                  <mat-checkbox [(ngModel)]="TermsAccepted" required>I accept the <a href="" target="_blank">Fathym Framework Terms & Conditions</a></mat-checkbox>
-                </div>
+            <mat-list-item>
+              <div *ngIf="State.HasDevOpsOAuth && State.EnterpriseBooted">
+                <mat-checkbox [(ngModel)]="TermsAccepted" required>
+                  I accept the <a href="" target="_blank">Fathym Framework Terms & Conditions</a>
+                </mat-checkbox>
               </div>
             </mat-list-item>
 
@@ -273,7 +277,14 @@
 
               <mat-list-item *ngIf="State.HasDevOpsOAuth && State.EnterpriseBooted">
                 <div class="spread" style="width: 100%;">
-                  <button mat-raised-button style="width: 100%;" class="mat-button-lg" color="primary" (click)="Finalize()" [disabled]="!TermsAccepted">
+                  <button
+                    mat-raised-button
+                    style="width: 100%;"
+                    class="mat-button-lg"
+                    color="primary"
+                    (click)="Finalize()"
+                    [disabled]="!TermsAccepted"
+                  >
                     Finalize and Deploy your Enterprise
                   </button>
                 </div>
