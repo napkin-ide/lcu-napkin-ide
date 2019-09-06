@@ -221,7 +221,7 @@
               <h1 matLine>Review & Setup</h1>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && State.Host">
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && State.Host && State.Step != SetupStepTypes.Complete">
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.Review)">Review & Setup</a>
@@ -249,7 +249,13 @@
               </div>
             </mat-list-item>
 
-            <mat-list-item>
+            <mat-list-item *ngIf="State.Step == SetupStepTypes.Complete">
+              <mat-icon matListIcon>check_box</mat-icon>
+
+              <h1 matLine>Fathym Framework Setup Complete</h1>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.Complete">
               <div *ngIf="State.HasDevOpsOAuth && State.EnterpriseBooted">
                 <mat-checkbox [(ngModel)]="TermsAccepted" required>
                   I accept the <a href="" target="_blank">Fathym Framework Terms & Conditions</a>
@@ -257,7 +263,7 @@
               </div>
             </mat-list-item>
 
-            <ng-container *ngIf="InfraConfigFormGroup.valid && NewForm.valid && HostForm.valid && State.Host && !State.Loading">
+            <ng-container *ngIf="InfraConfigFormGroup.valid && NewForm.valid && HostForm.valid && State.Host && !State.Loading && State.Step != SetupStepTypes.Complete">
               <mat-list-item *ngIf="!State.HasDevOpsOAuth">
                 <div class="spread" style="width: 100%;">
                   <a mat-raised-button color="primary" style="width: 100%;" class="mat-button-lg" [href]="AzureDevOpsOAuthURL">

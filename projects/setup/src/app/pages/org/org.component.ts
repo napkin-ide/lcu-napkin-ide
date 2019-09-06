@@ -181,9 +181,11 @@ export class OrgComponent implements OnInit {
   }
 
   public SetStep(step: NapkinIDESetupStepTypes) {
-    this.State.Loading = true;
+    if (this.State.Step !== NapkinIDESetupStepTypes.Complete) {
+      this.State.Loading = true;
 
-    this.nideState.SetNapkinIDESetupStep(step);
+      this.nideState.SetNapkinIDESetupStep(step);
+    }
   }
 
   public SetOrgDetails() {
