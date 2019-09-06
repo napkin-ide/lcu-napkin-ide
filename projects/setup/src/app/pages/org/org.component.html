@@ -257,7 +257,7 @@
               </div>
             </mat-list-item>
 
-            <ng-container *ngIf="InfraConfigFormGroup.valid && !State.Loading">
+            <ng-container *ngIf="InfraConfigFormGroup.valid && NewForm.valid && HostForm.valid && State.Host && !State.Loading">
               <mat-list-item *ngIf="!State.HasDevOpsOAuth">
                 <div class="spread" style="width: 100%;">
                   <a mat-raised-button color="primary" style="width: 100%;" class="mat-button-lg" [href]="AzureDevOpsOAuthURL">
@@ -532,9 +532,9 @@
             <h1 class="mat-display-3">Establish {{ State.OrganizationName }} Host {{ State.Host }}</h1>
 
             <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.HostFlow">
-              <div fxFlex="50%" fxFlex.lt-md="100%">
+              <div fxFlex="75%" fxFlex.lt-md="100%">
                 <mat-card>
-                  <h2 class="mat-subheading-2">Use a Fathym Domain</h2>
+                  <h2 class="mat-headline">Use a Fathym Domain</h2>
 
                   <p class="mat-subtitle paragraph-title paragraph-title">
                     Don't have your own domain? Or just want to get started quickly? This is the route for you.
@@ -548,7 +548,7 @@
                 </mat-card>
               </div>
 
-              <div fxFlex="50%" fxFlex.lt-md="100%">
+              <!-- <div fxFlex="50%" fxFlex.lt-md="100%">
                 <mat-card>
                   <h2 class="mat-subheading-2">Bring Your Own Domain</h2>
 
@@ -562,7 +562,7 @@
 
                   <a mat-raised-button color="primary" (click)="SetHostFlow('private')">Use Custom Domain</a>
                 </mat-card>
-              </div>
+              </div> -->
             </div>
 
             <ng-container *ngIf="State.HostFlow">
