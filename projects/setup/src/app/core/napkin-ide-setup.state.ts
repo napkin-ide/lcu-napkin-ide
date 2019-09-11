@@ -36,12 +36,17 @@ export class NapkinIDESetupState {
   public Step: NapkinIDESetupStepTypes;
 
   public Subdomain: string;
+
+  public Terms: string;
+
+  public TermsAccepted: boolean;
 }
 
 export enum NapkinIDESetupStepTypes {
   OrgDetails = 'OrgDetails',
   AzureSetup = 'AzureSetup',
   HostConfig = 'HostConfig',
+  Terms = 'Terms',
   Review = 'Review',
   Complete = 'Complete'
 }

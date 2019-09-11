@@ -13,6 +13,14 @@
 
   @include defaults($theme);
 
+  .split {
+    margin: 2rem 0;
+  }
+
+  .btn-split {
+    margin: 2rem .5rem;
+  }
+
   html,
   body {
     color: $nide-black;

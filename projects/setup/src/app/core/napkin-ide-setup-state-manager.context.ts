@@ -14,6 +14,16 @@ export class NapkinIDESetupStateManagerContext extends StateManagerContext<Napki
   }
 
   //  API Methods
+  public AcceptTerms(version: string) {
+    this.Execute({
+      Arguments: {
+        AcceptedOn: new Date(Date.now()),
+        Version: version
+      },
+      Type: 'AcceptTerms'
+    });
+  }
+
   public BootEnterprise() {
     this.Execute({
       Arguments: {},

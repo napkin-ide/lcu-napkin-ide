@@ -18,8 +18,6 @@ export class OrgComponent implements OnInit {
     return `/.devops/oauth?redirectUri=${this.OAuthRedirectURL}`;
   }
 
-  public DevOpsSetupFormGroup: FormGroup;
-
   public HostForm: FormGroup;
 
   public NewForm: FormGroup;
@@ -53,12 +51,6 @@ export class OrgComponent implements OnInit {
 
   //  Life Cycle
   public ngOnInit() {
-    this.DevOpsSetupFormGroup = this.formBldr.group({
-      devOpsAppId: [''],
-      devOpsClientSecret: [''],
-      devOpsScopes: ['']
-    });
-
     this.HostForm = this.formBldr.group({
       host: ['', Validators.required],
       root: ['']
@@ -85,19 +77,16 @@ export class OrgComponent implements OnInit {
   }
 
   public onChanges() {
-    this.HostValid = false;
-
-    const host = this.HostForm.controls.host.value;
-
-    if (this.State.HostFlow === 'private' && host && host.split('.').length >= 3) {
-      this.HostValid = true;
-      this.Subdomain = host.split('.')[0];
-    } else if (this.State.HostFlow === 'shared' && host && host.length > 0) {
-      this.HostValid = true;
-    }
+    this.isHostValid();
   }
 
   //  API methods
+  public AcceptTerms() {
+    this.State.Loading = true;
+
+    this.nideState.AcceptTerms(this.State.Terms);
+  }
+
   public Boot() {
     this.State.Loading = true;
 
@@ -198,18 +187,23 @@ export class OrgComponent implements OnInit {
     );
   }
 
-  public SetupDevOpsOAuth() {
-    this.State.Loading = true;
+  //  Helpers
+  protected isHostValid() {
+    this.HostValid = false;
 
-    this.nideState.SetupDevOpsOAuth(
-      this.DevOpsSetupFormGroup.controls.devOpsAppId.value,
-      this.DevOpsSetupFormGroup.controls.devOpsScopes.value,
-      this.DevOpsSetupFormGroup.controls.devOpsClientSecret.value
-    );
+    const host = this.HostForm.controls.host.value;
+
+    if (this.State.HostFlow === 'private' && host && host.split('.').length >= 3) {
+      this.HostValid = true;
+      this.Subdomain = host.split('.')[0];
+    } else if (this.State.HostFlow === 'shared' && host && host.length > 0) {
+      this.HostValid = true;
+    }
   }
 
-  //  Helpers
   protected stateChanged() {
+    this.isHostValid();
+
     if (this.State.OrganizationName) {
       this.NewForm.patchValue({
         name: this.State.OrganizationName || '',
@@ -238,19 +232,10 @@ export class OrgComponent implements OnInit {
       setTimeout(() => this.InfraConfigFormGroup.updateValueAndValidity());
     }
 
-    if (this.State.DevOpsAppID) {
-      this.DevOpsSetupFormGroup.controls.devOpsAppId.setValue(this.State.DevOpsAppID || '');
-
-      this.DevOpsSetupFormGroup.controls.devOpsClientSecret.setValue(this.State.DevOpsClientSecret || '');
-
-      this.DevOpsSetupFormGroup.controls.devOpsScopes.setValue(this.State.DevOpsScopes || '');
-
-      setTimeout(() => this.DevOpsSetupFormGroup.updateValueAndValidity());
+    if (this.State.Step === NapkinIDESetupStepTypes.Complete) {
+      setTimeout(() => {
+        location.href = `https://${this.State.Host}/fathym-it`;
+      }, 10000);
     }
-    // if (this.State.Step === 'Provisioning') {
-    //   setTimeout(() => {
-    //     // location.href = `https://${this.State.Host}/forge`;
-    //   }, 10000);
-    // }
   }
 }

@@ -29,6 +29,10 @@
           min-height: inherit;
           box-sizing: border-box;
           justify-content: center;
+
+          .title {
+            padding: 2rem;
+          }
         }
       }
 
@@ -49,6 +53,11 @@
         .mat-list-base {
           .mat-list-item {
             color: $nide-white;
+            padding: .25rem 0;
+
+            .mat-headline {
+              margin-top: 1rem;
+            }
           }
         }
       }
@@ -88,8 +97,8 @@
         color: $nide-white;
         background-size: cover;
         background-position: 50% 0;
-        background-image: linear-gradient(transparentize(mat-color($primary), 0.2), transparentize(mat-color($primary), 0.2)),
-          url(https://c1.staticflickr.com/8/7451/26797700615_76d3215c42_b.jpg);
+        background-image: linear-gradient(transparentize(mat-color($primary, 900), 0.15), transparentize(mat-color($primary, 900), 0.15)),
+          url(https://images.immediate.co.uk/production/volatile/sites/4/2009/09/GettyImages-884671854-4946bb3.jpg?quality=45&resize=960,413);
 
         // a {
         //   width: 80%;
