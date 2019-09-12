@@ -232,7 +232,7 @@ export class OrgComponent implements OnInit {
 
     if (this.State.Step === NapkinIDESetupStepTypes.Complete) {
       setTimeout(() => {
-        // location.href = `https://${this.State.Host}/fathym-it`;
+        location.href = `https://${this.State.Host}/fathym-it`;
       }, 15000);
     }
   }
