@@ -42,8 +42,6 @@ export class OrgComponent implements OnInit {
 
   public Subdomain: string;
 
-  public TermsAccepted: boolean;
-
   //  Constructors
   constructor(protected formBldr: FormBuilder, protected nideState: NapkinIDESetupStateManagerContext) {
     this.HostValid = false;
@@ -234,8 +232,8 @@ export class OrgComponent implements OnInit {
 
     if (this.State.Step === NapkinIDESetupStepTypes.Complete) {
       setTimeout(() => {
-        location.href = `https://${this.State.Host}/fathym-it`;
-      }, 10000);
+        // location.href = `https://${this.State.Host}/fathym-it`;
+      }, 15000);
     }
   }
 }

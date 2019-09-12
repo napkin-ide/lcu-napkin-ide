@@ -179,19 +179,19 @@
                 <h1 class="mat-headline">Fathym Terms & Privacy</h1>
 
                 <h2 class="mat-subheading-2">
-                    The Fathym Terms & Privacy will allow you access to our Open Core systems.
-                  </h2>
+                  The Fathym Terms & Privacy will allow you access to our Open Core systems.
+                </h2>
 
-                  <h2 class="mat-subheading-2">
-                    For more information on privac, terms, and conditions visit www.fathym-it.com/terms
-                  </h2>
+                <h2 class="mat-subheading-2">
+                  For more information on privacy, terms, and conditions visit www.fathym-it.com/terms
+                </h2>
               </div>
             </mat-list-item>
 
             <mat-list-item *ngIf="State.Step != SetupStepTypes.Terms && State.TermsAccepted">
               <mat-icon matListIcon>check_box</mat-icon>
 
-              <a matLine (click)="SetStep(SetupStepTypes.HostConfig)">Fathym Terms Accepted</a>
+              <a matLine (click)="SetStep(SetupStepTypes.Terms)">Fathym Terms Accepted</a>
             </mat-list-item>
           </ng-container>
 
@@ -204,7 +204,9 @@
               <h1 matLine>Review & Setup</h1>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && State.Host && State.TermsAccepted && State.Step != SetupStepTypes.Complete">
+            <mat-list-item
+              *ngIf="State.Step != SetupStepTypes.Review && State.Host && State.TermsAccepted && State.Step != SetupStepTypes.Complete"
+            >
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.Review)">Review & Setup</a>
@@ -217,17 +219,17 @@
                 <h1 class="mat-headline">Review & Setup</h1>
 
                 <h2 class="mat-subheading-2">
-                  We are going to setup a fairly opinionated starting infrastructure for your project. This screen gives you a good idea of
-                  what we are doing for you.
+                  We are going to setup a fairly opinionated starting infrastructure for your project. After getting started, you'll be able
+                  to use your team to dive in and adjust the architecture that powers your enterprise.
+                </h2>
+
+                <h2 class="mat-subheading-2" *ngIf="State.EnterpriseBooted">
+                  The initial configuration of your Organization has been setup. The final step will deploy and configure the Fathym
+                  Framework on the domain you've chosen.
                 </h2>
 
                 <h2 class="mat-subheading-2">
                   For more information, checkout the following documentation link...
-                </h2>
-
-                <h2 class="mat-subheading-2" *ngIf="State.EnterpriseBooted">
-                  The initial aspects of your Organization are setup. The final step will deploy and configure the Fathym Framework on the
-                  domain you've chosen.
                 </h2>
               </div>
             </mat-list-item>
@@ -237,58 +239,6 @@
 
               <h1 matLine>Fathym Framework Setup Complete</h1>
             </mat-list-item>
-
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.Complete">
-              <div *ngIf="State.HasDevOpsOAuth && State.EnterpriseBooted">
-                <mat-checkbox [(ngModel)]="TermsAccepted" required>
-                  I accept the <a href="" target="_blank">Fathym Framework Terms & Conditions</a>
-                </mat-checkbox>
-              </div>
-            </mat-list-item>
-
-            <ng-container
-              *ngIf="
-                InfraConfigFormGroup.valid &&
-                NewForm.valid &&
-                HostForm.valid &&
-                State.Host &&
-                !State.Loading &&
-                State.Step != SetupStepTypes.Complete &&
-                State.TermsAccepted
-              "
-            >
-              <mat-list-item *ngIf="!State.HasDevOpsOAuth">
-                <div class="spread" style="width: 100%;">
-                  <a mat-raised-button color="primary" style="width: 100%;" class="mat-button-lg" [href]="AzureDevOpsOAuthURL">
-                    Get Connected with Azure Dev Ops
-                  </a>
-                </div>
-              </mat-list-item>
-
-              <mat-list-item *ngIf="State.HasDevOpsOAuth && !State.EnterpriseBooted">
-                <div class="spread" style="width: 100%;">
-                  <a mat-raised-button style="width: 100%;" class="mat-button-lg" color="primary" (click)="Boot()">
-                    Get Connected <br />
-                    Boot your Organization
-                  </a>
-                </div>
-              </mat-list-item>
-
-              <mat-list-item *ngIf="State.HasDevOpsOAuth && State.EnterpriseBooted">
-                <div class="spread" style="width: 100%;">
-                  <button
-                    mat-raised-button
-                    style="width: 100%;"
-                    class="mat-button-lg"
-                    color="primary"
-                    (click)="Finalize()"
-                    [disabled]="!TermsAccepted"
-                  >
-                    Finalize and Deploy your Organization
-                  </button>
-                </div>
-              </mat-list-item>
-            </ng-container>
           </ng-container>
         </ng-container>
       </mat-nav-list>
@@ -442,11 +392,11 @@
           </form>
 
           <div *ngIf="State.Step == SetupStepTypes.Terms">
-              <h1 class="mat-display-2 title">Fathym Terms & Privacy</h1>
+            <h1 class="mat-display-2 title">Fathym Terms & Privacy</h1>
 
-              <p class="mat-headline">{{State.Terms}}</p>
+            <p class="mat-headline">{{ State.Terms }}</p>
 
-              <a mat-raised-button color="primary" (click)="AcceptTerms()">Accept Fathym Terms & Privacy</a>
+            <a mat-raised-button color="primary" (click)="AcceptTerms()">Accept Fathym Terms & Privacy</a>
           </div>
 
           <div *ngIf="State.Step == SetupStepTypes.Review">
@@ -454,67 +404,138 @@
 
             <h2 class="mat-headline">If you can Fathym It, you can Build It.</h2>
 
-            <div class="spread">
-              <h3 class="mat-display-1">
-                Scalable Infrastructure
-              </h3>
+            <ng-container *ngIf="!State.HasDevOpsOAuth">
+              <div class="spread">
+                <h3 class="mat-display-1">
+                  Get Connected with Azure Dev Ops
+                </h3>
 
-              <div>
-                <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="assets/img/Azure-logo.png" />
+                <div>
+                  <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="assets/img/Azure-logo.png" />
 
-                <p class="mat-subheading-2">
-                  Configure an enterprise scalable, and cost effective solution for getting on the Azure cloud. Free until you scale.
-                </p>
+                  <p class="mat-subheading-2">
+                    Part of our opinionated best practice architecture, uses Azure Dev Ops to deliver best in class Continuous Integration
+                    and Deployment capabilities. One of the most costly endeavours for a team is the initial setup of a long term, quality
+                    build and release pipeline. Fathym's tools provide a day-one, repeatable process for controlling how your teams manage
+                    this workflow.
+                  </p>
 
-                <p class="mat-subheading-2">
-                  We'll deploy a <a href="https://letsencrypt.org/" target="_blank">Let's Encrypt (Open Surce) SSL Certificate</a> and will
-                  manage it's renewal.
-                </p>
-
-                <p class="mat-subheading-2">
-                  Manage Azure, other clouds and legacy infrastructure with our Enterprise Orchestration tools.
-                </p>
+                  <p class="mat-subheading-2">
+                    To get started, we need to get connected with an instance of Azure Dev Ops. Don't worry, you'll be able to migrate to
+                    other systems in the future if you have a different prefered flavor.
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div class="spread">
-              <h3 class="mat-display-1">
-                Comprehensive Dev/Ops
-              </h3>
-
-              <div>
-                <img style="float: left; height: 150px; margin: 0 1rem 1rem 0;" src="assets/img/azure-dev-ops-logo.png" />
-
-                <p class="mat-subheading-2">
-                  We've gotten connected with your Azure Dev Ops instance and will help manage your code, builds, releases, and more.
-                </p>
-
-                <p class="mat-subheading-2">
-                  We'll get some git based source control setup for your infrastructure, and connect it to builds for auto deploying your
-                  infrastructure to Azure.
-                </p>
+              <div class="spread" style="width: 100%;">
+                <a mat-raised-button color="primary" class="mat-button-lg" [href]="AzureDevOpsOAuthURL">
+                  Get Connected with Azure Dev Ops
+                </a>
               </div>
-            </div>
+            </ng-container>
 
-            <div class="spread">
-              <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="https://www.fathym-it.com/img/logo" />
+            <ng-container *ngIf="State.HasDevOpsOAuth">
+              <ng-container *ngIf="!State.EnterpriseBooted">
+                <div class="spread">
+                  <h3 class="mat-display-1">
+                    Organization Infrastructure
+                  </h3>
 
-              <h3 class="mat-display-1">
-                Application Hosting
-              </h3>
+                  <div>
+                    <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="assets/img/Azure-logo.png" />
 
-              <div>
-                <p class="mat-subheading-2">
-                  The Dynamic Application Framework will provide a backbone for deliver javascript based front ends in a secure and scalable
-                  manner. Simplifying the developer experience to just solving customer problems.
-                </p>
+                    <p class="mat-subheading-2">
+                      We'll configure an enterprise scalable, and cost effective infrastructure for getting on the Azure cloud. Free until
+                      you scale.
+                    </p>
 
-                <p class="mat-subheading-2">
-                  We'll take care of security, SSL hosting, and application serving as long as you want us to. Then we'll help you upgrade
-                  your infrastructure to the services and scale you need.
-                </p>
-              </div>
-            </div>
+                    <p class="mat-subheading-2">
+                      We'll deploy a
+                      <a href="https://letsencrypt.org/" target="_blank">Let's Encrypt (Open Surce) SSL Certificate</a> secured application
+                      host.
+                    </p>
+
+                    <p class="mat-subheading-2">
+                      We'll manage Azure, other clouds and legacy infrastructure with our Enterprise Orchestration tools.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="spread">
+                  <h3 class="mat-display-1">
+                    Comprehensive Dev/Ops
+                  </h3>
+
+                  <div>
+                    <img style="float: left; height: 150px; margin: 0 1rem 1rem 0;" src="assets/img/azure-dev-ops-logo.png" />
+
+                    <p class="mat-subheading-2">
+                      We've gotten connected with your Azure Dev Ops instance and will help manage your code, builds, releases, and more.
+                    </p>
+
+                    <p class="mat-subheading-2">
+                      We'll get some git based source control setup for your infrastructure, and connect it to builds for auto deploying to
+                      Azure.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="spread" style="width: 100%;">
+                  <a mat-raised-button class="mat-button-lg" color="primary" (click)="Boot()">
+                    Get Connected <br />
+                    Boot your Organization
+                  </a>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="State.EnterpriseBooted">
+                  <div class="spread">
+                    <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="/img/logo" />
+
+                    <h3 class="mat-display-1">
+                      Application Hosting
+                    </h3>
+
+                    <div>
+                      <p class="mat-subheading-2">
+                        The Dynamic Application Framework will provide a backbone for deliver javascript based front ends in a secure and
+                        scalable manner. Simplifying the developer experience to just solving customer problems.
+                      </p>
+
+                      <p class="mat-subheading-2">
+                        We'll take care of security, SSL hosting, and application serving as long as you want us to. Then we'll help you
+                        upgrade your infrastructure to the services and scale you need.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="spread">
+                    <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="/img/logo" />
+
+                    <h3 class="mat-display-1">
+                      Auth & Auth
+                    </h3>
+
+                    <div>
+                      <p class="mat-subheading-2">
+                        Easy to consume and use OAuth / Identity as a service, backed by the Auth/Auth provider of your choosing...
+                      </p>
+                    </div>
+                  </div>
+
+                <div class="spread" style="width: 100%;">
+                  <button mat-raised-button class="mat-button-lg" color="primary" (click)="Finalize()" [disabled]="!State.TermsAccepted">
+                    Finalize and Deploy your Organization
+                  </button>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+
+          <div *ngIf="State.Step == SetupStepTypes.Complete">
+            <h1 class="mat-display-2 title">{{ State.OrganizationName }} has been added to the Ecosystem</h1>
+
+            <h2 class="mat-headline">Now Fathym It, and Build It.</h2>
 
             <div class="spread">
               <h3 class="mat-display-1">
@@ -523,17 +544,16 @@
 
               <div>
                 <p class="mat-subheading-2">
-                  First we'll take the Azure Dev Ops information you provided, and get connected so that we can start building what we need
-                  to.
+                  Some things are finalizing, and we'll redirect you to {{ State.Host }} in the next 30 seconds. Your SSL and hosts are
+                  being configured with the LCU Runtime, and once complete you'll be able to manage your world from your own infrastructure.
                 </p>
 
                 <p class="mat-subheading-2">
-                  After authorizing your Azure Dev Ops, we'll create a project, repositories, and package feeds as the default configuration
-                  for your infrastructure.
+                  We've authorize and configure your Azure Dev Ops, and we'll walk you through creating new Data Applications on this infrastructure.
                 </p>
 
                 <p class="mat-subheading-2">
-                  Finally we'll provision and deploy your infrastructure and services in order to start your Low Code Unit Runtime.
+                  We have tons of great information and tutorials to get you started, so dive in!
                 </p>
               </div>
             </div>
