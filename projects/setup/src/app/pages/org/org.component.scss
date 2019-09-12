@@ -8,6 +8,11 @@
   $warn: map-get($theme, warn);
 
   :host {
+    .mat-display-1 {
+      img {
+        width: 50px;
+      }
+    }
     .identity {
       height: 100%;
       min-height: 500px;
