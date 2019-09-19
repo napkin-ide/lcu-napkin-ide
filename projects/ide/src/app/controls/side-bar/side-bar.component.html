@@ -1,0 +1,42 @@
+<mat-grid-list class="fit-grid grid-start side-bar-grid" cols="1" rowHeight="fit">
+  <mat-grid-tile>
+    <div class="overflowed">
+      <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
+
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="IsSectionActive(section)" *ngFor="let section of SideBarSections">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ section }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-nav-list>
+            <ng-container *ngFor="let action of SideBar?.Actions">
+              <mat-list-item
+                (click)="SelectSideBarAction(section, action)"
+                *ngIf="action.Section == section"
+                class="side-bar-action"
+                [class.active]="action.Group == SideBar.CurrentAction?.Group && action.Action == SideBar.CurrentAction?.Action"
+              >
+                <a matLine>{{ action.Title }}</a>
+
+                <button mat-icon-button>
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
+              </mat-list-item>
+            </ng-container>
+
+            <!-- <mat-list-item>
+              <a matLine>Find More {{ section }}</a>
+
+              <button mat-icon-button>
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-list-item> -->
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
