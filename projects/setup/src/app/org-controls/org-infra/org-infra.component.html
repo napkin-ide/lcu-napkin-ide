@@ -1,0 +1,39 @@
+<form *ngIf="State.Step == SetupStepTypes.AzureSetup" [formGroup]="OrgInfraForm" (ngSubmit)="SetOrgDetails()">
+        <div class="spread">
+          <h2 class="mat-display-2 title" style="text-align: center">Microsoft Azure Subscription Setup</h2>
+
+          <div>
+            <mat-form-field class="mat-full-width">
+              <input matInput placeholder="Azure Tenant (Directory) ID" formControlName="azureTenantId" required />
+
+              <mat-hint>32 Character Limit</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mat-full-width">
+              <input matInput placeholder="Azure Subscription ID" formControlName="azureSubId" required />
+
+              <mat-hint>32 Character Limit</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mat-full-width">
+              <input matInput placeholder="Azure App ID" formControlName="azureAppId" required />
+
+              <mat-hint>32 Character Limit</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mat-full-width">
+              <input matInput placeholder="Azure App Auth key" formControlName="azureAppAuthKey" required />
+
+              <mat-hint>32 Character Limit</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div class="spread">
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()" [disabled]="!OrgInfraForm.valid">
+              Setup Organization Infrastructure
+            </a>
+
+            <a mat-button class="mat-full-width" color="warn" (click)="ChangeStep(SetupStepTypes.OrgDetails)">Rename Organization</a>
+          </div>
+        </div>
+      </form>

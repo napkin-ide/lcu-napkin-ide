@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
+<div [formGroup]="ParentForm" fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
   <div fxFlex="30%" fxFlex.lt-md="100%" class="details">
     <div class="inner">
       <mat-nav-list>
@@ -35,7 +35,7 @@
               </div>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.OrgDetails && NewForm.valid">
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.OrgDetails && OrgDetailsForm?.valid">
               <mat-icon matListIcon>check_box</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.OrgDetails)">Organization Details Configured</a>
@@ -45,7 +45,7 @@
           <mat-divider></mat-divider>
 
           <ng-container>
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureSetup && !InfraConfigFormGroup.valid">
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureSetup && !OrgInfraForm?.valid">
               <mat-icon matListIcon>check_box_outline_blank</mat-icon>
 
               <h1 matLine>Setup Organization Infrastructure</h1>
@@ -96,7 +96,7 @@
               </div>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureSetup && InfraConfigFormGroup.valid">
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureSetup && OrgInfraForm?.valid">
               <mat-icon matListIcon>check_box</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.AzureSetup)">Organization Infrastructure Setup</a>
@@ -134,7 +134,8 @@
                     worries, you'll be able to change it and bring your own domains later.
                   </h2>
 
-                  <h2 class="mat-subheading-2" *ngIf="HostForm.controls['root'].value">
+                  <!-- <h2 class="mat-subheading-2" *ngIf="HostForm.controls['root'].value"> -->
+                  <h2 class="mat-subheading-2" *ngIf="OrgHostComponent?.RootDomainControl.value || false">
                     Choose an available subdomain for your new site, where we will make your SSL secured Data Applications available.
                   </h2>
                 </ng-container>
@@ -198,7 +199,8 @@
           <mat-divider></mat-divider>
 
           <ng-container>
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && (!HostForm.valid || !State.Host || !State.TermsAccepted)">
+            <!-- <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && (!HostForm.valid || !State.Host || !State.TermsAccepted)"> -->
+                <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && (!OrgHostComponent?.first?.HostForm.valid || !State.Host || !State.TermsAccepted)">
               <mat-icon matListIcon>check_box_outline_blank</mat-icon>
 
               <h1 matLine>Review & Setup</h1>
@@ -245,39 +247,50 @@
     </div>
   </div>
 
+
+
+
   <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
     <div class="inner">
       <div>
         <div *ngIf="!State.Loading">
-          <form *ngIf="State.Step == SetupStepTypes.OrgDetails" [formGroup]="NewForm" (ngSubmit)="SetOrgDetails()">
+          <lcu-org-details 
+          #OrgDetailsComponent
+          [setup-step-types]="SetupStepTypes" 
+          [state]="State"></lcu-org-details>
+          <!-- <form *ngIf="State.Step == SetupStepTypes.OrgDetails" [formGroup]="OrgForm" (ngSubmit)="SetOrgDetails()">
             <h1 class="mat-display-2 title">Setup Your Organization</h1>
 
             <mat-form-field class="mat-full-width">
-              <input matInput placeholder="Organization Name" formControlName="name" required />
+              <input matInput placeholder="Organization Name" formControlName="orgName" required />
 
               <mat-icon matSuffix matTooltip="Enter a unique name for your new organization">help_outline</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="mat-full-width">
-              <textarea matInput placeholder="Description" formControlName="desc" required></textarea>
+              <textarea matInput placeholder="Description" formControlName="orgDesc" required></textarea>
 
               <mat-icon matSuffix matTooltip="Enter a useful description for your new organization">help_outline</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="mat-full-width">
-              <input matInput placeholder="Organization Lookup" formControlName="lookup" required />
+              <input matInput placeholder="Organization Lookup" formControlName="orgLookup" required />
 
               <mat-icon matSuffix matTooltip="Enter a valid organization lookup (lowercase alpha characters and '-' accepted)">
                 help_outline
               </mat-icon>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!NewForm.valid">
+            <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!OrgForm.valid">
               Setup Organization Details
             </button>
-          </form>
-
-          <form *ngIf="State.Step == SetupStepTypes.AzureSetup" [formGroup]="InfraConfigFormGroup" (ngSubmit)="SetOrgDetails()">
+          </form> -->
+          <lcu-org-infra
+          #OrgInfraComponent
+          [setup-step-types]="SetupStepTypes" 
+          [state]="State"
+          (set-step)="SetStep($event)"></lcu-org-infra>
+          <!-- <form *ngIf="State.Step == SetupStepTypes.AzureSetup" [formGroup]="InfraConfigFormGroup" (ngSubmit)="SetOrgDetails()">
             <div class="spread">
               <h2 class="mat-display-2 title" style="text-align: center">Microsoft Azure Subscription Setup</h2>
 
@@ -315,9 +328,16 @@
                 <a mat-button class="mat-full-width" color="warn" (click)="SetStep(SetupStepTypes.OrgDetails)">Rename Organization</a>
               </div>
             </div>
-          </form>
+          </form> -->
 
-          <form *ngIf="State.Step == SetupStepTypes.HostConfig" [formGroup]="HostForm" (ngSubmit)="SecureHost()">
+          <lcu-org-host
+          #OrgHostComponent
+          [setup-step-types]="SetupStepTypes" 
+          [state]="State"
+          (is-host-valid)="IsHostValid($event)"
+          (subdomain)="SubdomainChange($event)"
+          (set-step)="SetStep($event)"></lcu-org-host>
+          <!-- <form *ngIf="State.Step == SetupStepTypes.HostConfig" [formGroup]="HostForm" (ngSubmit)="SecureHost()">
             <h1 class="mat-display-2 title">Establish {{ State.OrganizationName }} Shared Host</h1>
 
             <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.HostFlow">
@@ -335,7 +355,7 @@
 
                   <a mat-raised-button color="accent" (click)="SetHostFlow('shared')">Use Fathym Domain</a>
                 </mat-card>
-              </div>
+              </div> -->
 
               <!-- <div fxFlex="50%" fxFlex.lt-md="100%">
                 <mat-card>
@@ -352,7 +372,7 @@
                   <a mat-raised-button color="primary" (click)="SetHostFlow('private')">Use Custom Domain</a>
                 </mat-card>
               </div> -->
-            </div>
+            <!-- </div>
 
             <ng-container *ngIf="State.HostFlow">
               <mat-form-field class="mat-full-width" *ngIf="State.HostFlow == 'shared'">
@@ -383,13 +403,13 @@
                 <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!HostForm.valid || !HostValid">
                   Configure Organization Hosting
                 </button>
-              </ng-container>
+              </ng-container> -->
 
               <!-- <div>
                 <a mat-button (click)="SetHostFlow(null)"><mat-icon>cancel</mat-icon> Back To Host Options</a>
               </div> -->
-            </ng-container>
-          </form>
+            <!-- </ng-container>
+          </form> -->
 
           <div *ngIf="State.Step == SetupStepTypes.Terms">
             <h1 class="mat-display-2 title">Fathym Terms & Privacy</h1>
