@@ -149,26 +149,31 @@
         .ide-editors {
           border-bottom: solid 1px rgba(255, 255, 255, 0.12);
           background-color: #F1F4F6;//mat-color($primary, 800);
+          height: 100%;
+
+          .mat-tab-body-wrapper {
+            height: 100%;
+          }
 
           .overlay {
             background-color: mat-color($primary, 800);
           }
         }
 
-        .ide-panels {
-          background-color: mat-color($primary, 700);
-        }
+        // .ide-panels {
+        //   background-color: mat-color($primary, 700);
+        // }
 
-        .hide-panels {
-          .ide-editors {
-            height: calc(100% - 49px) !important;
-          }
+        // .hide-panels {
+        //   .ide-editors {
+        //     height: calc(100% - 49px) !important;
+        //   }
 
-          .ide-panels {
-            top: calc(100% - 49px) !important;
-            height: 49px !important;
-          }
-        }
+        //   .ide-panels {
+        //     top: calc(100% - 49px) !important;
+        //     height: 49px !important;
+        //   }
+        // }
       }
     }
   }
