@@ -1,3 +1,47 @@
+<div *ngIf="State.Step === SetupStepTypes.Complete">
+
+    <h1 
+      fxLayoutAlign="center center" 
+      class="mat-display-1 title margin-bottom-4">
+      {{ State.OrganizationName }} has been added to the Ecosystem
+    </h1>
+
+    <h2 
+      fxLayoutAlign="center center" 
+      class="h2 paragraph-title-bold margin-bottom-3">
+      Now Fathym It, and Build It.
+    </h2>
+
+    <div fxLayout="column">
+        <h2 class="h2">
+            What Happens Next?
+        </h2>
+
+        <div fxLayout="row">
+          <div fxFlex="20">
+              <!-- <img style="height: 200px;" src="assets/img/Azure-logo.png" /> -->
+          </div>
+          <div fxFlex>
+              <p class="mat-subheading-2">
+                  Some things are finalizing, and we'll redirect you to {{ State.Host }} in the next 30 seconds. Your SSL and hosts are
+                  being configured with the LCU Runtime, and once complete you'll be able to manage your world from your own infrastructure.
+                </p>
+        
+                <p class="mat-subheading-2">
+                  We've authorize and configure your Azure Dev Ops, and we'll walk you through creating new Data Applications on this infrastructure.
+                </p>
+        
+                <p class="mat-subheading-2">
+                  We have tons of great information and tutorials to get you started, so dive in!
+                </p>
+        
+                <p class="mat-subheading-2">
+                  Redirecting you to {{State.Host}} in 15 seconds...
+                </p>
+          </div>
+        </div>
+      </div>
+
 <!-- <div class="spread" *ngIf="!State.Loading">
   <div fxLayout="row wrap" fxLayoutAlign="center start">
     <div fxFlex="90%">
@@ -28,7 +72,7 @@
 
           <mat-nav-list>
             <mat-list-item>
-              <mat-icon matListIcon>check_box</mat-icon>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <div matLine>Secure Connection to Azure</div>
 
@@ -42,7 +86,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check_box</mat-icon>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <div matLine>Secure Connection to GitHub</div>
 
@@ -52,7 +96,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check_box</mat-icon>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <div matLine>Secure Connection to Azure DevOps</div>
 
@@ -62,7 +106,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check_box</mat-icon>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <div matLine>Secure Connection to NPM</div>
 
@@ -90,7 +134,7 @@
 
           <mat-nav-list>
             <mat-list-item>
-              <mat-icon matListIcon>check_box</mat-icon>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <div matLine>Connected to your GitHub Organization:</div>
 
@@ -104,7 +148,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check_box</mat-icon>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <div matLine>Created an infrastructure repo:</div>
 
@@ -118,7 +162,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>{{ State.AppSeed.HasBuild ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
+              <mat-icon matListIcon class="success">{{ State.AppSeed.HasBuild ? 'check_circle' : 'cancel' }}</mat-icon>
 
               <div matLine>Created a repository for your {{ State.AppSeed?.SelectedSeed }} application:</div>
 
@@ -159,7 +203,7 @@
 
           <mat-nav-list>
             <mat-list-item>
-              <mat-icon matListIcon>{{ State.AppSeed.InfraBuilt ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
+              <mat-icon matListIcon class="success">{{ State.AppSeed.InfraBuilt ? 'check_circle' : 'cancel' }}</mat-icon>
 
               <div matLine>
                 Deployed your first version of <strong>{{ State.InfraTemplate.SelectedTemplate }}</strong> Infrastructure to
@@ -172,7 +216,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>{{ State.AppSeed.HasBuild ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
+              <mat-icon matListIcon class="success">{{ State.AppSeed.HasBuild ? 'check_circle' : 'cancel' }}</mat-icon>
 
               <div matLine>Established a new Azure DevOps project ({{ State.DevOps.ProjectName }}) with automated builds and releases</div>
 
@@ -209,7 +253,7 @@
 
           <mat-nav-list>
             <mat-list-item>
-              <mat-icon matListIcon>{{ State.AppSeed.AppSeeded ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
+              <mat-icon matListIcon class="success">{{ State.AppSeed.AppSeeded ? 'check_circle' : 'cancel' }}</mat-icon>
 
               <div matLine>
                 Seeded your application repository with a <strong>{{ State.AppSeed.SelectedSeed }}</strong> template
@@ -217,8 +261,8 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>{{
-                State.AppSeed.Step == AppSeedStepTypes.Created ? 'check_box' : 'check_box_outline_blank'
+              <mat-icon matListIcon class="success">{{
+                State.AppSeed.Step == AppSeedStepTypes.Created ? 'check_circle' : 'cancel'
               }}</mat-icon>
 
               <div matLine>Established a Data Applications configuration in your forge</div>
@@ -234,8 +278,8 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>{{
-                State.AppSeed.Step == AppSeedStepTypes.Created ? 'check_box' : 'check_box_outline_blank'
+              <mat-icon matListIcon class="success">{{
+                State.AppSeed.Step == AppSeedStepTypes.Created ? 'check_circle' : 'cancel'
               }}</mat-icon>
 
               <div matLine>

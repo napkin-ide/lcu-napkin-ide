@@ -1,12 +1,15 @@
-<div [formGroup]="ParentForm" fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
+<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
   <div fxFlex="30%" fxFlex.lt-md="100%" class="details">
     <div class="inner">
       <mat-nav-list>
         <mat-list-item>
           <div matLine>
-            <h1 class="mat-display-1 center">
-              <img src="/img/logo" />
-
+            <!-- <div class="logo"> -->
+              <!-- <div *ngIf="LogoClass" [ngClass]="LogoClass"></div> not really using this--> 
+              <!-- <div class="primary-logo"></div> -->
+            <!-- </div> -->
+            <h1 class="center title">
+              <!-- <img src="../../../assets/img/fathym_logo_screen.png" /> -->
               Fathym It. Build It.
             </h1>
           </div>
@@ -16,11 +19,11 @@
 
         <ng-container *ngIf="State.Step">
           <ng-container>
-            <mat-list-item *ngIf="State.Step == SetupStepTypes.OrgDetails">
+            <mat-list-item *ngIf="State.Step === SetupStepTypes.OrgDetails" class="active-mat-list-item">
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h1 class="mat-headline">Organization Details</h1>
+                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Organization Details</h2>
 
                 <p class="mat-subheading-2">
                   Fathym Framework has been designed from the ground up for organizations of any size. Our LCU Ecosytem connects
@@ -29,14 +32,14 @@
                 </p>
 
                 <p class="mat-subheading-1">
-                  <strong>Organization Lookup</strong> - This is used to describe many aspects of your default setup (updateable later), and
+                  <strong class="plain-text-bold">Organization Lookup</strong> - This is used to describe many aspects of your default setup (updateable later), and
                   gives the assets we create for you unique names for the various systems. The following rules apply...
                 </p>
               </div>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.OrgDetails && OrgDetailsForm?.valid">
-              <mat-icon matListIcon>check_box</mat-icon>
+            <mat-list-item *ngIf="State.Step != SetupStepTypes.OrgDetails && DetailsFormValid">
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.OrgDetails)">Organization Details Configured</a>
             </mat-list-item>
@@ -45,17 +48,19 @@
           <mat-divider></mat-divider>
 
           <ng-container>
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureSetup && !OrgInfraForm?.valid">
-              <mat-icon matListIcon>check_box_outline_blank</mat-icon>
+  
+            <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.AzureSetup && !InfraFormValid">
+              <mat-icon matListIcon class="error">highlight_off</mat-icon>
 
               <h1 matLine>Setup Organization Infrastructure</h1>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step == SetupStepTypes.AzureSetup">
+            <mat-list-item *ngIf="State.Step === SetupStepTypes.AzureSetup" class="active-mat-list-item">
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h1 class="mat-headline">Setup Organization Infrastructure</h1>
+                
+                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Setup Organization Infrastructure</h2>
 
                 <h2 class="mat-subheading-2">
                   Infrastructure Setup currently requires an Azure tenant and subscription to get started. Use the button below to create
@@ -96,8 +101,8 @@
               </div>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.AzureSetup && OrgInfraForm?.valid">
-              <mat-icon matListIcon>check_box</mat-icon>
+            <mat-list-item *ngIf="State.Step !== SetupStepTypes.AzureSetup && InfraFormValid">
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.AzureSetup)">Organization Infrastructure Setup</a>
             </mat-list-item>
@@ -106,19 +111,19 @@
           <mat-divider></mat-divider>
 
           <ng-container>
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.HostConfig && !HostForm.valid">
-              <mat-icon matListIcon>check_box_outline_blank</mat-icon>
+            <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.HostConfig && !HostFormValid">
+              <mat-icon matListIcon class="error">highlight_off</mat-icon>
 
               <h1 matLine>Configure Organization Host</h1>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step == SetupStepTypes.HostConfig">
+            <mat-list-item *ngIf="State.Step === SetupStepTypes.HostConfig" class="active-mat-list-item">
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h1 class="mat-headline">Configure Organization Host</h1>
+                  <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Configure Organization Host</h2>
 
-                <ng-container *ngIf="State.HostFlow == null">
+                <ng-container *ngIf="State.HostFlow === null">
                   <h2 class="mat-subheading-2">
                     If you have your own organization domain, follow that flow to validate domain ownership.
                   </h2>
@@ -128,19 +133,19 @@
                   </h2>
                 </ng-container>
 
-                <ng-container *ngIf="State.HostFlow == 'shared'">
+                <ng-container *ngIf="State.HostFlow === 'shared'">
                   <h2 class="mat-subheading-2">
                     We'll get you started with our community addition on a free domain. Select the root domain for your new site, no
                     worries, you'll be able to change it and bring your own domains later.
                   </h2>
 
                   <!-- <h2 class="mat-subheading-2" *ngIf="HostForm.controls['root'].value"> -->
-                  <h2 class="mat-subheading-2" *ngIf="OrgHostComponent?.RootDomainControl.value || false">
+                  <h2 class="mat-subheading-2" *ngIf="OrgHostComponent?.itm?.RootDomainControl.value || ''">
                     Choose an available subdomain for your new site, where we will make your SSL secured Data Applications available.
                   </h2>
                 </ng-container>
 
-                <ng-container *ngIf="State.HostFlow == 'private'">
+                <ng-container *ngIf="State.HostFlow === 'private'">
                   <h2 class="mat-subheading-2">
                     Enter the full domain that you would like to use for your site. Something like:
                   </h2>
@@ -149,16 +154,16 @@
                     www.my-domain.com
                   </h2>
 
-                  <h2 *ngIf="HostValid" class="mat-subheading-2">
-                    Then you will need to add a CNAME record for your domain provider. The record should have '{{ Subdomain }}' point to
+                  <h2 *ngIf="OrgHostComponent?.ValidHost" class="mat-subheading-2">
+                    Then you will need to add a CNAME record for your domain provider. The record should have '{{ OrgHostComponent.Subdomain }}' point to
                     'lcu-prd.fathym.com'
                   </h2>
                 </ng-container>
               </div>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.HostConfig && HostForm.valid">
-              <mat-icon matListIcon>check_box</mat-icon>
+            <mat-list-item *ngIf="State.Step !== SetupStepTypes.HostConfig && HostFormValid">
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.HostConfig)">Organization Host Configured</a>
             </mat-list-item>
@@ -167,17 +172,17 @@
           <mat-divider></mat-divider>
 
           <ng-container>
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.Terms && !State.TermsAccepted">
-              <mat-icon matListIcon>check_box_outline_blank</mat-icon>
+            <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.Terms && !State.TermsAccepted">
+              <mat-icon matListIcon class="error">highlight_off</mat-icon>
 
               <h1 matLine>Fathym Terms & Privacy</h1>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step == SetupStepTypes.Terms">
+            <mat-list-item *ngIf="State.Step === SetupStepTypes.Terms" class="active-mat-list-item">
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h1 class="mat-headline">Fathym Terms & Privacy</h1>
+                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Fathym Terms & Privacy</h1>
 
                 <h2 class="mat-subheading-2">
                   The Fathym Terms & Privacy will allow you access to our Open Core systems.
@@ -190,7 +195,7 @@
             </mat-list-item>
 
             <mat-list-item *ngIf="State.Step != SetupStepTypes.Terms && State.TermsAccepted">
-              <mat-icon matListIcon>check_box</mat-icon>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.Terms)">Fathym Terms Accepted</a>
             </mat-list-item>
@@ -200,25 +205,25 @@
 
           <ng-container>
             <!-- <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && (!HostForm.valid || !State.Host || !State.TermsAccepted)"> -->
-                <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && (!OrgHostComponent?.first?.HostForm.valid || !State.Host || !State.TermsAccepted)">
-              <mat-icon matListIcon>check_box_outline_blank</mat-icon>
+                <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.Review && !HostFormValid || !State.Host || !State.TermsAccepted">
+              <mat-icon matListIcon class="error">highlight_off</mat-icon>
 
               <h1 matLine>Review & Setup</h1>
             </mat-list-item>
 
             <mat-list-item
-              *ngIf="State.Step != SetupStepTypes.Review && State.Host && State.TermsAccepted && State.Step != SetupStepTypes.Complete"
+              *ngIf="State.Step !== SetupStepTypes.Review && State.Host && State.TermsAccepted && State.Step != SetupStepTypes.Complete"
             >
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.Review)">Review & Setup</a>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step == SetupStepTypes.Review">
+            <mat-list-item *ngIf="State.Step === SetupStepTypes.Review" class="active-mat-list-item">
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h1 class="mat-headline">Review & Setup</h1>
+                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Review & Setup</h1>
 
                 <h2 class="mat-subheading-2">
                   We are going to setup a fairly opinionated starting infrastructure for your project. After getting started, you'll be able
@@ -236,8 +241,8 @@
               </div>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step == SetupStepTypes.Complete">
-              <mat-icon matListIcon>check_box</mat-icon>
+            <mat-list-item *ngIf="State.Step === SetupStepTypes.Complete">
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <h1 matLine>Fathym Framework Setup Complete</h1>
             </mat-list-item>
@@ -254,334 +259,41 @@
     <div class="inner">
       <div>
         <div *ngIf="!State.Loading">
+          <mat-card>
+          <!-- Organization details form -->
           <lcu-org-details 
           #OrgDetailsComponent
           [setup-step-types]="SetupStepTypes" 
           [state]="State"></lcu-org-details>
-          <!-- <form *ngIf="State.Step == SetupStepTypes.OrgDetails" [formGroup]="OrgForm" (ngSubmit)="SetOrgDetails()">
-            <h1 class="mat-display-2 title">Setup Your Organization</h1>
-
-            <mat-form-field class="mat-full-width">
-              <input matInput placeholder="Organization Name" formControlName="orgName" required />
-
-              <mat-icon matSuffix matTooltip="Enter a unique name for your new organization">help_outline</mat-icon>
-            </mat-form-field>
-
-            <mat-form-field class="mat-full-width">
-              <textarea matInput placeholder="Description" formControlName="orgDesc" required></textarea>
-
-              <mat-icon matSuffix matTooltip="Enter a useful description for your new organization">help_outline</mat-icon>
-            </mat-form-field>
-
-            <mat-form-field class="mat-full-width">
-              <input matInput placeholder="Organization Lookup" formControlName="orgLookup" required />
-
-              <mat-icon matSuffix matTooltip="Enter a valid organization lookup (lowercase alpha characters and '-' accepted)">
-                help_outline
-              </mat-icon>
-            </mat-form-field>
-
-            <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!OrgForm.valid">
-              Setup Organization Details
-            </button>
-          </form> -->
+  
+          <!-- Organization infrastructure form -->
           <lcu-org-infra
           #OrgInfraComponent
           [setup-step-types]="SetupStepTypes" 
           [state]="State"
           (set-step)="SetStep($event)"></lcu-org-infra>
-          <!-- <form *ngIf="State.Step == SetupStepTypes.AzureSetup" [formGroup]="InfraConfigFormGroup" (ngSubmit)="SetOrgDetails()">
-            <div class="spread">
-              <h2 class="mat-display-2 title" style="text-align: center">Microsoft Azure Subscription Setup</h2>
-
-              <div>
-                <mat-form-field class="mat-full-width">
-                  <input matInput placeholder="Azure Tenant (Directory) ID" formControlName="azureTenantId" required />
-
-                  <mat-hint>32 Character Limit</mat-hint>
-                </mat-form-field>
-
-                <mat-form-field class="mat-full-width">
-                  <input matInput placeholder="Azure Subscription ID" formControlName="azureSubId" required />
-
-                  <mat-hint>32 Character Limit</mat-hint>
-                </mat-form-field>
-
-                <mat-form-field class="mat-full-width">
-                  <input matInput placeholder="Azure App ID" formControlName="azureAppId" required />
-
-                  <mat-hint>32 Character Limit</mat-hint>
-                </mat-form-field>
-
-                <mat-form-field class="mat-full-width">
-                  <input matInput placeholder="Azure App Auth key" formControlName="azureAppAuthKey" required />
-
-                  <mat-hint>32 Character Limit</mat-hint>
-                </mat-form-field>
-              </div>
-
-              <div class="spread">
-                <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()" [disabled]="!InfraConfigFormGroup.valid">
-                  Setup Organization Infrastructure
-                </a>
-
-                <a mat-button class="mat-full-width" color="warn" (click)="SetStep(SetupStepTypes.OrgDetails)">Rename Organization</a>
-              </div>
-            </div>
-          </form> -->
-
+         
+          <!-- Organization host form -->
           <lcu-org-host
           #OrgHostComponent
           [setup-step-types]="SetupStepTypes" 
           [state]="State"
-          (is-host-valid)="IsHostValid($event)"
-          (subdomain)="SubdomainChange($event)"
           (set-step)="SetStep($event)"></lcu-org-host>
-          <!-- <form *ngIf="State.Step == SetupStepTypes.HostConfig" [formGroup]="HostForm" (ngSubmit)="SecureHost()">
-            <h1 class="mat-display-2 title">Establish {{ State.OrganizationName }} Shared Host</h1>
+         
+          <!--Terms and conditions form-->
+          <lcu-org-terms
+          [setup-step-types]="SetupStepTypes" 
+          [state]="State"></lcu-org-terms>
+          
+          <lcu-org-review 
+            [setup-step-types]="SetupStepTypes" 
+            [state]="State"></lcu-org-review>
 
-            <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.HostFlow">
-              <div fxFlex="75%" fxFlex.lt-md="100%">
-                <mat-card>
-                  <h2 class="mat-headline">Use a Fathym Domain</h2>
+          <lcu-complete
+            [setup-step-types]="SetupStepTypes" 
+            [state]="State"></lcu-complete>
 
-                  <p class="mat-subtitle paragraph-title paragraph-title">
-                    Don't have your own domain? Or just want to get started quickly? This is the route for you.
-                  </p>
-
-                  <p class="mat-subtitle paragraph-title paragraph-title">
-                    You'll be able to add your own domain later on, click below to get started.
-                  </p>
-
-                  <a mat-raised-button color="accent" (click)="SetHostFlow('shared')">Use Fathym Domain</a>
-                </mat-card>
-              </div> -->
-
-              <!-- <div fxFlex="50%" fxFlex.lt-md="100%">
-                <mat-card>
-                  <h2 class="mat-subheading-2">Bring Your Own Domain</h2>
-
-                  <p class="mat-subtitle paragraph-title paragraph-title">
-                    Ready to get started forging your own domain? We'll walk you through getting started here.
-                  </p>
-
-                  <p class="mat-subtitle paragraph-title paragraph-title">
-                    You'll be able to add more domains later on, so click below to get started
-                  </p>
-
-                  <a mat-raised-button color="primary" (click)="SetHostFlow('private')">Use Custom Domain</a>
-                </mat-card>
-              </div> -->
-            <!-- </div>
-
-            <ng-container *ngIf="State.HostFlow">
-              <mat-form-field class="mat-full-width" *ngIf="State.HostFlow == 'shared'">
-                <mat-select placeholder="Root Domain" formControlName="root">
-                  <mat-option [value]="host" *ngFor="let host of State.HostOptions">{{ host }}</mat-option>
-                </mat-select>
-              </mat-form-field>
-
-              <ng-container *ngIf="HostForm.controls['root'].value || State.HostFlow == 'private'">
-                <mat-form-field class="mat-full-width">
-                  <input matInput placeholder="Host Address" (ngModelChange)="onChanges()" formControlName="host" required />
-
-                  <span matSuffix *ngIf="State.HostFlow == 'shared'">.{{ HostForm.controls['root'].value }}</span>
-
-                  <mat-icon
-                    matSuffix
-                    matTooltip="Select a domain. You can choose your own domain or one of Fathym’s domains. Fathym’s domains allow you to use a sub-domain, for example, yourcompany.{{
-                      HostForm.controls['root'].value
-                    }}."
-                    >help_outline</mat-icon
-                  >
-                </mat-form-field>
-
-                <div *ngIf="State.HostApprovalMessage">
-                  <h2>{{ State.HostApprovalMessage }}</h2>
-                </div>
-
-                <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!HostForm.valid || !HostValid">
-                  Configure Organization Hosting
-                </button>
-              </ng-container> -->
-
-              <!-- <div>
-                <a mat-button (click)="SetHostFlow(null)"><mat-icon>cancel</mat-icon> Back To Host Options</a>
-              </div> -->
-            <!-- </ng-container>
-          </form> -->
-
-          <div *ngIf="State.Step == SetupStepTypes.Terms">
-            <h1 class="mat-display-2 title">Fathym Terms & Privacy</h1>
-
-            <p class="mat-headline">{{ State.Terms }}</p>
-
-            <a mat-raised-button color="primary" (click)="AcceptTerms()">Accept Fathym Terms & Privacy</a>
-          </div>
-
-          <div *ngIf="State.Step == SetupStepTypes.Review">
-            <h1 class="mat-display-2 title">Adding {{ State.OrganizationName }} to the Ecosystem</h1>
-
-            <h2 class="mat-headline">If you can Fathym It, you can Build It.</h2>
-
-            <ng-container *ngIf="!State.HasDevOpsOAuth">
-              <div class="spread">
-                <h3 class="mat-display-1">
-                  Get Connected with Azure Dev Ops
-                </h3>
-
-                <div>
-                  <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="assets/img/Azure-logo.png" />
-
-                  <p class="mat-subheading-2">
-                    Part of our opinionated best practice architecture, uses Azure Dev Ops to deliver best in class Continuous Integration
-                    and Deployment capabilities. One of the most costly endeavours for a team is the initial setup of a long term, quality
-                    build and release pipeline. Fathym's tools provide a day-one, repeatable process for controlling how your teams manage
-                    this workflow.
-                  </p>
-
-                  <p class="mat-subheading-2">
-                    To get started, we need to get connected with an instance of Azure Dev Ops. Don't worry, you'll be able to migrate to
-                    other systems in the future if you have a different prefered flavor.
-                  </p>
-                </div>
-              </div>
-
-              <div class="spread" style="width: 100%;">
-                <a mat-raised-button color="primary" class="mat-button-lg" [href]="AzureDevOpsOAuthURL">
-                  Get Connected with Azure Dev Ops
-                </a>
-              </div>
-            </ng-container>
-
-            <ng-container *ngIf="State.HasDevOpsOAuth">
-              <ng-container *ngIf="!State.EnterpriseBooted">
-                <div class="spread">
-                  <h3 class="mat-display-1">
-                    Organization Infrastructure
-                  </h3>
-
-                  <div>
-                    <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="assets/img/Azure-logo.png" />
-
-                    <p class="mat-subheading-2">
-                      We'll configure an enterprise scalable, and cost effective infrastructure for getting on the Azure cloud. Free until
-                      you scale.
-                    </p>
-
-                    <p class="mat-subheading-2">
-                      We'll deploy a
-                      <a href="https://letsencrypt.org/" target="_blank">Let's Encrypt (Open Surce) SSL Certificate</a> secured application
-                      host.
-                    </p>
-
-                    <p class="mat-subheading-2">
-                      We'll manage Azure, other clouds and legacy infrastructure with our Enterprise Orchestration tools.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="spread">
-                  <h3 class="mat-display-1">
-                    Comprehensive Dev/Ops
-                  </h3>
-
-                  <div>
-                    <img style="float: left; height: 150px; margin: 0 1rem 1rem 0;" src="assets/img/azure-dev-ops-logo.png" />
-
-                    <p class="mat-subheading-2">
-                      We've gotten connected with your Azure Dev Ops instance and will help manage your code, builds, releases, and more.
-                    </p>
-
-                    <p class="mat-subheading-2">
-                      We'll get some git based source control setup for your infrastructure, and connect it to builds for auto deploying to
-                      Azure.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="spread" style="width: 100%;">
-                  <a mat-raised-button class="mat-button-lg" color="primary" (click)="Boot()">
-                    Get Connected <br />
-                    Boot your Organization
-                  </a>
-                </div>
-              </ng-container>
-
-              <ng-container *ngIf="State.EnterpriseBooted">
-                  <div class="spread">
-                    <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="/img/logo" />
-
-                    <h3 class="mat-display-1">
-                      Application Hosting
-                    </h3>
-
-                    <div>
-                      <p class="mat-subheading-2">
-                        The Dynamic Application Framework will provide a backbone for deliver javascript based front ends in a secure and
-                        scalable manner. Simplifying the developer experience to just solving customer problems.
-                      </p>
-
-                      <p class="mat-subheading-2">
-                        We'll take care of security, SSL hosting, and application serving as long as you want us to. Then we'll help you
-                        upgrade your infrastructure to the services and scale you need.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="spread">
-                    <img style="float: right; height: 150px; margin: 0 0 1rem 1rem;" src="/img/logo" />
-
-                    <h3 class="mat-display-1">
-                      Auth & Auth
-                    </h3>
-
-                    <div>
-                      <p class="mat-subheading-2">
-                        Easy to consume and use OAuth / Identity as a service, backed by the Auth/Auth provider of your choosing...
-                      </p>
-                    </div>
-                  </div>
-
-                <div class="spread" style="width: 100%;">
-                  <button mat-raised-button class="mat-button-lg" color="primary" (click)="Finalize()" [disabled]="!State.TermsAccepted">
-                    Finalize and Deploy your Organization
-                  </button>
-                </div>
-              </ng-container>
-            </ng-container>
-          </div>
-
-          <div *ngIf="State.Step == SetupStepTypes.Complete">
-            <h1 class="mat-display-2 title">{{ State.OrganizationName }} has been added to the Ecosystem</h1>
-
-            <h2 class="mat-headline">Now Fathym It, and Build It.</h2>
-
-            <div class="spread">
-              <h3 class="mat-display-1">
-                What Happens Next?
-              </h3>
-
-              <div>
-                <p class="mat-subheading-2">
-                  Some things are finalizing, and we'll redirect you to {{ State.Host }} in the next 30 seconds. Your SSL and hosts are
-                  being configured with the LCU Runtime, and once complete you'll be able to manage your world from your own infrastructure.
-                </p>
-
-                <p class="mat-subheading-2">
-                  We've authorize and configure your Azure Dev Ops, and we'll walk you through creating new Data Applications on this infrastructure.
-                </p>
-
-                <p class="mat-subheading-2">
-                  We have tons of great information and tutorials to get you started, so dive in!
-                </p>
-
-                <p class="mat-subheading-2">
-                  Redirecting you to {{State.Host}} in 15 seconds...
-                </p>
-              </div>
-            </div>
-          </div>
+        </mat-card>
         </div>
 
         <div *ngIf="State.Loading">

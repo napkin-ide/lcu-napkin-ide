@@ -7,13 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NapkinIDESetupStateManagerContext } from './core/napkin-ide-setup-state-manager.context';
 import { environment } from '../environments/environment';
-import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu-ide/common';
-// import { OrgDetailsComponent } from './org-controls/org-details/org-details.component';
-// import { OrgInfraComponent } from './org-controls/org-infra/org-infra.component';
-// import { OrgHostingComponent } from './org-controls/org-hosting/org-hosting.component';
+import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
+import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     FathymSharedModule.forRoot(),
     BrowserAnimationsModule,
@@ -21,7 +22,8 @@ import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu-ide
     AppRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    LcuNapkinIdeModule
   ],
   providers: [
     NapkinIDESetupStateManagerContext,

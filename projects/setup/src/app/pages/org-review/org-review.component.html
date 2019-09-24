@@ -1,0 +1,158 @@
+<div *ngIf="State.Step === SetupStepTypes.Review">
+
+    <h1 
+      fxLayoutAlign="center center" 
+      class="mat-display-1 title margin-bottom-4">
+      Adding {{ State.OrganizationName }} to the Ecosystem
+    </h1>
+
+    <h2 
+      fxLayoutAlign="center center" 
+      class="h2 paragraph-title-bold margin-bottom-3">
+      If you can Fathym It, you can Build It.
+    </h2>
+    
+    <ng-container *ngIf="!State.HasDevOpsOAuth">
+      <div fxLayout="column">
+        <h2 class="h2">
+          Get Connected with Azure Dev Ops
+        </h2>
+
+        <div fxLayout="row">
+          <div fxFlex="20">
+              <img style="height: 200px;" src="assets/img/Azure-logo.png" />
+          </div>
+          <div fxFlex>
+            <p class="mat-subheading-2">
+              Part of our opinionated best practice architecture, uses Azure Dev Ops to deliver best in class Continuous Integration
+              and Deployment capabilities. One of the most costly endeavours for a team is the initial setup of a long term, quality
+              build and release pipeline. Fathym's tools provide a day-one, repeatable process for controlling how your teams manage
+              this workflow.
+            </p>
+
+            <p class="mat-subheading-2">
+              To get started, we need to get connected with an instance of Azure Dev Ops. Don't worry, you'll be able to migrate to
+              other systems in the future if you have a different prefered flavor.
+            </p>
+          </div>
+        </div>
+
+        <a mat-raised-button color="accent" class="margin-top-3 mat-full-width" [href]="AzureDevOpsOAuthURL">
+          Get Connected with Azure Dev Ops
+        </a>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="State.HasDevOpsOAuth">
+      <ng-container *ngIf="!State.EnterpriseBooted">
+        <div fxLayout="column">
+          <h2 class="h2">
+            Organization Infrastructure
+          </h2>
+
+          <div fxLayout="row">
+            <div fxFlex="20">
+                <img style="height: 200px;" src="assets/img/Azure-logo.png" />
+            </div>
+            <div fxFlex>
+              <p class="mat-subheading-2">
+                We'll configure an enterprise scalable, and cost effective infrastructure for getting on the Azure cloud. Free until
+                you scale.
+              </p>
+
+              <p class="mat-subheading-2">
+                We'll deploy a
+                <a mat-button color="accent" href="https://letsencrypt.org/" target="_blank">Let's Encrypt (Open Surce) SSL Certificate</a> secured application
+                host.
+              </p>
+
+              <p class="mat-subheading-2">
+                We'll manage Azure, other clouds and legacy infrastructure with our Enterprise Orchestration tools.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="column" class="margin-top-5">
+          <h2 class="h2">
+              Comprehensive Dev/Ops
+          </h2>
+
+          <div fxLayout="row">
+              <div fxFlex="20">
+                  <img style="height: 200px;" src="assets/img/azure-dev-ops-logo.png" />
+              </div>
+              <div fxFlex>
+                  <p class="mat-subheading-2">
+                      We've gotten connected with your Azure Dev Ops instance and will help manage your code, builds, releases, and more.
+                    </p>
+      
+                    <p class="mat-subheading-2">
+                      We'll get some git based source control setup for your infrastructure, and connect it to builds for auto deploying to
+                      Azure.
+                    </p>
+              </div>
+            </div>
+        </div>
+
+        <button
+          mat-raised-button 
+          color="accent" 
+          class="margin-top-3 mat-full-width" 
+          (click)="Boot()" >
+          Get Connected, Boot your Organization
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="State.EnterpriseBooted">
+            <div fxLayout="column">
+                <h2 class="h2">
+                    Application Hosting
+                </h2>
+
+            <div fxLayout="row">
+              <div fxFlex="20">
+                  <div style="height: 150px; width: auto" class="thinky-logo"></div>
+              </div>
+              <div fxFlex>
+                <p class="mat-subheading-2">
+                  The Dynamic Application Framework will provide a backbone for deliver javascript based front ends in a secure and
+                  scalable manner. Simplifying the developer experience to just solving customer problems.
+                </p>
+
+                <p class="mat-subheading-2">
+                  We'll take care of security, SSL hosting, and application serving as long as you want us to. Then we'll help you
+                  upgrade your infrastructure to the services and scale you need.
+                </p>
+              </div>
+              </div>
+            </div>
+
+
+            <div fxLayout="column">
+                <h2 class="h2">
+                    Auth & Auth
+                </h2>
+
+            <div fxLayout="row">
+              <div fxFlex="20">
+                  <div style="height: 150px; width: auto" class="thinky-logo"></div>
+              </div>
+              <div fxFlex>
+                <p class="mat-subheading-2">
+                  Easy to consume and use OAuth / Identity as a service, backed by the Auth/Auth provider of your choosing...
+                </p>
+              </div>
+              </div>
+              <button
+                mat-raised-button 
+                color="accent" 
+                class="margin-top-3 mat-full-width" 
+                (click)="Finalize()" 
+                [disabled]="!State.TermsAccepted">
+                Finalize and Deploy your Organization
+              </button>
+            </div>
+      </ng-container>
+    </ng-container>
+  </div>

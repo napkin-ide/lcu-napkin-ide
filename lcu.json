@@ -1,14 +1,16 @@
 {
-  "templates": {
-    "repository": "lowcodeunit-devkit/lcu-cli-templates-core",
-    "scope": "@napkin-ide",
-    "workspace": "lcu-napkin-ide"
-  },
-  "config": {
-    "wc": ["wc/lcu-napkin-ide.lcu.js"],
-    "solutions": {},
-    "elements": {},
-    "flux": {},
-    "dependencies": {}
-  }
+	"templates": {
+		"repository": "lowcodeunit-devkit/lcu-cli-templates-core",
+		"scope": "@napkin-ide",
+		"workspace": "lcu-napkin-ide"
+	},
+	"config": {
+		"wc": [
+			"wc/lcu-napkin-ide.lcu.js"
+		],
+		"solutions": {},
+		"elements": {},
+		"flux": {},
+		"dependencies": {}
+	}
 }

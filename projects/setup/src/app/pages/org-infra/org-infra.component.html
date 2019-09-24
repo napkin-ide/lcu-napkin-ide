@@ -1,0 +1,114 @@
+<form *ngIf="State.Step == SetupStepTypes.AzureSetup" [formGroup]="InfraForm" (ngSubmit)="SetOrgDetails()">
+        <div class="spread">
+            <h1 
+            fxLayoutAlign="center center" 
+            class="mat-display-1 title margin-bottom-4">
+            Microsoft Azure Subscription Setup
+          </h1>
+          
+          <div>
+            <mat-form-field class="mat-full-width">
+                <input 
+                  formControlName="azureTenantId" 
+                  matInput placeholder="Azure Tenant (Directory) ID" 
+                  [type]="HideTenantId ? 'password' : 'text'" 
+                  required autocomplete="new-password">
+                  <mat-error *ngIf="OrgInfraAzureTenatId.hasError('maxlength')">
+                      Over character limit of 32
+                  </mat-error>
+                <mat-icon 
+                  matBadge="{{OrgInfraAzureTenatId.value.length}}" 
+                  matBadgePosition="below after" 
+                  matBadgeColor="{{OrgInfraAzureTenatId.hasError('maxlength') ? warn : primary}}"
+                  matBadgeOverlap="false"
+                  color="warn" 
+                  matSuffix 
+                  (click)="HideTenantId = !HideTenantId" class="cursor-pointer">{{HideTenantId ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+              <mat-hint>32 Character Limit</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mat-full-width margin-top-4">
+              <input 
+                formControlName="azureSubId" 
+                matInput placeholder="Azure Subscription ID" 
+                [type]="HideSubId ? 'password' : 'text'" 
+                required autocomplete="new-password">
+                <mat-error *ngIf="OrgInfraAzureSubId.hasError('maxlength')">
+                    Over character limit of 36
+                </mat-error>
+              <mat-icon 
+                matBadge="{{OrgInfraAzureSubId.value.length}}" 
+                matBadgePosition="below after" 
+                matBadgeColor="{{OrgInfraAzureSubId.hasError('maxlength') ? warn : primary}}"
+                matBadgeOverlap="false"
+                color="warn" 
+                matSuffix 
+                (click)="HideSubId = !HideSubId" class="cursor-pointer">{{HideSubId ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+              <mat-hint>36 Character Limit</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mat-full-width margin-top-4">
+              <input 
+                formControlName="azureAppId" 
+                matInput placeholder="Azure App ID" 
+                [type]="HideAppId ? 'password' : 'text'" 
+                required autocomplete="new-password">
+                <mat-error *ngIf="OrgInfraAzureAppAppId.hasError('maxlength')">
+                    Over character limit of 36
+                </mat-error>
+              <mat-icon 
+                matBadge="{{OrgInfraAzureAppAppId.value.length}}" 
+                matBadgePosition="below after" 
+                matBadgeColor="{{OrgInfraAzureAppAppId.hasError('maxlength') ? warn : primary}}"
+                matBadgeOverlap="false"
+                color="warn" 
+                matSuffix 
+                (click)="HideAppId = !HideAppId" class="cursor-pointer">{{HideAppId ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+              <mat-hint>36 Character Limit</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mat-full-width margin-top-4">
+              <input 
+                formControlName="azureAppAuthKey" 
+                matInput placeholder="Azure App Auth key" 
+                [type]="HideAuthKey ? 'password' : 'text'" 
+                required autocomplete="new-password">
+                <mat-error *ngIf="OrgInfraAzureAppAuthKey.hasError('maxlength')">
+                    Over character limit of 32
+                </mat-error>
+              <mat-icon 
+                matBadge="{{OrgInfraAzureAppAuthKey.value.length}}" 
+                matBadgePosition="below after" 
+                matBadgeColor="{{OrgInfraAzureAppAuthKey.hasError('maxlength') ? warn : primary}}"
+                matBadgeOverlap="false"
+                color="warn" 
+                matSuffix 
+                (click)="HideAuthKey = !HideAuthKey" class="cursor-pointer">{{HideAuthKey ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+              <mat-hint>32 Character Limit</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div class="margin-top-4">
+          <button
+            mat-raised-button 
+            color="accent" 
+            class="mat-full-width" 
+            (click)="Configure()" 
+            [disabled]="!InfraForm.valid">
+            Setup Organization Details
+          </button>
+
+          <button 
+            mat-button 
+            class="mat-full-width" 
+            color="warn" 
+            (click)="ChangeStep(SetupStepTypes.OrgDetails)">
+            Rename Organization
+        </button>
+        </div>
+        </div>
+      </form>

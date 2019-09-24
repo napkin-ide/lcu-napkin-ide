@@ -1,7 +1,8 @@
 @import "~@angular/material/theming";
-@import '../../../../node_modules/@lcu-ide/common/assets/styles/fathym-global.styles';
-@import '../../../../node_modules/@lcu-ide/common/assets/theming/fathym-nide-theme';
-@import '../../../../node_modules/@lcu-ide/common/assets/styles/branding/fathym-branding';
+@import '../../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+@import '../../../../node_modules/@lcu/common/assets/theming/fathym-nide-theme';
+@import '../../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+// @import '../../../../node_modules/@lcu/common/assets/theming/fathym-default-theme';
 
 // $nide-app-primary: mat-palette($nide-primary);
 // $nide-app-accent: mat-palette($nide-accent, A200, A100, A400);
@@ -10,9 +11,9 @@
 // // Create the theme object (a Sass map containing all of the palettes).
 // $nide-theme: mat-light-theme($nide-app-primary, $nide-app-accent, $nide-app-warn);
 
-@mixin defaults($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
+// @mixin defaults($theme) {
+//   $primary: map-get($theme, primary);
+//   $accent: map-get($theme, accent);
 
-  @include reset();
-}
+//   @include reset(); 
+// }
