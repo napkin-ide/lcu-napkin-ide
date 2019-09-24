@@ -1,0 +1,50 @@
+<mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
+  <mat-grid-tile>
+    <div class="mat-full-width">
+      <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
+
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div fxFlex="100%">
+          <nav mat-tab-nav-bar>
+            <a mat-tab-link *ngFor="let panel of Panels" [active]="panel.Lookup == CurrentPanel?.Lookup">
+              {{ panel.Title }}
+
+              <span mat-icon-button>
+                <mat-icon>cancel</mat-icon>
+              </span>
+            </a>
+          </nav>
+        </div>
+
+        <div fxFlex>
+          <button mat-icon-button (click)="ToggleShowPanels()">
+            <mat-icon *ngIf="ShowPanels">cancel</mat-icon>
+
+            <mat-icon *ngIf="!ShowPanels">keyboard_arrow_up</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <ng-template matTabContent *ngIf="ShowPanels">
+        <!-- <lcu-lazy-element [config]="Config" [context]="Context"></lcu-lazy-element> -->
+        ...
+      </ng-template>
+
+      <!-- <mat-tab-group>
+        <mat-tab [label]="panel.Title" *ngFor="let panel of Panels">
+          <ng-template mat-tab-label>
+            {{ panel.Title }}
+
+            <button mat-icon-button>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </ng-template>
+
+          <ng-template matTabContent *ngIf="ShowPanels">
+            ...
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group> -->
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

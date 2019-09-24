@@ -27,4 +27,4 @@ import { RouterModule } from '@angular/router';
     NavListComponent
   ]
 })
-export class LcuNapkinIdeModule { }
+export class LcuNapkinIdeModule {}
