@@ -9,8 +9,8 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'lcu-sign-in',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  // templateUrl: './login.component.html',
+  // styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
  //  Fields
