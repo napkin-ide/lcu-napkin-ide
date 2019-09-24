@@ -36,7 +36,7 @@
 
 // for updating components with themes
 @mixin component-themes($theme) {
-  @include flex-layout-component-theme($theme);
+  // @include flex-layout-component-theme($theme);
   // @include user-list-component-theme($theme);
   // @include side-nav-component-theme($theme);
 }
