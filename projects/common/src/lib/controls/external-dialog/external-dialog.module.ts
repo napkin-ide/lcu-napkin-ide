@@ -1,4 +1,4 @@
-import { MaterialModule } from '@lcu-ide/common';
+import { MaterialModule } from '@lcu/common';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExternalDialogComponent } from './external-dialog.component';
