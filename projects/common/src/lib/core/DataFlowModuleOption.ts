@@ -1,4 +1,4 @@
-import { Icon } from '@lcu-ide/common';
+import { Icon } from '@lcu/common';
 import { DataFlowModuleControlTypes } from './DataFlowModuleControlTypes';
 
 export class DataFlowModuleOption {
