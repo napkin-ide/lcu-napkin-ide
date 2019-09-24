@@ -1,4 +1,4 @@
-<form *ngIf="State.Step == SetupStepTypes.AzureSetup" [formGroup]="InfraForm" (ngSubmit)="SetOrgDetails()">
+<form *ngIf="State.Step == SetupStepTypes['AzureSetup']" [formGroup]="InfraForm">
         <div class="spread">
             <h1 
             fxLayoutAlign="center center" 
@@ -19,7 +19,7 @@
                 <mat-icon 
                   matBadge="{{OrgInfraAzureTenatId.value.length}}" 
                   matBadgePosition="below after" 
-                  matBadgeColor="{{OrgInfraAzureTenatId.hasError('maxlength') ? warn : primary}}"
+                  matBadgeColor="primary"
                   matBadgeOverlap="false"
                   color="warn" 
                   matSuffix 
@@ -40,7 +40,7 @@
               <mat-icon 
                 matBadge="{{OrgInfraAzureSubId.value.length}}" 
                 matBadgePosition="below after" 
-                matBadgeColor="{{OrgInfraAzureSubId.hasError('maxlength') ? warn : primary}}"
+                matBadgeColor="primary"
                 matBadgeOverlap="false"
                 color="warn" 
                 matSuffix 
@@ -61,7 +61,7 @@
               <mat-icon 
                 matBadge="{{OrgInfraAzureAppAppId.value.length}}" 
                 matBadgePosition="below after" 
-                matBadgeColor="{{OrgInfraAzureAppAppId.hasError('maxlength') ? warn : primary}}"
+                matBadgeColor="primary"
                 matBadgeOverlap="false"
                 color="warn" 
                 matSuffix 
@@ -82,7 +82,7 @@
               <mat-icon 
                 matBadge="{{OrgInfraAzureAppAuthKey.value.length}}" 
                 matBadgePosition="below after" 
-                matBadgeColor="{{OrgInfraAzureAppAuthKey.hasError('maxlength') ? warn : primary}}"
+                matBadgeColor="primary"
                 matBadgeOverlap="false"
                 color="warn" 
                 matSuffix 
@@ -106,7 +106,7 @@
             mat-button 
             class="mat-full-width" 
             color="warn" 
-            (click)="ChangeStep(SetupStepTypes.OrgDetails)">
+            (click)="ChangeStep(SetupStepTypes['OrgDetails'])">
             Rename Organization
         </button>
         </div>

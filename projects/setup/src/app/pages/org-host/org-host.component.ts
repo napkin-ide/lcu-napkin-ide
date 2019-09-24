@@ -97,6 +97,14 @@ export class OrgHostComponent implements OnInit {
 
 //  API Methods
 
+public SetHostFlow(flow: string) {
+  // this.OrgHostComponent.HostForm.reset();
+
+  this.State.Loading = true;
+
+  this.nideState.SetHostFlow(flow);
+}
+
 public SecureHost() {
   this.State.Loading = true;
 
@@ -111,12 +119,6 @@ public SecureHost() {
   this.nideState.SecureHost(host);
 }
 
-/**
- * Set organizational values on the state
- */
-public SetOrgDetails() {
-  this.State.Loading = true;
-}
 
 //  Helpers
 

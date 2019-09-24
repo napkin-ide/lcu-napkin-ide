@@ -1,5 +1,4 @@
-<form 
-  *ngIf="State.Step === SetupStepTypes.OrgDetails" 
+<form *ngIf="State.Step === SetupStepTypes['OrgDetails']" 
   [formGroup]="DetailsForm" 
   (ngSubmit)="SetOrgDetails()">
     <h1 

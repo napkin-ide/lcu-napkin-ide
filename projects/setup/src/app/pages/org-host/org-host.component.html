@@ -1,6 +1,6 @@
 
 <form 
-  *ngIf="State.Step == SetupStepTypes.HostConfig" 
+  *ngIf="State.Step == SetupStepTypes['HostConfig']" 
   [formGroup]="HostForm" 
   (ngSubmit)="SecureHost()">
   

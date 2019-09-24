@@ -37,13 +37,6 @@ export class OrgComponent implements OnInit, AfterViewInit {
   // public OrgHostComponent: OrgHostComponent;
 
   //  Properties
-  public get AzureDevOpsOAuthURL(): string {
-    return `/.devops/oauth?redirectUri=${this.OAuthRedirectURL}`;
-  }
-
-  public get OAuthRedirectURL(): string {
-    return `${location.href}`;
-  }
 
   public get RootURL(): string {
     const port = location.port ? `:${location.port}` : '';
@@ -136,14 +129,6 @@ export class OrgComponent implements OnInit, AfterViewInit {
     this.State.Loading = true;
 
     this.nideState.SetOrganizationDetails(null, null, null);
-  }
-
-  public SetHostFlow(flow: string) {
-    // this.OrgHostComponent.HostForm.reset();
-
-    this.State.Loading = true;
-
-    this.nideState.SetHostFlow(flow);
   }
 
   public SetStep(step: NapkinIDESetupStepTypes) {

@@ -11,6 +11,14 @@ export class OrgReviewComponent implements OnInit {
 
 // Properties
 
+public get OAuthRedirectURL(): string {
+  return `${location.href}`;
+}
+
+public get AzureDevOpsOAuthURL(): string {
+  return `/.devops/oauth?redirectUri=${this.OAuthRedirectURL}`;
+}
+
   /**
    * Setup step types
    */
@@ -30,6 +38,7 @@ export class OrgReviewComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
   public Boot() {
     this.State.Loading = true;

@@ -140,7 +140,7 @@
                   </h2>
 
                   <!-- <h2 class="mat-subheading-2" *ngIf="HostForm.controls['root'].value"> -->
-                  <h2 class="mat-subheading-2" *ngIf="OrgHostComponent?.itm?.RootDomainControl.value || ''">
+                  <h2 class="mat-subheading-2" *ngIf="OrgHostComponent?.first?.RootDomainControl.value || ''">
                     Choose an available subdomain for your new site, where we will make your SSL secured Data Applications available.
                   </h2>
                 </ng-container>
@@ -154,8 +154,8 @@
                     www.my-domain.com
                   </h2>
 
-                  <h2 *ngIf="OrgHostComponent?.ValidHost" class="mat-subheading-2">
-                    Then you will need to add a CNAME record for your domain provider. The record should have '{{ OrgHostComponent.Subdomain }}' point to
+                  <h2 *ngIf="OrgHostComponent?.first?.ValidHost" class="mat-subheading-2">
+                    Then you will need to add a CNAME record for your domain provider. The record should have '{{ OrgHostComponent.first.Subdomain }}' point to
                     'lcu-prd.fathym.com'
                   </h2>
                 </ng-container>
