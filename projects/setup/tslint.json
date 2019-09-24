@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "lcu",
+      "nide",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "lcu",
+      "nide",
       "kebab-case"
     ]
   }

@@ -1,5 +1,5 @@
 import { NapkinIDESetupState, AzureInfaSettings, NapkinIDESetupStepTypes } from './napkin-ide-setup.state';
-import { StateManagerContext } from '@lcu-ide/common';
+import { StateManagerContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 
 @Injectable({
@@ -14,6 +14,16 @@ export class NapkinIDESetupStateManagerContext extends StateManagerContext<Napki
   }
 
   //  API Methods
+  public AcceptTerms(version: string) {
+    this.Execute({
+      Arguments: {
+        AcceptedOn: new Date(Date.now()),
+        Version: version
+      },
+      Type: 'AcceptTerms'
+    });
+  }
+
   public BootEnterprise() {
     this.Execute({
       Arguments: {},
@@ -38,6 +48,13 @@ export class NapkinIDESetupStateManagerContext extends StateManagerContext<Napki
         UseDefaultSettings: useDefaultSettings
       },
       Type: 'ConfigureInfrastructure'
+    });
+  }
+
+  public Finalize() {
+    this.Execute({
+      Arguments: {},
+      Type: 'Finalize'
     });
   }
 

@@ -1,0 +1,16 @@
+:host {
+  iframe {
+    width: 100%;
+    height: 600px;
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.mat-dialog-container {
+  position: relative;
+}

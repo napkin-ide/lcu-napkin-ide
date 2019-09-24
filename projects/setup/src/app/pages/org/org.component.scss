@@ -1,23 +1,16 @@
-@import '../../../../../common/src/styles/theme';
+@import '~@angular/material/theming';
 
 @mixin org($theme) {
   $config: mat-typography-config();
-
+ 
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  :host {
+  // :host {
     .identity {
       height: 100%;
       min-height: 500px;
-      position: relative;
-      box-sizing: border-box;
-
-      .details,
-      .content {
-        box-sizing: border-box;
-      }
 
       .content {
         .inner {
@@ -31,47 +24,8 @@
           justify-content: center;
         }
       }
-
-      .details .inner {
-        position: sticky;
-        top: 0;
-        padding-top: 5px;
-        padding-bottom: 2em;
-
-        .mat-list,
-        .mat-nav-list {
-
-          .mat-list-text {
-            color: $nide-white;
-          }
-        }
-
-        .mat-list-base {
-          .mat-list-item {
-            color: $nide-white;
-          }
-        }
-      }
-
+     
       .inner {
-        text-align: left;
-
-        .spread {
-          overflow: auto;
-        }
-
-        .mat-list,
-        .mat-nav-list {
-          text-align: left;
-          width: 100%;
-        }
-
-        .mat-button,
-        .mat-raised-button,
-        .mat-stroked-button {
-          white-space: normal !important;
-        }
-
         .mat-list-base {
           .mat-list-item {
             height: auto !important;
@@ -83,53 +37,32 @@
         }
       }
 
+      .active-mat-list-item {
+        background-color: mat-color($primary, 600);
+      }
+
       .details {
+        border-right: solid 1px rgba(255, 255, 255, 0.12);
+        box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
         width: 30%;
-        color: $nide-white;
         background-size: cover;
         background-position: 50% 0;
-        background-image: linear-gradient(transparentize(mat-color($primary), 0.2), transparentize(mat-color($primary), 0.2)),
-          url(https://c1.staticflickr.com/8/7451/26797700615_76d3215c42_b.jpg);
-
-        // a {
-        //   width: 80%;
-        //   margin-top: 4rem;
-        //   font-size: 24px;
-        //   padding: 10px 25px;
-        //   line-height: 48px;
-        //   border-color: $nide-white;
-        //   border-width: 5px;
-        //   color: $nide-white;
-        // }
+        background-image: linear-gradient(transparentize(mat-color($primary), 0.15), transparentize(mat-color($primary), 0.15)),
+        url(https://images.immediate.co.uk/production/volatile/sites/4/2009/09/GettyImages-884671854-4946bb3.jpg?quality=45&resize=960,413);
       }
 
       .content {
         width: 70%;
-        background-color: $nide-white;
-
-        ::ng-deep {
-          .mat-form-field {
-            display: block;
-          }
-
-          .mat-card {
-            margin: 2rem;
-
-            .mat-subtitle paragraph-title {
-              margin: 1rem;
-            }
-          }
-
-          .mat-raised-button {
-            width: 80%;
-            font-size: 24px;
-            line-height: 48px;
-            // color: $nide-white;
-          }
-        }
       }
     }
   }
+
+.error {
+  color: rgb(204, 0, 0);
+  
 }
 
-@include org($nide-theme);
+.success {
+  color: rgb(0, 172, 0);
+}
+

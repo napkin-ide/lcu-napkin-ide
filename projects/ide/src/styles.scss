@@ -1,0 +1,199 @@
+@import '../../common/src/styles/theme';
+
+@include mat-core();
+
+@mixin nide($theme) {
+  @include angular-material-theme($theme);
+
+  $config: mat-typography-config();
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  @include defaults($theme);
+
+  html,
+  body {
+    color: $nide-black;
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    // font-family: Roboto, 'Helvetica Neue', sans-serif;
+  }
+
+  @include napkin-ide-page($nide-theme);
+}
+
+@mixin napkin-ide-page($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  @include angular-material-theme($theme);
+
+  .filler {
+    flex: 1 1 auto;
+  }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+    background: mat-color($primary, A100);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: mat-color($primary, A700);
+  }
+
+  .ide-bar {
+    .mat-toolbar,
+    .mat-toolbar-single-row {
+      height: 36px;
+      padding: 0;
+      background-color: mat-color($primary, 700);
+    }
+
+    .logo {
+      height: 36px;
+      width: 36px;
+      margin: 0 0.5rem;
+    }
+  }
+
+  .ide {
+    .fit-grid {
+      height: 100%;
+    }
+
+    .grid-start {
+      .mat-grid-tile .mat-figure {
+        align-items: start;
+        justify-content: start;
+      }
+    }
+
+    .overflowed {
+      height: 100%;
+      width: calc(100% + 3px);
+      overflow: auto;
+      overflow-x: hidden;
+
+      &.activities {
+        height: calc(100% - 60px);
+      }
+    }
+
+    .ide-container {
+      position: absolute;
+      top: 36px;
+      right: 0;
+      bottom: 36px;
+      left: 0;
+
+      .activity-bar {
+        width: 60px;
+        background-color: mat-color($primary, 100);
+
+        .activity-settings {
+          position: absolute;
+          bottom: 0;
+        }
+
+        .activity-action {
+          margin: 0 auto;
+          display: block;
+
+          &.mat-icon-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 0;
+
+            .mat-icon {
+              line-height: 40px;
+              width: 40px;
+              height: 40px;
+              font-size: 40px;
+              padding: 10px 0 0 0;
+            }
+
+            .material-icons {
+              font-size: 35px;
+            }
+          }
+
+          &.active {
+            background-color: transparentize($color: #a4bab3, $amount: 0.6);
+          }
+        }
+      }
+
+      .ide-content {
+        height: 100%;
+
+        .side-bar {
+          width: 300px;
+          background-color: transparentize($color: #a4bab3, $amount: 0.3); //mat-color($primary, 500);
+
+          .side-bar-action {
+            margin: 0 auto;
+            display: block;
+
+            &.active {
+              background-color: transparentize($color: #f1f4f6, $amount: 0.6);
+            }
+          }
+        }
+
+        .ide-editors {
+          border-bottom: solid 1px rgba(255, 255, 255, 0.12);
+          background-color: #f1f4f6; //mat-color($primary, 800);
+
+          .mat-tab-body-wrapper {
+            height: 100%;
+            overflow: auto;
+          }
+
+          .overlay {
+            background-color: mat-color($primary, 800);
+          }
+        }
+
+        .ide-panels {
+          background-color: mat-color($primary, 700);
+        }
+
+        .hide-panels {
+          overflow: hidden;
+
+          .ide-editors {
+            // height: calc(100% - 49px) !important;
+            height: 100%;
+          }
+
+          .ide-panels {
+            display: none;
+            // top: calc(100% - 49px) !important;
+            // height: 49px !important;
+          }
+        }
+      }
+    }
+  }
+
+  .status-bar {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    .mat-toolbar,
+    .mat-toolbar-single-row {
+      height: 36px;
+      padding: 0;
+      background-color: #282d35; // mat-color($primary, A100);
+    }
+  }
+}
+
+@include nide($nide-theme);
