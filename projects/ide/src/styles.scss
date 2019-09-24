@@ -11,7 +11,7 @@
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  // @include defaults($theme);
+  @include defaults($theme);
 
   html,
   body {
