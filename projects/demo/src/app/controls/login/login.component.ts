@@ -1,10 +1,11 @@
-import { UsersService } from './../../services/user.service';
+// import { UsersService } from './../../services/user.service';
+
 import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { BaseModeledResponse, Status } from '@lcu/common';
-import { SignInModel } from '../../models/sign-in.model';
+// import { SignInModel } from '../../models/sign-in.model';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { UserModel } from '../../models/user.model';
+// import { UserModel } from '../../models/user.model';
 
 @Component({
   selector: 'lcu-sign-in',
@@ -95,14 +96,14 @@ export class LoginComponent implements OnInit {
   /**
    * Users
    */
-  public Users: Array<UserModel>;
+  // public Users: Array<UserModel>;
 
   /**
    * Output event for signing in
    */
   // tslint:disable-next-line:no-output-rename
-  @Output('sign-in')
-  SignIn: EventEmitter<SignInModel>;
+  // @Output('sign-in')
+  // SignIn: EventEmitter<SignInModel>;
 
   /**
    * Output event for forgot password
@@ -164,16 +165,17 @@ export class LoginComponent implements OnInit {
 
     this._loading = coerceBooleanProperty(val);
 
-    this.disableForm(this._loading);
+    // this.disableForm(this._loading);
   }
 
   //  Constructors
-  constructor(protected userService: UsersService) {
-    this.HidePassword = true;
-    this.PageTitle = 'Login';
-    this.Title = 'Test Login';
-    this.TitleIcon = 'lock';
-    this.SubTitle = 'Select a user to the left to test';
+  // constructor(protected userService: UsersService) {
+    constructor() {
+      this.HidePassword = true;
+      this.PageTitle = 'Login';
+      this.Title = 'Test Login';
+      this.TitleIcon = 'lock';
+      this.SubTitle = 'Select a user to the left to test';
   }
 
   // 	Life Cycle
@@ -191,9 +193,9 @@ export class LoginComponent implements OnInit {
     this.setInitialValues();
     this.onChanges();
 
-    this.userService.GetUsers().subscribe((data: Array<UserModel>) => {
-      this.Users = data;
-    });
+    // this.userService.GetUsers().subscribe((data: Array<UserModel>) => {
+    //   this.Users = data;
+    // });
   }
 
   // 	API Methods
@@ -202,14 +204,14 @@ export class LoginComponent implements OnInit {
    * Sign in handler
    */
   public SignInHandler() {
-    const signIn: SignInModel = this.buildSignInModelFromForm();
+    // const signIn: SignInModel = this.buildSignInModelFromForm();
 
-    if (this.userService.Login(signIn.Username, signIn.Password) === false) {
-      this.LoginError = 'Login Failed';
-    } else {
-      this.LoginError = 'Success';
-      this.Form.reset();
-    }
+    // if (this.userService.Login(signIn.Username, signIn.Password) === false) {
+    //   this.LoginError = 'Login Failed';
+    // } else {
+    //   this.LoginError = 'Success';
+    //   this.Form.reset();
+    // }
   }
 
   /**
@@ -224,10 +226,10 @@ export class LoginComponent implements OnInit {
    *
    * @param user selected user
    */
-  public SetLogin(user: UserModel): void {
-    this.UsernameControl.setValue(user.Username);
-    this.PasswordControl.setValue(user.Password);
-  }
+  // public SetLogin(user: UserModel): void {
+  //   this.UsernameControl.setValue(user.Username);
+  //   this.PasswordControl.setValue(user.Password);
+  // }
   // 	Helpers
 
   /**
@@ -246,14 +248,14 @@ export class LoginComponent implements OnInit {
   /**
    * Build sign in model
    */
-  protected buildSignInModelFromForm(): SignInModel {
-    return {
+  // protected buildSignInModelFromForm(): SignInModel {
+  //   return {
 
-      Username: this.UsernameControl.value,
-      Password: this.PasswordControl.value,
-      RememberMe: false
-    };
-   }
+  //     Username: this.UsernameControl.value,
+  //     Password: this.PasswordControl.value,
+  //     RememberMe: false
+  //   };
+  //  }
 
    /**
     * Disable / enable form

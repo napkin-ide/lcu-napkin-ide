@@ -2,9 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, CanDeactivate } from '@angular/router';
 import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/forms';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { StatesModel } from '../../models/states.model';
-import { ReactiveFormService } from '../../services/reactive-form.service';
-import { ReactiveFormModel } from './../../models/reactive-form.model';
+// import { StatesModel } from '../../models/states.model';
+// import { ReactiveFormService } from '../../services/reactive-form.service';
+//import { ReactiveFormModel } from './../../models/reactive-form.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -22,7 +22,7 @@ export class ReactiveFormComponent implements OnInit {
   /**
    * Local property for session values
    */
-  protected _sessionValues: ReactiveFormModel;
+  // protected _sessionValues: ReactiveFormModel;
 
   /**
    * Local property for selecting terms
@@ -32,17 +32,17 @@ export class ReactiveFormComponent implements OnInit {
   /**
    * Getter / Setter for session values
    */
-  protected get sessionValues(): ReactiveFormModel {
-    if (sessionStorage.length === 0) {
-      return new ReactiveFormModel();
-    }
+  // protected get sessionValues(): ReactiveFormModel {
+  //   if (sessionStorage.length === 0) {
+  //     return new ReactiveFormModel();
+  //   }
 
-    return JSON.parse(sessionStorage.getItem('formValues'));
-  }
+  //   return JSON.parse(sessionStorage.getItem('formValues'));
+  // }
 
-  protected set sessionValues(val: ReactiveFormModel) {
-    this._sessionValues = val;
-  }
+  // protected set sessionValues(val: ReactiveFormModel) {
+  //   this._sessionValues = val;
+  // }
 
   /**
    * Input property for checking terms
@@ -160,12 +160,12 @@ export class ReactiveFormComponent implements OnInit {
   /**
    * property to states list
    */
-  public States: Array<StatesModel>;
+  // public States: Array<StatesModel>;
 
   /**
    * property for filtered states list
    */
-  public StatesFiltered: Observable<Array<StatesModel>>;
+  // public StatesFiltered: Observable<Array<StatesModel>>;
 
   /**
    * propery for form title
@@ -207,7 +207,7 @@ export class ReactiveFormComponent implements OnInit {
 
   constructor(
     protected activatedRoute: ActivatedRoute,
-    protected reactiveFormService: ReactiveFormService,
+    // protected reactiveFormService: ReactiveFormService,
     protected breakpointObserver: BreakpointObserver) {
 
     this.Title = 'Angular Reactive Form';
@@ -259,30 +259,30 @@ export class ReactiveFormComponent implements OnInit {
    * Setup the reactive form
    */
   protected setupForm(): void {
-    this.Form = new FormGroup({
-      firstNameControl: new FormControl(this.sessionValues.FirstName, Validators.compose([Validators.required])),
-      lastNameControl: new FormControl(this.sessionValues.lastName, Validators.compose([Validators.required])),
-      usernameControl: new FormControl(this.sessionValues.Username, Validators.compose([
-        Validators.required,
-        Validators.pattern(UserNameValidator.UsernameNoUnderscoreDotPattern)])),
-      emailControl: new FormControl(this.sessionValues.Email, Validators.compose(
-        [
-          Validators.required,
-          Validators.pattern(EmailValidator.EmailPatternDomain)])),
-      passwordControl: new FormControl(this.sessionValues.Password, Validators.compose([
-        Validators.required,
-        Validators.pattern(PasswordValidator.StrongPassword)
-      ])),
-      confirmPasswordControl: new FormControl(this.sessionValues.ConfirmPassword, Validators.compose([Validators.required])),
-      addressControl: new FormControl(this.sessionValues.Address, Validators.compose([Validators.required])),
-      cityControl: new FormControl(this.sessionValues.City, Validators.compose([Validators.required])),
-      stateControl: new FormControl(this.sessionValues.State, Validators.compose([Validators.required])),
-      termsControl: new FormControl(this.sessionValues.Terms, Validators.compose([Validators.requiredTrue])),
-      zipcodeControl: new FormControl(this.sessionValues.Zipcode, Validators.compose([
-        Validators.required,
-        Validators.pattern(ZipcodeValidator.ZipcodeExpression('US'))
-      ]))
-    });
+    // this.Form = new FormGroup({
+    //   firstNameControl: new FormControl(this.sessionValues.FirstName, Validators.compose([Validators.required])),
+    //   lastNameControl: new FormControl(this.sessionValues.lastName, Validators.compose([Validators.required])),
+    //   usernameControl: new FormControl(this.sessionValues.Username, Validators.compose([
+    //     Validators.required,
+    //     Validators.pattern(UserNameValidator.UsernameNoUnderscoreDotPattern)])),
+    //   emailControl: new FormControl(this.sessionValues.Email, Validators.compose(
+    //     [
+    //       Validators.required,
+    //       Validators.pattern(EmailValidator.EmailPatternDomain)])),
+    //   passwordControl: new FormControl(this.sessionValues.Password, Validators.compose([
+    //     Validators.required,
+    //     Validators.pattern(PasswordValidator.StrongPassword)
+    //   ])),
+    //   confirmPasswordControl: new FormControl(this.sessionValues.ConfirmPassword, Validators.compose([Validators.required])),
+    //   addressControl: new FormControl(this.sessionValues.Address, Validators.compose([Validators.required])),
+    //   cityControl: new FormControl(this.sessionValues.City, Validators.compose([Validators.required])),
+    //   stateControl: new FormControl(this.sessionValues.State, Validators.compose([Validators.required])),
+    //   termsControl: new FormControl(this.sessionValues.Terms, Validators.compose([Validators.requiredTrue])),
+    //   zipcodeControl: new FormControl(this.sessionValues.Zipcode, Validators.compose([
+    //     Validators.required,
+    //     Validators.pattern(ZipcodeValidator.ZipcodeExpression('US'))
+    //   ]))
+    // });
 
     this.Form.validator = PasswordValidator.PasswordsMatch(this.PasswordControl, this.ConfirmPasswordControl);
 
@@ -297,9 +297,9 @@ export class ReactiveFormComponent implements OnInit {
    * Return list of states
    */
   protected getStates(): void {
-    this.reactiveFormService.GetStates().subscribe((data: Array<StatesModel>) => {
-      this.States = data;
-    });
+    // this.reactiveFormService.GetStates().subscribe((data: Array<StatesModel>) => {
+    //   this.States = data;
+    // });
   }
 
   /**
@@ -307,9 +307,9 @@ export class ReactiveFormComponent implements OnInit {
    */
   protected onChanges(): void {
 
-    this.Form.valueChanges.subscribe((val: ReactiveFormModel) => {
-      this.updateSessionStorage(val);
-    });
+    // this.Form.valueChanges.subscribe((val: ReactiveFormModel) => {
+    //   this.updateSessionStorage(val);
+    // });
   }
 
    /**
@@ -317,9 +317,9 @@ export class ReactiveFormComponent implements OnInit {
     *
     * We need to use the state for this, but for now this will work
     */
-   protected updateSessionStorage(val: ReactiveFormModel): void {
-    sessionStorage.setItem('formValues', JSON.stringify(val));
-  }
+  //  protected updateSessionStorage(val: ReactiveFormModel): void {
+  //   sessionStorage.setItem('formValues', JSON.stringify(val));
+  // }
 
   /**
    * Breakpoints for screen sizes
@@ -336,18 +336,18 @@ export class ReactiveFormComponent implements OnInit {
    *
    * @param val string to filter state list
    */
-  protected filterStateList(val: string): Array<StatesModel> {
-    const filterValue: string = val.toLocaleLowerCase();
+  // protected filterStateList(val: string): Array<StatesModel> {
+  //   const filterValue: string = val.toLocaleLowerCase();
 
-    return this.States.filter(state => state.Name.toLocaleLowerCase().indexOf(filterValue) === 0);
-  }
+  //   return this.States.filter(state => state.Name.toLocaleLowerCase().indexOf(filterValue) === 0);
+  // }
 
   protected setupFilteringStates(): void {
-    this.StatesFiltered = this.StateControl.valueChanges
-    .pipe(
-      startWith(''),
-      map(state => state ? this.filterStateList(state) : this.States.slice())
-    );
+    // this.StatesFiltered = this.StateControl.valueChanges
+    // .pipe(
+    //   startWith(''),
+    //   map(state => state ? this.filterStateList(state) : this.States.slice())
+    // );
   }
 
   /**
