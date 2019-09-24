@@ -1,0 +1,25 @@
+@import '../../../../../common/src/styles/theme';
+
+@mixin org($theme) {
+  $config: mat-typography-config();
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  :host {
+    .side-bar-section {
+      text-align: center;
+
+      .mat-icon-button {
+        margin: auto;
+      }
+
+      .mat-card {
+        margin: 1rem;
+      }
+    }
+  }
+}
+
+@include org($nide-theme);

@@ -1,0 +1,74 @@
+@import '../../common/src/styles/theme';
+
+@include mat-core();
+
+@mixin nide($theme) {
+  @include angular-material-theme($theme);
+
+  $config: mat-typography-config();
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  @include defaults($theme);
+
+  html,
+  body {
+    color: $nide-black;
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: mat-color($primary, 300);
+    // font-family: Roboto, 'Helvetica Neue', sans-serif;
+  }
+
+  .mat-list-base .mat-list-item,
+  .mat-list-base .mat-list-option {
+    padding: .5rem !important;
+    height: auto !important;
+  }
+
+  .mat-tab-header {
+    z-index: 500;
+    position: sticky;
+    top: 0;
+    background-color: mat-color($primary, 300);
+  }
+
+  .describe {
+    text-align: right;
+  }
+
+  .mat-form-field {
+  }
+
+  .mat-headline title title {
+    .mat-form-field-flex {
+      width: 350px;
+    }
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-button-lg {
+    &.mat-icon-button .mat-icon {
+      line-height: 48px;
+    }
+
+    .mat-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .material-icons {
+      font-size: 48px;
+    }
+  }
+}
+
+@include nide($nide-theme);
