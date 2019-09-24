@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NapkinIDESetupState, NapkinIDESetupStepTypes } from '../../core/napkin-ide-setup.state';
 import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
@@ -14,10 +14,17 @@ export class CompleteComponent implements OnInit {
   //  Fields
 
   //  Properties
+
+  // tslint:disable-next-line:no-input-rename
+  @Input('setup-step-types')
+  public SetupStepTypes: NapkinIDESetupStepTypes;
+
+  // tslint:disable-next-line:no-input-rename
+  @Input('state')
   public State: NapkinIDESetupState;
 
   //  Constructors
-  constructor(protected formBldr: FormBuilder, protected nideState: NapkinIDESetupStateManagerContext) {
+  constructor(protected nideState: NapkinIDESetupStateManagerContext) {
   }
 
   //  Life Cycle

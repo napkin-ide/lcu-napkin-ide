@@ -1,6 +1,7 @@
 @import '../../../../../common/src/styles/theme';
 
 @mixin org($theme) {
+  
   $config: mat-typography-config();
 
   $primary: map-get($theme, primary);
@@ -37,13 +38,13 @@
         .mat-list,
         .mat-nav-list {
           .mat-list-text {
-            color: $nide-white;
+           // color: $nide-white;
           }
         }
 
         .mat-list-base {
           .mat-list-item {
-            color: $nide-white;
+           // color: $nide-white;
           }
         }
       }
@@ -90,7 +91,7 @@
 
       .content {
         width: 70%;
-        background-color: $nide-white;
+       // background-color: $nide-white;
 
         ::ng-deep {
           .mat-form-field {
@@ -117,4 +118,4 @@
   }
 }
 
-@include org($nide-theme);
+// @include org($nide-theme);

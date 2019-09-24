@@ -1,36 +1,151 @@
+@import "~@angular/material/theming";
+@import '../src/app/pages/org/org.component.scss';
 @import '../../common/src/styles/theme';
+// @import '../../../node_modules/@lcu/common/assets/theming/fathym-nide-theme';
+@import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+@import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+@import '../../../node_modules/@lcu/common/assets/theming/fathym-default-theme';
+
+
+@import './assets/themes/fathym-themes.scss';
 
 @include mat-core();
 
-@mixin nide($theme) {
-  @include angular-material-theme($theme);
-
-  $config: mat-typography-config();
-
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-
-  @include defaults($theme);
-
-  .split {
-    margin: 2rem 0;
-  }
-
-  .btn-split {
-    margin: 2rem .5rem;
-  }
-
-  html,
-  body {
-    color: $nide-black;
-    height: 100%;
-  }
-
-  body {
-    margin: 0;
-    // font-family: Roboto, 'Helvetica Neue', sans-serif;
-  }
+@mixin set-theme($theme) {
+  @include custom-theme($theme);
+  @include component-themes($theme);
+  
 }
 
-@include nide($nide-theme);
+// for updating components with themes
+@mixin component-themes($theme) {
+  @include org($theme);
+}
+
+.arctic-theme {
+  @include set-theme($arctic-theme);
+  .primary-logo {
+    background-image: url($fathym-full-ice-logo);
+    background-repeat: no-repeat;
+    // @include primary-logo($fathym-full-ice-logo, 150px);
+  }
+
+  .thinky-logo {
+    background-image: url($fathym-thinky-ice-logo);
+    background-repeat: no-repeat;
+  }
+ }
+
+ .contrast-theme {
+  @include set-theme($contrast-theme);
+  .primary-logo {
+    background-image: url($fathym-full-contrast-logo);
+    background-repeat: no-repeat;
+  }
+
+  .thinky-logo {
+    background-image: url($fathym-thinky-contrast-logo);
+    background-repeat: no-repeat;
+  }
+ }
+
+ .cool-candy-theme {
+  @include set-theme($cool-candy-theme);
+  .primary-logo {
+    background-image: url($fathym-full-arctic-logo);
+    background-repeat: no-repeat;
+  }
+
+  .thinky-logo {
+    background-image: url($fathym-thinky-arctic-logo);
+    background-repeat: no-repeat;
+  }
+ }
+
+ .flipper-theme {
+  @include set-theme($flipper-theme);
+  .primary-logo {
+    background-image: url($fathym-full-ice-logo);
+    background-repeat: no-repeat;
+  }
+
+  .thinky-logo {
+    background-image: url($fathym-thinky-ice-logo);
+    background-repeat: no-repeat;
+  }
+ }
+
+ .ice-theme {
+  @include set-theme($ice-theme);
+  .primary-logo {
+    background-image: url($fathym-full-flipper-logo);
+    background-repeat: no-repeat;
+  }
+
+  .thinky-logo {
+    background-image: url($fathym-thinky-flipper-logo);
+    background-repeat: no-repeat;
+  }
+ }
+
+ .sea-green-theme {
+  @include set-theme($sea-green-theme);
+  .primary-logo {
+    background-image: url($fathym-full-cool-candy-logo);
+    background-repeat: no-repeat;
+  }
+
+  .thinky-logo {
+    background-image: url($fathym-thinky-cool-candy-logo);
+    background-repeat: no-repeat;
+  }
+ }
+
+ .white-mint-theme {
+  @include set-theme($white-mint-theme);
+  .primary-logo {
+    background-image: url($fathym-full-flipper-logo);
+    background-repeat: no-repeat;
+  }
+
+  .thinky-logo {
+    background-image: url($fathym-thinky-flipper-logo);
+    background-repeat: no-repeat;
+  }
+ }
+
+.logo {
+  width: 150px;
+  height: 50px;
+}
+// @mixin nide($theme) {
+//   @include angular-material-theme($theme);
+
+//   $config: mat-typography-config();
+
+//   $primary: map-get($theme, primary);
+//   $accent: map-get($theme, accent);
+//   $warn: map-get($theme, warn);
+
+//   @include defaults($theme);
+
+//   .split {
+//     margin: 2rem 0;
+//   }
+
+//   .btn-split {
+//     margin: 2rem .5rem;
+//   }
+
+//   html,
+//   body {
+//     color: $nide-black;
+//     height: 100%;
+//   }
+
+//   body {
+//     margin: 0;
+//   }
+// }
+
+// @include nide($nide-theme);

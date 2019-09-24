@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <!-- Could be a title here -->
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <div class="logo">
+          <div *ngIf="LogoClass && ShowIcon" [ngClass]="LogoClass"></div>
+        </div>
+      </div>
+</mat-toolbar>
+
+<mat-nav-list *ngFor="let link of NavLinks">
+  <a mat-list-item [routerLink]="link.RouterURL" routerLinkActive="active">
+      <mat-icon color="primary" *ngIf="link.Icon">{{ link.Icon }}</mat-icon>
+      <span>{{ link.Label }}</span>
+  </a>
+</mat-nav-list>

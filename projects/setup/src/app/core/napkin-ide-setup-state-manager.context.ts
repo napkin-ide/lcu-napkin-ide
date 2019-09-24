@@ -1,5 +1,5 @@
 import { NapkinIDESetupState, AzureInfaSettings, NapkinIDESetupStepTypes } from './napkin-ide-setup.state';
-import { StateManagerContext } from '@lcu-ide/common';
+import { StateManagerContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 
 @Injectable({

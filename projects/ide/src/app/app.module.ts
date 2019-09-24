@@ -18,7 +18,7 @@ import {
   MaterialModule,
   FaviconsService,
   BrowserFavicons,
-  BROWSER_FAVICONS_CONFIG } from '@lcu-ide/common';
+  BROWSER_FAVICONS_CONFIG } from '@lcu/common';
 
 @NgModule({
   declarations: [AppComponent],

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatusBarComponent } from './status-bar.component';
-import { MaterialModule } from '@lcu-ide/common';
+import { MaterialModule } from '@lcu/common';
 
 @NgModule({
   declarations: [
