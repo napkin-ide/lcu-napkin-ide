@@ -1,7 +1,8 @@
 {
 	"name": "@napkin-ide/lcu-napkin-ide",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"scripts": {
+		"build:all": "npm run build common && npm run build demo && npm run build ide && npm run build settings && npm run build setup && npm run build sign-up",
 		"build:common": "ng build common",
 		"build:demo": "ng build demo --prod",
 		"build:ide": "ng build ide --prod",
@@ -65,7 +66,7 @@
 		"@angular/cli": "~8.2.1",
 		"@angular/compiler-cli": "~8.2.0",
 		"@angular/language-service": "~8.2.0",
-		"@lcu/cli": "^0.20.70",
+		"@lcu/cli": "^0.21.75",
 		"@types/jasmine": "~3.3.8",
 		"@types/jasminewd2": "~2.0.3",
 		"@types/node": "~8.9.4",

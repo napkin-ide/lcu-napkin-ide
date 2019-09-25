@@ -6,16 +6,31 @@ import { OrgComponent } from './org/org.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CompleteComponent } from './complete/complete.component';
+import { OrgDetailsComponent } from './org-details/org-details.component';
+import { OrgInfraComponent } from './org-infra/org-infra.component';
+import { OrgHostComponent } from './org-host/org-host.component';
+import { OrgReviewComponent } from './org-review/org-review.component';
+import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
+import { OrgTermsComponent } from './org-terms/org-terms.component';
 
 @NgModule({
-  declarations: [OrgComponent, CompleteComponent],
+  declarations: [
+    OrgComponent,
+    CompleteComponent,
+    OrgDetailsComponent,
+    OrgInfraComponent,
+    OrgHostComponent,
+    OrgReviewComponent,
+    OrgTermsComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     PagesRoutingModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    LcuNapkinIdeModule
  ],
   exports: [OrgComponent]
 })

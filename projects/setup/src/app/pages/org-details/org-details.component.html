@@ -1,0 +1,37 @@
+<form *ngIf="State.Step === SetupStepTypes['OrgDetails']" 
+  [formGroup]="DetailsForm" 
+  (ngSubmit)="SetOrgDetails()">
+    <h1 
+      fxLayoutAlign="center center" 
+      class="mat-display-1 title margin-bottom-4">
+      Setup Your Organization
+    </h1>
+
+    <mat-form-field class="mat-full-width">
+      <input matInput placeholder="Organization Name" formControlName="orgDetailName" required />
+
+      <mat-icon matSuffix matTooltip="Enter a unique name for your new organization">help_outline</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="mat-full-width">
+      <textarea matInput placeholder="Description" formControlName="orgDetailDesc" required></textarea>
+
+      <mat-icon matSuffix matTooltip="Enter a useful description for your new organization">help_outline</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="mat-full-width">
+      <input matInput placeholder="Organization Lookup" formControlName="orgDetailLookup" required />
+
+      <mat-icon matSuffix matTooltip="Enter a valid organization lookup (lowercase alpha characters and '-' accepted)">
+        help_outline
+      </mat-icon>
+    </mat-form-field>
+    
+    <button
+      mat-raised-button color="accent" 
+      class="mat-full-width" 
+      [disabled]="!DetailsForm.valid">
+      Setup Organization Details
+    </button>
+
+  </form>
