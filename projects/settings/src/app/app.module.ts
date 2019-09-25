@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { IdeSettingsStateManagerContext } from './core/ide-settings-state-manager.context';
 import { environment } from '../environments/environment';
-import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu-ide/common';
+import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
 
 @NgModule({
   declarations: [AppComponent],

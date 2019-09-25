@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IdeSettingsState, LowCodeUnitSetupConfig } from '../../core/ide-settings.state';
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
 import { MatSelectChange, MatListOption } from '@angular/material';
-import { IdeActivity, IdeSideBarAction } from '@napkin-ide/lcu-napkin-ide-common';
+import { IdeActivity, IdeSideBarAction } from '@lcu/common';
 
 @Component({
   selector: 'lcu-settings',

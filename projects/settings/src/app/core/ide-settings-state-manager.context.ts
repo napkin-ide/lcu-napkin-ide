@@ -1,8 +1,7 @@
 import { IdeSettingsState, LowCodeUnitSetupConfig, IdeSettingsConfigSolution } from './ide-settings.state';
-import { StateManagerContext } from '@lcu-ide/common';
+import { StateManagerContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
-import { IdeActivity, IdeSideBarAction } from '@napkin-ide/lcu-napkin-ide-common';
-import { DataFlowModulePackSetup } from '@napkin-ide/lcu-napkin-ide-common';
+import { IdeActivity, IdeSideBarAction, DataFlowModulePackSetup } from '@lcu/common';
 
 @Injectable({
   providedIn: 'root'

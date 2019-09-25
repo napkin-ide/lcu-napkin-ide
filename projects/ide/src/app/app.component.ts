@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
-import { FaviconsService } from '@lcu-ide/common';
+import { FaviconsService } from '@lcu/common';
 
 @Component({
   selector: 'nide-root',

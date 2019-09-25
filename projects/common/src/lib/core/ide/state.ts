@@ -1,7 +1,4 @@
-import { IdeActivity } from './activity';
-import { IdeSideBar } from './side-bar';
-import { IdeEditor } from './editor';
-import { IdePanel } from './panel';
+import { IdeActivity, IdeEditor, IdePanel, IdeSideBar } from '@lcu/common';
 
 export class IdeState {
   public Activities: IdeActivity[];

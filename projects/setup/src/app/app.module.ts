@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NapkinIDESetupStateManagerContext } from './core/napkin-ide-setup-state-manager.context';
 import { environment } from '../environments/environment';
-import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu-ide/common';
+import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
 
 @NgModule({
   declarations: [AppComponent],

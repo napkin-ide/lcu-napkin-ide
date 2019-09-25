@@ -1,5 +1,4 @@
-import { IdeActivity, IdeSideBarAction } from '@napkin-ide/lcu-napkin-ide-common';
-import { DataFlowModulePackSetup } from '@napkin-ide/lcu-napkin-ide-common';
+import { IdeActivity, IdeSideBarAction, DataFlowModulePackSetup } from '@lcu/common';
 
 
 export class IdeSettingsState {

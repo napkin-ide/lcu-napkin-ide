@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SettingsComponent } from './settings/settings.component';
-import { MaterialModule } from '@lcu-ide/common';
+import { MaterialModule } from '@lcu/common';
 
 @NgModule({
   declarations: [SettingsComponent],
