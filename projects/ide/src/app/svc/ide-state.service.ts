@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
-import { DAFService } from '@lcu/common';
-import { IdeActivity, IdeStateChange, IdeState, IdeStateChangeTypes } from '@napkin-ide/lcu-napkin-ide-common';
+import { DAFService, IdeActivity } from '@lcu/common';
+import { IdeStateChange, IdeState, IdeStateChangeTypes } from '@napkin-ide/lcu-napkin-ide-common';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({

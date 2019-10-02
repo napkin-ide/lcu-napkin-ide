@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeActivity, ExternalDialogComponent, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { ExternalDialogComponent, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { MatDialogRef, MatDialog } from '@angular/material';
+import { IdeActivity } from '@lcu/common';
 
 @Component({
   selector: 'nide-activity-bar',
