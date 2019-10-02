@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeEditor, IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { filter } from 'rxjs/operators';
 import { LazyElementConfig } from '@lowcodeunit/lazy-element';
+import { IdeEditor } from '@lcu/common';
 
 @Component({
   selector: 'nide-editors',
