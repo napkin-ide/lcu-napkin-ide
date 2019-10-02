@@ -25,92 +25,79 @@
 .arctic-theme {
   @include set-theme($arctic-theme);
   .primary-logo {
-    background-image: url($fathym-full-ice-logo);
-    background-repeat: no-repeat;
-    // @include primary-logo($fathym-full-ice-logo, 150px);
-  }
-
-  .thinky-logo {
-    background-image: url($fathym-thinky-ice-logo);
-    background-repeat: no-repeat;
+    // background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
+    background-image: fathym-logo('full', thinky-full-logo, #dbfdf2);
   }
  }
 
  .contrast-theme {
   @include set-theme($contrast-theme);
   .primary-logo {
-    background-image: url($fathym-full-contrast-logo);
-    background-repeat: no-repeat;
+  background-image: fathym-logo('full', thinky-full-logo, #282d35);
   }
 
   .thinky-logo {
-    background-image: url($fathym-thinky-contrast-logo);
     background-repeat: no-repeat;
+    top: 100px;
+    left: 300px;
+    width: 100px;
+    height: 100px;
+    background-color: mat-color($accent);
+    background-image: fathym-logo('logo', thinky-logo, mat-color($primary));
   }
  }
 
  .cool-candy-theme {
   @include set-theme($cool-candy-theme);
   .primary-logo {
-    background-image: url($fathym-full-arctic-logo);
-    background-repeat: no-repeat;
-  }
-
-  .thinky-logo {
-    background-image: url($fathym-thinky-arctic-logo);
-    background-repeat: no-repeat;
+    background-image: fathym-logo('full', thinky-full-logo, #9cd8d7);
   }
  }
 
  .flipper-theme {
   @include set-theme($flipper-theme);
   .primary-logo {
-    background-image: url($fathym-full-ice-logo);
-    background-repeat: no-repeat;
-  }
-
-  .thinky-logo {
-    background-image: url($fathym-thinky-ice-logo);
-    background-repeat: no-repeat;
+    background-image: fathym-logo('full', thinky-full-logo, #f1f4f6);
   }
  }
 
  .ice-theme {
   @include set-theme($ice-theme);
   .primary-logo {
-    background-image: url($fathym-full-flipper-logo);
-    background-repeat: no-repeat;
-  }
-
-  .thinky-logo {
-    background-image: url($fathym-thinky-flipper-logo);
-    background-repeat: no-repeat;
+    background-image: fathym-logo('full', thinky-full-logo, #fbfcf4);
   }
  }
 
  .sea-green-theme {
   @include set-theme($sea-green-theme);
   .primary-logo {
-    background-image: url($fathym-full-cool-candy-logo);
-    background-repeat: no-repeat;
+    background-image: fathym-logo('full', thinky-full-logo, #67c7c5);
   }
 
   .thinky-logo {
-    background-image: url($fathym-thinky-cool-candy-logo);
     background-repeat: no-repeat;
+    top: 100px;
+    left: 300px;
+    width: 100px;
+    height: 100px;
+    background-color: mat-color($accent, 100);
+    background-image: fathym-logo('logo', thinky-logo, mat-color($accent));
   }
  }
 
  .white-mint-theme {
   @include set-theme($white-mint-theme);
   .primary-logo {
-    background-image: url($fathym-full-flipper-logo);
-    background-repeat: no-repeat;
+    background-image: fathym-logo('full', thinky-full-logo, #f1f4f6);
   }
 
   .thinky-logo {
-    background-image: url($fathym-thinky-flipper-logo);
     background-repeat: no-repeat;
+    top: 100px;
+    left: 300px;
+    width: 100px;
+    height: 100px;
+    background-image: fathym-logo('logo', thinky-logo, mat-color($accent));
   }
  }
 

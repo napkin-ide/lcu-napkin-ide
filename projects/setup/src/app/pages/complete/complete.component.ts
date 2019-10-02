@@ -40,10 +40,5 @@ export class CompleteComponent implements OnInit {
 
   //  Helpers
   protected stateChanged() {
-    if (this.State.Step !== NapkinIDESetupStepTypes.Complete) {
-      setTimeout(() => {
-        this.nideState.$Refresh();
-      }, 15000);
-    }
   }
 }

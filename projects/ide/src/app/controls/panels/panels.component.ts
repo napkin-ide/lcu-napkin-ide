@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IdePanel, IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { IdeStateService } from '../../svc/ide-state.service';
 import { filter } from 'rxjs/operators';
+import { IdePanel } from '@lcu/common';
 
 @Component({
   selector: 'nide-panels',
