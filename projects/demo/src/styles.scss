@@ -50,53 +50,81 @@
     max-height: -webkit-fill-available;
   }
 
-   .arctic-theme {
+  .arctic-theme {
     @include set-theme($arctic-theme);
     .primary-logo {
-      background-image: url($fathym-full-ice-logo);
-      // @include primary-logo($fathym-full-ice-logo, 150px);
+      background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
     }
    }
 
    .contrast-theme {
     @include set-theme($contrast-theme);
     .primary-logo {
-		  background-image: url($fathym-full-contrast-logo);
+    background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
+    }
+
+    .thinky-logo {
+      background-repeat: no-repeat;
+      top: 100px;
+      left: 300px;
+      width: 100px;
+      height: 100px;
+      background-color: mat-color($accent);
+      background-image: fathym-logo('logo', thinky-logo, mat-color($primary));
     }
    }
 
    .cool-candy-theme {
     @include set-theme($cool-candy-theme);
     .primary-logo {
-		  background-image: url($fathym-full-arctic-logo);
+      background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
     }
    }
 
    .flipper-theme {
     @include set-theme($flipper-theme);
     .primary-logo {
-		  background-image: url($fathym-full-ice-logo);
+      background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
     }
    }
 
    .ice-theme {
     @include set-theme($ice-theme);
     .primary-logo {
-		  background-image: url($fathym-full-flipper-logo);
+      background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
     }
    }
 
    .sea-green-theme {
     @include set-theme($sea-green-theme);
     .primary-logo {
-		  background-image: url($fathym-full-cool-candy-logo);
+      background-image: fathym-logo('full', thinky-full-logo, mat-color($accent));
+    }
+
+    .thinky-logo {
+      background-repeat: no-repeat;
+      top: 100px;
+      left: 300px;
+      width: 100px;
+      height: 100px;
+      background-color: mat-color($accent, 100);
+      background-image: fathym-logo('logo', thinky-logo, mat-color($accent));
     }
    }
 
    .white-mint-theme {
     @include set-theme($white-mint-theme);
     .primary-logo {
-		  background-image: url($fathym-full-flipper-logo);
+      background-image: fathym-logo('full', thinky-full-logo, mat-color($warn));
+    }
+
+    .thinky-logo {
+      background-repeat: no-repeat;
+      top: 100px;
+      left: 300px;
+      width: 100px;
+      height: 100px;
+      background-image: fathym-logo('logo', thinky-logo, mat-color($accent));
     }
    }
 

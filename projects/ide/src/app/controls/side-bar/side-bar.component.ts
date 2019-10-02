@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeSideBar } from 'projects/common/src/lib/core/ide/side-bar';
-import { IdeStateStateManagerContext, IdeSideBarAction } from '@napkin-ide/lcu-napkin-ide-common';
+
+import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { IdeSideBar, IdeSideBarAction } from '@lcu/common';
 
 @Component({
   selector: 'nide-side-bar',
