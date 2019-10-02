@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NapkinIDESetupStepTypes, NapkinIDESetupState, AzureInfaSettings } from '../../core/napkin-ide-setup.state';
 import { AbstractControl, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
+import { Guid } from '@lcu/common';
 
 @Component({
   selector: 'lcu-org-infra',
@@ -64,6 +65,11 @@ export class OrgInfraComponent implements OnInit {
   public SetStep: EventEmitter<NapkinIDESetupStepTypes>;
 
   /**
+   * Guid Error Message
+   */
+  public GuidErrorMessage: string;
+
+  /**
    * Toggle Application Id
    */
   public HideAppId: boolean;
@@ -91,6 +97,8 @@ export class OrgInfraComponent implements OnInit {
   constructor(protected nideState: NapkinIDESetupStateManagerContext) {
     this.SetStep = new EventEmitter();
     this.setFieldToggles();
+
+    this.GuidErrorMessage = 'Value must be a valid Guid ( ' + Guid.Empty + ' )' ;
    }
 
 // life Cycle
@@ -135,11 +143,24 @@ public Configure() {
    * Setup detial form controls
    */
   protected setupForm(): void {
+    // this.InfraForm = new FormGroup({
+    //   azureTenantId: new FormControl ('', [Validators.required, Validators.maxLength(36)]),
+    //   azureAppId: new FormControl ('', [Validators.required, Validators.maxLength(36)]),
+    //   azureAppAuthKey: new FormControl ('', {validators: [Validators.required], updateOn: 'change'}),
+    //   azureSubId: new FormControl ('', [Validators.required, Validators.maxLength(36)])
+    // });
+
     this.InfraForm = new FormGroup({
-      azureTenantId: new FormControl ('', [Validators.required, Validators.maxLength(36)]),
-      azureAppId: new FormControl ('', [Validators.required, Validators.maxLength(36)]),
-      azureAppAuthKey: new FormControl ('', {validators: [Validators.required, Validators.maxLength(32)], updateOn: 'change'}),
-      azureSubId: new FormControl ('', [Validators.required, Validators.maxLength(36)])
+      azureTenantId: new FormControl ('',  {validators: Validators.compose([
+        Validators.required,
+        Validators.pattern(Guid.GuidValidator)]), updateOn: 'change'}),
+      azureAppId: new FormControl ('',  {validators: Validators.compose([
+        Validators.required,
+        Validators.pattern(Guid.GuidValidator)]), updateOn: 'change'}),
+      azureAppAuthKey: new FormControl ('', {validators: [Validators.required], updateOn: 'change'}),
+      azureSubId: new FormControl ('',  {validators: Validators.compose([
+        Validators.required,
+        Validators.pattern(Guid.GuidValidator)]), updateOn: 'change'})
     });
 
     this.onFormChanges();
