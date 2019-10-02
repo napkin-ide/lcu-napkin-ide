@@ -40,7 +40,7 @@ export class OrgHostComponent implements OnInit {
   public get SetupStepTypes() {
     return this._setupStepTypes;
   }
-  
+
   // public SetupStepTypes: NapkinIDESetupStepTypes;
 
   /**
@@ -113,7 +113,7 @@ public SecureHost() {
   if (this.State.HostFlow === 'private') {
     host = this.HostAddressControl.value;
   } else if (this.State.HostFlow === 'shared') {
-    host = `${this.HostAddressControl.value}.${this.HostAddressControl.value}`;
+    host = `${this.HostAddressControl.value}.${this.RootDomainControl.value}`;
   }
 
   this.nideState.SecureHost(host);
