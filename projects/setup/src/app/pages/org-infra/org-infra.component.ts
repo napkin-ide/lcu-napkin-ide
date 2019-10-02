@@ -136,7 +136,7 @@ public Configure() {
    */
   protected setupForm(): void {
     this.InfraForm = new FormGroup({
-      azureTenantId: new FormControl ('', [Validators.required, Validators.maxLength(32)]),
+      azureTenantId: new FormControl ('', [Validators.required, Validators.maxLength(36)]),
       azureAppId: new FormControl ('', [Validators.required, Validators.maxLength(36)]),
       azureAppAuthKey: new FormControl ('', {validators: [Validators.required, Validators.maxLength(32)], updateOn: 'change'}),
       azureSubId: new FormControl ('', [Validators.required, Validators.maxLength(36)])
