@@ -108,9 +108,9 @@ export class OrgInfraComponent implements OnInit {
 public Configure() {
   this.State.Loading = true;
 
-  if (!this.State.EnvSettings) {
-    this.State.EnvSettings = new AzureInfaSettings();
-  }
+  // if (!this.State.EnvSettings) {
+  this.State.EnvSettings = new AzureInfaSettings();
+ // }
 
   this.State.EnvSettings.AzureTenantID = this.OrgInfraAzureTenatId.value;
 
@@ -136,7 +136,7 @@ public Configure() {
    */
   protected setupForm(): void {
     this.InfraForm = new FormGroup({
-      azureTenantId: new FormControl ('', [Validators.required, Validators.maxLength(32)]),
+      azureTenantId: new FormControl ('', [Validators.required, Validators.maxLength(36)]),
       azureAppId: new FormControl ('', [Validators.required, Validators.maxLength(36)]),
       azureAppAuthKey: new FormControl ('', {validators: [Validators.required, Validators.maxLength(32)], updateOn: 'change'}),
       azureSubId: new FormControl ('', [Validators.required, Validators.maxLength(36)])
@@ -175,7 +175,7 @@ public Configure() {
 
       this.OrgInfraAzureAppAppId.setValue(this.State.EnvSettings.AzureAppID || '');
 
-      this.OrgInfraAzureTenatId.setValue(this.State.EnvSettings.AzureAppAuthKey || '');
+      this.OrgInfraAzureAppAuthKey.setValue(this.State.EnvSettings.AzureAppAuthKey || '');
 
       setTimeout(() => this.InfraForm.updateValueAndValidity());
     }

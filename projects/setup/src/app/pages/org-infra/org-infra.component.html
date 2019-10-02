@@ -14,7 +14,7 @@
                   [type]="HideTenantId ? 'password' : 'text'" 
                   required autocomplete="new-password">
                   <mat-error *ngIf="OrgInfraAzureTenatId.hasError('maxlength')">
-                      Over character limit of 32
+                      Over character limit of 36
                   </mat-error>
                 <mat-icon 
                   matBadge="{{OrgInfraAzureTenatId.value.length}}" 
