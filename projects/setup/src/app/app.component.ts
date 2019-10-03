@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
    * Reset material theme
    */
   protected resetTheme(): void {
-    this.changeTheme('sea-green-theme');
+    this.changeTheme('flipper-theme');
   }
 
   /**
