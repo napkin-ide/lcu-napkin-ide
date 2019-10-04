@@ -21,3 +21,4 @@ export * from './lib/core/ide/state';
 export * from './lib/core/ide/state-change';
 export * from './lib/core/ide/state-change-types';
 // export * from './lib/config/auth.config';
+export * from './lib/elements/shell-host/shell-host.component';
