@@ -1,20 +1,20 @@
 <div *ngIf="State.Step === SetupStepTypes['Terms']">
-  <h1 
-    fxLayoutAlign="center center" 
+  <h1
+    fxLayoutAlign="center center"
     class="mat-display-1 title margin-bottom-4">
-    Fathym Terms & Privacy
+    Fathym Enterprise Agreement
   </h1>
 
-  <p class="mat-headline">{{ State.Terms }}</p>
+  <p class="mat-headline" [innerHTML]="State.Terms"></p>
 
   <button
-    mat-raised-button 
-    color="accent" 
-    class="mat-full-width" 
+    mat-raised-button
+    color="accent"
+    class="mat-full-width"
     (click)="AcceptTerms()" >
-    Accept Fathym Terms & Privacy
+    Accept
   </button>
-  
+
 </div>
 
 
