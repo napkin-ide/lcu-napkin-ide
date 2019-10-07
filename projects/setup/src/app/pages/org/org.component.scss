@@ -48,8 +48,7 @@
         width: 30%;
         background-size: cover;
         background-position: 50% 0;
-        background-image: linear-gradient(transparentize(mat-color($primary), 0.15), transparentize(mat-color($primary), 0.15)),
-        url(https://images.immediate.co.uk/production/volatile/sites/4/2009/09/GettyImages-884671854-4946bb3.jpg?quality=45&resize=960,413);
+        background-image: url(~/../assets/img/green-bubbles.jpg);
       }
 
       .content {
