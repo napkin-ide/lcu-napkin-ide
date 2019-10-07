@@ -1,17 +1,18 @@
 <div *ngIf="State.Step === SetupStepTypes['Terms']">
-  <h1
-    fxLayoutAlign="center center"
-    class="mat-display-1 title margin-bottom-4">
+  <h1 fxLayoutAlign="center center" class="mat-display-1 title margin-bottom-4">
     Fathym Enterprise Agreement
   </h1>
 
-  <p class="mat-headline" [innerHTML]="State.Terms" fxLayoutAlign="center"></p>
 
-  <button
-    mat-raised-button
-    color="accent"
-    class="mat-full-width"
-    (click)="AcceptTerms()" >
+  <div [innerHTML]="State.Terms" fxLayoutAlign="center"></div>
+
+  <a href="https://fathym.com/terms-of-services/">
+    <button mat-button class="mat-full-width" color="warn">
+      Terms & Conditions
+    </button>
+  </a>
+
+  <button mat-raised-button color="accent" class="mat-full-width" (click)="AcceptTerms()">
     Accept
   </button>
 
@@ -26,6 +27,3 @@
     </a>
 
 </div>
-
-
-
