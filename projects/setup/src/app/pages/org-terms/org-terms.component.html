@@ -4,13 +4,8 @@
   </h1>
 
 
-  <div [innerHTML]="State.Terms" fxLayoutAlign="center"></div>
+  <div [innerHTML]="State.Terms" fxLayoutAlign="center" style="margin-bottom: 1.5em"></div>
 
-  <a href="https://fathym.com/terms-of-services/">
-    <button mat-button class="mat-full-width" color="warn">
-      Terms & Conditions
-    </button>
-  </a>
 
   <button mat-raised-button color="accent" class="mat-full-width" (click)="AcceptTerms()">
     Accept
