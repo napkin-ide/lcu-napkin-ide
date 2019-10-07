@@ -5,7 +5,7 @@
     Fathym Enterprise Agreement
   </h1>
 
-  <p class="mat-headline" [innerHTML]="State.Terms"></p>
+  <p class="mat-headline" [innerHTML]="State.Terms" fxLayoutAlign="center"></p>
 
   <button
     mat-raised-button
@@ -14,6 +14,16 @@
     (click)="AcceptTerms()" >
     Accept
   </button>
+
+  <a href="https://fathym.com/terms-of-services/" >
+    <button 
+      mat-button 
+      class="mat-full-width" 
+      style="margin-top: 0.5em"
+      color="warn">
+      Terms & Conditions
+    </button>
+    </a>
 
 </div>
 
