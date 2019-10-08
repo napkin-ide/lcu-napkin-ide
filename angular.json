@@ -193,6 +193,11 @@
 								"glob": "package.json",
 								"input": "./projects/demo/",
 								"output": "/"
+							},
+							{
+								"glob": "**/*",
+								"input": "./assets/img",
+								"output": "./assets/img"
 							}
 						],
 						"styles": [
