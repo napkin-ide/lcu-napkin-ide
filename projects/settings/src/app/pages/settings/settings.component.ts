@@ -77,6 +77,18 @@ export class SettingsComponent implements OnInit {
   }
 
   //  API methods
+  public AddDefaultDataAppsLCUs() {
+    this.State.Loading = true;
+
+    this.ideSettingsState.AddDefaultDataAppsLCUs();
+  }
+
+  public AddDefaultDataFlowsLCUs() {
+    this.State.Loading = true;
+
+    this.ideSettingsState.AddDefaultDataFlowLCUs();
+  }
+
   public AddNewActivity() {
     this.SaveActivity({
       Title: this.NewActivityForm.controls.title.value,
