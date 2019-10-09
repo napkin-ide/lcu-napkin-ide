@@ -3,7 +3,29 @@
     Fathym Enterprise Agreement
   </h1>
 
-  <div [innerHTML]="State.Terms" fxLayoutAlign="center" style="margin-bottom: 1.5em"></div>
+  <p>By continuting through this step and accepting, you agree to enter into and be bound by the Enterprise Agreement located at:</p>  
+  <a target='blank' href='https://fathym.com/enterprise-agreement/'>
+    <button 
+      mat-button 
+      class="mat-full-width" 
+      color="warn" >
+      Enterprise Agreement
+    </button>
+  </a> 
+
+  <br /> 
+  
+  <p>By clicking Accept you also accept Fathym's Terms and Conditions: </p> 
+  <a target='blank' href='https://fathym.com/terms-of-services/'>
+    <button 
+      mat-button 
+      class="mat-full-width" 
+      color="warn" >
+      Terms & Conditions
+    </button>
+  </a>
+
+  <!-- <div [innerHTML]="State.Terms" style="margin-bottom: 1.5em"></div> -->
 
   <button mat-raised-button color="accent" class="mat-full-width" (click)="AcceptTerms()">
     Accept

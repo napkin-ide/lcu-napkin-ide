@@ -23,6 +23,9 @@
           min-height: inherit;
           box-sizing: border-box;
           justify-content: center;
+          background-image: fathym-logo('logo', thinky-logo, #ac9d9dc2, .5);
+          background-repeat:no-repeat;
+          background-position: center;
         }
       }
      
@@ -66,10 +69,8 @@
   color: rgb(0, 172, 0);
 }
 
-form{
-  background-image: fathym-logo('logo', thinky-logo, #f1f4f6, .5);
-  background-repeat:no-repeat;
-  background-position: center;
+.mat-card{
+  opacity: 0.9 !important;
 }
 
 
