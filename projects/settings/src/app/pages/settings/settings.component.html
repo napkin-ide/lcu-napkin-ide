@@ -423,6 +423,22 @@
                   </a>
                 </mat-list-item>
               </form>
+
+              <mat-list-item *ngIf="!State.AddNew?.LCU">
+                <a matLine (click)="AddDefaultDataAppsLCUs()">
+                  <mat-icon>add</mat-icon>
+
+                  Add Default Data Apps Configuration to IDE
+                </a>
+              </mat-list-item>
+
+              <mat-list-item *ngIf="!State.AddNew?.LCU">
+                <a matLine (click)="AddDefaultDataFlowsLCUs()">
+                  <mat-icon>add</mat-icon>
+
+                  Add Default Data Flows Configuration to IDE
+                </a>
+              </mat-list-item>
             </mat-nav-list>
           </mat-card>
         </div>
