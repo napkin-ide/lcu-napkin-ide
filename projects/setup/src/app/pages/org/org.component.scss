@@ -8,6 +8,19 @@
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
+  .mat-toolbar{
+    background-color: mat-color($primary, A700) !important; 
+  }
+  .mat-raised-button{
+    background-color: mat-color($accent, A700) !important;
+  }
+
+  .slogan{
+    background-image: fathym-logo('slogan', thinky-slogan, #dfeff2, .5);
+    background-repeat:no-repeat;
+    background-position: center;
+  }
+
   // :host {
     .identity {
       height: 100%;
@@ -23,6 +36,9 @@
           min-height: inherit;
           box-sizing: border-box;
           justify-content: center;
+          background-image: fathym-logo('circle', thinky-circle, #ffffff, .5);
+          background-repeat:no-repeat;
+          background-position: center;
         }
       }
      
@@ -66,10 +82,9 @@
   color: rgb(0, 172, 0);
 }
 
-form{
-  background-image: fathym-logo('logo', thinky-logo, #f1f4f6, .5);
-  background-repeat:no-repeat;
-  background-position: center;
+.mat-card{
+  background-color: #a4bab3 !important;
+  opacity: 0.8 !important;
 }
 
 

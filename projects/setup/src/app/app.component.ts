@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
    * Reset material theme
    */
   protected resetTheme(): void {
-    this.changeTheme('flipper-theme');
+    this.changeTheme('ivy-light-theme');
   }
 
   /**
