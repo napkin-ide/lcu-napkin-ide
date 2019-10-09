@@ -5,6 +5,9 @@
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
 @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
 @import '../../../node_modules/@lcu/common/assets/theming/fathym-default-theme';
+@import '../../../node_modules/@lcu/common/assets/theming/fathym-ivylight-theme';
+@import '../../../node_modules/@lcu/common/assets/theming/fathym-ivydark-theme';
+
 
 
 @import './assets/themes/fathym-themes.scss';
@@ -27,6 +30,14 @@
   .primary-logo {
     // background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
     background-image: fathym-logo('full', thinky-full-logo, #dbfdf2);
+  }
+ }
+
+ .ivy-light-theme {
+  @include set-theme($ivy-light-theme);
+  .primary-logo {
+    // background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
+    background-image: fathym-logo('slogan', thinky-slogan, #dbfdf2);
   }
  }
 
