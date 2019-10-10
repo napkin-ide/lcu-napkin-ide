@@ -20,7 +20,7 @@
                     {{ GuidErrorMessage }}
                 </mat-error>
                 <mat-icon 
-                  matBadge="{{OrgInfraAzureTenatId.value.length}}" 
+
                   matBadgePosition="below after" 
                   matBadgeColor="primary"
                   matBadgeOverlap="false"
@@ -28,6 +28,7 @@
                   matSuffix 
                   (click)="HideTenantId = !HideTenantId" class="cursor-pointer">{{HideTenantId ? 'visibility_off' : 'visibility'}}
                 </mat-icon>
+                <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
               <mat-hint>Guid Value</mat-hint>
             </mat-form-field>
 
@@ -44,7 +45,7 @@
                     {{ GuidErrorMessage }}
                 </mat-error>
               <mat-icon 
-                matBadge="{{OrgInfraAzureSubId.value.length}}" 
+
                 matBadgePosition="below after" 
                 matBadgeColor="primary"
                 matBadgeOverlap="false"
@@ -52,6 +53,7 @@
                 matSuffix 
                 (click)="HideSubId = !HideSubId" class="cursor-pointer">{{HideSubId ? 'visibility_off' : 'visibility'}}
               </mat-icon>
+              <!-- matBadge="{{OrgInfraAzureSubId.value.length}}"  -->
               <mat-hint>Guid Value</mat-hint>
             </mat-form-field>
 
@@ -68,7 +70,7 @@
                     {{ GuidErrorMessage }}
                 </mat-error>
               <mat-icon 
-                matBadge="{{OrgInfraAzureAppAppId.value.length}}" 
+
                 matBadgePosition="below after" 
                 matBadgeColor="primary"
                 matBadgeOverlap="false"
@@ -76,6 +78,7 @@
                 matSuffix 
                 (click)="HideAppId = !HideAppId" class="cursor-pointer">{{HideAppId ? 'visibility_off' : 'visibility'}}
               </mat-icon>
+              <!-- matBadge="{{OrgInfraAzureAppAppId.value.length}}"  -->
               <mat-hint>Guid Value</mat-hint>
             </mat-form-field>
 
@@ -92,7 +95,7 @@
                     Value is required
                 </mat-error>
               <mat-icon 
-                matBadge="{{OrgInfraAzureAppAuthKey.value.length}}" 
+                
                 matBadgePosition="below after" 
                 matBadgeColor="primary"
                 matBadgeOverlap="false"
@@ -100,6 +103,7 @@
                 matSuffix 
                 (click)="HideAuthKey = !HideAuthKey" class="cursor-pointer">{{HideAuthKey ? 'visibility_off' : 'visibility'}}
               </mat-icon>
+              <!-- matBadge="{{OrgInfraAzureAppAuthKey.value.length}}"  -->
               <!-- <mat-hint>32 Character Limit</mat-hint> -->
             </mat-form-field>
           </div>
