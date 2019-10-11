@@ -37,7 +37,7 @@
   @include set-theme($ivy-light-theme);
   .primary-logo {
     // background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
-    background-image: fathym-logo(thinky-slogan, #dbfdf2);
+    background-image: fathym-logo(fathym-logo, #dbfdf2);
   }
  }
 

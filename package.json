@@ -51,7 +51,7 @@
 		"@angular/router": "~8.2.0",
 		"@aspnet/signalr": "^1.1.4",
 		"@lcu-ide/common": "^0.24.33",
-		"@lcu/common": "^0.51.199-integration",
+		"@lcu/common": "^0.52.204-integration",
 		"@lowcodeunit-devkit/ng-lcu": "^0.57.250",
 		"@lowcodeunit/lazy-element": "0.0.8",
 		"@webcomponents/custom-elements": "^1.2.4",
