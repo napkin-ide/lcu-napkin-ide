@@ -86,11 +86,8 @@
   background-color: rgba(164,186,179, 0.9) !important;
 }
 
-::ng-deep .mat-form-field-placeholder{
-  color:red !important;
- }
- ::ng-deep .mat-focused .mat-form-field-placeholder{
-  color:red !important;
+.mat-focused .mat-form-field-label {
+  color: mat-color($primary,A700) !important;
  }
 
 .test-tooltip {
