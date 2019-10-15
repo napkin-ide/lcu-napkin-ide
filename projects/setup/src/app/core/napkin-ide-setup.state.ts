@@ -1,4 +1,6 @@
 export class NapkinIDESetupState {
+  public CanFinalize?: boolean;
+
   public DevOpsAppID?: string;
 
   public DevOpsClientSecret?: string;
