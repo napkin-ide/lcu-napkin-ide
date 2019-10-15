@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NapkinIDESetupStepTypes, NapkinIDESetupState } from '../../core/napkin-ide-setup.state';
 import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
+import { setInterval } from 'timers';
 
 @Component({
   selector: 'lcu-org-review',
@@ -10,6 +11,7 @@ import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-s
 export class OrgReviewComponent implements OnInit {
 
 // Properties
+public IsProvisioned: boolean;
 
 public get OAuthRedirectURL(): string {
   return `${location.href}`;
@@ -33,12 +35,20 @@ public get AzureDevOpsOAuthURL(): string {
   @Input('state')
   public State: NapkinIDESetupState;
 
-
   constructor(protected nideState: NapkinIDESetupStateManagerContext) { }
 
   ngOnInit() {
-  }
+    this.IsProvisioned = false;
 
+    /** Interval to check if infrastructure has been provisioned - prevents user from continuing until so. */
+    const finalizedInterval: any = setInterval(() => {
+      if (!this.IsProvisioned) {
+        this.CanFinalize();
+      } else {
+        clearInterval(finalizedInterval._id);
+      }
+    }, 15000);
+  }
 
   public Boot() {
     this.State.Loading = true;
@@ -50,6 +60,10 @@ public get AzureDevOpsOAuthURL(): string {
     this.State.Loading = true;
 
     this.nideState.Finalize();
+  }
+
+  public CanFinalize() {
+    this.IsProvisioned = this.State.CanFinalize;
   }
 
 }

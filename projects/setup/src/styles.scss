@@ -17,7 +17,7 @@
 @mixin set-theme($theme) {
   @include custom-theme($theme);
   @include component-themes($theme);
-  
+
 }
 
 // for updating components with themes
@@ -38,6 +38,9 @@
   .primary-logo {
     // background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
     background-image: fathym-logo(fathym-logo, #dbfdf2);
+  }
+  button .mat-spinner circle {
+    stroke: #282D35;
   }
  }
 
