@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NapkinIDESetupStepTypes, NapkinIDESetupState } from '../../core/napkin-ide-setup.state';
 import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
-import { setInterval } from 'timers';
 
 @Component({
   selector: 'lcu-org-review',
@@ -45,7 +44,7 @@ public get AzureDevOpsOAuthURL(): string {
       if (!this.IsProvisioned) {
         this.CanFinalize();
       } else {
-        clearInterval(finalizedInterval._id);
+        clearInterval(finalizedInterval);
       }
     }, 15000);
   }
