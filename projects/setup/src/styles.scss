@@ -1,23 +1,29 @@
-@import "~@angular/material/theming";
+// @import "~@angular/material/theming";
 @import '../src/app/pages/org/org.component.scss';
-@import '../../common/src/styles/theme';
-// @import '../../../node_modules/@lcu/common/assets/theming/fathym-nide-theme';
+// @import '../../common/src/styles/theme';
+// @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+// @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+// @import '../../../node_modules/@lcu/common/assets/theming/fathym-default-theme';
+// @import '../../../node_modules/@lcu/common/assets/theming/fathym-ivy-light-theme';
+// @import '../../../node_modules/@lcu/common/assets/theming/fathym-ivy-dark-theme';
+// @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
+
+// @import './assets/themes/fathym-themes.scss';
+
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
 @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
-@import '../../../node_modules/@lcu/common/assets/theming/fathym-default-theme';
-@import '../../../node_modules/@lcu/common/assets/theming/fathym-ivy-light-theme';
-@import '../../../node_modules/@lcu/common/assets/theming/fathym-ivy-dark-theme';
+@import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 
+@mixin theme-setup($theme) {
+  @include angular-material-theme($theme);
+  @include theme-extras($theme);
+  @include component-themes($theme); 
+}
 
-
-@import './assets/themes/fathym-themes.scss';
-
-@include mat-core();
-
-@mixin set-theme($theme) {
-  @include custom-theme($theme);
-  @include component-themes($theme);
-
+@mixin primary-logo($logo, $theme, $opacity) {
+  .primary-logo {
+    background-image: fathym-logo($logo, mat-color(map-get($theme, accent)), $opacity);
+  }
 }
 
 // for updating components with themes
@@ -25,94 +31,13 @@
   @include org($theme);
 }
 
-.arctic-theme {
-  @include set-theme($arctic-theme);
-  .primary-logo {
-    // background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
-    background-image: fathym-logo(thinky-full-logo, #dbfdf2);
-  }
- }
-
  .ivy-light-theme {
-  @include set-theme($ivy-light-theme);
-  .primary-logo {
-    // background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
-    background-image: fathym-logo(fathym-logo, #dbfdf2);
-  }
+  $theme: fathym-ivy-theme();
+  @include theme-setup($theme);
+  @include primary-logo(fathym-logo, $theme, 1);
+
   button .mat-spinner circle {
     stroke: #282D35;
-  }
- }
-
- .contrast-theme {
-  @include set-theme($contrast-theme);
-  .primary-logo {
-  background-image: fathym-logo(thinky-full-logo, #282d35);
-  }
-
-  .thinky-logo {
-    background-repeat: no-repeat;
-    top: 100px;
-    left: 300px;
-    width: 100px;
-    height: 100px;
-    background-color: mat-color($accent);
-    background-image: fathym-logo(thinky-logo, mat-color($primary));
-  }
- }
-
- .cool-candy-theme {
-  @include set-theme($cool-candy-theme);
-  .primary-logo {
-    background-image: fathym-logo(thinky-full-logo, #9cd8d7);
-  }
- }
-
- .flipper-theme {
-  @include set-theme($flipper-theme);
-  .primary-logo {
-    background-image: fathym-logo(thinky-full-logo, #f1f4f6);
-  }
- }
-
- .ice-theme {
-  @include set-theme($ice-theme);
-  .primary-logo {
-    background-image: fathym-logo(thinky-full-logo, #fbfcf4);
-  }
- }
-
-
- .sea-green-theme {
-  @include set-theme($sea-green-theme);
-  .primary-logo {
-    background-image: fathym-logo(thinky-full-logo, #67c7c5);
-  }
-
-  .thinky-logo {
-    background-repeat: no-repeat;
-    top: 100px;
-    left: 300px;
-    width: 100px;
-    height: 100px;
-    background-color: mat-color($accent, 100);
-    background-image: fathym-logo(thinky-logo, mat-color($accent));
-  }
- }
-
- .white-mint-theme {
-  @include set-theme($white-mint-theme);
-  .primary-logo {
-    background-image: fathym-logo(thinky-full-logo, #f1f4f6);
-  }
-
-  .thinky-logo {
-    background-repeat: no-repeat;
-    top: 100px;
-    left: 300px;
-    width: 100px;
-    height: 100px;
-    background-image: fathym-logo(thinky-logo, mat-color($accent));
   }
  }
 
@@ -120,34 +45,4 @@
   width: 150px;
   height: 50px;
 }
-// @mixin nide($theme) {
-//   @include angular-material-theme($theme);
 
-//   $config: mat-typography-config();
-
-//   $primary: map-get($theme, primary);
-//   $accent: map-get($theme, accent);
-//   $warn: map-get($theme, warn);
-
-//   @include defaults($theme);
-
-//   .split {
-//     margin: 2rem 0;
-//   }
-
-//   .btn-split {
-//     margin: 2rem .5rem;
-//   }
-
-//   html,
-//   body {
-//     color: $nide-black;
-//     height: 100%;
-//   }
-
-//   body {
-//     margin: 0;
-//   }
-// }
-
-// @include nide($nide-theme);
