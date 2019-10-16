@@ -1,8 +1,10 @@
-@import '~@angular/material/theming';
-@import '../../../../../common/src/styles/theme';
+// @import '~@angular/material/theming';
+// @import '../../../../../common/src/styles/theme';
+
+@import '../../../../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 
 @mixin org($theme) {
-  $config: mat-typography-config();
+ // $config: mat-typography-config();
  
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -86,10 +88,10 @@
   background-color: rgba(164,186,179, 0.9) !important;
 }
 
-.mat-focused .mat-form-field-label {
-  color: mat-color($primary,A700) !important;
- }
+// .mat-focused .mat-form-field-label {
+//   color: mat-color($primary,A700) !important;
+//  }
 
-.test-tooltip {
-  background-color: mat-color($primary, A700);
-  }
+// .test-tooltip {
+//   background-color: mat-color($primary, A700);
+//   }

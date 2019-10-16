@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector, SecurityContext } from '@angular/core';
-import { LCUElementContext, LcuElementComponent } from '@lcu-ide/common';
+import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 import { DomSanitizer, SafeValue } from '@angular/platform-browser';
 
 export class LcuNapkinIdeShellHostElementState {
