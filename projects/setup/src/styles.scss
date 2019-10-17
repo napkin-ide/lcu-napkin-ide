@@ -25,7 +25,7 @@
  .ivy-light-theme {
     $theme: fathym-ivy-theme();
     @include theme-setup($theme);
-    @include primary-logo(fathym-logo, $theme, 1);
+    @include primary-logo(thinky-full-logo, $theme, 1);
 
     button .mat-spinner circle {
       stroke: #282D35;
