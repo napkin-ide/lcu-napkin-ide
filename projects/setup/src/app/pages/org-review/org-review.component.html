@@ -151,7 +151,7 @@
                 (click)="Finalize()"
                 [disabled]="!State.TermsAccepted || !IsProvisioned">
 
-                <mat-icon *ngIf="!IsProvisioned" class="icon-btn-spinner" matTooltip="Provisioning infrastructure resources, please wait." matTooltipClass="test-tooltip">
+                <mat-icon *ngIf="!IsProvisioned" class="icon-btn-spinner" matTooltip="Provisioning infrastructure resources, please wait." matTooltipClass="tooltip-background">
                   <mat-spinner diameter="24"></mat-spinner>
                 </mat-icon>
 
