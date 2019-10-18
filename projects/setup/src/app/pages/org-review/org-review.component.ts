@@ -10,8 +10,6 @@ import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-s
 export class OrgReviewComponent implements OnInit {
 
 // Properties
-public IsProvisioned: boolean;
-
 public get OAuthRedirectURL(): string {
   return `${location.href}`;
 }
@@ -37,11 +35,9 @@ public get AzureDevOpsOAuthURL(): string {
   constructor(protected nideState: NapkinIDESetupStateManagerContext) { }
 
   ngOnInit() {
-    this.IsProvisioned = false;
-
     /** Interval to check if infrastructure has been provisioned - prevents user from continuing until so. */
     const finalizedInterval: any = setInterval(() => {
-      if (!this.IsProvisioned) {
+      if (!this.State.CanFinalize) {
         this.CanFinalize();
       } else {
         clearInterval(finalizedInterval);
@@ -62,7 +58,7 @@ public get AzureDevOpsOAuthURL(): string {
   }
 
   public CanFinalize() {
-    this.IsProvisioned = this.State.CanFinalize;
+    this.nideState.CanFinalize();
   }
 
 }

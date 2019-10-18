@@ -149,9 +149,9 @@
                 color="accent"
                 class="margin-top-3 mat-full-width"
                 (click)="Finalize()"
-                [disabled]="!State.TermsAccepted || !IsProvisioned">
+                [disabled]="!State.TermsAccepted || !State.CanFinalize">
 
-                <mat-icon *ngIf="!IsProvisioned" class="icon-btn-spinner" matTooltip="Provisioning infrastructure resources, please wait." matTooltipClass="tooltip-background">
+                <mat-icon *ngIf="!State.CanFinalize" class="icon-btn-spinner" matTooltip="Provisioning infrastructure resources, please wait." matTooltipClass="tooltip-background">
                   <mat-spinner diameter="24"></mat-spinner>
                 </mat-icon>
 
