@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, PipeTransform, Pipe } from '@angular/core';
 import { NapkinIDESetupStepTypes, NapkinIDESetupState } from '../../core/napkin-ide-setup.state';
 import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
 
@@ -10,7 +10,7 @@ import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-s
 export class OrgTermsComponent implements OnInit {
 
 // Properties
-
+  public Terms: string;
   /**
    * Setup step types
    */
@@ -28,6 +28,7 @@ export class OrgTermsComponent implements OnInit {
   constructor(protected nideState: NapkinIDESetupStateManagerContext) { }
 
   ngOnInit() {
+    this.setupState();
   }
 
   //  API methods
@@ -42,6 +43,20 @@ export class OrgTermsComponent implements OnInit {
    * When state values change
    */
   protected stateChanged(): void {
+    console.log('state', this.State);
+    this.Terms = this.State.Terms.replace(/\\/g, '');
+    console.log('finalData', this.Terms);
+  }
+
+   /**
+   * Setup state mechanism
+   */
+  protected setupState(): void {
+    this.nideState.Context.subscribe(state => {
+      this.State = state;
+
+      this.stateChanged();
+    });
   }
 
 }

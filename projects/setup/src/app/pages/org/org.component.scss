@@ -1,12 +1,19 @@
-@import '~@angular/material/theming';
-@import '../../../../../common/src/styles/theme';
+
+.tooltip-background {
+  background-color: #4a918e !important; 
+}
 
 @mixin org($theme) {
-  $config: mat-typography-config();
- 
+
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
+
+  .slogan{
+    background-image: fathym-logo(thinky-slogan, #dfeff2, .5);
+    background-repeat:no-repeat;
+    background-position: center;
+  }
 
   // :host {
     .identity {
@@ -23,6 +30,9 @@
           min-height: inherit;
           box-sizing: border-box;
           justify-content: center;
+          background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.3));
+          background-repeat:no-repeat;
+          background-position: center;
         }
       }
      
@@ -48,7 +58,7 @@
         width: 30%;
         background-size: cover;
         background-position: 50% 0;
-        background-image: url(~/../assets/img/green-bubbles.jpg);
+        background-image: url('assets/img/green-bubbles.jpg');
       }
 
       .content {
@@ -56,21 +66,3 @@
       }
     }
   }
-
-.error {
-  color: rgb(204, 0, 0);
-  
-}
-
-.success {
-  color: rgb(0, 172, 0);
-}
-
-form{
-  background-image: fathym-logo('logo', thinky-logo, #f1f4f6, .5);
-  background-repeat:no-repeat;
-  background-position: center;
-}
-
-
-

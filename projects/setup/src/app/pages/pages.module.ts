@@ -1,4 +1,4 @@
-import { MaterialModule } from '@lcu/common';
+import { MaterialModule, PipeModule } from '@lcu/common';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -30,8 +30,10 @@ import { OrgTermsComponent } from './org-terms/org-terms.component';
     PagesRoutingModule,
     FlexLayoutModule,
     MaterialModule,
-    LcuNapkinIdeModule
+    LcuNapkinIdeModule,
+    PipeModule
  ],
-  exports: [OrgComponent]
+  exports: [OrgComponent],
+  providers: []
 })
 export class PagesModule {}

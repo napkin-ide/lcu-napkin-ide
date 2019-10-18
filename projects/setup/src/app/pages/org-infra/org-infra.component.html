@@ -9,7 +9,7 @@
           <div>
             <mat-form-field class="mat-full-width">
               <div fxLayout="row" fxLayoutGap="10px">
-                <mat-icon *ngIf="!OrgInfraAzureTenatId.hasError('pattern')" class="success">check_circle</mat-icon>
+                <mat-icon *ngIf="OrgInfraAzureTenatId.value.length > 0 && !OrgInfraAzureTenatId.hasError('pattern')" class="success">check_circle</mat-icon>
                 <input 
                   formControlName="azureTenantId" 
                   matInput placeholder="Azure Tenant (Directory) ID" 
@@ -20,7 +20,7 @@
                     {{ GuidErrorMessage }}
                 </mat-error>
                 <mat-icon 
-                  matBadge="{{OrgInfraAzureTenatId.value.length}}" 
+
                   matBadgePosition="below after" 
                   matBadgeColor="primary"
                   matBadgeOverlap="false"
@@ -28,12 +28,13 @@
                   matSuffix 
                   (click)="HideTenantId = !HideTenantId" class="cursor-pointer">{{HideTenantId ? 'visibility_off' : 'visibility'}}
                 </mat-icon>
+                <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
               <mat-hint>Guid Value</mat-hint>
             </mat-form-field>
 
             <mat-form-field class="mat-full-width margin-top-4">
               <div fxLayout="row" fxLayoutGap="10px">
-                  <mat-icon *ngIf="!OrgInfraAzureSubId.hasError('pattern')" class="success">check_circle</mat-icon>
+                  <mat-icon *ngIf="OrgInfraAzureSubId.value.length > 0 && !OrgInfraAzureSubId.hasError('pattern')" class="success">check_circle</mat-icon>
                   <input 
                     formControlName="azureSubId" 
                     matInput placeholder="Azure Subscription ID" 
@@ -44,7 +45,7 @@
                     {{ GuidErrorMessage }}
                 </mat-error>
               <mat-icon 
-                matBadge="{{OrgInfraAzureSubId.value.length}}" 
+
                 matBadgePosition="below after" 
                 matBadgeColor="primary"
                 matBadgeOverlap="false"
@@ -52,12 +53,13 @@
                 matSuffix 
                 (click)="HideSubId = !HideSubId" class="cursor-pointer">{{HideSubId ? 'visibility_off' : 'visibility'}}
               </mat-icon>
+              <!-- matBadge="{{OrgInfraAzureSubId.value.length}}"  -->
               <mat-hint>Guid Value</mat-hint>
             </mat-form-field>
 
             <mat-form-field class="mat-full-width margin-top-4">
               <div fxLayout="row" fxLayoutGap="10px">
-                  <mat-icon *ngIf="!OrgInfraAzureAppAppId.hasError('pattern')" class="success">check_circle</mat-icon>
+                  <mat-icon *ngIf="OrgInfraAzureAppAppId.value.length > 0 && !OrgInfraAzureAppAppId.hasError('pattern')" class="success">check_circle</mat-icon>
                 <input 
                   formControlName="azureAppId" 
                   matInput placeholder="Azure App ID" 
@@ -68,7 +70,7 @@
                     {{ GuidErrorMessage }}
                 </mat-error>
               <mat-icon 
-                matBadge="{{OrgInfraAzureAppAppId.value.length}}" 
+
                 matBadgePosition="below after" 
                 matBadgeColor="primary"
                 matBadgeOverlap="false"
@@ -76,12 +78,13 @@
                 matSuffix 
                 (click)="HideAppId = !HideAppId" class="cursor-pointer">{{HideAppId ? 'visibility_off' : 'visibility'}}
               </mat-icon>
+              <!-- matBadge="{{OrgInfraAzureAppAppId.value.length}}"  -->
               <mat-hint>Guid Value</mat-hint>
             </mat-form-field>
 
             <mat-form-field class="mat-full-width margin-top-4">
               <div fxLayout="row" fxLayoutGap="10px">
-                  <mat-icon *ngIf="!OrgInfraAzureAppAuthKey.hasError('required')" class="success">check_circle</mat-icon>
+                  <mat-icon *ngIf="OrgInfraAzureAppAuthKey.value.length > 0 && !OrgInfraAzureAppAuthKey.hasError('required')" class="success">check_circle</mat-icon>
                 <input 
                   formControlName="azureAppAuthKey" 
                   matInput placeholder="Azure App Auth key" 
@@ -92,7 +95,7 @@
                     Value is required
                 </mat-error>
               <mat-icon 
-                matBadge="{{OrgInfraAzureAppAuthKey.value.length}}" 
+                
                 matBadgePosition="below after" 
                 matBadgeColor="primary"
                 matBadgeOverlap="false"
@@ -100,6 +103,7 @@
                 matSuffix 
                 (click)="HideAuthKey = !HideAuthKey" class="cursor-pointer">{{HideAuthKey ? 'visibility_off' : 'visibility'}}
               </mat-icon>
+              <!-- matBadge="{{OrgInfraAzureAppAuthKey.value.length}}"  -->
               <!-- <mat-hint>32 Character Limit</mat-hint> -->
             </mat-form-field>
           </div>

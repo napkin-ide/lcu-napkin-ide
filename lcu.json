@@ -11,8 +11,8 @@
 		"solutions": {
 			"data-flow-manager": {
 				"element": "lcu-napkin-ide-shell-host-element"
-      }
-    },
+			}
+		},
 		"elements": {},
 		"flux": {},
 		"dependencies": {}

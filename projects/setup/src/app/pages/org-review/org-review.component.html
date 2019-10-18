@@ -1,17 +1,17 @@
 <div *ngIf="State.Step === SetupStepTypes['Review']">
 
-    <h1 
-      fxLayoutAlign="center center" 
+    <h1
+      fxLayoutAlign="center center"
       class="mat-display-1 title margin-bottom-4">
       Adding {{ State.OrganizationName }} to the Ecosystem
     </h1>
 
-    <h2 
-      fxLayoutAlign="center center" 
+    <h2
+      fxLayoutAlign="center center"
       class="h2 paragraph-title-bold margin-bottom-3">
       If you can Fathym It, you can Build It.
     </h2>
-    
+
     <ng-container *ngIf="!State.HasDevOpsOAuth">
       <div fxLayout="column">
         <h2 class="h2">
@@ -20,7 +20,7 @@
 
         <div fxLayout="row">
           <div fxFlex="20">
-              <img style="width: 140%" src="assets/img/Azure-logo.png" />
+              <img style="width: 140%; margin-top: 1em;" src="assets/img/Azure-logo.png" />
           </div>
           <div fxFlex>
             <p class="weird-fix">
@@ -86,7 +86,7 @@
                   <p class="mat-subheading-2">
                       We've gotten connected with your Azure Dev Ops instance and will help manage your code, builds, releases, and more.
                     </p>
-      
+
                     <p class="mat-subheading-2">
                       We'll get some git based source control setup for your infrastructure, and connect it to builds for auto deploying to
                       Azure.
@@ -96,9 +96,9 @@
         </div>
 
         <button
-          mat-raised-button 
-          color="accent" 
-          class="margin-top-3 mat-full-width" 
+          mat-raised-button
+          color="accent"
+          class="margin-top-3 mat-full-width"
           (click)="Boot()" >
           Get Connected, Boot your Organization
         </button>
@@ -145,12 +145,18 @@
               </div>
               </div>
               <button
-                mat-raised-button 
-                color="accent" 
-                class="margin-top-3 mat-full-width" 
-                (click)="Finalize()" 
-                [disabled]="!State.TermsAccepted">
+                mat-raised-button
+                color="accent"
+                class="margin-top-3 mat-full-width"
+                (click)="Finalize()"
+                [disabled]="!State.TermsAccepted || !IsProvisioned">
+
+                <mat-icon *ngIf="!IsProvisioned" class="icon-btn-spinner" matTooltip="Provisioning infrastructure resources, please wait." matTooltipClass="tooltip-background">
+                  <mat-spinner diameter="24"></mat-spinner>
+                </mat-icon>
+
                 Finalize and Deploy your Organization
+
               </button>
             </div>
       </ng-container>
