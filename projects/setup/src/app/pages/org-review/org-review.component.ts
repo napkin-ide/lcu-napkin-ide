@@ -37,7 +37,7 @@ public get AzureDevOpsOAuthURL(): string {
   ngOnInit() {
     /** Interval to check if infrastructure has been provisioned - prevents user from continuing until so. */
     const finalizedInterval: any = setInterval(() => {
-      if (!this.State.CanFinalize) {
+      if (!this.State.CanFinalize && this.State.EnterpriseBooted) {
         this.CanFinalize();
       } else {
         clearInterval(finalizedInterval);
