@@ -31,6 +31,7 @@ public get AzureDevOpsOAuthURL(): string {
   // tslint:disable-next-line:no-input-rename
   @Input('state')
   public State: NapkinIDESetupState;
+
   constructor(protected nideState: NapkinIDESetupStateManagerContext) { }
 
   ngOnInit() {
@@ -41,7 +42,7 @@ public get AzureDevOpsOAuthURL(): string {
       } else {
         clearInterval(finalizedInterval);
       }
-    }, 15000);
+    }, 60000);
   }
 
   public Boot() {
