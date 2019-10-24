@@ -5,7 +5,7 @@
     <mat-tab label="Setup" *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0">
       <div class="spread">
         <mat-accordion>
-          <mat-expansion-panel [expanded]="ExpandActivityBar">
+          <!-- <mat-expansion-panel [expanded]="ExpandActivityBar">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Activity Bar
@@ -44,10 +44,9 @@
                       <input matInput placeholder="Title" [(ngModel)]="activity.Title" />
                     </mat-form-field>
 
-                    <!-- <mat-form-field>
+                   <mat-form-field>
                       <input matInput placeholder="Lookup" [(ngModel)]="activity.Lookup" />
-                    </mat-form-field> -->
-
+                    </mat-form-field> 
                     <mat-form-field>
                       <input matInput placeholder="Icon" [(ngModel)]="activity.Icon" />
                       <mat-icon matSuffix>{{ activity.Icon }}</mat-icon>
@@ -100,9 +99,9 @@
                 </mat-list-item>
               </form>
             </mat-nav-list>
-          </mat-expansion-panel>
+          </mat-expansion-panel> -->
 
-          <mat-expansion-panel *ngIf="State.Activities?.length > 0" [expanded]="ExpandSideBar">
+          <!-- <mat-expansion-panel *ngIf="State.Activities?.length > 0" [expanded]="ExpandSideBar">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Side Bar
@@ -203,9 +202,9 @@
                               </mat-select>
                             </mat-form-field>
 
-                            <!-- <mat-form-field>
+                             <mat-form-field>
                               <input matInput placeholder="Action" [(ngModel)]="sectionAction.Action" />
-                            </mat-form-field> -->
+                            </mat-form-field> 
                           </div>
 
                           <button mat-icon-button color="primary" (click)="SaveSectionAction(sectionAction)">
@@ -281,7 +280,7 @@
           </mat-expansion-panel>
         </mat-accordion>
       </div>
-    </mat-tab>
+    </mat-tab> -->
 
     <mat-tab label="Configuration" *ngIf="State.Arch?.LCUs?.length > 0">
       <div class="spread">

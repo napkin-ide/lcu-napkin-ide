@@ -1,0 +1,18 @@
+<form *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0"
+  [formGroup]="DetailsForm">
+
+  <mat-expansion-panel [expanded]="ExpandActivityBar">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Activity Bar
+        </mat-panel-title>
+
+        <mat-panel-description>
+          Setup your IDE Activity Bar
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+     
+    </mat-expansion-panel>
+
+</form>

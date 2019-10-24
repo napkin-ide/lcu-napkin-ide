@@ -1,0 +1,84 @@
+<mat-progress-bar mode="indeterminate" *ngIf="State.Loading"></mat-progress-bar>
+
+<mat-nav-list class="activities">
+  <ng-container *ngFor="let activity of State.Activities">
+    <mat-list-item *ngIf="State.EditActivity != activity.Lookup">
+      <a matLine (click)="SetEditActivity(activity)">
+        <mat-icon>{{ activity.Icon }}</mat-icon>
+
+        {{ activity.Title }} ({{ activity.Lookup }})
+      </a>
+
+      <button mat-icon-button color="accent" (click)="SetEditActivity(activity)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" (click)="DeleteActivity(activity)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+
+    <mat-list-item *ngIf="State.EditActivity == activity.Lookup">
+      <div matLine>
+        {{ activity.Lookup }}
+
+        <mat-form-field>
+          <input matInput placeholder="Title" [(ngModel)]="activity.Title" />
+        </mat-form-field>
+
+        <!-- <mat-form-field>
+          <input matInput placeholder="Lookup" [(ngModel)]="activity.Lookup" />
+        </mat-form-field> -->
+
+        <mat-form-field>
+          <input matInput placeholder="Icon" [(ngModel)]="activity.Icon" />
+          <mat-icon matSuffix>{{ activity.Icon }}</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <button mat-icon-button color="primary" (click)="SaveActivity(activity)">
+        <mat-icon>save</mat-icon>
+      </button>
+
+      <a mat-icon-button color="warn" (click)="SetEditActivity(null)">
+        <mat-icon>cancel</mat-icon>
+      </a>
+    </mat-list-item>
+  </ng-container>
+
+  <mat-list-item *ngIf="!State.AddNew?.Activity">
+    <a matLine (click)="ToggleAddNewActivity()">
+      <mat-icon>add</mat-icon>
+
+      Add New Activity
+    </a>
+  </mat-list-item>
+
+  <form [formGroup]="NewActivityForm" (ngSubmit)="AddNewActivity()">
+    <mat-list-item *ngIf="State.AddNew?.Activity">
+      <div matLine>
+        <mat-form-field>
+          <input matInput placeholder="Title" formControlName="title" required />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Lookup" formControlName="lookup" required />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Icon" formControlName="icon" required />
+
+          <mat-icon matSuffix>{{ NewActivityForm.controls.icon.value }}</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <button mat-icon-button color="primary" type="submit">
+        <mat-icon>save</mat-icon>
+      </button>
+
+      <a mat-icon-button color="warn" (click)="ToggleAddNewActivity()">
+        <mat-icon>cancel</mat-icon>
+      </a>
+    </mat-list-item>
+  </form>
+</mat-nav-list>
