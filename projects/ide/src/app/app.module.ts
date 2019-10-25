@@ -1,15 +1,9 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ActivityBarModule } from './controls/activity-bar/activity-bar.module';
-import { EditorsModule } from './controls/editors/editors.module';
-import { IdeBarModule } from './controls/ide-bar/ide-bar.module';
-import { PanelsModule } from './controls/panels/panels.module';
-import { SideBarModule } from './controls/side-bar/side-bar.module';
-import { StatusBarModule } from './controls/status-bar/status-bar.module';
-import { IdeStateService } from './svc/ide-state.service';
-import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { HttpClientModule } from '@angular/common/http';
+import { IdeStateService } from './core/ide-state.service';
+import { IdeStateStateManagerContext, LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { environment } from '../environments/environment';
 import {
@@ -19,21 +13,21 @@ import {
   FaviconsService,
   BrowserFavicons,
   BROWSER_FAVICONS_CONFIG } from '@lcu/common';
+import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     FathymSharedModule.forRoot(),
+    AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    ActivityBarModule,
-    EditorsModule,
-    IdeBarModule,
-    PanelsModule,
-    SideBarModule,
-    StatusBarModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    LcuNapkinIdeModule
   ],
   providers: [
     IdeStateService,

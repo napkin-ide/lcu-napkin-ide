@@ -1,0 +1,35 @@
+<div class="ide-bar">
+  <nide-ide-top-bar></nide-ide-top-bar>
+</div>
+
+<div class="ide">
+  <mat-sidenav-container class="ide-container">
+    <mat-sidenav class="activity-bar" mode="side" opened>
+      <nide-ide-activity-bar></nide-ide-activity-bar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <mat-drawer-container class="ide-content">
+        <mat-drawer class="side-bar" mode="side" opened>
+          <nide-ide-side-bar></nide-ide-side-bar>
+        </mat-drawer>
+
+        <mat-drawer-content [class.hide-panels]="!ShowPanels">
+          <mat-grid-list class="fit-grid" cols="1" rows="2" rowHeight="fit">
+            <mat-grid-tile class="ide-editors" rowspan="2">
+              <nide-ide-editors></nide-ide-editors>
+            </mat-grid-tile>
+
+            <!-- <mat-grid-tile class="ide-panels">
+              <nide-panels></nide-panels>
+            </mat-grid-tile> -->
+          </mat-grid-list>
+        </mat-drawer-content>
+      </mat-drawer-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+<div class="status-bar">
+  <nide-ide-status-bar></nide-ide-status-bar>
+</div>

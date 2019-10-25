@@ -1,26 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-
 import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { IdeSideBar, IdeSideBarAction } from '@lcu/common';
 
 @Component({
-  selector: 'nide-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  selector: 'nide-ide-side-bar',
+  templateUrl: './ide-side-bar.component.html',
+  styleUrls: ['./ide-side-bar.component.scss']
 })
-export class SideBarComponent implements OnInit {
-  // Properties
+export class IdeSideBarComponent implements OnInit {
   public Loading: boolean;
-
   public SideBar: IdeSideBar;
-
   public SideBarSections: string[];
 
-  //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext) {}
+  constructor(
+    protected ideState: IdeStateStateManagerContext
+  ) { }
 
-  //  Life Cycle
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.ideState.Context.subscribe(ideState => {
       this.SideBar = ideState.SideBar;
 
@@ -38,15 +34,14 @@ export class SideBarComponent implements OnInit {
     });
   }
 
-  //  API Methods
-  public IsSectionActive(section: string) {
+  public IsSectionActive(section: string): boolean {
     return this.SideBar.CurrentAction &&
       this.SideBar.Actions.filter(a2 => a2.Section === section).some(
         a2 => a2.Group === this.SideBar.CurrentAction.Group && a2.Action === this.SideBar.CurrentAction.Action
       );
   }
 
-  public SelectSideBarAction(section: string, action: IdeSideBarAction) {
+  public SelectSideBarAction(section: string, action: IdeSideBarAction): void {
     this.Loading = true;
 
     this.ideState.SelectSideBarAction(action.Action, action.Group, section);

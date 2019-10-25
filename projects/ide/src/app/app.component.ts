@@ -8,13 +8,17 @@ import { FaviconsService } from '@lcu/common';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  // Properties
+  public SelectedTheme: string;
   public ShowPanels: boolean;
 
-  //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext, protected faviconsService: FaviconsService) {}
+  constructor(
+    protected faviconsService: FaviconsService,
+    protected ideState: IdeStateStateManagerContext
+  ) { }
 
-  //  Life Cycle
+  /**
+   * Angular Lifecycle Hook
+   */
   public ngOnInit() {
     this.ideState.Context.subscribe(ideState => {
       this.ShowPanels = ideState.ShowPanels;
@@ -26,9 +30,9 @@ export class AppComponent implements OnInit {
   }
 
   /**
-    * Set default favicon
-    */
-   protected resetFavicon(): void {
+   * Set default favicon
+   */
+  protected resetFavicon(): void {
     this.faviconsService.reset();
   }
 }

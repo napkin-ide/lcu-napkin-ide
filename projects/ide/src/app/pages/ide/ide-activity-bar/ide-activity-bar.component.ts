@@ -4,30 +4,25 @@ import { MatDialogRef, MatDialog } from '@angular/material';
 import { IdeActivity } from '@lcu/common';
 
 @Component({
-  selector: 'nide-activity-bar',
-  templateUrl: './activity-bar.component.html',
-  styleUrls: ['./activity-bar.component.scss']
+  selector: 'nide-ide-activity-bar',
+  templateUrl: './ide-activity-bar.component.html',
+  styleUrls: ['./ide-activity-bar.component.scss']
 })
-export class ActivityBarComponent implements OnInit {
-  //  Fields
+export class IdeActivityBarComponent implements OnInit {
   protected rootActDialog: MatDialogRef<ExternalDialogComponent, any>;
 
-  //  Properties
   public Activities: IdeActivity[];
-
   public CurrentActivity: IdeActivity;
-
   public InfraConfigured: boolean;
-
   public Loading: boolean;
-
   public RootActivities: IdeActivity[];
 
-  //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext, protected dialog: MatDialog) {}
+  constructor(
+    protected ideState: IdeStateStateManagerContext,
+    protected dialog: MatDialog
+  ) { }
 
-  //  Life Cycle
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.ideState.Context.subscribe(ideState => {
       this.Activities = ideState.Activities;
 
@@ -49,7 +44,6 @@ export class ActivityBarComponent implements OnInit {
     });
   }
 
-  //  API Methods
   public OpenRootActivity(act: IdeActivity): void {
     if (!this.rootActDialog) {
       this.rootActDialog = this.dialog.open(ExternalDialogComponent, {
@@ -67,9 +61,8 @@ export class ActivityBarComponent implements OnInit {
     }
   }
 
-  public SelectActivity(activity: IdeActivity) {
+  public SelectActivity(activity: IdeActivity): void {
     this.Loading = true;
-
     this.ideState.SetActivity(activity.Lookup);
   }
 }

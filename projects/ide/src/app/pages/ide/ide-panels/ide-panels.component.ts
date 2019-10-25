@@ -1,29 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
-import { IdeStateService } from '../../svc/ide-state.service';
-import { filter } from 'rxjs/operators';
+import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { IdePanel } from '@lcu/common';
 
 @Component({
-  selector: 'nide-panels',
-  templateUrl: './panels.component.html',
-  styleUrls: ['./panels.component.scss']
+  selector: 'nide-ide-panels',
+  templateUrl: './ide-panels.component.html',
+  styleUrls: ['./ide-panels.component.scss']
 })
-export class PanelsComponent implements OnInit {
-  // Properties
+export class IdePanelsComponent implements OnInit {
   public CurrentPanel: IdePanel;
-
   public Loading: boolean;
-
   public Panels: IdePanel[];
-
   public ShowPanels: boolean;
 
-  //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext) {}
+  constructor(
+    protected ideState: IdeStateStateManagerContext
+  ) { }
 
-  //  Life Cycle
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.ideState.Context.subscribe(ideState => {
       this.Panels = ideState.Panels;
 
@@ -37,8 +31,7 @@ export class PanelsComponent implements OnInit {
     });
   }
 
-  //  API Methods
-  public ToggleShowPanels() {
+  public ToggleShowPanels(): void {
     this.Loading = true;
 
     this.ideState.ToggleShowPanels();

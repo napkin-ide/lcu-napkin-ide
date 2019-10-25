@@ -1,31 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
-import { filter } from 'rxjs/operators';
+import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { LazyElementConfig } from '@lowcodeunit/lazy-element';
 import { IdeEditor } from '@lcu/common';
 
 @Component({
-  selector: 'nide-editors',
-  templateUrl: './editors.component.html',
-  styleUrls: ['./editors.component.scss']
+  selector: 'nide-ide-editors',
+  templateUrl: './ide-editors.component.html',
+  styleUrls: ['./ide-editors.component.scss']
 })
-export class EditorsComponent implements OnInit {
-  // Properties
-  public CurrentEditor: IdeEditor;
-
-  public Editors: IdeEditor[];
-
+export class IdeEditorsComponent implements OnInit {
   public Config: LazyElementConfig;
-
   public Context: any = null;
-
+  public CurrentEditor: IdeEditor;
+  public Editors: IdeEditor[];
   public Loading: boolean;
 
-  //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext) {}
+  constructor(
+    protected ideState: IdeStateStateManagerContext
+  ) { }
 
-  //  Life Cycle
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.ideState.Context.subscribe(ideState => {
       this.Editors = ideState.Editors;
 
@@ -44,12 +38,11 @@ export class EditorsComponent implements OnInit {
     });
   }
 
-  //  API Methods
-  public CurrentEditorIndex() {
+  public CurrentEditorIndex(): number {
     return this.Editors ? this.Editors.findIndex(e => e.Lookup === this.CurrentEditor.Lookup) : -1;
   }
 
-  public Remove(editor: IdeEditor, event: MouseEvent) {
+  public Remove(editor: IdeEditor, event: MouseEvent): void {
     this.Loading = true;
 
     this.ideState.RemoveEditor(editor.Lookup);
@@ -57,7 +50,7 @@ export class EditorsComponent implements OnInit {
     return event.stopImmediatePropagation();
   }
 
-  public Select(editor: IdeEditor) {
+  public Select(editor: IdeEditor): void {
     this.Loading = true;
 
     this.ideState.SelectEditor(editor.Lookup);
