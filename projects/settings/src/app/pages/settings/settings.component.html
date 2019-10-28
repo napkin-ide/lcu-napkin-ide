@@ -1,10 +1,27 @@
-<div class="spread">
-  <h2 class="mat-display-2 title">Enterprise IDE Settings</h2>
+<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
+  <div fxFlex="30%" fxFlex.lt-md="100%" class="details">
+    <div class="inner">
+      <mat-nav-list>
+        <mat-list-item>
+          <div matLine style="height: 6em; margin: 1em 0 1em 0">
+            <h1>Enterprise IDE Settings</h1>
+          </div>
+        </mat-list-item>
 
-  <mat-tab-group mat-stretch-tabs *ngIf="!MainLoading">
-    <mat-tab label="Setup" *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0">
-      <div class="spread">
-        <mat-accordion>
+        <mat-divider></mat-divider>
+
+  <ng-container *ngIf="!MainLoading">
+    <ng-container>
+    <mat-list-item *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0" class="active-mat-list-item">
+      <mat-icon matListIcon>chevron_right</mat-icon>
+
+      <div matLine>
+        <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Setup</h2>
+      </div>
+    </mat-list-item>
+    </ng-container>
+  </ng-container>
+      </mat-nav-list>
           <!-- <mat-expansion-panel [expanded]="ExpandActivityBar">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -281,8 +298,38 @@
         </mat-accordion>
       </div>
     </mat-tab> -->
+    </div>
+  </div>
 
-    <mat-tab label="Configuration" *ngIf="State.Arch?.LCUs?.length > 0">
+
+
+
+
+  <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
+    <div class="inner">
+      <div>
+        <div *ngIf="!State.Loading">
+          <mat-card>
+            <lcu-settings-setup
+            #SettingsSetupComponent
+            [setup-step-types]="SetupStepTypes"
+            [state]="State"></lcu-settings-setup>
+          </mat-card>
+        </div>
+        <div *ngIf="State.Loading">
+          <mat-spinner></mat-spinner>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+    <!-- <mat-tab label="Configuration" *ngIf="State.Arch?.LCUs?.length > 0">
       <div class="spread">
         <mat-card>
           <div>
@@ -448,4 +495,4 @@
   <div *ngIf="MainLoading">
     <mat-spinner></mat-spinner>
   </div>
-</div>
+</div> -->

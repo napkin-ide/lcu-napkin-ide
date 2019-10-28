@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IdeSettingsState, LowCodeUnitSetupConfig } from '../../core/ide-settings.state';
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
 import { MatSelectChange, MatListOption } from '@angular/material';
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
+import { SettingsSetupComponent } from '../settings-setup/settings-setup.component';
 
 @Component({
   selector: 'lcu-settings',
@@ -45,6 +46,13 @@ export class SettingsComponent implements OnInit {
   constructor(protected formBldr: FormBuilder, protected ideSettingsState: IdeSettingsStateManagerContext) {}
 
   //  Life Cycle
+
+  /**
+   * Settings-SetupComponent
+   */
+  @ViewChildren(SettingsSetupComponent)
+  public SettingsSetupComponent: QueryList<SettingsSetupComponent>;
+  
   public ngOnInit() {
     this.NewActivityForm = this.formBldr.group({
       title: ['', Validators.required],

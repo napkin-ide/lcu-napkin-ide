@@ -1,6 +1,6 @@
 <form *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0"
   [formGroup]="DetailsForm">
-
+  <mat-accordian>
   <mat-expansion-panel [expanded]="ExpandActivityBar">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -14,5 +14,6 @@
 
      
     </mat-expansion-panel>
+  </mat-accordian>
 
 </form>
