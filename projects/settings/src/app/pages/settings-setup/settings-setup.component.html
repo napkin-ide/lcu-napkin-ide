@@ -1,6 +1,5 @@
-<form *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0"
-  [formGroup]="DetailsForm">
-  <mat-accordian>
+<form *ngIf="State?.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0">
+  <mat-accordion>
   <mat-expansion-panel [expanded]="ExpandActivityBar">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -12,8 +11,16 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-     
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+            Side Bar
+          </mat-panel-title>
+    
+          <mat-panel-description>
+            Setup your IDE Side Bar
+          </mat-panel-description>
+        </mat-expansion-panel-header>
     </mat-expansion-panel>
-  </mat-accordian>
+  </mat-accordion>
 
 </form>

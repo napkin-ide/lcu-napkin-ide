@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IdeSettingsState, LowCodeUnitSetupConfig } from '../../core/ide-settings.state';
 
 @Component({
   selector: 'lcu-settings-setup',
@@ -12,4 +13,16 @@ export class SettingsSetupComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+  * Current state
+  */
+ // tslint:disable-next-line:no-input-rename
+ @Input('state')
+ public State: IdeSettingsState;
+
+  
+
 }
+
+
+
