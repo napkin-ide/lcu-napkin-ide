@@ -106,7 +106,6 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  //  API methods
   public AddNewSectionAction() {
     this.SaveSectionAction({
       Title: this.NewSectionActionForm.controls.title.value,

@@ -52,21 +52,21 @@
 
           <div fxLayout="row">
             <div fxFlex="20">
-                <img style="height: 200px;" src="assets/img/Azure-logo.png" />
+                <img style="width: 140%;" src="assets/img/Azure-logo.png" />
             </div>
             <div fxFlex>
-              <p class="mat-subheading-2">
+              <p class="weird-fix">
                 We'll configure an enterprise scalable, and cost effective infrastructure for getting on the Azure cloud. Free until
                 you scale.
               </p>
 
-              <p class="mat-subheading-2">
+              <p class="weird-fix">
                 We'll deploy a
                 <a mat-button color="accent" href="https://letsencrypt.org/" target="_blank">Let's Encrypt (Open Surce) SSL Certificate</a> secured application
                 host.
               </p>
 
-              <p class="mat-subheading-2">
+              <p class="weird-fix">
                 We'll manage Azure, other clouds and legacy infrastructure with our Enterprise Orchestration tools.
               </p>
             </div>
@@ -80,14 +80,14 @@
 
           <div fxLayout="row">
               <div fxFlex="20">
-                  <img style="height: 200px;" src="assets/img/azure-dev-ops-logo.png" />
+                  <img style="width: 130%;" src="assets/img/azure-dev-ops-logo.png" />
               </div>
               <div fxFlex>
-                  <p class="mat-subheading-2">
+                  <p class="weird-fix">
                       We've gotten connected with your Azure Dev Ops instance and will help manage your code, builds, releases, and more.
                     </p>
 
-                    <p class="mat-subheading-2">
+                    <p class="weird-fix">
                       We'll get some git based source control setup for your infrastructure, and connect it to builds for auto deploying to
                       Azure.
                     </p>
@@ -149,9 +149,9 @@
                 color="accent"
                 class="margin-top-3 mat-full-width"
                 (click)="Finalize()"
-                [disabled]="!State.TermsAccepted || !IsProvisioned">
+                [disabled]="!State.TermsAccepted || !State.CanFinalize">
 
-                <mat-icon *ngIf="!IsProvisioned" class="icon-btn-spinner" matTooltip="Provisioning infrastructure resources, please wait." matTooltipClass="tooltip-background">
+                <mat-icon *ngIf="!State.CanFinalize" class="icon-btn-spinner" matTooltip="Provisioning infrastructure resources, please wait." matTooltipClass="tooltip-background">
                   <mat-spinner diameter="24"></mat-spinner>
                 </mat-icon>
 

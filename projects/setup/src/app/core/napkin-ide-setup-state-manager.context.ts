@@ -31,6 +31,13 @@ export class NapkinIDESetupStateManagerContext extends StateManagerContext<Napki
     });
   }
 
+  public CanFinalize() {
+    this.Execute({
+      Arguments: {},
+      Type: 'CanFinalize'
+    });
+  }
+
   public CommitInfrastructure(template: string) {
     this.Execute({
       Arguments: {
