@@ -8,19 +8,24 @@ import { IdeSettingsState, LowCodeUnitSetupConfig } from '../../core/ide-setting
 })
 export class SettingsSetupComponent implements OnInit {
 
-  constructor() { }
+  public get ExpandActivityBar(): boolean {
+    return !!this.State.EditActivity || this.State.AddNew.Activity || !this.State.Activities || this.State.Activities.length <= 0;
+  }
 
-  ngOnInit() {
+  public get LCUGroups(): string[] {
+    return Object.keys(this.State.LCUSolutionOptions);
   }
 
   /**
-  * Current state
-  */
- // tslint:disable-next-line:no-input-rename
- @Input('state')
- public State: IdeSettingsState;
+   * Current state
+   */
+  // tslint:disable-next-line:no-input-rename
+  @Input('state')
+  public State: IdeSettingsState;
 
-  
+  constructor() { }
+
+  public ngOnInit(): void { }
 
 }
 

@@ -16,16 +16,9 @@ export class SettingsComponent implements OnInit {
   //  Fields
 
   //  Properties
-  public get ExpandActivityBar(): boolean {
-    return !!this.State.EditActivity || this.State.AddNew.Activity || !this.State.Activities || this.State.Activities.length <= 0;
-  }
 
   public get ExpandSideBar(): boolean {
     return !this.State.EditActivity && !this.State.AddNew.Activity && this.State.Activities && this.State.Activities.length > 0;
-  }
-
-  public get LCUGroups(): string[] {
-    return Object.keys(this.State.LCUSolutionOptions);
   }
 
   public get MainLoading(): boolean {
@@ -52,7 +45,7 @@ export class SettingsComponent implements OnInit {
    */
   @ViewChildren(SettingsSetupComponent)
   public SettingsSetupComponent: QueryList<SettingsSetupComponent>;
-  
+
   public ngOnInit() {
     this.NewActivityForm = this.formBldr.group({
       title: ['', Validators.required],
