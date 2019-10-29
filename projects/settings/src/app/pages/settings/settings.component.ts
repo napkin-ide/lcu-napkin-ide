@@ -77,6 +77,10 @@ export class SettingsComponent implements OnInit {
     });
   }
 
+  public get LCUGroups(): string[] {
+    return Object.keys(this.State.LCUSolutionOptions);
+  }
+
   //  API methods
   public AddDefaultDataAppsLCUs() {
     this.State.Loading = true;
