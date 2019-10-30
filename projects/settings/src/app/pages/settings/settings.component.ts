@@ -36,7 +36,6 @@ export class SettingsComponent implements OnInit {
   public NewSideBarSectionForm: FormGroup;
 
   public State: IdeSettingsState;
-
   //  Constructors
   constructor(protected formBldr: FormBuilder, protected ideSettingsState: IdeSettingsStateManagerContext) {}
 
@@ -63,6 +62,7 @@ export class SettingsComponent implements OnInit {
 
 
   public ngOnInit() {
+
     this.NewActivityForm = this.formBldr.group({
       title: ['', Validators.required],
       lookup: ['', Validators.required],
@@ -90,6 +90,7 @@ export class SettingsComponent implements OnInit {
       this.resetForms();
 
       this.State = state;
+      this.SetStep('Setup'); // TODO: Change to enum
     });
   }
 
@@ -241,6 +242,10 @@ export class SettingsComponent implements OnInit {
     this.State.Loading = true;
 
     this.ideSettingsState.SetSideBarEditActivity(event.value);
+  }
+
+  public SetStep(step: string): void {
+    this.State.Step = step;
   }
 
   public ToggleAddNewActivity() {

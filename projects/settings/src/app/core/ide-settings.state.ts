@@ -29,6 +29,8 @@ export class IdeSettingsState {
   public SideBarEditActivity: string;
 
   public SideBarSections: string[];
+
+  public Step: string; // TODO: Change to enum
 }
 
 export class IdeSettingsArchitechtureState {

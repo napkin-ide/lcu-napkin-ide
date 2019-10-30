@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="State.Step === 'Architecture'"> <!-- TODO: Change to enum -->
   <mat-nav-list>
     <ng-container *ngFor="let lcu of State.Arch?.LCUs">
       <mat-list-item *ngIf="State.Arch.EditLCU != lcu.Lookup">

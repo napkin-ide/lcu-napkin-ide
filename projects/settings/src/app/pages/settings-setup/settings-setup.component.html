@@ -1,4 +1,4 @@
-<form *ngIf="State?.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0">
+<form *ngIf="State.Step === 'Setup'"> <!-- TODO: Change to enum -->
   <mat-card>
     <mat-accordion>
     <mat-expansion-panel [expanded]="ExpandActivityBar">

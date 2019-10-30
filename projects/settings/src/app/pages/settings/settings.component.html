@@ -10,43 +10,78 @@
 
         <mat-divider></mat-divider>
 
-  <ng-container *ngIf="!MainLoading">
-    <ng-container>
-    <mat-list-item *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0" class="active-mat-list-item">
-      <mat-icon matListIcon>chevron_right</mat-icon>
+        <ng-container *ngIf="!MainLoading">
+          <ng-container>
+            <mat-list-item
+              *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0"
+              class="list-item"
+              [class.active-mat-list-item]="State.Step === 'Setup'"
+              (click)="SetStep('Setup')">
+                <mat-icon matListIcon>chevron_right</mat-icon>
 
-      <div matLine>
-        <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Setup</h2>
+                <div matLine>
+                  <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Setup</h2>
+                </div>
+            </mat-list-item>
+          </ng-container>
+
+          <mat-divider></mat-divider>
+
+          <ng-container>
+            <mat-list-item
+              *ngIf="State.Arch?.LCUs?.length > 0"
+              class="list-item"
+              [class.active-mat-list-item]="State.Step === 'Configuration'"
+              (click)="SetStep('Configuration')">
+                <mat-icon matListIcon>chevron_right</mat-icon>
+
+                <div matLine>
+                  <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Configuration</h2>
+                </div>
+            </mat-list-item>
+          </ng-container>
+
+          <mat-divider></mat-divider>
+
+          <ng-container>
+            <mat-list-item
+              class="list-item"
+              [class.active-mat-list-item]="State.Step === 'Architecture'"
+              (click)="SetStep('Architecture')">
+                <mat-icon matListIcon>chevron_right</mat-icon>
+
+                <div matLine>
+                  <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Architecture</h2>
+                </div>
+            </mat-list-item>
+          </ng-container>
+        </ng-container>
+      </mat-nav-list>
+
+
+    </div>
+  </div>
+  <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
+    <div class="inner">
+      <div>
+        <div *ngIf="!State.Loading">
+          <mat-card>
+            <lcu-settings-setup #SettingsSetupComponent [state]="State"></lcu-settings-setup>
+
+            <lcu-settings-config #SettingsConfigComponent [state]="State"></lcu-settings-config>
+
+            <lcu-settings-arch #SettingsArchComponent [state]="State"></lcu-settings-arch>
+          </mat-card>
+        </div>
+        <div *ngIf="State.Loading">
+          <mat-spinner></mat-spinner>
+        </div>
       </div>
-    </mat-list-item>
-    </ng-container>
+    </div>
+  </div>
+</div>
 
-    <mat-divider></mat-divider>
-
-    <ng-container>
-      <mat-list-item class="list-item" *ngIf="State.Arch?.LCUs?.length > 0">
-        <mat-icon matListIcon>chevron_right</mat-icon>
-
-        <div matLine>
-          <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Configuration</h2>
-        </div>
-      </mat-list-item>
-    </ng-container>
-
-    <mat-divider></mat-divider>
-
-    <ng-container>
-      <mat-list-item class="list-item" >
-        <mat-icon matListIcon>chevron_right</mat-icon>
-
-        <div matLine>
-          <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Architecture</h2>
-        </div>
-      </mat-list-item>
-    </ng-container>
-  </ng-container>
-    </mat-nav-list>
-          <!-- <mat-expansion-panel [expanded]="ExpandActivityBar">
+      <!-- <mat-expansion-panel [expanded]="ExpandActivityBar">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Activity Bar
@@ -142,7 +177,7 @@
             </mat-nav-list>
           </mat-expansion-panel> -->
 
-          <!-- <mat-expansion-panel *ngIf="State.Activities?.length > 0" [expanded]="ExpandSideBar">
+      <!-- <mat-expansion-panel *ngIf="State.Activities?.length > 0" [expanded]="ExpandSideBar">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Side Bar
@@ -322,45 +357,12 @@
         </mat-accordion>
       </div>
     </mat-tab> -->
-    </div>
-  </div>
 
 
 
 
 
-  <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
-    <div class="inner">
-      <div>
-        <div *ngIf="!State.Loading">
-          <mat-card>
-            <lcu-settings-setup
-            #SettingsSetupComponent
-            [state]="State"></lcu-settings-setup>
-
-            <lcu-settings-config
-            #SettingsConfigComponent
-            [state]="State"></lcu-settings-config>
-
-            <lcu-settings-arch
-            #SettingsArchComponent
-            [state]="State"></lcu-settings-arch>
-          </mat-card>
-        </div>
-        <div *ngIf="State.Loading">
-          <mat-spinner></mat-spinner>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-
-
-
-    <!-- <mat-tab label="Configuration" *ngIf="State.Arch?.LCUs?.length > 0">
+<!-- <mat-tab label="Configuration" *ngIf="State.Arch?.LCUs?.length > 0">
       <div class="spread">
         <mat-card>
           <div>
