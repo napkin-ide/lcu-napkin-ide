@@ -5,7 +5,7 @@
         <mat-list-item>
           <div matLine class="slogan" style="height: 6em; margin: 1em 0 1em 0">
             <!-- <div class="logo"> -->
-              <!-- <div *ngIf="LogoClass" [ngClass]="LogoClass"></div> not really using this--> 
+              <!-- <div *ngIf="LogoClass" [ngClass]="LogoClass"></div> not really using this-->
               <!-- <div class="primary-logo"></div> -->
             <!-- </div> -->
             <!-- <h1 class="center title">
@@ -48,7 +48,7 @@
           <mat-divider></mat-divider>
 
           <ng-container>
-  
+
             <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.AzureSetup && !InfraFormValid">
               <mat-icon matListIcon class="error">highlight_off</mat-icon>
 
@@ -59,7 +59,7 @@
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                
+
                 <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Setup Organization Infrastructure</h2>
 
                 <h2 class="mat-subheading-2">
@@ -261,36 +261,36 @@
         <div *ngIf="!State.Loading">
           <mat-card>
           <!-- Organization details form -->
-          <lcu-org-details 
+          <lcu-org-details
           #OrgDetailsComponent
-          [setup-step-types]="SetupStepTypes" 
+          [setup-step-types]="SetupStepTypes"
           [state]="State"></lcu-org-details>
-  
+
           <!-- Organization infrastructure form -->
           <lcu-org-infra
           #OrgInfraComponent
-          [setup-step-types]="SetupStepTypes" 
+          [setup-step-types]="SetupStepTypes"
           [state]="State"
           (set-step)="SetStep($event)"></lcu-org-infra>
-         
+
           <!-- Organization host form -->
           <lcu-org-host
           #OrgHostComponent
-          [setup-step-types]="SetupStepTypes" 
+          [setup-step-types]="SetupStepTypes"
           [state]="State"
           (set-step)="SetStep($event)"></lcu-org-host>
-         
+
           <!--Terms and conditions form-->
           <lcu-org-terms
-          [setup-step-types]="SetupStepTypes" 
+          [setup-step-types]="SetupStepTypes"
           [state]="State"></lcu-org-terms>
-          
-          <lcu-org-review 
-            [setup-step-types]="SetupStepTypes" 
+
+          <lcu-org-review
+            [setup-step-types]="SetupStepTypes"
             [state]="State"></lcu-org-review>
 
           <lcu-complete
-            [setup-step-types]="SetupStepTypes" 
+            [setup-step-types]="SetupStepTypes"
             [state]="State"></lcu-complete>
 
         </mat-card>

@@ -5,6 +5,8 @@ import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-ma
 import { MatSelectChange, MatListOption } from '@angular/material';
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
 import { SettingsSetupComponent } from '../settings-setup/settings-setup.component';
+import { SettingsConfigComponent } from '../settings-config/settings-config.component';
+import { SettingsArchComponent } from '../settings-arch/settings-arch.component';
 
 @Component({
   selector: 'lcu-settings',
@@ -45,6 +47,20 @@ export class SettingsComponent implements OnInit {
    */
   @ViewChildren(SettingsSetupComponent)
   public SettingsSetupComponent: QueryList<SettingsSetupComponent>;
+
+  /**
+   * Settings-ConfigComponent
+   */
+  @ViewChildren(SettingsConfigComponent)
+  public SettingsConfigComponent: QueryList<SettingsConfigComponent>;
+
+  /**
+   * Settings-ArchComponent
+   */
+  @ViewChildren(SettingsArchComponent)
+  public SettingsArchComponent: QueryList<SettingsArchComponent>;
+
+
 
   public ngOnInit() {
     this.NewActivityForm = this.formBldr.group({

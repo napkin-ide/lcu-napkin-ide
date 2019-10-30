@@ -337,6 +337,14 @@
             <lcu-settings-setup
             #SettingsSetupComponent
             [state]="State"></lcu-settings-setup>
+
+            <lcu-settings-config
+            #SettingsConfigComponent
+            [state]="State"></lcu-settings-config>
+
+            <lcu-settings-arch
+            #SettingsArchComponent
+            [state]="State"></lcu-settings-arch>
           </mat-card>
         </div>
         <div *ngIf="State.Loading">

@@ -10,7 +10,7 @@
   $warn: map-get($theme, warn);
 
   .slogan{
-    background-image: fathym-logo(thinky-slogan, #000000);
+    background-image: fathym-logo(thinky-slogan, #000000, .7);
     background-repeat:no-repeat;
     background-position: center;
   }
