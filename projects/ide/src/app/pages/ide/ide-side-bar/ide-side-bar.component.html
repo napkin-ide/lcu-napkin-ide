@@ -3,6 +3,16 @@
     <div class="overflowed">
       <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
 
+      <div class="side-bar-header" *ngIf="CurrentActivity">
+        <div>
+          <mat-icon *ngIf="CurrentActivity.IconSet" color="primary" [fontSet]="CurrentActivity.IconSet" [fontIcon]="CurrentActivity.Icon"></mat-icon>
+          <mat-icon *ngIf="!CurrentActivity.IconSet" color="primary">{{ CurrentActivity.Icon }}</mat-icon>
+        </div>
+        <div>
+          {{ CurrentActivity?.Title }}
+        </div>
+      </div>
+
       <mat-accordion>
         <mat-expansion-panel [expanded]="IsSectionActive(section)" *ngFor="let section of SideBarSections">
           <mat-expansion-panel-header>

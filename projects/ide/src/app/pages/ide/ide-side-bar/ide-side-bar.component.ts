@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
-import { IdeSideBar, IdeSideBarAction } from '@lcu/common';
+import { IdeSideBar, IdeSideBarAction, IdeActivity } from '@lcu/common';
 
 @Component({
   selector: 'nide-ide-side-bar',
@@ -8,6 +8,7 @@ import { IdeSideBar, IdeSideBarAction } from '@lcu/common';
   styleUrls: ['./ide-side-bar.component.scss']
 })
 export class IdeSideBarComponent implements OnInit {
+  public CurrentActivity: IdeActivity;
   public Loading: boolean;
   public SideBar: IdeSideBar;
   public SideBarSections: string[];
@@ -18,8 +19,8 @@ export class IdeSideBarComponent implements OnInit {
 
   public ngOnInit(): void {
     this.ideState.Context.subscribe(ideState => {
+      console.log('ideState: ', ideState);
       this.SideBar = ideState.SideBar;
-
       this.Loading = ideState.Loading;
 
       if (this.SideBar && this.SideBar.Actions) {
@@ -28,6 +29,10 @@ export class IdeSideBarComponent implements OnInit {
         }).filter((a, i, self) => self.indexOf(a) === i);
 
         this.SideBarSections = sections;
+      }
+
+      if (ideState.CurrentActivity) {
+        this.CurrentActivity = ideState.CurrentActivity;
       }
 
       // this.ideState.AddStatusChange('Side Bar Loaded...');

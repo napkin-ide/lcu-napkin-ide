@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     });
 
     this.resetFavicon();
+    this.resetTheme();
   }
 
   /**
@@ -35,4 +36,26 @@ export class AppComponent implements OnInit {
   protected resetFavicon(): void {
     this.faviconsService.reset();
   }
+
+  /**
+   * Reset material theme
+   */
+  protected resetTheme(): void {
+    this.changeTheme('arctic-theme');
+  }
+
+  /**
+   * Toggle through Fathym themes
+   *
+   * @param val theme type
+   */
+  protected changeTheme(val: string): void {
+    this.SelectedTheme = val;
+
+    // const element: HTMLElement = this.overlayContainer.getContainerElement();
+    // const classList: DOMTokenList = element.classList;
+
+    // const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
+    // classList.add(ToggleThemeUtil.Toggle(element.classList, val));
+   }
 }
