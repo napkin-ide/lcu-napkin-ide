@@ -19,10 +19,6 @@ export class SettingsComponent implements OnInit {
 
   //  Properties
 
-  public get ExpandSideBar(): boolean {
-    return !this.State.EditActivity && !this.State.AddNew.Activity && this.State.Activities && this.State.Activities.length > 0;
-  }
-
   public get MainLoading(): boolean {
     return this.State.Loading && (!this.State.Arch || !this.State.Arch.LCUs || this.State.Arch.LCUs.length === 0);
   }

@@ -16,6 +16,10 @@ export class SettingsSetupComponent implements OnInit {
     return !!this.State.EditActivity || this.State.AddNew.Activity || !this.State.Activities || this.State.Activities.length <= 0;
   }
 
+  public get ExpandSideBar(): boolean {
+    return !this.State.EditActivity && !this.State.AddNew.Activity && this.State.Activities && this.State.Activities.length > 0;
+  }
+
   public get LCUGroups(): string[] {
     return Object.keys(this.State.LCUSolutionOptions);
   }
