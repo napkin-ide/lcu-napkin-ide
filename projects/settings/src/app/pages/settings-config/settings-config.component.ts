@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IdeSettingsState, LowCodeUnitSetupConfig } from '../../core/ide-settings.state';
+import { IdeSettingsState, LowCodeUnitSetupConfig, IDESettingStepTypes } from '../../core/ide-settings.state';
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
 import { MatSelectChange, MatListOption } from '@angular/material';
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
@@ -34,6 +34,9 @@ export class SettingsConfigComponent implements OnInit {
   public NewSectionActionForm: FormGroup;
 
   public NewSideBarSectionForm: FormGroup;
+
+  @Input('setting-step-types')
+  public SettingStepTypes: IDESettingStepTypes;
 
 
   //  Constructors

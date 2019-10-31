@@ -30,7 +30,13 @@ export class IdeSettingsState {
 
   public SideBarSections: string[];
 
-  public Step: string; // TODO: Change to enum
+  public Step: IDESettingStepTypes;
+}
+
+export enum IDESettingStepTypes {
+  Architecture = 'Architecture',
+  Setup = 'Setup',
+  Configuration = 'Configuration'
 }
 
 export class IdeSettingsArchitechtureState {
