@@ -241,7 +241,7 @@ export class SettingsComponent implements OnInit {
     this.ideSettingsState.SetSideBarEditActivity(event.value);
   }
 
-  public SetStep(step: string): void {
+  public SetStep(step: IDESettingStepTypes): void {
     this.State.Step = step;
   }
 
