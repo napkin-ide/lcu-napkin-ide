@@ -37,6 +37,7 @@ export class SettingsComponent implements OnInit {
 
   //  Life Cycle
 
+
   /**
    * Settings-SetupComponent
    */
@@ -87,7 +88,7 @@ export class SettingsComponent implements OnInit {
       this.resetForms();
 
       this.State = state;
-      this.SetStep('SettingStepType.Setup');
+      this.SetStep(IDESettingStepTypes.Setup);
     });
   }
 
@@ -241,7 +242,7 @@ export class SettingsComponent implements OnInit {
     this.ideSettingsState.SetSideBarEditActivity(event.value);
   }
 
-  public SetStep(step: IDESettingStepTypes): void {
+  public SetStep(step: IDESettingStepTypes) {
     this.State.Step = step;
   }
 

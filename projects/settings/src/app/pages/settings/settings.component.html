@@ -66,11 +66,20 @@
       <div>
         <div *ngIf="!State.Loading">
           <mat-card>
-            <lcu-settings-setup #SettingsSetupComponent [state]="State"></lcu-settings-setup>
+            <lcu-settings-setup
+            #SettingsSetupComponent
+            [setting-step-types]="SettingStepTypes"
+            [state]="State"></lcu-settings-setup>
 
-            <lcu-settings-config #SettingsConfigComponent [state]="State"></lcu-settings-config>
+            <lcu-settings-config
+            #SettingsConfigComponent
+            [setting-step-types]="SettingStepTypes"
+            [state]="State"></lcu-settings-config>
 
-            <lcu-settings-arch #SettingsArchComponent [state]="State"></lcu-settings-arch>
+            <lcu-settings-arch
+            #SettingsArchComponent
+            [setting-step-types]="SettingStepTypes"
+            [state]="State"></lcu-settings-arch>
           </mat-card>
         </div>
         <div *ngIf="State.Loading">
