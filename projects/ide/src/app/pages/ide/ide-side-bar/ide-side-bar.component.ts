@@ -1,30 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input } from '@angular/core';
 import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
-import { IdeSideBar, IdeSideBarAction } from '@lcu/common';
+import { IdeSideBar, IdeSideBarAction, IdeActivity } from '@lcu/common';
 
 @Component({
-  selector: 'nide-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  selector: 'nide-ide-side-bar',
+  templateUrl: './ide-side-bar.component.html',
+  styleUrls: ['./ide-side-bar.component.scss']
 })
-export class SideBarComponent implements OnInit {
-  // Properties
-  public Loading: boolean;
-
+export class IdeSideBarComponent implements OnInit {
+  public CurrentActivity: IdeActivity;
   public SideBar: IdeSideBar;
-
   public SideBarSections: string[];
 
-  //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext) {}
+  @Input() public isHandset: boolean = false;
 
-  //  Life Cycle
-  public ngOnInit() {
+  constructor(
+    protected ideState: IdeStateStateManagerContext
+  ) { }
+
+  // TODO: Trigger loading on any State actions
+  public ngOnInit(): void {
     this.ideState.Context.subscribe(ideState => {
       this.SideBar = ideState.SideBar;
-
-      this.Loading = ideState.Loading;
 
       if (this.SideBar && this.SideBar.Actions) {
         const sections = this.SideBar.Actions.map(a => {
@@ -34,21 +31,20 @@ export class SideBarComponent implements OnInit {
         this.SideBarSections = sections;
       }
 
-      // this.ideState.AddStatusChange('Side Bar Loaded...');
+      if (ideState.CurrentActivity) {
+        this.CurrentActivity = ideState.CurrentActivity;
+      }
     });
   }
 
-  //  API Methods
-  public IsSectionActive(section: string) {
+  public IsSectionActive(section: string): boolean {
     return this.SideBar.CurrentAction &&
       this.SideBar.Actions.filter(a2 => a2.Section === section).some(
         a2 => a2.Group === this.SideBar.CurrentAction.Group && a2.Action === this.SideBar.CurrentAction.Action
       );
   }
 
-  public SelectSideBarAction(section: string, action: IdeSideBarAction) {
-    this.Loading = true;
-
+  public SelectSideBarAction(section: string, action: IdeSideBarAction): void {
     this.ideState.SelectSideBarAction(action.Action, action.Group, section);
   }
 }
