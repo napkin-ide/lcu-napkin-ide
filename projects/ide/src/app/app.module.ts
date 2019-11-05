@@ -14,7 +14,6 @@ import {
   BrowserFavicons,
   BROWSER_FAVICONS_CONFIG } from '@lcu/common';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,8 +24,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-    ReactiveFormsModule,
-    FormsModule,
     LcuNapkinIdeModule
   ],
   providers: [

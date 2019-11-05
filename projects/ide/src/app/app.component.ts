@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { FaviconsService } from '@lcu/common';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { ToggleThemeUtil } from '@lcu/common';
 
 @Component({
   selector: 'nide-root',
@@ -13,7 +15,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     protected faviconsService: FaviconsService,
-    protected ideState: IdeStateStateManagerContext
+    protected ideState: IdeStateStateManagerContext,
+    protected overlayContainer: OverlayContainer
   ) { }
 
   /**
@@ -22,8 +25,6 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     this.ideState.Context.subscribe(ideState => {
       this.ShowPanels = ideState.ShowPanels;
-
-      // this.ideState.AddStatusChange('Editors Loaded...');
     });
 
     this.resetFavicon();
@@ -41,7 +42,7 @@ export class AppComponent implements OnInit {
    * Reset material theme
    */
   protected resetTheme(): void {
-    this.changeTheme('arctic-theme');
+    this.changeTheme('ivy-light-theme');
   }
 
   /**
@@ -52,10 +53,10 @@ export class AppComponent implements OnInit {
   protected changeTheme(val: string): void {
     this.SelectedTheme = val;
 
-    // const element: HTMLElement = this.overlayContainer.getContainerElement();
-    // const classList: DOMTokenList = element.classList;
+    const element: HTMLElement = this.overlayContainer.getContainerElement();
+    const classList: DOMTokenList = element.classList;
 
-    // const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
-    // classList.add(ToggleThemeUtil.Toggle(element.classList, val));
+    const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
+    classList.add(ToggleThemeUtil.Toggle(element.classList, val));
    }
 }

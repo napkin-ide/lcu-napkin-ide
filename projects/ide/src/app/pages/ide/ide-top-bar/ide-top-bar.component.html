@@ -1,4 +1,7 @@
-  <mat-toolbar>
+  <mat-toolbar fxLayout="row" fxLayoutAlign="space-between">
     <img class="logo" src="https://fathym.com/wp-content/uploads/2019/07/logo-octopus-300x77.png" alt="Fathym Framework" />
 
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ToggleSideBar()" *ngIf="isHandset">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
   </mat-toolbar>

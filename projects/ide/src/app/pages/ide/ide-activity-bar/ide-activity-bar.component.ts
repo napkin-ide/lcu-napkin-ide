@@ -14,7 +14,6 @@ export class IdeActivityBarComponent implements OnInit {
   public Activities: IdeActivity[];
   public CurrentActivity: IdeActivity;
   public InfraConfigured: boolean;
-  public Loading: boolean;
   public RootActivities: IdeActivity[];
 
   constructor(
@@ -22,25 +21,17 @@ export class IdeActivityBarComponent implements OnInit {
     protected dialog: MatDialog
   ) { }
 
+  // TODO: Trigger loading on any State actions
   public ngOnInit(): void {
     this.ideState.Context.subscribe(ideState => {
       this.Activities = ideState.Activities;
-
       this.CurrentActivity = ideState.CurrentActivity;
-
       this.InfraConfigured = ideState.InfrastructureConfigured;
-
-      this.Loading = ideState.Loading;
-
       this.RootActivities = ideState.RootActivities;
-
-      console.log(ideState);
 
       if (!this.InfraConfigured && this.RootActivities && this.RootActivities.length === 1) {
         this.OpenRootActivity(this.RootActivities[0]);
       }
-
-      // this.ideState.AddStatusChange('Activities Loaded...');
     });
   }
 
@@ -52,17 +43,13 @@ export class IdeActivityBarComponent implements OnInit {
       });
 
       this.rootActDialog.afterClosed().subscribe(result => {
-        this.Loading = true;
-
         this.ideState.$Refresh();
-
         this.rootActDialog = null;
       });
     }
   }
 
   public SelectActivity(activity: IdeActivity): void {
-    this.Loading = true;
     this.ideState.SetActivity(activity.Lookup);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { IdeSideBar, IdeSideBarAction, IdeActivity } from '@lcu/common';
 
@@ -9,19 +9,19 @@ import { IdeSideBar, IdeSideBarAction, IdeActivity } from '@lcu/common';
 })
 export class IdeSideBarComponent implements OnInit {
   public CurrentActivity: IdeActivity;
-  public Loading: boolean;
   public SideBar: IdeSideBar;
   public SideBarSections: string[];
+
+  @Input() public isHandset: boolean = false;
 
   constructor(
     protected ideState: IdeStateStateManagerContext
   ) { }
 
+  // TODO: Trigger loading on any State actions
   public ngOnInit(): void {
     this.ideState.Context.subscribe(ideState => {
-      console.log('ideState: ', ideState);
       this.SideBar = ideState.SideBar;
-      this.Loading = ideState.Loading;
 
       if (this.SideBar && this.SideBar.Actions) {
         const sections = this.SideBar.Actions.map(a => {
@@ -34,8 +34,6 @@ export class IdeSideBarComponent implements OnInit {
       if (ideState.CurrentActivity) {
         this.CurrentActivity = ideState.CurrentActivity;
       }
-
-      // this.ideState.AddStatusChange('Side Bar Loaded...');
     });
   }
 
@@ -47,8 +45,6 @@ export class IdeSideBarComponent implements OnInit {
   }
 
   public SelectSideBarAction(section: string, action: IdeSideBarAction): void {
-    this.Loading = true;
-
     this.ideState.SelectSideBarAction(action.Action, action.Group, section);
   }
 }

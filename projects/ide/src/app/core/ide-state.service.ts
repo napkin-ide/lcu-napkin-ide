@@ -3,6 +3,7 @@ import { DAFService, IdeActivity } from '@lcu/common';
 import { IdeStateChange, IdeState, IdeStateChangeTypes } from '@napkin-ide/lcu-napkin-ide-common';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+// TODO: Do we need this service anymore? Doesn't appear to be used...
 @Injectable({
   providedIn: 'root'
 })
