@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { FaviconsService } from '@lcu/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ToggleThemeUtil } from '@lcu/common';
@@ -11,11 +10,9 @@ import { ToggleThemeUtil } from '@lcu/common';
 })
 export class AppComponent implements OnInit {
   public SelectedTheme: string;
-  public ShowPanels: boolean;
 
   constructor(
     protected faviconsService: FaviconsService,
-    protected ideState: IdeStateStateManagerContext,
     protected overlayContainer: OverlayContainer
   ) { }
 
@@ -23,10 +20,6 @@ export class AppComponent implements OnInit {
    * Angular Lifecycle Hook
    */
   public ngOnInit() {
-    this.ideState.Context.subscribe(ideState => {
-      this.ShowPanels = ideState.ShowPanels;
-    });
-
     this.resetFavicon();
     this.resetTheme();
   }

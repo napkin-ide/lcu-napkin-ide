@@ -14,6 +14,7 @@ export class IdeComponent implements OnInit {
   public IsHandset$: Observable<boolean>;
   public IsOpen: boolean = true;
   public Loading: boolean = false;
+  public ShowPanels: boolean = false;
 
   constructor(
     protected breakpointObserver: BreakpointObserver,
@@ -39,6 +40,7 @@ export class IdeComponent implements OnInit {
 
     this.ideState.Context.subscribe(ideState => {
       this.Loading = ideState.Loading;
+      this.ShowPanels = ideState.ShowPanels;
     });
   }
 
