@@ -1,256 +1,262 @@
 <form *ngIf="State.Step === SettingStepTypes['Setup']">
-    <mat-accordion>
-      <mat-expansion-panel [expanded]="ExpandActivityBar">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Activity Bar
-          </mat-panel-title>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="ExpandActivityBar">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Activity Bar
+        </mat-panel-title>
 
-          <mat-panel-description>
-            Setup your IDE Activity Bar
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+        <mat-panel-description>
+          Setup your IDE Activity Bar
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-        <mat-progress-bar mode="indeterminate" *ngIf="State.Loading"></mat-progress-bar>
+      <mat-progress-bar mode="indeterminate" *ngIf="State.Loading"></mat-progress-bar>
 
-        <mat-nav-list class="activities">
-          <ng-container *ngFor="let activity of State.Activities">
-            <mat-list-item *ngIf="State.EditActivity != activity.Lookup">
-              <a matLine (click)="SetEditActivity(activity)">
-                <mat-icon>{{ activity.Icon }}</mat-icon>
+      <mat-nav-list class="activities">
+        <ng-container *ngFor="let activity of State.Activities">
+          <mat-list-item *ngIf="State.EditActivity != activity.Lookup">
+            <a matLine (click)="SetEditActivity(activity)">
+              <mat-icon>{{ activity.Icon }}</mat-icon>
 
-                {{ activity.Title }} ({{ activity.Lookup }})
-              </a>
-
-              <button mat-icon-button color="accent" (click)="SetEditActivity(activity)">
-                <mat-icon>edit</mat-icon>
-              </button>
-
-              <button mat-icon-button color="warn" (click)="DeleteActivity(activity)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-list-item>
-
-            <mat-list-item *ngIf="State.EditActivity == activity.Lookup">
-              <div matLine>
-                {{ activity.Lookup }}
-
-                <mat-form-field>
-                  <input matInput placeholder="Title" [(ngModel)]="activity.Title" />
-                </mat-form-field>
-
-                <mat-form-field>
-                  <input matInput placeholder="Lookup" [(ngModel)]="activity.Lookup" />
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput placeholder="Icon" [(ngModel)]="activity.Icon" />
-                  <mat-icon matSuffix>{{ activity.Icon }}</mat-icon>
-                </mat-form-field>
-              </div>
-
-              <button mat-icon-button color="primary" (click)="SaveActivity(activity)">
-                <mat-icon>save</mat-icon>
-              </button>
-
-              <a mat-icon-button color="warn" (click)="SetEditActivity(null)">
-                <mat-icon>cancel</mat-icon>
-              </a>
-            </mat-list-item>
-          </ng-container>
-
-          <mat-list-item *ngIf="!State.AddNew?.Activity">
-            <a matLine (click)="ToggleAddNewActivity()">
-              <mat-icon>add</mat-icon>
-
-              Add New Activity
+              {{ activity.Title }} ({{ activity.Lookup }})
             </a>
+
+            <button mat-icon-button color="accent" (click)="SetEditActivity(activity)">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-icon-button color="warn" (click)="DeleteActivity(activity)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </mat-list-item>
 
-          <form [formGroup]="NewActivityForm" (ngSubmit)="AddNewActivity()">
-            <mat-list-item *ngIf="State.AddNew?.Activity">
-              <div matLine>
-                <mat-form-field>
-                  <input matInput placeholder="Title" formControlName="title" required />
-                </mat-form-field>
+          <mat-list-item *ngIf="State.EditActivity == activity.Lookup">
+            <div matLine>
+              {{ activity.Lookup }}
 
-                <mat-form-field>
-                  <input matInput placeholder="Lookup" formControlName="lookup" required />
-                </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Title" [(ngModel)]="activity.Title" />
+              </mat-form-field>
 
-                <mat-form-field>
-                  <input matInput placeholder="Icon" formControlName="icon" required />
+              <mat-form-field>
+                <input matInput placeholder="Lookup" [(ngModel)]="activity.Lookup" />
+              </mat-form-field>
 
-                  <mat-icon matSuffix>{{ NewActivityForm.get('icon').value }}</mat-icon>
-                </mat-form-field>
-              </div>
+              <mat-form-field>
+                <input matInput placeholder="Icon" [(ngModel)]="activity.Icon" />
+                <mat-icon matSuffix>{{ activity.Icon }}</mat-icon>
+              </mat-form-field>
+            </div>
 
-              <button mat-icon-button color="primary" type="submit">
-                <mat-icon>save</mat-icon>
-              </button>
+            <button mat-icon-button color="primary" (click)="SaveActivity(activity)">
+              <mat-icon>save</mat-icon>
+            </button>
 
-              <a mat-icon-button color="warn" (click)="ToggleAddNewActivity()">
-                <mat-icon>cancel</mat-icon>
-              </a>
-            </mat-list-item>
-          </form>
-        </mat-nav-list>
-      </mat-expansion-panel>
+            <a mat-icon-button color="warn" (click)="SetEditActivity(null)">
+              <mat-icon>cancel</mat-icon>
+            </a>
+          </mat-list-item>
+        </ng-container>
 
-      <mat-expansion-panel *ngIf="State.Activities?.length > 0" [expanded]="ExpandSideBar">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Side Bar
-          </mat-panel-title>
+        <mat-list-item *ngIf="!State.AddNew?.Activity">
+          <a matLine (click)="ToggleAddNewActivity()">
+            <mat-icon>add</mat-icon>
 
-          <mat-panel-description>
-            Setup your IDE Side Bar
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+            Add New Activity
+          </a>
+        </mat-list-item>
 
-        <div class="mat-headline title title">
-          Manage
+        <form [formGroup]="NewActivityForm" (ngSubmit)="AddNewActivity()">
+          <mat-list-item *ngIf="State.AddNew?.Activity">
+            <div matLine>
+              <mat-form-field>
+                <input matInput placeholder="Title" formControlName="title" required />
+              </mat-form-field>
 
-          <mat-form-field>
-            <mat-select placeholder="Activity Bar" [value]="State.SideBarEditActivity"
-              (selectionChange)="SetSideBarEditActivity($event)">
-              <ng-container *ngFor="let activity of State.Activities">
-                <mat-option [value]="activity.Lookup">
-                  {{ activity.Title }}
-                </mat-option>
-              </ng-container>
-            </mat-select>
-          </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Lookup" formControlName="lookup" required />
+              </mat-form-field>
 
-          Side Bar Configuration
-        </div>
+              <mat-form-field>
+                <input matInput placeholder="Icon" formControlName="icon" required />
 
-        <mat-progress-bar mode="indeterminate" *ngIf="State.Loading && !State.EditSection"></mat-progress-bar>
+                <mat-icon matSuffix>{{ NewActivityForm.get('icon').value }}</mat-icon>
+              </mat-form-field>
+            </div>
 
-        <div fxLayout="row wrap" fxLayoutAlign="center center"
+            <button mat-icon-button color="primary" type="submit">
+              <mat-icon>save</mat-icon>
+            </button>
+
+            <a mat-icon-button color="warn" (click)="ToggleAddNewActivity()">
+              <mat-icon>cancel</mat-icon>
+            </a>
+          </mat-list-item>
+        </form>
+      </mat-nav-list>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="State.Activities?.length > 0" [expanded]="ExpandSideBar">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Side Bar
+        </mat-panel-title>
+
+        <mat-panel-description>
+          Setup your IDE Side Bar
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="mat-headline title title">
+        Manage Configuration of
+
+        <mat-form-field>
+          <mat-select placeholder="Activity Bar" [value]="State.SideBarEditActivity"
+            (selectionChange)="SetSideBarEditActivity($event)">
+            <ng-container *ngFor="let activity of State.Activities">
+              <mat-option [value]="activity.Lookup">
+                {{ activity.Title }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <mat-progress-bar mode="indeterminate" *ngIf="State.Loading && !State.EditSection">
+
+      </mat-progress-bar>
+
+        <!-- <div fxLayout="row wrap" fxLayoutAlign="center center"
           *ngIf="State.SideBarEditActivity && (!State.Loading || State.EditSection)">
           <div [fxFlex]="section == State.EditSection ? '90%' : '30%'" class="side-bar-section"
             *ngFor="let section of State.SideBarSections">
-            <mat-card>
-              <div class="mat-headline title title">
-                {{ section }}
+            <mat-card> -->
+     <mat-nav-list class="activities">
+        <ng-container *ngFor="let section of State.SideBarSections">
+          <mat-list-item>
+            <div matLine>
+              {{ section }}
 
-                <ng-container *ngIf="section != State.EditSection">
-                  <button mat-icon-button color="primary" class="spread-thin" (click)="SetEditSection(section)">
+              <ng-container *ngIf="section != State.EditSection">
+                <button mat-icon-button color="primary" class="spread-thin" (click)="SetEditSection(section)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="warn" class="spread-thin" (click)="DeleteSideBarSection(section)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="section == State.EditSection">
+                <button mat-icon-button color="accent" class="spread-thin" (click)="SetEditSection(null)">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </ng-container>
+            </div>
+          </mat-list-item>
+
+          <div *ngIf="section == State.EditSection">
+            <mat-progress-bar mode="indeterminate" *ngIf="State.Loading"></mat-progress-bar>
+
+
+            <mat-nav-list *ngIf="!State.Loading">
+              <ng-container *ngFor="let sectionAction of State.SectionActions">
+                <mat-list-item *ngIf="State.EditSectionAction != sectionAction.Action">
+                  <a matLine (click)="SetEditSectionAction(sectionAction)"> {{ sectionAction.Title }} </a>
+
+                  <button mat-icon-button color="primary" (click)="SetEditSectionAction(sectionAction)">
                     <mat-icon>edit</mat-icon>
                   </button>
 
-                  <button mat-icon-button color="warn" class="spread-thin" (click)="DeleteSideBarSection(section)">
+                  <button mat-icon-button color="warn" (click)="DeleteSectionAction(sectionAction)">
                     <mat-icon>delete</mat-icon>
                   </button>
-                </ng-container>
+                </mat-list-item>
 
-                <ng-container *ngIf="section == State.EditSection">
-                  <button mat-icon-button color="accent" class="spread-thin" (click)="SetEditSection(null)">
-                    <mat-icon>cancel</mat-icon>
+                <mat-list-item *ngIf="State.EditSectionAction == sectionAction.Action">
+                  <div matLine>
+                    <mat-form-field>
+                      <input matInput placeholder="Title" [(ngModel)]="sectionAction.Title" />
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <mat-select placeholder="LCU" [(ngModel)]="sectionAction.Group">
+                        <mat-option [value]="group" *ngFor="let group of LCUGroups">{{ group }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="sectionAction.Group">
+                      <mat-select placeholder="Action" [(ngModel)]="sectionAction.Action">
+                        <mat-option [value]="action"
+                          *ngFor="let action of State.LCUSolutionOptions[sectionAction.Group]">{{
+                            action
+                            }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <input matInput placeholder="Action" [(ngModel)]="sectionAction.Action" />
+                    </mat-form-field>
+                  </div>
+
+                  <button mat-icon-button color="primary" (click)="SaveSectionAction(sectionAction)">
+                    <mat-icon>save</mat-icon>
                   </button>
-                </ng-container>
-              </div>
 
-              <div *ngIf="section == State.EditSection">
-                <mat-progress-bar mode="indeterminate" *ngIf="State.Loading"></mat-progress-bar>
-
-                <mat-nav-list *ngIf="!State.Loading">
-                  <ng-container *ngFor="let sectionAction of State.SectionActions">
-                    <mat-list-item *ngIf="State.EditSectionAction != sectionAction.Action">
-                      <a matLine (click)="SetEditSectionAction(sectionAction)"> {{ sectionAction.Title }} </a>
-
-                      <button mat-icon-button color="primary" (click)="SetEditSectionAction(sectionAction)">
-                        <mat-icon>edit</mat-icon>
-                      </button>
-
-                      <button mat-icon-button color="warn" (click)="DeleteSectionAction(sectionAction)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </mat-list-item>
-
-                    <mat-list-item *ngIf="State.EditSectionAction == sectionAction.Action">
-                      <div matLine>
-                        <mat-form-field>
-                          <input matInput placeholder="Title" [(ngModel)]="sectionAction.Title" />
-                        </mat-form-field>
-
-                        <mat-form-field>
-                          <mat-select placeholder="LCU" [(ngModel)]="sectionAction.Group">
-                            <mat-option [value]="group" *ngFor="let group of LCUGroups">{{ group }}</mat-option>
-                          </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field *ngIf="sectionAction.Group">
-                          <mat-select placeholder="Action" [(ngModel)]="sectionAction.Action">
-                            <mat-option [value]="action"
-                              *ngFor="let action of State.LCUSolutionOptions[sectionAction.Group]">{{
-                                  action
-                                }}</mat-option>
-                          </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                          <input matInput placeholder="Action" [(ngModel)]="sectionAction.Action" />
-                        </mat-form-field>
-                      </div>
-
-                      <button mat-icon-button color="primary" (click)="SaveSectionAction(sectionAction)">
-                        <mat-icon>save</mat-icon>
-                      </button>
-
-                      <a mat-icon-button color="warn" (click)="SetEditSectionAction(null)">
-                        <mat-icon>cancel</mat-icon>
-                      </a>
-                    </mat-list-item>
-                  </ng-container>
-
-                  <mat-list-item *ngIf="!State.AddNew?.SectionAction">
-                    <a matLine (click)="ToggleAddNewSectionAction()">
-                      <mat-icon>add</mat-icon>
-
-                      Add New Action
-                    </a>
+                  <a mat-icon-button color="warn" (click)="SetEditSectionAction(null)">
+                    <mat-icon>cancel</mat-icon>
+                  </a>
                   </mat-list-item>
+               <!-- </ng-container> -->
 
-                  <form [formGroup]="NewSectionActionForm" (ngSubmit)="AddNewSectionAction()">
-                    <mat-list-item *ngIf="State.AddNew?.SectionAction">
-                      <div matLine>
-                        <mat-form-field>
-                          <input matInput placeholder="Title" formControlName="title" required />
-                        </mat-form-field>
+                <mat-list-item *ngIf="!State.AddNew?.SectionAction">
+                  <a matLine (click)="ToggleAddNewSectionAction()">
+                    <mat-icon>add</mat-icon>
+                    Add New Action
+                  </a>
+                </mat-list-item>
 
-                        <mat-form-field>
-                          <mat-select placeholder="LCU" formControlName="group" #newSecActGroup>
-                            <mat-option [value]="group" *ngFor="let group of LCUGroups">{{ group }}</mat-option>
-                          </mat-select>
-                        </mat-form-field>
+                <form [formGroup]="NewSectionActionForm" (ngSubmit)="AddNewSectionAction()">
+                  <mat-list-item *ngIf="State.AddNew?.SectionAction">
+                    <div matLine>
+                      <mat-form-field>
+                        <input matInput placeholder="Title" formControlName="title" required />
+                      </mat-form-field>
 
-                        <mat-form-field *ngIf="newSecActGroup.value">
-                          <mat-select placeholder="Action" formControlName="action">
-                            <mat-option [value]="action"
-                              *ngFor="let action of State.LCUSolutionOptions[newSecActGroup.value]">{{
-                                  action
-                                }}</mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
+                      <mat-form-field>
+                        <mat-select placeholder="LCU" formControlName="group" #newSecActGroup>
+                          <mat-option [value]="group" *ngFor="let group of LCUGroups">{{ group }}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
 
-                      <button mat-icon-button color="primary" type="submit">
-                        <mat-icon>save</mat-icon>
-                      </button>
+                      <mat-form-field *ngIf="newSecActGroup.value">
+                        <mat-select placeholder="Action" formControlName="action">
+                          <mat-option [value]="action"
+                            *ngFor="let action of State.LCUSolutionOptions[newSecActGroup.value]">{{
+                              action
+                              }}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
 
-                      <a mat-icon-button color="warn" (click)="ToggleAddNewSectionAction()">
-                        <mat-icon>cancel</mat-icon>
-                      </a>
-                    </mat-list-item>
-                  </form>
-                </mat-nav-list>
-              </div>
-            </mat-card>
-          </div>
+                    <button mat-icon-button color="primary" type="submit">
+                      <mat-icon>save</mat-icon>
+                    </button>
 
-          <div fxFlex="30%" class="side-bar-section">
-            <mat-card>
+                    <a mat-icon-button color="warn" (click)="ToggleAddNewSectionAction()">
+                      <mat-icon>cancel</mat-icon>
+                    </a>
+                   </mat-list-item>
+                 </form>
+               </ng-container>
+             </mat-nav-list>
+           </div>
+
+            <!-- <div fxFlex="30%" class="side-bar-section"> -->
+           <mat-nav-list>
+            <mat-list-item>
               <h2 class="mat-headline title title">Add New Side Bar Section</h2>
 
               <form [formGroup]="NewSideBarSectionForm" (ngSubmit)="AddSideBarSection()">
@@ -262,9 +268,8 @@
                   <mat-icon>add</mat-icon>
                 </button>
               </form>
-            </mat-card>
-          </div>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-</form>
+            </mat-list-item>
+      </mat-nav-list>
+    <!-- </mat-expansion-panel>
+  </mat-accordion>
+</form> -->
