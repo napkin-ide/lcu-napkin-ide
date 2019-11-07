@@ -252,12 +252,11 @@
                    </mat-list-item>
                  </form>
                </ng-container>
-             </mat-nav-list>
-           </div>
+
 
             <!-- <div fxFlex="30%" class="side-bar-section"> -->
-           <mat-nav-list>
-            <mat-list-item>
+            <ng-container>
+              <mat-list-item>
               <h2 class="mat-headline title title">Add New Side Bar Section</h2>
 
               <form [formGroup]="NewSideBarSectionForm" (ngSubmit)="AddSideBarSection()">
@@ -270,6 +269,7 @@
                 </button>
               </form>
             </mat-list-item>
+            </ng-container>
       </mat-nav-list>
     <!-- </mat-expansion-panel>
   </mat-accordion>
