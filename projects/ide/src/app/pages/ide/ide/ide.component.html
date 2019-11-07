@@ -1,0 +1,43 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="ide-parent-container">
+
+  <div fxLayout="row" fxFlexAlign="stretch" class="ide-top-bar">
+    <nide-ide-top-bar fxFlex
+      [isHandset]="(IsHandset$ | async)"
+      (openSideBarEvent)="OpenSideBar()">
+    </nide-ide-top-bar>
+  </div>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
+
+  <div fxLayout="row" fxLayout.lt-md="column" class="ide-center-content">
+    <mat-sidenav-container fxFlex="1 5 30%" fxFlex.lt-md="1 1 100%" [ngClass]="{'opened': IsOpen, 'closed': !IsOpen}">
+      <mat-sidenav fxFlex="1 1 60px" class="ide-activity-bar" mode="side" opened>
+        <nide-ide-activity-bar fxFlex></nide-ide-activity-bar>
+      </mat-sidenav>
+
+      <mat-sidenav-content fxFlex="1 1 calc(100% - 60px)" fxLayoutAlign="start stretch">
+        <mat-drawer-container fxLayout="column" fxFlex fxLayoutAlign="start stretch" class="ide-side-bar">
+          <mat-drawer fxFlex="1 1 100%" class="ide-side-bar-content" mode="side" opened>
+            <nide-ide-side-bar fxFlex
+              [isHandset]="(IsHandset$ | async)">
+            </nide-ide-side-bar>
+          </mat-drawer>
+        </mat-drawer-container>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <mat-drawer-container fxFlex="3 1 70%" fxFlex.lt-md="1 1 100%">
+      <mat-drawer-content [class.hide-panels]="!ShowPanels">
+        <mat-grid-list class="ide-editors-container" cols="1" rows="2" rowHeight="fit">
+          <mat-grid-tile class="ide-editors" rowspan="2">
+            <nide-ide-editors></nide-ide-editors>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </div>
+
+  <div fxLayout="row" fxFlexAlign="stretch" class="ide-status-bar">
+    <nide-ide-status-bar fxFlex></nide-ide-status-bar>
+  </div>
+</div>

@@ -1,8 +1,6 @@
 <mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
   <mat-grid-tile>
-    <div class="overflowed">
-      <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
-
+    <div class="ide-overflowed">
       <mat-tab-group [selectedIndex]="CurrentEditorIndex()">
         <mat-tab *ngFor="let editor of Editors">
           <ng-template mat-tab-label>

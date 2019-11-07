@@ -1,18 +1,11 @@
 <mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
   <mat-grid-tile>
-    <div class="overflowed">
-      <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
+    <div class="ide-overflowed">
 
       <div class="activities" *ngIf="InfraConfigured">
         <ng-container *ngFor="let activity of Activities">
-          <a
-            class="activity-action"
-            mat-icon-button
-            [matTooltip]="activity.Title"
-            matTooltipPosition="after"
-            (click)="SelectActivity(activity)"
-            [class.active]="activity.Lookup == CurrentActivity?.Lookup"
-          >
+          <a class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipPosition="after"
+            (click)="SelectActivity(activity)" [class.active]="activity.Lookup == CurrentActivity?.Lookup">
             <mat-icon *ngIf="activity.IconSet" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
 
             <mat-icon *ngIf="!activity.IconSet">{{ activity.Icon }}</mat-icon>
@@ -21,14 +14,8 @@
       </div>
 
       <div class="activity-settings">
-        <a
-          class="activity-action"
-          mat-icon-button
-          [matTooltip]="activity.Title"
-          matTooltipPosition="after"
-          (click)="OpenRootActivity(activity)"
-          *ngFor="let activity of RootActivities"
-        >
+        <a class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipPosition="after"
+          (click)="OpenRootActivity(activity)" *ngFor="let activity of RootActivities">
           <mat-icon *ngIf="activity.IconSet" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
 
           <mat-icon *ngIf="!activity.IconSet">{{ activity.Icon }}</mat-icon>

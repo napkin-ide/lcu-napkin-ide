@@ -1,0 +1,182 @@
+@mixin ide($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .ide-parent-container {
+    height: 100%;
+
+    .ide-top-bar {
+      .mat-toolbar,
+      .mat-toolbar-single-row {
+        height: auto;
+        padding: 0;
+        background-color: mat-color($primary, 700);
+      }
+
+      .logo {
+        width: 150px;
+        margin: 0.5rem;
+      }
+    }
+
+    .ide-center-content {
+      height: 100%;
+
+      .ide-activity-bar {
+        border: none;
+        background-color: mat-color($primary, 400);
+
+        .activity-settings {
+          position: absolute;
+          bottom: 0;
+        }
+
+        .activity-action {
+          margin: 0 auto;
+          display: block;
+
+          &.mat-icon-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 0;
+
+            .mat-icon {
+              line-height: 40px;
+              width: 40px;
+              height: 40px;
+              font-size: 40px;
+              padding: 10px 0 0 0;
+            }
+
+            .material-icons {
+              font-size: 35px;
+            }
+          }
+
+          &.active {
+            background-color: mat-color($primary, 700);
+          }
+        }
+      }
+
+      .ide-side-bar {
+        height: 100%;
+
+        .ide-side-bar-content {
+          width: 100%;
+
+          .ide-side-bar-header {
+            align-items: center;
+            display: flex;
+            height: 60px;
+            justify-content: center;
+          }
+
+          .ide-side-bar-action {
+            border-left: 5px solid transparent;
+            margin: 0 auto;
+            display: block;
+
+            &.active {
+              background: linear-gradient(to right, mat-color($primary, 50), transparent);
+              border-left: 5px solid mat-color($primary, 700);
+
+              .mat-line {
+                color: mat-contrast($primary, 200) !important;
+              }
+            }
+          }
+
+          .mat-expansion-panel {
+            border-radius: 0px;
+            margin: 5px 0;
+          }
+        }
+      }
+
+      .ide-editors-container {
+        height: 100%;
+
+        .ide-editors {
+
+          &.mat-grid-tile {
+            height: 100% !important;
+          }
+
+          .mat-tab-body-wrapper {
+            height: 100%;
+            overflow: auto;
+          }
+
+          .overlay {
+            background-color: mat-color($primary, 800);
+          }
+        }
+
+        .ide-panels {
+          background-color: mat-color($primary, 700);
+        }
+
+        .hide-panels {
+          overflow: hidden;
+
+          .ide-editors {
+            height: 100%;
+          }
+
+          .ide-panels {
+            display: none;
+          }
+        }
+      }
+
+      .fit-grid {
+        height: 100%;
+
+        .grid-start {
+          .mat-grid-tile .mat-figure {
+            align-items: start;
+            justify-content: start;
+          }
+        }
+      }
+
+      .opened {
+        display: inherit;
+      }
+
+      .closed {
+        display: none !important;
+      }
+    }
+
+    .ide-status-bar {
+      .mat-toolbar,
+      .mat-toolbar-single-row {
+        height: 36px;
+        padding: 0;
+      }
+    }
+
+    .ide-overflowed {
+      height: 100%;
+      overflow: auto;
+      overflow-x: hidden;
+      width: 100%;
+
+      &.activities {
+        height: calc(100% - 60px);
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    background: mat-color($primary, A100);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: mat-color($primary, A700);
+  }
+}
