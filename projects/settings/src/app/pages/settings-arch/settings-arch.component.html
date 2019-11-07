@@ -1,4 +1,5 @@
-<form *ngIf="State.Step === SettingStepTypes['Architecture']">
+<form>
+<!-- <form *ngIf="State.Step === SettingStepTypes['Architecture']"> -->
   <mat-nav-list>
     <ng-container *ngFor="let lcu of State.Arch?.LCUs">
       <mat-list-item *ngIf="State.Arch.EditLCU != lcu.Lookup">

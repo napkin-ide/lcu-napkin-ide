@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { SettingsComponent } from './settings/settings.component';
 import { MaterialModule } from '@lcu/common';
 import { SettingsSetupComponent } from './settings-setup/settings-setup.component';
 import { SettingsConfigComponent } from './settings-config/settings-config.component';
@@ -12,7 +11,13 @@ import { SettingsActbarComponent } from './settings-actbar/settings-actbar.compo
 import { SettingsSidebarComponent } from './settings-sidebar/settings-sidebar.component';
 
 @NgModule({
-  declarations: [SettingsComponent, SettingsSetupComponent, SettingsConfigComponent, SettingsArchComponent, SettingsActbarComponent, SettingsSidebarComponent],
+  declarations: [
+    SettingsSetupComponent,
+    SettingsConfigComponent,
+    SettingsArchComponent,
+    SettingsActbarComponent,
+    SettingsSidebarComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,7 +26,19 @@ import { SettingsSidebarComponent } from './settings-sidebar/settings-sidebar.co
     FlexLayoutModule,
     MaterialModule
   ],
-  exports: [SettingsComponent, SettingsSetupComponent, SettingsConfigComponent, SettingsArchComponent, SettingsActbarComponent, SettingsSidebarComponent],
-  entryComponents: [SettingsSetupComponent, SettingsConfigComponent, SettingsArchComponent, SettingsActbarComponent, SettingsSidebarComponent]
+  exports: [
+    SettingsSetupComponent,
+    SettingsConfigComponent,
+    SettingsArchComponent,
+    SettingsActbarComponent,
+    SettingsSidebarComponent
+  ],
+  entryComponents: [
+    SettingsSetupComponent,
+    SettingsConfigComponent,
+    SettingsArchComponent,
+    SettingsActbarComponent,
+    SettingsSidebarComponent
+  ]
 })
 export class PagesModule {}

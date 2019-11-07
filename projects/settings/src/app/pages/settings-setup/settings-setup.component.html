@@ -1,4 +1,5 @@
-<form *ngIf="State.Step === SettingStepTypes['Setup']">
+<form *ngIf="!State.Loading">
+<!-- <form *ngIf="State.Step === SettingStepTypes['Setup']"> -->
   <mat-accordion>
     <mat-expansion-panel [expanded]="ExpandActivityBar">
       <mat-expansion-panel-header>

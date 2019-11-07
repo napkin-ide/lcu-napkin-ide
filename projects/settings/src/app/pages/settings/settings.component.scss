@@ -1,69 +1,61 @@
-@import '../../../../../common/src/styles/theme';
-
-@mixin org($theme) {
- // $config: mat-typography-config();
+@mixin settings($theme) {
+  // $config: mat-typography-config();
 
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
- // :host {
-    // .side-bar-section {
-    //   text-align: center;
+  .identity {
+    height: 100%;
+    min-height: 500px;
 
-    //   .mat-icon-button {
-    //     margin: auto;
-    //   }
+    .mat-expansion-panel {
+      background-color: transparentize(mat-color($primary), 0.2);
+    }
 
-    .identity {
-      height: 100%;
-      min-height: 500px;
-
-      .content {
-        .inner {
-          height: 100%;
-          min-height: 600px;
-          padding: 2rem;
-          display: flex;
-          align-items: center;
-          min-height: inherit;
-          box-sizing: border-box;
-          justify-content: center;
-          background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.3));
-          background-repeat:no-repeat;
-          background-position: center;
-        }
-      }
-
+    .content {
       .inner {
-        .mat-list-base {
-          .mat-list-item {
-            height: auto !important;
+        height: 100%;
+        min-height: 600px;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        min-height: inherit;
+        box-sizing: border-box;
+        justify-content: center;
+        background-image: fathym-logo(thinky-circle, rgba(74, 145, 142, 0.3));
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
 
-            .mat-line {
-              white-space: normal !important;
-            }
+    .inner {
+      .mat-list-base {
+        .mat-list-item {
+          height: auto !important;
+
+          .mat-line {
+            white-space: normal !important;
           }
         }
       }
+    }
 
-      .active-mat-list-item {
-        background-color: mat-color($primary, 600);
-      }
+    .active-mat-list-item {
+      background-color: mat-color($primary, 600);
+    }
 
-      .details {
-        border-right: solid 1px rgba(255, 255, 255, 0.12);
-        box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
-        width: 30%;
-        background-size: cover;
-        background-position: 50% 0;
-        background-image: url('~/assets/img/green-bubbles.jpg');
-      }
+    .details {
+      border-right: solid 1px rgba(255, 255, 255, 0.12);
+      box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+      width: 30%;
+      background-size: cover;
+      background-position: 50% 0;
+      background-image: url("~/assets/img/green-bubbles.jpg");
+    }
 
-      .content {
-        width: 70%;
-      }
+    .content {
+      width: 70%;
     }
   }
-
-@include org($nide-theme);
+}
