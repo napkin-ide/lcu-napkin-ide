@@ -1,5 +1,6 @@
 <form>
 <!-- <form *ngIf="State.Step === SettingStepTypes['Architecture']"> -->
+  <mat-card>
   <mat-nav-list>
     <ng-container *ngFor="let lcu of State.Arch?.LCUs">
       <mat-list-item *ngIf="State.Arch.EditLCU != lcu.Lookup">
@@ -93,4 +94,5 @@
       </a>
     </mat-list-item>
   </mat-nav-list>
+  </mat-card>
 </form>
