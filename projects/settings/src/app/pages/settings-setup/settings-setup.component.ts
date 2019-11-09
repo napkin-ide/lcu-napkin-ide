@@ -24,12 +24,9 @@ export class SettingsSetupComponent implements OnInit {
     return Object.keys(this.State.LCUSolutionOptions);
   }
 
-  /**
-   * Current state
-   */
-  // tslint:disable-next-line:no-input-rename
-  @Input('state')
-  public State: IdeSettingsState;
+  public CurrentSection: string;
+
+  public IsNewSideBarSection: boolean = false;
 
   public NewActivityForm: FormGroup;
 
@@ -38,6 +35,13 @@ export class SettingsSetupComponent implements OnInit {
   public NewSectionActionForm: FormGroup;
 
   public NewSideBarSectionForm: FormGroup;
+
+  /**
+   * Current state
+   */
+  // tslint:disable-next-line:no-input-rename
+  @Input('state')
+  public State: IdeSettingsState;
 
   @Input('setting-step-types')
   public SettingStepTypes: IDESettingStepTypes;
@@ -125,7 +129,7 @@ export class SettingsSetupComponent implements OnInit {
 
   public AddSideBarSection() {
     this.State.Loading = true;
-
+    this.IsNewSideBarSection = false;
     this.ideSettingsState.AddSideBarSection(this.NewSideBarSectionForm.controls.name.value);
   }
 
@@ -214,6 +218,7 @@ export class SettingsSetupComponent implements OnInit {
 
   public SetEditSection(section: string) {
     this.State.Loading = true;
+    this.CurrentSection = section;
 
     this.ideSettingsState.SetEditSection(section);
   }
@@ -246,6 +251,12 @@ export class SettingsSetupComponent implements OnInit {
     this.State.Loading = true;
 
     this.ideSettingsState.ToggleAddNewSectionAction();
+  }
+
+  public ToggleAddNewSideBarSection() {
+    // TODO: Add this to the State instead
+    // this.State.Loading = true;
+    this.IsNewSideBarSection = !this.IsNewSideBarSection;
   }
 
   public UpdateLCU(lcu: LowCodeUnitSetupConfig) {
