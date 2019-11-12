@@ -4,24 +4,28 @@ import { IdeSettingsState, LowCodeUnitSetupConfig, IDESettingStepTypes } from '.
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
 import { MatSelectChange, MatListOption } from '@angular/material';
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
-import { SettingsSetupComponent } from '../settings-setup/settings-setup.component';
-import { SettingsConfigComponent } from '../settings-config/settings-config.component';
-import { SettingsArchComponent } from '../settings-arch/settings-arch.component';
 
 @Component({
-  selector: 'lcu-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss'],
-  animations: []
+  selector: 'lcu-settings-config',
+  templateUrl: './settings-config.component.html',
+  styleUrls: ['./settings-config.component.scss']
 })
-export class SettingsComponent implements OnInit {
-  //  Fields
+export class SettingsConfigComponent implements OnInit {
 
-  //  Properties
-
-  public get MainLoading(): boolean {
-    return this.State.Loading && (!this.State.Arch || !this.State.Arch.LCUs || this.State.Arch.LCUs.length === 0);
+  public get ExpandActivityBar(): boolean {
+    return !!this.State.EditActivity || this.State.AddNew.Activity || !this.State.Activities || this.State.Activities.length <= 0;
   }
+
+  public get LCUGroups(): string[] {
+    return Object.keys(this.State.LCUSolutionOptions);
+  }
+
+  /**
+   * Current state
+   */
+  // tslint:disable-next-line:no-input-rename
+  @Input('state')
+  public State: IdeSettingsState;
 
   public NewActivityForm: FormGroup;
 
@@ -31,36 +35,20 @@ export class SettingsComponent implements OnInit {
 
   public NewSideBarSectionForm: FormGroup;
 
-  public State: IdeSettingsState;
+  @Input('setting-step-types')
+  public SettingStepTypes: IDESettingStepTypes;
+
+
   //  Constructors
   constructor(protected formBldr: FormBuilder, protected ideSettingsState: IdeSettingsStateManagerContext) {}
 
   //  Life Cycle
 
-
   /**
    * Settings-SetupComponent
    */
-  @ViewChildren(SettingsSetupComponent)
-  public SettingsSetupComponent: QueryList<SettingsSetupComponent>;
-
-  /**
-   * Settings-ConfigComponent
-   */
-  @ViewChildren(SettingsConfigComponent)
-  public SettingsConfigComponent: QueryList<SettingsConfigComponent>;
-
-  /**
-   * Settings-ArchComponent
-   */
-  @ViewChildren(SettingsArchComponent)
-  public SettingsArchComponent: QueryList<SettingsArchComponent>;
-
-
-  public SettingStepTypes = IDESettingStepTypes;
 
   public ngOnInit() {
-
     this.NewActivityForm = this.formBldr.group({
       title: ['', Validators.required],
       lookup: ['', Validators.required],
@@ -88,13 +76,9 @@ export class SettingsComponent implements OnInit {
       this.resetForms();
 
       this.State = state;
-      this.SetStep(IDESettingStepTypes.Setup);
     });
   }
 
-  public get LCUGroups(): string[] {
-    return Object.keys(this.State.LCUSolutionOptions);
-  }
 
   //  API methods
   public AddDefaultDataAppsLCUs() {
@@ -242,10 +226,6 @@ export class SettingsComponent implements OnInit {
     this.ideSettingsState.SetSideBarEditActivity(event.value);
   }
 
-  public SetStep(step: IDESettingStepTypes) {
-    this.State.Step = step;
-  }
-
   public ToggleAddNewActivity() {
     this.State.Loading = true;
 
@@ -282,4 +262,5 @@ export class SettingsComponent implements OnInit {
 
     this.NewSideBarSectionForm.reset();
   }
+
 }

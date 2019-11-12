@@ -1,0 +1,56 @@
+<form>
+<!-- <form *ngIf="State.Step === SettingStepTypes['Configuration']"> -->
+  <mat-card>
+  <div>
+    <div class="mat-headline title title">
+      Manage
+
+      <mat-form-field>
+        <mat-select placeholder="Low Code Unit" [value]="State.Config.CurrentLCUConfig" (selectionChange)="SetConfigLCU($event)">
+          <ng-container *ngFor="let lcu of State.Arch?.LCUs">
+            <mat-option [value]="lcu.Lookup">
+              {{ lcu.Lookup }} <small>({{ lcu.NPMPackage }}@{{ lcu.PackageVersion }})</small>
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+      LCU Capabilities
+    </div>
+  </div>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="State.Loading"></mat-progress-bar>
+
+  <div *ngIf="State.Config.CurrentLCUConfig && !State.Loading">
+    <mat-selection-list #slnCapabilities>
+      <h4 mat-subheader>Solutions</h4>
+
+      <mat-list-option
+        [value]="solution.Name"
+        [selected]="HasCapability(solution.Name)"
+        *ngFor="let solution of State.Config.LCUConfig.Solutions"
+      >
+        {{ solution.Name }}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <mat-selection-list #elmCapabilities>
+      <h4 mat-subheader>Elements</h4>
+    </mat-selection-list>
+
+    <mat-selection-list #capabilities>
+      <h4 mat-subheader>Data Flow Modules</h4>
+    </mat-selection-list>
+
+    <div class="describe spread">
+      <a
+        mat-raised-button
+        color="primary"
+        (click)="SaveLCUCapabilities(State.Config.CurrentLCUConfig, slnCapabilities.selectedOptions.selected)"
+      >
+        Save Capabilities
+      </a>
+    </div>
+  </div>
+  </mat-card>
+</form>
