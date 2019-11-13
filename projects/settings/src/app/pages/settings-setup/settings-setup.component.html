@@ -23,7 +23,7 @@
               {{ activity.Title }} ({{ activity.Lookup }})
             </a>
 
-            <button mat-icon-button color="accent" (click)="SetEditActivity(activity)">
+            <button mat-icon-button color="primary" (click)="SetEditActivity(activity)">
               <mat-icon>edit</mat-icon>
             </button>
 
@@ -137,7 +137,8 @@
                 </mat-panel-title>
 
                 <mat-panel-description fxLayoutAlign="flex-end">
-                  <ng-container *ngIf="section != State.EditSection">
+                  <ng-container>
+                      <!-- *ngIf="section != State.EditSection" -->
                     <!-- <button mat-icon-button color="primary" class="spread-thin" (click)="SetEditSection(section)">
                       <mat-icon>edit</mat-icon>
                     </button> -->
@@ -147,11 +148,11 @@
                     </button>
                   </ng-container>
 
-                  <ng-container *ngIf="section == State.EditSection">
+                  <!-- <ng-container *ngIf="section == State.EditSection">
                     <button mat-icon-button color="accent" class="spread-thin" (click)="SetEditSection(null)">
                       <mat-icon>cancel</mat-icon>
                     </button>
-                  </ng-container>
+                  </ng-container> -->
                 </mat-panel-description>
               </mat-expansion-panel-header>
 
