@@ -1,13 +1,13 @@
 <div *ngIf="State.Step === SetupStepTypes['Complete']">
 
-    <h1 
-      fxLayoutAlign="center center" 
+    <h1
+      fxLayoutAlign="center center"
       class="mat-display-1 title margin-bottom-4">
       {{ State.OrganizationName }} has been added to the Ecosystem
     </h1>
 
-    <h2 
-      fxLayoutAlign="center center" 
+    <h2
+      fxLayoutAlign="center center"
       class="h2 paragraph-title-bold margin-bottom-3">
       Now Fathym It, and Build It.
     </h2>
@@ -26,18 +26,18 @@
                   Some things are finalizing, and we'll redirect you to {{ State.Host }} in the next 30 seconds. Your SSL and hosts are
                   being configured with the LCU Runtime, and once complete you'll be able to manage your world from your own infrastructure.
                 </p>
-        
+
                 <p class="mat-subheading-2">
                   We've authorize and configure your Azure Dev Ops, and we'll walk you through creating new Data Applications on this infrastructure.
                 </p>
-        
+
                 <p class="mat-subheading-2">
                   We have tons of great information and tutorials to get you started, so dive in!
                 </p>
-        
-                <p class="mat-subheading-2">
-                  Redirecting you to {{State.Host}} in 15 seconds...
-                </p>
+
+                <a mat-raised-button color="primary" target="_parent" href="https://{{State.Host}}/fathym-it">
+                  <mat-icon>launch</mat-icon> Open Enterprise IDE
+                </a>
           </div>
         </div>
       </div>

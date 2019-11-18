@@ -1,74 +1,44 @@
-@import '../../common/src/styles/theme';
+@import '../src/app/pages/settings/settings.component.scss';
+@import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+@import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+@import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 
-@include mat-core();
-
-@mixin nide($theme) {
+@mixin theme-setup($theme) {
   @include angular-material-theme($theme);
+  @include fathym-branding($theme);
+  @include theme-extras($theme);
+  @include component-themes($theme);
+}
 
-  $config: mat-typography-config();
-
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-
-  @include defaults($theme);
-
-  html,
-  body {
-    color: $nide-black;
-    height: 100%;
-  }
-
-  body {
-    margin: 0;
-    background-color: mat-color($primary, 300);
-    // font-family: Roboto, 'Helvetica Neue', sans-serif;
-  }
-
-  .mat-list-base .mat-list-item,
-  .mat-list-base .mat-list-option {
-    padding: .5rem !important;
-    height: auto !important;
-  }
-
-  .mat-tab-header {
-    z-index: 500;
-    position: sticky;
-    top: 0;
-    background-color: mat-color($primary, 300);
-  }
-
-  .describe {
-    text-align: right;
-  }
-
-  .mat-form-field {
-  }
-
-  .mat-headline title title {
-    .mat-form-field-flex {
-      width: 350px;
-    }
-  }
-
-  .mat-form-field-wrapper {
-    padding-bottom: 0;
-  }
-
-  .mat-button-lg {
-    &.mat-icon-button .mat-icon {
-      line-height: 48px;
-    }
-
-    .mat-icon {
-      width: 48px;
-      height: 48px;
-    }
-
-    .material-icons {
-      font-size: 48px;
-    }
+@mixin primary-logo($logo, $theme, $opacity) {
+  .primary-logo {
+    background-image: fathym-logo($logo, mat-color(map-get($theme, accent)), $opacity);
   }
 }
 
-@include nide($nide-theme);
+@mixin component-themes($theme) {
+  @include settings($theme);
+}
+
+.ivy-light-theme {
+  $theme: fathym-ivy-theme();
+  @include theme-setup($theme);
+  @include primary-logo(thinky-full-logo, $theme, 1);
+}
+
+.logo {
+  width: 150px;
+  height: 50px;
+}
+
+.router-container {
+  background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.3));
+  background-position: center;
+  background-repeat:no-repeat;
+  box-sizing: border-box;
+  height: 88%;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+@include theme-setup(fathym-ivy-theme());

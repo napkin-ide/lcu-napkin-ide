@@ -1,0 +1,23 @@
+<mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
+  <mat-grid-tile>
+    <div class="ide-overflowed">
+      <mat-tab-group [selectedIndex]="CurrentEditorIndex()">
+        <mat-tab *ngFor="let editor of Editors">
+          <ng-template mat-tab-label>
+            <div (click)="Select(editor)">
+              {{ editor.Title }}
+
+              <button mat-icon-button (click)="Remove(editor, $event)">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template matTabContent>
+            <lcu-lazy-element [config]="Config" [context]="Context"></lcu-lazy-element>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

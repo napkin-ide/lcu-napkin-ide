@@ -15,6 +15,20 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
   }
 
   //  API Methods
+  public AddDefaultDataAppsLCUs() {
+    this.Execute({
+      Arguments: {},
+      Type: 'AddDefaultDataAppsLCUs'
+    });
+  }
+
+  public AddDefaultDataFlowLCUs() {
+    this.Execute({
+      Arguments: { },
+      Type: 'AddDefaultDataFlowLCUs'
+    });
+  }
+
   public AddSideBarSection(section: string) {
     this.Execute({
       Arguments: {

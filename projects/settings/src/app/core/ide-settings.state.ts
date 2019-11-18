@@ -29,6 +29,14 @@ export class IdeSettingsState {
   public SideBarEditActivity: string;
 
   public SideBarSections: string[];
+
+  public Step: IDESettingStepTypes;
+}
+
+export enum IDESettingStepTypes {
+  Architecture = 'Architecture',
+  Setup = 'Setup',
+  Configuration = 'Configuration'
 }
 
 export class IdeSettingsArchitechtureState {

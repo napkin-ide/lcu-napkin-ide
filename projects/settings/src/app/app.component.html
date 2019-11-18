@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<div [className]="SelectedTheme" style="height: 100%">
+  <lcu-side-nav
+    [nav-links]="SettingsLinks"
+
+    show-side-nav="true">
+    <!-- logo-class="primary-logo"
+    logo-alt="Fathym Logo" -->
+    <div class="router-container" fxLayout="column" fxLayoutAlign="start stretch">
+      <strong class="mat-display-2 title">{{ SettingsTitle }}</strong>
+      <lcu-settings></lcu-settings>
+    </div>
+  </lcu-side-nav>
+</div>

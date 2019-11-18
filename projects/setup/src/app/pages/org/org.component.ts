@@ -147,9 +147,6 @@ export class OrgComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
 
     if (this.State.Step === NapkinIDESetupStepTypes.Complete) {
-      setTimeout(() => {
-        location.href = `https://${this.State.Host}/fathym-it`;
-      }, 15000);
     }
   }
 

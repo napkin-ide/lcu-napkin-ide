@@ -1,11 +1,19 @@
-@import '~@angular/material/theming';
+
+.tooltip-background {
+  background-color: #4a918e !important;
+}
 
 @mixin org($theme) {
-  $config: mat-typography-config();
- 
+
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
+
+  .slogan{
+    background-image: fathym-logo(thinky-slogan, #000000, .7);
+    background-repeat:no-repeat;
+    background-position: center;
+  }
 
   // :host {
     .identity {
@@ -22,9 +30,12 @@
           min-height: inherit;
           box-sizing: border-box;
           justify-content: center;
+          background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.3));
+          background-repeat:no-repeat;
+          background-position: center;
         }
       }
-     
+
       .inner {
         .mat-list-base {
           .mat-list-item {
@@ -47,8 +58,7 @@
         width: 30%;
         background-size: cover;
         background-position: 50% 0;
-        background-image: linear-gradient(transparentize(mat-color($primary), 0.15), transparentize(mat-color($primary), 0.15)),
-        url(https://images.immediate.co.uk/production/volatile/sites/4/2009/09/GettyImages-884671854-4946bb3.jpg?quality=45&resize=960,413);
+        background-image: url('assets/img/green-bubbles.jpg');
       }
 
       .content {
@@ -56,13 +66,3 @@
       }
     }
   }
-
-.error {
-  color: rgb(204, 0, 0);
-  
-}
-
-.success {
-  color: rgb(0, 172, 0);
-}
-
