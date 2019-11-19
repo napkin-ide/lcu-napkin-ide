@@ -1,12 +1,12 @@
 <div [className]="SelectedTheme" style="height: 100%">
   <lcu-side-nav
     [nav-links]="SettingsLinks"
-
-    show-side-nav="true">
+    show-side-nav="true"
+    [title]='SettingsTitle'>
     <!-- logo-class="primary-logo"
     logo-alt="Fathym Logo" -->
     <div class="router-container" fxLayout="column" fxLayoutAlign="start stretch">
-      <strong class="mat-display-2 title">{{ SettingsTitle }}</strong>
+      <!-- <strong class="mat-display-2 title">{{ SettingsTitle }}</strong> -->
       <lcu-settings></lcu-settings>
     </div>
   </lcu-side-nav>

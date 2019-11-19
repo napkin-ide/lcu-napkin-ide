@@ -23,6 +23,9 @@ export class SideNavComponent implements OnInit {
   @Input('show-side-nav')
   public ShowSideNav: boolean;
 
+  @Input('title')
+  public Title: string;
+
   /**
    * Input property for logo
    */
