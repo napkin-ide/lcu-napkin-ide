@@ -11,6 +11,7 @@ export class AppComponent {
   public SettingsLinks: Array<NavListModel>;
   public SettingsTitle: string;
 
+
   constructor()  {}
 
   public ngOnInit(): void {
@@ -23,6 +24,8 @@ export class AppComponent {
       { Label: 'Architecture', RouterURL: '/architecture', Icon: 'square_foot'}
     ];
   }
+
+
 
   /**
    * Reset material theme
