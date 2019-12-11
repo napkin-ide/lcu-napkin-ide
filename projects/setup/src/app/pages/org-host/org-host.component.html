@@ -1,11 +1,11 @@
 
-<form 
-  *ngIf="State.Step == SetupStepTypes['HostConfig']" 
-  [formGroup]="HostForm" 
+<form
+  *ngIf="State.Step == SetupStepTypes['HostConfig']"
+  [formGroup]="HostForm"
   (ngSubmit)="SecureHost()">
-  
-  <h1 
-    fxLayoutAlign="center center" 
+
+  <h1
+    fxLayoutAlign="center center"
     class="mat-display-1 title margin-bottom-4">
     Establish {{ State.OrganizationName }} Shared Host
   </h1>
@@ -60,9 +60,8 @@
 
               <mat-icon
                 matSuffix
-                matTooltip="Select a domain. You can choose your own domain or one of Fathym’s domains. Fathym’s domains allow you to use a sub-domain, for example, yourcompany.{{
-                  RootDomainControl.value
-                }}." matTooltipClass="tooltip-background"
+                matTooltip="Select a root domain for your new website. You can change it or use your own domains later."
+                matTooltipClass="tooltip-background"
                 >help_outline</mat-icon
               >
             </mat-form-field>

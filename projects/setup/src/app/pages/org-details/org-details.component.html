@@ -1,10 +1,10 @@
-<form *ngIf="State.Step === SetupStepTypes['OrgDetails']" 
-  [formGroup]="DetailsForm" 
+<form *ngIf="State.Step === SetupStepTypes['OrgDetails']"
+  [formGroup]="DetailsForm"
   (ngSubmit)="SetOrgDetails()">
-    <h1 
-      fxLayoutAlign="center center" 
+    <h1
+      fxLayoutAlign="center center"
       class="mat-display-1 title margin-bottom-4">
-      Setup Your Organization
+      Set Up Your Organization
     </h1>
 
     <mat-form-field class="mat-full-width">
@@ -26,12 +26,12 @@
         help_outline
       </mat-icon>
     </mat-form-field>
-    
+
     <button
-      mat-raised-button color="accent" 
-      class="mat-full-width" 
+      mat-raised-button color="accent"
+      class="mat-full-width"
       [disabled]="!DetailsForm.valid">
-      Setup Organization Details
+      Set Up Organization Details
     </button>
 
   </form>
