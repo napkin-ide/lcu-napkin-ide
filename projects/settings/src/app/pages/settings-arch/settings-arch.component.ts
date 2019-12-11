@@ -80,7 +80,6 @@ export class SettingsArchComponent implements OnInit {
     });
   }
 
-
   //  API methods
   public AddDefaultDataAppsLCUs() {
     this.State.Loading = true;
