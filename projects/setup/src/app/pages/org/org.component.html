@@ -23,18 +23,16 @@
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Organization Details</h2>
+                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Configure Organization Details</h2>
 
                 <p class="mat-subheading-2">
-                  Fathym Framework has been designed from the ground up for organizations of any size. Our LCU Ecosytem connects
-                  organizations with a new set of problem solving No Code and Low Code tools. Enabling Enterprise Orchestration between new
-                  partners with ease and simplicity.
+                  The Fathym Framework is designed for organizations of any size. Our low-code unit (LCU) ecosystem enables your organization to rapidly build data applications.
                 </p>
 
-                <p class="mat-subheading-1">
+                <!-- <p class="mat-subheading-1">
                   <strong class="plain-text-bold">Organization Lookup</strong> - This is used to describe many aspects of your default setup (updateable later), and
                   gives the assets we create for you unique names for the various systems. The following rules apply...
-                </p>
+                </p> -->
               </div>
             </mat-list-item>
 
@@ -52,7 +50,7 @@
             <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.AzureSetup && !InfraFormValid">
               <mat-icon matListIcon class="error">highlight_off</mat-icon>
 
-              <h1 matLine>Setup Organization Infrastructure</h1>
+              <h1 matLine>Set Up Organization Infrastructure</h1>
             </mat-list-item>
 
             <mat-list-item *ngIf="State.Step === SetupStepTypes.AzureSetup" class="active-mat-list-item">
@@ -60,38 +58,35 @@
 
               <div matLine>
 
-                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Setup Organization Infrastructure</h2>
+                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Set Up Organization Infrastructure</h2>
 
                 <h2 class="mat-subheading-2">
-                  Infrastructure Setup currently requires an Azure tenant and subscription to get started. Use the button below to create
-                  your free Azure account or skip ahead to collect your configuration information.
+                  You will need to have a Microsoft Azure account to get started. Create a new account or use an existing account.
                 </h2>
 
                 <div class="btn-split">
                   <a mat-raised-button href="https://azure.microsoft.com/free/" color="primary" class="mat-full-width" target="_blank">
-                    <img matListIcon src="assets/img/Azure-logo.png" style="width: 40px;"/>
+                    <img matListIcon src="assets/img/Azure-logo.png" />
 
                     Create a Free Azure Account
                   </a>
                 </div>
 
                 <h2 class="mat-subheading-2">
-                  From your newly created subscription or one that already exists, Fathym needs access to your Azure subscription to help
-                  you manage your infrastructure. Follow the instructions in the link below (create a secret and ignore the section on
-                  certificates) to locate your authorization information, and enter it in the form inputs.
+                  Fathym needs access to your Azure subscription to help you manage your infrastructure.
                 </h2>
 
                 <div class="btn-split">
                   <a
                     mat-raised-button
-                    href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal"
+                    href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in."
                     color="primary"
                     class="mat-full-width"
                     target="_blank"
                   >
                     <mat-icon>settings</mat-icon>
 
-                    Locate your configuration information
+                    Locate Your Configuration Information
                   </a>
                 </div>
 
@@ -104,7 +99,7 @@
             <mat-list-item *ngIf="State.Step !== SetupStepTypes.AzureSetup && InfraFormValid">
               <mat-icon matListIcon class="success">check_circle</mat-icon>
 
-              <a matLine (click)="SetStep(SetupStepTypes.AzureSetup)">Organization Infrastructure Setup</a>
+              <a matLine (click)="SetStep(SetupStepTypes.AzureSetup)">Organization Infrastructure Set Up</a>
             </mat-list-item>
           </ng-container>
 
@@ -135,13 +130,12 @@
 
                 <ng-container *ngIf="State.HostFlow === 'shared'">
                   <h2 class="mat-subheading-2">
-                    We'll get you started with our community addition on a free domain. Select the root domain for your new site, no
-                    worries, you'll be able to change it and bring your own domains later.
+                      Get started with Fathym’s community edition on a free domain.
                   </h2>
 
                   <!-- <h2 class="mat-subheading-2" *ngIf="HostForm.controls['root'].value"> -->
                   <h2 class="mat-subheading-2" *ngIf="OrgHostComponent?.first?.RootDomainControl.value || ''">
-                    Choose an available subdomain for your new site, where we will make your SSL secured Data Applications available.
+                      Fathym creates SSL-secured data applications for your subdomain.
                   </h2>
                 </ng-container>
 
@@ -175,17 +169,17 @@
             <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.Terms && !State.TermsAccepted">
               <mat-icon matListIcon class="error">highlight_off</mat-icon>
 
-              <h1 matLine>Fathym Terms & Privacy</h1>
+              <h1 matLine>Accept Fathym's Terms</h1>
             </mat-list-item>
 
             <mat-list-item *ngIf="State.Step === SetupStepTypes.Terms" class="active-mat-list-item">
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Fathym Terms & Privacy</h1>
+                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Accept Fathym's Terms</h1>
 
                 <h2 class="mat-subheading-2">
-                  The Fathym Terms & Privacy will allow you access to our Open Core systems.
+                  Accepting Fathym’s Terms & Privacy agreements allows you access to our open core systems.
                 </h2>
 
                 <h2 class="mat-subheading-2">
@@ -226,12 +220,11 @@
                 <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Review & Setup</h1>
 
                 <h2 class="mat-subheading-2">
-                  We are going to setup a fairly opinionated starting infrastructure for your project. After getting started, you'll be able
-                  to use your team to dive in and adjust the architecture that powers your enterprise.
+                    Fathym will set up a best practice IoT infrastructure for your project. Once set up, you can adjust the architecture as needed for your organization.
                 </h2>
 
                 <h2 class="mat-subheading-2" *ngIf="State.EnterpriseBooted">
-                  The initial configuration of your Organization has been setup. The final step will deploy and configure the Fathym
+                  The initial configuration of your organization has been set up. The final step will deploy and configure the Fathym
                   Framework on the domain you've chosen.
                 </h2>
 
