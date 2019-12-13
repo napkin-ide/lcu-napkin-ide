@@ -27,7 +27,7 @@
 
       <mat-list-option
         [value]="solution.Name"
-        [selected]="HasCapability(solution.Name)"
+        [selected]="HasSolutionCapability(solution.Name)"
         *ngFor="let solution of State.Config.LCUConfig.Solutions"
       >
         {{ solution.Name }}
@@ -38,15 +38,23 @@
       <h4 mat-subheader>Elements</h4>
     </mat-selection-list>
 
-    <mat-selection-list #capabilities>
+    <mat-selection-list #dataFlowCapabilities>
       <h4 mat-subheader>Data Flow Modules</h4>
+
+      <mat-list-option
+        [value]="opt.ModuleType"
+        [selected]="HasDataFlowCapability(opt.ModuleType)"
+        *ngFor="let opt of State.Config.LCUConfig.Modules.Options"
+      >
+        {{ opt.Name }} ({{opt.ModuleType}})
+      </mat-list-option>
     </mat-selection-list>
 
     <div class="describe spread">
       <a
         mat-raised-button
         color="primary"
-        (click)="SaveLCUCapabilities(State.Config.CurrentLCUConfig, slnCapabilities.selectedOptions.selected)"
+        (click)="SaveLCUCapabilities(State.Config.CurrentLCUConfig, slnCapabilities.selectedOptions.selected, dataFlowCapabilities.selectedOptions.selected)"
       >
         Save Capabilities
       </a>

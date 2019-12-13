@@ -74,5 +74,7 @@ export class LowCodeUnitSetupConfig {
 export class LowCodeUnitConfiguration {
   public Files: string[];
 
+  public Modules: DataFlowModulePackSetup;
+
   public Solutions: IdeSettingsConfigSolution[];
 }

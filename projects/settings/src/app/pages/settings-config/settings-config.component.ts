@@ -1,6 +1,19 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  ViewChildren,
+  QueryList,
+  ChangeDetectorRef,
+  Input
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IdeSettingsState, LowCodeUnitSetupConfig, IDESettingStepTypes } from '../../core/ide-settings.state';
+import {
+  IdeSettingsState,
+  LowCodeUnitSetupConfig,
+  IDESettingStepTypes
+} from '../../core/ide-settings.state';
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
 import { MatSelectChange, MatListOption } from '@angular/material';
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
@@ -11,9 +24,13 @@ import { IdeActivity, IdeSideBarAction } from '@lcu/common';
   styleUrls: ['./settings-config.component.scss']
 })
 export class SettingsConfigComponent implements OnInit {
-
   public get ExpandActivityBar(): boolean {
-    return !!this.State.EditActivity || this.State.AddNew.Activity || !this.State.Activities || this.State.Activities.length <= 0;
+    return (
+      !!this.State.EditActivity ||
+      this.State.AddNew.Activity ||
+      !this.State.Activities ||
+      this.State.Activities.length <= 0
+    );
   }
 
   public get LCUGroups(): string[] {
@@ -38,9 +55,11 @@ export class SettingsConfigComponent implements OnInit {
   @Input('setting-step-types')
   public SettingStepTypes: IDESettingStepTypes;
 
-
   //  Constructors
-  constructor(protected formBldr: FormBuilder, protected ideSettingsState: IdeSettingsStateManagerContext) {}
+  constructor(
+    protected formBldr: FormBuilder,
+    protected ideSettingsState: IdeSettingsStateManagerContext
+  ) {}
 
   //  Life Cycle
 
@@ -78,7 +97,6 @@ export class SettingsConfigComponent implements OnInit {
       this.State = state;
     });
   }
-
 
   //  API methods
   public AddDefaultDataAppsLCUs() {
@@ -122,7 +140,9 @@ export class SettingsConfigComponent implements OnInit {
   public AddSideBarSection() {
     this.State.Loading = true;
 
-    this.ideSettingsState.AddSideBarSection(this.NewSideBarSectionForm.controls.name.value);
+    this.ideSettingsState.AddSideBarSection(
+      this.NewSideBarSectionForm.controls.name.value
+    );
   }
 
   public DeleteActivity(activity: IdeActivity) {
@@ -157,8 +177,21 @@ export class SettingsConfigComponent implements OnInit {
     }
   }
 
-  public HasCapability(name: string) {
-    return this.State.Config.ActiveSolutions && !!this.State.Config.ActiveSolutions.find(s => s.Name === name);
+  public HasDataFlowCapability(moduleType: string) {
+    return (
+      this.State.Config.ActiveModules &&
+      this.State.Config.ActiveModules.Options &&
+      !!this.State.Config.ActiveModules.Options.find(
+        o => o.ModuleType === moduleType
+      )
+    );
+  }
+
+  public HasSolutionCapability(name: string) {
+    return (
+      this.State.Config.ActiveSolutions &&
+      !!this.State.Config.ActiveSolutions.find(s => s.Name === name)
+    );
   }
 
   public SaveActivity(activity: IdeActivity) {
@@ -173,14 +206,36 @@ export class SettingsConfigComponent implements OnInit {
     this.ideSettingsState.SaveLCU(lcu);
   }
 
-  public SaveLCUCapabilities(lcuLookup: string, capabilities: MatListOption[]) {
+  public SaveLCUCapabilities(
+    lcuLookup: string,
+    slnCapabilities: MatListOption[],
+    dataFlowCapabilities: MatListOption[]
+  ) {
     this.State.Loading = true;
+
+    const options = dataFlowCapabilities.map(dfc => {
+      return this.State.Config.LCUConfig.Modules.Options.find(
+        o => o.ModuleType === dfc.value
+      );
+    });
 
     this.ideSettingsState.SaveLCUCapabilities(
       lcuLookup,
       this.State.Config.ActiveFiles,
-      capabilities.map(c => this.State.Config.LCUConfig.Solutions.find(s => s.Name === c.value)),
-      this.State.Config.ActiveModules
+      slnCapabilities.map(c => {
+        return this.State.Config.LCUConfig.Solutions.find(
+          s => s.Name === c.value
+        );
+      }),
+      {
+        Pack: this.State.Config.LCUConfig.Modules.Pack,
+        Options: options,
+        Displays: options.map(opt => {
+          return this.State.Config.LCUConfig.Modules.Displays.find(
+            o => o.ModuleType === opt.ModuleType
+          );
+        })
+      }
     );
   }
 
@@ -245,7 +300,11 @@ export class SettingsConfigComponent implements OnInit {
   }
 
   public UpdateLCU(lcu: LowCodeUnitSetupConfig) {
-    if (confirm(`Are you sure you want to update ${lcu.Lookup} version ${lcu.PackageVersion} to latest?`)) {
+    if (
+      confirm(
+        `Are you sure you want to update ${lcu.Lookup} version ${lcu.PackageVersion} to latest?`
+      )
+    ) {
       this.State.Loading = true;
 
       this.ideSettingsState.SaveLCU({ ...lcu, PackageVersion: 'latest' });
@@ -262,5 +321,4 @@ export class SettingsConfigComponent implements OnInit {
 
     this.NewSideBarSectionForm.reset();
   }
-
 }
