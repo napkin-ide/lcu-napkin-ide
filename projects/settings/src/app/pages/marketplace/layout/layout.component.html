@@ -1,10 +1,20 @@
 <!--TODO:  How to use this as the template for all pages-->
 
-<mat-toolbar>
-  <span class="filler"></span>
-
-  <h2>The stuff...</h2>
+<mat-toolbar class="marketplace-toolbar">
+  <!-- <span class="filler"></span> -->
+  <h2>LCU Marketplace</h2>
 </mat-toolbar>
+<div class="marketplace-container" fxLayout="row" fxLayoutAlign="end center">
+    <mat-form-field class="marketplace-search-form">
+        <input matInput type="search" placeholder="Search Marketplace">
+        <button mat-button matPrefix mat-icon-button>
+            <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+  <mat-icon class="marketplace-icons" id="profile">person</mat-icon>
+  <mat-icon class="marketplace-icons" id="shopping-cart">shopping_cart</mat-icon>
+</div>
 
 <div>
   <router-outlet></router-outlet>
