@@ -1,0 +1,7 @@
+@mixin settings($theme) {
+  // $config: mat-typography-config();
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+}

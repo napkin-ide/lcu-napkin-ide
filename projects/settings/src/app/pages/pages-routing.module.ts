@@ -19,6 +19,10 @@ const routes: Routes = [
     component: SettingsArchComponent
   },
   {
+    path: 'marketplace',
+    loadChildren: './marketplace/marketplace.module#MarketplaceModule'
+  },
+  {
     path: '**',
     component: SettingsSetupComponent
   }
