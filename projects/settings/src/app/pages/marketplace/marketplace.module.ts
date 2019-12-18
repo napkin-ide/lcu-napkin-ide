@@ -7,9 +7,10 @@ import { MaterialModule } from '@lcu/common';
 import { MarketplaceOverviewComponent } from './overview/overview.component';
 import { MarketplaceLayoutComponent } from './layout/layout.component';
 import { MarketplaceShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { MarketplaceProfileComponent } from './profile/profile.component';
 
 @NgModule({
-  declarations: [MarketplaceLayoutComponent, MarketplaceOverviewComponent, MarketplaceShoppingCartComponent],
+  declarations: [MarketplaceLayoutComponent, MarketplaceOverviewComponent, MarketplaceShoppingCartComponent, MarketplaceProfileComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,6 +20,6 @@ import { MarketplaceShoppingCartComponent } from './shopping-cart/shopping-cart.
     MaterialModule
   ],
   exports: [MarketplaceLayoutComponent, MarketplaceOverviewComponent],
-  entryComponents: [MarketplaceLayoutComponent, MarketplaceOverviewComponent, MarketplaceShoppingCartComponent]
+  entryComponents: [MarketplaceLayoutComponent, MarketplaceOverviewComponent, MarketplaceShoppingCartComponent, MarketplaceProfileComponent]
 })
 export class MarketplaceModule {}
