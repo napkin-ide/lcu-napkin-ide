@@ -4,10 +4,13 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
-  .marketplace-container{
-    width: 100%;
-  }
+
   
+  
+}
+.marketplace-container{
+  width: 100%;
+  padding-right: 50px;
 }
 .marketplace-header{
   cursor: pointer;

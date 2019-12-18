@@ -1,12 +1,14 @@
 
 // TODO hook into themes
+
 .featured-container{
     color:white;
     background-color:#a4bab3;
-    width: 75%;
+    width: 90%;
     height: 100%;
-    padding: 10px;
+    padding: 20px;
     margin: 20px;
+    margin-top:0px;
     border-radius: 15px;
     
     .featured-content{
@@ -14,15 +16,19 @@
     }
 }
 .marketplace-categories{
-    width: 80%
+    width: 90%;
+    margin-top: 35px;
 }
 .category{
     width: 120px;
     height:120px;
+    font-weight: 900;
+    font-size:20px;
     cursor: pointer;
+
     mat-icon{
-        font-size: 70px;
-        height:70px;
-        width:70px;
+        font-size: 90px;
+        height:90px;
+        width:90px;
     }
 }
