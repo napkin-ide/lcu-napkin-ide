@@ -1,13 +1,17 @@
 
 // TODO hook into themes
-.featured-content{
+.featured-container{
     color:white;
     background-color:#a4bab3;
     width: 75%;
-    height: 100px;
+    height: 100%;
     padding: 10px;
     margin: 20px;
     border-radius: 15px;
+    
+    .featured-content{
+        width:45%;
+    }
 }
 .marketplace-categories{
     width: 80%
