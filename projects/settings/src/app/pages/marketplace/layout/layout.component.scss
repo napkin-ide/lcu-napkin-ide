@@ -4,4 +4,21 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
+  .marketplace-container{
+    width: 100%;
+  }
+  
+}
+.marketplace-header{
+  cursor: pointer;
+  outline: none;
+}
+
+.marketplace-icons{
+  margin: 5px;
+  font-size: 35px;
+  height: 35px;
+  width:35px;
+  cursor: pointer;
+  outline: none;
 }
