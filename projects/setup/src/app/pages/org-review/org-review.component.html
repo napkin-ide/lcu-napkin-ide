@@ -14,9 +14,9 @@
 
     <ng-container *ngIf="!State.HasDevOpsOAuth">
       <div fxLayout="column">
-        <h2 class="h2">
+        <!-- <h2 class="h2">
           Get Connected with Azure DevOps
-        </h2>
+        </h2> -->
 
         <div fxLayout="row">
           <div fxFlex="20">
@@ -28,7 +28,7 @@
             </p>
 
             <a mat-raised-button color="accent" class="margin-top-3 weird-fix" [href]="AzureDevOpsOAuthURL">
-                Get Connected with Azure Dev Ops
+                Get Connected with Azure DevOps
               </a>
 
             <!-- <p class="weird-fix">
@@ -42,7 +42,8 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="State.HasDevOpsOAuth">
+    <ng-container >
+    <!-- *ngIf="State.HasDevOpsOAuth" -->
       <ng-container *ngIf="!State.EnterpriseBooted">
         <div fxLayout="column">
           <h2 class="h2">
@@ -55,26 +56,22 @@
             </div>
             <div fxFlex>
               <p class="weird-fix">
-                We'll configure an enterprise scalable, and cost effective infrastructure for getting on the Azure cloud. Free until
-                you scale.
+                Fathym does the following for your infrastructure:
               </p>
 
-              <p class="weird-fix">
-                We'll deploy a
-                <a mat-button color="accent" href="https://letsencrypt.org/" target="_blank">Let's Encrypt (Open Surce) SSL Certificate</a> secured application
-                host.
-              </p>
+              <ul class="weird-fix">
+                <li>Configures an enterprise-scalable, cost effective infrastructure (free until you scale your organization) </li>
+                <li>Deploys an SSL certificate for a secured application host </li>
+                <li>Manages Azure, other clouds, and legacy infrastructure </li>
+              </ul>
 
-              <p class="weird-fix">
-                We'll manage Azure, other clouds and legacy infrastructure with our Enterprise Orchestration tools.
-              </p>
             </div>
           </div>
         </div>
 
         <div fxLayout="column" class="margin-top-5">
           <h2 class="h2">
-              Comprehensive Dev/Ops
+              Comprehensive DevOps
           </h2>
 
           <div fxLayout="row">
@@ -83,13 +80,13 @@
               </div>
               <div fxFlex>
                   <p class="weird-fix">
-                      We've gotten connected with your Azure Dev Ops instance and will help manage your code, builds, releases, and more.
+                    Fathym does the following for your DevOps:
                     </p>
 
-                    <p class="weird-fix">
-                      We'll get some git based source control setup for your infrastructure, and connect it to builds for auto deploying to
-                      Azure.
-                    </p>
+                    <ul class="weird-fix">
+                      <li>Connects with your Azure DevOps instance and assists in managing your code, builds, releases, and more </li>
+                      <li>Sets up Git-based source control for your infrastructure and connects it to builds for auto-deploying to Azure </li>
+                    </ul>
               </div>
             </div>
         </div>
@@ -99,11 +96,12 @@
           color="accent"
           class="margin-top-3 mat-full-width"
           (click)="Boot()" >
-          Get Connected, Boot your Organization
+          Get Connected & Launch Your Organization
         </button>
       </ng-container>
 
-      <ng-container *ngIf="State.EnterpriseBooted">
+      <ng-container >
+        <!-- *ngIf="State.EnterpriseBooted"> -->
             <div fxLayout="column">
                 <h2 class="h2">
                     Application Hosting
@@ -115,13 +113,11 @@
               </div>
               <div fxFlex>
                 <p class="mat-subheading-2">
-                  The Dynamic Application Framework will provide a backbone for deliver javascript based front ends in a secure and
-                  scalable manner. Simplifying the developer experience to just solving customer problems.
+                    The Dynamic Application Framework provides a basis for delivering javascript-based front ends in a secure and scalable manner. Fathym simplifies the developer experience so you can focus on your customers.
                 </p>
 
                 <p class="mat-subheading-2">
-                  We'll take care of security, SSL hosting, and application serving as long as you want us to. Then we'll help you
-                  upgrade your infrastructure to the services and scale you need.
+                    Fathym manages security, SSL hosting, and application serving as long as you want, then we will help upgrade your infrastructure to the services and scale you need.
                 </p>
               </div>
               </div>
@@ -130,7 +126,7 @@
 
             <div fxLayout="column">
                 <h2 class="h2">
-                    Auth & Auth
+                    Authorization
                 </h2>
 
             <div fxLayout="row">
@@ -139,7 +135,7 @@
               </div>
               <div fxFlex>
                 <p class="mat-subheading-2">
-                  Easy to consume and use OAuth / Identity as a service, backed by the Auth/Auth provider of your choosing...
+                    Fathym offers an easy-to-consume-and-use OAuth/Identity as a service backed by the Auth/Auth provider you choose.
                 </p>
               </div>
               </div>
