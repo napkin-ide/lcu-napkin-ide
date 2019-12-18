@@ -4,10 +4,6 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
-// TODO make background-color #4a918e theme is overriding to whitesmoke
-  mat-toolbar .marketplace-toolbar{
-    background-color: #4a918e !important;
-  }
   .marketplace-container{
     width: 100%;
   }
