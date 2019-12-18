@@ -8,21 +8,10 @@
     </div>
 
     <div class="marketplace-categories" fxLayout="row" fxLayoutAlign="space-between center">
-        <div class="category" fxLayout="column" fxLayoutAlign="space-around center">
-            <mat-icon>trending_up</mat-icon>
-            <p>Data Flow</p>
-        </div>
-        <div class="category" fxLayout="column" fxLayoutAlign="space-around center">
-            <mat-icon>track_changes</mat-icon>
-            <p>IOT</p>
-        </div>
-        <div class="category" fxLayout="column" fxLayoutAlign="space-around center">
-            <mat-icon>apps</mat-icon>
-            <p>Data Apps</p>
-        </div>
-        <div class="category" fxLayout="column" fxLayoutAlign="space-around center">
-            <mat-icon>language</mat-icon>
-            <p>State</p>
+        <div class="category" fxLayout="column" fxLayoutAlign="space-around center" 
+        *ngFor="let offering of ServiceOfferings">
+            <mat-icon>{{ offering.icon }}</mat-icon>
+            <p>{{ offering.name }}</p>
         </div>
     </div>
 </div>
