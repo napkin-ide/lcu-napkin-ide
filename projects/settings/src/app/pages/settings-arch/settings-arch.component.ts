@@ -77,6 +77,7 @@ export class SettingsArchComponent implements OnInit {
       this.resetForms();
 
       this.State = state;
+      console.log("state: ", this.State)
     });
   }
 
