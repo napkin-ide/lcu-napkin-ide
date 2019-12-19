@@ -1,5 +1,10 @@
-.profile-navigation {
-    
+$profile-inset: 10px;
+
+.profile-title {
+    margin-left: $profile-inset;
+}
+
+.profile-navigation {  
     mat-list {
         min-height: 300px;
         margin-left: 30px;
@@ -15,6 +20,14 @@
             cursor: pointer;
         }
     }
+}
+
+::ng-deep .marketplace-profile-form .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0 !important; /* remove underline from form inputs */
+}
+
+.marketplace-profile-form input {
+    margin-left: $profile-inset;
 }
 
 .active-option {
