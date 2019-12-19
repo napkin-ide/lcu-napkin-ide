@@ -9,9 +9,6 @@
   @include theme-extras($theme);
   @include component-themes($theme);
 
-  .marketplace-toolbar{
-    background-color: #4a918e !important;
-  }
 }
 
 @mixin primary-logo($logo, $theme, $opacity) {
