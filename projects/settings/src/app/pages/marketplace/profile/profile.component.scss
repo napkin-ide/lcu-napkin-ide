@@ -1,0 +1,22 @@
+.profile-navigation {
+    
+    mat-list {
+        min-height: 300px;
+        margin-left: 30px;
+        margin-right: 30px;
+        padding-top: 45px;
+        padding-bottom: 45px;
+        border-radius: 50px;
+        background-color: #a4bab3;
+        mat-list-item {
+            margin-bottom: 5px;
+            font-family: arial;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
+}
+
+.active-option {
+    background-color: #4a918e  !important;
+}
