@@ -1,1 +1,31 @@
-<h1>Profile Component</h1>
+<div fxLayout="row">
+    <div fxFlex="30%">
+        <div fxFlex="100%" class="profile-navigation">
+            <mat-list role="list">
+                <mat-list-item role="listitem"
+                    *ngFor="let option of ProfileOptions"
+                    [ngClass]="{'active-option': option.Active}"
+                    (click)="SetActiveOption(option.Value)">{{ option.Title }}
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+    <div fxFlex="40%">
+        <div fxFlex="100%" class="active-data-section">
+            <div *ngIf="ActiveOptionValue === 'myInfo'">
+                My info
+            </div>
+            <div *ngIf="ActiveOptionValue === 'password'">
+                Password shows
+            </div>
+            <div *ngIf="ActiveOptionValue === 'subscriptions'">
+                Subscription info shows
+            </div>
+        </div>
+    </div>
+    <div fxFlex="30%">
+        <div fxFlex="100%" class="right-side-profile">
+
+        </div>
+    </div>
+</div>

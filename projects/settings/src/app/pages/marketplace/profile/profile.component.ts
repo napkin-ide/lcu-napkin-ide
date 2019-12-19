@@ -7,9 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketplaceProfileComponent implements OnInit {
 
-  constructor() { }
+  public ProfileOptions: any;
+  public ActiveOptionValue: string;
+
+  constructor() {
+    this.ProfileOptions = [
+      { Title: 'My Info', Active: false, Value: 'myInfo' },
+      { Title: 'Password', Active: false, Value: 'password' },
+      { Title: 'Subscriptions', Active: false, Value: 'subscriptions' }
+    ];
+    this.SetActiveOption('myInfo');
+  }
 
   ngOnInit() {
+  }
+
+  public SetActiveOption(value) {
+    this.ProfileOptions.forEach((op, idx) => {
+      if (op.Value === value) {
+        this.ProfileOptions[idx].Active = true;
+        this.ActiveOptionValue = this.ProfileOptions[idx].Value;
+      } else {
+        this.ProfileOptions[idx].Active = false;
+      }
+    });
   }
 
 }

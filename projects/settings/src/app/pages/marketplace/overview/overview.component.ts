@@ -37,6 +37,7 @@ export class MarketplaceOverviewComponent implements OnInit {
       this.resetForms();
 
       this.State = state;
+      // console.log(this.State)
     });
     this.buildServiceOfferings();
   }
