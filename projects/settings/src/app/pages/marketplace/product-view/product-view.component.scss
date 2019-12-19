@@ -1,0 +1,37 @@
+@mixin settings($theme) {
+    // $config: mat-typography-config();
+  
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    
+}
+
+h1, h2, h3, h4, h5, h6, p, span {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.product-info {
+    max-width: 55%;
+    text-align: right;
+    
+    .product-title {
+        font-size: 3em;
+        margin: 0;
+    }
+
+    .product-description {
+        font-size: 26px;
+        margin: 0;
+        margin-top: 10px;
+    }
+}
+
+.product-details-button {    
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 24pt;
+    background-color: #4a918e ;
+    border: none;
+}
