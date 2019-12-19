@@ -13,13 +13,29 @@
     <div fxFlex="40%">
         <div fxFlex="100%" class="active-data-section">
             <div *ngIf="ActiveOptionValue === 'myInfo'">
-                My info
+                <h1 class="profile-title">My info</h1>
+                <form  [formGroup]="ProfileForm" (ngSubmit)="OnSubmit()" class="marketplace-profile-form" fxLayout="column">
+                    <mat-form-field>
+                      <input matInput placeholder="Name" formControlName="Name">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput placeholder="Company email" formControlName="CompanyEmail">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput placeholder="Company" formControlName="Company">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput placeholder="Company URL" formControlName="CompanyURL">
+                    </mat-form-field>
+                    <button *ngIf="!EditingForm" (click)="EditForm()">Edit</button>
+                    <button *ngIf="EditingForm" type="submit" [disabled]="!ProfileForm.valid">Submit</button>
+                </form>
             </div>
             <div *ngIf="ActiveOptionValue === 'password'">
-                Password shows
+                <div class="profile-title">Password</div>
             </div>
             <div *ngIf="ActiveOptionValue === 'subscriptions'">
-                Subscription info shows
+                <div class="profile-title">Subscription info</div>
             </div>
         </div>
     </div>
