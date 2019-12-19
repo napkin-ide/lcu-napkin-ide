@@ -22,7 +22,7 @@ export class AppComponent {
       { Label: 'Setup', RouterURL: '/setup', Icon: 'build'},
       { Label: 'Configuration', RouterURL: '/configuration', Icon: 'perm_data_setting'},
       { Label: 'Architecture', RouterURL: '/architecture', Icon: 'square_foot'},
-      { Label: 'Marketplace', RouterURL: '/marketplace', Icon: 'flight'}
+      { Label: 'Marketplace', RouterURL: '/marketplace', Icon: 'shopping_basket'}
     ];
   }
 
