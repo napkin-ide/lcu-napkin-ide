@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
-import {  FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { IdeSettingsStateManagerContext } from '../../../core/ide-settings-state-manager.context';
 import { IdeSettingsState } from '../../../core/ide-settings.state';
 import { ServiceOfferingModel } from '../models/service-offering.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lcu-marketplace-overview',
@@ -17,9 +18,17 @@ export class MarketplaceOverviewComponent implements OnInit {
   public State: IdeSettingsState;
 
   public ServiceOfferings: Array<ServiceOfferingModel>;
+  public FeaturedProduct: any; // will be product model
 
   //  Constructors
-  constructor(protected formBldr: FormBuilder, protected ideSettingsState: IdeSettingsStateManagerContext) {}
+  constructor(
+    protected formBldr: FormBuilder,
+    protected ideSettingsState: IdeSettingsStateManagerContext,
+    protected router: Router) {
+      this.FeaturedProduct = {
+        Title: 'Fathym Forecast API'
+      };
+  }
 
   //  Life Cycle
 
@@ -34,6 +43,10 @@ export class MarketplaceOverviewComponent implements OnInit {
 
 
   //  API methods
+  public OpenProductView(product) {
+    console.log('opening product view for ', product.Title)
+    this.router.navigate(['marketplace/product', product.Title]);
+  }
 
   //  Helpers
   protected resetForms() {

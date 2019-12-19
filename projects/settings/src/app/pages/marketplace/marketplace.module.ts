@@ -8,9 +8,10 @@ import { MarketplaceOverviewComponent } from './overview/overview.component';
 import { MarketplaceLayoutComponent } from './layout/layout.component';
 import { MarketplaceShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { MarketplaceProfileComponent } from './profile/profile.component';
+import { MarketplaceProductViewComponent } from './product-view/product-view.component';
 
 @NgModule({
-  declarations: [MarketplaceLayoutComponent, MarketplaceOverviewComponent, MarketplaceShoppingCartComponent, MarketplaceProfileComponent],
+  declarations: [MarketplaceLayoutComponent, MarketplaceOverviewComponent, MarketplaceShoppingCartComponent, MarketplaceProfileComponent, MarketplaceProductViewComponent],
   imports: [
     CommonModule,
     FormsModule,
