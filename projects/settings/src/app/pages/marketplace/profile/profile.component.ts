@@ -12,7 +12,7 @@ export class MarketplaceProfileComponent implements OnInit {
   public ActiveOptionValue: string;
   public EditingForm: boolean;
   public UserEntity: any;
-  protected ProfileForm: FormGroup;
+  public ProfileForm: FormGroup;
 
   constructor() {
     // get user / company from state...
