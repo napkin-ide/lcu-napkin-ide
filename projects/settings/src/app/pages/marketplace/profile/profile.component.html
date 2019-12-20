@@ -16,19 +16,35 @@
                 <h1 class="profile-title">My info</h1>
                 <form  [formGroup]="ProfileForm" (ngSubmit)="OnSubmit()" class="marketplace-profile-form" fxLayout="column">
                     <mat-form-field>
-                      <input matInput placeholder="Name" formControlName="Name">
+                      <input 
+                        [ngClass]="{'input-edit-indication': EditingForm}" 
+                        matInput 
+                        placeholder="Name" 
+                        formControlName="Name">
                     </mat-form-field>
                     <mat-form-field>
-                      <input matInput placeholder="Company email" formControlName="CompanyEmail">
+                      <input 
+                        [ngClass]="{'input-edit-indication': EditingForm}" 
+                        matInput 
+                        placeholder="Company email" 
+                        formControlName="CompanyEmail">
                     </mat-form-field>
                     <mat-form-field>
-                      <input matInput placeholder="Company" formControlName="Company">
+                      <input 
+                        [ngClass]="{'input-edit-indication': EditingForm}" 
+                        matInput 
+                        placeholder="Company" 
+                        formControlName="Company">
                     </mat-form-field>
                     <mat-form-field>
-                      <input matInput placeholder="Company URL" formControlName="CompanyURL">
+                      <input 
+                        [ngClass]="{'input-edit-indication': EditingForm}" 
+                        matInput 
+                        placeholder="Company URL" 
+                        formControlName="CompanyURL">
                     </mat-form-field>
-                    <button *ngIf="!EditingForm" (click)="EditForm()">Edit</button>
-                    <button *ngIf="EditingForm" type="submit" [disabled]="!ProfileForm.valid">Submit</button>
+                    <button class="profile-action-button" *ngIf="!EditingForm" (click)="EditForm()">Edit</button>
+                    <button class="profile-action-button" *ngIf="EditingForm" type="submit" [disabled]="!ProfileForm.valid">Save</button>
                 </form>
             </div>
             <div *ngIf="ActiveOptionValue === 'password'">
