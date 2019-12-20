@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'lcu-marketplace-profile',
@@ -30,9 +30,9 @@ export class MarketplaceProfileComponent implements OnInit {
     ];
     this.SetActiveOption('myInfo');
     this.ProfileForm = new FormGroup({
-      Name: new FormControl(''),
-      CompanyEmail: new FormControl(''),
-      Company: new FormControl(''),
+      Name: new FormControl('', Validators.required),
+      CompanyEmail: new FormControl('', Validators.required),
+      Company: new FormControl('', Validators.required),
       CompanyURL: new FormControl(''),
     });
     this.ProfileForm.patchValue({
@@ -41,6 +41,10 @@ export class MarketplaceProfileComponent implements OnInit {
       Company: this.UserEntity.Company,
       CompanyURL: this.UserEntity.CompanyURL
     });
+    this.ProfileForm.controls['Name'].disable();
+    this.ProfileForm.controls['CompanyEmail'].disable();
+    this.ProfileForm.controls['Company'].disable();
+    this.ProfileForm.controls['CompanyURL'].disable();
 
   }
 
@@ -60,11 +64,19 @@ export class MarketplaceProfileComponent implements OnInit {
 
   public EditForm() {
     this.EditingForm = true;
+    this.ProfileForm.controls['Name'].enable();
+    this.ProfileForm.controls['CompanyEmail'].enable();
+    this.ProfileForm.controls['Company'].enable();
+    this.ProfileForm.controls['CompanyURL'].enable();
   }
 
   public OnSubmit() {
-    console.log(this.ProfileForm);
+    console.log('sending user info change: ', this.ProfileForm.value);
     this.EditingForm = false;
+    this.ProfileForm.controls['Name'].disable();
+    this.ProfileForm.controls['CompanyEmail'].disable();
+    this.ProfileForm.controls['Company'].disable();
+    this.ProfileForm.controls['CompanyURL'].disable();
   }
 
 }

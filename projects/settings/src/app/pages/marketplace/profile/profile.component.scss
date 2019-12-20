@@ -28,8 +28,24 @@ $profile-inset: 10px;
 
 .marketplace-profile-form input {
     margin-left: $profile-inset;
+    color: black;
+}
+
+.profile-action-button {
+    width: 50%;
+    margin-left: $profile-inset;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 24pt;
+    background-color: #4a918e ;
+    border: none;
 }
 
 .active-option {
     background-color: #4a918e  !important;
+}
+
+.input-edit-indication {
+    border-bottom: 1px solid black;
+    color: gray !important;
 }
