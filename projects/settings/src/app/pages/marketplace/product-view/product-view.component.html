@@ -11,10 +11,14 @@
       <p class="product-description">{{ Product.Description }}</p>
     </div>
     <div>
-      <button class="product-details-button">Add to org</button>
+      <button class="product-details-button" (click)="AddToOrg(Product)">Add to org</button>
       <p>By accessing this API you agree to it's
         <a href="https://fathym.com/terms-of-services/" target="_blank">terms and conditions.</a>
       </p>
     </div>
   </div>
+</div>
+
+<div *ngIf="State.Loading">
+  <mat-spinner></mat-spinner>
 </div>

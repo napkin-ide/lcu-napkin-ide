@@ -11,6 +11,12 @@ h1, h2, h3, h4, h5, h6, p, span {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+mat-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 .product-info {
     max-width: 55%;
