@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IdeSettingsState } from '../../../core/ide-settings.state';
+import { IdeSettingsStateManagerContext } from '../../../core/ide-settings-state-manager.context';
 
 @Component({
   selector: 'lcu-marketplace-profile',
@@ -13,8 +15,9 @@ export class MarketplaceProfileComponent implements OnInit {
   public EditingForm: boolean;
   public UserEntity: any;
   public ProfileForm: FormGroup;
+  public State: IdeSettingsState;
 
-  constructor() {
+  constructor(protected ideSettingsState: IdeSettingsStateManagerContext) {
     // get user / company from state...
     this.UserEntity = {
       Name: 'Chris P. Bacon',
@@ -49,6 +52,9 @@ export class MarketplaceProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ideSettingsState.Context.subscribe(state => {
+      this.State = state;
+    });
   }
 
   public SetActiveOption(value) {
@@ -71,7 +77,6 @@ export class MarketplaceProfileComponent implements OnInit {
   }
 
   public OnSubmit() {
-    console.log('sending user info change: ', this.ProfileForm.value);
     this.EditingForm = false;
     this.ProfileForm.controls['Name'].disable();
     this.ProfileForm.controls['CompanyEmail'].disable();

@@ -13,7 +13,7 @@
     <div fxFlex="40%">
         <div fxFlex="100%" class="active-data-section">
             <div *ngIf="ActiveOptionValue === 'myInfo'">
-                <h1 class="profile-title">My info</h1>
+                <div class="profile-title">My info</div>
                 <form  [formGroup]="ProfileForm" (ngSubmit)="OnSubmit()" class="marketplace-profile-form" fxLayout="column">
                     <mat-form-field>
                       <input 
