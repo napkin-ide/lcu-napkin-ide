@@ -3,7 +3,7 @@
         <div fxFlex="100%" class="profile-navigation">
             <mat-list role="list">
                 <mat-list-item role="listitem"
-                    *ngFor="let option of ProfileOptions"
+                    *ngFor="let option of ProfileSideBarOptions"
                     [ngClass]="{'active-option': option.Active}"
                     (click)="SetActiveOption(option.Value)">{{ option.Title }}
                 </mat-list-item>
