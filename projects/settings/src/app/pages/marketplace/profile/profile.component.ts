@@ -10,12 +10,61 @@ import { IdeSettingsStateManagerContext } from '../../../core/ide-settings-state
 })
 export class MarketplaceProfileComponent implements OnInit {
 
-  public ProfileOptions: any;
+  // FIELDS
+
+  /**
+   * name constant
+   */
+  protected readonly NAME: string = 'Name';
+
+  /**
+   * company email constant
+   */
+  protected readonly COMPANY_EMAIL: string = 'CompanyEmail';
+
+  /**
+   * company constant
+   */
+  protected readonly COMPANY: string = 'CompanyEmail';
+
+  /**
+   * company url constant
+   */
+  protected readonly COMPANY_URL: string = 'CompanyURL';
+
+  // PROPERTIES
+
+  /**
+   * configuration for the listed options in the profile section sidebar
+   */
+  public ProfileSideBarOptions: any;
+
+  /**
+   * the currently active sidebar list option
+   */
   public ActiveOptionValue: string;
+
+  /**
+   * boolean that determines / indicates whether profile form is currently being edited
+   */
   public EditingForm: boolean;
+
+  /**
+   * the user entity from which the current user's profile is generated
+   */
   public UserEntity: any;
+
+  /**
+   * the profile form used to edit the user's profile data
+   */
   public ProfileForm: FormGroup;
+
+  /**
+   * the current state
+   */
   public State: IdeSettingsState;
+
+  // CONSTRUCTORS
 
   constructor(protected ideSettingsState: IdeSettingsStateManagerContext) {
     // get user / company from state...
@@ -26,7 +75,7 @@ export class MarketplaceProfileComponent implements OnInit {
       CompanyURL: 'www.eggstobacon.yum'
     };
     this.EditingForm = false;
-    this.ProfileOptions = [
+    this.ProfileSideBarOptions = [
       { Title: 'My Info', Active: false, Value: 'myInfo' },
       { Title: 'Password', Active: false, Value: 'password' },
       { Title: 'Subscriptions', Active: false, Value: 'subscriptions' }
@@ -44,12 +93,14 @@ export class MarketplaceProfileComponent implements OnInit {
       Company: this.UserEntity.Company,
       CompanyURL: this.UserEntity.CompanyURL
     });
-    this.ProfileForm.controls['Name'].disable();
-    this.ProfileForm.controls['CompanyEmail'].disable();
-    this.ProfileForm.controls['Company'].disable();
-    this.ProfileForm.controls['CompanyURL'].disable();
+    this.ProfileForm.controls[this.NAME].disable();
+    this.ProfileForm.controls[this.COMPANY_EMAIL].disable();
+    this.ProfileForm.controls[this.COMPANY].disable();
+    this.ProfileForm.controls[this.COMPANY_URL].disable();
 
   }
+
+  // LIFECYCLE
 
   ngOnInit() {
     this.ideSettingsState.Context.subscribe(state => {
@@ -57,31 +108,48 @@ export class MarketplaceProfileComponent implements OnInit {
     });
   }
 
-  public SetActiveOption(value) {
-    this.ProfileOptions.forEach((op, idx) => {
+  // API METHODS
+
+  /**
+   *
+   * @param value the option to set as active
+   *
+   * sets the chosen option as the active option and switches views
+   */
+  public SetActiveOption(value): void {
+    this.ProfileSideBarOptions.forEach((op, idx) => {
       if (op.Value === value) {
-        this.ProfileOptions[idx].Active = true;
-        this.ActiveOptionValue = this.ProfileOptions[idx].Value;
+        this.ProfileSideBarOptions[idx].Active = true;
+        this.ActiveOptionValue = this.ProfileSideBarOptions[idx].Value;
       } else {
-        this.ProfileOptions[idx].Active = false;
+        this.ProfileSideBarOptions[idx].Active = false;
       }
     });
   }
 
-  public EditForm() {
+  /**
+   * when user clicks 'Edit', this runs and puts the form in 'edit mode'
+   */
+  public EditForm(): void {
     this.EditingForm = true;
-    this.ProfileForm.controls['Name'].enable();
-    this.ProfileForm.controls['CompanyEmail'].enable();
-    this.ProfileForm.controls['Company'].enable();
-    this.ProfileForm.controls['CompanyURL'].enable();
+    this.ProfileForm.controls[this.NAME].enable();
+    this.ProfileForm.controls[this.COMPANY_EMAIL].enable();
+    this.ProfileForm.controls[this.COMPANY].enable();
+    this.ProfileForm.controls[this.COMPANY_URL].enable();
   }
 
-  public OnSubmit() {
+  /**
+   * when user clicks 'Save', this runs and returns the form to 'read-only mode'
+   */
+  public OnSubmit(): void {
     this.EditingForm = false;
-    this.ProfileForm.controls['Name'].disable();
-    this.ProfileForm.controls['CompanyEmail'].disable();
-    this.ProfileForm.controls['Company'].disable();
-    this.ProfileForm.controls['CompanyURL'].disable();
+    this.ProfileForm.controls[this.NAME].disable();
+    this.ProfileForm.controls[this.COMPANY_EMAIL].disable();
+    this.ProfileForm.controls[this.COMPANY].disable();
+    this.ProfileForm.controls[this.COMPANY_URL].disable();
+    // make the call to save profile here...
   }
+
+  // HELPERS
 
 }

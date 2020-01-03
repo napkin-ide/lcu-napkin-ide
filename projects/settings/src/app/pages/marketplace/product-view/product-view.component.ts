@@ -10,8 +10,26 @@ import { IdeSettingsStateManagerContext } from '../../../core/ide-settings-state
 })
 export class MarketplaceProductViewComponent implements OnInit {
 
-  public Product: any; // will be product model
+  //  FIELDS
+
+  /**
+   * the lcu to be sent to back end and saved
+   */
+  protected savedLCU: LowCodeUnitSetupConfig;
+
+  //  PROPERTIES
+
+  /**
+   * product model containing product properties used in this file
+   */
+  public Product: any; // any for now, until we can see what the actual product looks like
+
+  /**
+   * Current state
+   */
   public State: IdeSettingsState;
+
+  // CONSTRUCTORS
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -22,24 +40,45 @@ export class MarketplaceProductViewComponent implements OnInit {
     this.Product.Description = 'More description things yay! This is an API; spend the moneys and you can use it, because capitalism.';
   }
 
+  // LIFECYCLE
+
   ngOnInit() {
     this.ideSettingsState.Context.subscribe(state => {
       this.State = state;
     });
   }
 
-  public AddToOrg(product) {
-    this.State.Loading = true;
+  // API METHODS
+
+  /**
+   *
+   * @param product the product (lcu) to be saved
+   *
+   * takes a product, converts it to an LCU setup configuration and saves it
+   */
+  public AddToOrg(product): void {
+    this.savedLCU = new LowCodeUnitSetupConfig();
+
     // map product into LowCodeUnitSetupConfig...
-    this.SaveLCU({
-      // hard coding this for now as functionality to populate this data from state is not yet complete
-      Lookup: 'lcu-fathym-forecast-lcu', // can be named anything
-      NPMPackage: '@habistack/lcu-fathym-forecast-lcu', // must be real package
-      PackageVersion: '0.9.75' // must be real version number
-    });
+    
+    // hard coding this for now as functionality to populate this data from state is not yet complete
+    this.savedLCU.Lookup = 'lcu-fathym-forecast-lcu';
+    this.savedLCU.NPMPackage = '@habistack/lcu-fathym-forecast-lcu';
+    this.savedLCU.PackageVersion = '0.9.75';
+
+    this.State.Loading = true;
+    this.saveLCU(this.savedLCU);
   }
 
-  public SaveLCU(lcu: LowCodeUnitSetupConfig) {
+  // HELPERS
+
+  /**
+   *
+   * @param lcu the LCU to save
+   *
+   * takes an LCU setup configuration and sends it to the back to be saved
+   */
+  protected saveLCU(lcu: LowCodeUnitSetupConfig): void {
     this.ideSettingsState.SaveLCU(lcu);
   }
 
