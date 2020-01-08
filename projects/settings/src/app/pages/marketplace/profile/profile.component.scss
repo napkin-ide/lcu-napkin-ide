@@ -64,3 +64,13 @@ $profile-inset: 10px;
     border-bottom: 1px solid black;
     color: gray !important;
 }
+
+@media screen and (max-width: 800px) {
+    .profile-navigation {  
+        mat-list {
+            mat-list-item {
+                font-size: 22px;
+            }
+        }
+    }
+}
