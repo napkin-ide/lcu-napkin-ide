@@ -18,6 +18,11 @@ export class OrgReviewComponent implements OnInit {
   }
 
   /**
+   * indicates whether user has clicked to "Finalize" registration
+   */
+  public FinalizeClicked: boolean;
+
+  /**
    * Setup step types
    */
   // tslint:disable-next-line:no-input-rename
@@ -31,7 +36,9 @@ export class OrgReviewComponent implements OnInit {
   @Input('state')
   public State: NapkinIDESetupState;
 
-  constructor(protected nideState: NapkinIDESetupStateManagerContext) {}
+  constructor(protected nideState: NapkinIDESetupStateManagerContext) {
+    this.FinalizeClicked = false;
+  }
 
   ngOnInit() {
     this.setupTempFinalizeTracker();
@@ -45,6 +52,8 @@ export class OrgReviewComponent implements OnInit {
 
   public Finalize() {
     this.State.Loading = true;
+
+    this.FinalizeClicked = true;
 
     this.nideState.Finalize();
   }
