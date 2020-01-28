@@ -140,6 +140,7 @@
               </div>
               </div>
               <button
+                *ngIf="!FinalizeClicked"
                 mat-raised-button
                 color="accent"
                 class="margin-top-3 mat-full-width"
@@ -151,8 +152,9 @@
                 </mat-icon>
 
                 Finalize and Deploy your Organization
-
+                
               </button>
+              <mat-progress-bar *ngIf="FinalizeClicked" mode="indeterminate"></mat-progress-bar>
             </div>
       </ng-container>
     </ng-container>
