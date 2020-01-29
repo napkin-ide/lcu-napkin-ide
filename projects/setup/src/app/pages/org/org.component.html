@@ -251,47 +251,67 @@
   <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
     <div class="inner">
       <div>
-        <div *ngIf="!State.Loading">
+        <div >
           <mat-card>
+            <!-- when the state is loading *ngIf="State.Loading" -->
+            <div *ngIf="State.Loading">
+              <p>Hello this is some content to fill the card!</p>
+              
+              <p>Fathym is calculating something</p>
+
+              <p>Hopefully this doesnt take long...</p>
+
+              <!-- close but no cigar -->
+              <!-- <div class="spinner" logo-alt="Fathym Logo">
+                <mat-spinner></mat-spinner>
+              </div> -->
+
+              <!-- Spinning thinky -->
+              <!-- <mat-spinner class="spinner" strokeWidth=".01"></mat-spinner> -->
+              <mat-spinner></mat-spinner>
+
+            </div>
           <!-- Organization details form -->
-          <lcu-org-details
+          <lcu-org-details *ngIf="!State.Loading"
           #OrgDetailsComponent
           [setup-step-types]="SetupStepTypes"
           [state]="State"></lcu-org-details>
 
           <!-- Organization infrastructure form -->
-          <lcu-org-infra
+          <lcu-org-infra *ngIf="!State.Loading"
           #OrgInfraComponent
           [setup-step-types]="SetupStepTypes"
           [state]="State"
           (set-step)="SetStep($event)"></lcu-org-infra>
 
           <!-- Organization host form -->
-          <lcu-org-host
+          <lcu-org-host *ngIf="!State.Loading"
           #OrgHostComponent
           [setup-step-types]="SetupStepTypes"
           [state]="State"
           (set-step)="SetStep($event)"></lcu-org-host>
 
           <!--Terms and conditions form-->
-          <lcu-org-terms
+          <lcu-org-terms *ngIf="!State.Loading"
           [setup-step-types]="SetupStepTypes"
           [state]="State"></lcu-org-terms>
 
-          <lcu-org-review
+          <lcu-org-review *ngIf="!State.Loading"
             [setup-step-types]="SetupStepTypes"
             [state]="State"></lcu-org-review>
 
-          <lcu-complete
+          <lcu-complete *ngIf="!State.Loading"
             [setup-step-types]="SetupStepTypes"
             [state]="State"></lcu-complete>
 
         </mat-card>
         </div>
-
-        <div *ngIf="State.Loading">
+        <!-- original spinner  refer to line 265 and 270 for alt spinners-->
+        <!-- <div *ngIf="State.Loading">
+          <div class="spinner" logo-alt="Fathym Logo"></div>
           <mat-spinner></mat-spinner>
-        </div>
+        </div> -->
+
       </div>
     </div>
   </div>
