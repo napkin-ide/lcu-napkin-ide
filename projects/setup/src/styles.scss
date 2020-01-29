@@ -15,6 +15,17 @@
   .primary-logo {
     background-image: fathym-logo($logo, mat-color(map-get($theme, accent)), $opacity);
   }
+  .spinner-logo{
+    background-image: fathym-logo(thinky-logo,black, $opacity );
+    // height: 70px !important;
+    // width: 70px !important;
+    // background-size: 70px !important;
+    // bottom: -80px;
+    // left:14px;
+    // position: relative;
+    background-repeat:no-repeat;
+    // background-position: center;
+  }
 }
 
 // for updating components with themes
