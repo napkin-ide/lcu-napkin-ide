@@ -42,8 +42,7 @@
       </div>
     </ng-container>
 
-    <ng-container >
-    <!-- *ngIf="State.HasDevOpsOAuth" -->
+    <ng-container *ngIf="State.HasDevOpsOAuth">
       <ng-container *ngIf="!State.EnterpriseBooted">
         <div fxLayout="column">
           <h2 class="h2">
@@ -100,8 +99,7 @@
         </button>
       </ng-container>
 
-      <ng-container >
-        <!-- *ngIf="State.EnterpriseBooted"> -->
+      <ng-container *ngIf="State.EnterpriseBooted">
             <div fxLayout="column">
                 <h2 class="h2">
                     Application Hosting
