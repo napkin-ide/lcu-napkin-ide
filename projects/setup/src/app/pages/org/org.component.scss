@@ -1,4 +1,3 @@
-
 .tooltip-background {
   background-color: #4a918e !important;
 }
@@ -14,6 +13,15 @@
     background-repeat:no-repeat;
     background-position: center;
   }
+  .spinner{
+    background-image: fathym-logo(thinky-logo,black, 1 );
+    height: 70px !important;
+    width: 70px !important;
+    background-size: 70px !important;
+    margin: auto;
+    background-repeat:no-repeat;
+  }
+  
 
   // :host {
     .identity {
