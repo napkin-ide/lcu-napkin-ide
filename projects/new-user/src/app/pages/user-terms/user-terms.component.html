@@ -1,0 +1,9 @@
+<div *ngIf="State.Step === SetupStepTypes['Terms']">
+    <!-- <h1 fxLayoutAlign="center center" class="mat-display-1 title margin-bottom-4">
+      Fathym Enterprise Agreement
+    </h1> -->
+    <div [innerHTML]="State.Terms | sanitizeHtml" fxLayoutAlign="center" style="margin-bottom: 1.5em"></div>
+    <button mat-raised-button color="accent" class="mat-full-width" class="hover-highlight" (click)="AcceptTerms()">
+      Accept
+    </button>
+   </div>

@@ -1,0 +1,316 @@
+<div *ngIf="State.Step === SetupStepTypes['Complete']">
+
+    <h1
+      fxLayoutAlign="center center"
+      class="mat-display-1 title margin-bottom-4">
+      {{ State.OrganizationName }} has been added to the Ecosystem
+    </h1>
+
+    <h2
+      fxLayoutAlign="center center"
+      class="h2 paragraph-title-bold margin-bottom-3">
+      Now Fathym It, and Build It.
+    </h2>
+
+    <div fxLayout="column">
+        <h2 class="h2">
+            What Happens Next?
+        </h2>
+
+        <div fxLayout="row">
+          <div fxFlex="20">
+              <!-- <img style="height: 200px;" src="assets/img/Azure-logo.png" /> -->
+          </div>
+          <div fxFlex>
+              <p class="mat-subheading-2">
+                  Some things are finalizing, and we'll redirect you to {{ State.Host }} in the next 30 seconds. Your SSL and hosts are
+                  being configured with the LCU Runtime, and once complete you'll be able to manage your world from your own infrastructure.
+                </p>
+
+                <p class="mat-subheading-2">
+                  We've authorize and configure your Azure Dev Ops, and we'll walk you through creating new Data Applications on this infrastructure.
+                </p>
+
+                <p class="mat-subheading-2">
+                  We have tons of great information and tutorials to get you started, so dive in!
+                </p>
+
+                <a mat-raised-button color="primary" target="_parent" href="https://{{State.Host}}/fathym-it">
+                  <mat-icon>launch</mat-icon> Open Enterprise IDE
+                </a>
+          </div>
+        </div>
+      </div>
+
+<!-- <div class="spread" *ngIf="!State.Loading">
+  <div fxLayout="row wrap" fxLayoutAlign="center start">
+    <div fxFlex="90%">
+      <mat-card class="spread">
+        <div class="spread">
+          <h2 class="mat-headline title">Finalizing Your Application Setup</h2>
+
+          <p class="mat-body-3 plain-text">
+            Below is a summary of what Fathym has set up so far and some recommended reading on your next steps. Fathym will notify you when
+            setup is complete.
+          </p>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="45%" fxFlex.lt-md="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>lock</mat-icon>
+
+          <mat-card-title class="mat-headline title">LCU Management</mat-card-title>
+        </mat-card-header>
+
+        <div>
+          <p class="mat-body-3 plain-text" style="text-align: left; margin-bottom: 1em; margin-left: 1.6em">
+            Fathym created and accessed several of your systems:
+          </p>
+
+          <mat-nav-list>
+            <mat-list-item>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
+
+              <div matLine>Secure Connection to Azure</div>
+
+              <a
+                mat-icon-button
+                target="_blank"
+                href="https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredAppsPreview"
+              >
+                <mat-icon>settings</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
+
+              <div matLine>Secure Connection to GitHub</div>
+
+              <a mat-icon-button target="_blank" href="https://github.com/settings/applications">
+                <mat-icon>settings</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
+
+              <div matLine>Secure Connection to Azure DevOps</div>
+
+              <a mat-icon-button target="_blank" href="https://aex.dev.azure.com/me?mkt=en-US&campaign=o~msft~vsts~usercard">
+                <mat-icon>settings</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
+
+              <div matLine>Secure Connection to NPM</div>
+
+              <a mat-icon-button target="_blank" href="https://www.npmjs.com/settings/mcgear/tokens">
+                <mat-icon>settings</mat-icon>
+              </a>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="45%" fxFlex.lt-md="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>code</mat-icon>
+
+          <mat-card-title class="mat-headline title">Source Control Configuration</mat-card-title>
+        </mat-card-header>
+
+        <div>
+          <p class="mat-body-3 plain-text" style="text-align: left; margin-bottom: 1em; margin-left: 1.6em">
+            For your next steps on starting development in your repositories, read the following:
+          </p>
+
+          <mat-nav-list>
+            <mat-list-item>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
+
+              <div matLine>Connected to your GitHub Organization:</div>
+
+              <div matLine>
+                <strong>{{ State.GitHub.SelectedOrg }}</strong>
+              </div>
+
+              <a mat-icon-button target="_blank" href="https://github.com/settings/organizations">
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon class="success">check_circle</mat-icon>
+
+              <div matLine>Created an infrastructure repo:</div>
+
+              <div matLine>
+                <strong>@{{ GitHubOrg }}/{{ GitHubRepo }}</strong>
+              </div>
+
+              <a mat-icon-button target="_blank" href="https://github.com/{{ GitHubOrg }}/{{ GitHubRepo }}">
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon class="success">{{ State.AppSeed.HasBuild ? 'check_circle' : 'cancel' }}</mat-icon>
+
+              <div matLine>Created a repository for your {{ State.AppSeed?.SelectedSeed }} application:</div>
+
+              <div matLine>
+                <strong>@{{ GitHubOrg }}/{{ State.AppSeed.NewName }}</strong>
+              </div>
+
+              <a
+                mat-icon-button
+                target="_blank"
+                href="https://github.com/{{ GitHubOrg }}/{{ State.AppSeed?.NewName }}"
+                [disabled]="!State.AppSeed.HasBuild"
+              >
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+          </mat-nav-list>
+
+          <div class="spread" *ngIf="!State.AppSeed.HasBuild">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="45%" fxFlex.lt-md="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>cloud</mat-icon>
+
+          <mat-card-title class="mat-headline title">Azure DevOps</mat-card-title>
+        </mat-card-header>
+
+        <div>
+          <p class="mat-body-3 plain-text" style="text-align: left; margin-bottom: 1em; margin-left: 1.6em">
+            Fathym set up a streamlined DevOps process for you:
+          </p>
+
+          <mat-nav-list>
+            <mat-list-item>
+              <mat-icon matListIcon class="success">{{ State.AppSeed.InfraBuilt ? 'check_circle' : 'cancel' }}</mat-icon>
+
+              <div matLine>
+                Deployed your first version of <strong>{{ State.InfraTemplate.SelectedTemplate }}</strong> Infrastructure to
+                <strong>{{ State.Environment.Lookup }}</strong>
+              </div>
+
+              <a mat-icon-button target="_blank" href="https://portal.azure.com" [disabled]="!State.AppSeed.InfraBuilt">
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon class="success">{{ State.AppSeed.HasBuild ? 'check_circle' : 'cancel' }}</mat-icon>
+
+              <div matLine>Established a new Azure DevOps project ({{ State.DevOps.ProjectName }}) with automated builds and releases</div>
+
+              <a
+                mat-icon-button
+                target="_blank"
+                href="https://fathym.visualstudio.com/{{ State.DevOps.ProjectName }}/_build"
+                [disabled]="!State.AppSeed.HasBuild"
+              >
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+          </mat-nav-list>
+
+          <div class="spread" *ngIf="!State.AppSeed.InfraBuilt || !State.AppSeed.HasBuild">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="45%" fxFlex.lt-md="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>dashboard</mat-icon>
+
+          <mat-card-title class="mat-headline title">Application Seed</mat-card-title>
+        </mat-card-header>
+
+        <div>
+          <p class="mat-body-3 plain-text" style="text-align: left; margin-bottom: 1em; margin-left: 1.6em">
+            Fathym set up a default application for you in the dynamic application framework:
+          </p>
+
+          <mat-nav-list>
+            <mat-list-item>
+              <mat-icon matListIcon class="success">{{ State.AppSeed.AppSeeded ? 'check_circle' : 'cancel' }}</mat-icon>
+
+              <div matLine>
+                Seeded your application repository with a <strong>{{ State.AppSeed.SelectedSeed }}</strong> template
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon class="success">{{
+                State.AppSeed.Step == AppSeedStepTypes.Created ? 'check_circle' : 'cancel'
+              }}</mat-icon>
+
+              <div matLine>Established a Data Applications configuration in your ide</div>
+
+              <a
+                mat-icon-button
+                target="_blank"
+                href="/{{ GitHubOrg }}/{{ State.AppSeed.NewName }}"
+                [disabled]="State.AppSeed.Step != AppSeedStepTypes.Created"
+              >
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon class="success">{{
+                State.AppSeed.Step == AppSeedStepTypes.Created ? 'check_circle' : 'cancel'
+              }}</mat-icon>
+
+              <div matLine>
+                Prepared your ide with default Low Code Units to manage your current configuration
+              </div>
+
+              <a mat-icon-button target="_parent" href="/fathym-it" [disabled]="State.AppSeed.Step != AppSeedStepTypes.Created">
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+          </mat-nav-list>
+
+          <div class="spread" *ngIf="!State.AppSeed.AppSeeded || State.AppSeed.Step != AppSeedStepTypes.Created">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>search</mat-icon>
+
+          <mat-card-title>Get Started & Next Steps</mat-card-title>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="spread" *ngIf="State.Loading">
+  <mat-spinner></mat-spinner>
+</div> -->
