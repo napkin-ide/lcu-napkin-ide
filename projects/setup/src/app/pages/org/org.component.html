@@ -254,21 +254,18 @@
         <div >
           <mat-card>
             <!-- when the state is loading *ngIf="State.Loading" -->
-            <div *ngIf="State.Loading">
-              <p>Hello this is some content to fill the card!</p>
-              
-              <p>Fathym is calculating something</p>
+            <div>
+            <!-- *ngIf="State.Loading"> -->
+              <p style="text-align: center;">Behind the scenes Thinky is working hard to provision your resourses</p>
 
-              <p>Hopefully this doesnt take long...</p>
+              <p style="text-align: center;">Hooking up your Azure info at the moment...</p>
 
-              <!-- close but no cigar -->
-              <!-- <div class="spinner" logo-alt="Fathym Logo">
-                <mat-spinner></mat-spinner>
-              </div> -->
 
-              <!-- Spinning thinky -->
-              <!-- <mat-spinner class="spinner" strokeWidth=".01"></mat-spinner> -->
-              <mat-spinner></mat-spinner>
+              <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
+                <mat-spinner diameter="75"></mat-spinner >
+                <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+              </div>
+
 
             </div>
           <!-- Organization details form -->

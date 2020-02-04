@@ -8,7 +8,7 @@
   @include angular-material-theme($theme);
   @include fathym-branding($theme);
   @include theme-extras($theme);
-  @include component-themes($theme); 
+  @include component-themes($theme);
 }
 
 @mixin primary-logo($logo, $theme, $opacity) {
@@ -39,7 +39,8 @@
     @include primary-logo(thinky-full-logo, $theme, 1);
 
     button .mat-spinner circle {
-      stroke: #282D35;
+      stroke: #282D35 !important;
+      color: black !important;
     }
  }
 
