@@ -1,0 +1,45 @@
+<form
+      fxLayout="column"
+      fxLayoutGap="10px"
+      [formGroup]="Form"
+      novalidate>
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon color="accent">lock_open</mat-icon>
+    </div>
+    <mat-card-title>Organization Access</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    
+    <mat-form-field>
+      <mat-label>Organizations</mat-label>
+      <mat-select  
+        formControlName="orgControl"
+        id="organizationSelect"
+        name="organizationSelect">
+        <mat-option
+          id="organizationOption"
+          name="organizationOption"
+          *ngFor="let org of Orgs" 
+          [value]="org"
+          [ngClass]="{'disabled-with-cursor': org.Disabled}">
+          <mat-icon [ngClass]="{'error': org.Disabled, 'success': !org.Disabled}">check_circle</mat-icon>
+          {{ org.Label }} 
+          <small *ngIf="org.Disabled"> (Click to request access)</small>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button 
+      *ngIf="UnathorizedSelected && UnathorizedSelected.Disabled"
+      id="requestAccessButton"
+      name="requestAccessButton"
+      mat-flat-button 
+      color="primary">
+      Request Access to {{UnathorizedSelected.Label}}
+    </button>
+  </mat-card-actions>
+</mat-card>
+</form>

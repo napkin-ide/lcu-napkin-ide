@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+@import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+@import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
+
+@mixin theme-setup($theme) {
+  @include angular-material-theme($theme);
+  @include fathym-branding($theme);
+  @include theme-extras($theme);
+
+  .disabled-with-cursor {
+    @include disabled(.5);
+    // background-color: mat-color(map-get($theme, warn), 900);
+    background-color: rgba($color: #5f5f5f, $alpha: 1);
+   }
+}
+
+@mixin primary-logo($logo, $theme, $opacity) {
+  .primary-logo {
+    background-image: fathym-logo($logo, mat-color(map-get($theme, accent)), $opacity);
+  }
+}
+
+.logo {
+  width: 150px;
+  height: 50px;
+}
+
+
+@include theme-setup(fathym-ivy-theme(true));
+
+
