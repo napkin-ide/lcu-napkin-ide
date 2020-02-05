@@ -13,15 +13,19 @@
     background-repeat:no-repeat;
     background-position: center;
   }
-  .spinner{
+  .spinner-logo{
+    position: absolute;
     background-image: fathym-logo(thinky-logo,black, 1 );
-    height: 70px !important;
-    width: 70px !important;
-    background-size: 70px !important;
-    margin: auto;
+    height: 70% !important;
+    width: 70% !important;
     background-repeat:no-repeat;
   }
-  
+  .spinner-container {
+    position: relative;
+    height: 75px;
+    width: 75px;
+    margin-left: 43%;
+  }
 
   // :host {
     .identity {
