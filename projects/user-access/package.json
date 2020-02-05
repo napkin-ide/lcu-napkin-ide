@@ -1,0 +1,8 @@
+{
+	"name": "@napkin-ide/lcu-napkin-ide-user-access",
+	"version": "0.0.1",
+	"peerDependencies": {
+		"@angular/common": "~8.1.2",
+		"@angular/core": "~8.1.2"
+	}
+}
