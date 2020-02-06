@@ -8,10 +8,10 @@
 
           <div>
 
-              <mat-form-field class="mat-full-width ">
+              <mat-form-field class="mat-full-width" >
                   <div fxLayout="row" fxLayoutGap="10px">
                       <mat-icon *ngIf="OrgInfraAzureAppAppId.value.length > 0 && !OrgInfraAzureAppAppId.hasError('pattern')" class="success">check_circle</mat-icon>
-                    <input
+                    <input 
                       formControlName="azureAppId"
                       matInput placeholder="Azure App ID"
                       [type]="HideAppId ? 'password' : 'text'"
@@ -29,7 +29,7 @@
                     matSuffix
                     (click)="HideAppId = !HideAppId" class="cursor-pointer">{{HideAppId ? 'visibility_off' : 'visibility'}}
                   </mat-icon>
-                  <mat-icon matSuffix matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. See the help for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
+                  <mat-icon matSuffix (click)="OpenHelpPdf()"  matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
                   <!-- matBadge="{{OrgInfraAzureAppAppId.value.length}}"  -->
                   <mat-hint>Guid Value</mat-hint>
                 </mat-form-field>
@@ -56,7 +56,7 @@
                   matSuffix
                   (click)="HideTenantId = !HideTenantId" class="cursor-pointer">{{HideTenantId ? 'visibility_off' : 'visibility'}}
                 </mat-icon>
-                <mat-icon matSuffix matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. See the help for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
+                <mat-icon matSuffix  (click)="OpenHelpPdf()" matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
                 <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
               <mat-hint>Guid Value</mat-hint>
             </mat-form-field>
@@ -82,7 +82,7 @@
                 matSuffix
                 (click)="HideSubId = !HideSubId" class="cursor-pointer">{{HideSubId ? 'visibility_off' : 'visibility'}}
               </mat-icon>
-              <mat-icon matSuffix matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. See the help for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
+              <mat-icon matSuffix (click)="OpenHelpPdf()" matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
               <!-- matBadge="{{OrgInfraAzureSubId.value.length}}"  -->
               <mat-hint>Guid Value</mat-hint>
             </mat-form-field>
@@ -110,7 +110,7 @@
                 matSuffix
                 (click)="HideAuthKey = !HideAuthKey" class="cursor-pointer">{{HideAuthKey ? 'visibility_off' : 'visibility'}}
               </mat-icon>
-              <mat-icon matSuffix matTooltip=" Obtain this value from Azure’s Certificates and Secrets page. See the help for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
+              <mat-icon matSuffix (click)="OpenHelpPdf()" matTooltip=" Obtain this value from Azure’s Certificates and Secrets page. Click for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
               <!-- matBadge="{{OrgInfraAzureAppAuthKey.value.length}}"  -->
               <!-- <mat-hint>32 Character Limit</mat-hint> -->
             </mat-form-field>
@@ -118,11 +118,14 @@
 
           <div class="margin-top-4">
           <button
+            matTooltip="Your best practices IoT cloud infrastructure is being set up. If you were doing this from scratch, it would take several days, but with Fathym it will only take up to 15 minutes." 
+            matTooltipClass="tooltip-background"
             mat-raised-button
             color="accent"
             class="mat-full-width"
             (click)="Configure()"
-            [disabled]="!InfraForm.valid">
+            [disabled]="!InfraForm.valid"
+            >
             Set Up Organization Details
           </button>
 
