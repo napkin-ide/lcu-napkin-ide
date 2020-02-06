@@ -6,12 +6,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OrgAccessComponent } from './controls/org-access/org-access.component';
+import { OrgAccessComponent } from './pages/org-access/org-access.component';
+import { AccessComponent } from './controls/access/access.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrgAccessComponent
+    OrgAccessComponent,
+    AccessComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -24,7 +27,7 @@ import { OrgAccessComponent } from './controls/org-access/org-access.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [OrgAccessComponent],
-  entryComponents: [OrgAccessComponent]
+  exports: [OrgAccessComponent, AccessComponent],
+  entryComponents: [OrgAccessComponent, AccessComponent]
 })
 export class AppModule { }
