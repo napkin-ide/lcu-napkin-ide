@@ -13,62 +13,11 @@ export class UserManagementStateContext extends StateContext<UserManagementState
     super(injector);
   }
 
-  public async Start(shouldUpdate: boolean) {
-    if (!this.startSub) {
-      this.startSub = this.rt.Started.subscribe(async () => {
-        const groupName = await this.connectToState(shouldUpdate);
-
-        this.setupReceiveState(groupName);
-
-        this.$Refresh();
-      });
-
-      this.rt.Start();
-    }
-  }
-  protected loadActionPath() {
-    const actionRoot = this.loadStateActionRoot();
-
-    return `${actionRoot}`;//?lcu-app-id=${this.Settings.AppConfig.ID}&lcu-app-ent-api-key=${this.Settings.AppConfig.EnterpriseAPIKey}`;
-  }
-
-  protected async connectToState(shouldUpdate: boolean): Promise<string> {
-    const stateKey = await this.loadStateKey();
-
-    const stateName = await this.loadStateName();
-
-    const env = await this.loadEnvironment();
-
-    const unMock = await this.loadUsernameMock();
-
-    return new Promise<string>((resolve, reject) => {
-      this.rt
-        .InvokeAction('ConnectToState', {
-          ShouldSend: shouldUpdate,
-          Key: stateKey,
-          State: stateName,
-          Environment: env,
-          UsernameMock: unMock
-        })
-        .subscribe({
-          next: (req: any) => {
-            if (req.Status && req.Status.Code === 0) {
-              resolve(req.GroupName);
-            } else {
-              reject(
-                req.Status
-                  ? req.Status.Message
-                  : 'Unknonw issue connecting to state.'
-              );
-            }
-          },
-          error: err => reject(err)
-          // complete: () => console.log('Observer got a complete notification'),
-        });
+  protected setupReceiveState(groupName: string) {
+    this.rt.RegisterHandler(`ReceiveState`).subscribe(req => {//=>${groupName}
+      this.subject.next(req.State);
     });
   }
-
-
   //  API Methods
   public AcceptTerms(version: string) {
     this.Execute({
@@ -125,6 +74,14 @@ export class UserManagementStateContext extends StateContext<UserManagementState
   }
 
   protected loadStateName() {
-    return 'user-management';
+    return 'usermanagement';
+  }
+
+  protected loadStateRoot() {
+    return `/${this.loadStateName()}`;
+  }
+
+  protected loadStateActionRoot() {
+    return `/${this.loadStateName()}`;
   }
 }
