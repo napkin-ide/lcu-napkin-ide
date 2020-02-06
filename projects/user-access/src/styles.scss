@@ -8,9 +8,9 @@
   @include theme-extras($theme);
 
   .disabled-with-cursor {
-    @include disabled(.5);
-    // background-color: mat-color(map-get($theme, warn), 900);
-    background-color: rgba($color: #5f5f5f, $alpha: 1);
+    @include disabled(.75);
+    background-color: mat-color(map-get($theme, warn), 900);
+    // background-color: rgba($color: #3a3a3a, $alpha: 1);
    }
 }
 

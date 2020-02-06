@@ -1,14 +1,14 @@
-import { OrgModel } from './../../models/org.model';
+import { OrgModel } from '../../models/org.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { MatSelect } from '@angular/material';
 
 @Component({
-  selector: 'lcu-org-access',
-  templateUrl: './org-access.component.html',
-  styleUrls: ['./org-access.component.scss']
+  selector: 'lcu-access',
+  templateUrl: './access.component.html',
+  styleUrls: ['./access.component.scss']
 })
-export class OrgAccessComponent implements OnInit {
+export class AccessComponent implements OnInit {
 
   public Orgs: Array<OrgModel> = [
     {Value: 'org-one', Label: 'Organization One', Disabled: false},
