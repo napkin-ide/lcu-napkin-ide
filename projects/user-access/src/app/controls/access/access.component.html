@@ -19,7 +19,10 @@
         formControlName="orgControl"
         id="organizationSelect"
         name="organizationSelect">
-        <mat-select-trigger>
+        <mat-select-trigger fxLayout="row" fxLayoutAlign="start end">
+          <mat-icon [ngClass]="{'error': select.value?.Disabled,'success': !select.value?.Disabled}">
+            check_circle
+          </mat-icon>
           {{select.value?.Label}}
         </mat-select-trigger>
         

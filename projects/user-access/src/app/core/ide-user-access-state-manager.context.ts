@@ -15,17 +15,10 @@ export class IdeUserAccessStateManagerContext extends StateManagerContext<IdeUse
   }
 
   //  API Methods
-  public GetAvailableOrganizations() {
+  public RequestUserAccess() {
     this.Execute({
       Arguments: {},
-      Type: 'GetAvailableOrganizations'
-    });
-  }
-
-  public RequestAccess() {
-    this.Execute({
-      Arguments: {},
-      Type: 'RequestAccess'
+      Type: 'RequestUserAccess'
     });
   }
 
