@@ -130,6 +130,10 @@ public Configure() {
 
   this.nideState.ConfigureInfrastructure('Azure', true, this.State.EnvSettings);
 }
+
+public OpenHelpPdf(){
+  window.open("../assets/pdf/Fathym_Framework_Registration.pdf")
+}
   // helpers
 
   /**
