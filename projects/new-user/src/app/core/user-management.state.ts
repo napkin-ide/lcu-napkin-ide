@@ -1,17 +1,17 @@
 export class UserManagementState {
+  public Country?: string;
+
+  public FullName?: string;
+
+  public Handle?: string;
+
   public Loading?: boolean;
 
-  public Step: UserManagementStepTypes;
+  public Step?: UserManagementStepTypes;
 
-  public Terms: string;
+  public Terms?: string;
 
-  public TermsAccepted: boolean;
-
-  public UserCountry?: string;
-
-  public UserFullName?: string;
-
-  public UserHandle?: string;
+  public TermsAccepted?: boolean;
 
   public UserType?: UserTypes;
 }

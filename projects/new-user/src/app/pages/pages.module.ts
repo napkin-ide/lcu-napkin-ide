@@ -6,19 +6,10 @@ import { UserComponent } from './user/user.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CompleteComponent } from './complete/complete.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
-import { UserTypeComponent } from './user-type/user-type.component';
 import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
-import { UserTermsComponent } from './user-terms/user-terms.component';
 
 @NgModule({
-  declarations: [
-    UserComponent,
-    CompleteComponent,
-    UserDetailsComponent,
-    UserTypeComponent,
-    UserTermsComponent
-  ],
+  declarations: [UserComponent, CompleteComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -28,7 +19,7 @@ import { UserTermsComponent } from './user-terms/user-terms.component';
     MaterialModule,
     LcuNapkinIdeModule,
     PipeModule
- ],
+  ],
   exports: [UserComponent],
   providers: []
 })
