@@ -23,11 +23,10 @@
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Configure Organization Details</h2>
+                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Organization Details</h2>
 
                 <p class="mat-subheading-2">
-                  The Fathym Framework is designed for organizations of any size. Our low-code unit (LCU) ecosystem enables your organization to rapidly build data applications.
-                </p>
+                  Fathym’s low-code framework is designed for organizations of any size. It's built to give developers the freedom and best practice workflows to rapidly create IoT and data-driven applications that are agnostic to tools, platforms and clouds.</p>
 
                 <!-- <p class="mat-subheading-1">
                   <strong class="plain-text-bold">Organization Lookup</strong> - This is used to describe many aspects of your default setup (updateable later), and
@@ -68,13 +67,14 @@
                   <a mat-raised-button href="https://azure.microsoft.com/free/" color="primary" class="mat-full-width" target="_blank">
                     <img matListIcon src="assets/img/Azure-logo.png" />
 
-                    Create a Free Azure Account
+                    Create &nbsp; a &nbsp; Free &nbsp; Azure &nbsp; Account
                   </a>
                 </div>
 
-                <h2 class="mat-subheading-2">
+                <h2 class="mat-subheading-2" style="margin-top:15px;">
                   Fathym needs access to your Azure subscription to help you manage your infrastructure.
                 </h2>
+
 
                 <div class="btn-split">
                   <a
@@ -210,14 +210,14 @@
             >
               <mat-icon matListIcon>chevron_right</mat-icon>
 
-              <a matLine (click)="SetStep(SetupStepTypes.Review)">Review & Setup</a>
+              <a matLine (click)="SetStep(SetupStepTypes.Review)">Review & Set Up</a>
             </mat-list-item>
 
             <mat-list-item *ngIf="State.Step === SetupStepTypes.Review" class="active-mat-list-item">
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Review & Setup</h1>
+                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Review & Set Up</h1>
 
                 <h2 class="mat-subheading-2">
                     Fathym will set up a best practice IoT infrastructure for your project. Once set up, you can adjust the architecture as needed for your organization.
@@ -231,6 +231,7 @@
                 <h2 class="mat-subheading-2">
                   For more information, checkout the following documentation link...
                 </h2>
+                <a href="../assets/pdf/Fathym_Framework_Registration.pdf" target="_blank">Fathym Registration Help PDF</a>
               </div>
             </mat-list-item>
 
@@ -255,20 +256,15 @@
           <mat-card>
             <!-- when the state is loading *ngIf="State.Loading" -->
             <div *ngIf="State.Loading">
-              <p>Hello this is some content to fill the card!</p>
-              
-              <p>Fathym is calculating something</p>
+              <p  style="text-align: center;">Behind the scenes Thinky is working hard to provision your resourses</p>
 
-              <p>Hopefully this doesnt take long...</p>
+              <p style="text-align: center;">Hooking up your Azure info at the moment...</p>
 
-              <!-- close but no cigar -->
-              <!-- <div class="spinner" logo-alt="Fathym Logo">
-                <mat-spinner></mat-spinner>
-              </div> -->
+              <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
+                <mat-spinner diameter="75"></mat-spinner >
+                <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+              </div>
 
-              <!-- Spinning thinky -->
-              <!-- <mat-spinner class="spinner" strokeWidth=".01"></mat-spinner> -->
-              <mat-spinner></mat-spinner>
 
             </div>
           <!-- Organization details form -->

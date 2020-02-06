@@ -1,0 +1,68 @@
+<form
+      fxLayout="column"
+      fxLayoutGap="10px"
+      [formGroup]="Form"
+      novalidate>
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon color="accent">lock_open</mat-icon>
+    </div>
+    <mat-card-title>Organization Access</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    
+    <mat-form-field>
+      <mat-label>Organizations</mat-label>
+      <mat-select
+        #select  
+        formControlName="orgControl"
+        id="organizationSelect"
+        name="organizationSelect">
+        <mat-select-trigger fxLayout="row" fxLayoutAlign="start end">
+          <mat-icon [ngClass]="{'error': select.value?.Disabled,'success': !select.value?.Disabled}">
+            check_circle
+          </mat-icon>
+          {{select.value?.Label}}
+        </mat-select-trigger>
+        
+        <mat-option
+          id="organizationOption"
+          name="organizationOption"
+          *ngFor="let org of Orgs" 
+          [value]="org"
+          [ngClass]="{'disabled-with-cursor': org.Disabled}"
+          [matTooltipDisabled]="!org.Disabled"
+          matTooltip="Click to request access to {{org.Label}}"
+          matTooltipPosition="above">
+          <mat-icon matListIcon [ngClass]="{'error': org.Disabled,'success': !org.Disabled}">check_circle</mat-icon>
+          {{ org.Label }} 
+          <small *ngIf="org.Disabled"> (no access)</small>
+        </mat-option>
+      </mat-select
+      >
+
+      <!-- <mat-select #select>
+        <mat-select-trigger *ngIf="select.value">
+          <mat-icon>{{select.value.icon}}</mat-icon>{{select.value.viewValue}}
+        </mat-select-trigger>
+        <mat-option *ngFor="let food of foods" [value]="food">
+          <mat-icon>{{food.icon}}</mat-icon>{{food.viewValue}}
+        </mat-option>
+      </mat-select> -->
+
+
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button 
+      *ngIf="UnathorizedSelected && UnathorizedSelected.Disabled"
+      id="requestAccessButton"
+      name="requestAccessButton"
+      mat-flat-button 
+      color="primary">
+      Request Access to {{UnathorizedSelected.Label}}
+    </button>
+  </mat-card-actions>
+</mat-card>
+</form>
