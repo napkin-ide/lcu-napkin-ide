@@ -9,7 +9,7 @@ import { debounceTime, take, timeout } from 'rxjs/operators';
 export class LimitButtonClickDirective implements OnInit, OnDestroy {
 
   @HostBinding('class.disabled')
-  protected isDisabled: boolean;
+  public IsDisabled: boolean;
 
   @Input('clicks-allowed')
   public ClicksAllowed: number = 1;
@@ -63,9 +63,9 @@ export class LimitButtonClickDirective implements OnInit, OnDestroy {
   }
 
   protected disable(val: boolean): void {
-    this.isDisabled = val;
+    this.IsDisabled = val;
 
-    if (this.isDisabled) {
+    if (this.IsDisabled) {
       this.renderer.setAttribute(this.el.nativeElement, 'disabled', String(val));
     } else {
         this.renderer.removeAttribute(this.el.nativeElement, 'disabled');
