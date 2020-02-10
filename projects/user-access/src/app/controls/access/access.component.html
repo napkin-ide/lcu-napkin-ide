@@ -4,13 +4,13 @@
       [formGroup]="Form"
       novalidate>
 <mat-card>
-  <mat-card-header>
+  <!-- <mat-card-header>
     <div mat-card-avatar>
       <mat-icon color="accent">lock_open</mat-icon>
     </div>
     <mat-card-title>Organization Access</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+  </mat-card-header> -->
+  <!-- <mat-card-content>
     
     <mat-form-field>
       <mat-label>Organizations</mat-label>
@@ -39,30 +39,30 @@
           {{ org.Label }} 
           <small *ngIf="org.Disabled"> (no access)</small>
         </mat-option>
-      </mat-select
-      >
-
-      <!-- <mat-select #select>
-        <mat-select-trigger *ngIf="select.value">
-          <mat-icon>{{select.value.icon}}</mat-icon>{{select.value.viewValue}}
-        </mat-select-trigger>
-        <mat-option *ngFor="let food of foods" [value]="food">
-          <mat-icon>{{food.icon}}</mat-icon>{{food.viewValue}}
-        </mat-option>
-      </mat-select> -->
-
-
+      </mat-select>
     </mat-form-field>
-  </mat-card-content>
+  </mat-card-content> -->
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon color="accent">lock</mat-icon>
+    </div>
+    <mat-card-title>You don't have access to this organization</mat-card-title>
+  </mat-card-header>
+<mat-card-content> 
+</mat-card-content> 
   <mat-card-actions>
     <button 
-      *ngIf="UnathorizedSelected && UnathorizedSelected.Disabled"
-      id="requestAccessButton"
-      name="requestAccessButton"
+      id="requestButton"
+      name="requestButton"
       mat-flat-button 
-      color="primary">
-      Request Access to {{UnathorizedSelected.Label}}
+      color="primary"
+      (click)="RequestAccess($event)">
+      Request Access
     </button>
   </mat-card-actions>
 </mat-card>
 </form>
+
+<!-- <div *ngIf="State.Loading">
+  <mat-spinner></mat-spinner>
+</div> -->
