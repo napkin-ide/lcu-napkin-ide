@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: './pages/pages.module#PagesModule'
+  },
+  {
+    path: 'Fathym_Framework_Registration.pdf',
+    redirectTo: '/assets/pdf/Fathym_Framework_Registration.pdf'
   }
 ];
 

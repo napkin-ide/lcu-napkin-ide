@@ -3,6 +3,7 @@ import { NapkinIDESetupStepTypes, NapkinIDESetupState, AzureInfaSettings } from 
 import { AbstractControl, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
 import { Guid } from '@lcu/common';
+import { Constants } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-org-infra',
@@ -132,7 +133,7 @@ public Configure() {
 }
 
 public OpenHelpPdf(){
-  window.open("../../assets/pdf/Fathym_Framework_Registration.pdf")
+  window.open(Constants.HELP_PDF)
 }
   // helpers
 
