@@ -202,7 +202,7 @@
                 <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.Review && !HostFormValid || !State.Host || !State.TermsAccepted">
               <mat-icon matListIcon class="error">highlight_off</mat-icon>
 
-              <h1 matLine>Review & Setup</h1>
+              <h1 matLine>Permissions & Launch</h1>
             </mat-list-item>
 
             <mat-list-item
@@ -210,14 +210,14 @@
             >
               <mat-icon matListIcon>chevron_right</mat-icon>
 
-              <a matLine (click)="SetStep(SetupStepTypes.Review)">Review & Set Up</a>
+              <a matLine (click)="SetStep(SetupStepTypes.Review)">Permissions & Launch</a>
             </mat-list-item>
 
             <mat-list-item *ngIf="State.Step === SetupStepTypes.Review" class="active-mat-list-item">
               <mat-icon matListIcon>chevron_right</mat-icon>
 
               <div matLine>
-                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Review & Set Up</h1>
+                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Permissions & Launch</h1>
 
                 <h2 class="mat-subheading-2">
                     Fathym will set up a best practice IoT infrastructure for your project. Once set up, you can adjust the architecture as needed for your organization.
