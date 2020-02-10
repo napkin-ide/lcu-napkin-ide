@@ -132,7 +132,7 @@ public Configure() {
 }
 
 public OpenHelpPdf(){
-  window.open("../assets/pdf/Fathym_Framework_Registration.pdf")
+  window.open("../../assets/pdf/Fathym_Framework_Registration.pdf")
 }
   // helpers
 
