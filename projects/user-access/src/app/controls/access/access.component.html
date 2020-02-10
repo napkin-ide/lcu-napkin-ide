@@ -49,6 +49,7 @@
     <mat-card-title>You don't have access to this organization</mat-card-title>
   </mat-card-header>
 <mat-card-content> 
+  <!-- <span>{{State.RequestMessage}}</span> -->
 </mat-card-content> 
   <mat-card-actions>
     <button 
@@ -56,8 +57,11 @@
       name="requestButton"
       mat-flat-button 
       color="primary"
-      (click)="RequestAccess($event)">
-      Request Access
+      lcuLimitButtonClick
+      (limit-click)="RequestAccess($event)"
+      [clicks-allowed]=3
+      [disable-button]="DisableRequestButton">
+      Request Access to 'Org Name'
     </button>
   </mat-card-actions>
 </mat-card>

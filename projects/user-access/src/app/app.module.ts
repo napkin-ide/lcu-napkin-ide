@@ -8,13 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OrgAccessComponent } from './pages/org-access/org-access.component';
 import { AccessComponent } from './controls/access/access.component';
+import { LimitButtonClickDirective } from './directives/limit-button-click.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     OrgAccessComponent,
-    AccessComponent
+    AccessComponent,
+    LimitButtonClickDirective
   ],
   imports: [
     BrowserAnimationsModule,
@@ -27,7 +29,7 @@ import { AccessComponent } from './controls/access/access.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [OrgAccessComponent, AccessComponent],
+  exports: [OrgAccessComponent, AccessComponent, LimitButtonClickDirective],
   entryComponents: [OrgAccessComponent, AccessComponent]
 })
 export class AppModule { }

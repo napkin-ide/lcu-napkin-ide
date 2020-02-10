@@ -33,6 +33,8 @@ export class AccessComponent implements OnInit {
   @Input('state')
   public State: IdeUserAccessState;
 
+  public DisableRequestButton: boolean;
+
   /**
    * property for reactive form
    */
@@ -55,7 +57,8 @@ export class AccessComponent implements OnInit {
     return this.Form.get('orgControl');
   }
 
-  constructor(protected userAccessState: IdeUserAccessStateManagerContext) {
+  // constructor(protected userAccessState: IdeUserAccessStateManagerContext) {
+ constructor() {
     this.UnathorizedSelected = null;
     this.Loading = false;
   }
@@ -70,11 +73,10 @@ export class AccessComponent implements OnInit {
   public RequestAccess(evt: Event): void {
     // this.userAccessState.RequestUserAccess();
 
-      // fromEvent(evt.target, 'click')
-      // .pipe(take(1))
-      // .subscribe(() => {
-      //   console.log('clicked ');
-      // });
+    // for testing
+    setTimeout (() => {
+      this.DisableRequestButton = false;
+     }, 3000);
   }
 
   /**
@@ -105,12 +107,12 @@ export class AccessComponent implements OnInit {
    * Setup state
    */
   protected setupState(): void {
-    this.userAccessState.Context.subscribe(state => {
-      this.State = state;
-      this.Loading = state.Loading;
+    // this.userAccessState.Context.subscribe(state => {
+    //   this.State = state;
+    //   this.Loading = state.Loading;
 
-      this.stateChanged();
-    });
+    //   this.stateChanged();
+    // });
   }
 
   /**
