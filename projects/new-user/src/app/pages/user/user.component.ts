@@ -15,38 +15,10 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   //  Properties
 
-  public get RootURL(): string {
-    const port = location.port ? `:${location.port}` : '';
-
-    return `${location.protocol}//${location.hostname}${port}`;
-  }
-
-  /**
-   * host form validity
-   */
-  public HostFormValid: boolean;
-
-  /**
-   * detail form validity
-   */
-  public DetailsFormValid: boolean;
-
-  /**
-   * Infra form validity
-   */
-  public InfraFormValid: boolean;
-
-  /**
-   * Step types
-   */
-  public SetupStepTypes = UserManagementStepTypes;
-
   /**
    * State mechanism
    */
   public State: UserManagementState;
-
-  public Subdomain: string;
 
   //  Constructor
   constructor(
@@ -54,7 +26,7 @@ export class UserComponent implements OnInit, AfterViewInit {
     protected userMngState: UserManagementStateContext,
     protected cdr: ChangeDetectorRef
     ) {
-     this.HostFormValid = false;
+      this.State = {};
   }
 
   //  Life Cycle
@@ -83,7 +55,7 @@ export class UserComponent implements OnInit, AfterViewInit {
     // using *ngIf with external form properties
     this.cdr.detectChanges();
 
-    if (this.State.Step === UserManagementStepTypes.Complete) {
-    }
+    // if (this.State.Step === UserManagementStepTypes.Complete) {
+    // }
   }
 }

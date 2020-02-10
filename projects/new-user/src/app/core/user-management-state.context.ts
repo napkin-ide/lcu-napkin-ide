@@ -15,7 +15,7 @@ export class UserManagementStateContext extends StateContext<UserManagementState
 
   protected setupReceiveState(groupName: string) {
     this.rt.RegisterHandler(`ReceiveState`).subscribe(req => {//=>${groupName}
-      this.subject.next(req.State);
+      this.subject.next(req);
     });
   }
   //  API Methods
