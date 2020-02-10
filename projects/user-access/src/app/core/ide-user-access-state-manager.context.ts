@@ -1,7 +1,6 @@
-import { IdeUserAccessState, LowCodeUnitSetupConfig, IdeUserAccessConfigSolution } from './ide-user-access.state';
+import { IdeUserAccessState, } from './ide-user-access.state';
 import { StateManagerContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
-import { IdeActivity, IdeSideBarAction, DataFlowModulePackSetup } from '@lcu/common';
 
 @Injectable({
   providedIn: 'root'
@@ -24,14 +23,14 @@ export class IdeUserAccessStateManagerContext extends StateManagerContext<IdeUse
 
   //  Helpers
   protected defaultValue() {
-    return { Loading: true } as IdeUserAccessState;
+   return { Loading: true } as IdeUserAccessState;
   }
 
   protected loadStateKey() {
-    return 'main';
+    return 'init';
   }
 
   protected loadStateName() {
-    return 'ide-user-access';
+    return 'napkin-ide-setup';
   }
 }

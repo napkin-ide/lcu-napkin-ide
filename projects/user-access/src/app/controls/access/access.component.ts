@@ -1,7 +1,11 @@
+import { Subject } from 'rxjs/internal/Subject';
 import { OrgModel } from '../../models/org.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { MatSelect } from '@angular/material';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { IdeUserAccessStateManagerContext } from '../../core/ide-user-access-state-manager.context';
+import { IdeUserAccessState } from '../../core/ide-user-access.state';
+import { fromEvent } from 'rxjs';
+import { take, takeWhile, throttleTime, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'lcu-access',
@@ -20,10 +24,24 @@ export class AccessComponent implements OnInit {
     {Value: 'org-seven', Label: 'Organization Seven', Disabled: false}
   ];
 
+  onStop = new Subject<void>();
+
+  /**
+   * Current state
+   */
+  // tslint:disable-next-line:no-input-rename
+  @Input('state')
+  public State: IdeUserAccessState;
+
   /**
    * property for reactive form
    */
   public Form: FormGroup;
+
+  /**
+   * State loading
+   */
+  public Loading: boolean;
 
   /**
    * property when an unathorized org is selected
@@ -37,12 +55,26 @@ export class AccessComponent implements OnInit {
     return this.Form.get('orgControl');
   }
 
-  constructor() {
+  constructor(protected userAccessState: IdeUserAccessStateManagerContext) {
     this.UnathorizedSelected = null;
+    this.Loading = false;
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.setupForm();
+  }
+
+  /**
+   * Request organization access
+   */
+  public RequestAccess(evt: Event): void {
+    // this.userAccessState.RequestUserAccess();
+
+      // fromEvent(evt.target, 'click')
+      // .pipe(take(1))
+      // .subscribe(() => {
+      //   console.log('clicked ');
+      // });
   }
 
   /**
@@ -67,6 +99,25 @@ export class AccessComponent implements OnInit {
         this.UnathorizedSelected = null;
       }
     });
+  }
+
+  /**
+   * Setup state
+   */
+  protected setupState(): void {
+    this.userAccessState.Context.subscribe(state => {
+      this.State = state;
+      this.Loading = state.Loading;
+
+      this.stateChanged();
+    });
+  }
+
+  /**
+   * When state changes
+   */
+  protected stateChanged() {
+    debugger;
   }
 
 }
