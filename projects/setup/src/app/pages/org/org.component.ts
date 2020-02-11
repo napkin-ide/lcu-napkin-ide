@@ -5,6 +5,7 @@ import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-s
 import { OrgDetailsComponent } from '../org-details/org-details.component';
 import { OrgInfraComponent } from '../org-infra/org-infra.component';
 import { OrgHostComponent } from '../org-host/org-host.component';
+import { Constants } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-org',
@@ -71,6 +72,8 @@ export class OrgComponent implements OnInit, AfterViewInit {
 
   public Subdomain: string;
 
+  public HelpPdf: string;
+
   //  Constructor
   constructor(
     protected formBldr: FormBuilder,
@@ -78,6 +81,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
     protected cdr: ChangeDetectorRef
     ) {
      this.HostFormValid = false;
+     this.HelpPdf = Constants.HELP_PDF;
   }
 
   //  Life Cycle
