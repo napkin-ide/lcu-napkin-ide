@@ -119,11 +119,11 @@ export class NapkinIDESetupStateManagerContext extends StateManagerContext<Napki
     return <NapkinIDESetupState>{ Loading: true };
   }
 
-  protected loadStateKey() {
-    return 'init';
+  protected loadStateKey(): Promise<string> {
+    return Promise.resolve('init');
   }
 
-  protected loadStateName() {
-    return 'napkin-ide-setup';
+  protected loadStateName(): Promise<string> {
+    return Promise.resolve('napkin-ide-setup');
   }
 }
