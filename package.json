@@ -57,7 +57,7 @@
 		"@lcu/common": "^1.1.1",
 		"@lowcodeunit-devkit/ng-lcu": "^1.2.16",
 		"@lowcodeunit/lazy-element": "0.0.13",
-		"@lowcodeunit/lcu-theme-picker-common": "^1.1.8",
+		"@lowcodeunit/lcu-theme-picker-common": "^1.1.9-integration",
 		"@webcomponents/custom-elements": "^1.3.2",
 		"@webcomponents/webcomponentsjs": "^2.4.1",
 		"copy": "^0.3.2",
