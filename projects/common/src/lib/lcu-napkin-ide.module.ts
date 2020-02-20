@@ -6,6 +6,9 @@ import { MaterialModule } from '@lcu/common';
 import { NavListComponent } from './controls/nav-list/nav-list.component';
 import { RouterModule } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
+import { LcuThemePickerModule } from '@lowcodeunit/lcu-theme-picker-common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/she
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    LcuThemePickerModule,
+    FlexLayoutModule
   ],
   exports: [
     SideNavComponent,
