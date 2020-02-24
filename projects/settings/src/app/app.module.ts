@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
 import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LcuThemePickerModule } from '@lowcodeunit/lcu-theme-picker-common';
 
 @NgModule({
   declarations: [AppComponent, SettingsComponent],
@@ -19,7 +20,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     MaterialModule,
     LcuNapkinIdeModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    LcuThemePickerModule.forRoot()
   ],
   providers: [
     IdeSettingsStateManagerContext,

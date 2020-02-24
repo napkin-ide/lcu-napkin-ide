@@ -22,7 +22,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    LcuThemePickerModule,
+    LcuThemePickerModule.forRoot(),
     FlexLayoutModule
   ],
   exports: [

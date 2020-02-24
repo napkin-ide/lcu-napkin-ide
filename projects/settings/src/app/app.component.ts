@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavListModel } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
@@ -6,16 +6,13 @@ import { NavListModel } from '@napkin-ide/lcu-napkin-ide-common';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  public SelectedTheme: string;
+export class AppComponent implements OnInit {
   public SettingsLinks: Array<NavListModel>;
   public SettingsTitle: string;
 
-
-  constructor()  {}
+  constructor() { }
 
   public ngOnInit(): void {
-    this.resetTheme();
     this.SettingsTitle = 'Enterprise IDE Settings';
 
     this.SettingsLinks = [
@@ -25,22 +22,4 @@ export class AppComponent {
       { Label: 'Marketplace', RouterURL: '/marketplace', Icon: 'shopping_basket'}
     ];
   }
-
-
-
-  /**
-   * Reset material theme
-   */
-  protected resetTheme(): void {
-    this.changeTheme('ivy-light-theme');
-  }
-
-  /**
-   * Toggle through Fathym themes
-   *
-   * @param val theme type
-   */
-  protected changeTheme(val: string): void {
-    this.SelectedTheme = val;
-   }
 }
