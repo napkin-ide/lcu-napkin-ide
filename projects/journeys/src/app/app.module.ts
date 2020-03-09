@@ -9,7 +9,6 @@ import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
 import { LcuNapkinIdeModule, UserManagementStateContext } from '@napkin-ide/lcu-napkin-ide-common';
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -22,7 +21,7 @@ import { LcuNapkinIdeModule, UserManagementStateContext } from '@napkin-ide/lcu-
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    LcuNapkinIdeModule
+    LcuNapkinIdeModule,
   ],
   providers: [
     UserManagementStateContext,

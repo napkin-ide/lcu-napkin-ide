@@ -1,0 +1,95 @@
+<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
+  <div fxFlex="30%" fxFlex.lt-md="100%" class="details" *ngIf="!State.Loading">
+    <div class="inner">
+      <mat-nav-list class="spread">
+        <ng-container *ngFor="let persona of State.Personas">
+          <mat-list-item class="active-mat-list-item">
+            <mat-icon matListIcon>chevron_right</mat-icon>
+
+            <div matLine>
+              <a (click)="SetUserType(persona.Lookup)">
+                <h2
+                  class="h2 paragraph-title-bold margin-bottom-3 margin-top-3"
+                >
+                  {{ persona.Name }}
+                </h2>
+              </a>
+
+              <ng-container
+                *ngIf="State.UserType === UserTypes[persona.Lookup]"
+              >
+                <p
+                  class="mat-subheading-2"
+                  *ngFor="let desc of persona.Descriptions"
+                >
+                  {{ desc }}
+                </p>
+              </ng-container>
+            </div>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+        </ng-container>
+      </mat-nav-list>
+    </div>
+  </div>
+
+  <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
+    <div class="inner">
+      <div *ngIf="!State.Loading">
+        <div class="spread" *ngFor="let catName of Categories">
+          <ng-container
+            *ngIf="
+              CurrentPersona?.DetailLookupCategories[catName];
+              let detLookups
+            "
+          >
+            <h3>{{ catName }}</h3>
+
+            <div fxLayout="row wrap" fxLayoutAlign="left center">
+              <div
+                fxFlex="30%"
+                fxFlex.lt-md="50%"
+                fxFlex.lt-sm="80%"
+                *ngFor="let detLookup of detLookups"
+              >
+                <ng-container
+                  *ngIf="LoadJourneyDetails(detLookup); let details"
+                >
+                  <mat-card style="height: 150px;" class="spread">
+                    <mat-card-content>
+                      <h4>{{ details.Name }}</h4>
+
+                      <p>{{ details.Description }}</p>
+                    </mat-card-content>
+
+                    <mat-card-actions>
+                      <a [routerLink]="['/journey', CurrentPersona.Lookup, details.Lookup]" mat-raised-button color="accent">View More</a>
+                    </mat-card-actions>
+                  </mat-card>
+                </ng-container>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div *ngIf="State.Loading">
+        <p style="text-align: center;">
+          Behind the scenes Thinky is working hard to set up your Low Code Unit
+        </p>
+
+        <!-- <p style="text-align: center;"></p> -->
+
+        <div
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          class="spinner-container"
+        >
+          <mat-spinner diameter="75"></mat-spinner>
+          <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

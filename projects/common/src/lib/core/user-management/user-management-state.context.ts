@@ -1,4 +1,4 @@
-import { UserManagementState, UserManagementStepTypes, UserTypes } from './user-management.state';
+import { UserManagementState, UserTypes, UserSetupStepTypes } from './user-management.state';
 import { StateContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 
@@ -13,11 +13,6 @@ export class UserManagementStateContext extends StateContext<UserManagementState
     super(injector);
   }
 
-  protected setupReceiveState(groupName: string) {
-    this.rt.RegisterHandler(`ReceiveState`).subscribe(req => {//=>${groupName}
-      this.subject.next(req);
-    });
-  }
   //  API Methods
   public AcceptTerms(version: string) {
     this.Execute({
@@ -35,15 +30,6 @@ export class UserManagementStateContext extends StateContext<UserManagementState
     });
   }
 
-  public SetUserManagementStep(step: UserManagementStepTypes) {
-    this.Execute({
-      Arguments: {
-        Step: step
-      },
-      Type: 'SetUserManagementStep'
-    });
-  }
-
   public SetUserDetails(fullName: string, country: string, handle: string) {
     this.Execute({
       Arguments: {
@@ -52,6 +38,15 @@ export class UserManagementStateContext extends StateContext<UserManagementState
         Handle: handle
       },
       Type: 'SetUserDetails'
+    });
+  }
+
+  public SetUserSetupStep(step: UserSetupStepTypes) {
+    this.Execute({
+      Arguments: {
+        Step: step
+      },
+      Type: 'SetUserSetupStep'
     });
   }
 

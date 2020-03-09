@@ -1,0 +1,112 @@
+<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
+  <div fxFlex="30%" fxFlex.lt-md="100%" class="details" *ngIf="!State.Loading">
+    <div class="inner">
+      <mat-nav-list class="spread">
+        <mat-list-item>
+          <mat-icon matListIcon>chevron_right</mat-icon>
+
+          <div matLine>
+            <a>
+              <h2 class="h2 paragraph-title-bold">
+                Overview
+              </h2>
+            </a>
+          </div>
+        </mat-list-item>
+<!--
+        <mat-list-item>
+          <mat-icon matListIcon>chevron_right</mat-icon>
+
+          <div matLine>
+            <a>
+              <h2 class="h2 paragraph-title-bold">
+                Pricing
+              </h2>
+            </a>
+          </div>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon matListIcon>chevron_right</mat-icon>
+
+          <div matLine>
+            <a>
+              <h2 class="h2 paragraph-title-bold">
+                About
+              </h2>
+            </a>
+          </div>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon matListIcon>chevron_right</mat-icon>
+
+          <div matLine>
+            <a>
+              <h2 class="h2 paragraph-title-bold">
+                Documentation
+              </h2>
+            </a>
+          </div>
+        </mat-list-item> -->
+
+        <mat-list-item>
+          <mat-icon matListIcon>chevron_left</mat-icon>
+
+          <div matLine>
+            <a [routerLink]="['/']">
+              <h2 class="h2 paragraph-title-bold">
+                Back to All Journeys
+              </h2>
+            </a>
+          </div>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+  </div>
+
+  <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
+    <div class="inner">
+      <div *ngIf="!State.Loading && CurrentJourney">
+        <h2>{{ CurrentPersona.Name }} - {{ CurrentJourney.Name }}</h2>
+
+        <p class="h3">{{ CurrentJourney.Description }}</p>
+
+        <div>
+          <mat-tab-group>
+            <mat-tab label="Getting Started">
+              <div class="spread">Getting Started Content</div>
+            </mat-tab>
+            <mat-tab label="Prerequisits">
+              <div class="spread">Prerequisits Content</div>
+            </mat-tab>
+            <mat-tab label="Configuration">
+              <div class="spread">Configuration Content</div>
+            </mat-tab>
+            <mat-tab label="Execute Journey">
+              <div class="spread">Execute Jouney Content</div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+
+      <!-- when the state is loading *ngIf="State.Loading" -->
+      <div *ngIf="State.Loading">
+        <p style="text-align: center;">
+          Behind the scenes Thinky is working hard to set up your Low Code Unit
+        </p>
+
+        <!-- <p style="text-align: center;"></p> -->
+
+        <div
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          class="spinner-container"
+        >
+          <mat-spinner diameter="75"></mat-spinner>
+          <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

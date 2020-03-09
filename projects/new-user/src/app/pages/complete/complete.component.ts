@@ -1,7 +1,10 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserManagementState, UserManagementStepTypes } from '../../core/user-management.state';
-import { UserManagementStateContext } from '../../core/user-management-state.context';
+import {
+  UserManagementStateContext,
+  UserManagementState,
+  UserSetupStepTypes
+} from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-complete',
@@ -16,15 +19,14 @@ export class CompleteComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
   @Input('setup-step-types')
-  public SetupStepTypes: UserManagementStepTypes;
+  public SetupStepTypes: UserSetupStepTypes;
 
   // tslint:disable-next-line:no-input-rename
   @Input('state')
   public State: UserManagementState;
 
   //  Constructors
-  constructor(protected nideState: UserManagementStateContext) {
-  }
+  constructor(protected nideState: UserManagementStateContext) {}
 
   //  Life Cycle
   public ngOnInit() {
@@ -38,6 +40,5 @@ export class CompleteComponent implements OnInit {
   //  API methods
 
   //  Helpers
-  protected stateChanged() {
-  }
+  protected stateChanged() {}
 }
