@@ -9,6 +9,8 @@ export class UserManagementState {
 
   public TermsAccepted?: boolean;
 
+  public Username?: string;
+
   public UserSetupStep?: UserSetupStepTypes;
 
   public UserType?: UserTypes;
@@ -35,6 +37,7 @@ export class JourneyDetail {
 export enum UserSetupStepTypes {
   Welcome = 'Welcome',
   Setup = 'Setup',
+  Progress = 'Progress',
   Complete = 'Complete'
 }
 

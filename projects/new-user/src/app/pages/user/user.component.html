@@ -41,14 +41,100 @@
     <div fxLayout="row wrap" fxLayout="center center">
       <div fxFlex="40%" fxFlex.lt-sm="80%">
         <div class="spread text-center">
-          <h2>Connect Your Cloud</h2>
+          <ng-container *ngIf="stepper.selectedIndex == 0">
+            <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">
+              Organization Details
+            </h2>
 
-          <p>Fathym will support you in getting the most out of your cloud.</p>
+            <h3 class="mat-subheading-2">
+              Fathym’s low-code framework is designed for organizations of any
+              size. It's built to give developers the freedom and best practice
+              workflows to rapidly create IoT and data-driven applications that
+              are agnostic to tools, platforms and clouds.
+            </h3>
+          </ng-container>
+
+          <ng-container *ngIf="stepper.selectedIndex == 1">
+            <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">
+              Set Up Organization Infrastructure
+            </h2>
+
+            <h3 class="mat-subheading-2">
+              You will need to have a Microsoft Azure account to get started.
+              Create a new account or use an existing account.
+            </h3>
+
+            <div class="btn-split">
+              <a
+                mat-raised-button
+                href="https://azure.microsoft.com/free/"
+                color="primary"
+                class="mat-full-width"
+                target="_blank"
+              >
+                <img class="azure-logo" src="assets/img/Azure-logo.png" />
+
+                Create &nbsp; a &nbsp; Free &nbsp; Azure &nbsp; Account
+              </a>
+            </div>
+
+            <h3 class="mat-subheading-2" style="margin-top:15px;">
+              Fathym needs access to your Azure subscription to help you manage
+              your infrastructure.
+            </h3>
+
+            <div class="btn-split">
+              <a
+                mat-raised-button
+                href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in."
+                color="primary"
+                class="mat-full-width"
+                target="_blank"
+              >
+                <mat-icon>settings</mat-icon>
+
+                Locate Your Configuration Information
+              </a>
+            </div>
+
+            <div class="spread">
+              <h4 class="mat-subheading-1">
+                Additional infrastructure options coming soon!
+              </h4>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="stepper.selectedIndex == 2">
+            <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">
+              Select Product Plan
+            </h2>
+
+            <div class="spread">
+              <h3 class="mat-subheading-2">
+                Select the product plan that meets your needs.
+              </h3>
+            </div>
+
+            <div class="spread">
+              <h3 class="mat-subheading-2">
+                Provide billing details so we can charge you post trial (cancel
+                anytime).
+              </h3>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="stepper.selectedIndex == 3">
+            Review dets
+          </ng-container>
         </div>
       </div>
 
       <div fxFlex="60%" fxFlex.lt-sm="80%">
-        <mat-horizontal-stepper [linear]="true" #stepper>
+        <mat-horizontal-stepper
+          [linear]="true"
+          #stepper
+          (selectionChange)="StepperChanged($event)"
+        >
           <mat-step [stepControl]="DetailsForm">
             <form [formGroup]="DetailsForm">
               <ng-template matStepLabel>Organization</ng-template>
@@ -124,9 +210,10 @@
               </div>
             </form>
           </mat-step>
+
           <mat-step [stepControl]="InfraForm">
             <form [formGroup]="InfraForm">
-              <ng-template matStepLabel>Billing</ng-template>
+              <ng-template matStepLabel>Infrastructure</ng-template>
 
               <mat-form-field class="mat-full-width">
                 <div fxLayout="row" fxLayoutGap="10px">
@@ -324,24 +411,75 @@
               </div>
             </form>
           </mat-step>
-          <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-              <ng-template matStepLabel>Billing</ng-template>
-              <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input
-                  matInput
-                  formControlName="secondCtrl"
-                  placeholder="Ex. 1 Main St, New York, NY"
-                  required
-                />
-              </mat-form-field>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+
+          <mat-step [stepControl]="BillingForm">
+            <form
+              action="/charge"
+              method="post"
+              id="payment-form"
+              [formGroup]="BillingForm"
+              (ngSubmit)="SubmitBilling($event)"
+            >
+              <ng-template matStepLabel>Product Plan</ng-template>
+
+              <div
+                class="product-plans form-row"
+                fxLayout="row wrap"
+                fxLayout="center center"
+              >
+                <mat-radio-group
+                  aria-labelledby="example-radio-group-label"
+                  [(ngModel)]="favoriteSeason"
+                >
+                  <div fxFlex="25%">
+                    <mat-card class="spread">
+                      <mat-radio-button
+                        class="example-radio-button"
+                        [value]="season"
+                      >
+                        Explorer
+                      </mat-radio-button>
+                    </mat-card>
+                  </div>
+
+                  <div fxFlex="25%">
+                    <mat-card class="spread">
+                      <mat-radio-button
+                        class="example-radio-button"
+                        [value]="season"
+                      >
+                        Explorer
+                      </mat-radio-button>
+                    </mat-card>
+                  </div>
+                </mat-radio-group>
+              </div>
+
+              <div class="form-row">
+                <label for="card-element" class="spread"
+                  >Enter Payment Details</label
+                >
+
+                <div id="card-element" class="spread"></div>
+
+                <div
+                  id="card-errors"
+                  role="alert"
+                  class="spread"
+                  *ngIf="StripeError"
+                >
+                  {{ StripeError }}
+                </div>
+              </div>
+
+              <div class="spread">
+                <button mat-raised-button color="primary">
+                  Add payment source
+                </button>
               </div>
             </form>
           </mat-step>
+
           <mat-step>
             <ng-template matStepLabel>Review</ng-template>
             <p>You are now done.</p>

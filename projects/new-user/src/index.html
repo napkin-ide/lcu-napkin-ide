@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <script src="https://js.stripe.com/v3/"></script>
 
     <script id="lcu-reg">
       window.LCU = {
@@ -21,8 +22,12 @@
         },
         State: {
           Root: "/api",
-          // Environment: 'local',
-          UsernameMock: 'michael.gearhardt@fathym.com'
+          // Environment: 'local'
+        },
+        Settings: {
+          Stripe: {
+            PublicKey: 'pk_test_KnI6QApAae5tFIxuwuoSBFx6'
+          }
         }
       };
     </script>

@@ -21,7 +21,10 @@ import {
   UserSetupStepTypes,
   Constants
 } from '@napkin-ide/lcu-napkin-ide-common';
-import { Guid } from '@lcu/common';
+import { Guid, LCUServiceSettings } from '@lcu/common';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
+
+declare var Stripe: any;
 
 @Component({
   selector: 'lcu-user',
@@ -31,8 +34,13 @@ import { Guid } from '@lcu/common';
 })
 export class UserComponent implements OnInit, AfterViewInit {
   //  Fields
+  protected stripeCard: any;
+
+  protected stripe: any;
 
   //  Properties
+  public BillingForm: FormGroup;
+
   public DetailsForm: FormGroup;
 
   /**
@@ -106,9 +114,9 @@ export class UserComponent implements OnInit, AfterViewInit {
     return this.InfraForm.get('azureAppAuthKey');
   }
 
-  public secondFormGroup: FormGroup;
-
   public State: UserManagementState;
+
+  public StripeError: string;
 
   public UserSetupStepTypes = UserSetupStepTypes;
 
@@ -116,6 +124,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   constructor(
     protected formBldr: FormBuilder,
     protected userMngState: UserManagementStateContext,
+    protected lcuSettings: LCUServiceSettings,
     protected cdr: ChangeDetectorRef
   ) {
     this.State = {};
@@ -125,6 +134,78 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   //  Life Cycle
   public ngOnInit() {
+    this.setupForms();
+
+    this.userMngState.Context.subscribe(state => {
+      this.State = state;
+
+      this.stateChanged();
+    });
+  }
+
+  public ngAfterViewInit(): void {}
+
+  //  API methods
+  public OpenHelpPdf() {
+    window.open(Constants.HELP_PDF);
+  }
+
+  public SetUserSetupStep(step: UserSetupStepTypes) {
+    this.State.Loading = true;
+
+    this.userMngState.SetUserSetupStep(step);
+  }
+
+  public StepperChanged(event: StepperSelectionEvent) {
+    if (event.selectedIndex === 2) {
+      this.setupStripe();
+    }
+  }
+
+  public SubmitBilling(event: Event) {
+    event.preventDefault();
+
+    this.stripe
+      .createPaymentMethod({
+        type: 'card',
+        card: this.stripeCard,
+        billing_details: {
+          email: this.State.Username
+        }
+      })
+      .then(this.handleStripePaymentMethodCreated);
+  }
+
+  //  Helpers
+  protected handleCardChanged(event) {
+    if (event.error) {
+      this.StripeError = event.error.message;
+    } else {
+      this.StripeError = '';
+    }
+  }
+
+  protected handleStripePaymentMethodCreated(result, email) {
+    if (result.error) {
+      this.StripeError = result.error;
+    } else {
+      this.StripeError = '';
+
+      this.userMngState.SetPaymentMethod(result.paymentMethod.id);
+    }
+  }
+
+
+  /**
+   * Setup toggled fields
+   */
+  protected setFieldToggles(): void {
+    this.HideAppId = this.HideAuthKey = this.HideTenantId = this.HideSubId = true;
+  }
+
+  protected setupForms() {
+    this.BillingForm = this.formBldr.group({});
+
     this.DetailsForm = this.formBldr.group({
       orgDetailName: new FormControl('', [Validators.required]),
       orgDetailDesc: new FormControl('', [Validators.required]),
@@ -158,38 +239,23 @@ export class UserComponent implements OnInit, AfterViewInit {
         updateOn: 'change'
       })
     });
-
-    this.secondFormGroup = this.formBldr.group({
-      secondCtrl: ['', Validators.required]
-    });
-
-    this.userMngState.Context.subscribe(state => {
-      this.State = state;
-
-      this.stateChanged();
-    });
   }
 
-  public ngAfterViewInit(): void {}
+  protected setupStripe() {
+    if (!this.stripe) {
+      // Your Stripe public key
+      this.stripe = Stripe(this.lcuSettings.Settings.Stripe.PublicKey);
 
-  //  API methods
-  public OpenHelpPdf() {
-    window.open(Constants.HELP_PDF);
-  }
+      const elements = this.stripe.elements();
 
-  public SetUserSetupStep(step: UserSetupStepTypes) {
-    this.State.Loading = true;
+      this.stripeCard = elements.create('card');
 
-    this.userMngState.SetUserSetupStep(step);
-  }
+      this.stripeCard.mount('#card-element');
 
-  //  Helpers
-
-  /**
-   * Setup toggled fields
-   */
-  protected setFieldToggles(): void {
-    this.HideAppId = this.HideAuthKey = this.HideTenantId = this.HideSubId = true;
+      this.stripeCard.addEventListener('change', event =>
+        this.handleCardChanged(event)
+      );
+    }
   }
 
   protected stateChanged() {

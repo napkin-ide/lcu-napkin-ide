@@ -5,5 +5,26 @@
 }
 
 .setup {
+  .azure-logo {
+    height: 24px;
+  }
 
+  .product-plans {
+    .mat-radio-group {
+      width: 100%;
+    }
+  }
+}
+
+/******************************    Strip Styling    **************************************/
+// Main form styling
+.StripeElement {
+}
+
+// Focused field that user has text cursor in
+.StripeElement--focus {
+}
+
+// A field with an error or incomplete
+.StripeElement--invalid {
 }

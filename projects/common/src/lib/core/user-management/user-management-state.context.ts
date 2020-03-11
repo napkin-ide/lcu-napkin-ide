@@ -1,11 +1,17 @@
-import { UserManagementState, UserTypes, UserSetupStepTypes } from './user-management.state';
+import {
+  UserManagementState,
+  UserTypes,
+  UserSetupStepTypes
+} from './user-management.state';
 import { StateContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserManagementStateContext extends StateContext<UserManagementState> {
+export class UserManagementStateContext extends StateContext<
+  UserManagementState
+> {
   //  Properties
 
   //  Constructors
@@ -14,30 +20,35 @@ export class UserManagementStateContext extends StateContext<UserManagementState
   }
 
   //  API Methods
-  public AcceptTerms(version: string) {
+  public EstablishUser(
+    orgName: string,
+    orgDesc: string,
+    orgLookup: string,
+    azureTenantId: string,
+    azureAppId: string,
+    azureAuthKey: string,
+    azureSubId: string
+  ) {
     this.Execute({
       Arguments: {
-        Version: version
+        OrgName: orgName,
+        OrgDesc: orgDesc,
+        OrgLookup: orgLookup,
+        AzureTenantID: azureTenantId,
+        AzureAppID: azureAppId,
+        AzureAuthKey: azureAuthKey,
+        AzureSubID: azureSubId
       },
-      Type: 'AcceptTerms'
-    });
-  }
-
-  public EstablishUser() {
-    this.Execute({
-      Arguments: {},
       Type: 'EstablishUser'
     });
   }
 
-  public SetUserDetails(fullName: string, country: string, handle: string) {
+  public SetPaymentMethod(methodId: string) {
     this.Execute({
       Arguments: {
-        FullName: fullName,
-        Country: country,
-        Handle: handle
+        MethodID: methodId
       },
-      Type: 'SetUserDetails'
+      Type: 'SetPaymentMethod'
     });
   }
 
@@ -61,7 +72,7 @@ export class UserManagementStateContext extends StateContext<UserManagementState
 
   //  Helpers
   protected defaultValue() {
-    return <UserManagementState>{ Loading: true };
+    return { Loading: true } as UserManagementState;
   }
 
   protected loadStateKey() {
