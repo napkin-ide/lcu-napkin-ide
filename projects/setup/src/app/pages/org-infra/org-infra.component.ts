@@ -53,11 +53,9 @@ export class OrgInfraComponent implements OnInit {
   // Properties
 
   /**
-   * Setup step types
+   * Step types
    */
-  // tslint:disable-next-line:no-input-rename
-  @Input('setup-step-types')
-  public SetupStepTypes: NapkinIDESetupStepTypes;
+  public SetupStepTypes = NapkinIDESetupStepTypes;
 
   /**
    * Current state

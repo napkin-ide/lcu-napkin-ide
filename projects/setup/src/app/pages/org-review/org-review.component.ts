@@ -28,10 +28,9 @@ export class OrgReviewComponent implements OnInit {
   public SetStep: EventEmitter<NapkinIDESetupStepTypes>;
 
   /**
-   * Setup step types
+   * Step types
    */
-  @Input('setup-step-types')
-  public SetupStepTypes: NapkinIDESetupStepTypes;
+  public SetupStepTypes = NapkinIDESetupStepTypes;
 
   /**
    * Current state

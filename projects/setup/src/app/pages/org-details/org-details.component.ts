@@ -41,9 +41,10 @@ export class OrgDetailsComponent implements OnInit {
 
   // Properties
 
-  // tslint:disable-next-line:no-input-rename
-  @Input('setup-step-types')
-  public SetupStepTypes: NapkinIDESetupStepTypes;
+  /**
+   * Step types
+   */
+  public SetupStepTypes = NapkinIDESetupStepTypes;
 
   // tslint:disable-next-line:no-input-rename
   @Input('state')

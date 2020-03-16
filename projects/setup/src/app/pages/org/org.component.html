@@ -190,11 +190,11 @@
                   needed for your project.
                 </h2>
 
-                <h2 class="mat-subheading-2" *ngIf="State.EnterpriseBooted">
+                <!-- <h2 class="mat-subheading-2" *ngIf="State.EnterpriseBooted">
                   The initial configuration of your project has been set up. The
                   final step will deploy and configure the Fathym Framework on
                   the domain you've chosen.
-                </h2>
+                </h2> -->
 
                 <h2 class="mat-subheading-2">
                   For more information, checkout the following documentation
@@ -249,22 +249,19 @@
             >
               <lcu-org-details
                 #OrgDetailsComponent
-                [setup-step-types]="SetupStepTypes"
                 [state]="State"
               ></lcu-org-details>
 
               <lcu-org-infra
                 #OrgInfraComponent
-                [setup-step-types]="SetupStepTypes"
                 [state]="State"
                 (set-step)="SetStep($event)"
               ></lcu-org-infra>
 
               <lcu-org-review
-                [setup-step-types]="SetupStepTypes"
-                (set-step)="SetStep($event)"
                 [state]="State"
-              ></lcu-org-review>
+                (set-step)="SetStep($event)"
+                ></lcu-org-review>
 
               <lcu-complete
                 [setup-step-types]="SetupStepTypes"
