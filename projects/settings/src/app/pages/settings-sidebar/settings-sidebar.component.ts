@@ -4,6 +4,7 @@ import { IdeSettingsState, LowCodeUnitSetupConfig } from '../../core/ide-setting
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
 import { MatSelectChange, MatListOption } from '@angular/material';
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
+import { Constants } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-settings-sidebar',
@@ -19,6 +20,8 @@ export class SettingsSidebarComponent implements OnInit {
   public get MainLoading(): boolean {
     return this.State.Loading && (!this.State.Arch || !this.State.Arch.LCUs || this.State.Arch.LCUs.length === 0);
   }
+
+  public LCUText: string = Constants.LCU_TEXT;
 
   public NewActivityForm: FormGroup;
 

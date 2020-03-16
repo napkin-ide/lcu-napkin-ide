@@ -272,7 +272,7 @@
 
                         <mat-form-field>
                           <mat-select
-                            placeholder="LCU"
+                            placeholder="{{LCUText}}&trade;"
                             [(ngModel)]="sectionAction.Group"
                             name="secActGroup"
                             [ngModelOptions]="{ standalone: true }"
@@ -360,7 +360,7 @@
 
                           <mat-form-field>
                             <mat-select
-                              placeholder="LCU"
+                              placeholder="{{LCUText}}&trade;"
                               formControlName="group"
                               #newSecActGroup
                             >

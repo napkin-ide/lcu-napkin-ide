@@ -9,6 +9,7 @@ import { SettingsConfigComponent } from './settings-config/settings-config.compo
 import { SettingsArchComponent } from './settings-arch/settings-arch.component';
 import { SettingsActbarComponent } from './settings-actbar/settings-actbar.component';
 import { SettingsSidebarComponent } from './settings-sidebar/settings-sidebar.component';
+import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SettingsSidebarComponent } from './settings-sidebar/settings-sidebar.co
     ReactiveFormsModule,
     PagesRoutingModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    LcuNapkinIdeModule
   ],
   exports: [
     SettingsSetupComponent,
