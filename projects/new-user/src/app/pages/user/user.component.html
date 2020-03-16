@@ -1,7 +1,7 @@
 <ng-container *ngIf="!State.Loading">
   <section
     class="welcome"
-    *ngIf="State.UserSetupStep == UserSetupStepTypes.Welcome"
+    *ngIf="State.UserSetupStep == NapkinIDESetupStepTypes.Welcome"
   >
     <div class="spread" fxLayout="row" fxLayout="center center">
       <div fxFlex="auto"></div>
@@ -24,7 +24,7 @@
           mat-raised-button
           color="accent"
           class="mat-full-width"
-          (click)="SetUserSetupStep(UserSetupStepTypes.Setup)"
+          (click)="SetUserSetupStep(NapkinIDESetupStepTypes.Setup)"
         >
           Start Setup
         </button>
@@ -36,7 +36,7 @@
 
   <section
     class="setup"
-    *ngIf="State.UserSetupStep == UserSetupStepTypes.Setup"
+    *ngIf="State.UserSetupStep == NapkinIDESetupStepTypes.Setup"
   >
     <div fxLayout="row wrap" fxLayout="center center">
       <div fxFlex="40%" fxFlex.lt-sm="80%">
@@ -203,7 +203,7 @@
                   mat-button
                   class="mat-full-width"
                   color="warn"
-                  (click)="SetUserSetupStep(UserSetupStepTypes.Welcome)"
+                  (click)="SetUserSetupStep(NapkinIDESetupStepTypes.Welcome)"
                 >
                   Back
                 </button>

@@ -5,10 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { NapkinIDESetupStateManagerContext } from './core/napkin-ide-setup-state-manager.context';
 import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
-import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
+import { LcuNapkinIdeModule, UserManagementStateContext } from '@napkin-ide/lcu-napkin-ide-common';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,7 @@ import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
     LcuNapkinIdeModule,
   ],
   providers: [
-    NapkinIDESetupStateManagerContext,
+    UserManagementStateContext,
     {
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment)

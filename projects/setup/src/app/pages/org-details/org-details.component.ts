@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { NapkinIDESetupState, NapkinIDESetupStepTypes } from '../../core/napkin-ide-setup.state';
-import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
+import { UserManagementStateContext, UserManagementState, NapkinIDESetupStepTypes } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-org-details',
@@ -19,18 +18,25 @@ export class OrgDetailsComponent implements OnInit {
     return this.DetailsForm.get('orgDetailName');
   }
 
-  /**
-   * Access organization description field
-   */
-  public get OrgDetailDesc(): AbstractControl {
-    return this.DetailsForm.get('orgDetailDesc');
-  }
+  // /**
+  //  * Access organization description field
+  //  */
+  // public get OrgDetailDesc(): AbstractControl {
+  //   return this.DetailsForm.get('orgDetailDesc');
+  // }
 
   /**
    * Access organization lookup field
    */
   public get OrgDetailLookup(): AbstractControl {
     return this.DetailsForm.get('orgDetailLookup');
+  }
+
+  /**
+   * Access organization lookup field
+   */
+  public get OrgDetailTerms(): AbstractControl {
+    return this.DetailsForm.get('orgDetailTerms');
   }
 
   // Properties
@@ -41,14 +47,14 @@ export class OrgDetailsComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
   @Input('state')
-  public State: NapkinIDESetupState;
+  public State: UserManagementState;
 
   /**
    * Details formgroup
    */
   public DetailsForm: FormGroup;
 
-  constructor(protected nideState: NapkinIDESetupStateManagerContext) {}
+  constructor(protected userMgr: UserManagementStateContext) {}
 
   ngOnInit() {
     this.setupForm();
@@ -63,9 +69,9 @@ export class OrgDetailsComponent implements OnInit {
 public SetOrgDetails() {
   this.State.Loading = true;
 
-  this.nideState.SetOrganizationDetails(
+  this.userMgr.SetOrganizationDetails(
     this.OrgDetailName.value,
-    this.OrgDetailDesc.value,
+    // this.OrgDetailDesc.value,
     this.OrgDetailLookup.value
   );
 }
@@ -78,8 +84,9 @@ public SetOrgDetails() {
   protected setupForm(): void {
     this.DetailsForm = new FormGroup({
       orgDetailName: new FormControl ('', [Validators.required]),
-      orgDetailDesc: new FormControl ('', [Validators.required]),
-      orgDetailLookup: new FormControl ('', [Validators.required])
+      // orgDetailDesc: new FormControl ('', [Validators.required]),
+      orgDetailLookup: new FormControl ('', [Validators.required]),
+      orgDetailTerms: new FormControl ('', [Validators.required])
     });
 
     this.onFormChanges();
@@ -97,7 +104,7 @@ public SetOrgDetails() {
    * Setup state mechanism
    */
   protected setupState(): void {
-    this.nideState.Context.subscribe(state => {
+    this.userMgr.Context.subscribe(state => {
       this.State = state;
 
       this.stateChanged();
@@ -110,8 +117,12 @@ public SetOrgDetails() {
   protected stateChanged(): void {
     if (this.State.OrganizationName) {
       this.OrgDetailName.patchValue(this.State.OrganizationName || '');
-      this.OrgDetailDesc.patchValue(this.State.OrganizationDescription || '');
+
+      // this.OrgDetailDesc.patchValue(this.State.OrganizationDescription || '');
+
       this.OrgDetailLookup.patchValue(this.State.OrganizationLookup || '');
+
+      this.OrgDetailTerms.patchValue(this.State.TermsAccepted || '');
     }
   }
 

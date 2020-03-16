@@ -1,8 +1,11 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NapkinIDESetupState, NapkinIDESetupStepTypes } from '../../core/napkin-ide-setup.state';
-import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
-import { AzureInfaSettings } from '../../core/napkin-ide-setup.state';
+import {
+  NapkinIDESetupState,
+  UserManagementStateContext,
+  NapkinIDESetupStepTypes,
+  UserManagementState
+} from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-complete',
@@ -21,15 +24,14 @@ export class CompleteComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
   @Input('state')
-  public State: NapkinIDESetupState;
+  public State: UserManagementState;
 
   //  Constructors
-  constructor(protected nideState: NapkinIDESetupStateManagerContext) {
-  }
+  constructor(protected userMgr: UserManagementStateContext) {}
 
   //  Life Cycle
   public ngOnInit() {
-    this.nideState.Context.subscribe(state => {
+    this.userMgr.Context.subscribe(state => {
       this.State = state;
 
       this.stateChanged();
@@ -39,6 +41,5 @@ export class CompleteComponent implements OnInit {
   //  API methods
 
   //  Helpers
-  protected stateChanged() {
-  }
+  protected stateChanged() {}
 }

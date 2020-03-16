@@ -18,7 +18,7 @@ import {
 import {
   UserManagementStateContext,
   UserManagementState,
-  UserSetupStepTypes,
+  NapkinIDESetupStepTypes,
   Constants
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { Guid, LCUServiceSettings } from '@lcu/common';
@@ -118,7 +118,7 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   public StripeError: string;
 
-  public UserSetupStepTypes = UserSetupStepTypes;
+  public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
 
   //  Constructor
   constructor(
@@ -150,10 +150,10 @@ export class UserComponent implements OnInit, AfterViewInit {
     window.open(Constants.HELP_PDF);
   }
 
-  public SetUserSetupStep(step: UserSetupStepTypes) {
+  public SetUserSetupStep(step: NapkinIDESetupStepTypes) {
     this.State.Loading = true;
 
-    this.userMngState.SetUserSetupStep(step);
+    this.userMngState.SetNapkinIDESetupStep(step);
   }
 
   public StepperChanged(event: StepperSelectionEvent) {
@@ -263,7 +263,7 @@ export class UserComponent implements OnInit, AfterViewInit {
     // using *ngIf with external form properties
     this.cdr.detectChanges();
 
-    // if (this.State.Step === UserManagementStepTypes.Complete) {
+    // if (this.State.SetupStep === UserManagementStepTypes.Complete) {
     // }
   }
 }

@@ -11,14 +11,19 @@
 
     <script id="lcu-reg">
       window.LCU = {
-        APIRoot: 'https://www.fathym-int.com',
-        // APIRoot: 'https://localhost:44387',
+        APIRoot: "https://localhost:44387/api/state",
         Application: {
-          // ID: 'fd175dd1-3f91-4527-b43f-eb4bca6ab158'
+          // ID: 'fd175dd1-3f91-4527-b43f-eb4bca6ab158',
+          EnterpriseAPIKey: "3ebd1c0d-22d0-489e-a46f-3260103c8cd7"
         },
         State: {
-         // Environment: 'local',
-          UsernameMock: 'shannon.bruns@fathym.com'
+          Root: "/api",
+          // Environment: 'local'
+        },
+        Settings: {
+          Stripe: {
+            PublicKey: 'pk_test_KnI6QApAae5tFIxuwuoSBFx6'
+          }
         }
       };
     </script>

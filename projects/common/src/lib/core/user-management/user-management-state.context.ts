@@ -1,7 +1,8 @@
 import {
   UserManagementState,
   UserTypes,
-  UserSetupStepTypes
+  AzureInfaSettings,
+  NapkinIDESetupStepTypes
 } from './user-management.state';
 import { StateContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
@@ -20,26 +21,60 @@ export class UserManagementStateContext extends StateContext<
   }
 
   //  API Methods
-  public EstablishUser(
-    orgName: string,
-    orgDesc: string,
-    orgLookup: string,
-    azureTenantId: string,
-    azureAppId: string,
-    azureAuthKey: string,
-    azureSubId: string
+  public BootOrganization() {
+    this.Execute({
+      Arguments: {},
+      Type: 'BootOrganization'
+    });
+  }
+
+  public ConfigureInfrastructure(
+    infraType: string,
+    useDefaultSettings: boolean,
+    settings: AzureInfaSettings
   ) {
     this.Execute({
       Arguments: {
-        OrgName: orgName,
-        OrgDesc: orgDesc,
-        OrgLookup: orgLookup,
-        AzureTenantID: azureTenantId,
-        AzureAppID: azureAppId,
-        AzureAuthKey: azureAuthKey,
-        AzureSubID: azureSubId
+        InfrastructureType: infraType,
+        Settings: settings,
+        UseDefaultSettings: useDefaultSettings
       },
-      Type: 'EstablishUser'
+      Type: 'ConfigureInfrastructure'
+    });
+  }
+
+  public SetNapkinIDESetupStep(step: NapkinIDESetupStepTypes) {
+    this.Execute({
+      Arguments: {
+        Step: step
+      },
+      Type: 'SetNapkinIDESetupStep'
+    });
+  }
+
+  public SetOrganizationDetails(
+    name: string,
+    // description: string,
+    lookup: string
+  ) {
+    this.Execute({
+      Arguments: {
+        Name: name,
+        // Description: description,
+        Lookup: lookup
+      },
+      Type: 'SetOrganizationDetails'
+    });
+  }
+
+  public SetupDevOpsOAuth(appId: string, scopes: string, clientSecret: string) {
+    this.Execute({
+      Arguments: {
+        AppID: appId,
+        Scopes: scopes,
+        ClientSecret: clientSecret
+      },
+      Type: 'SetupDevOpsOAuth'
     });
   }
 
@@ -49,15 +84,6 @@ export class UserManagementStateContext extends StateContext<
         MethodID: methodId
       },
       Type: 'SetPaymentMethod'
-    });
-  }
-
-  public SetUserSetupStep(step: UserSetupStepTypes) {
-    this.Execute({
-      Arguments: {
-        Step: step
-      },
-      Type: 'SetUserSetupStep'
     });
   }
 

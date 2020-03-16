@@ -1,9 +1,41 @@
+import { Status } from '@lcu/common';
+
 export class UserManagementState {
+  public BootOptions?: BootOption[];
+
   public Details?: JourneyDetail[];
+
+  public DevOpsAppID?: string;
+
+  public DevOpsClientSecret?: string;
+
+  public DevOpsScopes?: string;
+
+  public EnvironmentLookup?: string;
+
+  public EnvSettings?: AzureInfaSettings;
+
+  public HasDevOpsOAuth?: boolean;
+
+  public Host?: string;
 
   public Loading?: boolean;
 
+  public NewEnterpriseAPIKey?: string;
+
+  public OrganizationDescription?: string;
+
+  public OrganizationName?: string;
+
+  public OrganizationLookup?: string;
+
+  public PaymentMethodID?: string;
+
   public Personas?: JourneyPersona[];
+
+  public SetupStep?: NapkinIDESetupStepTypes;
+
+  public Template?: string;
 
   public Terms?: string;
 
@@ -11,33 +43,56 @@ export class UserManagementState {
 
   public Username?: string;
 
-  public UserSetupStep?: UserSetupStepTypes;
-
   public UserType?: UserTypes;
 }
 
 export class JourneyPersona {
-  public Descriptions: string[];
+  public Descriptions?: string[];
 
-  public DetailLookupCategories: { [category: string]: string[] };
+  public DetailLookupCategories?: { [category: string]: string[] };
 
-  public Lookup: string;
+  public Lookup?: string;
 
-  public Name: string;
+  public Name?: string;
 }
 
 export class JourneyDetail {
-  public Description: string;
+  public Description?: string;
 
-  public Lookup: string;
+  public Lookup?: string;
 
-  public Name: string;
+  public Name?: string;
 }
 
-export enum UserSetupStepTypes {
-  Welcome = 'Welcome',
-  Setup = 'Setup',
-  Progress = 'Progress',
+export class BootOption {
+  public Descriptions?: string[];
+
+  public Loading?: boolean;
+
+  public Lookup?: string;
+
+  public Name?: string;
+
+  public SetupStep?: NapkinIDESetupStepTypes;
+
+  public Status?: Status;
+}
+
+export class AzureInfaSettings {
+  public AzureTenantID?: string;
+
+  public AzureSubID?: string;
+
+  public AzureAppID?: string;
+
+  public AzureAppAuthKey?: string;
+}
+
+export enum NapkinIDESetupStepTypes {
+  OrgDetails = 'OrgDetails',
+  AzureSetup = 'AzureSetup',
+  Billing = 'Billing',
+  Review = 'Review',
   Complete = 'Complete'
 }
 

@@ -17,6 +17,7 @@ export * from './lib/controls/side-nav/side-nav.component';
 export * from './lib/controls/external-dialog/external-dialog.component';
 export * from './lib/controls/external-dialog/external-dialog.module';
 export * from './lib/core/ide/ide-state-state-manager.context';
+export * from './lib/core/user-management/napkin-ide-setup.state';
 export * from './lib/core/user-management/user-management-state.context';
 export * from './lib/core/user-management/user-management.state';
 export * from './lib/core/ide/state';

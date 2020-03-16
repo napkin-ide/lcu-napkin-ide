@@ -1,5 +1,5 @@
 <form
-  *ngIf="State.Step == SetupStepTypes['AzureSetup']"
+  *ngIf="State.SetupStep == SetupStepTypes.AzureSetup"
   [formGroup]="InfraForm"
 >
   <div class="spread">
@@ -186,7 +186,7 @@
 
     <div class="margin-top-4">
       <button
-        matTooltip="Your best practices IoT cloud infrastructure is being set up. If you were doing this from scratch, it would take several days, but with Fathym it will only take up to 15 minutes."
+        matTooltip="Your best practices IoT cloud infrastructure will be set up. If you were doing this from scratch, it may take several days, but with Fathym it will only take up to 15 minutes."
         matTooltipClass="tooltip-background"
         mat-raised-button
         color="accent"
@@ -194,16 +194,15 @@
         (click)="Configure()"
         [disabled]="!InfraForm.valid"
       >
-        Set Up Organization Details
+        Review & Launch
       </button>
 
       <button
         mat-button
         class="mat-full-width"
-        color="warn"
-        (click)="ChangeStep(SetupStepTypes['OrgDetails'])"
+        (click)="ChangeStep(SetupStepTypes.OrgDetails)"
       >
-        Rename Organization
+        Back
       </button>
     </div>
   </div>
