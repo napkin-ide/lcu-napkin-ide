@@ -108,12 +108,4 @@ export class UserManagementStateContext extends StateContext<
   protected loadStateName() {
     return 'usermanagement';
   }
-
-  protected loadStateRoot() {
-    return `/${this.loadStateName()}`;
-  }
-
-  protected loadStateActionRoot() {
-    return `/${this.loadStateName()}`;
-  }
 }
