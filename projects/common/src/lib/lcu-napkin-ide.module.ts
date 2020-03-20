@@ -8,13 +8,15 @@ import { RouterModule } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
 import { LcuThemePickerModule } from '@lowcodeunit/lcu-theme-picker-common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { UserAccountSidenavComponent } from './controls/user-account-sidenav/user-account-sidenav.component';
 
 
 @NgModule({
   declarations: [
     SideNavComponent,
     NavListComponent,
-    LcuNapkinIdeShellHostElementComponent
+    LcuNapkinIdeShellHostElementComponent,
+    UserAccountSidenavComponent
   ],
   imports: [
     CommonModule,
@@ -28,12 +30,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   exports: [
     SideNavComponent,
     NavListComponent,
-    LcuNapkinIdeShellHostElementComponent
+    LcuNapkinIdeShellHostElementComponent,
+    UserAccountSidenavComponent
   ],
   entryComponents: [
     SideNavComponent,
     NavListComponent,
-    LcuNapkinIdeShellHostElementComponent
+    LcuNapkinIdeShellHostElementComponent,
+    UserAccountSidenavComponent
   ]
 })
 export class LcuNapkinIdeModule {}
