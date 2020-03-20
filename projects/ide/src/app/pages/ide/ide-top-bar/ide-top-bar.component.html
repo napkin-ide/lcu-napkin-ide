@@ -1,38 +1,17 @@
 <mat-toolbar class="ide-tool-bar" fxLayout="row" fxLayoutAlign="space-between">
+
   <div fxLayout="row" fxLayoutAlign="space-between center">
-  <button class="menu-button" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ToggleSideBar()" *ngIf="isHandset">
-    <mat-icon class="toolbar-icon" aria-label="Side nav toggle icon" >menu</mat-icon>
-  </button>
-  <div class="primary-logo" alt="Fathym Framework" [ngClass]="{'small': isHandset, 'large': !isHandset}"></div>
-</div>
-  <!-- <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ToggleSideBar()" *ngIf="isHandset">
-    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-  </button> -->
 
-<!-- LCU will go here -->
-  <div class="user-account" fxLayoutAlign="center center">
-    <!-- <button mat-button [matMenuTriggerFor]="menu">
-      <mat-icon>person</mat-icon>
+    <button class="menu-button" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ToggleSideBar()" *ngIf="isHandset">
+
+      <mat-icon class="toolbar-icon" aria-label="Side nav toggle icon" >menu</mat-icon>
+
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu> -->
-    <mat-sidenav-container class="user-account-sidenav-container">
-      <mat-sidenav-content class="user-account-sidenav-content" (click)="ToggleDrawer()">
-        <mat-icon class="toolbar-icon">account_circle</mat-icon>
-      </mat-sidenav-content>
-      <mat-sidenav class="user-account-sidenav" #sidenav position="end" mode="over">
-        <div fxLayout="column" fxLayoutAlign="center center">
-        <div class="greeting" [ngStyle]="{'font-size':'12px'}">Hi, george.hatch@fathym.com</div>
-        <button id="login-button" type="submit" mat-raised-button color="primary" (click)="LogoutClicked()">
-          LOGOUT
-        </button>
-      </div>
-      </mat-sidenav>
 
-    </mat-sidenav-container>
+    <div class="primary-logo" alt="Fathym Framework" [ngClass]="{'small': isHandset, 'large': !isHandset}"></div>
+
   </div>
-  <!-- end LCU -->
+
+  <!-- <lcu-user-account-sidenav class="user-account" fxLayoutAlign="center center"></lcu-user-account-sidenav> -->
 
 </mat-toolbar>

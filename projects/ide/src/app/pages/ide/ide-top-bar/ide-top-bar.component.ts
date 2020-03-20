@@ -46,14 +46,6 @@ export class IdeTopBarComponent implements OnInit {
     this.openSideBarEvent.emit(!this.SideBarOpened);
   }
 
-  public ToggleDrawer(){
-if(this.drawer.opened){
-      this.drawer.close()
-    }
-    else{
-      this.drawer.open();
-    }
-  }
 
   public LogoutClicked(){
     //TODO hook up to auth
