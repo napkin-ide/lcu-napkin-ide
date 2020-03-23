@@ -75,12 +75,12 @@ export class UserManagementStateContext extends StateContext<
     return { Loading: true } as UserManagementState;
   }
 
-  protected loadStateKey(): Promise<string> {
-    return Promise.resolve('init');
+  protected loadStateKey(): string {
+    return 'init';
   }
 
-  protected loadStateName(): Promise<string> {
-    return Promise.resolve('usermanagement');
+  protected loadStateName(): string {
+    return 'usermanagement';
   }
 
   protected loadStateRoot() {

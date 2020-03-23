@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { UserInfoModel } from '../../models/user-info.model';
 
 @Component({
