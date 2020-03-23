@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, C
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IdeSettingsState, LowCodeUnitSetupConfig, IDESettingStepTypes } from '../../core/ide-settings.state';
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
-import { MatSelectChange, MatListOption } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
+import { MatListOption } from '@angular/material/list';
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
 
 @Component({

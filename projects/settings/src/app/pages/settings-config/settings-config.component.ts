@@ -15,7 +15,8 @@ import {
   IDESettingStepTypes
 } from '../../core/ide-settings.state';
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
-import { MatSelectChange, MatListOption } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
+import { MatListOption } from '@angular/material/list';
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
 
 @Component({

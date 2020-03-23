@@ -56,7 +56,7 @@ export class MarketplaceProductViewComponent implements OnInit {
    *
    * takes a product, converts it to an LCU setup configuration and saves it
    */
-  public AddToOrg(product): void {
+  public AddToOrg(product: any): void {
     this.savedLCU = new LowCodeUnitSetupConfig();
 
     // map product into LowCodeUnitSetupConfig...

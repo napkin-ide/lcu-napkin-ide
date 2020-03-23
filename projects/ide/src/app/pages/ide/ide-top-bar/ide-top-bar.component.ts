@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { UserManagementState, UserManagementStateContext } from '@napkin-ide/lcu-napkin-ide-common';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'nide-ide-top-bar',

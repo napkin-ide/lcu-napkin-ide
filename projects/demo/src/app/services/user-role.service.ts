@@ -27,7 +27,7 @@ export class UserRolesService {
       .subscribe(this.roles$);
   }
 
-  public UpdateRoles(roles): void {
-    this.roleUpdates$.next(roles);
-  }
+  // public UpdateRoles(roles): void {
+  //   this.roleUpdates$.next(roles);
+  // }
 }
