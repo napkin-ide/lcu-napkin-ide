@@ -15,7 +15,6 @@ export class IdeTopBarComponent implements OnInit {
 
   protected SideBarOpened: boolean = false;
 
-  @ViewChild('sidenav', {static: false}) public drawer: MatSidenav;
 
   @Input() public isHandset: boolean = false;
 

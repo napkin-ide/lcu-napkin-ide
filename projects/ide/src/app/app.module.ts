@@ -25,7 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     FlexLayoutModule,
     MaterialModule,
     LcuNapkinIdeModule
-  ],
+    ],
   providers: [
     IdeStateService,
     IdeStateStateManagerContext,
