@@ -136,7 +136,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   public ngOnInit() {
     this.setupForms();
 
-    this.userMngState.Context.subscribe(state => {
+    this.userMngState.Context.subscribe((state: any) => {
       this.State = state;
 
       this.stateChanged();
@@ -177,7 +177,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   //  Helpers
-  protected handleCardChanged(event) {
+  protected handleCardChanged(event: any) {
     if (event.error) {
       this.StripeError = event.error.message;
     } else {
@@ -185,7 +185,7 @@ export class UserComponent implements OnInit, AfterViewInit {
     }
   }
 
-  protected handleStripePaymentMethodCreated(result, email) {
+  protected handleStripePaymentMethodCreated(result: any, email: string) {
     if (result.error) {
       this.StripeError = result.error;
     } else {
@@ -252,7 +252,7 @@ export class UserComponent implements OnInit, AfterViewInit {
 
       this.stripeCard.mount('#card-element');
 
-      this.stripeCard.addEventListener('change', event =>
+      this.stripeCard.addEventListener('change', (event: any) =>
         this.handleCardChanged(event)
       );
     }
