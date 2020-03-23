@@ -14,11 +14,11 @@ export class UserAccountSidenavComponent implements OnInit {
   @Input('user-info')
   public UserInfo: UserInfoModel;
 
-  @Output('button-clicked')
-  public ButtonClicked: EventEmitter<any>;
+  @Output('logout-clicked')
+  public LogoutClicked: EventEmitter<any>;
 
   constructor() {
-    this.ButtonClicked = new EventEmitter<any>();
+    this.LogoutClicked = new EventEmitter<any>();
   }
 
   public ngOnInit(): void {
@@ -39,6 +39,6 @@ export class UserAccountSidenavComponent implements OnInit {
     }
   }
   public Logout() {
-    this.ButtonClicked.emit("Logout");
+    this.LogoutClicked.emit("Logout");
   }
 }
