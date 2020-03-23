@@ -44,7 +44,7 @@ export class MarketplaceOverviewComponent implements OnInit {
 
 
   //  API methods
-  public OpenProductView(product) {
+  public OpenProductView(product: any) {
     console.log('opening product view for ', product.Title)
     this.router.navigate(['marketplace/product', product.Title]);
   }

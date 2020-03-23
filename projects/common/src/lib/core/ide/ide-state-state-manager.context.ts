@@ -64,11 +64,11 @@ export class IdeStateStateManagerContext extends StateManagerContext<IdeState> {
     return <IdeState>{ Loading: true };
   }
 
-  protected async loadStateKey() {
-    return 'main';
+  protected async loadStateKey(): Promise<string> {
+    return Promise.resolve('main');
   }
 
-  protected async loadStateName() {
-    return 'ide-state';
+  protected async loadStateName(): Promise<string> {
+    return Promise.resolve('ide-state');
   }
 }

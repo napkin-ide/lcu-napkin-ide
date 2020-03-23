@@ -73,7 +73,7 @@ export class LimitButtonClickDirective implements OnInit, OnDestroy {
   }
 
   @HostListener('click', ['$event'])
-  clickEvent(event) {
+  clickEvent(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     this.clicks.next(event);

@@ -75,11 +75,11 @@ export class UserManagementStateContext extends StateContext<
     return { Loading: true } as UserManagementState;
   }
 
-  protected loadStateKey() {
+  protected loadStateKey(): string {
     return 'init';
   }
 
-  protected loadStateName() {
+  protected loadStateName(): string {
     return 'usermanagement';
   }
 

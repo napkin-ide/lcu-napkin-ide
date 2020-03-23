@@ -57,7 +57,7 @@
 						"main": "projects/lcu/src/main.ts",
 						"polyfills": "projects/lcu/src/polyfills.ts",
 						"tsConfig": "projects/lcu/tsconfig.app.json",
-						"aot": false,
+						"aot": true,
 						"assets": [
 							"projects/lcu/src/favicon.ico",
 							{
@@ -185,7 +185,7 @@
 						"main": "projects/demo/src/main.ts",
 						"polyfills": "projects/demo/src/polyfills.ts",
 						"tsConfig": "projects/demo/tsconfig.app.json",
-						"aot": false,
+						"aot": true,
 						"assets": [
 							"projects/demo/src/favicon.ico",
 							"projects/demo/src/assets",
@@ -312,7 +312,7 @@
 						"main": "projects/setup/src/main.ts",
 						"polyfills": "projects/setup/src/polyfills.ts",
 						"tsConfig": "projects/setup/tsconfig.app.json",
-						"aot": false,
+						"aot": true,
 						"assets": [
 							"projects/setup/src/favicon.ico",
 							"projects/setup/src/assets",
@@ -434,7 +434,7 @@
 						"main": "projects/ide/src/main.ts",
 						"polyfills": "projects/ide/src/polyfills.ts",
 						"tsConfig": "projects/ide/tsconfig.app.json",
-						"aot": false,
+						"aot": true,
 						"assets": [
 							"projects/ide/src/favicon.ico",
 							"projects/ide/src/assets",
@@ -556,7 +556,7 @@
 						"main": "projects/settings/src/main.ts",
 						"polyfills": "projects/settings/src/polyfills.ts",
 						"tsConfig": "projects/settings/tsconfig.app.json",
-						"aot": false,
+						"aot": true,
 						"assets": [
 							"projects/settings/src/favicon.ico",
 							"projects/settings/src/assets",

@@ -196,11 +196,11 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
     return <IdeSettingsState>{ Loading: true };
   }
 
-  protected loadStateKey() {
-    return 'main';
+  protected loadStateKey(): Promise<string> {
+    return Promise.resolve('main');
   }
 
-  protected loadStateName() {
-    return 'ide-settings';
+  protected loadStateName(): Promise<string> {
+    return Promise.resolve('ide-settings');
   }
 }
