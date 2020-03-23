@@ -4,7 +4,7 @@
   </mat-sidenav-content>
   <mat-sidenav class="user-account-sidenav" #sidenav position="end" mode="over">
     <div fxLayout="column" fxLayoutAlign="center center">
-    <div class="greeting" [ngStyle]="{'font-size':'12px'}">Hi, {{UserInfo.Email}}}}</div>
+    <div class="greeting" [ngStyle]="{'font-size':'12px'}">Hi, {{ UserInfo.Email }}</div>
     <button id="login-button" type="submit" mat-raised-button color="primary" (click)="Logout()">
       LOGOUT
     </button>
