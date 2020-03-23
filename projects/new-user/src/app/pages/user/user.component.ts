@@ -43,6 +43,15 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   public DetailsForm: FormGroup;
 
+  public favoriteSeason: any;
+
+  public season: any;
+
+  /**
+   * Error Message
+   */
+  public GuidErrorMessage: string;
+
   /**
    * Toggle Application Id
    */
