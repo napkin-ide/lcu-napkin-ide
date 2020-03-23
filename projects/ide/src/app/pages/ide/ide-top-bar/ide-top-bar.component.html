@@ -1,7 +1,17 @@
-  <mat-toolbar fxLayout="row" fxLayoutAlign="space-between">
-    <div class="primary-logo" alt="Fathym Framework"></div>
+<mat-toolbar class="ide-tool-bar" fxLayout="row" fxLayoutAlign="space-between">
 
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ToggleSideBar()" *ngIf="isHandset">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+
+    <button class="menu-button" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ToggleSideBar()" *ngIf="isHandset">
+
+      <mat-icon class="toolbar-icon" aria-label="Side nav toggle icon" >menu</mat-icon>
+
     </button>
-  </mat-toolbar>
+
+    <div class="primary-logo" alt="Fathym Framework" [ngClass]="{'small': isHandset, 'large': !isHandset}"></div>
+
+  </div>
+
+  <!-- <lcu-user-account-sidenav class="user-account" fxLayoutAlign="center center"></lcu-user-account-sidenav> -->
+
+</mat-toolbar>

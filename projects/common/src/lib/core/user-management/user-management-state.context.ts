@@ -1,11 +1,17 @@
-import { UserManagementState, UserManagementStepTypes, UserTypes } from './user-management.state';
+import {
+  UserManagementState,
+  UserTypes,
+  UserSetupStepTypes
+} from './user-management.state';
 import { StateContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserManagementStateContext extends StateContext<UserManagementState> {
+export class UserManagementStateContext extends StateContext<
+  UserManagementState
+> {
   //  Properties
 
   //  Constructors
@@ -13,45 +19,45 @@ export class UserManagementStateContext extends StateContext<UserManagementState
     super(injector);
   }
 
-  protected setupReceiveState(groupName: string) {
-    this.rt.RegisterHandler(`ReceiveState`).subscribe(req => {//=>${groupName}
-      this.subject.next(req);
-    });
-  }
   //  API Methods
-  public AcceptTerms(version: string) {
+  public EstablishUser(
+    orgName: string,
+    orgDesc: string,
+    orgLookup: string,
+    azureTenantId: string,
+    azureAppId: string,
+    azureAuthKey: string,
+    azureSubId: string
+  ) {
     this.Execute({
       Arguments: {
-        Version: version
+        OrgName: orgName,
+        OrgDesc: orgDesc,
+        OrgLookup: orgLookup,
+        AzureTenantID: azureTenantId,
+        AzureAppID: azureAppId,
+        AzureAuthKey: azureAuthKey,
+        AzureSubID: azureSubId
       },
-      Type: 'AcceptTerms'
-    });
-  }
-
-  public EstablishUser() {
-    this.Execute({
-      Arguments: {},
       Type: 'EstablishUser'
     });
   }
 
-  public SetUserManagementStep(step: UserManagementStepTypes) {
+  public SetPaymentMethod(methodId: string) {
+    this.Execute({
+      Arguments: {
+        MethodID: methodId
+      },
+      Type: 'SetPaymentMethod'
+    });
+  }
+
+  public SetUserSetupStep(step: UserSetupStepTypes) {
     this.Execute({
       Arguments: {
         Step: step
       },
-      Type: 'SetUserManagementStep'
-    });
-  }
-
-  public SetUserDetails(fullName: string, country: string, handle: string) {
-    this.Execute({
-      Arguments: {
-        FullName: fullName,
-        Country: country,
-        Handle: handle
-      },
-      Type: 'SetUserDetails'
+      Type: 'SetUserSetupStep'
     });
   }
 
@@ -66,7 +72,7 @@ export class UserManagementStateContext extends StateContext<UserManagementState
 
   //  Helpers
   protected defaultValue() {
-    return <UserManagementState>{ Loading: true };
+    return { Loading: true } as UserManagementState;
   }
 
   protected loadStateKey(): Promise<string> {

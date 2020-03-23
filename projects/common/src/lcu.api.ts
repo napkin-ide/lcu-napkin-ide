@@ -12,11 +12,15 @@
 // export * from './lib/controls/status-bar/status-bar.component';
 export * from './lib/lcu-napkin-ide.module';
 export * from './lib/models/nav-list.model';
+export * from './lib/models/user-info.model';
 export * from './lib/controls/nav-list/nav-list.component';
 export * from './lib/controls/side-nav/side-nav.component';
 export * from './lib/controls/external-dialog/external-dialog.component';
 export * from './lib/controls/external-dialog/external-dialog.module';
+export * from './lib/controls/user-account-sidenav/user-account-sidenav.component';
 export * from './lib/core/ide/ide-state-state-manager.context';
+export * from './lib/core/user-management/user-management-state.context';
+export * from './lib/core/user-management/user-management.state';
 export * from './lib/core/ide/state';
 export * from './lib/core/ide/state-change';
 export * from './lib/core/ide/state-change-types';

@@ -1,141 +1,210 @@
-<form *ngIf="State.Step == SetupStepTypes['AzureSetup']" [formGroup]="InfraForm">
-        <div class="spread">
-            <h1
-            fxLayoutAlign="center center"
-            class="mat-display-1 title margin-bottom-4">
-            Microsoft Azure Subscription Set Up
-          </h1>
+<form
+  *ngIf="State.Step == SetupStepTypes['AzureSetup']"
+  [formGroup]="InfraForm"
+>
+  <div class="spread">
+    <h1
+      fxLayoutAlign="center center"
+      class="mat-display-1 title margin-bottom-4"
+    >
+      Microsoft Azure Subscription Set Up
+    </h1>
 
-          <div>
-
-              <mat-form-field class="mat-full-width" >
-                  <div fxLayout="row" fxLayoutGap="10px">
-                      <mat-icon *ngIf="OrgInfraAzureAppAppId.value.length > 0 && !OrgInfraAzureAppAppId.hasError('pattern')" class="success">check_circle</mat-icon>
-                    <input 
-                      formControlName="azureAppId"
-                      matInput placeholder="Azure App ID"
-                      [type]="HideAppId ? 'password' : 'text'"
-                      required autocomplete="new-password">
-                    </div>
-                    <mat-error *ngIf="OrgInfraAzureAppAppId.hasError('pattern')">
-                        {{ GuidErrorMessage }}
-                    </mat-error>
-                  <mat-icon
-
-                    matBadgePosition="below after"
-                    matBadgeColor="primary"
-                    matBadgeOverlap="false"
-                    color="warn"
-                    matSuffix
-                    (click)="HideAppId = !HideAppId" class="cursor-pointer">{{HideAppId ? 'visibility_off' : 'visibility'}}
-                  </mat-icon>
-                  <mat-icon matSuffix (click)="OpenHelpPdf()"  matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
-                  <!-- matBadge="{{OrgInfraAzureAppAppId.value.length}}"  -->
-                  <mat-hint>Guid Value</mat-hint>
-                </mat-form-field>
-
-
-            <mat-form-field class="mat-full-width margin-top-4">
-              <div fxLayout="row" fxLayoutGap="10px">
-                <mat-icon *ngIf="OrgInfraAzureTenatId.value.length > 0 && !OrgInfraAzureTenatId.hasError('pattern')" class="success">check_circle</mat-icon>
-                <input
-                  formControlName="azureTenantId"
-                  matInput placeholder="Azure Tenant (Directory) ID"
-                  [type]="HideTenantId ? 'password' : 'text'"
-                  required autocomplete="new-password">
-              </div>
-                 <mat-error *ngIf="OrgInfraAzureTenatId.hasError('pattern')">
-                    {{ GuidErrorMessage }}
-                </mat-error>
-                <mat-icon
-
-                  matBadgePosition="below after"
-                  matBadgeColor="primary"
-                  matBadgeOverlap="false"
-                  color="warn"
-                  matSuffix
-                  (click)="HideTenantId = !HideTenantId" class="cursor-pointer">{{HideTenantId ? 'visibility_off' : 'visibility'}}
-                </mat-icon>
-                <mat-icon matSuffix  (click)="OpenHelpPdf()" matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
-                <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
-              <mat-hint>Guid Value</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field class="mat-full-width margin-top-4">
-              <div fxLayout="row" fxLayoutGap="10px">
-                  <mat-icon *ngIf="OrgInfraAzureSubId.value.length > 0 && !OrgInfraAzureSubId.hasError('pattern')" class="success">check_circle</mat-icon>
-                  <input
-                    formControlName="azureSubId"
-                    matInput placeholder="Azure Subscription ID"
-                    [type]="HideSubId ? 'password' : 'text'"
-                    required autocomplete="new-password">
-                </div>
-                <mat-error *ngIf="OrgInfraAzureSubId.hasError('pattern')">
-                    {{ GuidErrorMessage }}
-                </mat-error>
-              <mat-icon
-
-                matBadgePosition="below after"
-                matBadgeColor="primary"
-                matBadgeOverlap="false"
-                color="warn"
-                matSuffix
-                (click)="HideSubId = !HideSubId" class="cursor-pointer">{{HideSubId ? 'visibility_off' : 'visibility'}}
-              </mat-icon>
-              <mat-icon matSuffix (click)="OpenHelpPdf()" matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
-              <!-- matBadge="{{OrgInfraAzureSubId.value.length}}"  -->
-              <mat-hint>Guid Value</mat-hint>
-            </mat-form-field>
-
-
-
-            <mat-form-field class="mat-full-width margin-top-4">
-              <div fxLayout="row" fxLayoutGap="10px">
-                  <mat-icon *ngIf="OrgInfraAzureAppAuthKey.value.length > 0 && !OrgInfraAzureAppAuthKey.hasError('required')" class="success">check_circle</mat-icon>
-                <input
-                  formControlName="azureAppAuthKey"
-                  matInput placeholder="Azure App Auth key"
-                  [type]="HideAuthKey ? 'password' : 'text'"
-                  required autocomplete="new-password">
-                </div>
-                <mat-error *ngIf="OrgInfraAzureAppAuthKey.hasError">
-                    Value is required
-                </mat-error>
-              <mat-icon
-
-                matBadgePosition="below after"
-                matBadgeColor="primary"
-                matBadgeOverlap="false"
-                color="warn"
-                matSuffix
-                (click)="HideAuthKey = !HideAuthKey" class="cursor-pointer">{{HideAuthKey ? 'visibility_off' : 'visibility'}}
-              </mat-icon>
-              <mat-icon matSuffix (click)="OpenHelpPdf()" matTooltip=" Obtain this value from Azure’s Certificates and Secrets page. Click for more detailed instructions." matTooltipClass="tooltip-background">help_outline</mat-icon>
-              <!-- matBadge="{{OrgInfraAzureAppAuthKey.value.length}}"  -->
-              <!-- <mat-hint>32 Character Limit</mat-hint> -->
-            </mat-form-field>
-          </div>
-
-          <div class="margin-top-4">
-          <button
-            matTooltip="Your best practices IoT cloud infrastructure is being set up. If you were doing this from scratch, it would take several days, but with Fathym it will only take up to 15 minutes." 
-            matTooltipClass="tooltip-background"
-            mat-raised-button
-            color="accent"
-            class="mat-full-width"
-            (click)="Configure()"
-            [disabled]="!InfraForm.valid"
-            >
-            Set Up Organization Details
-          </button>
-
-          <button
-            mat-button
-            class="mat-full-width"
-            color="warn"
-            (click)="ChangeStep(SetupStepTypes['OrgDetails'])">
-            Rename Organization
-        </button>
+    <div>
+      <mat-form-field class="mat-full-width">
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-icon
+            *ngIf="
+              OrgInfraAzureAppAppId.value.length > 0 &&
+              !OrgInfraAzureAppAppId.hasError('pattern')
+            "
+            class="success"
+            >check_circle</mat-icon
+          >
+          <input
+            formControlName="azureAppId"
+            matInput
+            placeholder="Azure App ID"
+            [type]="HideAppId ? 'password' : 'text'"
+            required
+            autocomplete="new-password"
+          />
         </div>
+        <mat-error *ngIf="OrgInfraAzureAppAppId.hasError('pattern')">
+          {{ GuidErrorMessage }}
+        </mat-error>
+        <mat-icon
+          matBadgePosition="below after"
+          matBadgeColor="primary"
+          matBadgeOverlap="false"
+          color="warn"
+          matSuffix
+          (click)="HideAppId = !HideAppId"
+          class="cursor-pointer"
+          >{{ HideAppId ? "visibility_off" : "visibility" }}
+        </mat-icon>
+        <mat-icon
+          matSuffix
+          (click)="OpenHelpPdf()"
+          matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
+          matTooltipClass="tooltip-background"
+          >help_outline</mat-icon
+        >
+        <!-- matBadge="{{OrgInfraAzureAppAppId.value.length}}"  -->
+        <mat-hint>Guid Value</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mat-full-width margin-top-4">
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-icon
+            *ngIf="
+              OrgInfraAzureTenatId.value.length > 0 &&
+              !OrgInfraAzureTenatId.hasError('pattern')
+            "
+            class="success"
+            >check_circle</mat-icon
+          >
+          <input
+            formControlName="azureTenantId"
+            matInput
+            placeholder="Azure Tenant (Directory) ID"
+            [type]="HideTenantId ? 'password' : 'text'"
+            required
+            autocomplete="new-password"
+          />
         </div>
-      </form>
+        <mat-error *ngIf="OrgInfraAzureTenatId.hasError('pattern')">
+          {{ GuidErrorMessage }}
+        </mat-error>
+        <mat-icon
+          matBadgePosition="below after"
+          matBadgeColor="primary"
+          matBadgeOverlap="false"
+          color="warn"
+          matSuffix
+          (click)="HideTenantId = !HideTenantId"
+          class="cursor-pointer"
+          >{{ HideTenantId ? "visibility_off" : "visibility" }}
+        </mat-icon>
+        <mat-icon
+          matSuffix
+          (click)="OpenHelpPdf()"
+          matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
+          matTooltipClass="tooltip-background"
+          >help_outline</mat-icon
+        >
+        <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
+        <mat-hint>Guid Value</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mat-full-width margin-top-4">
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-icon
+            *ngIf="
+              OrgInfraAzureSubId.value.length > 0 &&
+              !OrgInfraAzureSubId.hasError('pattern')
+            "
+            class="success"
+            >check_circle</mat-icon
+          >
+          <input
+            formControlName="azureSubId"
+            matInput
+            placeholder="Azure Subscription ID"
+            [type]="HideSubId ? 'password' : 'text'"
+            required
+            autocomplete="new-password"
+          />
+        </div>
+        <mat-error *ngIf="OrgInfraAzureSubId.hasError('pattern')">
+          {{ GuidErrorMessage }}
+        </mat-error>
+        <mat-icon
+          matBadgePosition="below after"
+          matBadgeColor="primary"
+          matBadgeOverlap="false"
+          color="warn"
+          matSuffix
+          (click)="HideSubId = !HideSubId"
+          class="cursor-pointer"
+          >{{ HideSubId ? "visibility_off" : "visibility" }}
+        </mat-icon>
+        <mat-icon
+          matSuffix
+          (click)="OpenHelpPdf()"
+          matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
+          matTooltipClass="tooltip-background"
+          >help_outline</mat-icon
+        >
+        <!-- matBadge="{{OrgInfraAzureSubId.value.length}}"  -->
+        <mat-hint>Guid Value</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mat-full-width margin-top-4">
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-icon
+            *ngIf="
+              OrgInfraAzureAppAuthKey.value.length > 0 &&
+              !OrgInfraAzureAppAuthKey.hasError('required')
+            "
+            class="success"
+            >check_circle</mat-icon
+          >
+          <input
+            formControlName="azureAppAuthKey"
+            matInput
+            placeholder="Azure App Auth key"
+            [type]="HideAuthKey ? 'password' : 'text'"
+            required
+            autocomplete="new-password"
+          />
+        </div>
+        <mat-error *ngIf="OrgInfraAzureAppAuthKey.hasError">
+          Value is required
+        </mat-error>
+        <mat-icon
+          matBadgePosition="below after"
+          matBadgeColor="primary"
+          matBadgeOverlap="false"
+          color="warn"
+          matSuffix
+          (click)="HideAuthKey = !HideAuthKey"
+          class="cursor-pointer"
+          >{{ HideAuthKey ? "visibility_off" : "visibility" }}
+        </mat-icon>
+        <mat-icon
+          matSuffix
+          (click)="OpenHelpPdf()"
+          matTooltip=" Obtain this value from Azure’s Certificates and Secrets page. Click for more detailed instructions."
+          matTooltipClass="tooltip-background"
+          >help_outline</mat-icon
+        >
+        <!-- matBadge="{{OrgInfraAzureAppAuthKey.value.length}}"  -->
+        <!-- <mat-hint>32 Character Limit</mat-hint> -->
+      </mat-form-field>
+    </div>
+
+    <div class="margin-top-4">
+      <button
+        matTooltip="Your best practices IoT cloud infrastructure is being set up. If you were doing this from scratch, it would take several days, but with Fathym it will only take up to 15 minutes."
+        matTooltipClass="tooltip-background"
+        mat-raised-button
+        color="accent"
+        class="mat-full-width"
+        (click)="Configure()"
+        [disabled]="!InfraForm.valid"
+      >
+        Set Up Organization Details
+      </button>
+
+      <button
+        mat-button
+        class="mat-full-width"
+        color="warn"
+        (click)="ChangeStep(SetupStepTypes['OrgDetails'])"
+      >
+        Rename Organization
+      </button>
+    </div>
+  </div>
+</form>
