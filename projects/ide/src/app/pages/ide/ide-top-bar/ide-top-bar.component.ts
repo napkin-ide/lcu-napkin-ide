@@ -46,9 +46,9 @@ export class IdeTopBarComponent implements OnInit {
   }
 
 
-  public LogoutClicked(){
+  public LogoutClicked(event: any){
     //TODO hook up to auth
-    console.log("Logout clicked");
+    console.log("Logout clicked: ", event);
   }
   
 
