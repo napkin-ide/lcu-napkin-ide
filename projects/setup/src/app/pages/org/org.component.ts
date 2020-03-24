@@ -7,22 +7,22 @@ import {
   QueryList,
   ChangeDetectorRef,
   Input
-} from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { OrgDetailsComponent } from "../org-details/org-details.component";
-import { OrgInfraComponent } from "../org-infra/org-infra.component";
+} from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { OrgDetailsComponent } from '../org-details/org-details.component';
+import { OrgInfraComponent } from '../org-infra/org-infra.component';
 import {
   Constants,
   UserManagementState,
   UserManagementStateContext,
   NapkinIDESetupStepTypes,
   BootOption
-} from "@napkin-ide/lcu-napkin-ide-common";
+} from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
-  selector: "lcu-org",
-  templateUrl: "./org.component.html",
-  styleUrls: ["./org.component.scss"],
+  selector: 'lcu-org',
+  templateUrl: './org.component.html',
+  styleUrls: ['./org.component.scss'],
   animations: []
 })
 export class OrgComponent implements OnInit, AfterViewInit {
@@ -42,7 +42,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
   public OrgInfraComponent: QueryList<OrgInfraComponent>;
 
   public get RootURL(): string {
-    const port = location.port ? `:${location.port}` : "";
+    const port = location.port ? `:${location.port}` : '';
 
     return `${location.protocol}//${location.hostname}${port}`;
   }
@@ -101,7 +101,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
   // }
 
   public Copy(inputElement: HTMLInputElement) {
-    const textarea = document.createElement("textarea");
+    const textarea = document.createElement('textarea');
 
     textarea.textContent = inputElement.value;
 
@@ -117,7 +117,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
 
     selection.addRange(range);
 
-    console.log("copy success", document.execCommand("copy"));
+    console.log('copy success', document.execCommand('copy'));
 
     selection.removeAllRanges();
 
