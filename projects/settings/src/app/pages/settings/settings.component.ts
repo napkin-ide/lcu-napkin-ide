@@ -1,8 +1,10 @@
+import { MatListOption } from '@angular/material/list';
+import { MatSelectChange } from '@angular/material/select';
 import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IdeSettingsState, LowCodeUnitSetupConfig, IDESettingStepTypes } from '../../core/ide-settings.state';
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
-import { MatSelectChange, MatListOption } from '@angular/material';
+
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
 import { SettingsSetupComponent } from '../settings-setup/settings-setup.component';
 import { SettingsConfigComponent } from '../settings-config/settings-config.component';

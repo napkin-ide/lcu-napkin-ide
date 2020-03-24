@@ -1,0 +1,14 @@
+<mat-sidenav-container class="user-account-sidenav-container">
+  <mat-sidenav-content class="user-account-sidenav-content" (click)="ToggleDrawer()">
+    <mat-icon class="toolbar-icon">account_circle</mat-icon>
+  </mat-sidenav-content>
+  <mat-sidenav class="user-account-sidenav" #sidenav position="end" mode="over">
+    <div fxLayout="column" fxLayoutAlign="center center">
+    <div class="greeting" [ngStyle]="{'font-size':'12px'}">Hi, {{ UserInfo.Email }}</div>
+    <button id="login-button" type="submit" mat-raised-button color="primary" (click)="Logout()">
+      LOGOUT
+    </button>
+  </div>
+  </mat-sidenav>
+
+</mat-sidenav-container>

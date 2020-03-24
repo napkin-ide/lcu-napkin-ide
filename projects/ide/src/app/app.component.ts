@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FaviconsService } from '@lcu/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ToggleThemeUtil } from '@lcu/common';
+import { UserManagementState } from '@napkin-ide/lcu-napkin-ide-common/napkin-ide-lcu-napkin-ide-common';
 
 @Component({
   selector: 'nide-root',
