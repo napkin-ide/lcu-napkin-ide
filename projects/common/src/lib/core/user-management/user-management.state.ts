@@ -1,6 +1,8 @@
 import { Status } from '@lcu/common';
 
 export class UserManagementState {
+  public Booted?: boolean;
+
   public BootOptions?: BootOption[];
 
   public Details?: JourneyDetail[];

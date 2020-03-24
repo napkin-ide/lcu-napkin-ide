@@ -13,6 +13,8 @@ import { BootOption } from 'projects/common/src/lcu.api';
 })
 export class OrgReviewComponent implements OnInit {
   // Properties
+  public ActiveBootOptionDetails: BootOption;
+
   public get OAuthRedirectURL(): string {
     return `${location.href}`;
   }
@@ -42,8 +44,7 @@ export class OrgReviewComponent implements OnInit {
     this.SetStep = new EventEmitter();
   }
 
-  public ngOnInit() {
-  }
+  public ngOnInit() {}
 
   public Boot() {
     this.State.Loading = true;
@@ -65,8 +66,24 @@ export class OrgReviewComponent implements OnInit {
       : '';
   }
 
+  public IsCurrentLoadingBootAction(bootOption: BootOption): boolean {
+    const curLoading = this.State.BootOptions.find(bo => bo.Loading);
+
+    return curLoading === bootOption;
+  }
+
   public SetUpLoading(): boolean {
-    return this.State.Loading || !!this.State.BootOptions.find(bo => bo.Loading);
+    return (
+      this.State.Loading || !!this.State.BootOptions.find(bo => bo.Loading)
+    );
+  }
+
+  public SetActiveBootOptionDetails(bootOption: BootOption): void {
+    if (this.ActiveBootOptionDetails !== bootOption) {
+      this.ActiveBootOptionDetails = bootOption;
+    } else {
+      this.ActiveBootOptionDetails = null;
+    }
   }
 
   //  Helpers

@@ -28,7 +28,7 @@
             </span>
           </ng-container>
 
-          <mat-spinner diameter="24" *ngIf="bootOption.Loading"></mat-spinner>
+          <mat-spinner diameter="24" *ngIf="IsCurrentLoadingBootAction(bootOption)"></mat-spinner>
         </mat-icon>
 
         <h3 matLine>
@@ -58,6 +58,20 @@
         >
           <mat-icon>settings</mat-icon>
         </a>
+
+        <a
+          mat-icon-button
+          color="primary"
+          matTooltip="View Details"
+          matTooltipClass="tooltip-background"
+          matTooltipPosition="left"
+          (click)="SetActiveBootOptionDetails(bootOption)"
+          *ngIf="bootOption.Status?.Code == 0 && !bootOption.Loading"
+        >
+          <mat-icon *ngIf="ActiveBootOptionDetails != bootOption">expand_more</mat-icon>
+
+          <mat-icon *ngIf="ActiveBootOptionDetails == bootOption">expand_less</mat-icon>
+        </a>
       </mat-list-item>
 
       <mat-divider *ngIf="i != State.BootOptions.length - 1"></mat-divider>
@@ -66,20 +80,24 @@
 
   <div class="spread" style="text-align: center;">
     <button
-      *ngIf="!SetUpLoading()"
+      *ngIf="!SetUpLoading() && !State.Booted"
       mat-raised-button
       color="accent"
       class="margin-top-3"
       (click)="Boot()"
-      [disabled]="!State || !State.TermsAccepted"
     >
       Finalize and Deploy your Project
     </button>
-<!--
-    <mat-progress-bar
-      *ngIf="State.Loading"
-      mode="indeterminate"
-    ></mat-progress-bar> -->
+
+    <a
+      *ngIf="!SetUpLoading() && State.Booted"
+      mat-raised-button
+      color="primary"
+      class="margin-top-3"
+      target="_parent" href="https://{{State.Host}}/fathym-it"
+    >
+    <mat-icon>launch</mat-icon> Open Enterprise IDE
+  </a>
 
     <div *ngIf="State.Loading" class="spread">
       <p style="text-align: center;">

@@ -1,19 +1,34 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { OrgDetailsComponent } from '../org-details/org-details.component';
-import { OrgInfraComponent } from '../org-infra/org-infra.component';
-import { Constants, UserManagementState, UserManagementStateContext, NapkinIDESetupStepTypes } from '@napkin-ide/lcu-napkin-ide-common';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  ViewChildren,
+  QueryList,
+  ChangeDetectorRef,
+  Input
+} from "@angular/core";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { OrgDetailsComponent } from "../org-details/org-details.component";
+import { OrgInfraComponent } from "../org-infra/org-infra.component";
+import {
+  Constants,
+  UserManagementState,
+  UserManagementStateContext,
+  NapkinIDESetupStepTypes,
+  BootOption
+} from "@napkin-ide/lcu-napkin-ide-common";
 
 @Component({
-  selector: 'lcu-org',
-  templateUrl: './org.component.html',
-  styleUrls: ['./org.component.scss'],
+  selector: "lcu-org",
+  templateUrl: "./org.component.html",
+  styleUrls: ["./org.component.scss"],
   animations: []
 })
 export class OrgComponent implements OnInit, AfterViewInit {
-
   //  Fields
 
+  //  Properties
   /**
    * OrgDetailsComponent
    */
@@ -26,10 +41,8 @@ export class OrgComponent implements OnInit, AfterViewInit {
   @ViewChildren(OrgInfraComponent)
   public OrgInfraComponent: QueryList<OrgInfraComponent>;
 
-  //  Properties
-
   public get RootURL(): string {
-    const port = location.port ? `:${location.port}` : '';
+    const port = location.port ? `:${location.port}` : "";
 
     return `${location.protocol}//${location.hostname}${port}`;
   }
@@ -63,13 +76,12 @@ export class OrgComponent implements OnInit, AfterViewInit {
     protected formBldr: FormBuilder,
     protected userMgr: UserManagementStateContext,
     protected cdr: ChangeDetectorRef
-    ) {
-     this.HelpPdf = Constants.HELP_PDF;
+  ) {
+    this.HelpPdf = Constants.HELP_PDF;
   }
 
   //  Life Cycle
   public ngOnInit() {
-
     this.userMgr.Context.subscribe(state => {
       this.State = state;
 
@@ -89,7 +101,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
   // }
 
   public Copy(inputElement: HTMLInputElement) {
-    const textarea = document.createElement('textarea');
+    const textarea = document.createElement("textarea");
 
     textarea.textContent = inputElement.value;
 
@@ -105,7 +117,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
 
     selection.addRange(range);
 
-    console.log('copy success', document.execCommand('copy'));
+    console.log("copy success", document.execCommand("copy"));
 
     selection.removeAllRanges();
 
@@ -143,20 +155,23 @@ export class OrgComponent implements OnInit, AfterViewInit {
    * QueryList is used, because the component is undefined on load
    */
   protected setupChildrenForms(): void {
+    // detail form
+    this.OrgDetailsComponent.changes.subscribe(
+      (itm: QueryList<OrgDetailsComponent>) => {
+        if (itm.first) {
+          this.DetailsFormValid = itm.first.DetailsForm.valid;
+        }
+      }
+    );
 
     // detail form
-    this.OrgDetailsComponent.changes.subscribe((itm: QueryList<OrgDetailsComponent>) => {
-      if (itm.first) {
-        this.DetailsFormValid = itm.first.DetailsForm.valid;
+    this.OrgInfraComponent.changes.subscribe(
+      (itm: QueryList<OrgInfraComponent>) => {
+        if (itm.first) {
+          this.InfraFormValid = itm.first.InfraForm.valid;
+        }
       }
-     });
-
-    // detail form
-    this.OrgInfraComponent.changes.subscribe((itm: QueryList<OrgInfraComponent>) => {
-      if (itm.first) {
-        this.InfraFormValid = itm.first.InfraForm.valid;
-      }
-    });
+    );
 
     // this.ParentForm.addControl('InfraForm', this.OrgInfraComponent.InfraForm);
     // this.OrgInfraComponent.InfraForm.setParent(this.ParentForm);
