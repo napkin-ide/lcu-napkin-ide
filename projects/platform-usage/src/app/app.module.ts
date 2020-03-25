@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 // import { AppRoutingModule } from './app-routing.module';
 
 import { ExistingUserAccountsComponent } from './pages/existing-user-accounts/existing-user-accounts.component';
+import { IdeStateService } from 'projects/ide/src/app/core/ide-state.service';
 
 @NgModule({
   declarations: [
@@ -33,14 +34,15 @@ import { ExistingUserAccountsComponent } from './pages/existing-user-accounts/ex
     LcuNapkinIdeModule
   ],
   providers: [
-    // IdeStateStateManagerContext,
-    // {
-    //   provide: LCUServiceSettings,
-    //   useValue: FathymSharedModule.DefaultServiceSettings(environment)
-    // },
-    // {
-    //   provide: FaviconsService, useClass: BrowserFavicons
-    // },
+    IdeStateService,
+    IdeStateStateManagerContext,
+    {
+      provide: LCUServiceSettings,
+      useValue: FathymSharedModule.DefaultServiceSettings(environment)
+    },
+    {
+      provide: FaviconsService, useClass: BrowserFavicons
+    },
     {
       provide: BROWSER_FAVICONS_CONFIG,
       useValue: {
