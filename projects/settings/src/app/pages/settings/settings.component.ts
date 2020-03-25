@@ -245,7 +245,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public SetStep(step: IDESettingStepTypes) {
-    this.State.SetupStep = step;
+    this.State.Step = step;
   }
 
   public ToggleAddNewActivity() {
