@@ -24,7 +24,7 @@ export class IdeActivityBarComponent implements OnInit {
 
   // TODO: Trigger loading on any State actions
   public ngOnInit(): void {
-    this.ideState.Context.subscribe(ideState => {
+    this.ideState.Context.subscribe((ideState: any) => {
       this.Activities = ideState.Activities;
       this.CurrentActivity = ideState.CurrentActivity;
       this.InfraConfigured = ideState.InfrastructureConfigured;

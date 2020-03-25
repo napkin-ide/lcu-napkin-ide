@@ -20,22 +20,35 @@
     <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
   </ng-container>
 
-  <!-- Name Column -->
+  <!-- Username Column -->
   <ng-container matColumnDef="Username">
     <th mat-header-cell *matHeaderCellDef> Username </th>
     <td mat-cell *matCellDef="let element"> {{element.Username}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
+  <!-- FreeTrial Column -->
   <ng-container matColumnDef="FreeTrialSignUp">
     <th mat-header-cell *matHeaderCellDef> Free Trial Sign Up Date </th>
-    <td mat-cell *matCellDef="let element"> {{element.FreeTrialSignUp | date:'shortDate'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.FreeTrialSignUp | date:'M/d/yyyy'}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- Expiration Column -->
   <ng-container matColumnDef="ExpirationDate">
     <th mat-header-cell *matHeaderCellDef> Expiration Date </th>
-    <td mat-cell *matCellDef="let element"> {{element.ExpirationDate | date:'shortDate'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.ExpirationDate | date:'M/d/yyyy'}} </td>
+  </ng-container>
+
+  <!-- Paid Column -->
+  <ng-container matColumnDef="PaidSignUpDate">
+    <th mat-header-cell *matHeaderCellDef> Paid Sign Up Date </th>
+    <td mat-cell *matCellDef="let element"> 
+      <div *ngIf="element.PaidSignUpDate">
+        {{element.PaidSignUpDate | date:'M/d/yyyy'}}
+    </div> 
+
+    <div *ngIf="!element.PaidSignUpDate"> - </div> 
+
+  </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="DisplayedColumns"></tr>

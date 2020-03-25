@@ -15,12 +15,12 @@ export class ExistingUserAccountsComponent implements OnInit {
 
   constructor() { 
     this.UserData = Constants.USER_DATA;
-    this.DisplayedColumns = ['Email', 'Username', 'FreeTrialSignUp', 'ExpirationDate'];
+    this.DisplayedColumns = ['Email', 'Username', 'FreeTrialSignUp', 'ExpirationDate', 'PaidSignUpDate'];
   }
 
   ngOnInit() {
     console.log("UserData",Constants.USER_DATA);
-    
+
   }
 
 }
