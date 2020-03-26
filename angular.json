@@ -1121,10 +1121,122 @@
           }
         }
       }
+    },
+    "platform-usage": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/platform-usage",
+      "sourceRoot": "projects/platform-usage/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/platform-usage",
+            "index": "projects/platform-usage/src/index.html",
+            "main": "projects/platform-usage/src/main.ts",
+            "polyfills": "projects/platform-usage/src/polyfills.ts",
+            "tsConfig": "projects/platform-usage/tsconfig.app.json",
+            "assets": [
+              "projects/platform-usage/src/favicon.ico",
+              "projects/platform-usage/src/assets"
+            ],
+            "styles": [
+              "projects/platform-usage/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/platform-usage/src/environments/environment.ts",
+                  "with": "projects/platform-usage/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "platform-usage:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "platform-usage:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "platform-usage:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/platform-usage/src/test.ts",
+            "polyfills": "projects/platform-usage/src/polyfills.ts",
+            "tsConfig": "projects/platform-usage/tsconfig.spec.json",
+            "karmaConfig": "projects/platform-usage/karma.conf.js",
+            "assets": [
+              "projects/platform-usage/src/favicon.ico",
+              "projects/platform-usage/src/assets"
+            ],
+            "styles": [
+              "projects/platform-usage/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/platform-usage/tsconfig.app.json",
+              "projects/platform-usage/tsconfig.spec.json",
+              "projects/platform-usage/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/platform-usage/e2e/protractor.conf.js",
+            "devServerTarget": "platform-usage:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "platform-usage:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "lcu",
   "cli": {
-    "analytics": "000c642d-fcc1-4223-a5a6-141209a4fa05"
+    "analytics": false
   }
 }
