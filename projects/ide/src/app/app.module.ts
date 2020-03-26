@@ -2,7 +2,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { IdeStateService } from './core/ide-state.service';
 import {
   IdeStateStateManagerContext,
   LcuNapkinIdeModule
@@ -31,7 +30,6 @@ import { AppRoutingModule } from './app-routing.module';
     LcuNapkinIdeModule
   ],
   providers: [
-    IdeStateService,
     IdeStateStateManagerContext,
     {
       provide: LCUServiceSettings,

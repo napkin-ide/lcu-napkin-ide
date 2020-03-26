@@ -1,6 +1,6 @@
 import { IdeActivity, IdeEditor, IdePanel, IdeSideBar } from '@lcu/common';
 
-export class IdeState {
+export class IdeManagementState {
   public Activities: IdeActivity[];
 
   public CurrentActivity: IdeActivity;

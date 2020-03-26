@@ -1,11 +1,11 @@
 import { Injectable, Injector } from '@angular/core';
-import { StateManagerContext } from '@lcu/common';
-import { IdeState } from './state';
+import { StateContext } from '@lcu/common';
+import { IdeManagementState } from './ide-management.state';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IdeStateStateManagerContext extends StateManagerContext<IdeState> {
+export class IdeStateStateManagerContext extends StateContext<IdeManagementState> {
   //  Properties
 
   //  Constructors
@@ -19,7 +19,7 @@ export class IdeStateStateManagerContext extends StateManagerContext<IdeState> {
       Arguments: {
         EditorLookup: editorLookup
       },
-      Type: 'remove-editor'
+      Type: 'RemoveEditor'
     });
   }
 
@@ -28,7 +28,7 @@ export class IdeStateStateManagerContext extends StateManagerContext<IdeState> {
       Arguments: {
         EditorLookup: editorLookup
       },
-      Type: 'select-editor'
+      Type: 'SelectEditor'
     });
   }
 
@@ -39,7 +39,7 @@ export class IdeStateStateManagerContext extends StateManagerContext<IdeState> {
         Group: group,
         Section: section
       },
-      Type: 'select-side-bar-action'
+      Type: 'SelectSideBarAction'
     });
   }
 
@@ -48,27 +48,27 @@ export class IdeStateStateManagerContext extends StateManagerContext<IdeState> {
       Arguments: {
         Activity: activity
       },
-      Type: 'set-activity'
+      Type: 'SetActivity'
     });
   }
 
   public ToggleShowPanels() {
     this.Execute({
       Arguments: {},
-      Type: 'toggle-show-panels'
+      Type: 'ToggleShowPanels'
     });
   }
 
   //  Helpers
   protected defaultValue() {
-    return <IdeState>{ Loading: true };
+    return <IdeManagementState>{ Loading: true };
   }
 
-  protected async loadStateKey(): Promise<string> {
-    return Promise.resolve('main');
+  protected loadStateKey(): string {
+    return 'main';
   }
 
-  protected async loadStateName(): Promise<string> {
-    return Promise.resolve('ide-state');
+  protected loadStateName(): string {
+    return 'idemanagement';
   }
 }
