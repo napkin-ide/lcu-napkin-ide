@@ -31,12 +31,14 @@ export class UserManagementStateContext extends StateContext<
   public ConfigureInfrastructure(
     infraType: string,
     useDefaultSettings: boolean,
-    settings: AzureInfaSettings
+    settings: AzureInfaSettings,
+    template: string
   ) {
     this.Execute({
       Arguments: {
         InfrastructureType: infraType,
         Settings: settings,
+        Template: template,
         UseDefaultSettings: useDefaultSettings
       },
       Type: 'ConfigureInfrastructure'

@@ -23,6 +23,13 @@ export class OrgInfraComponent implements OnInit {
   // Fields
 
   /**
+   * Infrastructure template lookup field
+   */
+  public get InfraTemplate(): AbstractControl {
+    return this.InfraForm.get('infraTemplate');
+  }
+
+  /**
    * Access organization name field
    */
   public get OrgInfraAzureTenatId(): AbstractControl {
@@ -101,6 +108,13 @@ export class OrgInfraComponent implements OnInit {
    */
   public InfraForm: FormGroup;
 
+  /**
+   * Infrastructure option keys
+   */
+  public get InfrastructureOptionKeys(): string[] {
+    return Object.keys(this.State.InfrastructureOptions);
+  }
+
   constructor(protected userMgr: UserManagementStateContext) {
     this.SetStep = new EventEmitter();
     this.setFieldToggles();
@@ -127,19 +141,24 @@ export class OrgInfraComponent implements OnInit {
   public Configure() {
     this.State.Loading = true;
 
-    // if (!this.State.EnvSettings) {
-    this.State.EnvSettings = new AzureInfaSettings();
-    // }
+    const envSettings = {
+      ...(this.State.EnvSettings || new AzureInfaSettings())
+    };
 
-    this.State.EnvSettings.AzureTenantID = this.OrgInfraAzureTenatId.value;
+    envSettings.AzureTenantID = this.OrgInfraAzureTenatId.value;
 
-    this.State.EnvSettings.AzureSubID = this.OrgInfraAzureSubId.value;
+    envSettings.AzureSubID = this.OrgInfraAzureSubId.value;
 
-    this.State.EnvSettings.AzureAppID = this.OrgInfraAzureAppAppId.value;
+    envSettings.AzureAppID = this.OrgInfraAzureAppAppId.value;
 
-    this.State.EnvSettings.AzureAppAuthKey = this.OrgInfraAzureAppAuthKey.value;
+    envSettings.AzureAppAuthKey = this.OrgInfraAzureAppAuthKey.value;
 
-    this.userMgr.ConfigureInfrastructure('Azure', true, this.State.EnvSettings);
+    this.userMgr.ConfigureInfrastructure(
+      'Azure',
+      true,
+      envSettings,
+      this.InfraTemplate.value
+    );
   }
 
   public OpenHelpPdf() {
@@ -190,6 +209,10 @@ export class OrgInfraComponent implements OnInit {
           Validators.pattern(Guid.GuidValidator)
         ]),
         updateOn: 'change'
+      }),
+      infraTemplate: new FormControl('', {
+        validators: Validators.compose([Validators.required]),
+        updateOn: 'change'
       })
     });
 
@@ -231,6 +254,10 @@ export class OrgInfraComponent implements OnInit {
 
       this.OrgInfraAzureAppAuthKey.setValue(
         this.State.EnvSettings.AzureAppAuthKey || ''
+      );
+
+      this.InfraTemplate.setValue(
+        this.State.Template || ''
       );
 
       setTimeout(() => this.InfraForm.updateValueAndValidity());
