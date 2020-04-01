@@ -112,7 +112,7 @@ export class OrgInfraComponent implements OnInit {
    * Infrastructure option keys
    */
   public get InfrastructureOptionKeys(): string[] {
-    return Object.keys(this.State.InfrastructureOptions);
+    return this.State.InfrastructureOptions ? Object.keys(this.State.InfrastructureOptions) : [];
   }
 
   constructor(protected userMgr: UserManagementStateContext) {
@@ -230,7 +230,7 @@ export class OrgInfraComponent implements OnInit {
    * Setup state mechanism
    */
   protected setupState(): void {
-    this.userMgr.Context.subscribe(state => {
+    this.userMgr.Context.subscribe((state: UserManagementState) => {
       this.State = state;
 
       this.stateChanged();

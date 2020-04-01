@@ -1,4 +1,4 @@
-import { Status } from "@lcu/common";
+import { Status } from '@lcu/common';
 
 export class UserManagementState {
   public Booted?: boolean;
@@ -40,6 +40,8 @@ export class UserManagementState {
   public Personas?: JourneyPersona[];
 
   public SetupStep?: NapkinIDESetupStepTypes;
+
+  public Status?: Status;
 
   public Template?: string;
 
@@ -95,15 +97,15 @@ export class AzureInfaSettings {
 }
 
 export enum NapkinIDESetupStepTypes {
-  OrgDetails = "OrgDetails",
-  AzureSetup = "AzureSetup",
-  Billing = "Billing",
-  Review = "Review",
-  Complete = "Complete"
+  OrgDetails = 'OrgDetails',
+  AzureSetup = 'AzureSetup',
+  Billing = 'Billing',
+  Review = 'Review',
+  Complete = 'Complete'
 }
 
 export enum UserTypes {
-  Design = "Design",
-  Develop = "Develop",
-  Manage = "Manage"
+  Design = 'Design',
+  Develop = 'Develop',
+  Manage = 'Manage'
 }

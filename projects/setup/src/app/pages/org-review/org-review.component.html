@@ -28,7 +28,10 @@
             </span>
           </ng-container>
 
-          <mat-spinner diameter="24" *ngIf="IsCurrentLoadingBootAction(bootOption)"></mat-spinner>
+          <mat-spinner
+            diameter="24"
+            *ngIf="IsCurrentLoadingBootAction(bootOption)"
+          ></mat-spinner>
         </mat-icon>
 
         <h3 matLine>
@@ -68,9 +71,13 @@
           (click)="SetActiveBootOptionDetails(bootOption)"
           *ngIf="bootOption.Status?.Code == 0 && !bootOption.Loading"
         >
-          <mat-icon *ngIf="ActiveBootOptionDetails != bootOption">expand_more</mat-icon>
+          <mat-icon *ngIf="ActiveBootOptionDetails != bootOption"
+            >expand_more</mat-icon
+          >
 
-          <mat-icon *ngIf="ActiveBootOptionDetails == bootOption">expand_less</mat-icon>
+          <mat-icon *ngIf="ActiveBootOptionDetails == bootOption"
+            >expand_less</mat-icon
+          >
         </a>
       </mat-list-item>
 
@@ -80,7 +87,7 @@
 
   <div class="spread" style="text-align: center;">
     <button
-      *ngIf="!SetUpLoading() && !State.Booted"
+      *ngIf="(!SetUpLoading() || (State.Status && State.Status.Code != 0)) && !State.Booted"
       mat-raised-button
       color="accent"
       class="margin-top-3"
@@ -94,10 +101,13 @@
       mat-raised-button
       color="primary"
       class="margin-top-3"
-      target="_parent" href="https://{{State.Host}}/fathym-it"
+      target="_parent"
+      href="https://{{ State.Host }}/fathym-it"
     >
-    <mat-icon>launch</mat-icon> Open Enterprise IDE
-  </a>
+      <mat-icon>launch</mat-icon> Open Enterprise IDE
+    </a>
+
+    <div class="spread" *ngIf="!State.Booted">{{ !State.Status ? '' : State.Status.Code == 0 ? '' : State.Status?.Message  }}</div>
 
     <div *ngIf="State.Loading" class="spread">
       <p style="text-align: center;">
@@ -114,7 +124,8 @@
       </div>
     </div>
   </div>
-<!--
+
+  <!--
   <ng-container *ngIf="State.HasDevOpsOAuth">
     <ng-container *ngIf="!State.EnterpriseBooted">
       <div fxLayout="column">
