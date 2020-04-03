@@ -152,7 +152,12 @@ export class UserComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public ngAfterViewInit(): void {}
+  public ngAfterViewInit(): void {
+    // this.setupStripe();
+  }
+  public ngAfterContentInit(): void{
+    this.setupStripe();
+  }
 
   //  API methods
   public OpenHelpPdf() {
@@ -166,8 +171,8 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   public StepperChanged(event: StepperSelectionEvent) {
-    if (event.selectedIndex === 2) {
-      this.setupStripe();
+    if (event.selectedIndex === 0) {
+      // this.setupStripe();
     }
   }
 
@@ -182,7 +187,9 @@ export class UserComponent implements OnInit, AfterViewInit {
           email: this.State.Username
         }
       })
-      .then(this.handleStripePaymentMethodCreated);
+      .then((result: any) => {
+        this.handleStripePaymentMethodCreated(result);
+      });
   }
 
   //  Helpers
@@ -194,7 +201,7 @@ export class UserComponent implements OnInit, AfterViewInit {
     }
   }
 
-  protected handleStripePaymentMethodCreated(result: any, email: string) {
+  protected handleStripePaymentMethodCreated(result: any) {
     if (result.error) {
       this.StripeError = result.error;
     } else {
@@ -213,7 +220,9 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   protected setupForms() {
-    this.BillingForm = this.formBldr.group({});
+    this.BillingForm = this.formBldr.group({     
+       prodPlan: new FormControl('', [Validators.required]),
+  });
 
     this.DetailsForm = this.formBldr.group({
       orgDetailName: new FormControl('', [Validators.required]),
