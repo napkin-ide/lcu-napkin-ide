@@ -780,36 +780,36 @@
         }
       }
     },
-    "new-user": {
+    "billing": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/new-user",
-      "sourceRoot": "projects/new-user/src",
+      "root": "projects/billing",
+      "sourceRoot": "projects/billing/src",
       "prefix": "lcu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/new-user",
-            "index": "projects/new-user/src/index.html",
-            "main": "projects/new-user/src/main.ts",
-            "polyfills": "projects/new-user/src/polyfills.ts",
-            "tsConfig": "projects/new-user/tsconfig.app.json",
+            "outputPath": "dist/billing",
+            "index": "projects/billing/src/index.html",
+            "main": "projects/billing/src/main.ts",
+            "polyfills": "projects/billing/src/polyfills.ts",
+            "tsConfig": "projects/billing/tsconfig.app.json",
             "assets": [
-              "projects/new-user/src/favicon.ico",
-              "projects/new-user/src/assets",
+              "projects/billing/src/favicon.ico",
+              "projects/billing/src/assets",
               {
                 "glob": "package.json",
-                "input": "./projects/new-user/",
+                "input": "./projects/billing/",
                 "output": "/"
               }
             ],
             "styles": [
-              "projects/new-user/src/styles.scss"
+              "projects/billing/src/styles.scss"
             ],
             "scripts": []
           },
@@ -817,8 +817,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/new-user/src/environments/environment.ts",
-                  "with": "projects/new-user/src/environments/environment.prod.ts"
+                  "replace": "projects/billing/src/environments/environment.ts",
+                  "with": "projects/billing/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -836,33 +836,33 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "new-user:build"
+            "browserTarget": "billing:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "new-user:build:production"
+              "browserTarget": "billing:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "new-user:build"
+            "browserTarget": "billing:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/new-user/src/test.ts",
-            "polyfills": "projects/new-user/src/polyfills.ts",
-            "tsConfig": "projects/new-user/tsconfig.spec.json",
-            "karmaConfig": "projects/new-user/karma.conf.js",
+            "main": "projects/billing/src/test.ts",
+            "polyfills": "projects/billing/src/polyfills.ts",
+            "tsConfig": "projects/billing/tsconfig.spec.json",
+            "karmaConfig": "projects/billing/karma.conf.js",
             "assets": [
-              "projects/new-user/src/favicon.ico",
-              "projects/new-user/src/assets"
+              "projects/billing/src/favicon.ico",
+              "projects/billing/src/assets"
             ],
             "styles": [
-              "projects/new-user/src/styles.scss"
+              "projects/billing/src/styles.scss"
             ],
             "scripts": []
           }
@@ -871,9 +871,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/new-user/tsconfig.app.json",
-              "projects/new-user/tsconfig.spec.json",
-              "projects/new-user/e2e/tsconfig.json"
+              "projects/billing/tsconfig.app.json",
+              "projects/billing/tsconfig.spec.json",
+              "projects/billing/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -883,12 +883,12 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/new-user/e2e/protractor.conf.js",
-            "devServerTarget": "new-user:serve"
+            "protractorConfig": "projects/billing/e2e/protractor.conf.js",
+            "devServerTarget": "billing:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "new-user:serve:production"
+              "devServerTarget": "billing:serve:production"
             }
           }
         }

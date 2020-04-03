@@ -1,5 +1,5 @@
 {
-	"name": "@napkin-ide/lcu-napkin-ide-new-user",
+	"name": "@napkin-ide/lcu-napkin-ide-billing",
 	"version": "0.0.3",
 	"peerDependencies": {
 		"@angular/common": "^9.0.1",
