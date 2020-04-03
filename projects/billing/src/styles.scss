@@ -1,0 +1,39 @@
+@import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+@import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+@import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
+
+@mixin theme-setup($theme) {
+  @include angular-material-theme($theme);
+  @include fathym-branding($theme);
+  @include theme-extras($theme);
+  @include component-themes($theme);
+}
+
+@mixin primary-logo($logo, $theme, $opacity) {
+  .primary-logo {
+    background-image: fathym-logo($logo, mat-color(map-get($theme, accent)), $opacity);
+  }
+}
+
+// for updating components with themes
+@mixin component-themes($theme) {
+}
+
+ .ivy-light-theme {
+    $theme: fathym-ivy-theme();
+    @include theme-setup($theme);
+    @include primary-logo(thinky-full-logo, $theme, 1);
+
+    button .mat-spinner circle {
+      stroke: #282D35;
+    }
+ }
+
+.logo {
+  width: 150px;
+  height: 50px;
+}
+
+.text-center {
+  text-align: center;
+}
