@@ -14,6 +14,9 @@ export class UserAccountSidenavComponent implements OnInit {
   @Input('user-info')
   public UserInfo: UserInfoModel;
 
+  @Input('user-email')
+  public UserEmail: string;
+
   @Output('logout-clicked')
   public LogoutClicked: EventEmitter<any>;
 

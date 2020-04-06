@@ -6,7 +6,9 @@ import {
   ViewChildren,
   QueryList,
   ChangeDetectorRef,
-  Input
+  Input,
+  ElementRef,
+  AfterViewChecked
 } from '@angular/core';
 import {
   FormGroup,
@@ -32,96 +34,33 @@ declare var Stripe: any;
   styleUrls: ['./billing.component.scss'],
   animations: []
 })
-export class BillingComponent implements OnInit, AfterViewInit {
+export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked {
   //  Fields
+
+  @ViewChild('cardElement') cardElement: ElementRef;
+
   protected stripeCard: any;
+  /**
+   * The stripe card number to be sent to payment method
+   */
+  protected stripeCardNumber: any;
+  /**
+   * The expiration date of the card user in payment method
+   */
+  protected stripeCardExpiry: any;
+  /**
+   * The cvc number to be sent to payment method
+   */
+  protected stripeCardCvc: any;
 
   protected stripe: any;
 
   //  Properties
   public BillingForm: FormGroup;
 
-  // public DetailsForm: FormGroup;
-
   public favoriteSeason: any;
 
   public season: any;
-
-  /**
-   * Error Message
-   */
-  // public GuidErrorMessage: string;
-
-  /**
-   * Toggle Application Id
-   */
-  // public HideAppId: boolean;
-
-  /**
-   * Toggle Auth Key
-   */
-  // public HideAuthKey: boolean;
-
-  /**
-   * Toggle Tenant Id
-   */
-  // public HideTenantId: boolean;
-
-  /**
-   * Toggle Subscription Id
-   */
-  // public HideSubId: boolean;
-
-  // public InfraForm: FormGroup;
-
-  /**
-   * Access organization name field
-   */
-  // public get OrgDetailName(): AbstractControl {
-  //   return this.DetailsForm.get('orgDetailName');
-  // }
-
-  /**
-   * Access organization description field
-   */
-  // public get OrgDetailDesc(): AbstractControl {
-  //   return this.DetailsForm.get('orgDetailDesc');
-  // }
-
-  /**
-   * Access organization lookup field
-   */
-  // public get OrgDetailLookup(): AbstractControl {
-  //   return this.DetailsForm.get('orgDetailLookup');
-  // }
-
-  /**
-   * Access organization name field
-   */
-  // public get OrgInfraAzureTenatId(): AbstractControl {
-  //   return this.InfraForm.get('azureTenantId');
-  // }
-
-  /**
-   * Access organization description field
-   */
-  // public get OrgInfraAzureSubId(): AbstractControl {
-  //   return this.InfraForm.get('azureSubId');
-  // }
-
-  /**
-   * Access organization lookup field
-   */
-  // public get OrgInfraAzureAppAppId(): AbstractControl {
-  //   return this.InfraForm.get('azureAppId');
-  // }
-
-  /**
-   * Access organization lookup field
-   */
-  // public get OrgInfraAzureAppAuthKey(): AbstractControl {
-  //   return this.InfraForm.get('azureAppAuthKey');
-  // }
 
   public State: UserManagementState;
 
@@ -144,7 +83,6 @@ export class BillingComponent implements OnInit, AfterViewInit {
   //  Life Cycle
   public ngOnInit() {
     this.setupForms();
-    this.setupStripe();
     this.userMngState.Context.subscribe((state: any) => {
       this.State = state;
 
@@ -153,11 +91,15 @@ export class BillingComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    // this.setupStripe();
+    setTimeout(()=>{
+      this.setupStripe();
+    },5000)
+    
   }
-  public ngAfterContentInit(): void{
-    this.setupStripe();
+  public ngAfterViewChecked(): void{
+    // this.setupStripe()
   }
+  
 
   //  API methods
   // public OpenHelpPdf() {
@@ -182,7 +124,10 @@ export class BillingComponent implements OnInit, AfterViewInit {
     this.stripe
       .createPaymentMethod({
         type: 'card',
-        card: this.stripeCard,
+        cardNumber: this.stripeCardNumber,
+        cardExpiry: this.stripeCardExpiry,
+        cardCvc: this.stripeCardCvc,
+        // card: this.stripeCard,
         billing_details: {
           email: this.State.Username
         }
@@ -223,57 +168,111 @@ export class BillingComponent implements OnInit, AfterViewInit {
     this.BillingForm = this.formBldr.group({     
        prodPlan: new FormControl('', [Validators.required]),
   });
-
-    // this.DetailsForm = this.formBldr.group({
-    //   orgDetailName: new FormControl('', [Validators.required]),
-    //   orgDetailDesc: new FormControl('', [Validators.required]),
-    //   orgDetailLookup: new FormControl('', [Validators.required])
-    // });
-
-    // this.InfraForm = new FormGroup({
-    //   azureTenantId: new FormControl('', {
-    //     validators: Validators.compose([
-    //       Validators.required,
-    //       Validators.pattern(Guid.GuidValidator)
-    //     ]),
-    //     updateOn: 'change'
-    //   }),
-    //   azureAppId: new FormControl('', {
-    //     validators: Validators.compose([
-    //       Validators.required,
-    //       Validators.pattern(Guid.GuidValidator)
-    //     ]),
-    //     updateOn: 'change'
-    //   }),
-    //   azureAppAuthKey: new FormControl('', {
-    //     validators: [Validators.required],
-    //     updateOn: 'change'
-    //   }),
-    //   azureSubId: new FormControl('', {
-    //     validators: Validators.compose([
-    //       Validators.required,
-    //       Validators.pattern(Guid.GuidValidator)
-    //     ]),
-    //     updateOn: 'change'
-    //   })
-    // });
   }
 
   protected setupStripe() {
+    console.log("Stripe = ", this.stripe)
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.lcuSettings.Settings.Stripe.PublicKey);
 
       const elements = this.stripe.elements();
 
-      this.stripeCard = elements.create('card');
+      this.stripeCard = elements.create('card',{
+        'style': {
+          'base': {
+            'fontFamily': 'Arial, sans-serif',
+            'fontSize': '14px',
+            'color': 'black',
+            'background-color': 'whitesmoke',
+          },
+          'invalid': {
+            'color': 'red',
+          },
+        }
+      });
+      this.stripeCard.mount(document.getElementById('card-element'));
 
-      this.stripeCard.mount('#card-element');
+
+      // this.stripeCard.mount(this.cardElement.nativeElement);
+      // this.setupStripeElements();
 
       this.stripeCard.addEventListener('change', (event: any) =>
         this.handleCardChanged(event)
       );
+
+    //   this.stripeCardNumber.addEventListener('change', (event: any) =>
+    //     this.handleCardChanged(event)
+    //   );
+    
+
+    // this.stripeCardExpiry.addEventListener('change', (event: any) =>
+    //     this.handleCardChanged(event)
+    //   );
+
+    //   this.stripeCardCvc.addEventListener('change', (event: any) =>
+    //     this.handleCardChanged(event)
+    //   );
     }
+  }
+
+  protected setupStripeElements():void{
+    const elements = this.stripe.elements();
+    var elementStyles = {
+      base: {
+        color: '#fff',
+        fontWeight: 600,
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '16px',
+        fontSmoothing: 'antialiased',
+  
+        ':focus': {
+          color: '#424770',
+        },
+  
+        '::placeholder': {
+          color: '#9BACC8',
+        },
+  
+        ':focus::placeholder': {
+          color: '#CFD7DF',
+        },
+      },
+      invalid: {
+        color: '#fff',
+        ':focus': {
+          color: '#FA755A',
+        },
+        '::placeholder': {
+          color: '#FFCCA5',
+        },
+      },
+    };
+  
+    var elementClasses = {
+      focus: 'focus',
+      empty: 'empty',
+      invalid: 'invalid',
+    };
+  
+    this.stripeCardNumber = elements.create('cardNumber', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardNumber.mount('#card-number');
+  
+    this.stripeCardExpiry = elements.create('cardExpiry', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardExpiry.mount('#card-expiry');
+  
+    this.stripeCardCvc = elements.create('cardCvc', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardCvc.mount('#card-cvc');
+  
   }
 
   protected stateChanged() {
