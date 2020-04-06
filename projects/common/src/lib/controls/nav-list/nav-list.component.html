@@ -1,8 +1,10 @@
 <mat-toolbar color="primary">
   <!-- Could be a title here -->
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-        <div class="logo">
-          <div *ngIf="LogoClass && ShowIcon" [ngClass]="LogoClass"></div>
+      <!-- TODO: We need an SVG for this (Thinky with Circle and 'Fathym' title) -->
+        <div fxFlex fxLayoutGap="5px" class="fathym-brand" *ngIf="ShowIcon">
+          <div fxFlex="1 1 25%" class="thinky-circle"></div>
+          <div fxFlex="1 1 75%" class="fathym-name"></div>
         </div>
       </div>
 </mat-toolbar>

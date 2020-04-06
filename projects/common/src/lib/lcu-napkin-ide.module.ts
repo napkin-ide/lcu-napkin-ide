@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserAccountSidenavComponent } from './controls/user-account-sidenav/user-account-sidenav.component';
+import { LcuTrademarkDirective } from './controls/trademark/trademark.directive';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UserAccountSidenavComponent } from './controls/user-account-sidenav/use
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    UserAccountSidenavComponent
+    UserAccountSidenavComponent,
+    LcuTrademarkDirective
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { UserAccountSidenavComponent } from './controls/user-account-sidenav/use
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    UserAccountSidenavComponent
+    UserAccountSidenavComponent,
+    LcuTrademarkDirective
   ],
   entryComponents: [
     SideNavComponent,
