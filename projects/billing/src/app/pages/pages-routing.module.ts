@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserComponent } from './user/user.component';
+import { BillingComponent } from './billing/billing.component';
 import { CompleteComponent } from './complete/complete.component';
 
 const routes: Routes = [
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: UserComponent
+    component: BillingComponent
   }
 ];
 
