@@ -60,8 +60,6 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   public productPlan: any;
 
-  public season: any;
-
   public State: UserBillingState;
 
   public StripeError: string;
@@ -86,7 +84,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.setupForms();
     this.userBillState.Context.subscribe((state: any) => {
       this.State = state;
-
+      console.log("billing state: ", this.State)
       this.stateChanged();
     });
   }
@@ -97,8 +95,8 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     // },2000)
 
   }
-  public ngAfterViewChecked(): void{
-    // this.setupStripe()
+  public ngAfterViewChecked(): void {
+    this.setupStripe();
   }
 
 
@@ -148,8 +146,8 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   protected setupForms() {
     this.BillingForm = this.formBldr.group({
-       prodPlan: new FormControl('', [Validators.required]),
-  });
+      prodPlan: new FormControl('', [Validators.required]),
+    });
   }
 
   protected setupStripe() {
@@ -160,102 +158,104 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
 
       const elements = this.stripe.elements();
 
-      this.stripeCard = elements.create('card',{
+      this.stripeCard = elements.create('card', {
         'style': {
           'base': {
-            'fontFamily': 'Arial, sans-serif',
-            'fontSize': '14px',
-            'color': 'black',
-            'background-color': 'whitesmoke',
+            color: 'black',
+            fontWeight: 600,
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '16px',
+            fontSmoothing: 'antialiased',
+
+            ':focus': {
+              color: '#424770',
+            },
+
+            '::placeholder': {
+              color: 'black',
+            },
+
+            ':focus::placeholder': {
+              color: '#CFD7DF',
+            },
           },
           'invalid': {
-            'color': 'red',
+            color: '#fff',
+            ':focus': {
+              color: '#FA755A',
+            },
+          },
+          '::placeholder': {
+            color: 'black',
           },
         }
       });
       this.stripeCard.mount(document.getElementById('card-element'));
 
-
-      // this.stripeCard.mount(this.cardElement.nativeElement);
-      // this.setupStripeElements();
-
       this.stripeCard.addEventListener('change', (event: any) =>
         this.handleCardChanged(event)
       );
-
-    //   this.stripeCardNumber.addEventListener('change', (event: any) =>
-    //     this.handleCardChanged(event)
-    //   );
-
-
-    // this.stripeCardExpiry.addEventListener('change', (event: any) =>
-    //     this.handleCardChanged(event)
-    //   );
-
-    //   this.stripeCardCvc.addEventListener('change', (event: any) =>
-    //     this.handleCardChanged(event)
-    //   );
     }
   }
 
-  protected setupStripeElements():void{
-    const elements = this.stripe.elements();
-    var elementStyles = {
-      base: {
-        color: '#fff',
-        fontWeight: 600,
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '16px',
-        fontSmoothing: 'antialiased',
+  // protected setupStripeElements():void{
+  //   const elements = this.stripe.elements();
+  //   var elementStyles = {
+  //     base: {
+  //       color: '#fff',
+  //       fontWeight: 600,
+  //       fontFamily: 'Arial, sans-serif',
+  //       fontSize: '16px',
+  //       fontSmoothing: 'antialiased',
 
-        ':focus': {
-          color: '#424770',
-        },
+  //       ':focus': {
+  //         color: '#424770',
+  //       },
 
-        '::placeholder': {
-          color: '#9BACC8',
-        },
+  //       '::placeholder': {
+  //         color: '#9BACC8',
+  //       },
 
-        ':focus::placeholder': {
-          color: '#CFD7DF',
-        },
-      },
-      invalid: {
-        color: '#fff',
-        ':focus': {
-          color: '#FA755A',
-        },
-        '::placeholder': {
-          color: '#FFCCA5',
-        },
-      },
-    };
+  //       ':focus::placeholder': {
+  //         color: '#CFD7DF',
+  //       },
+  //     },
+  //     invalid: {
+  //       color: '#fff',
+  //       ':focus': {
+  //         color: '#FA755A',
+  //       },
+  //       '::placeholder': {
+  //         color: '#FFCCA5',
+  //       },
+  //     },
+  //   };
 
-    var elementClasses = {
-      focus: 'focus',
-      empty: 'empty',
-      invalid: 'invalid',
-    };
+  //   var elementClasses = {
+  //     focus: 'focus',
+  //     empty: 'empty',
+  //     invalid: 'invalid',
+  //   };
 
-    this.stripeCardNumber = elements.create('cardNumber', {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    this.stripeCardNumber.mount('#card-number');
+  //   this.stripeCardNumber = elements.create('cardNumber', {
+  //     style: elementStyles,
+  //     classes: elementClasses,
+  //   });
+  //   this.stripeCardNumber.mount('#card-number');
 
-    this.stripeCardExpiry = elements.create('cardExpiry', {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    this.stripeCardExpiry.mount('#card-expiry');
+  //   this.stripeCardExpiry = elements.create('cardExpiry', {
+  //     style: elementStyles,
+  //     classes: elementClasses,
+  //   });
+  //   this.stripeCardExpiry.mount('#card-expiry');
 
-    this.stripeCardCvc = elements.create('cardCvc', {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    this.stripeCardCvc.mount('#card-cvc');
+  //   this.stripeCardCvc = elements.create('cardCvc', {
+  //     style: elementStyles,
+  //     classes: elementClasses,
+  //   });
+  //   this.stripeCardCvc.mount('#card-cvc');
 
-  }
+  // }
 
   protected stateChanged() {
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
