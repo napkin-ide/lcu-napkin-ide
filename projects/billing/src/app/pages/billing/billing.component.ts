@@ -18,8 +18,8 @@ import {
   AbstractControl
 } from '@angular/forms';
 import {
-  UserManagementStateContext,
-  UserManagementState,
+  UserBillingStateContext,
+  UserBillingState,
   NapkinIDESetupStepTypes,
   Constants
 } from '@napkin-ide/lcu-napkin-ide-common';
@@ -58,11 +58,11 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   //  Properties
   public BillingForm: FormGroup;
 
-  public favoriteSeason: any;
+  public productPlan: any;
 
   public season: any;
 
-  public State: UserManagementState;
+  public State: UserBillingState;
 
   public StripeError: string;
 
@@ -71,11 +71,12 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   //  Constructor
   constructor(
     protected formBldr: FormBuilder,
-    protected userMngState: UserManagementStateContext,
+    protected userBillState: UserBillingStateContext,
     protected lcuSettings: LCUServiceSettings,
     protected cdr: ChangeDetectorRef
   ) {
     this.State = {};
+    this.productPlan = '';
 
     // this.setFieldToggles();
   }
@@ -83,7 +84,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   //  Life Cycle
   public ngOnInit() {
     this.setupForms();
-    this.userMngState.Context.subscribe((state: any) => {
+    this.userBillState.Context.subscribe((state: any) => {
       this.State = state;
 
       this.stateChanged();
@@ -91,43 +92,24 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
 
   public ngAfterViewInit(): void {
-    setTimeout(()=>{
-      this.setupStripe();
-    },5000)
-    
+    // setTimeout(()=>{
+    //   this.setupStripe();
+    // },2000)
+
   }
   public ngAfterViewChecked(): void{
     // this.setupStripe()
   }
-  
+
 
   //  API methods
-  // public OpenHelpPdf() {
-  //   window.open(Constants.HELP_PDF);
-  // }
-
-  public SetUserSetupStep(step: NapkinIDESetupStepTypes) {
-    this.State.Loading = true;
-
-    this.userMngState.SetNapkinIDESetupStep(step);
-  }
-
-  public StepperChanged(event: StepperSelectionEvent) {
-    if (event.selectedIndex === 0) {
-      // this.setupStripe();
-    }
-  }
-
   public SubmitBilling(event: Event) {
     event.preventDefault();
 
     this.stripe
       .createPaymentMethod({
         type: 'card',
-        cardNumber: this.stripeCardNumber,
-        cardExpiry: this.stripeCardExpiry,
-        cardCvc: this.stripeCardCvc,
-        // card: this.stripeCard,
+        card: this.stripeCard,
         billing_details: {
           email: this.State.Username
         }
@@ -152,7 +134,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     } else {
       this.StripeError = '';
 
-      this.userMngState.SetPaymentMethod(result.paymentMethod.id);
+      this.userBillState.SetPaymentMethod(result.paymentMethod.id);
     }
   }
 
@@ -165,7 +147,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   // }
 
   protected setupForms() {
-    this.BillingForm = this.formBldr.group({     
+    this.BillingForm = this.formBldr.group({
        prodPlan: new FormControl('', [Validators.required]),
   });
   }
@@ -204,7 +186,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     //   this.stripeCardNumber.addEventListener('change', (event: any) =>
     //     this.handleCardChanged(event)
     //   );
-    
+
 
     // this.stripeCardExpiry.addEventListener('change', (event: any) =>
     //     this.handleCardChanged(event)
@@ -225,15 +207,15 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
         fontFamily: 'Arial, sans-serif',
         fontSize: '16px',
         fontSmoothing: 'antialiased',
-  
+
         ':focus': {
           color: '#424770',
         },
-  
+
         '::placeholder': {
           color: '#9BACC8',
         },
-  
+
         ':focus::placeholder': {
           color: '#CFD7DF',
         },
@@ -248,31 +230,31 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
         },
       },
     };
-  
+
     var elementClasses = {
       focus: 'focus',
       empty: 'empty',
       invalid: 'invalid',
     };
-  
+
     this.stripeCardNumber = elements.create('cardNumber', {
       style: elementStyles,
       classes: elementClasses,
     });
     this.stripeCardNumber.mount('#card-number');
-  
+
     this.stripeCardExpiry = elements.create('cardExpiry', {
       style: elementStyles,
       classes: elementClasses,
     });
     this.stripeCardExpiry.mount('#card-expiry');
-  
+
     this.stripeCardCvc = elements.create('cardCvc', {
       style: elementStyles,
       classes: elementClasses,
     });
     this.stripeCardCvc.mount('#card-cvc');
-  
+
   }
 
   protected stateChanged() {
