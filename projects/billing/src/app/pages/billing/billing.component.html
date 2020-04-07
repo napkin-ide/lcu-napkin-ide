@@ -1,227 +1,70 @@
 <ng-container *ngIf="!State.Loading">
-  <!-- <section
-    class="welcome"
-    *ngIf="State.UserSetupStep == NapkinIDESetupStepTypes.Welcome"
-  >
-    <div class="spread" fxLayout="row" fxLayout="center center">
-      <div fxFlex="auto"></div>
 
-      <div fxFlex="40%" fxFlex.lt-md="60%" fxFlex.lt-sm="90%">
-        <h2>Welcome to Fathym<br />Fathym It. Build It.</h2>
-
-        <p>
-          Being a developer is more than just the languages you know, the code
-          you right, the IDEs you use, the cloud you choose, and the tools you
-          prefer; its the way you use them to create solutions to real problems.
-        </p>
-
-        <p>
-          Use the technology you prefer with Fathym to deliver quality solutions
-          to your customers.
-        </p>
-
-        <button
-          mat-raised-button
-          color="accent"
-          class="mat-full-width"
-          (click)="SetUserSetupStep(NapkinIDESetupStepTypes.Setup)"
-        >
-          Start Setup
-        </button>
+  <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-between center">
+<!-- PRICING CONTAINER -->
+    <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%">
+      <h1>Pricing Options</h1>
+      
+      <div class="product-plans form-row" fxLayout="row wrap" fxLayoutAlign="space-between center" >
+        <!-- <form action="">  -->
+          <!-- TODO fix form issue -->
+        
+      <!-- </form> -->
       </div>
-
-      <div fxFlex="auto"></div>
     </div>
-  </section> -->
 
-  <!-- <section
-    class="setup"
-    *ngIf="State.UserSetupStep == NapkinIDESetupStepTypes.Setup"
-  > -->
-     <div class="setup" fxLayout="row wrap" fxLayout="center center">
-     <!-- <div fxFlex="40%" fxFlex.lt-sm="80%">
-        <div class="spread text-center">
-          <ng-container *ngIf="stepper.selectedIndex == 0">
-            <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">
-              Organization Details
-            </h2>
+<!-- BILLING CONTAINER -->
+    <div class='billing-container' fxFlex="45%" fxFlex.lt-sm="80%">
+      <div >
+        <form action="/charge" method="post" id="payment-form" [formGroup]="BillingForm"
+          (ngSubmit)="SubmitBilling($event)">
 
-            <h3 class="mat-subheading-2">
-              Fathym’s low-code framework is designed for organizations of any
-              size. It's built to give developers the freedom and best practice
-              workflows to rapidly create IoT and data-driven applications that
-              are agnostic to tools, platforms and clouds.
-            </h3>
-          </ng-container>
-
-          <ng-container *ngIf="stepper.selectedIndex == 1">
-            <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">
-              Set Up Organization Infrastructure
-            </h2>
-
-            <h3 class="mat-subheading-2">
-              You will need to have a Microsoft Azure account to get started.
-              Create a new account or use an existing account.
-            </h3>
-
-            <div class="btn-split">
-              <a
-                mat-raised-button
-                href="https://azure.microsoft.com/free/"
-                color="primary"
-                class="mat-full-width"
-                target="_blank"
-              >
-                <img class="azure-logo" src="assets/img/Azure-logo.png" />
-
-                Create &nbsp; a &nbsp; Free &nbsp; Azure &nbsp; Account
-              </a>
-            </div>
-
-            <h3 class="mat-subheading-2" style="margin-top:15px;">
-              Fathym needs access to your Azure subscription to help you manage
-              your infrastructure.
-            </h3>
-
-            <div class="btn-split">
-              <a
-                mat-raised-button
-                href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in."
-                color="primary"
-                class="mat-full-width"
-                target="_blank"
-              >
-                <mat-icon>settings</mat-icon>
-
-                Locate Your Configuration Information
-              </a>
-            </div>
-
-            <div class="spread">
-              <h4 class="mat-subheading-1">
-                Additional infrastructure options coming soon!
-              </h4>
-            </div>
-          </ng-container>
-
-          <ng-container *ngIf="stepper.selectedIndex == 2">
-            <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">
-              Select Product Plan
-            </h2>
-
-            <div class="spread">
-              <h3 class="mat-subheading-2">
-                Select the product plan that meets your needs.
-              </h3>
-            </div>
-
-            <div class="spread">
-              <h3 class="mat-subheading-2">
-                Provide billing details so we can charge you post trial (cancel
-                anytime).
-              </h3>
-            </div>
-          </ng-container>
-
-          <ng-container *ngIf="stepper.selectedIndex == 3">
-            Review dets
-          </ng-container>
-        </div>
-      </div> -->
-
-      <div fxFlex="60%" fxFlex.lt-sm="80%">
-        <!-- TODO REMOVE HORIZONTAL STEPPER -->
-        <!-- <mat-horizontal-stepper
-          [linear]="true"
-          #stepper
-          (selectionChange)="StepperChanged($event)"> -->
-
-          <div>
-            <form
-              action="/charge"
-              method="post"
-              id="payment-form"
-              [formGroup]="BillingForm"
-              (ngSubmit)="SubmitBilling($event)"
-            >
-              <ng-template matStepLabel>Product Plan</ng-template>
-
-              <div
-                class="product-plans form-row"
-                fxLayout="row wrap"
-                fxLayout="center center"
-              >
-                <mat-radio-group
-                  aria-labelledby="example-radio-group-label"
-                  formControlName="prodPlan"
-                  [(ngModel)]="favoriteSeason"
-                >
-                  <div fxFlex="25%">
-                    <mat-card class="spread">
-                      <mat-radio-button
-                        class="example-radio-button"
-                        [value]="season"
-                      >
-                        Explorer 1
-                      </mat-radio-button>
-                    </mat-card>
-                  </div>
-
-                  <div fxFlex="25%">
-                    <mat-card class="spread">
-                      <mat-radio-button
-                        class="example-radio-button"
-                        [value]="season"
-                      >
-                        Explorer 2
-                      </mat-radio-button>
-                    </mat-card>
-                  </div>
-                </mat-radio-group>
-              </div>
-
-              <div class="form-row">
-                <label for="card-element"  class="spread"
-                  >Enter Payment Details</label
-                >
-              <div class="stripe-container">
-                <div id="card-element" class="spread"></div>
-              </div>
-                <!-- <div id="card-expiry" class="spread"></div>
-                <div id="card-cvc" class="spread"></div> -->
-
-
-                <div
-                  id="card-errors"
-                  role="alert"
-                  class="spread"
-                  *ngIf="StripeError"
-                >
-                  {{ StripeError }}
-                </div>
-              </div>
-
-              <div class="spread">
-                <button mat-raised-button color="primary">
-                  Add payment source
-                </button>
-              </div>
-            </form>
+          <mat-radio-group aria-labelledby="example-radio-group-label" 
+          [(ngModel)]="productPlan" formControlName="prodPlan">
+          <div fxFlex="30%">
+            <mat-card class='mat-payment-card'>
+              <mat-radio-button class="example-radio-button" value="option1">
+                Explorer 1
+              </mat-radio-button>
+            </mat-card>
           </div>
 
-          <!-- <mat-step>
-            <ng-template matStepLabel>Review</ng-template>
-            <p>You are now done.</p>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
+          <div fxFlex="30%">
+            <mat-card class='mat-payment-card'>
+              <mat-radio-button class="example-radio-button" value="option2">
+                Explorer 2
+              </mat-radio-button>
+            </mat-card>
+          </div>
+        </mat-radio-group>
+        <div>Your Selected Plan is: {{productPlan}}</div>
 
-              <button mat-button (click)="stepper.reset()">Reset</button>
+        <!-- <div *ngIf="productPlan? setupStripe() : false" class="payment-info-container" > -->
+          <div class="form-row" >
+
+
+            <label for="card-element" class="spread">Enter Payment Details</label>
+            <div class="stripe-container">
+              <div id="card-element" class="spread"></div>
             </div>
-          </mat-step> -->
-        <!-- </mat-horizontal-stepper> -->
+            <div id="card-errors" role="alert" class="spread" *ngIf="StripeError">
+              {{ StripeError }}
+            </div>
+          </div>
+
+          <div class="spread">
+            <button mat-raised-button color="primary" >
+              Add payment
+            </button>
+          </div>
+        <!-- </div> -->
+        </form>
       </div>
+
+
     </div>
-  <!-- </section> -->
+  </div>
+
 </ng-container>
 
 <div *ngIf="State.Loading">
@@ -234,5 +77,3 @@
     <div class="spinner-logo" logo-alt="Fathym Logo"></div>
   </div>
 </div>
-
-<!-- <button mat-raised-button color="primary" (click)="SetUserDetails()">Set User Details</button> -->

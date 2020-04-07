@@ -58,7 +58,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   //  Properties
   public BillingForm: FormGroup;
 
-  public favoriteSeason: any;
+  public productPlan: any;
 
   public season: any;
 
@@ -76,6 +76,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     protected cdr: ChangeDetectorRef
   ) {
     this.State = {};
+    this.productPlan = '';
 
     // this.setFieldToggles();
   }
@@ -91,9 +92,9 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
 
   public ngAfterViewInit(): void {
-    setTimeout(()=>{
-      this.setupStripe();
-    },5000)
+    // setTimeout(()=>{
+    //   this.setupStripe();
+    // },2000)
     
   }
   public ngAfterViewChecked(): void{
@@ -124,10 +125,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.stripe
       .createPaymentMethod({
         type: 'card',
-        cardNumber: this.stripeCardNumber,
-        cardExpiry: this.stripeCardExpiry,
-        cardCvc: this.stripeCardCvc,
-        // card: this.stripeCard,
+        card: this.stripeCard,
         billing_details: {
           email: this.State.Username
         }

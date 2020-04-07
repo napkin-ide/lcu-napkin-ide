@@ -4,16 +4,23 @@
   text-align: center;
 }
 
-.setup {
-  .azure-logo {
-    height: 24px;
-  }
-
-  .product-plans {
-    .mat-radio-group {
-      width: 100%;
+.billing-page-container {
+  padding: 20px;
+  background-color: #a4bab3;
+  .pricing-container{
+    background-color: lavenderblush;
+    height: 100%;
+    .product-plans {
+      .mat-radio-group {
+        width: 100%;
+      }
     }
   }
+  .billing-container{
+    background-color: lavenderblush;
+  }
+
+  
 }
 .stripe-container{
   // background-color: green;
