@@ -52,6 +52,10 @@ export class UserManagementState {
   public Username?: string;
 
   public UserType?: UserTypes;
+
+  public SubscribersLimited: Array<string>;
+
+  public SubscribersActive: Array<string>; 
 }
 
 export class JourneyPersona {
