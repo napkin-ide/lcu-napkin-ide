@@ -19,6 +19,8 @@ export * from './lib/controls/external-dialog/external-dialog.component';
 export * from './lib/controls/external-dialog/external-dialog.module';
 export * from './lib/controls/user-account-sidenav/user-account-sidenav.component';
 export * from './lib/state/ide/ide-management-state.context';
+export * from './lib/state/user-billing/user-billing-state.context';
+export * from './lib/state/user-billing/user-billing.state';
 export * from './lib/state/user-management/user-management-state.context';
 export * from './lib/state/user-management/user-management.state';
 export * from './lib/state/ide/ide-management-state.context';

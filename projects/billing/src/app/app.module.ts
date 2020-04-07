@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
-import { LcuNapkinIdeModule, UserManagementStateContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { LcuNapkinIdeModule, UserBillingStateContext } from '@napkin-ide/lcu-napkin-ide-common';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { LcuNapkinIdeModule, UserManagementStateContext } from '@napkin-ide/lcu-
     LcuNapkinIdeModule
   ],
   providers: [
-    UserManagementStateContext,
+    UserBillingStateContext,
     {
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment)
