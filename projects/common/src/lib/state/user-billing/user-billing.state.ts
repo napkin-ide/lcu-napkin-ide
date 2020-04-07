@@ -8,6 +8,8 @@ export class UserBillingState {
   public Plans?: BillingPlanOption[];
 
   public Status?: Status;
+
+  public Username?: string;
 }
 
 export class BillingPlanOption {
