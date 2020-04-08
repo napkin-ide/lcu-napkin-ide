@@ -8,14 +8,14 @@ import {
   ChangeDetectorRef,
   Input,
   ElementRef,
-  AfterViewChecked
+  AfterViewChecked,
 } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl,
-  AbstractControl
+  AbstractControl,
 } from '@angular/forms';
 import {
   UserBillingStateContext,
@@ -34,9 +34,10 @@ declare var Stripe: any;
   selector: 'lcu-billing',
   templateUrl: './billing.component.html',
   styleUrls: ['./billing.component.scss'],
-  animations: []
+  animations: [],
 })
-export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class BillingComponent
+  implements OnInit, AfterViewInit, AfterViewChecked {
   //  Fields
 
   @ViewChild('cardElement') cardElement: ElementRef;
@@ -90,7 +91,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.setupForms();
     this.userBillState.Context.subscribe((state: any) => {
       this.State = state;
-      console.log("billing state: ", this.State)
+      console.log('billing state: ', this.State);
       this.stateChanged();
     });
   }
@@ -99,18 +100,19 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     // setTimeout(()=>{
     //   this.setupStripe();
     // },2000)
-
   }
   public ngAfterViewChecked(): void {
     this.setupStripe();
   }
 
+ 
+
+
+  //  API methods
   public SelectPlan(plan: any) {
     this.selectedPlan = plan;
   }
 
-
-  //  API methods
   public SubmitBilling(event: Event) {
     event.preventDefault();
 
@@ -119,8 +121,8 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
         type: 'card',
         card: this.stripeCard,
         billing_details: {
-          email: this.State.Username
-        }
+          email: this.State.Username,
+        },
       })
       .then((result: any) => {
         this.handleStripePaymentMethodCreated(result);
@@ -142,10 +144,12 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     } else {
       this.StripeError = '';
       console.log("Billing Form: ", this.BillingForm)
-      this.userBillState.CompletePayment(result.paymentMethod.id, this.BillingForm.value.userName, this.selectedPlan.Lookup);
+      this.userBillState.CompletePayment(
+        result.paymentMethod.id, 
+        this.BillingForm.value.userName, 
+        this.selectedPlan.Lookup);
     }
   }
-
 
   /**
    * Setup toggled fields
@@ -157,12 +161,12 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   protected setupForms() {
     this.BillingForm = this.formBldr.group({
       prodPlan: new FormControl('', [Validators.required]),
-      userName: new FormControl('', [Validators.required])
+      userName: new FormControl('', [Validators.required]),
     });
   }
 
   protected setupStripe() {
-    console.log("Stripe = ", this.stripe)
+    console.log('Stripe = ', this.stripe);
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.lcuSettings.Settings.Stripe.PublicKey);
@@ -170,8 +174,8 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
       const elements = this.stripe.elements();
 
       this.stripeCard = elements.create('card', {
-        'style': {
-          'base': {
+        style: {
+          base: {
             color: 'black',
             fontWeight: 600,
             fontFamily: 'Arial, sans-serif',
@@ -190,7 +194,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
               color: '#CFD7DF',
             },
           },
-          'invalid': {
+          invalid: {
             color: '#fff',
             ':focus': {
               color: '#FA755A',
@@ -199,7 +203,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
           '::placeholder': {
             color: 'black',
           },
-        }
+        },
       });
       this.stripeCard.mount(document.getElementById('card-element'));
 
