@@ -8,11 +8,13 @@
 .billing-page-container {
   padding: 20px;
   background-color: #a4bab3;
-  height: 90%;
+  height: 100%;
+  
 
   .pricing-container{
     background-color: lavenderblush;
     height: 100%;
+    overflow: auto;
 
     .product-plans {
 
@@ -53,6 +55,14 @@ h2{
 .mat-payment-card{
   margin-left: 10px;
 }
+
+.stripe-card{
+  background-color: #a4bab3;
+  border-radius: 2px;
+  margin-left: 20px;
+  padding: 5px;
+}
+
 
 /******************************    Strip Styling    **************************************/
 // Main form styling

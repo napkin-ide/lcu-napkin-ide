@@ -1,4 +1,4 @@
-<ng-container *ngIf="!State.Loading">
+<!-- <ng-container [fxShow]="!State.Loading"> -->
   <!-- FORM -->
   <form action="/charge" method="post" 
   class="billing-form" id="payment-form" 
@@ -6,24 +6,26 @@
   (ngSubmit)="SubmitBilling($event)" >
 
   <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
+
 <!-- PRICING CONTAINER -->
     <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%">
-      <h2>Pricing Options</h2>
-      <p>Please select a platform plan that best suits your needs.</p>
+      <h2>Plan Options</h2>
+      <!-- <p>Please select a platform plan that best suits your needs.</p> -->
       
       <div class="product-plans form-row" fxLayout="row wrap" fxLayoutAlign="space-between center" >
         <mat-radio-group class="radio-group" aria-labelledby="example-radio-group-label" 
           [(ngModel)]="productPlan" formControlName="prodPlan" fxLayout="column" fxLayoutAlign="space-around start">
-          <div fxFlex="30%">
+
+          <div *ngFor="let plan of State.Plans"fxFlex="30%">
             <mat-card class='mat-payment-card'>
-              <mat-radio-button class="example-radio-button" value="option1" (click)="setupStripe()">
-                Explorer 1
+              <mat-radio-button class="example-radio-button" [value]="plan.Name" (click)="setupStripe()">
+                {{plan.Name}}
               </mat-radio-button>
             </mat-card>
-            <p>description goes here</p>
+            <p>{{plan.Description}}</p>
           </div>
 
-          <div fxFlex="30%">
+          <!-- <div fxFlex="30%">
             <mat-card class='mat-payment-card'>
               <mat-radio-button class="example-radio-button" value="option2" (click)="setupStripe()">
                 Explorer 2
@@ -31,7 +33,7 @@
             </mat-card>
             <p>description goes here</p>
 
-          </div>
+          </div> -->
         </mat-radio-group>
       </div>
     </div>
@@ -48,28 +50,25 @@
 
             <label *ngIf="productPlan" for="card-element" class="spread">Enter Payment Details</label>
             <div class="stripe-container">
-              <div id="card-element" class="spread"></div>
+              <div id="card-element" class="stripe-card"></div>
             </div>
             <div id="card-errors" role="alert" class="spread" *ngIf="StripeError">
               {{ StripeError }}
             </div>
           </div>
 
-          <div class="spread">
-            <button mat-raised-button color="primary" *ngIf="productPlan">
+          <div class="spread" fxLayoutAlign="center">
+            <button mat-raised-button id="payment-button" color="primary" *ngIf="productPlan">
               Add payment
             </button>
           </div>
         </div>
-        <!-- </form> -->
-
-
     </div>
   </div>
 </form>
-</ng-container>
+<!-- </ng-container> -->
 
-<div *ngIf="State.Loading">
+<!-- <div [fxShow]="State.Loading">
   <p style="text-align: center;">
     Behind the scenes Thinky is working hard to set up your Low Code Unit
   </p>
@@ -78,4 +77,4 @@
     <mat-spinner diameter="75"></mat-spinner>
     <div class="spinner-logo" logo-alt="Fathym Logo"></div>
   </div>
-</div>
+</div> -->
