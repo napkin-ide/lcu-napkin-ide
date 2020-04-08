@@ -2,9 +2,10 @@
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
 
-    <button class="menu-button" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ToggleSideBar()" *ngIf="isHandset">
+    <button class="menu-button" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ToggleSideBar()"
+      *ngIf="isHandset">
 
-      <mat-icon class="toolbar-icon" aria-label="Side nav toggle icon" >menu</mat-icon>
+      <mat-icon class="toolbar-icon" aria-label="Side nav toggle icon">menu</mat-icon>
 
     </button>
 
@@ -12,8 +13,20 @@
 
   </div>
 
-  <lcu-user-account-sidenav class="user-account" 
-  [user-email]="UserEmail"
-  (logout-clicked)=LogoutClicked($event)></lcu-user-account-sidenav>
+  <!-- use state to insert the actions -->
+  <div>
+    <span class="action-icons">
+      <button 
+        *ngFor="let action of State.HeaderActions" 
+        matTooltip="{{ action.Text }}" 
+        mat-icon-button
+        (click)="HeaderActionClicked(action)">
+        <mat-icon>{{ action.Icon }}</mat-icon>
+      </button>
+    </span>
+
+    <lcu-user-account-sidenav class="user-account" [user-email]="UserEmail" (logout-clicked)=LogoutClicked($event)>
+    </lcu-user-account-sidenav>
+  </div>
 
 </mat-toolbar>
