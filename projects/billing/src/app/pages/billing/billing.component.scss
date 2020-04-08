@@ -1,5 +1,13 @@
 @import "../../../common";
 
+@mixin input-box {
+  background-color: #a4bab3;
+  border-radius: 2px;
+  // margin-left: 20px;
+  margin: 10px 0px;
+  padding: 5px;
+}
+
 .welcome {
   text-align: center;
 }
@@ -57,24 +65,23 @@ h2{
 }
 
 .stripe-card{
-  background-color: #a4bab3;
-  border-radius: 2px;
-  margin-left: 20px;
-  padding: 5px;
+  @include input-box();
 }
-#cardholder-name-input{
+
+.cardholder-name-input{
+  @include input-box();
   border: 0;
   color: black;
-  font-weight: 700;
-  margin-right: 20px;;
-  ::placeholder{
-  color: black !important;
+  font-weight: 600;
+  font-size: 16px;
+  
+  // margin-right: 22px;
+   ::placeholder{
+  color: black;
   opacity: 1;
   }
 }
-#input-span{
-  margin-right: 20px;
-}
+
 
 
 /******************************    Strip Styling    **************************************/

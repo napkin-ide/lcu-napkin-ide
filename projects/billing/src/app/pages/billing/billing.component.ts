@@ -55,11 +55,15 @@ export class BillingComponent
   protected redirectUri: any;
 
   protected selectedPlan: BillingPlanOption;
+/**
+ * The plan lookup that is passed in via params
+ */
+  protected planParam: any;
 
   //  Properties
   public BillingForm: FormGroup;
 
-  public productPlan: any;
+  // public productPlan: any;
 
   public State: UserBillingState;
 
@@ -68,6 +72,8 @@ export class BillingComponent
   public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
 
   public CustomerName: string;
+
+  public PaymentSuccessful: boolean;
 
   //  Constructor
   constructor(
@@ -78,10 +84,10 @@ export class BillingComponent
     protected route: ActivatedRoute
   ) {
     this.State = {};
-    this.productPlan = '';
+    // this.productPlan = '';
     this.route.queryParams.subscribe(params => {
       this.redirectUri = params['param1'];  // Set redirectUri to some local property on the component
-      this.productPlan = params['param2'];  // Set the plan to the value of the form for prodPlan
+      this.planParam = params['param2'];  // Set the plan to the value of the form for prodPlan
     });
     // this.setFieldToggles();
   }
@@ -109,6 +115,10 @@ export class BillingComponent
 
 
   //  API methods
+public ResetBillingStatus(){
+  this.PaymentSuccessful = false;
+}
+
   public SelectPlan(plan: any) {
     this.selectedPlan = plan;
   }
@@ -166,7 +176,12 @@ export class BillingComponent
   }
 
   protected setupStripe() {
-    console.log('Stripe = ', this.stripe);
+    // const loading = this.State.Loading;
+    // console.log("loading: ", loading)
+    // if(this.State.Loading){
+    //   console.log("Not ready to load")
+    //   return;
+    // }
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.lcuSettings.Settings.Stripe.PublicKey);
@@ -219,6 +234,11 @@ export class BillingComponent
     // using *ngIf with external form properties
     this.cdr.detectChanges();
 
+    // if a plan has been passed in via param set the selected plan accordingly
+    if(this.planParam){
+      this.selectedPlan = this.State.Plans.find(p => p.Lookup === this.planParam);
+    }
+
     if (this.State.PaymentStatus) {
       console.log("Payment Status",this.State.PaymentStatus)
       if (this.State.PaymentStatus.Code === 101) {
@@ -251,5 +271,6 @@ export class BillingComponent
    */
   protected paymentSuccess(): void {
     //TODO do something
+    this.PaymentSuccessful = true;
   }
 }
