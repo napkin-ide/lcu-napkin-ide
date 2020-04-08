@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 // import { UserManagementState, UserManagementStateContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
 import { MatSidenav } from '@angular/material/sidenav';
 import {
+  // import { IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common/lcu.api';
   IdeStateStateManagerContext,
   UserManagementStateContext,
   UserManagementState,
@@ -77,7 +78,7 @@ export class IdeTopBarComponent implements OnInit {
         }
       ];
 
-      this.UserEmail = this.State.Username;
+      // this.UserEmail = this.State.Username;
     });
 
     // this.ideState.Context.subscribe((ideState:any) => {

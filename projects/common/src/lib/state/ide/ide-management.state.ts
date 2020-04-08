@@ -11,7 +11,7 @@ export class IdeManagementState {
 
   public Editors: IdeEditor[];
 
-  public HeaderActions: IdeAction;
+  public HeaderActions: Array<IdeAction>;
 
   public InfrastructureConfigured: boolean;
 
