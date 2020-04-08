@@ -54,7 +54,7 @@ export class BillingComponent
    */
   protected redirectUri: any;
 
-  protected selectedPlan: BillingPlanOption;
+  public selectedPlan: BillingPlanOption;
 /**
  * The plan lookup that is passed in via params
  */
@@ -111,7 +111,7 @@ export class BillingComponent
     this.setupStripe();
   }
 
- 
+
 
 
   //  API methods
@@ -155,8 +155,8 @@ public ResetBillingStatus(){
       this.StripeError = '';
       console.log("Billing Form: ", this.BillingForm)
       this.userBillState.CompletePayment(
-        result.paymentMethod.id, 
-        this.BillingForm.value.userName, 
+        result.paymentMethod.id,
+        this.BillingForm.value.userName,
         this.selectedPlan.Lookup);
     }
   }
