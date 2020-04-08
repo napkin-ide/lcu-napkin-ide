@@ -9,6 +9,8 @@ export class UserBillingState {
 
   public Status?: Status;
 
+  public PaymentStatus?: Status;
+
   public Username?: string;
 }
 
