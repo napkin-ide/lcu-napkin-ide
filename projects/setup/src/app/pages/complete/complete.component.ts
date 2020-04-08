@@ -1,7 +1,6 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
-  NapkinIDESetupState,
   UserManagementStateContext,
   NapkinIDESetupStepTypes,
   UserManagementState

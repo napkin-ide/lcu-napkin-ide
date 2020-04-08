@@ -3,7 +3,7 @@
     <div class="inner">
       <mat-nav-list>
         <mat-list-item>
-          <div matLine class="slogan" style="height: 6em; margin: 1em 0 1em 0">
+          <div matLine class="slogan" style="height: 6em; margin: 1em 0 1em 0;">
             <!-- <div class="logo"> -->
             <!-- <div *ngIf="LogoClass" [ngClass]="LogoClass"></div> not really using this-->
             <!-- <div class="primary-logo"></div> -->
@@ -48,9 +48,21 @@
             >
               <mat-icon matListIcon class="success">check_circle</mat-icon>
 
-              <a matLine (click)="SetStep(SetupStepTypes.OrgDetails)"
-                >Project Details Configured</a
+              <a
+                matLine
+                (click)="SetStep(SetupStepTypes.OrgDetails)"
+                *ngIf="!State.NewEnterpriseAPIKey"
               >
+                Project Details Configured
+              </a>
+
+              <h2
+                matLine
+                *ngIf="State.NewEnterpriseAPIKey"
+                class="h2 paragraph-title-bold margin-bottom-3 margin-top-3"
+              >
+                Project Details Configured
+              </h2>
             </mat-list-item>
           </ng-container>
 
@@ -100,7 +112,7 @@
                   </a>
                 </div>
 
-                <h2 class="mat-subheading-2" style="margin-top:15px;">
+                <h2 class="mat-subheading-2" style="margin-top: 15px;">
                   Fathym needs access to your Azure subscription to help you
                   manage your infrastructure.
                 </h2>
@@ -261,7 +273,7 @@
               <lcu-org-review
                 [state]="State"
                 (set-step)="SetStep($event)"
-                ></lcu-org-review>
+              ></lcu-org-review>
 
               <lcu-complete
                 [setup-step-types]="SetupStepTypes"
