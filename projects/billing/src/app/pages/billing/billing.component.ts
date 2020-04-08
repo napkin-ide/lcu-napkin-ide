@@ -21,10 +21,12 @@ import {
   UserBillingStateContext,
   UserBillingState,
   NapkinIDESetupStepTypes,
-  Constants
+  Constants,
+  BillingPlanOption
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { Guid, LCUServiceSettings } from '@lcu/common';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { ActivatedRoute } from '@angular/router';
 
 declare var Stripe: any;
 
@@ -38,22 +40,20 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   //  Fields
 
   @ViewChild('cardElement') cardElement: ElementRef;
-
+  /**
+   * Stripe card info
+   */
   protected stripeCard: any;
   /**
-   * The stripe card number to be sent to payment method
+   * Instance of stripe
    */
-  protected stripeCardNumber: any;
-  /**
-   * The expiration date of the card user in payment method
-   */
-  protected stripeCardExpiry: any;
-  /**
-   * The cvc number to be sent to payment method
-   */
-  protected stripeCardCvc: any;
-
   protected stripe: any;
+  /**
+   * The redirect URI that the user came from to be redirected to once the payment is complete
+   */
+  protected redirectUri: any;
+
+  protected selectedPlan: BillingPlanOption;
 
   //  Properties
   public BillingForm: FormGroup;
@@ -73,11 +73,15 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     protected formBldr: FormBuilder,
     protected userBillState: UserBillingStateContext,
     protected lcuSettings: LCUServiceSettings,
-    protected cdr: ChangeDetectorRef
+    protected cdr: ChangeDetectorRef,
+    protected route: ActivatedRoute
   ) {
     this.State = {};
     this.productPlan = '';
-
+    this.route.queryParams.subscribe(params => {
+      this.redirectUri = params['param1'];  // Set redirectUri to some local property on the component
+      this.productPlan = params['param2'];  // Set the plan to the value of the form for prodPlan
+    });
     // this.setFieldToggles();
   }
 
@@ -99,6 +103,10 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
   public ngAfterViewChecked(): void {
     this.setupStripe();
+  }
+
+  public SelectPlan(plan: any) {
+    this.selectedPlan = plan;
   }
 
 
@@ -134,7 +142,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     } else {
       this.StripeError = '';
       console.log("Billing Form: ", this.BillingForm)
-      this.userBillState.CompletePayment(result.paymentMethod.id, this.BillingForm.value.userName, this.BillingForm.value.prodPlan);
+      this.userBillState.CompletePayment(result.paymentMethod.id, this.BillingForm.value.userName, this.selectedPlan.Lookup);
     }
   }
 
@@ -201,78 +209,43 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
   }
 
-  // protected setupStripeElements():void{
-  //   const elements = this.stripe.elements();
-  //   var elementStyles = {
-  //     base: {
-  //       color: '#fff',
-  //       fontWeight: 600,
-  //       fontFamily: 'Arial, sans-serif',
-  //       fontSize: '16px',
-  //       fontSmoothing: 'antialiased',
-
-  //       ':focus': {
-  //         color: '#424770',
-  //       },
-
-  //       '::placeholder': {
-  //         color: '#9BACC8',
-  //       },
-
-  //       ':focus::placeholder': {
-  //         color: '#CFD7DF',
-  //       },
-  //     },
-  //     invalid: {
-  //       color: '#fff',
-  //       ':focus': {
-  //         color: '#FA755A',
-  //       },
-  //       '::placeholder': {
-  //         color: '#FFCCA5',
-  //       },
-  //     },
-  //   };
-
-  //   var elementClasses = {
-  //     focus: 'focus',
-  //     empty: 'empty',
-  //     invalid: 'invalid',
-  //   };
-
-  //   this.stripeCardNumber = elements.create('cardNumber', {
-  //     style: elementStyles,
-  //     classes: elementClasses,
-  //   });
-  //   this.stripeCardNumber.mount('#card-number');
-
-  //   this.stripeCardExpiry = elements.create('cardExpiry', {
-  //     style: elementStyles,
-  //     classes: elementClasses,
-  //   });
-  //   this.stripeCardExpiry.mount('#card-expiry');
-
-  //   this.stripeCardCvc = elements.create('cardCvc', {
-  //     style: elementStyles,
-  //     classes: elementClasses,
-  //   });
-  //   this.stripeCardCvc.mount('#card-cvc');
-
-  // }
 
   protected stateChanged() {
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
     // using *ngIf with external form properties
     this.cdr.detectChanges();
 
-    if(this.State.PaymentStatus){
-      console.log(this.State.PaymentStatus)
-      if(this.State.PaymentStatus.Code === 101){
-        console.log("Status is 101 Do Step 8")
+    if (this.State.PaymentStatus) {
+      console.log("Payment Status",this.State.PaymentStatus)
+      if (this.State.PaymentStatus.Code === 101) {
+        this.stripe.confirmCardPayment('requires_action').then(function (result: any) {
+          if (result.error) {
+            // Display error message in  UI.
+            this.StripeError = this.State.PaymentStatus.Message;
+            // The card was declined (i.e. insufficient funds, card has expired, etc)
+          } else {
+            // Show a success message to your customer
+            this.paymentSuccess();
+          }
+        });
+
+      }
+      else if (this.State.PaymentStatus.Code === 1) {
+        this.StripeError = this.State.PaymentStatus.Message;
+      }
+
+      else {
+        this.paymentSuccess();
       }
     }
 
     // if (this.State.SetupStep === UserManagementStepTypes.Complete) {
     // }
+  }
+  /**
+   * When the payment returns Successfully
+   */
+  protected paymentSuccess(): void {
+    //TODO do something
   }
 }

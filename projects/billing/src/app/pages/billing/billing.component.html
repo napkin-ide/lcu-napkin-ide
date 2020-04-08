@@ -18,7 +18,7 @@
 
           <div *ngFor="let plan of State.Plans"fxFlex="30%">
             <mat-card class='mat-payment-card'>
-              <mat-radio-button class="example-radio-button" [value]="plan.Name" (click)="setupStripe()">
+              <mat-radio-button class="example-radio-button" [value]="plan.Name" (click)="SelectPlan(plan)">
                 {{plan.Name}}
               </mat-radio-button>
             </mat-card>
@@ -47,8 +47,8 @@
         <div class="payment-info-container" >
           <div class="form-row" fxLayout="column"  >
             <div class="billing-info">
-            <label>
-              <span><span>Name</span></span>
+            <label fxLayout="column">
+              <span id="input-span">Name</span>
               <input name="cardholder-name" class="stripe-card" id="cardholder-name-input" formControlName="userName" placeholder="Cardholder Name" />
             </label>
           </div>

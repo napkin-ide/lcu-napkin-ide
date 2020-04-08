@@ -64,6 +64,16 @@ h2{
 }
 #cardholder-name-input{
   border: 0;
+  color: black;
+  font-weight: 700;
+  margin-right: 20px;;
+  ::placeholder{
+  color: black !important;
+  opacity: 1;
+  }
+}
+#input-span{
+  margin-right: 20px;
 }
 
 
