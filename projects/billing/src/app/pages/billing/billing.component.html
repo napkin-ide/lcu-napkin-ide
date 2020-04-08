@@ -1,7 +1,7 @@
 <!-- <ng-container [fxShow]="!State.Loading"> -->
   <!-- FORM -->
-  <form action="/charge" method="post" 
-  class="billing-form" id="payment-form" 
+  <form action="/charge" method="post"
+  class="billing-form" id="payment-form"
   [formGroup]="BillingForm"
   (ngSubmit)="SubmitBilling($event)" >
 
@@ -11,14 +11,14 @@
     <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%">
       <h2>Plan Options</h2>
       <!-- <p>Please select a platform plan that best suits your needs.</p> -->
-      
+
       <div class="product-plans form-row" fxLayout="row wrap" fxLayoutAlign="space-between center" >
-        <mat-radio-group class="radio-group" aria-labelledby="example-radio-group-label" 
+        <mat-radio-group class="radio-group" aria-labelledby="example-radio-group-label"
           [(ngModel)]="productPlan" formControlName="prodPlan" fxLayout="column" fxLayoutAlign="space-around start">
 
           <div *ngFor="let plan of State.Plans"fxFlex="30%">
             <mat-card class='mat-payment-card'>
-              <mat-radio-button class="example-radio-button" [value]="plan.Name" (click)="setupStripe()">
+              <mat-radio-button class="example-radio-button" [value]="plan.Lookup" (click)="setupStripe()">
                 {{plan.Name}}
               </mat-radio-button>
             </mat-card>
