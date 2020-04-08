@@ -14,12 +14,14 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   //  API Methods
-  public SetPaymentMethod(methodId: string) {
+  public CompletePayment(methodId: string, customerName: string, plan: string) {
     this.Execute({
       Arguments: {
+        CustomerName: customerName,
         MethodID: methodId,
+        Plan: plan
       },
-      Type: 'SetPaymentMethod',
+      Type: 'CompletePayment',
     });
   }
 
