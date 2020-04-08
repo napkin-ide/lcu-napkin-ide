@@ -1,31 +1,32 @@
-<!-- <ng-container [fxShow]="!State.Loading"> -->
+<!-- <div [fxShow]="!State.Loading && !PaymentSuccessful"> -->
+
+<div [fxShow]="!State.Loading">
   <!-- FORM -->
-  <form action="/charge" method="post"
-  class="billing-form" id="payment-form"
-  [formGroup]="BillingForm"
-  (ngSubmit)="SubmitBilling($event)" >
+  <form action="/charge" method="post" class="billing-form" id="payment-form" [formGroup]="BillingForm"
+    (ngSubmit)="SubmitBilling($event)">
 
-  <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
+    <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
 
-<!-- PRICING CONTAINER -->
-    <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%">
-      <h2>Plan Options</h2>
-      <!-- <p>Please select a platform plan that best suits your needs.</p> -->
+      <!-- PRICING CONTAINER -->
+      <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%">
+        <h2>Plan Options</h2>
+        <!-- <p>Please select a platform plan that best suits your needs.</p> -->
 
-      <div class="product-plans form-row" fxLayout="row wrap" fxLayoutAlign="space-between center" >
-        <mat-radio-group class="radio-group" aria-labelledby="example-radio-group-label"
-          [(ngModel)]="productPlan" formControlName="prodPlan" fxLayout="column" fxLayoutAlign="space-around start">
+        <div class="product-plans form-row" fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <mat-radio-group class="radio-group" aria-labelledby="example-radio-group-label" [(ngModel)]="selectedPlan"
+            formControlName="prodPlan" fxLayout="column" fxLayoutAlign="space-around start">
 
-          <div *ngFor="let plan of State.Plans"fxFlex="30%">
-            <mat-card class='mat-payment-card'>
-              <mat-radio-button class="example-radio-button" [value]="plan.Lookup" (click)="setupStripe()">
-                {{plan.Name}}
-              </mat-radio-button>
-            </mat-card>
-            <p>{{plan.Description}}</p>
-          </div>
+            <div *ngFor="let plan of State.Plans" fxFlex="30%">
+              <mat-card class='mat-payment-card'>
+                <!-- (click)="SelectPlan(plan)" -->
+                <mat-radio-button class="example-radio-button" [value]="plan">
+                  {{plan.Name}}
+                </mat-radio-button>
+              </mat-card>
+              <p>{{plan.Description}}</p>
+            </div>
 
-          <!-- <div fxFlex="30%">
+            <!-- <div fxFlex="30%">
             <mat-card class='mat-payment-card'>
               <mat-radio-button class="example-radio-button" value="option2" (click)="setupStripe()">
                 Explorer 2
@@ -34,47 +35,48 @@
             <p>description goes here</p>
 
           </div> -->
-        </mat-radio-group>
+          </mat-radio-group>
+        </div>
       </div>
-    </div>
 
-<!-- BILLING CONTAINER -->
-    <div class='billing-container' fxFlex="45%" fxFlex.lt-sm="80%">
-      <h2>Billing Info</h2>
-        <div *ngIf="productPlan" class="selected-prod-plan">Your Selected Plan: {{productPlan}}</div>
-        <div *ngIf="!productPlan" class="selected-prod-plan">Please Select a Product Plan</div>
+      <!-- BILLING CONTAINER -->
+      <div class='billing-container' fxFlex="45%" fxFlex.lt-sm="80%">
+        <h2>Billing Info</h2>
+        <div *ngIf="selectedPlan" class="selected-prod-plan">Your Selected Plan: {{selectedPlan.Name}}</div>
+        <div *ngIf="!selectedPlan" class="selected-prod-plan">Please Select a Product Plan</div>
 
-        <div class="payment-info-container" >
-          <div class="form-row" fxLayout="column"  >
+        <div class="payment-info-container">
+          <div class="form-row" fxLayout="column" fxLayoutAlign="space-around center">
             <div class="billing-info">
-            <label>
-              <span><span>Name</span></span>
-              <input name="cardholder-name" class="stripe-card" id="cardholder-name-input" formControlName="userName" placeholder="Cardholder Name" />
-            </label>
-          </div>
-          <div class="billing-info">
-            <label for="card-element" class="spread">Payment Details</label>
-            <div class="stripe-container">
-              <div id="card-element" class="stripe-card"></div>
+              <label fxLayout="column" fxLayoutAlign="space-around center">
+                <span id="input-span">Name</span>
+                <input name="cardholder-name" class="cardholder-name-input" id="cardholder-name-input" formControlName="userName"
+                  placeholder="Cardholder Name" />
+              </label>
             </div>
-            <div id="card-errors" role="alert" class="spread" *ngIf="StripeError">
-              {{ StripeError }}
+            <div class="billing-info">
+              <label for="card-element" fxLayout="column" fxLayoutAlign="space-around center">Payment Details</label>
+              <div class="stripe-container">
+                <div id="card-element" class="stripe-card"></div>
+              </div>
+              <div id="card-errors" role="alert" class="spread" *ngIf="StripeError">
+                {{ StripeError }}
+              </div>
             </div>
-          </div>
           </div>
 
           <div class="spread" fxLayoutAlign="center">
-            <button mat-raised-button id="payment-button" color="primary" *ngIf="productPlan">
+            <button mat-raised-button id="payment-button" color="primary" *ngIf="selectedPlan">
               Add payment
             </button>
           </div>
         </div>
+      </div>
     </div>
-  </div>
-</form>
-<!-- </ng-container> -->
+  </form>
+</div>
 
-<!-- <div [fxShow]="State.Loading">
+<div [fxShow]="State.Loading">
   <p style="text-align: center;">
     Behind the scenes Thinky is working hard to set up your Low Code Unit
   </p>
@@ -83,4 +85,9 @@
     <mat-spinner diameter="75"></mat-spinner>
     <div class="spinner-logo" logo-alt="Fathym Logo"></div>
   </div>
+</div>
+
+<!-- <div *ngIf="PaymentSuccessful && !State.Loading">
+  Successfully completed billing
+  <div (click)="ResetBillingStatus()">Manage Billing</div>
 </div> -->
