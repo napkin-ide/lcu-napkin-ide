@@ -45,16 +45,22 @@
         <div *ngIf="!productPlan" class="selected-prod-plan">Please Select a Product Plan</div>
 
         <div class="payment-info-container" >
-          <div class="form-row" >
-
-
-            <label *ngIf="productPlan" for="card-element" class="spread">Enter Payment Details</label>
+          <div class="form-row" fxLayout="column"  >
+            <div class="billing-info">
+            <label>
+              <span><span>Name</span></span>
+              <input name="cardholder-name" class="stripe-card" id="cardholder-name-input" formControlName="userName" placeholder="Cardholder Name" />
+            </label>
+          </div>
+          <div class="billing-info">
+            <label for="card-element" class="spread">Payment Details</label>
             <div class="stripe-container">
               <div id="card-element" class="stripe-card"></div>
             </div>
             <div id="card-errors" role="alert" class="spread" *ngIf="StripeError">
               {{ StripeError }}
             </div>
+          </div>
           </div>
 
           <div class="spread" fxLayoutAlign="center">

@@ -66,6 +66,8 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
 
+  public CustomerName: string;
+
   //  Constructor
   constructor(
     protected formBldr: FormBuilder,
@@ -131,8 +133,8 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.StripeError = result.error;
     } else {
       this.StripeError = '';
-
-      this.userBillState.SetPaymentMethod(result.paymentMethod.id);
+      console.log("Billing Form: ", this.BillingForm)
+      this.userBillState.CompletePayment(result.paymentMethod.id, this.BillingForm.value.userName, this.BillingForm.value.prodPlan);
     }
   }
 
@@ -147,6 +149,7 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
   protected setupForms() {
     this.BillingForm = this.formBldr.group({
       prodPlan: new FormControl('', [Validators.required]),
+      userName: new FormControl('', [Validators.required])
     });
   }
 
@@ -261,6 +264,13 @@ export class BillingComponent implements OnInit, AfterViewInit, AfterViewChecked
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
     // using *ngIf with external form properties
     this.cdr.detectChanges();
+
+    if(this.State.PaymentStatus){
+      console.log(this.State.PaymentStatus)
+      if(this.State.PaymentStatus.Code === 101){
+        console.log("Status is 101 Do Step 8")
+      }
+    }
 
     // if (this.State.SetupStep === UserManagementStepTypes.Complete) {
     // }
