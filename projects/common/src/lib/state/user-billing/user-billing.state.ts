@@ -1,15 +1,17 @@
 import { Status } from '@lcu/common';
 
 export class UserBillingState {
+  public CustomerName?: string;
+
   public Loading?: boolean;
 
   public PaymentMethodID?: string;
 
+  public PaymentStatus?: Status;
+
   public Plans?: BillingPlanOption[];
 
   public Status?: Status;
-
-  public PaymentStatus?: Status;
 
   public Username?: string;
 }
