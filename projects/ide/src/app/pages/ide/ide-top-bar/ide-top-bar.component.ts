@@ -1,28 +1,48 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UserManagementState, UserManagementStateContext, UserInfoModel } from '@napkin-ide/lcu-napkin-ide-common';
 
+
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+} from '@angular/core';
+// import { UserManagementState, UserManagementStateContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
+import { MatSidenav } from '@angular/material/sidenav';
+import {
+  IdeStateStateManagerContext,
+  UserManagementStateContext,
+  UserManagementState,
+  UserInfoModel
+} from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'nide-ide-top-bar',
   templateUrl: './ide-top-bar.component.html',
-  styleUrls: ['./ide-top-bar.component.scss']
+  styleUrls: ['./ide-top-bar.component.scss'],
 })
 export class IdeTopBarComponent implements OnInit {
+  protected SideBarOpened = false;
 
+  public UserEmail: string;
 
-  public State: UserManagementState;
+  public State: any;
 
   public UsersInfo: UserInfoModel;
 
 
-  protected SideBarOpened: boolean = false;
+  @Input() public isHandset = false;
 
 
-  @Input() public isHandset: boolean = false;
+  @Output() public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<
+    boolean
+  >();
 
-  @Output() public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor(protected usersCtxt: UserManagementStateContext) { }
+  constructor(
+    protected ideState: IdeStateStateManagerContext,
+    protected userMngState: UserManagementStateContext
+  ) {}
 
   public ngOnInit(): void { 
     this.GetUserInfo();
@@ -30,25 +50,26 @@ export class IdeTopBarComponent implements OnInit {
   ngAfterContentInit(): void {
     // this.usersCtxt.Start;
    
-    this.usersCtxt.Context.subscribe((state: any) => {
+    this.userMngState.Context.subscribe((state: any) => {
       this.State = state;
       if (this.State) {
         this.stateChanged();
       }
+      this.UserEmail = this.State.Username;
     });
-
   }
 
- 
+    // this.ideState.Context.subscribe((ideState:any) => {
+    //   this.UserEmail = this.ideState.Settings.StateConfig.UsernameMock;
+
 
   public ToggleSideBar(): void {
     this.openSideBarEvent.emit(!this.SideBarOpened);
   }
 
-
-  public LogoutClicked(event: any){
-    //TODO hook up to auth
-    console.log("Logout clicked: ", event);
+  public LogoutClicked(event: any) {
+    // TODO hook up to auth
+    console.log('Logout clicked: ', event);
     window.location.replace('.oauth/logout');
   }
 

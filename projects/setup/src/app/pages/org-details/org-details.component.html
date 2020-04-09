@@ -47,6 +47,10 @@
       required
     />
 
+    <mat-error *ngIf="OrgDetailLookupHasError">
+      {{ OrgDetailLookupErrorMessage }}
+    </mat-error>
+
     <mat-icon
       matSuffix
       matTooltip="Enter a valid project lookup (lowercase alpha characters and '-' accepted)"
@@ -64,8 +68,8 @@
       </a>
       and
       <a href="https://fathym.com/terms-of-services/">
-        Fathym Terms of Services
-      </a>.
+        Fathym Terms of Services </a
+      >.
     </mat-checkbox>
   </div>
 

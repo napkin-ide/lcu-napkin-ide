@@ -1,9 +1,9 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
-  UserManagementStateContext,
-  NapkinIDESetupStepTypes,
-  UserManagementState
+  UserBillingStateContext,
+  UserBillingState,
+  NapkinIDESetupStepTypes
 } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
@@ -23,14 +23,14 @@ export class CompleteComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
   @Input('state')
-  public State: UserManagementState;
+  public State: UserBillingState;
 
   //  Constructors
-  constructor(protected userMgr: UserManagementStateContext) {}
+  constructor(protected userMgr: UserBillingStateContext) {}
 
   //  Life Cycle
   public ngOnInit() {
-    this.userMgr.Context.subscribe(state => {
+    this.userMgr.Context.subscribe((state: UserBillingState) => {
       this.State = state;
 
       this.stateChanged();
