@@ -69,7 +69,7 @@ export class IdeTopBarComponent implements OnInit {
           Text: 'Buy Now',
           Type: IdeActionTypes.Modal,
           Icon: 'forward',
-          Action: '/forge-settings'
+          Action: '/billing'
         },
         {
           Text: 'Documentation',
