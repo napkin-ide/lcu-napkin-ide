@@ -7,8 +7,11 @@ import {
   UserManagementStateContext,
   UserManagementState,
   IdeManagementState,
-  IdeActionTypes
+  IdeActionTypes,
+  ExternalDialogComponent
 } from '@napkin-ide/lcu-napkin-ide-common';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'nide-ide-top-bar',
@@ -17,6 +20,7 @@ import {
 })
 export class IdeTopBarComponent implements OnInit {
 
+  protected billingDialog: MatDialogRef<ExternalDialogComponent, any>;
 
   protected SideBarOpened: boolean = false;
 
@@ -29,7 +33,9 @@ export class IdeTopBarComponent implements OnInit {
 
   @Output() public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(protected ideState: IdeStateStateManagerContext, protected userMngState: UserManagementStateContext) { }
+  constructor(protected ideState: IdeStateStateManagerContext,
+    protected userMngState: UserManagementStateContext,
+    protected dialog: MatDialog) { }
 
   public ngOnInit(): void {
   }
@@ -63,7 +69,7 @@ export class IdeTopBarComponent implements OnInit {
           Text: 'Buy Now',
           Type: IdeActionTypes.Modal,
           Icon: 'forward',
-          Action: 'http://google.com'
+          Action: '/forge-settings'
         },
         {
           Text: 'Documentation',
@@ -102,11 +108,26 @@ export class IdeTopBarComponent implements OnInit {
   public HeaderActionClicked(action: any) {
     if (action.Type === IdeActionTypes.ExternalLink) {
       console.log('navigating to external link: ' + action.Action);
+      window.open(action.Action); // navigate to external link
     } else if (action.Type === IdeActionTypes.Link) {
       console.log('navigating to internal link: ' + action.Action);
     } else if (action.Type === IdeActionTypes.Modal) {
       console.log('opening modal: ' + action.Action);
+      this.openLinkInModal(action.Action);
     }
+  }
+
+  protected openLinkInModal(linkUrl: string): void {
+    this.billingDialog = this.dialog.open(ExternalDialogComponent, {
+      width: '90%',
+      data: { ExternalPath: linkUrl }
+    });
+
+    this.billingDialog.afterClosed().subscribe((result: Observable<any>) => {
+      this.ideState.$Refresh();
+      this.billingDialog = null;
+    });
+
   }
 
 
