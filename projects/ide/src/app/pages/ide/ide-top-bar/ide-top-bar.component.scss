@@ -14,4 +14,13 @@
     margin-left: 25px;
 }
 
-
+.action-icons {
+    margin-right: 60px;
+    button {
+        margin-top: 7px;
+    }
+    mat-icon {
+        font-size: 40px;
+        width: initial;
+    }
+}

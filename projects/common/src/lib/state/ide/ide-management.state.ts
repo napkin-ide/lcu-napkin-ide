@@ -11,6 +11,8 @@ export class IdeManagementState {
 
   public Editors: IdeEditor[];
 
+  public HeaderActions: Array<IdeAction>;
+
   public InfrastructureConfigured: boolean;
 
   public Loading: boolean;
@@ -24,4 +26,17 @@ export class IdeManagementState {
   public SideBar: IdeSideBar;
 
   public StatusChanges: string[];
+}
+
+export class IdeAction {
+  public Icon: string;
+  public Action: string;
+  public Text: string;
+  public Type: IdeActionTypes;
+}
+
+export enum IdeActionTypes {
+  Link = 'Link',
+  ExternalLink = 'ExternalLink',
+  Modal = 'Modal'
 }
