@@ -60,5 +60,6 @@ export class IdeTopBarComponent implements OnInit {
   public LogoutClicked(event: any) {
     // TODO hook up to auth
     console.log('Logout clicked: ', event);
+    window.location.replace('.oauth/logout');
   }
 }
