@@ -33,10 +33,11 @@ export class IdeTopBarComponent implements OnInit {
 
   public ngOnInit(): void {
   }
+
   public ngAfterContentInit(): void {
     // this.usersCtxt.Start;
 
-    this.userMngState.Context.subscribe((state: IdeManagementState) => {
+    this.ideState.Context.subscribe((state: IdeManagementState) => {
       this.State = state;
 
       this.State.HeaderActions = [
