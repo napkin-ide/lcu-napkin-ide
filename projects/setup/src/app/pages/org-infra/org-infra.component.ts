@@ -200,6 +200,7 @@ export class OrgInfraComponent implements OnInit {
 
   ngOnInit() {
     this.setupForm();
+
     this.setupState();
   }
 
@@ -369,7 +370,7 @@ export class OrgInfraComponent implements OnInit {
    */
   protected statusValidatorFactory(errorFor: string) {
     return (control: FormControl) => {
-      const errorFrom = (this.State.Status as any).ErrorFrom;
+      const errorFrom = this.State.Status ? (this.State.Status as any).ErrorFrom : '';
 
       if (
         this.State.Status &&
