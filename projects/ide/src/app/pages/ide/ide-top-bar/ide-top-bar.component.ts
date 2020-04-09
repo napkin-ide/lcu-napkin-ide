@@ -1,3 +1,5 @@
+
+
 import {
   Component,
   OnInit,
@@ -12,6 +14,7 @@ import {
   IdeStateStateManagerContext,
   UserManagementStateContext,
   UserManagementState,
+  UserInfoModel
 } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
@@ -26,7 +29,11 @@ export class IdeTopBarComponent implements OnInit {
 
   public State: any;
 
+  public UsersInfo: UserInfoModel;
+
+
   @Input() public isHandset = false;
+
 
   @Output() public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<
     boolean
@@ -37,21 +44,24 @@ export class IdeTopBarComponent implements OnInit {
     protected userMngState: UserManagementStateContext
   ) {}
 
-  public ngOnInit(): void {}
-  public ngAfterContentInit(): void {
+  public ngOnInit(): void { 
+    this.GetUserInfo();
+  }
+  ngAfterContentInit(): void {
     // this.usersCtxt.Start;
-
+   
     this.userMngState.Context.subscribe((state: any) => {
       this.State = state;
-
+      if (this.State) {
+        this.stateChanged();
+      }
       this.UserEmail = this.State.Username;
     });
+  }
 
     // this.ideState.Context.subscribe((ideState:any) => {
     //   this.UserEmail = this.ideState.Settings.StateConfig.UsernameMock;
 
-    // });
-  }
 
   public ToggleSideBar(): void {
     this.openSideBarEvent.emit(!this.SideBarOpened);
@@ -62,4 +72,17 @@ export class IdeTopBarComponent implements OnInit {
     console.log('Logout clicked: ', event);
     window.location.replace('.oauth/logout');
   }
+
+  protected stateChanged(){
+    console.log("State: ", this.State);
+    if(!this.UsersInfo){
+      this.UsersInfo = new UserInfoModel();
+    }
+    this.UsersInfo.Username = this.State.Username;
+  }
+
+  protected GetUserInfo(){
+    console.log("State: ", this.State);
+  }
+
 }

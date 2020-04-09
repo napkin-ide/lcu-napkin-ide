@@ -13,7 +13,9 @@
   </div>
 
   <lcu-user-account-sidenav class="user-account" 
+  [user-info]="UsersInfo"
   [user-email]="UserEmail"
-  (logout-clicked)=LogoutClicked($event)></lcu-user-account-sidenav>
+  (logout-clicked)=LogoutClicked($event)>
+  </lcu-user-account-sidenav>
 
 </mat-toolbar>
