@@ -75,6 +75,10 @@ export class BillingComponent
 
   public PaymentSuccessful: boolean;
 
+  public stripeCardNumber: any;
+  public stripeCardExpiry: any;
+  public stripeCardCvc: any;
+
   //  Constructor
   constructor(
     protected formBldr: FormBuilder,
@@ -129,6 +133,9 @@ public ResetBillingStatus(){
     this.stripe
       .createPaymentMethod({
         type: 'card',
+        // cardExpiry: this.stripeCardExpiry,
+        // cardNumber: this.stripeCardNumber,
+        // cardCvc: this.stripeCardCvc,
         card: this.stripeCard,
         billing_details: {
           email: this.State.Username,
@@ -176,16 +183,11 @@ public ResetBillingStatus(){
   }
 
   protected setupStripe() {
-    // const loading = this.State.Loading;
-    // console.log("loading: ", loading)
-    // if(this.State.Loading){
-    //   console.log("Not ready to load")
-    //   return;
-    // }
+    
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.lcuSettings.Settings.Stripe.PublicKey);
-
+      // this.setupStripeElements();
       const elements = this.stripe.elements();
 
       this.stripeCard = elements.create('card', {
@@ -225,7 +227,80 @@ public ResetBillingStatus(){
       this.stripeCard.addEventListener('change', (event: any) =>
         this.handleCardChanged(event)
       );
+
+    //     this.stripeCardNumber.addEventListener('change', (event: any) =>
+    //     this.handleCardChanged(event)
+    //   );
+
+
+    // this.stripeCardExpiry.addEventListener('change', (event: any) =>
+    //     this.handleCardChanged(event)
+    //   );
+
+    //   this.stripeCardCvc.addEventListener('change', (event: any) =>
+    //     this.handleCardChanged(event)
+    //   );
     }
+  }
+
+  
+
+  protected setupStripeElements():void{
+    const elements = this.stripe.elements();
+    var elementStyles = {
+      base: {
+        color: '#fff',
+        fontWeight: 600,
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '16px',
+        fontSmoothing: 'antialiased',
+
+        ':focus': {
+          color: '#424770',
+        },
+
+        '::placeholder': {
+          color: '#9BACC8',
+        },
+
+        ':focus::placeholder': {
+          color: '#CFD7DF',
+        },
+      },
+      invalid: {
+        color: '#fff',
+        ':focus': {
+          color: '#FA755A',
+        },
+        '::placeholder': {
+          color: '#FFCCA5',
+        },
+      },
+    };
+
+    var elementClasses = {
+      focus: 'focus',
+      empty: 'empty',
+      invalid: 'invalid',
+    };
+
+    this.stripeCardNumber = elements.create('cardNumber', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardNumber.mount('#card-number');
+
+    this.stripeCardExpiry = elements.create('cardExpiry', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardExpiry.mount('#card-expiry');
+
+    this.stripeCardCvc = elements.create('cardCvc', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardCvc.mount('#card-cvc');
   }
 
 
