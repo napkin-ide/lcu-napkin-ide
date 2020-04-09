@@ -9,8 +9,8 @@
 
       <!-- PRICING CONTAINER -->
       <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%">
-        <h2>Plan Options</h2>
-        <!-- <p>Please select a platform plan that best suits your needs.</p> -->
+        <lcu-plan-card></lcu-plan-card>
+        <!-- <p>Please select a platform plan that best suits your needs.</p>
 
         <div class="product-plans form-row" fxLayout="row wrap" fxLayoutAlign="space-between center">
           <mat-radio-group class="radio-group" aria-labelledby="example-radio-group-label" [(ngModel)]="selectedPlan"
@@ -18,25 +18,17 @@
 
             <div *ngFor="let plan of State.Plans" fxFlex="30%">
               <mat-card class='mat-payment-card'>
-                <!-- (click)="SelectPlan(plan)" -->
-                <mat-radio-button class="example-radio-button" [value]="plan">
+                 (click)="SelectPlan(plan)" -->
+                <!-- <mat-radio-button class="example-radio-button" [value]="plan">
                   {{plan.Name}}
                 </mat-radio-button>
               </mat-card>
               <p>{{plan.Description}}</p>
             </div>
 
-            <!-- <div fxFlex="30%">
-            <mat-card class='mat-payment-card'>
-              <mat-radio-button class="example-radio-button" value="option2" (click)="setupStripe()">
-                Explorer 2
-              </mat-radio-button>
-            </mat-card>
-            <p>description goes here</p>
-
-          </div> -->
+           
           </mat-radio-group>
-        </div>
+        </div> -->
       </div>
 
       <!-- BILLING CONTAINER -->
