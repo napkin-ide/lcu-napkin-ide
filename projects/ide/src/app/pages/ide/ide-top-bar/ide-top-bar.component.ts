@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { UserManagementState, UserManagementStateContext } from '@napkin-ide/lcu-napkin-ide-common';
-import { MatSidenav } from '@angular/material/sidenav';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { UserManagementState, UserManagementStateContext, UserInfoModel } from '@napkin-ide/lcu-napkin-ide-common';
+
 
 @Component({
   selector: 'nide-ide-top-bar',
@@ -11,6 +11,8 @@ export class IdeTopBarComponent implements OnInit {
 
 
   public State: UserManagementState;
+
+  public UsersInfo: UserInfoModel;
 
 
   protected SideBarOpened: boolean = false;
@@ -28,18 +30,16 @@ export class IdeTopBarComponent implements OnInit {
   ngAfterContentInit(): void {
     // this.usersCtxt.Start;
    
-    // this.usersCtxt.Context.subscribe(state => {
-    //   this.State = state;
-    //   if (this.State) {
-    //     this.stateChanged();
-    //   }
-    // });
+    this.usersCtxt.Context.subscribe((state: any) => {
+      this.State = state;
+      if (this.State) {
+        this.stateChanged();
+      }
+    });
 
   }
 
-  public stateChanged(){
-    console.log("State: ", this.State);
-  }
+ 
 
   public ToggleSideBar(): void {
     this.openSideBarEvent.emit(!this.SideBarOpened);
@@ -50,9 +50,15 @@ export class IdeTopBarComponent implements OnInit {
     //TODO hook up to auth
     console.log("Logout clicked: ", event);
     window.location.replace('.oauth/logout');
-
   }
-  
+
+  protected stateChanged(){
+    console.log("State: ", this.State);
+    if(!this.UsersInfo){
+      this.UsersInfo = new UserInfoModel();
+    }
+    this.UsersInfo.Username = this.State.Username;
+  }
 
   protected GetUserInfo(){
     console.log("State: ", this.State);

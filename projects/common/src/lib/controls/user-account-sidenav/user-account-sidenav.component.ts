@@ -25,6 +25,7 @@ export class UserAccountSidenavComponent implements OnInit {
     if (!this.UserInfo) {
       this.UserInfo = new UserInfoModel;
     }
+    console.log("User Email = ", this.UserInfo.Email)
     if (!this.UserInfo.Email) {
       this.UserInfo.Email = "Guest";
     }
