@@ -25,7 +25,7 @@ export class OrgDetailsComponent implements OnInit {
    * Access organization name field
    */
   public get OrgDetailName(): AbstractControl {
-    return this.DetailsForm.get('orgDetailName');
+    return !this.DetailsForm ? null : this.DetailsForm.get('orgDetailName');
   }
 
   // /**
@@ -39,7 +39,7 @@ export class OrgDetailsComponent implements OnInit {
    * Access organization lookup field
    */
   public get OrgDetailLookup(): AbstractControl {
-    return this.DetailsForm ? this.DetailsForm.get('orgDetailLookup') : null;
+    return !this.DetailsForm ? null : this.DetailsForm.get('orgDetailLookup');
   }
 
   public get OrgDetailLookupHasError(): boolean {
@@ -64,7 +64,7 @@ export class OrgDetailsComponent implements OnInit {
    * Access organization lookup field
    */
   public get OrgDetailTerms(): AbstractControl {
-    return this.DetailsForm.get('orgDetailTerms');
+    return !this.DetailsForm ? null : this.DetailsForm.get('orgDetailTerms');
   }
 
   // Properties
