@@ -56,8 +56,18 @@
             </div>
             <div class="billing-info">
               <label for="card-element" fxLayout="column" fxLayoutAlign="space-around center">Payment Details</label>
+
               <div class="stripe-container">
                 <div id="card-element" class="stripe-card"></div>
+                <!-- <label for="card-number" fxLayout="column" fxLayoutAlign="space-around center">Card Number</label>
+                <div id="card-number"class="stripe-card"></div>
+                <label for="card-expiry" fxLayout="column" fxLayoutAlign="space-around center">Expiration Date</label>
+
+                <div id="card-expiry"class="stripe-card"></div>
+                <label for="card-cvc" fxLayout="column" fxLayoutAlign="space-around center">CVC</label>
+
+                <div id="card-cvc"class="stripe-card"></div> -->
+
               </div>
               <div id="card-errors" role="alert" class="spread" *ngIf="StripeError">
                 {{ StripeError }}
