@@ -60,6 +60,14 @@ export class BillingComponent
  */
   protected planID: any;
 
+  protected get stripePublicKey(): string {
+    const stateCfg: any = this.lcuSettings.StateConfig;
+
+
+
+    return stateCfg && stateCfg.Stripe ? stateCfg.Stripe.PublicKey : '';
+  }
+
   //  Properties
   public BillingForm: FormGroup;
 
@@ -88,11 +96,11 @@ export class BillingComponent
     protected route: ActivatedRoute,
   ) {
     this.State = {};
-   
+
     this.route.paramMap.subscribe(params => {
-      this.planID = params.get('id');  
+      this.planID = params.get('id');
     });
-    
+
   }
 
   //  Life Cycle
@@ -181,10 +189,10 @@ public ResetBillingStatus(){
   }
 
   protected setupStripe() {
-    
+
     if (!this.stripe) {
       // Your Stripe public key
-      this.stripe = Stripe(this.lcuSettings.Settings.Stripe.PublicKey);
+      this.stripe = Stripe(this.stripePublicKey);
       // this.setupStripeElements();
       const elements = this.stripe.elements();
 
@@ -241,7 +249,7 @@ public ResetBillingStatus(){
     }
   }
 
-  
+
 
   // protected setupStripeElements():void{
   //   const elements = this.stripe.elements();
@@ -313,7 +321,7 @@ public ResetBillingStatus(){
     // using *ngIf with external form properties
     this.cdr.detectChanges();
 
-    
+
 
     if (this.State.PaymentStatus) {
       console.log("Payment Status",this.State.PaymentStatus)
