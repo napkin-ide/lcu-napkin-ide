@@ -7,9 +7,11 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CompleteComponent } from './complete/complete.component';
 import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
+import { BillingFlowComponent } from './billing-flow/billing-flow.component';
+import { PlansComponent } from './plans/plans.component';
 
 @NgModule({
-  declarations: [BillingComponent, CompleteComponent],
+  declarations: [BillingComponent, CompleteComponent, BillingFlowComponent, PlansComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -20,7 +22,8 @@ import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
     LcuNapkinIdeModule,
     PipeModule
   ],
-  exports: [BillingComponent],
-  providers: []
+  exports: [BillingComponent, BillingFlowComponent, PlansComponent],
+  providers: [],
+  entryComponents: [BillingFlowComponent, PlansComponent]
 })
 export class PagesModule {}

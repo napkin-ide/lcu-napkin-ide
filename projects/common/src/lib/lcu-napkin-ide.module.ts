@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserAccountSidenavComponent } from './controls/user-account-sidenav/user-account-sidenav.component';
+import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UserAccountSidenavComponent } from './controls/user-account-sidenav/use
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    UserAccountSidenavComponent
+    UserAccountSidenavComponent,
+    PlanCardComponent
   ],
   imports: [
     CommonModule,
@@ -30,13 +32,15 @@ import { UserAccountSidenavComponent } from './controls/user-account-sidenav/use
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    UserAccountSidenavComponent
+    UserAccountSidenavComponent,
+    PlanCardComponent
   ],
   entryComponents: [
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    UserAccountSidenavComponent
+    UserAccountSidenavComponent,
+    PlanCardComponent
   ]
 })
 export class LcuNapkinIdeModule {}
