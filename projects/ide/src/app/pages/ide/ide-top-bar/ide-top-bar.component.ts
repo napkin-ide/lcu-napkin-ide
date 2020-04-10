@@ -46,44 +46,7 @@ export class IdeTopBarComponent implements OnInit {
   public ngOnInit(): void {
     this.ideState.Context.subscribe((state: IdeManagementState) => {
       this.State = state;
-      this.State.HeaderActions = [
-        {
-          Text: 'Home',
-          Type: IDEActionTypes.ExternalLink,
-          Icon: 'home',
-          Action: 'http://google.com'
-        },
-        {
-          Text: 'Data Apps',
-          Type: IDEActionTypes.Link,
-          Icon: 'view_list',
-          Action: 'http://google.com'
-        },
-        {
-          Text: 'Data Flow',
-          Type: IDEActionTypes.Link,
-          Icon: 'account_tree',
-          Action: 'http://google.com'
-        },
-        {
-          Text: 'Buy Now',
-          Type: IDEActionTypes.Modal,
-          Icon: 'forward',
-          Action: '/billing'
-        },
-        {
-          Text: 'Documentation',
-          Type: IDEActionTypes.ExternalLink,
-          Icon: 'assignment',
-          Action: 'http://google.com'
-        },
-        {
-          Text: 'Support',
-          Type: IDEActionTypes.ExternalLink,
-          Icon: 'help_outline',
-          Action: 'http://google.com'
-        }
-      ];
+
       this.stateChanged();
 
       this.getUserInfo();
