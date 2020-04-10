@@ -46,7 +46,44 @@ export class IdeTopBarComponent implements OnInit {
   public ngOnInit(): void {
     this.ideState.Context.subscribe((state: IdeManagementState) => {
       this.State = state;
-
+      this.State.HeaderActions = [
+        {
+          Text: 'Home',
+          Type: IDEActionTypes.ExternalLink,
+          Icon: 'home',
+          Action: 'http://google.com'
+        },
+        {
+          Text: 'Data Apps',
+          Type: IDEActionTypes.Link,
+          Icon: 'view_list',
+          Action: 'http://google.com'
+        },
+        {
+          Text: 'Data Flow',
+          Type: IDEActionTypes.Link,
+          Icon: 'account_tree',
+          Action: 'http://google.com'
+        },
+        {
+          Text: 'Buy Now',
+          Type: IDEActionTypes.Modal,
+          Icon: 'forward',
+          Action: '/billing'
+        },
+        {
+          Text: 'Documentation',
+          Type: IDEActionTypes.ExternalLink,
+          Icon: 'assignment',
+          Action: 'http://google.com'
+        },
+        {
+          Text: 'Support',
+          Type: IDEActionTypes.ExternalLink,
+          Icon: 'help_outline',
+          Action: 'http://google.com'
+        }
+      ];
       this.stateChanged();
 
       this.getUserInfo();
@@ -66,21 +103,17 @@ export class IdeTopBarComponent implements OnInit {
 
   public HeaderActionClicked(action: any) {
     if (action.Type === IDEActionTypes.ExternalLink) {
-      console.log("navigating to external link: " + action.Action);
-
       window.open(action.Action); // navigate to external link
     } else if (action.Type === IDEActionTypes.Link) {
-      console.log("navigating to internal link: " + action.Action);
+      console.log('navigating to internal link: ', action.Action);
     } else if (action.Type === IDEActionTypes.Modal) {
-      console.log("opening modal: " + action.Action);
-
       this.openLinkInModal(action.Action);
     }
   }
 
   protected openLinkInModal(linkUrl: string): void {
     this.billingDialog = this.dialog.open(ExternalDialogComponent, {
-      width: "90%",
+      width: '90%',
       data: { ExternalPath: linkUrl },
     });
 

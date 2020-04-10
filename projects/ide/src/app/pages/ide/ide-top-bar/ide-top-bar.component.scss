@@ -16,8 +16,12 @@
 
 .action-icons {
     margin-right: 60px;
+    position: absolute;
+    right: 0;
+    
     button {
         margin-top: 7px;
+        margin-right: 0.5em;
     }
     mat-icon {
         font-size: 40px;
