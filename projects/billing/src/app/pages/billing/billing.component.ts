@@ -61,9 +61,7 @@ export class BillingComponent
   protected planID: any;
 
   protected get stripePublicKey(): string {
-    const stateCfg: any = this.lcuSettings.StateConfig;
-
-
+    const stateCfg: any = (window as any).LCU.State;
 
     return stateCfg && stateCfg.Stripe ? stateCfg.Stripe.PublicKey : '';
   }
@@ -320,8 +318,6 @@ public ResetBillingStatus(){
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
     // using *ngIf with external form properties
     this.cdr.detectChanges();
-
-
 
     if (this.State.PaymentStatus) {
       console.log("Payment Status",this.State.PaymentStatus)
