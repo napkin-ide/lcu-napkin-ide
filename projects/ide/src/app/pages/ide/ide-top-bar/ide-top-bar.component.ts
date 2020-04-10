@@ -61,26 +61,22 @@ export class IdeTopBarComponent implements OnInit {
     // TODO hook up to auth
     console.log("Logout clicked: ", event);
 
-    window.location.replace(".oauth/logout");
+    window.location.replace("/.oauth/logout");
   }
 
   public HeaderActionClicked(action: any) {
     if (action.Type === IDEActionTypes.ExternalLink) {
-      console.log("navigating to external link: " + action.Action);
-
       window.open(action.Action); // navigate to external link
     } else if (action.Type === IDEActionTypes.Link) {
-      console.log("navigating to internal link: " + action.Action);
+      console.log('navigating to internal link: ', action.Action);
     } else if (action.Type === IDEActionTypes.Modal) {
-      console.log("opening modal: " + action.Action);
-
       this.openLinkInModal(action.Action);
     }
   }
 
   protected openLinkInModal(linkUrl: string): void {
     this.billingDialog = this.dialog.open(ExternalDialogComponent, {
-      width: "90%",
+      width: '90%',
       data: { ExternalPath: linkUrl },
     });
 
