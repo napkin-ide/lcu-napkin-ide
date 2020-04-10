@@ -15,8 +15,8 @@
         <div fxLayout="row" fxLayoutGap="10px">
           <mat-icon
             *ngIf="
-              OrgInfraAzureAppAppId.value.length > 0 &&
-              !OrgInfraAzureAppAppId.hasError('pattern')
+              OrgInfraAzureAppId.value.length > 0 &&
+              !OrgInfraAzureAppId.hasError('pattern')
             "
             class="success"
             >check_circle</mat-icon
@@ -30,9 +30,11 @@
             autocomplete="new-password"
           />
         </div>
-        <mat-error *ngIf="OrgInfraAzureAppAppId.hasError('pattern')">
-          {{ GuidErrorMessage }}
+
+        <mat-error *ngIf="OrgInfraAzureAppIdHasError">
+          {{ OrgInfraAzureAppIdErrorMessage }}
         </mat-error>
+
         <mat-icon
           matBadgePosition="below after"
           matBadgeColor="primary"
@@ -50,7 +52,7 @@
           matTooltipClass="tooltip-background"
           >help_outline</mat-icon
         >
-        <!-- matBadge="{{OrgInfraAzureAppAppId.value.length}}"  -->
+        <!-- matBadge="{{OrgInfraAzureAppId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
 
@@ -73,9 +75,11 @@
             autocomplete="new-password"
           />
         </div>
-        <mat-error *ngIf="OrgInfraAzureTenatId.hasError('pattern')">
-          {{ GuidErrorMessage }}
+
+        <mat-error *ngIf="OrgInfraAzureTenatIdHasError">
+          {{ OrgInfraAzureTenatIdErrorMessage }}
         </mat-error>
+
         <mat-icon
           matBadgePosition="below after"
           matBadgeColor="primary"
@@ -116,9 +120,11 @@
             autocomplete="new-password"
           />
         </div>
-        <mat-error *ngIf="OrgInfraAzureSubId.hasError('pattern')">
-          {{ GuidErrorMessage }}
+
+        <mat-error *ngIf="OrgInfraAzureSubIdHasError">
+          {{ OrgInfraAzureSubIdErrorMessage }}
         </mat-error>
+
         <mat-icon
           matBadgePosition="below after"
           matBadgeColor="primary"
@@ -159,9 +165,11 @@
             autocomplete="new-password"
           />
         </div>
-        <mat-error *ngIf="OrgInfraAzureAppAuthKey.hasError">
-          Value is required
+
+        <mat-error *ngIf="OrgInfraAzureAppAuthKeyHasError">
+          {{ OrgInfraAzureAppAuthKeyErrorMessage }}
         </mat-error>
+
         <mat-icon
           matBadgePosition="below after"
           matBadgeColor="primary"
@@ -196,6 +204,8 @@
         </mat-select>
       </mat-form-field>
     </div>
+
+    <div class="spread mat-small mat-error" *ngIf="State.Status && State.Status.Code != 0">{{ State.Status.Message  }}</div>
 
     <div class="margin-top-4">
       <button

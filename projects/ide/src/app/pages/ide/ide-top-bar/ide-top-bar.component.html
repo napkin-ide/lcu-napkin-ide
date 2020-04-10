@@ -16,9 +16,9 @@
   <!-- use state to insert the actions -->
   <div>
     <span class="action-icons">
-      <button 
-        *ngFor="let action of State.HeaderActions" 
-        matTooltip="{{ action.Text }}" 
+      <button
+        *ngFor="let action of State.HeaderActions"
+        matTooltip="{{ action.Text }}"
         mat-icon-button
         (click)="HeaderActionClicked(action)">
         <mat-icon>{{ action.Icon }}</mat-icon>
@@ -28,5 +28,10 @@
     <lcu-user-account-sidenav class="user-account" [user-email]="UserEmail" (logout-clicked)=LogoutClicked($event)>
     </lcu-user-account-sidenav>
   </div>
+  <lcu-user-account-sidenav class="user-account"
+  [user-info]="UsersInfo"
+  [user-email]="UserEmail"
+  (logout-clicked)=LogoutClicked($event)>
+  </lcu-user-account-sidenav>
 
 </mat-toolbar>
