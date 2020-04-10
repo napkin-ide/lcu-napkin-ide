@@ -158,7 +158,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
     // detail form
     this.OrgDetailsComponent.changes.subscribe(
       (itm: QueryList<OrgDetailsComponent>) => {
-        if (itm.first) {
+        if (itm.first && itm.first.DetailsForm) {
           this.DetailsFormValid = itm.first.DetailsForm.valid;
         }
       }
@@ -167,7 +167,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
     // detail form
     this.OrgInfraComponent.changes.subscribe(
       (itm: QueryList<OrgInfraComponent>) => {
-        if (itm.first) {
+        if (itm.first && itm.first.InfraForm) {
           this.InfraFormValid = itm.first.InfraForm.valid;
         }
       }

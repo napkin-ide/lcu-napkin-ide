@@ -107,7 +107,7 @@
       <mat-icon>launch</mat-icon> Open Enterprise IDE
     </a>
 
-    <div class="spread" *ngIf="!State.Booted">{{ !State.Status ? '' : State.Status.Code == 0 ? '' : State.Status?.Message  }}</div>
+    <div class="spread mat-error mat-small" *ngIf="!State.Booted && State.Status && State.Status.Code != 0">{{ State.Status.Message  }}</div>
 
     <div *ngIf="State.Loading" class="spread">
       <p style="text-align: center;">

@@ -1,58 +1,88 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+
+
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+} from '@angular/core';
 // import { UserManagementState, UserManagementStateContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
 import { MatSidenav } from '@angular/material/sidenav';
-import {IdeStateStateManagerContext, 
-        UserManagementStateContext,
-        UserManagementState } from '@napkin-ide/lcu-napkin-ide-common';
+import {
+  IdeStateStateManagerContext,
+  UserManagementStateContext,
+  UserManagementState,
+  UserInfoModel
+} from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'nide-ide-top-bar',
   templateUrl: './ide-top-bar.component.html',
-  styleUrls: ['./ide-top-bar.component.scss']
+  styleUrls: ['./ide-top-bar.component.scss'],
 })
 export class IdeTopBarComponent implements OnInit {
-
-
-  protected SideBarOpened: boolean = false;
+  protected SideBarOpened = false;
 
   public UserEmail: string;
 
   public State: any;
 
+  public UsersInfo: UserInfoModel;
 
-  @Input() public isHandset: boolean = false;
 
-  @Output() public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() public isHandset = false;
 
-  constructor(protected ideState: IdeStateStateManagerContext, protected userMngState: UserManagementStateContext) { }
+
+  @Output() public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<
+    boolean
+  >();
+
+  constructor(
+    protected ideState: IdeStateStateManagerContext,
+    protected userMngState: UserManagementStateContext
+  ) {}
 
   public ngOnInit(): void { 
+    this.GetUserInfo();
   }
- public  ngAfterContentInit(): void {
+  ngAfterContentInit(): void {
     // this.usersCtxt.Start;
-
+   
     this.userMngState.Context.subscribe((state: any) => {
       this.State = state;
-
+      if (this.State) {
+        this.stateChanged();
+      }
       this.UserEmail = this.State.Username;
     });
+  }
 
     // this.ideState.Context.subscribe((ideState:any) => {
     //   this.UserEmail = this.ideState.Settings.StateConfig.UsernameMock;
 
-    // });
-
-  }
 
   public ToggleSideBar(): void {
     this.openSideBarEvent.emit(!this.SideBarOpened);
   }
 
-
-  public LogoutClicked(event: any){
-    //TODO hook up to auth
-    console.log("Logout clicked: ", event);
+  public LogoutClicked(event: any) {
+    // TODO hook up to auth
+    console.log('Logout clicked: ', event);
+    window.location.replace('.oauth/logout');
   }
-  
+
+  protected stateChanged(){
+    console.log("State: ", this.State);
+    if(!this.UsersInfo){
+      this.UsersInfo = new UserInfoModel();
+    }
+    this.UsersInfo.Username = this.State.Username;
+  }
+
+  protected GetUserInfo(){
+    console.log("State: ", this.State);
+  }
 
 }
