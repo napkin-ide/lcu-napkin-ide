@@ -1,5 +1,3 @@
-
-
 import {
   Component,
   OnInit,
@@ -7,61 +5,53 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-} from '@angular/core';
+} from "@angular/core";
 // import { UserManagementState, UserManagementStateContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
-import { MatSidenav } from '@angular/material/sidenav';
+import { MatSidenav } from "@angular/material/sidenav";
 import {
+  // import { IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common/lcu.api';
   IdeStateStateManagerContext,
-  UserManagementStateContext,
-  UserManagementState,
-  UserInfoModel
-} from '@napkin-ide/lcu-napkin-ide-common';
+  IdeManagementState,
+  IDEActionTypes,
+  ExternalDialogComponent,
+  UserInfoModel,
+} from "@napkin-ide/lcu-napkin-ide-common";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { Observable } from "rxjs";
 
 @Component({
-  selector: 'nide-ide-top-bar',
-  templateUrl: './ide-top-bar.component.html',
-  styleUrls: ['./ide-top-bar.component.scss'],
+  selector: "nide-ide-top-bar",
+  templateUrl: "./ide-top-bar.component.html",
+  styleUrls: ["./ide-top-bar.component.scss"],
 })
 export class IdeTopBarComponent implements OnInit {
-  protected SideBarOpened = false;
+  protected billingDialog: MatDialogRef<ExternalDialogComponent, any>;
 
-  public UserEmail: string;
+  protected SideBarOpened: boolean = false;
 
-  public State: any;
+  public State: IdeManagementState;
 
   public UsersInfo: UserInfoModel;
 
+  @Output()
+  public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input() public isHandset = false;
 
-
-  @Output() public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<
-    boolean
-  >();
-
   constructor(
     protected ideState: IdeStateStateManagerContext,
-    protected userMngState: UserManagementStateContext
+    protected dialog: MatDialog
   ) {}
 
-  public ngOnInit(): void { 
-    this.GetUserInfo();
-  }
-  ngAfterContentInit(): void {
-    // this.usersCtxt.Start;
-   
-    this.userMngState.Context.subscribe((state: any) => {
+  public ngOnInit(): void {
+    this.ideState.Context.subscribe((state: IdeManagementState) => {
       this.State = state;
-      if (this.State) {
-        this.stateChanged();
-      }
-      this.UserEmail = this.State.Username;
+
+      this.stateChanged();
+
+      this.getUserInfo();
     });
   }
-
-    // this.ideState.Context.subscribe((ideState:any) => {
-    //   this.UserEmail = this.ideState.Settings.StateConfig.UsernameMock;
-
 
   public ToggleSideBar(): void {
     this.openSideBarEvent.emit(!this.SideBarOpened);
@@ -69,20 +59,48 @@ export class IdeTopBarComponent implements OnInit {
 
   public LogoutClicked(event: any) {
     // TODO hook up to auth
-    console.log('Logout clicked: ', event);
-    window.location.replace('.oauth/logout');
+    console.log("Logout clicked: ", event);
+
+    window.location.replace(".oauth/logout");
   }
 
-  protected stateChanged(){
+  public HeaderActionClicked(action: any) {
+    if (action.Type === IDEActionTypes.ExternalLink) {
+      console.log("navigating to external link: " + action.Action);
+
+      window.open(action.Action); // navigate to external link
+    } else if (action.Type === IDEActionTypes.Link) {
+      console.log("navigating to internal link: " + action.Action);
+    } else if (action.Type === IDEActionTypes.Modal) {
+      console.log("opening modal: " + action.Action);
+
+      this.openLinkInModal(action.Action);
+    }
+  }
+
+  protected openLinkInModal(linkUrl: string): void {
+    this.billingDialog = this.dialog.open(ExternalDialogComponent, {
+      width: "90%",
+      data: { ExternalPath: linkUrl },
+    });
+
+    this.billingDialog.afterClosed().subscribe((result: Observable<any>) => {
+      this.ideState.$Refresh();
+
+      this.billingDialog = null;
+    });
+  }
+
+  protected getUserInfo() {
     console.log("State: ", this.State);
-    if(!this.UsersInfo){
+  }
+
+  protected stateChanged() {
+    console.log("State: ", this.State);
+    if (!this.UsersInfo) {
       this.UsersInfo = new UserInfoModel();
     }
+
     this.UsersInfo.Username = this.State.Username;
   }
-
-  protected GetUserInfo(){
-    console.log("State: ", this.State);
-  }
-
 }
