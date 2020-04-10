@@ -1,15 +1,12 @@
-
 <div [ngClass]="{'explorer': Plan?.Name === 'Explorer', 
                  'developer': Plan?.Name === 'Developer',
-                 'enterprise': Plan?.Name === 'Enterprise Monthly'}" 
-                 fxLayout="column">
+                 'enterprise': Plan?.Name === 'Enterprise Monthly'}" fxLayout="column">
 
   <div class="title" fxLayoutAlign="center center">{{Plan.Name}}</div>
-  <div class= "description" fxLayoutAlign="center center">{{Plan.Description}}</div>
+  <div class="description" fxLayoutAlign="center center">{{Plan.Description}}</div>
   <!-- <div>{{Plan.Features}}</div> -->
-  <div class = "price" fxLayoutAlign="center center">{{Plan.Price}}</div>
-  <div *ngIf="ShowButton === true"class="button-container" fxLayoutAlign="center center">
+  <div class="price" fxLayoutAlign="center center">{{Plan.Price}}</div>
+  <div *ngIf="ShowButton === true" class="button-container" fxLayoutAlign="center center">
     <button mat-raised-button class="button" (click)="BuyNow(Plan)">Buy Now</button>
+  </div>
 </div>
-</div>
-
