@@ -1,11 +1,12 @@
 @import "../../../common";
 
 @mixin input-box {
-  background-color: #a4bab3;
+  background-color: #f7f7f7;
   border-radius: 2px;
   // margin-left: 20px;
   margin: 10px 0px;
   padding: 5px;
+  border-bottom: 1px solid #d7d1c9;
 }
 
 .welcome {

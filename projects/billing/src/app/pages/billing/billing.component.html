@@ -1,49 +1,26 @@
-<!-- <div [fxShow]="!State.Loading && !PaymentSuccessful"> -->
-
 <div [fxShow]="!State.Loading">
-  <!-- FORM -->
-  <form action="/charge" method="post" class="billing-form" id="payment-form" [formGroup]="BillingForm"
-    (ngSubmit)="SubmitBilling($event)">
 
-    <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
+  <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
 
-      <!-- PRICING CONTAINER -->
-      <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%">
-        <lcu-plan-card></lcu-plan-card>
-        <!-- <p>Please select a platform plan that best suits your needs.</p>
+    <!-- PRICING CONTAINER -->
+    <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%" fxLayoutAlign="center center">
+      <lcu-plan-card [plan]="SelectedPlan"></lcu-plan-card>
+    </div>
 
-        <div class="product-plans form-row" fxLayout="row wrap" fxLayoutAlign="space-between center">
-          <mat-radio-group class="radio-group" aria-labelledby="example-radio-group-label" [(ngModel)]="selectedPlan"
-            formControlName="prodPlan" fxLayout="column" fxLayoutAlign="space-around start">
+    <!-- BILLING CONTAINER -->
+    <div class='billing-container' fxFlex="45%" fxFlex.lt-sm="80%">
+      <h2>Enter Your Payment Information Below</h2>
 
-            <div *ngFor="let plan of State.Plans" fxFlex="30%">
-              <mat-card class='mat-payment-card'>
-                 (click)="SelectPlan(plan)" -->
-                <!-- <mat-radio-button class="example-radio-button" [value]="plan">
-                  {{plan.Name}}
-                </mat-radio-button>
-              </mat-card>
-              <p>{{plan.Description}}</p>
-            </div>
 
-           
-          </mat-radio-group>
-        </div> -->
-      </div>
-
-      <!-- BILLING CONTAINER -->
-      <div class='billing-container' fxFlex="45%" fxFlex.lt-sm="80%">
-        <h2>Billing Info</h2>
-        <div *ngIf="selectedPlan" class="selected-prod-plan">Your Selected Plan: {{selectedPlan.Name}}</div>
-        <div *ngIf="!selectedPlan" class="selected-prod-plan">Please Select a Product Plan</div>
-
-        <div class="payment-info-container">
+      <div class="payment-info-container">
+        <form action="/charge" method="post" class="billing-form" id="payment-form" [formGroup]="BillingForm"
+          (ngSubmit)="SubmitBilling($event)">
           <div class="form-row" fxLayout="column" fxLayoutAlign="space-around center">
             <div class="billing-info">
               <label fxLayout="column" fxLayoutAlign="space-around center">
                 <span id="input-span">Name</span>
-                <input name="cardholder-name" class="cardholder-name-input" id="cardholder-name-input" formControlName="userName"
-                  placeholder="Cardholder Name" />
+                <input name="cardholder-name" class="cardholder-name-input" id="cardholder-name-input"
+                  formControlName="userName" placeholder="Cardholder Name" />
               </label>
             </div>
             <div class="billing-info">
@@ -68,16 +45,16 @@
           </div>
 
           <div class="spread" fxLayoutAlign="center">
-            <button mat-raised-button id="payment-button" color="primary" *ngIf="selectedPlan">
+            <button mat-raised-button id="payment-button" color="primary" *ngIf="SelectedPlan">
               Add payment
             </button>
           </div>
-        </div>
+        </form>
       </div>
-    </div>
-  </form>
-</div>
 
+    </div>
+  </div>
+</div>
 <div [fxShow]="State.Loading">
   <p style="text-align: center;">
     Behind the scenes Thinky is working hard to set up your Low Code Unit
