@@ -143,6 +143,12 @@ public ResetBillingStatus(){
       });
   }
 
+  public ToggleChanged(event: any):void{
+    //true === Annually
+    //false === Monthly
+    console.log("toggle changed: ", event.checked);
+  }
+
   //  Helpers
   protected handleCardChanged(event: any) {
     if (event.error) {
@@ -165,12 +171,7 @@ public ResetBillingStatus(){
     }
   }
 
-  /**
-   * Setup toggled fields
-   */
-  // protected setFieldToggles(): void {
-  //   this.HideAppId = this.HideAuthKey = this.HideTenantId = this.HideSubId = true;
-  // }
+  
 
   protected setupForms() {
     this.BillingForm = this.formBldr.group({
@@ -201,7 +202,7 @@ public ResetBillingStatus(){
             },
 
             '::placeholder': {
-              color: 'black',
+              color: 'grey',
             },
 
             ':focus::placeholder': {
@@ -215,7 +216,7 @@ public ResetBillingStatus(){
             },
           },
           '::placeholder': {
-            color: 'black',
+            color: 'grey',
           },
         },
       });
@@ -242,63 +243,63 @@ public ResetBillingStatus(){
 
   
 
-  protected setupStripeElements():void{
-    const elements = this.stripe.elements();
-    var elementStyles = {
-      base: {
-        color: '#fff',
-        fontWeight: 600,
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '16px',
-        fontSmoothing: 'antialiased',
+  // protected setupStripeElements():void{
+  //   const elements = this.stripe.elements();
+  //   var elementStyles = {
+  //     base: {
+  //       color: '#fff',
+  //       fontWeight: 600,
+  //       fontFamily: 'Arial, sans-serif',
+  //       fontSize: '16px',
+  //       fontSmoothing: 'antialiased',
 
-        ':focus': {
-          color: '#424770',
-        },
+  //       ':focus': {
+  //         color: '#424770',
+  //       },
 
-        '::placeholder': {
-          color: '#9BACC8',
-        },
+  //       '::placeholder': {
+  //         color: '#9BACC8',
+  //       },
 
-        ':focus::placeholder': {
-          color: '#CFD7DF',
-        },
-      },
-      invalid: {
-        color: '#fff',
-        ':focus': {
-          color: '#FA755A',
-        },
-        '::placeholder': {
-          color: '#FFCCA5',
-        },
-      },
-    };
+  //       ':focus::placeholder': {
+  //         color: '#CFD7DF',
+  //       },
+  //     },
+  //     invalid: {
+  //       color: '#fff',
+  //       ':focus': {
+  //         color: '#FA755A',
+  //       },
+  //       '::placeholder': {
+  //         color: '#FFCCA5',
+  //       },
+  //     },
+  //   };
 
-    var elementClasses = {
-      focus: 'focus',
-      empty: 'empty',
-      invalid: 'invalid',
-    };
+  //   var elementClasses = {
+  //     focus: 'focus',
+  //     empty: 'empty',
+  //     invalid: 'invalid',
+  //   };
 
-    this.stripeCardNumber = elements.create('cardNumber', {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    this.stripeCardNumber.mount('#card-number');
+  //   this.stripeCardNumber = elements.create('cardNumber', {
+  //     style: elementStyles,
+  //     classes: elementClasses,
+  //   });
+  //   this.stripeCardNumber.mount('#card-number');
 
-    this.stripeCardExpiry = elements.create('cardExpiry', {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    this.stripeCardExpiry.mount('#card-expiry');
+  //   this.stripeCardExpiry = elements.create('cardExpiry', {
+  //     style: elementStyles,
+  //     classes: elementClasses,
+  //   });
+  //   this.stripeCardExpiry.mount('#card-expiry');
 
-    this.stripeCardCvc = elements.create('cardCvc', {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    this.stripeCardCvc.mount('#card-cvc');
-  }
+  //   this.stripeCardCvc = elements.create('cardCvc', {
+  //     style: elementStyles,
+  //     classes: elementClasses,
+  //   });
+  //   this.stripeCardCvc.mount('#card-cvc');
+  // }
 
 
   protected stateChanged() {

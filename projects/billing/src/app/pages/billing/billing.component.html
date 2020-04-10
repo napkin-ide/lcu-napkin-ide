@@ -3,28 +3,34 @@
   <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
 
     <!-- PRICING CONTAINER -->
-    <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%" fxLayoutAlign="center center">
+    <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="space-around center">
       <lcu-plan-card [plan]="SelectedPlan"></lcu-plan-card>
+      <div class='vertical-line'></div>
     </div>
+
+
 
     <!-- BILLING CONTAINER -->
     <div class='billing-container' fxFlex="45%" fxFlex.lt-sm="80%">
       <h2>Enter Your Payment Information Below</h2>
 
-
+      <!-- STRIPE STUFF -->
       <div class="payment-info-container">
-        <form action="/charge" method="post" class="billing-form" id="payment-form" [formGroup]="BillingForm"
-          (ngSubmit)="SubmitBilling($event)">
+
+        <form action="/charge" method="post" class="billing-form" 
+        id="payment-form" [formGroup]="BillingForm" (ngSubmit)="SubmitBilling($event)">
+
           <div class="form-row" fxLayout="column" fxLayoutAlign="space-around center">
+
             <div class="billing-info">
-              <label fxLayout="column" fxLayoutAlign="space-around center">
+              <label fxLayout="column" fxLayoutAlign="space-around start">
                 <span id="input-span">Name</span>
                 <input name="cardholder-name" class="cardholder-name-input" id="cardholder-name-input"
                   formControlName="userName" placeholder="Cardholder Name" />
               </label>
             </div>
             <div class="billing-info">
-              <label for="card-element" fxLayout="column" fxLayoutAlign="space-around center">Payment Details</label>
+              <label for="card-element" fxLayout="column" fxLayoutAlign="space-around start">Credit Card</label>
 
               <div class="stripe-container">
                 <div id="card-element" class="stripe-card"></div>
@@ -44,10 +50,15 @@
             </div>
           </div>
 
-          <div class="spread" fxLayoutAlign="center">
-            <button mat-raised-button id="payment-button" color="primary" *ngIf="SelectedPlan">
-              Add payment
-            </button>
+          <!-- TOGGLE & BUTTON -->
+          <div class="toggle-button-container" fxLayout="column" fxLayoutAlign="center center">
+            <div class="toggle-container" fxLayout="row" fxLayoutAlign="center center">
+              <div>Monthly &nbsp;</div>
+              <mat-slide-toggle class="toggle" (change)="ToggleChanged($event)" name="yearly">Annually</mat-slide-toggle>
+            </div>
+            <div class="button-container" fxLayoutAlign="center center">
+              <button mat-raised-button id="payment-button" color="primary" *ngIf="SelectedPlan">Buy Now</button>
+            </div>
           </div>
         </form>
       </div>

@@ -21,7 +21,7 @@
   
 
   .pricing-container{
-    background-color: lavenderblush;
+    // background-color: lavenderblush;
     height: 100%;
     overflow: auto;
 
@@ -33,7 +33,7 @@
     }
   }
   .billing-container{
-    background-color: lavenderblush;
+    // background-color: lavenderblush;
     height: 100%;
   }
 
@@ -44,9 +44,9 @@
   #card-element{
     width: 500px;
     // background-color: grey ;
-    .ElementsApp input{
-      background-color: red;
-    }
+    // .ElementsApp input{
+    //   background-color: red;
+    // }
   }
 }
 }
@@ -54,15 +54,21 @@ h2{
   text-align: center;
 }
 
-.selected-prod-plan{
-  text-align: center;
-  margin: 30px;
+.vertical-line{
+  border-left: 2px solid grey;
+  height: 430px;
 }
-
-
 
 .mat-payment-card{
   margin-left: 10px;
+}
+
+.toggle-container{
+  margin: 10px;
+}
+
+.button-container{
+  margin: 10px;
 }
 
 .stripe-card{
@@ -71,10 +77,14 @@ h2{
 
 .cardholder-name-input{
   @include input-box();
-  border: 0;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
   color: black;
   font-weight: 600;
   font-size: 16px;
+  width: 500px;
+  outline: none;
   
   // margin-right: 22px;
    ::placeholder{
@@ -83,7 +93,9 @@ h2{
   }
 }
 
-
+#payment-button{
+  width: 500px;
+}
 
 /******************************    Strip Styling    **************************************/
 // Main form styling
