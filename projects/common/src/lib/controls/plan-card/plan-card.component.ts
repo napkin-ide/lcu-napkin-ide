@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
+import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 
 @Component({
   selector: 'lcu-plan-card',
@@ -7,9 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanCardComponent implements OnInit {
 
-  constructor() { }
+
+  @Input('plan') Plan: BillingPlanOption;
+
+  @Input('show-button') ShowButton: boolean;
+
+  @Output('buy-now-clicked') BuyNowClicked: EventEmitter<any>;
+
+  constructor(protected userBillState: UserBillingStateContext) { 
+    this.BuyNowClicked = new EventEmitter();
+  }
 
   ngOnInit() {
+    // this.userBillState.Context.subscribe((state: any) => {
+    //   this.State = state;
+    //   // console.log('billing state: ', this.State);
+    //   this.stateChanged();
+    // });
+    console.log('Plan from plan card: ',this.Plan);
   }
+
+  public BuyNow(plan: any){
+    console.log("Plan selected: ", plan);
+    this.BuyNowClicked.emit(plan);
+  }
+  // protected stateChanged(): void{
+  //   console.log("state = ", this.State);
+  // }
 
 }

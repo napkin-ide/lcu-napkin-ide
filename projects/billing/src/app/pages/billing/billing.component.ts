@@ -22,7 +22,7 @@ import {
   UserBillingState,
   NapkinIDESetupStepTypes,
   Constants,
-  BillingPlanOption
+  BillingPlanOption,
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { Guid, LCUServiceSettings } from '@lcu/common';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
@@ -54,11 +54,17 @@ export class BillingComponent
    */
   protected redirectUri: any;
 
-  public selectedPlan: BillingPlanOption;
-/**
- * The plan lookup that is passed in via params
- */
-  protected planParam: any;
+  public SelectedPlan: BillingPlanOption;
+  /**
+   * The plan lookup that is passed in via params
+   */
+  protected planID: any;
+
+  protected get stripePublicKey(): string {
+    const stateCfg: any = (window as any).LCU.State;
+
+    return stateCfg && stateCfg.Stripe ? stateCfg.Stripe.PublicKey : '';
+  }
 
   //  Properties
   public BillingForm: FormGroup;
@@ -88,12 +94,10 @@ export class BillingComponent
     protected route: ActivatedRoute
   ) {
     this.State = {};
-    // this.productPlan = '';
-    this.route.queryParams.subscribe(params => {
-      this.redirectUri = params['param1'];  // Set redirectUri to some local property on the component
-      this.planParam = params['param2'];  // Set the plan to the value of the form for prodPlan
+
+    this.route.paramMap.subscribe((params) => {
+      this.planID = params.get('id');
     });
-    // this.setFieldToggles();
   }
 
   //  Life Cycle
@@ -102,30 +106,24 @@ export class BillingComponent
     this.userBillState.Context.subscribe((state: any) => {
       this.State = state;
       console.log('billing state: ', this.State);
+      console.log('Plan id', this.planID);
       this.stateChanged();
     });
   }
 
-  public ngAfterViewInit(): void {
-    // setTimeout(()=>{
-    //   this.setupStripe();
-    // },2000)
-  }
+  public ngAfterViewInit(): void {}
   public ngAfterViewChecked(): void {
     this.setupStripe();
   }
 
-
-
-
   //  API methods
-public ResetBillingStatus(){
-  this.PaymentSuccessful = false;
-}
-
-  public SelectPlan(plan: any) {
-    this.selectedPlan = plan;
+  public ResetBillingStatus() {
+    this.PaymentSuccessful = false;
   }
+
+  // public SelectPlan(plan: any) {
+  //   this.SelectedPlan = plan;
+  // }
 
   public SubmitBilling(event: Event) {
     event.preventDefault();
@@ -160,11 +158,12 @@ public ResetBillingStatus(){
       this.StripeError = result.error;
     } else {
       this.StripeError = '';
-      console.log("Billing Form: ", this.BillingForm)
+      console.log('Billing Form: ', this.BillingForm);
       this.userBillState.CompletePayment(
         result.paymentMethod.id,
         this.BillingForm.value.userName,
-        this.selectedPlan.Lookup);
+        this.SelectedPlan.Lookup
+      );
     }
   }
 
@@ -183,10 +182,9 @@ public ResetBillingStatus(){
   }
 
   protected setupStripe() {
-    
     if (!this.stripe) {
       // Your Stripe public key
-      this.stripe = Stripe(this.lcuSettings.Settings.Stripe.PublicKey);
+      this.stripe = Stripe(this.stripePublicKey);
       // this.setupStripeElements();
       const elements = this.stripe.elements();
 
@@ -228,26 +226,23 @@ public ResetBillingStatus(){
         this.handleCardChanged(event)
       );
 
-    //     this.stripeCardNumber.addEventListener('change', (event: any) =>
-    //     this.handleCardChanged(event)
-    //   );
+      //     this.stripeCardNumber.addEventListener('change', (event: any) =>
+      //     this.handleCardChanged(event)
+      //   );
 
+      // this.stripeCardExpiry.addEventListener('change', (event: any) =>
+      //     this.handleCardChanged(event)
+      //   );
 
-    // this.stripeCardExpiry.addEventListener('change', (event: any) =>
-    //     this.handleCardChanged(event)
-    //   );
-
-    //   this.stripeCardCvc.addEventListener('change', (event: any) =>
-    //     this.handleCardChanged(event)
-    //   );
+      //   this.stripeCardCvc.addEventListener('change', (event: any) =>
+      //     this.handleCardChanged(event)
+      //   );
     }
   }
 
-  
-
-  protected setupStripeElements():void{
+  protected setupStripeElements(): void {
     const elements = this.stripe.elements();
-    var elementStyles = {
+    const elementStyles = {
       base: {
         color: '#fff',
         fontWeight: 600,
@@ -278,7 +273,7 @@ public ResetBillingStatus(){
       },
     };
 
-    var elementClasses = {
+    const elementClasses = {
       focus: 'focus',
       empty: 'empty',
       invalid: 'invalid',
@@ -303,37 +298,36 @@ public ResetBillingStatus(){
     this.stripeCardCvc.mount('#card-cvc');
   }
 
-
   protected stateChanged() {
+    // if a plan has been passed in via param set the selected plan accordingly
+    if (this.planID) {
+      this.SelectedPlan = this.State.Plans.find(
+        (p: any) => p.Lookup === this.planID
+      );
+      console.log('SELECTED PLAN:', this.SelectedPlan);
+    }
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
     // using *ngIf with external form properties
     this.cdr.detectChanges();
 
-    // if a plan has been passed in via param set the selected plan accordingly
-    if(this.planParam){
-      this.selectedPlan = this.State.Plans.find(p => p.Lookup === this.planParam);
-    }
-
     if (this.State.PaymentStatus) {
-      console.log("Payment Status",this.State.PaymentStatus)
+      console.log('Payment Status', this.State.PaymentStatus);
       if (this.State.PaymentStatus.Code === 101) {
-        this.stripe.confirmCardPayment('requires_action').then(function (result: any) {
-          if (result.error) {
-            // Display error message in  UI.
-            this.StripeError = this.State.PaymentStatus.Message;
-            // The card was declined (i.e. insufficient funds, card has expired, etc)
-          } else {
-            // Show a success message to your customer
-            this.paymentSuccess();
-          }
-        });
-
-      }
-      else if (this.State.PaymentStatus.Code === 1) {
+        this.stripe
+          .confirmCardPayment('requires_action')
+          .then(function(result: any) {
+            if (result.error) {
+              // Display error message in  UI.
+              this.StripeError = this.State.PaymentStatus.Message;
+              // The card was declined (i.e. insufficient funds, card has expired, etc)
+            } else {
+              // Show a success message to your customer
+              this.paymentSuccess();
+            }
+          });
+      } else if (this.State.PaymentStatus.Code === 1) {
         this.StripeError = this.State.PaymentStatus.Message;
-      }
-
-      else {
+      } else {
         this.paymentSuccess();
       }
     }
@@ -345,7 +339,7 @@ public ResetBillingStatus(){
    * When the payment returns Successfully
    */
   protected paymentSuccess(): void {
-    //TODO do something
+    // TODO do something
     this.PaymentSuccessful = true;
   }
 }

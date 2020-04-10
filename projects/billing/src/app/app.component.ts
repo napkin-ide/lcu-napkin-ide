@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ToggleThemeUtil } from '@lcu/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'lcu-root',
@@ -11,8 +12,15 @@ export class AppComponent implements OnInit {
 
   public SelectedTheme: string;
 
+  public RedirectUri: string;
+
   constructor(
-    protected overlayContainer: OverlayContainer) {}
+    protected overlayContainer: OverlayContainer,
+    protected route: ActivatedRoute) {
+      this.route.queryParams.subscribe(params => {
+        this.RedirectUri = params['redirectUri'];  // Set redirectUri to some local property on the component
+      });
+    }
 
   public ngOnInit(): void {
     this.resetTheme();
