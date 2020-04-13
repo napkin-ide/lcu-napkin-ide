@@ -14,6 +14,8 @@ export class UserBillingState {
   public Status?: Status;
 
   public Username?: string;
+
+  public RequiredOptIns?: Array<any>;
 }
 
 export class BillingPlanOption {

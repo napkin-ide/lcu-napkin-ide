@@ -26,7 +26,7 @@ import {
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { Guid, LCUServiceSettings } from '@lcu/common';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 declare var Stripe: any;
 
@@ -91,17 +91,21 @@ export class BillingComponent
     protected userBillState: UserBillingStateContext,
     protected lcuSettings: LCUServiceSettings,
     protected cdr: ChangeDetectorRef,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    protected router: Router
   ) {
     this.State = {};
 
-    this.route.paramMap.subscribe((params) => {
-      this.planID = params.get('id');
-    });
+    // this.route.paramMap.subscribe((params) => {
+    //   this.planID = params.get('id');
+    // });
   }
 
   //  Life Cycle
   public ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      this.planID = params.get('id');
+    });
     this.setupForms();
     this.userBillState.Context.subscribe((state: any) => {
       this.State = state;
@@ -109,9 +113,12 @@ export class BillingComponent
       console.log('Plan id', this.planID);
       this.stateChanged();
     });
+    console.log("state HERE: ", this.State);
+
   }
 
   public ngAfterViewInit(): void {}
+
   public ngAfterViewChecked(): void {
     this.setupStripe();
   }
@@ -127,7 +134,6 @@ export class BillingComponent
 
   public SubmitBilling(event: Event) {
     event.preventDefault();
-
     this.stripe
       .createPaymentMethod({
         type: 'card',
@@ -303,10 +309,13 @@ export class BillingComponent
 
   protected stateChanged() {
     // if a plan has been passed in via param set the selected plan accordingly
+    console.log("planID =", this.planID)
     if (this.planID) {
+      // debugger
       this.SelectedPlan = this.State.Plans.find(
         (p: any) => p.Lookup === this.planID
       );
+      // debugger
       console.log('SELECTED PLAN:', this.SelectedPlan);
     }
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
@@ -344,5 +353,6 @@ export class BillingComponent
   protected paymentSuccess(): void {
     // TODO do something
     this.PaymentSuccessful = true;
+    this.router.navigate(['complete']);
   }
 }

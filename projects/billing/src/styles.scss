@@ -1,6 +1,7 @@
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
 @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
 @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
+@import '../../billing/src/app/pages/billing/billing.component.scss';
 
 @mixin theme-setup($theme) {
   @include angular-material-theme($theme);
@@ -17,6 +18,7 @@
 
 // for updating components with themes
 @mixin component-themes($theme) {
+  // @include billing-component($theme);
 }
 
  .ivy-light-theme {
