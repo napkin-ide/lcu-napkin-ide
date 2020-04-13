@@ -13,8 +13,11 @@ export class IdeActivityBarComponent implements OnInit {
   protected rootActDialog: MatDialogRef<ExternalDialogComponent, any>;
 
   public Activities: IdeActivity[];
+
   public CurrentActivity: IdeActivity;
+
   public InfraConfigured: boolean;
+
   public RootActivities: IdeActivity[];
 
   constructor(
