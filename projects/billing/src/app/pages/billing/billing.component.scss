@@ -9,6 +9,18 @@
   border-bottom: 1px solid #d7d1c9;
 }
 
+// @mixin billing-component($theme){
+  .fathym-logo{
+    background-image: fathym-logo(thinky-full-logo, black, 1);
+    background-repeat: no-repeat;
+    background-size: 267px;
+    height: 70px;
+    width: 300px;
+  }
+// }
+
+
+
 .welcome {
   text-align: center;
 }

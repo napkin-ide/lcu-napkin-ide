@@ -1,4 +1,6 @@
 
+$Fathym-Green: #4a918e;
+
 @mixin plan-card-basic {
     border: 1px solid;
     width: 22vw;
@@ -18,17 +20,17 @@
 }
 .enterprise{
     @include plan-card-basic();
-    border-color: red;
+    border-color: $Fathym-Green;
     .title{
         @include title();
-        background-color: red;
+        background-color: $Fathym-Green;
     }
     .button-container{
         position: relative;
         bottom: -205 !important;
         .button{
             @include button();
-            background-color: red;  
+            background-color:$Fathym-Green;  
         }
     }
     

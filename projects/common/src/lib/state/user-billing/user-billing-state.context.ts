@@ -25,6 +25,14 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
     });
   }
 
+  public ResetState(){
+    this.Execute({
+      Arguments:{},
+      Type: 'ResetStateCheck',
+    });
+  }
+
+
   //  Helpers
   protected defaultValue() {
     return { Loading: true } as UserBillingState;
