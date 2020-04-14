@@ -1,5 +1,6 @@
-<div [ngClass]="{'basic': Plan?.PlanGroup === 'Basic', 
-                 'pro': Plan?.PlanGroup === 'Professional'}" fxLayout="column">
+<div [ngClass]="{'basic': Plan?.PlanGroup === PlanGroups[0], 
+                 'pro': Plan?.PlanGroup === PlanGroups[1],
+                 'inter': Plan?.PlanGroup === PlanGroups[2]}" fxLayout="column">
 
   <div *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</div>
   <p *ngIf="Plan?.PlanGroup === FeaturedPlanGroup" class="featured-plan">Most Popular</p>

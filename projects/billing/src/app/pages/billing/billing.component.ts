@@ -87,6 +87,12 @@ export class BillingComponent
  */
   public AcceptedEA: boolean;
 
+  /**
+   * List of plan Groups
+   */
+
+  public PlanGroups: Array<string>;
+
   // public stripeCardNumber: any;
   // public stripeCardExpiry: any;
   // public stripeCardCvc: any;
@@ -111,9 +117,9 @@ export class BillingComponent
       this.State = state;
       console.log('billing state: ', this.State);
       console.log('Plan id', this.planID);
-      if(!this.State.Loading){
+      // if(!this.State.Loading){
         this.stateChanged();
-      }
+      // }
     });
     
   }
@@ -149,13 +155,13 @@ export class BillingComponent
   public ToggleChanged(event: any):void{
     let toggleSelected: string;
     if(event.checked === true){
-      toggleSelected = "year";
+      toggleSelected = "month";
     }
     else{
-      toggleSelected = 'month'
+      toggleSelected = "year"
     }
-    //true === Annually
-    //false === Monthly
+    //false === Annually
+    //true === Monthly
     // console.log("toggle changed: ", event.checked);
     this.State.Plans.forEach((plan: BillingPlanOption) => {
       if(this.SelectedPlan.PlanGroup === plan.PlanGroup && plan.Interval === toggleSelected){
@@ -341,6 +347,17 @@ export class BillingComponent
 
 
   protected stateChanged() {
+
+    if (this.State.Plans) {
+      this.PlanGroups = new Array<string>();
+
+      this.State.Plans.forEach((plan: BillingPlanOption) => {
+        if(!this.PlanGroups.includes(plan.PlanGroup)){
+          this.PlanGroups.push(plan.PlanGroup)
+        }
+      });
+      console.log('plan groups', this.PlanGroups);
+    }
     
     if(this.State.RequiredOptIns){
       if(!this.State.RequiredOptIns.includes("ToS")){
@@ -353,7 +370,7 @@ export class BillingComponent
     // console.log("planID =", this.planID);
         // if a plan has been passed in via param set the selected plan accordingly
 
-    if (this.planID) {
+    if (this.planID && this.State.Plans) {
       this.SelectedPlan = this.State.Plans.find(
         (p: any) => p.Lookup === this.planID
       );

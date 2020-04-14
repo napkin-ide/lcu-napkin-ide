@@ -6,7 +6,12 @@
 
     <!-- PRICING CONTAINER -->
     <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="space-around center">
-      <lcu-plan-card [plan]="SelectedPlan"></lcu-plan-card>
+
+      <lcu-plan-card *ngIf="State.Plans" 
+        [plan]="SelectedPlan" 
+        [plan-groups]="PlanGroups">
+      </lcu-plan-card>
+
       <div class='vertical-line'></div>
     </div>
 
@@ -67,8 +72,8 @@
               <!-- TOGGLE & BUTTON -->
               <div class="toggle-button-container" fxLayout="column" fxLayoutAlign="center center">
                 <div class="toggle-container" fxLayout="row" fxLayoutAlign="center center">
-                  <div>Monthly &nbsp;</div>
-                  <mat-slide-toggle class="toggle" (change)="ToggleChanged($event)">Annually
+                  <div>Annually &nbsp;</div>
+                  <mat-slide-toggle class="toggle" (change)="ToggleChanged($event)">Monthly
                   </mat-slide-toggle>
                 </div>
                 <div class="button-container" fxLayoutAlign="center center">

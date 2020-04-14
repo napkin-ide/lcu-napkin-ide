@@ -3,12 +3,13 @@
   <div  fxLayout.lg="row wrap" fxLayout.sm="column" fxLayout.xs="column"
         fxLayoutAlign="space-around center" 
         fxLayoutGap="30px">
-    <div *ngFor="let plan of PlanGroups">
+    <div *ngFor="let plan of DisplayedPlans">
 
       <lcu-plan-card 
         class='lcu-plan-card'
         [featured-plan-group]="State.FeaturedPlanGroup"
         [plan]="plan" 
+        [plan-groups]="PlanGroups"
         [show-button]="ShowButton"
         (buy-now-clicked)="BuyNowClicked($event)">
       </lcu-plan-card>

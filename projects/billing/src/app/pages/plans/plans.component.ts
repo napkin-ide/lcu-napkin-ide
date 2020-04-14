@@ -13,8 +13,14 @@ export class PlansComponent implements OnInit {
   public State: any;
 
   public ShowButton: boolean;
-
-  public PlanGroups: Array<BillingPlanOption>;
+/**
+ * List the plan group names for the plan card
+ */
+  public PlanGroups: Array<string>;
+/**
+ * list of plans to display on the page excluding duplicate plan with different billing cycles
+ */
+  public DisplayedPlans: Array<BillingPlanOption>
 
   constructor(
     protected userBillState: UserBillingStateContext,
@@ -49,13 +55,19 @@ export class PlansComponent implements OnInit {
     // }
 
     if (this.State.Plans) {
-      this.PlanGroups = new Array<BillingPlanOption>();
+      this.PlanGroups = new Array<string>();
+      this.DisplayedPlans = new Array<BillingPlanOption>();
       this.State.Plans.forEach((plan: BillingPlanOption) => {
-        if (plan.Interval === 'month') {
-          this.PlanGroups.push(plan);
+        // let temp = this.DisplayedPlans.find(disPlan => disPlan === plan.PlanGroup);
+        // console.log("temp:", temp)
+        if (this.DisplayedPlans.filter(e => e.PlanGroup === plan.PlanGroup).length === 0) {
+          this.DisplayedPlans.push(plan);
+        }
+        if(!this.PlanGroups.includes(plan.PlanGroup)){
+          this.PlanGroups.push(plan.PlanGroup)
         }
       });
-      console.log('plan groups', this.PlanGroups);
+      console.log('displayed plan groups', this.DisplayedPlans);
     }
   }
 
