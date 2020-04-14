@@ -54,7 +54,7 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="State.RequiredOptIns.length > 0" class="required-opt-ins" fxLayout="column" fxLayoutAlign="center start">
+              <div *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="column" fxLayoutAlign="center start">
                 <mat-checkbox *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
                   <a target='blank' href="https://fathym.com/terms-of-services/">Terms of Service</a>
                 </mat-checkbox>

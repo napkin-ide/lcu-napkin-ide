@@ -111,13 +111,15 @@ export class BillingComponent
       this.State = state;
       console.log('billing state: ', this.State);
       console.log('Plan id', this.planID);
-      this.stateChanged();
+      if(!this.State.Loading){
+        this.stateChanged();
+      }
     });
-    console.log("state HERE: ", this.State);
-
+    
   }
 
-  public ngAfterViewInit(): void {}
+  public ngAfterViewInit(): void {
+  }
 
   public ngAfterViewChecked(): void {
     this.setupStripe();
@@ -339,7 +341,7 @@ export class BillingComponent
 
 
   protected stateChanged() {
-    // if a plan has been passed in via param set the selected plan accordingly
+    
     if(this.State.RequiredOptIns){
       if(!this.State.RequiredOptIns.includes("ToS")){
         this.AcceptedTOS = true;
@@ -348,18 +350,18 @@ export class BillingComponent
         this.AcceptedEA = true;
       }
     }
-    console.log("planID =", this.planID)
+    // console.log("planID =", this.planID);
+        // if a plan has been passed in via param set the selected plan accordingly
+
     if (this.planID) {
-      // debugger
       this.SelectedPlan = this.State.Plans.find(
         (p: any) => p.Lookup === this.planID
       );
-      // debugger
       console.log('SELECTED PLAN:', this.SelectedPlan);
     }
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
     // using *ngIf with external form properties
-    this.cdr.detectChanges();
+    // this.cdr.detectChanges();
 
     if (this.State.PaymentStatus) {
       console.log('Payment Status', this.State.PaymentStatus);
