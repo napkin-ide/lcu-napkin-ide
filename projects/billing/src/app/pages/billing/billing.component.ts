@@ -80,6 +80,14 @@ export class BillingComponent
   public CustomerName: string;
 
   public PaymentSuccessful: boolean;
+/**
+ * Whether or not the user has accepted the Terms of Service
+ */
+  public AcceptedTOS: boolean;
+/**
+ * Whether or not the user has accepted the Enterprise Agreement
+ */
+  public AcceptedEA: boolean;
 
   public stripeCardNumber: any;
   public stripeCardExpiry: any;
@@ -148,13 +156,45 @@ export class BillingComponent
   }
 
   public ToggleChanged(event: any):void{
+    let toggleSelected: string;
+    if(event.checked === true){
+      toggleSelected = "year";
+    }
+    else{
+      toggleSelected = 'month'
+    }
     //true === Annually
     //false === Monthly
     console.log("toggle changed: ", event.checked);
+    this.State.Plans.forEach((plan: BillingPlanOption) => {
+      if(this.SelectedPlan.PlanGroup === plan.PlanGroup && plan.Interval === toggleSelected){
+        this.SelectedPlan = plan;
+      }
+    });
   }
 
   public GoBack(){
     this.router.navigate(['']);
+  }
+
+  public TOSChanged(event: any){
+    console.log("TOS: ", event);
+    this.AcceptedTOS = event.checked;
+  }
+  public EAChanged(event: any){
+    console.log("EA: ", event);
+    this.AcceptedEA = event.checked;
+
+  }
+
+  public IsButtonDisabled(): boolean{
+    if(this.AcceptedEA && this.AcceptedTOS && this.StripeError === '' && this.BillingForm.value.userName){
+      return false;
+    }
+    else{
+      return true;
+    }
+  
   }
 
   //  Helpers
@@ -206,7 +246,7 @@ export class BillingComponent
             fontSmoothing: 'antialiased',
 
             ':focus': {
-              color: '#424770',
+              color: 'black',
             },
 
             '::placeholder': {
@@ -214,11 +254,11 @@ export class BillingComponent
             },
 
             ':focus::placeholder': {
-              color: '#CFD7DF',
+              color: 'black',
             },
           },
           invalid: {
-            color: '#fff',
+            color: '#FA755A',
             ':focus': {
               color: '#FA755A',
             },
@@ -345,7 +385,10 @@ export class BillingComponent
       }
     }
 
-    // if (this.State.SetupStep === UserManagementStepTypes.Complete) {
+    // if(this.State.RequiredOptIns){
+    //   if(this.State.RequiredOptIns.includes('ToS')){
+    //     console.log('It worked')
+    //   }
     // }
   }
   /**

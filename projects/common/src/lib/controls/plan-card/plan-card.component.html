@@ -1,11 +1,11 @@
-<div [ngClass]="{'explorer': Plan?.Name === 'Explorer', 
+<div [ngClass]="{'basic': Plan?.Name === 'Basic Monthly' || Plan?.Name === 'Basic Yearly', 
                  'developer': Plan?.Name === 'Developer',
-                 'enterprise': Plan?.Name === 'Enterprise Monthly'}" fxLayout="column">
+                 'pro': Plan?.Name === 'Professional Monthly' || Plan?.Name ==='Professional Yearly'}" fxLayout="column">
 
-  <div class="title" fxLayoutAlign="center center">{{Plan.Name}}</div>
+  <div class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</div>
   <div class="description" fxLayoutAlign="center center">{{Plan.Description}}</div>
   <!-- <div>{{Plan.Features}}</div> -->
-  <div class="price" fxLayoutAlign="center center">{{Plan.Price}}</div>
+  <!-- <div class="price" fxLayoutAlign="center center">{{Plan.Price}}</div> -->
   <div *ngIf="ShowButton === true" class="button-container" fxLayoutAlign="center center">
     <button mat-raised-button class="button" (click)="BuyNow(Plan)">Buy Now</button>
   </div>

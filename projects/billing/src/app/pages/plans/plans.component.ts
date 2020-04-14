@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserBillingStateContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { UserBillingStateContext, BillingPlanOption } from '@napkin-ide/lcu-napkin-ide-common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -13,6 +13,8 @@ export class PlansComponent implements OnInit {
   public State: any;
 
   public ShowButton: boolean;
+
+  public PlanGroups: Array<BillingPlanOption>;
 
   constructor(
     protected userBillState: UserBillingStateContext,
@@ -43,6 +45,16 @@ export class PlansComponent implements OnInit {
     //   this.userBillState.ResetState();
     //   console.log("State after resetting state: ", this.State);
     // }
+
+    if(this.State.Plans){
+      this.PlanGroups = new Array<BillingPlanOption>();
+      this.State.Plans.forEach((plan: BillingPlanOption) => {
+        if(plan.Interval === 'month'){
+          this.PlanGroups.push(plan);
+        }
+      });
+      console.log("plan groups", this.PlanGroups);
+    }
   }
 
 }
