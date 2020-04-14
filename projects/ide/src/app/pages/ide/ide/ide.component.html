@@ -41,3 +41,11 @@
     <nide-ide-status-bar fxFlex></nide-ide-status-bar>
   </div>
 </div>
+
+<lcu-guide-bot *ngIf="!Loading"
+  [bot-padding]="BotPadding"
+  [bot-screen-position]="BotScreenPosition"
+  [bounding-element-selector]="BotBoundingContainer"
+  [enable-chat]="EnableChat"
+  [tour]="AppTour">
+</lcu-guide-bot>

@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IdeStateStateManagerContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
+import { GuidedTour, GuideBotScreenPosition, Orientation } from '@lowcodeunit/lcu-guided-tour-common';
 
 @Component({
   selector: 'nide-ide',
@@ -10,6 +11,11 @@ import { IdeStateStateManagerContext, IdeManagementState } from '@napkin-ide/lcu
   styleUrls: ['./ide.component.scss']
 })
 export class IdeComponent implements OnInit {
+  public AppTour: GuidedTour;
+  public BotBoundingContainer: string = '#ideMainSideBar';
+  public BotPadding: number = 5;
+  public BotScreenPosition: GuideBotScreenPosition = GuideBotScreenPosition.BottomLeft;
+  public EnableChat: boolean = false;
 
   public IsHandset$: Observable<boolean>;
   public IsOpen: boolean = true;
@@ -19,7 +25,9 @@ export class IdeComponent implements OnInit {
   constructor(
     protected breakpointObserver: BreakpointObserver,
     protected ideState: IdeStateStateManagerContext
-  ) { }
+  ) {
+    this.AppTour = this.createGuidedTour();
+  }
 
   public ngOnInit(): void {
     this.IsHandset$ = this.breakpointObserver.observe([
@@ -46,6 +54,40 @@ export class IdeComponent implements OnInit {
 
   public OpenSideBar(): void {
     this.IsOpen = !this.IsOpen;
+  }
+
+  protected createGuidedTour(): GuidedTour {
+    return {
+      tourId: 'app-tour',
+      useOrb: false,
+      steps: [
+        {
+          title: 'Welcome to Fathym!',
+          subtitle: 'Welcome Tour',
+          selector: '.mat-tab-body-wrapper',
+          content: `Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here. Welcome to the tour! As you can see, you can highlight certain elements of an application
+          and display more information here.`,
+          orientation: Orientation.Left
+        },
+        {
+          title: 'Data Flow',
+          subtitle: 'Welcome Tour',
+          selector: '.flowchart-object',
+          content: `This is a Data Flow Object.`,
+          orientation: Orientation.Left
+        }
+      ]
+    };
   }
 
 }

@@ -2,6 +2,7 @@
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
 @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
 @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
+@import "../../../node_modules/@lowcodeunit/lcu-guided-tour-common/assets/styles/lcu-guided-tour.scss";
 
 @mixin theme-setup($theme) {
   @include angular-material-theme($theme);
@@ -20,6 +21,10 @@
 }
 
 @mixin component-themes($theme) {
+  @include thinky-bot($theme);
+  @include thinky-bounce($theme);
+  @include thinky-chat($theme);
+  @include guided-tour($theme);
   @include ide($theme);
 
   html, body {
@@ -28,6 +33,10 @@
 
   body {
     margin: 0;
+  }
+
+  .mat-card {
+    background-color: mat-color(map-get($theme, background), card) !important;
   }
 }
 
