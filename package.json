@@ -17,7 +17,7 @@
     "demo:lcu": "npm run build:common && npm run build:lcu && npm run start:demo",
     "deploy": "npm version patch && npm run deploy:all",
     "deploy:all": "npm run deploy:common && npm run deploy:concurrently",
-    "deploy:concurrently": "concurrently \"npm run deploy:lcu\" \"npm run deploy:demo\" \"npm run deploy:setup\" && concurrently \"npm run deploy:ide\" \"npm run deploy:settings\" \"npm run deploy:shell-host\" && concurrently \"npm run deploy:user-access\" \"npm run deploy:billing\"",
+    "deploy:concurrently": "concurrently \"npm run deploy:lcu\" \"npm run deploy:demo\" \"npm run deploy:setup\" && concurrently \"npm run deploy:ide\" \"npm run deploy:settings\" && concurrently \"npm run deploy:user-access\" \"npm run deploy:billing\"",
     "deploy:common": "npm version patch --prefix projects/common && npm run build:common && npm publish ./dist/common --access public",
     "deploy:demo": "npm version patch --prefix projects/demo && npm run build:demo && npm publish ./dist/demo --access public",
     "deploy:ide": "npm version patch --prefix projects/ide && npm run build:ide && npm publish ./dist/ide --access public",
