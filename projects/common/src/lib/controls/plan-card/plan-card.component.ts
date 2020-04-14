@@ -21,6 +21,11 @@ export class PlanCardComponent implements OnInit {
   @Input('plan') Plan: BillingPlanOption;
 
   /**
+   * The plan groups to key off of the indexes
+   */
+  @Input('plan-groups') PlanGroups: Array<string>;
+
+  /**
    * Whether or not to display the buy now button (Button for plan page only)
    */
   @Input('show-button') ShowButton: boolean;

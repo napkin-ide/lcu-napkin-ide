@@ -1,5 +1,6 @@
 
 $Fathym-Green: #4a918e;
+$Purple: purple;
 $Orange: orange;
 //----------------------MIXINS------------------------//
 @mixin plan-card-basic {
@@ -39,6 +40,24 @@ $Orange: orange;
         .button{
             @include button();
             background-color:$Fathym-Green;  
+        }
+    }
+    
+}
+
+.inter{
+    @include plan-card-basic();
+    border-color: $Purple;
+    .title{
+        @include title();
+        background-color: $Purple;
+    }
+    .button-container{
+        @include button-position();
+
+        .button{
+            @include button();
+            background-color:$Purple;  
         }
     }
     
