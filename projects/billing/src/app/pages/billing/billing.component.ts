@@ -94,7 +94,7 @@ export class BillingComponent
     protected route: ActivatedRoute,
     protected router: Router
   ) {
-    this.State = {};
+    // this.State = {};
 
     // this.route.paramMap.subscribe((params) => {
     //   this.planID = params.get('id');
@@ -128,9 +128,6 @@ export class BillingComponent
     this.PaymentSuccessful = false;
   }
 
-  // public SelectPlan(plan: any) {
-  //   this.SelectedPlan = plan;
-  // }
 
   public SubmitBilling(event: Event) {
     event.preventDefault();
@@ -154,6 +151,10 @@ export class BillingComponent
     //true === Annually
     //false === Monthly
     console.log("toggle changed: ", event.checked);
+  }
+
+  public GoBack(){
+    this.router.navigate(['']);
   }
 
   //  Helpers
@@ -353,6 +354,6 @@ export class BillingComponent
   protected paymentSuccess(): void {
     // TODO do something
     this.PaymentSuccessful = true;
-    this.router.navigate(['complete']);
+    // this.router.navigate(['complete']);
   }
 }

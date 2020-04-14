@@ -20,7 +20,12 @@
 // }
 
 
-
+.back-arrow{
+  position: relative;
+  top: -40px;
+  left: 20px;
+  cursor: pointer;
+}
 .welcome {
   text-align: center;
 }

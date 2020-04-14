@@ -21,11 +21,6 @@ export class PlanCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.userBillState.Context.subscribe((state: any) => {
-    //   this.State = state;
-    //   // console.log('billing state: ', this.State);
-    //   this.stateChanged();
-    // });
     console.log('Plan from plan card: ',this.Plan);
   }
 
