@@ -1,12 +1,12 @@
-<div *ngFor="let plan of State.Plans" fxLayout="row" fxLayoutAlign="space-around center">
+<div *ngFor="let plan of State.Plans" 
+      fxLayout="row wrap" 
+      fxLayoutAlign="space-around center" 
+      fxLayoutGap="20px grid">
+
   <lcu-plan-card 
     [plan]="plan" 
     [show-button]="ShowButton"
     (buy-now-clicked)="BuyNowClicked($event)">
   </lcu-plan-card>
-
-  <lcu-plan-card [plan]="plan"></lcu-plan-card>
-  <lcu-plan-card [plan]="plan"></lcu-plan-card>
-
 
 </div>

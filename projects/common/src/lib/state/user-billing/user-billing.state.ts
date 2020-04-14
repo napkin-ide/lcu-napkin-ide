@@ -16,6 +16,7 @@ export class UserBillingState {
   public Username?: string;
 
   public RequiredOptIns?: Array<any>;
+
 }
 
 export class BillingPlanOption {
@@ -26,4 +27,8 @@ export class BillingPlanOption {
   public Name?: string;
 
   public Price?: number;
+
+  public Interval?: string;
+
+  public PlanGroup?: string;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ToggleThemeUtil } from '@lcu/common';
 import { ActivatedRoute } from '@angular/router';
+import { UserBillingStateContext } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-root',
@@ -14,15 +15,26 @@ export class AppComponent implements OnInit {
 
   public RedirectUri: string;
 
+  public State: any;
+
+  public Username: string;
+
   constructor(
     protected overlayContainer: OverlayContainer,
-    protected route: ActivatedRoute) {
+    protected route: ActivatedRoute,
+    protected userBillState: UserBillingStateContext,) {
+      
       this.route.queryParams.subscribe(params => {
         this.RedirectUri = params['redirectUri'];  // Set redirectUri to some local property on the component
       });
+      this.Username = 'Guest';
     }
 
   public ngOnInit(): void {
+    this.userBillState.Context.subscribe((state: any) => {
+      this.State = state;
+      this.stateChanged();
+    });
     this.resetTheme();
   }
 
@@ -55,5 +67,12 @@ export class AppComponent implements OnInit {
 
     const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
     classList.add(ToggleThemeUtil.Toggle(element.classList, val));
+   }
+
+   protected stateChanged(){
+     console.log("Billing App State Changed", this.State);
+     if(this.State.Username){
+       this.Username = this.State.Username;
+     }
    }
 }
