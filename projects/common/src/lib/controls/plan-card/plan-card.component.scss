@@ -1,11 +1,12 @@
 
 $Fathym-Green: #4a918e;
-
+$Orange: orange;
+//----------------------MIXINS------------------------//
 @mixin plan-card-basic {
     border: 1px solid;
     width: 250px;
     height: 370px;
-    // margin-bottom: 80px;
+    position: relative;
     border-radius: 4px;;
 }
 
@@ -18,7 +19,14 @@ $Fathym-Green: #4a918e;
     border: 1px solid black;
     color: white;
 }
-.enterprise{
+
+@mixin button-position{
+    position: absolute;
+    bottom: -30px;
+    left: 65px;
+}
+//--------------------------END MIXINS--------------------------------------//
+.pro{
     @include plan-card-basic();
     border-color: $Fathym-Green;
     .title{
@@ -26,12 +34,43 @@ $Fathym-Green: #4a918e;
         background-color: $Fathym-Green;
     }
     .button-container{
-        position: relative;
-        bottom: -205 !important;
+        @include button-position();
+
         .button{
             @include button();
             background-color:$Fathym-Green;  
         }
     }
     
+}
+
+.basic{
+    @include plan-card-basic();
+    border-color: $Orange;
+    .title{
+        @include title();
+        background-color: $Orange;
+    }
+    .button-container{
+        @include button-position();
+        .button{
+            @include button();
+            background-color:$Orange;  
+        }
+    }
+    
+}
+
+.featured-plan{  
+    transform: rotate(40deg);
+    background-color: #00c2ff;
+    width: 140px;
+    position: relative;
+    top: -25px;
+    right: -144px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-size: 12px;
+    clip-path: polygon(20% 0%, 77% 0, 86% 100%, 0% 100%);
 }

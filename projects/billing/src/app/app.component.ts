@@ -47,6 +47,9 @@ export class AppComponent implements OnInit {
     // this.routeChanged();
   }
 
+  public LogoutClicked(){
+    window.location.replace("/.oauth/logout");
+  }
   /**
    * Reset material theme
    */

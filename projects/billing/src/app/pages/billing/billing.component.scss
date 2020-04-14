@@ -1,5 +1,7 @@
 @import "../../../common";
 
+$Fathym-Green: #4a918e;
+
 @mixin input-box {
   background-color: #f7f7f7;
   border-radius: 2px;
@@ -22,9 +24,10 @@
 
 .back-arrow{
   position: relative;
-  top: -40px;
+  top: -38px;
   left: 20px;
   cursor: pointer;
+  z-index: 1;
 }
 .welcome {
   text-align: center;
@@ -50,7 +53,6 @@
     }
   }
   .billing-container{
-    // background-color: lavenderblush;
     height: 100%;
   }
 
@@ -110,8 +112,10 @@ h2{
   }
 }
 
-#payment-button{
+.buy-now-button{
   width: 500px;
+  background-color: $Fathym-Green;
+  
 }
 
 /******************************    Strip Styling    **************************************/

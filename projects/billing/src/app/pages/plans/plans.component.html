@@ -1,12 +1,30 @@
-<div *ngFor="let plan of State.Plans" 
-      fxLayout="row wrap" 
-      fxLayoutAlign="space-around center" 
-      fxLayoutGap="20px grid">
+<div [fxShow]="!State.Loading">
+  <!-- fxLayoutAlign="space-around center"  -->
+  <div  fxLayout.lg="row wrap" fxLayout.sm="column" fxLayout.xs="column"
+        fxLayoutAlign="space-around center" 
+        fxLayoutGap="30px">
+    <div *ngFor="let plan of PlanGroups">
 
-  <lcu-plan-card 
-    [plan]="plan" 
-    [show-button]="ShowButton"
-    (buy-now-clicked)="BuyNowClicked($event)">
-  </lcu-plan-card>
+      <lcu-plan-card 
+        class='lcu-plan-card'
+        [featured-plan-group]="State.FeaturedPlanGroup"
+        [plan]="plan" 
+        [show-button]="ShowButton"
+        (buy-now-clicked)="BuyNowClicked($event)">
+      </lcu-plan-card>
+    
+    </div>
+  </div>
+</div>
 
+ <!-- LOADING SCREEN -->
+ <div [fxShow]="State.Loading">
+  <p style="text-align: center;">
+    Behind the scenes Thinky is working hard to set up your Low Code Unit
+  </p>
+
+  <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
+    <mat-spinner diameter="75"></mat-spinner>
+    <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+  </div>
 </div>

@@ -54,16 +54,27 @@
                   </div>
                 </div>
               </div>
+              <div *ngIf="State.RequiredOptIns.length > 0" class="required-opt-ins" fxLayout="column" fxLayoutAlign="center start">
+                <mat-checkbox *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
+                  <a target='blank' href="https://fathym.com/terms-of-services/">Terms of Service</a>
+                </mat-checkbox>
+                <mat-checkbox *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
+                  <a target="blank" href="https://fathym.com/enterprise-agreement/">Enterprise Agreement</a>
+                </mat-checkbox>
+
+              </div>
 
               <!-- TOGGLE & BUTTON -->
               <div class="toggle-button-container" fxLayout="column" fxLayoutAlign="center center">
                 <div class="toggle-container" fxLayout="row" fxLayoutAlign="center center">
                   <div>Monthly &nbsp;</div>
-                  <mat-slide-toggle class="toggle" (change)="ToggleChanged($event)" name="yearly">Annually
+                  <mat-slide-toggle class="toggle" (change)="ToggleChanged($event)">Annually
                   </mat-slide-toggle>
                 </div>
                 <div class="button-container" fxLayoutAlign="center center">
-                  <button mat-raised-button id="payment-button" color="primary" *ngIf="SelectedPlan">Buy Now</button>
+                  <button mat-raised-button id="payment-button" class='buy-now-button'
+                  *ngIf="SelectedPlan"
+                  [disabled]="IsButtonDisabled()">Buy Now</button>
                 </div>
               </div>
             </form>
@@ -85,8 +96,3 @@
       <div class="spinner-logo" logo-alt="Fathym Logo"></div>
     </div>
   </div>
-
-  <!-- <div *ngIf="PaymentSuccessful && !State.Loading">
-  Successfully completed billing
-  <div (click)="ResetBillingStatus()">Manage Billing</div>
-</div> -->
