@@ -4,10 +4,10 @@
 <div [className]="SelectedTheme" style="height: 100%">
   <!-- <lcu-side-nav logo-class="primary-logo" title="Fathym Setup"> -->
     <div class="billing-top-bar">
-      <lcu-user-account-sidenav [user-email]="Username" ></lcu-user-account-sidenav>
+      <lcu-user-account-sidenav [user-email]="Username" (logout-clicked)="LogoutClicked()"></lcu-user-account-sidenav>
     </div>
-    
-    <div style="height: 100%;">
+    <!-- style="height: 100%;" -->
+    <div class='router-container'>
       <router-outlet (activate)="OnActivate($event)"></router-outlet>
     </div>
     <!-- <img class="bg-image" [src]="BackgroundImage" alt=""> -->
