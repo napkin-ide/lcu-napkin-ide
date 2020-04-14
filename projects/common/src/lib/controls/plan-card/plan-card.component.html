@@ -1,4 +1,4 @@
-<div [ngClass]="{'basic': Plan?.PlanGroup === 'Basic', 
+<div [ngClass]="{'basic': Plan?.PlanGroup === 'Starter', 
                  'pro': Plan?.PlanGroup === 'Professional'}" fxLayout="column">
 
   <div *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</div>

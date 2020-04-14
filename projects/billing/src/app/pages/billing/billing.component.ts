@@ -111,9 +111,9 @@ export class BillingComponent
       this.State = state;
       console.log('billing state: ', this.State);
       console.log('Plan id', this.planID);
-      if(!this.State.Loading){
+      // if(!this.State.Loading){
         this.stateChanged();
-      }
+      // }
     });
     
   }
@@ -353,7 +353,7 @@ export class BillingComponent
     // console.log("planID =", this.planID);
         // if a plan has been passed in via param set the selected plan accordingly
 
-    if (this.planID) {
+    if (this.planID && this.State.Plans) {
       this.SelectedPlan = this.State.Plans.find(
         (p: any) => p.Lookup === this.planID
       );
