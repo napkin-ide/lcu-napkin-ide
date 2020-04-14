@@ -3,10 +3,7 @@ import {
   OnInit,
   ViewChild,
   AfterViewInit,
-  ViewChildren,
-  QueryList,
   ChangeDetectorRef,
-  Input,
   ElementRef,
   AfterViewChecked,
 } from '@angular/core';
@@ -15,17 +12,14 @@ import {
   FormBuilder,
   Validators,
   FormControl,
-  AbstractControl,
 } from '@angular/forms';
 import {
   UserBillingStateContext,
   UserBillingState,
   NapkinIDESetupStepTypes,
-  Constants,
   BillingPlanOption,
 } from '@napkin-ide/lcu-napkin-ide-common';
-import { Guid, LCUServiceSettings } from '@lcu/common';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { LCUServiceSettings } from '@lcu/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 declare var Stripe: any;
@@ -54,7 +48,6 @@ export class BillingComponent
    */
   protected redirectUri: any;
 
-  public SelectedPlan: BillingPlanOption;
   /**
    * The plan lookup that is passed in via params
    */
@@ -73,13 +66,18 @@ export class BillingComponent
 
   public State: UserBillingState;
 
+  /**
+   * The Plan that is displayed on the side
+   */
+  public SelectedPlan: BillingPlanOption;
+
+  /**
+   * Error displayed by stripe
+   */
   public StripeError: string;
 
   public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
 
-  public CustomerName: string;
-
-  public PaymentSuccessful: boolean;
 /**
  * Whether or not the user has accepted the Terms of Service
  */
@@ -89,9 +87,9 @@ export class BillingComponent
  */
   public AcceptedEA: boolean;
 
-  public stripeCardNumber: any;
-  public stripeCardExpiry: any;
-  public stripeCardCvc: any;
+  // public stripeCardNumber: any;
+  // public stripeCardExpiry: any;
+  // public stripeCardCvc: any;
 
   //  Constructor
   constructor(
@@ -101,13 +99,7 @@ export class BillingComponent
     protected cdr: ChangeDetectorRef,
     protected route: ActivatedRoute,
     protected router: Router
-  ) {
-    // this.State = {};
-
-    // this.route.paramMap.subscribe((params) => {
-    //   this.planID = params.get('id');
-    // });
-  }
+  ) {  }
 
   //  Life Cycle
   public ngOnInit() {
@@ -132,9 +124,6 @@ export class BillingComponent
   }
 
   //  API methods
-  public ResetBillingStatus() {
-    this.PaymentSuccessful = false;
-  }
 
 
   public SubmitBilling(event: Event) {
@@ -165,10 +154,11 @@ export class BillingComponent
     }
     //true === Annually
     //false === Monthly
-    console.log("toggle changed: ", event.checked);
+    // console.log("toggle changed: ", event.checked);
     this.State.Plans.forEach((plan: BillingPlanOption) => {
       if(this.SelectedPlan.PlanGroup === plan.PlanGroup && plan.Interval === toggleSelected){
         this.SelectedPlan = plan;
+        this.planID = this.SelectedPlan.Lookup;
       }
     });
   }
@@ -350,6 +340,14 @@ export class BillingComponent
 
   protected stateChanged() {
     // if a plan has been passed in via param set the selected plan accordingly
+    if(this.State.RequiredOptIns){
+      if(!this.State.RequiredOptIns.includes("ToS")){
+        this.AcceptedTOS = true;
+      }
+      if(!this.State.RequiredOptIns.includes("EA")){
+        this.AcceptedEA = true;
+      }
+    }
     console.log("planID =", this.planID)
     if (this.planID) {
       // debugger
@@ -385,18 +383,12 @@ export class BillingComponent
       }
     }
 
-    // if(this.State.RequiredOptIns){
-    //   if(this.State.RequiredOptIns.includes('ToS')){
-    //     console.log('It worked')
-    //   }
-    // }
   }
   /**
    * When the payment returns Successfully
    */
   protected paymentSuccess(): void {
     // TODO do something
-    this.PaymentSuccessful = true;
     // this.router.navigate(['complete']);
   }
 }
