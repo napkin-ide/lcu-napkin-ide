@@ -1,27 +1,18 @@
 <div [fxShow]="!State.Loading">
   <!-- fxLayoutAlign="space-around center"  -->
-  <div *ngFor="let plan of State.Plans" 
-        fxLayout="row wrap" 
+  <div  fxLayout.lg="row wrap" fxLayout.sm="column" fxLayout.xs="column"
         fxLayoutAlign="space-around center" 
-        fxLayoutGap="20px">
+        fxLayoutGap="30px">
+    <div *ngFor="let plan of PlanGroups">
 
-    <lcu-plan-card 
-      [plan]="plan" 
-      [show-button]="ShowButton"
-      (buy-now-clicked)="BuyNowClicked($event)">
-    </lcu-plan-card>
-
-    <!-- <lcu-plan-card 
-      [plan]="plan" 
-      [show-button]="ShowButton"
-      (buy-now-clicked)="BuyNowClicked($event)">
-    </lcu-plan-card>
-
-    <lcu-plan-card 
-      [plan]="plan" 
-      [show-button]="ShowButton"
-      (buy-now-clicked)="BuyNowClicked($event)">
-    </lcu-plan-card> -->
+      <lcu-plan-card 
+        class='lcu-plan-card'
+        [plan]="plan" 
+        [show-button]="ShowButton"
+        (buy-now-clicked)="BuyNowClicked($event)">
+      </lcu-plan-card>
+    
+    </div>
   </div>
 </div>
 

@@ -15,7 +15,7 @@ export class UserBillingState {
 
   public Username?: string;
 
-  public RequiredOptIns?: Array<any>;
+  public RequiredOptIns?: Array<string>;
 
 }
 
