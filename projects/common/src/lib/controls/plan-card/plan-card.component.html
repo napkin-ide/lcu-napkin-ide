@@ -1,9 +1,9 @@
 <div [ngClass]="{'basic': Plan?.PlanGroup === 'Basic', 
                  'pro': Plan?.PlanGroup === 'Professional'}" fxLayout="column">
 
-  <div class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</div>
-  <p *ngIf="Plan.PlanGroup === FeaturedPlanGroup" class="featured-plan">Most Popular</p>
-  <div class="description" fxLayoutAlign="center center">{{Plan.Description}}</div>
+  <div *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</div>
+  <p *ngIf="Plan?.PlanGroup === FeaturedPlanGroup" class="featured-plan">Most Popular</p>
+  <div *ngIf="Plan?.Description"class="description" fxLayoutAlign="center center">{{Plan.Description}}</div>
   <!-- <div>{{Plan.Features}}</div> -->
   <div *ngIf="ShowButton === true" class="button-container" fxLayoutAlign="center center">
     <button mat-raised-button class="button" (click)="BuyNow(Plan)">Buy Now</button>
