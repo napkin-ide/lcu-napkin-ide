@@ -85,7 +85,7 @@ $Orange: orange;
     background-color: #00c2ff;
     width: 140px;
     position: relative;
-    top: -25px;
+    top: -13px;
     right: -144px;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -96,4 +96,18 @@ $Orange: orange;
 
 .description{
     text-align: center;
+}
+
+.discounted-from{
+    text-decoration: line-through;
+}
+
+.price{
+    font-size: 30px;
+}
+
+.interval-toggle{
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
 }
