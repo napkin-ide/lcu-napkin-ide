@@ -95,6 +95,11 @@ export class BillingComponent
 
   public PlanGroups: Array<string>;
 
+  /**
+   * An array of the intervals to pass to the Interval Toggle
+   */
+  public Intervals: string[];
+
   // public stripeCardNumber: any;
   // public stripeCardExpiry: any;
   // public stripeCardCvc: any;
@@ -154,13 +159,8 @@ export class BillingComponent
       });
   }
 
-  public ToggleChanged(event: any): void {
-    let toggleSelected: string;
-    if (event.checked === true) {
-      toggleSelected = 'month';
-    } else {
-      toggleSelected = 'year';
-    }
+  public ToggleChanged(toggleSelected: string): void {
+   
     // false === Annually
     // true === Monthly
     // console.log("toggle changed: ", event.checked);
@@ -357,10 +357,14 @@ export class BillingComponent
   protected stateChanged() {
     if (this.State.Plans) {
       this.PlanGroups = new Array<string>();
+      this.Intervals = new Array<string>();
 
       this.State.Plans.forEach((plan: BillingPlanOption) => {
         if (!this.PlanGroups.includes(plan.PlanGroup)) {
           this.PlanGroups.push(plan.PlanGroup);
+        }
+        if(!this.Intervals.includes(plan.Interval)){
+          this.Intervals.push(plan.Interval);
         }
       });
 

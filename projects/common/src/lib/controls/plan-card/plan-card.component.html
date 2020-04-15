@@ -4,8 +4,19 @@
 
   <div *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</div>
   <p *ngIf="Plan?.PlanGroup === FeaturedPlanGroup" class="featured-plan">Most Popular</p>
-  <div *ngIf="Plan?.Description"class="description" fxLayoutAlign="center center">{{Plan.Description}}</div>
+  <p *ngIf="Plan?.PlanGroup !== FeaturedPlanGroup"></p>
+
+  <p *ngIf="Plan?.Description" class="description" fxLayout="row" fxLayoutAlign="center center">
+    {{Plan.Description}}
+  </p>
+  <div *ngIf="Plan?.Price && Plan?.Interval" class="price" fxLayoutAlign="center center">${{Plan.Price}}/{{Plan.Interval}}</div>
+
   <!-- <div>{{Plan.Features}}</div> -->
+  <lcu-interval-toggle *ngIf='ShowToggle && Intervals && Plan?.Interval'
+    [current-interval]="Plan.Interval"
+    [intervals]="Intervals" 
+    (interval-selected)="IntervalSelected($event)">
+  </lcu-interval-toggle>
   <div *ngIf="ShowButton === true" class="button-container" fxLayoutAlign="center center">
     <button mat-raised-button class="button" (click)="BuyNow(Plan)">Buy Now</button>
   </div>
