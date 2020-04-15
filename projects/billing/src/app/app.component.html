@@ -3,8 +3,8 @@
 </div> -->
 <div [className]="SelectedTheme" style="height: 100%">
   <!-- <lcu-side-nav logo-class="primary-logo" title="Fathym Setup"> -->
-    <div class="billing-top-bar">
-      <lcu-user-account-sidenav [user-email]="Username" (logout-clicked)="LogoutClicked()"></lcu-user-account-sidenav>
+    <div class="billing-top-bar"  fxLayout="row" fxLayoutAlign="end center">
+      <lcu-user-account-sidenav class="user-account-sidenav"[user-email]="Username" (logout-clicked)="LogoutClicked()"></lcu-user-account-sidenav>
     </div>
     <!-- style="height: 100%;" -->
     <div class='router-container'>
