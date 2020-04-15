@@ -76,6 +76,8 @@ export class BillingComponent
    */
   public StripeError: string;
 
+  public StripeValid: boolean;
+
   public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
 
   /**
@@ -190,7 +192,7 @@ export class BillingComponent
     if (
       this.AcceptedEA &&
       this.AcceptedTOS &&
-      this.StripeError === '' &&
+      this.StripeValid &&
       this.BillingForm.value.userName
     ) {
       return false;
@@ -203,8 +205,12 @@ export class BillingComponent
   protected handleCardChanged(event: any) {
     if (event.error) {
       this.StripeError = event.error.message;
-    } else {
+
+      this.StripeValid = false;
+    } else if (event.complete) {
       this.StripeError = '';
+
+      this.StripeValid = true;
     }
   }
 
@@ -227,6 +233,8 @@ export class BillingComponent
       prodPlan: new FormControl('', [Validators.required]),
       userName: new FormControl('', [Validators.required]),
     });
+
+    this.StripeValid = false;
   }
 
   protected setupStripe() {

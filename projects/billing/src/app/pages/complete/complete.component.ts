@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   UserBillingStateContext,
   UserBillingState,
-  NapkinIDESetupStepTypes
+  NapkinIDESetupStepTypes,
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'lcu-complete',
   templateUrl: './complete.component.html',
   styleUrls: ['./complete.component.scss'],
-  animations: []
+  animations: [],
 })
 export class CompleteComponent implements OnInit {
   //  Fields
@@ -27,9 +27,11 @@ export class CompleteComponent implements OnInit {
   public State: UserBillingState;
 
   //  Constructors
-  constructor(protected userMgr: UserBillingStateContext,
+  constructor(
+    protected userMgr: UserBillingStateContext,
     protected route: ActivatedRoute,
-    protected router: Router) {}
+    protected router: Router
+  ) {}
 
   //  Life Cycle
   public ngOnInit() {
@@ -42,14 +44,12 @@ export class CompleteComponent implements OnInit {
 
   //  API methods
 
-  public Redirect(){
-    // http://www.fathym-it.com/projects/new
-    window.location.href = 'http://www.fathym-it.com/projects/new';
-
-  }
-
   //  Helpers
   protected stateChanged() {
-    console.log("state success page: ", this.State);
+    console.log('state success page: ', this.State);
+
+    if (!this.State.PaymentStatus) {
+      this.router.navigate(['']);
+    }
   }
 }
