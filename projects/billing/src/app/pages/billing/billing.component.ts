@@ -78,13 +78,13 @@ export class BillingComponent
 
   public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
 
-/**
- * Whether or not the user has accepted the Terms of Service
- */
+  /**
+   * Whether or not the user has accepted the Terms of Service
+   */
   public AcceptedTOS: boolean;
-/**
- * Whether or not the user has accepted the Enterprise Agreement
- */
+  /**
+   * Whether or not the user has accepted the Enterprise Agreement
+   */
   public AcceptedEA: boolean;
 
   /**
@@ -105,7 +105,7 @@ export class BillingComponent
     protected cdr: ChangeDetectorRef,
     protected route: ActivatedRoute,
     protected router: Router
-  ) {  }
+  ) {}
 
   //  Life Cycle
   public ngOnInit() {
@@ -118,14 +118,12 @@ export class BillingComponent
       console.log('billing state: ', this.State);
       console.log('Plan id', this.planID);
       // if(!this.State.Loading){
-        this.stateChanged();
+      this.stateChanged();
       // }
     });
-    
   }
 
-  public ngAfterViewInit(): void {
-  }
+  public ngAfterViewInit(): void {}
 
   public ngAfterViewChecked(): void {
     this.setupStripe();
@@ -133,9 +131,11 @@ export class BillingComponent
 
   //  API methods
 
-
   public SubmitBilling(event: Event) {
+    this.State.Loading = true;
+
     event.preventDefault();
+
     this.stripe
       .createPaymentMethod({
         type: 'card',
@@ -152,47 +152,51 @@ export class BillingComponent
       });
   }
 
-  public ToggleChanged(event: any):void{
+  public ToggleChanged(event: any): void {
     let toggleSelected: string;
-    if(event.checked === true){
-      toggleSelected = "month";
+    if (event.checked === true) {
+      toggleSelected = 'month';
+    } else {
+      toggleSelected = 'year';
     }
-    else{
-      toggleSelected = "year"
-    }
-    //false === Annually
-    //true === Monthly
+    // false === Annually
+    // true === Monthly
     // console.log("toggle changed: ", event.checked);
     this.State.Plans.forEach((plan: BillingPlanOption) => {
-      if(this.SelectedPlan.PlanGroup === plan.PlanGroup && plan.Interval === toggleSelected){
+      if (
+        this.SelectedPlan.PlanGroup === plan.PlanGroup &&
+        plan.Interval === toggleSelected
+      ) {
         this.SelectedPlan = plan;
         this.planID = this.SelectedPlan.Lookup;
       }
     });
   }
 
-  public GoBack(){
+  public GoBack() {
     this.router.navigate(['']);
   }
 
-  public TOSChanged(event: any){
-    console.log("TOS: ", event);
+  public TOSChanged(event: any) {
+    console.log('TOS: ', event);
     this.AcceptedTOS = event.checked;
   }
-  public EAChanged(event: any){
-    console.log("EA: ", event);
+  public EAChanged(event: any) {
+    console.log('EA: ', event);
     this.AcceptedEA = event.checked;
-
   }
 
-  public IsButtonDisabled(): boolean{
-    if(this.AcceptedEA && this.AcceptedTOS && this.StripeError === '' && this.BillingForm.value.userName){
+  public IsButtonDisabled(): boolean {
+    if (
+      this.AcceptedEA &&
+      this.AcceptedTOS &&
+      this.StripeError === '' &&
+      this.BillingForm.value.userName
+    ) {
       return false;
-    }
-    else{
+    } else {
       return true;
     }
-  
   }
 
   //  Helpers
@@ -217,8 +221,6 @@ export class BillingComponent
       );
     }
   }
-
-  
 
   protected setupForms() {
     this.BillingForm = this.formBldr.group({
@@ -286,7 +288,6 @@ export class BillingComponent
     }
   }
 
-
   // protected setupStripeElements():void{
   //   const elements = this.stripe.elements();
   //   var elementStyles = {
@@ -345,30 +346,29 @@ export class BillingComponent
   //   this.stripeCardCvc.mount('#card-cvc');
   // }
 
-
   protected stateChanged() {
-
     if (this.State.Plans) {
       this.PlanGroups = new Array<string>();
 
       this.State.Plans.forEach((plan: BillingPlanOption) => {
-        if(!this.PlanGroups.includes(plan.PlanGroup)){
-          this.PlanGroups.push(plan.PlanGroup)
+        if (!this.PlanGroups.includes(plan.PlanGroup)) {
+          this.PlanGroups.push(plan.PlanGroup);
         }
       });
+
       console.log('plan groups', this.PlanGroups);
     }
-    
-    if(this.State.RequiredOptIns){
-      if(!this.State.RequiredOptIns.includes("ToS")){
+
+    if (this.State.RequiredOptIns) {
+      if (!this.State.RequiredOptIns.includes('ToS')) {
         this.AcceptedTOS = true;
       }
-      if(!this.State.RequiredOptIns.includes("EA")){
+      if (!this.State.RequiredOptIns.includes('EA')) {
         this.AcceptedEA = true;
       }
     }
     // console.log("planID =", this.planID);
-        // if a plan has been passed in via param set the selected plan accordingly
+    // if a plan has been passed in via param set the selected plan accordingly
 
     if (this.planID && this.State.Plans) {
       this.SelectedPlan = this.State.Plans.find(
@@ -397,11 +397,12 @@ export class BillingComponent
           });
       } else if (this.State.PaymentStatus.Code === 1) {
         this.StripeError = this.State.PaymentStatus.Message;
+      } else if (this.State.PaymentStatus.Code === 0) {
+        //  TODO: Navigate to success page
       } else {
         this.paymentSuccess();
       }
     }
-
   }
   /**
    * When the payment returns Successfully
