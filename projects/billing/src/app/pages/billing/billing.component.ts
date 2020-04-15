@@ -398,9 +398,9 @@ export class BillingComponent
       } else if (this.State.PaymentStatus.Code === 1) {
         this.StripeError = this.State.PaymentStatus.Message;
       } else if (this.State.PaymentStatus.Code === 0) {
-        //  TODO: Navigate to success page
-      } else {
         this.paymentSuccess();
+      } else {
+        // TODO: What to do in case of other errors
       }
     }
   }
@@ -408,7 +408,6 @@ export class BillingComponent
    * When the payment returns Successfully
    */
   protected paymentSuccess(): void {
-    // TODO do something
-    // this.router.navigate(['complete']);
+    this.router.navigate(['complete']);
   }
 }
