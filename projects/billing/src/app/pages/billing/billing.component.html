@@ -7,8 +7,8 @@
     <!-- PRICING CONTAINER -->
     <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="space-around center">
 
-      <lcu-plan-card *ngIf="State.Plans" 
-        [plan]="SelectedPlan" 
+      <lcu-plan-card *ngIf="State.Plans"
+        [plan]="SelectedPlan"
         [plan-groups]="PlanGroups">
       </lcu-plan-card>
 
@@ -54,7 +54,7 @@
                 <div id="card-cvc"class="stripe-card"></div> -->
 
                   </div>
-                  <div id="card-errors" role="alert" class="spread" *ngIf="StripeError">
+                  <div id="card-errors mat-error" role="alert" class="spread" *ngIf="StripeError">
                     {{ StripeError }}
                   </div>
                 </div>
