@@ -9,6 +9,7 @@ import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/she
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserAccountSidenavComponent } from './controls/user-account-sidenav/user-account-sidenav.component';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
+import { IntervalToggleComponent } from './controls/interval-toggle/interval-toggle.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PlanCardComponent } from './controls/plan-card/plan-card.component';
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
     UserAccountSidenavComponent,
-    PlanCardComponent
+    PlanCardComponent,
+    IntervalToggleComponent
   ],
   imports: [
     CommonModule,
@@ -33,14 +35,16 @@ import { PlanCardComponent } from './controls/plan-card/plan-card.component';
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
     UserAccountSidenavComponent,
-    PlanCardComponent
+    PlanCardComponent,
+    IntervalToggleComponent
   ],
   entryComponents: [
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
     UserAccountSidenavComponent,
-    PlanCardComponent
+    PlanCardComponent,
+    IntervalToggleComponent
   ]
 })
 export class LcuNapkinIdeModule {}

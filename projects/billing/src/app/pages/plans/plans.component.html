@@ -8,10 +8,14 @@
       <lcu-plan-card 
         class='lcu-plan-card'
         [featured-plan-group]="State.FeaturedPlanGroup"
+        [show-toggle]="ShowToggle"
+        [intervals]="Intervals"
         [plan]="plan" 
+        [all-plans]="DisplayedPlans"
         [plan-groups]="PlanGroups"
         [show-button]="ShowButton"
-        (buy-now-clicked)="BuyNowClicked($event)">
+        (buy-now-clicked)="BuyNowClicked($event)"
+        (interval-toggled)="IntervalToggled($event, plan)">
       </lcu-plan-card>
     
     </div>
