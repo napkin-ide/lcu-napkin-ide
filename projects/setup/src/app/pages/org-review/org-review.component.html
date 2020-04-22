@@ -20,7 +20,7 @@
         >
           <ng-container *ngIf="!bootOption.Loading">
             <span *ngIf="bootOption.Status?.Code != 0">
-              check
+              radio_button_unchecked
             </span>
 
             <span *ngIf="bootOption.Status?.Code == 0">
@@ -93,7 +93,7 @@
       class="margin-top-3"
       (click)="Boot()"
     >
-      Finalize and Deploy your Project
+      Finalize and Deploy Workspace
     </button>
 
     <a

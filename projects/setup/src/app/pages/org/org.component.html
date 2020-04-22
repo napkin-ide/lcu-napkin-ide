@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
-  <div fxFlex="30%" fxFlex.lt-md="100%" class="details">
+  <div fxFlex="35%" fxFlex.lt-md="100%" class="details">
     <div class="inner">
       <mat-nav-list>
         <mat-list-item>
@@ -23,23 +23,44 @@
               *ngIf="State.SetupStep == SetupStepTypes.OrgDetails"
               class="active-mat-list-item"
             >
-              <mat-icon matListIcon>chevron_right</mat-icon>
+            <div fxLayout="row"fxLayoutAlign="space-between start" >
+            <mat-icon 
+             *ngIf="!State.OrganizationLookup  && !State.OrganizationName"
+             matListIcon [ngClass]="'step-checkbox list-icon'">
+              radio_button_unchecked
+            </mat-icon>
 
-              <div matLine>
+            <mat-icon 
+              *ngIf="(State.SetupStep === 'OrgDetails') && (State.OrganizationLookup && State.OrganizationName)" 
+              matListIcon [ngClass]="'step-checkbox success'">
+              check_circle
+            </mat-icon>
+
+              <div matLine class='reg-headers'>
                 <h2
-                  class="h2 paragraph-title-bold margin-bottom-3 margin-top-3"
+                
                 >
-                  Project Details
+                  Workspace Set Up
                 </h2>
-
+                  <hr class="hr-line">
                 <p class="mat-subheading-2">
                   Fathym’s low-code framework is designed for projects of any
                   size. It's built to give developers the freedom and best
                   practice workflows to rapidly create IoT and data-driven
                   applications that are agnostic to tools, platforms and clouds.
                 </p>
+                <a mat-raised-button 
+                class="documentation-button" 
+                color="primary" target="blank"
+                href="https://support.fathym.com/docs/registration"
+                fxLayoutAlign="center">
+                  <mat-icon>description</mat-icon>
+                  View Registration Documentation
+                </a>
               </div>
+            </div>
             </mat-list-item>
+          
 
             <mat-list-item
               *ngIf="
@@ -53,7 +74,7 @@
                 (click)="SetStep(SetupStepTypes.OrgDetails)"
                 *ngIf="!State.NewEnterpriseAPIKey"
               >
-                Project Details Configured
+                Workspace Set Up
               </a>
 
               <h2
@@ -61,8 +82,9 @@
                 *ngIf="State.NewEnterpriseAPIKey"
                 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3"
               >
-                Project Details Configured
+                Workspace Set Up
               </h2>
+              
             </mat-list-item>
           </ng-container>
 
@@ -75,26 +97,40 @@
                 State.SetupStep !== SetupStepTypes.AzureSetup && !InfraFormValid
               "
             >
-              <mat-icon matListIcon class="error">highlight_off</mat-icon>
+            <mat-icon matListIcon class="list-icon">radio_button_unchecked</mat-icon>
 
-              <h1 matLine>Set Up Project Infrastructure</h1>
+              <h1 matLine>Workspace Infrastructure Set Up</h1>
             </mat-list-item>
 
             <mat-list-item
               *ngIf="State.SetupStep === SetupStepTypes.AzureSetup"
               class="active-mat-list-item"
             >
-              <mat-icon matListIcon>chevron_right</mat-icon>
+            <div fxLayout="row"fxLayoutAlign="space-between start" >
+              <div class="icon-container">
+              <mat-icon 
+               *ngIf="State.SetupStep === SetupStepTypes.AzureSetup && !InfraFormValid"
+               matListIcon [ngClass]="'step-checkbox list-icon'">
+                radio_button_unchecked
+              </mat-icon>
+  
+              <mat-icon 
+                *ngIf="State.SetupStep === SetupStepTypes.AzureSetup && InfraFormValid" 
+                matListIcon [ngClass]="'step-checkbox success'">
+                check_circle
+              </mat-icon>
+            </div>
+              <!-- <mat-icon matListIcon>chevron_right</mat-icon> -->
 
-              <div matLine>
+              <div matLine class='reg-headers'>
                 <h2
-                  class="h2 paragraph-title-bold margin-bottom-3 margin-top-3"
+                
                 >
-                  Set Up Project Infrastructure
+                  Workspace Infrastructure Set Up
                 </h2>
-
+                <hr class="hr-line">
                 <h2 class="mat-subheading-2">
-                  You will need to have a Microsoft Azure account to get
+                  You will need a Microsoft Azure account to get
                   started. Create a new account or use an existing account.
                 </h2>
 
@@ -108,35 +144,37 @@
                   >
                     <img matListIcon src="assets/img/Azure-logo.png" />
 
-                    Create &nbsp; a &nbsp; Free &nbsp; Azure &nbsp; Account
+                    Create/Connect a Microsoft Azure Account
                   </a>
                 </div>
 
                 <h2 class="mat-subheading-2" style="margin-top: 15px;">
-                  Fathym needs access to your Azure subscription to help you
-                  manage your infrastructure.
+                  Fathym needs access to your Azure subscription in order to
+                  manage your infrastructure. Access your configuration information through
+                  the link below.
                 </h2>
 
                 <div class="btn-split">
                   <a
                     mat-raised-button
-                    href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in."
+                    href="https://support.fathym.com/docs/registration"
                     color="primary"
                     class="mat-full-width"
                     target="_blank"
                   >
-                    <mat-icon>settings</mat-icon>
+                    <mat-icon>search</mat-icon>
 
-                    Locate Your Configuration Information
+                    Find Your Azure Configuration Information
                   </a>
                 </div>
 
                 <div class="spread">
-                  <h3 class="mat-subheading-1">
+                  <!-- <h3 class="mat-subheading-1">
                     Additional infrastructure options coming soon!
-                  </h3>
+                  </h3> -->
                 </div>
               </div>
+            </div>
             </mat-list-item>
 
             <mat-list-item
@@ -147,7 +185,7 @@
               <mat-icon matListIcon class="success">check_circle</mat-icon>
 
               <a matLine (click)="SetStep(SetupStepTypes.AzureSetup)"
-                >Project Infrastructure Set Up</a
+                >Workspace Infrastructure Set Up</a
               >
             </mat-list-item>
           </ng-container>
@@ -165,7 +203,7 @@
             >
               <mat-icon matListIcon class="error">highlight_off</mat-icon>
 
-              <h1 matLine>Permissions & Launch</h1>
+              <h1 matLine>Finalize and Deploy</h1>
             </mat-list-item>
 
             <mat-list-item
@@ -173,13 +211,15 @@
                 State.SetupStep !== SetupStepTypes.Review &&
                 State.Host &&
                 State.TermsAccepted &&
-                State.SetupStep != SetupStepTypes.Complete
+                State.SetupStep !== SetupStepTypes.Complete
               "
             >
-              <mat-icon matListIcon>chevron_right</mat-icon>
+            <mat-icon matListIcon class="list-icon">radio_button_unchecked</mat-icon>
+
+              <!-- <mat-icon matListIcon>chevron_right</mat-icon> -->
 
               <a matLine (click)="SetStep(SetupStepTypes.Review)"
-                >Permissions & Launch</a
+                >Finalize and Deploy</a
               >
             </mat-list-item>
 
@@ -187,19 +227,34 @@
               *ngIf="State.SetupStep === SetupStepTypes.Review"
               class="active-mat-list-item"
             >
-              <mat-icon matListIcon>chevron_right</mat-icon>
+              <!-- <mat-icon matListIcon>chevron_right</mat-icon> -->
+              <div fxLayout="row"fxLayoutAlign="space-between start" >
+                <mat-icon 
+                 *ngIf="State.SetupStep === SetupStepTypes.Review "
+                 matListIcon [ngClass]="'step-checkbox list-icon'">
+                  radio_button_unchecked
+                </mat-icon>
+    
+                <mat-icon 
+                  *ngIf="State.SetupStep === SetupStepTypes.Complete" 
+                  matListIcon [ngClass]="'step-checkbox success'">
+                  check_circle
+                </mat-icon>
 
-              <div matLine>
-                <h1
-                  class="h2 paragraph-title-bold margin-bottom-3 margin-top-3"
-                >
-                  Permissions & Launch
-                </h1>
-
+              <div matLine class='reg-headers'>
+                <h2
+                                >
+                  Finalize and Deploy
+                </h2>
+                <hr class="hr-line">
                 <h2 class="mat-subheading-2">
                   Fathym will set up a best practice IoT infrastructure for your
-                  project. Once set up, you can adjust the architecture as
-                  needed for your project.
+                  workspace. Once set up, you can adjust the architecture as
+                  needed.
+                </h2>
+                <h2 class="mat-subheading-2">
+                  This process can take up to 15 minutes, so click "Finalize and Deploy"
+                  and grab a coffee (or beer!).
                 </h2>
 
                 <!-- <h2 class="mat-subheading-2" *ngIf="State.EnterpriseBooted">
@@ -208,13 +263,15 @@
                   the domain you've chosen.
                 </h2> -->
 
-                <h2 class="mat-subheading-2">
+
+                <!-- <h2 class="mat-subheading-2">
                   For more information, checkout the following documentation
                   link...
                 </h2>
                 <a [href]="HelpPdf" target="_blank"
                   >Fathym Registration Help PDF</a
-                >
+                > -->
+              </div>
               </div>
             </mat-list-item>
 
@@ -229,7 +286,7 @@
     </div>
   </div>
 
-  <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
+  <div fxFlex="65%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
     <div class="inner">
       <div style="width: 100%;">
         <div class="spread">
