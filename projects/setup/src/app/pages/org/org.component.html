@@ -224,7 +224,7 @@
             </mat-list-item>
 
             <mat-list-item
-              *ngIf="State.SetupStep === SetupStepTypes.Review"
+              *ngIf="State.SetupStep === SetupStepTypes.Review || State.SetupStep === SetupStepTypes.Complete"
               class="active-mat-list-item"
             >
               <!-- <mat-icon matListIcon>chevron_right</mat-icon> -->
