@@ -208,13 +208,13 @@
                   the domain you've chosen.
                 </h2> -->
 
-                <h2 class="mat-subheading-2">
+                <!-- <h2 class="mat-subheading-2">
                   For more information, checkout the following documentation
                   link...
                 </h2>
                 <a [href]="HelpPdf" target="_blank"
                   >Fathym Registration Help PDF</a
-                >
+                > -->
               </div>
             </mat-list-item>
 
@@ -234,12 +234,9 @@
       <div style="width: 100%;">
         <div class="spread">
           <mat-card>
-            <div
-              *ngIf="State.Loading && State.SetupStep !== SetupStepTypes.Review"
-            >
+            <div *ngIf="State.Loading && State.SetupStep !== SetupStepTypes.Review">
               <p style="text-align: center;">
-                Behind the scenes Thinky is working hard to set up your Low Code
-                Unit
+                <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
               </p>
 
               <!-- <p style="text-align: center;"></p> -->

@@ -1,23 +1,23 @@
 <div [fxShow]="!State.Loading">
   <!-- fxLayoutAlign="space-around center"  -->
   <div  fxLayout.lg="row wrap" fxLayout.sm="column" fxLayout.xs="column"
-        fxLayoutAlign="space-around center" 
+        fxLayoutAlign="space-around center"
         fxLayoutGap="30px">
     <div *ngFor="let plan of DisplayedPlans">
 
-      <lcu-plan-card 
+      <lcu-plan-card
         class='lcu-plan-card'
         [featured-plan-group]="State.FeaturedPlanGroup"
         [show-toggle]="ShowToggle"
         [intervals]="Intervals"
-        [plan]="plan" 
+        [plan]="plan"
         [all-plans]="DisplayedPlans"
         [plan-groups]="PlanGroups"
         [show-button]="ShowButton"
         (buy-now-clicked)="BuyNowClicked($event)"
         (interval-toggled)="IntervalToggled($event, plan)">
       </lcu-plan-card>
-    
+
     </div>
   </div>
 </div>
@@ -25,7 +25,7 @@
  <!-- LOADING SCREEN -->
  <div [fxShow]="State.Loading">
   <p style="text-align: center;">
-    Behind the scenes Thinky is working hard to set up your Low Code Unit
+    <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
   </p>
 
   <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
