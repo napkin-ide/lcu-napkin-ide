@@ -19,11 +19,11 @@
           [color]="GetBootOptionColor(bootOption)"
         >
           <ng-container *ngIf="!bootOption.Loading">
-            <span *ngIf="bootOption.Status?.Code != 0">
+            <span *ngIf="bootOption.Status?.Code != 0" >
               radio_button_unchecked
             </span>
 
-            <span *ngIf="bootOption.Status?.Code == 0">
+            <span *ngIf="bootOption.Status?.Code == 0" >
               check_circle
             </span>
           </ng-container>
@@ -91,7 +91,7 @@
       mat-raised-button
       color="accent"
       class="margin-top-3"
-      (click)="Boot()"
+      (click)="OpenConfirmationDialog()"
     >
       Finalize and Deploy Workspace
     </button>

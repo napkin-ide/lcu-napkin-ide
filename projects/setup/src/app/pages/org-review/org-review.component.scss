@@ -59,3 +59,17 @@
     }
   }
 }
+
+// @mixin modal($theme) {
+//   $primary: map-get($theme, primary);
+//   $accent: map-get($theme, accent);
+//   $warn: map-get($theme, warn);
+//   // @warn "current theme #{$theme}";
+
+// .thinky{
+//   background-image: fathym-logo(thinky-circle, #000000, .7);
+//   background-repeat:no-repeat;
+//   background-position: center;
+//   background-size: 100px;
+// }
+// }

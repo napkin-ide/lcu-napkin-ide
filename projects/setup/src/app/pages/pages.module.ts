@@ -10,6 +10,7 @@ import { OrgDetailsComponent } from './org-details/org-details.component';
 import { OrgInfraComponent } from './org-infra/org-infra.component';
 import { OrgReviewComponent } from './org-review/org-review.component';
 import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
     CompleteComponent,
     OrgDetailsComponent,
     OrgInfraComponent,
-    OrgReviewComponent
+    OrgReviewComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
     LcuNapkinIdeModule,
     PipeModule
  ],
-  exports: [OrgComponent],
-  providers: []
+  exports: [OrgComponent, ConfirmationModalComponent],
+  providers: [],
+  entryComponents: [ConfirmationModalComponent]
 })
 export class PagesModule {}
