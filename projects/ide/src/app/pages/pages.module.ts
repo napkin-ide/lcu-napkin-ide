@@ -10,7 +10,7 @@ import { IdeSideBarComponent } from './ide/ide-side-bar/ide-side-bar.component';
 import { IdeStatusBarComponent } from './ide/ide-status-bar/ide-status-bar.component';
 import { IdeTopBarComponent } from './ide/ide-top-bar/ide-top-bar.component';
 import { LazyElementModule } from '@lowcodeunit/lazy-element';
-import { ExternalDialogModule } from '@napkin-ide/lcu-napkin-ide-common';
+import { ExternalDialogModule, LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -29,7 +29,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     PagesRoutingModule,
     FlexLayoutModule,
-    ExternalDialogModule
+    ExternalDialogModule,
+    LcuNapkinIdeModule
  ],
   exports: [IdeComponent],
   providers: []

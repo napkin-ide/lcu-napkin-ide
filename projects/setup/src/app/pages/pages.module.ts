@@ -8,10 +8,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CompleteComponent } from './complete/complete.component';
 import { OrgDetailsComponent } from './org-details/org-details.component';
 import { OrgInfraComponent } from './org-infra/org-infra.component';
-import { OrgHostComponent } from './org-host/org-host.component';
 import { OrgReviewComponent } from './org-review/org-review.component';
 import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
-import { OrgTermsComponent } from './org-terms/org-terms.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +17,7 @@ import { OrgTermsComponent } from './org-terms/org-terms.component';
     CompleteComponent,
     OrgDetailsComponent,
     OrgInfraComponent,
-    OrgHostComponent,
-    OrgReviewComponent,
-    OrgTermsComponent
+    OrgReviewComponent
   ],
   imports: [
     CommonModule,

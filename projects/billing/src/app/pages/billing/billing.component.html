@@ -1,0 +1,105 @@
+<div [fxShow]="!State.Loading">
+
+  <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon>
+
+  <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
+
+    <!-- PRICING CONTAINER -->
+    <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="space-around center">
+
+      <lcu-plan-card *ngIf="State.Plans"
+        [plan]="SelectedPlan"
+        [plan-groups]="PlanGroups">
+      </lcu-plan-card>
+
+      <div class='vertical-line'></div>
+    </div>
+
+    <!-- BILLING CONTAINER -->
+    <div class='billing-container' fxFlex="45%" fxFlex.lt-sm="80%">
+      <div class="billing-header-container" fxLayout="column" fxLayoutAlign="space-around center">
+      <div class="fathym-logo"></div>
+      <h2>Enter Your Payment Information Below</h2>
+    </div>
+
+        <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
+
+          <!-- STRIPE STUFF -->
+          <div class="payment-info-container">
+
+            <form action="/charge" method="post" class="billing-form" id="payment-form" [formGroup]="BillingForm"
+              (ngSubmit)="SubmitBilling($event)">
+
+              <div class="form-row" fxLayout="column" fxLayoutAlign="space-around center">
+
+                <div class="billing-info">
+                  <label fxLayout="column" fxLayoutAlign="space-around start">
+                    <span id="input-span">Name</span>
+                    <input name="cardholder-name" class="cardholder-name-input" id="cardholder-name-input"
+                      formControlName="userName" placeholder="Cardholder Name" />
+                  </label>
+                </div>
+                <div class="billing-info">
+                  <label for="card-element" fxLayout="column" fxLayoutAlign="space-around start">Credit Card</label>
+
+                  <div class="stripe-container">
+                    <div id="card-element" class="stripe-card"></div>
+                    <!-- <label for="card-number" fxLayout="column" fxLayoutAlign="space-around center">Card Number</label>
+                <div id="card-number"class="stripe-card"></div>
+                <label for="card-expiry" fxLayout="column" fxLayoutAlign="space-around center">Expiration Date</label>
+
+                <div id="card-expiry"class="stripe-card"></div>
+                <label for="card-cvc" fxLayout="column" fxLayoutAlign="space-around center">CVC</label>
+
+                <div id="card-cvc"class="stripe-card"></div> -->
+
+                  </div>
+                  <div id="card-errors mat-error" role="alert" class="spread" *ngIf="StripeError">
+                    {{ StripeError }}
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="column" fxLayoutAlign="center start">
+                <mat-checkbox *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
+                  <a target='blank' href="https://fathym.com/terms-of-services/">Terms of Service</a>
+                </mat-checkbox>
+                <mat-checkbox *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
+                  <a target="blank" href="https://fathym.com/enterprise-agreement/">Enterprise Agreement</a>
+                </mat-checkbox>
+
+              </div>
+
+              <!-- TOGGLE & BUTTON -->
+              <div class="toggle-button-container" fxLayout="column" fxLayoutAlign="center center">
+
+                <lcu-interval-toggle *ngIf="SelectedPlan"
+                [current-interval]="SelectedPlan.Interval"
+                [intervals]="Intervals" 
+                (interval-selected)="ToggleChanged($event)">
+              </lcu-interval-toggle>
+
+                <div class="button-container" fxLayoutAlign="center center">
+                  <button mat-raised-button id="payment-button" class='buy-now-button'
+                  *ngIf="SelectedPlan"
+                  [disabled]="IsButtonDisabled()">Buy Now</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+    </div>
+  </div>
+</div>
+
+  <!-- LOADING SCREEN -->
+  <div [fxShow]="State.Loading">
+    <p style="text-align: center;">
+      Behind the scenes Thinky is working hard to set up your Low Code Unit
+    </p>
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
+      <mat-spinner diameter="75"></mat-spinner>
+      <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+    </div>
+  </div>

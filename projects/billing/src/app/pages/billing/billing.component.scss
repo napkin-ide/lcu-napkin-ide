@@ -1,0 +1,132 @@
+@import "../../../common";
+
+$Fathym-Green: #4a918e;
+
+@mixin input-box {
+  background-color: #f7f7f7;
+  border-radius: 2px;
+  // margin-left: 20px;
+  margin: 10px 0px;
+  padding: 5px;
+  border-bottom: 1px solid #d7d1c9;
+}
+
+// @mixin billing-component($theme){
+  .fathym-logo{
+    background-image: fathym-logo(thinky-full-logo, black, 1);
+    background-repeat: no-repeat;
+    background-size: 267px;
+    height: 70px;
+    width: 300px;
+  }
+// }
+
+
+.back-arrow{
+  position: relative;
+  top: -38px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 1;
+}
+.welcome {
+  text-align: center;
+}
+.billing-form{
+  height: 100%;
+.billing-page-container {
+  padding: 20px;
+  background-color: #a4bab3;
+  height: 100%;
+  
+
+  .pricing-container{
+    // background-color: lavenderblush;
+    height: 100%;
+    overflow: auto;
+
+    .product-plans {
+
+      .mat-radio-group {
+        width: 100%;
+      }
+    }
+  }
+  .billing-container{
+    height: 100%;
+  }
+
+  
+}
+.stripe-container{
+  // background-color: green;
+  #card-element{
+    width: 500px;
+    // background-color: grey ;
+    // .ElementsApp input{
+    //   background-color: red;
+    // }
+  }
+}
+}
+h2{
+  text-align: center;
+}
+
+.vertical-line{
+  border-left: 2px solid grey;
+  height: 430px;
+}
+
+.mat-payment-card{
+  margin-left: 10px;
+}
+
+.toggle-container{
+  margin: 10px;
+}
+
+.button-container{
+  margin: 10px;
+}
+
+.stripe-card{
+  @include input-box();
+}
+
+.cardholder-name-input{
+  @include input-box();
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  color: black;
+  font-weight: 600;
+  font-size: 16px;
+  width: 500px;
+  outline: none;
+  
+  // margin-right: 22px;
+   ::placeholder{
+  color: black;
+  opacity: 1;
+  }
+}
+
+.buy-now-button{
+  width: 500px;
+  background-color: $Fathym-Green;
+  
+}
+
+/******************************    Strip Styling    **************************************/
+// Main form styling
+.StripeElement {
+}
+
+// Focused field that user has text cursor in
+.StripeElement--focus {
+}
+
+// A field with an error or incomplete
+.StripeElement--invalid {
+}

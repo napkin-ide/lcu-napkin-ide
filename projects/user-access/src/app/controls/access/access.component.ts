@@ -119,7 +119,7 @@ export class AccessComponent implements OnInit {
    * When state changes
    */
   protected stateChanged() {
-    debugger;
+  
   }
 
 }

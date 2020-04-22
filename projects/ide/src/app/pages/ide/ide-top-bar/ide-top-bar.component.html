@@ -1,7 +1,62 @@
-  <mat-toolbar fxLayout="row" fxLayoutAlign="space-between">
-    <div class="primary-logo" alt="Fathym Framework"></div>
-
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ToggleSideBar()" *ngIf="isHandset">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+<mat-toolbar class="ide-tool-bar" fxLayout="row" fxLayoutAlign="space-between">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <button
+      class="menu-button"
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="ToggleSideBar()"
+      *ngIf="isHandset"
+    >
+      <mat-icon class="toolbar-icon" aria-label="Side nav toggle icon"
+        >menu</mat-icon
+      >
     </button>
-  </mat-toolbar>
+
+    <div
+      class="primary-logo"
+      alt="Fathym Framework"
+      [ngClass]="{ small: isHandset, large: !isHandset }"
+    ></div>
+  </div>
+
+  <!-- use state to insert the actions -->
+  <span class="action-icons">
+    <ng-container *ngFor="let action of State.HeaderActions">
+      <button
+        *ngIf="action.Type == IDEActionTypes.Modal"
+        matTooltip="{{ action.Text }}"
+        mat-icon-button
+        (click)="HeaderActionClicked(action)"
+      >
+        <mat-icon>{{ action.Icon }}</mat-icon> <span>{{ action.Text }}</span>
+      </button>
+
+      <a
+        *ngIf="
+          action.Type == IDEActionTypes.Link ||
+          action.Type == IDEActionTypes.ExternalLink
+        "
+        mat-icon-button
+        [href]="action.Action"
+        [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''"
+      >
+        <mat-icon>{{ action.Icon }}</mat-icon> <span>{{ action.Text }}</span>
+      </a>
+    </ng-container>
+  </span>
+
+  <lcu-user-account-sidenav
+    class="user-account"
+    [user-email]="State.Username"
+    (logout-clicked)="LogoutClicked($event)"
+  >
+  </lcu-user-account-sidenav>
+  <!-- <lcu-user-account-sidenav
+    class="user-account"
+    [user-info]="UsersInfo"
+    [user-email]="State.Username"
+    (logout-clicked)="LogoutClicked($event)"
+  >
+  </lcu-user-account-sidenav> -->
+</mat-toolbar>

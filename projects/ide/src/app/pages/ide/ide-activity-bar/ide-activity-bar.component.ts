@@ -1,6 +1,7 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ExternalDialogComponent, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { IdeActivity } from '@lcu/common';
 
 @Component({
@@ -12,8 +13,11 @@ export class IdeActivityBarComponent implements OnInit {
   protected rootActDialog: MatDialogRef<ExternalDialogComponent, any>;
 
   public Activities: IdeActivity[];
+
   public CurrentActivity: IdeActivity;
+
   public InfraConfigured: boolean;
+
   public RootActivities: IdeActivity[];
 
   constructor(
@@ -33,6 +37,7 @@ export class IdeActivityBarComponent implements OnInit {
         this.OpenRootActivity(this.RootActivities[0]);
       }
     });
+    console.log('ideState =', this.ideState);
   }
 
   public OpenRootActivity(act: IdeActivity): void {
@@ -42,7 +47,7 @@ export class IdeActivityBarComponent implements OnInit {
         data: { ExternalPath: act.Lookup }
       });
 
-      this.rootActDialog.afterClosed().subscribe(result => {
+      this.rootActDialog.afterClosed().subscribe((result: Observable<any>) => {
         this.ideState.$Refresh();
         this.rootActDialog = null;
       });

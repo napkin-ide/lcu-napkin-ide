@@ -1,0 +1,113 @@
+
+$Fathym-Green: #4a918e;
+$Purple: purple;
+$Orange: orange;
+//----------------------MIXINS------------------------//
+@mixin plan-card-basic {
+    border: 1px solid;
+    width: 250px;
+    height: 370px;
+    position: relative;
+    border-radius: 4px;;
+}
+
+@mixin title {
+    margin-top: 15px;
+}
+
+@mixin button{
+    width: 100px;
+    border: 1px solid black;
+    color: white;
+}
+
+@mixin button-position{
+    position: absolute;
+    bottom: -30px;
+    left: 65px;
+}
+//--------------------------END MIXINS--------------------------------------//
+.pro{
+    @include plan-card-basic();
+    border-color: $Fathym-Green;
+    .title{
+        @include title();
+        background-color: $Fathym-Green;
+    }
+    .button-container{
+        @include button-position();
+
+        .button{
+            @include button();
+            background-color:$Fathym-Green;  
+        }
+    }
+    
+}
+
+.inter{
+    @include plan-card-basic();
+    border-color: $Purple;
+    .title{
+        @include title();
+        background-color: $Purple;
+    }
+    .button-container{
+        @include button-position();
+
+        .button{
+            @include button();
+            background-color:$Purple;  
+        }
+    }
+    
+}
+
+.basic{
+    @include plan-card-basic();
+    border-color: $Orange;
+    .title{
+        @include title();
+        background-color: $Orange;
+    }
+    .button-container{
+        @include button-position();
+        .button{
+            @include button();
+            background-color:$Orange;  
+        }
+    }
+    
+}
+
+.featured-plan{  
+    transform: rotate(40deg);
+    background-color: #00c2ff;
+    width: 140px;
+    position: relative;
+    top: -13px;
+    right: -144px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-size: 12px;
+    clip-path: polygon(23% 0,77% 0,86% 100%,0 169%);
+}
+
+.description{
+    text-align: center;
+}
+
+.discounted-from{
+    text-decoration: line-through;
+}
+
+.price{
+    font-size: 30px;
+}
+
+.interval-toggle{
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+}

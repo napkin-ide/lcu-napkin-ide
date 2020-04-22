@@ -6,9 +6,11 @@ import { MaterialModule } from '@lcu/common';
 import { NavListComponent } from './controls/nav-list/nav-list.component';
 import { RouterModule } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
-import { LcuThemePickerModule } from '@lowcodeunit/lcu-theme-picker-common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LcuTrademarkDirective } from './controls/trademark/trademark.directive';
+import { UserAccountSidenavComponent } from './controls/user-account-sidenav/user-account-sidenav.component';
+import { PlanCardComponent } from './controls/plan-card/plan-card.component';
+import { IntervalToggleComponent } from './controls/interval-toggle/interval-toggle.component';
 
 
 @NgModule({
@@ -16,7 +18,10 @@ import { LcuTrademarkDirective } from './controls/trademark/trademark.directive'
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    LcuTrademarkDirective
+    LcuTrademarkDirective,
+    UserAccountSidenavComponent,
+    PlanCardComponent,
+    IntervalToggleComponent
   ],
   imports: [
     CommonModule,
@@ -24,19 +29,25 @@ import { LcuTrademarkDirective } from './controls/trademark/trademark.directive'
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    LcuThemePickerModule,
+   // LcuThemePickerModule,
     FlexLayoutModule
   ],
   exports: [
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    LcuTrademarkDirective
+    LcuTrademarkDirective,
+    UserAccountSidenavComponent,
+    PlanCardComponent,
+    IntervalToggleComponent
   ],
   entryComponents: [
     SideNavComponent,
     NavListComponent,
-    LcuNapkinIdeShellHostElementComponent
+    LcuNapkinIdeShellHostElementComponent,
+    UserAccountSidenavComponent,
+    PlanCardComponent,
+    IntervalToggleComponent
   ]
 })
 export class LcuNapkinIdeModule {}

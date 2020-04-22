@@ -1,0 +1,38 @@
+.ide-tool-bar{
+    position: relative;
+    z-index: 1000;
+}
+.toolbar-icon{
+    font-size: 40px;
+}
+
+.menu-button{
+    margin-left: 3px;
+    margin-top: 3px;
+}
+.small{
+    margin-left: 25px;
+}
+
+.action-icons {
+    margin-right: 60px;
+    position: absolute;
+    right: 0;
+    top: 5;
+
+    button, a {
+        margin-top: 7px;
+        margin-right: 0.5em;
+    }
+    mat-icon {
+        font-size: 40px;
+        width: initial;
+    }
+}
+
+.mat-icon-button {
+    width: initial;
+}
+.user-account{
+    margin-right: 20px;
+}

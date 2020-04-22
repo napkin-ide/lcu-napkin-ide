@@ -116,9 +116,9 @@ export class MarketplaceProfileComponent implements OnInit {
    *
    * sets the chosen option as the active option and switches views
    */
-  public SetActiveOption(value): void {
-    this.ProfileSideBarOptions.forEach((op, idx) => {
-      if (op.Value === value) {
+  public SetActiveOption(value: string): void {
+    this.ProfileSideBarOptions.forEach((op: object, idx: number) => {
+      if (op['Value'] === value) {
         this.ProfileSideBarOptions[idx].Active = true;
         this.ActiveOptionValue = this.ProfileSideBarOptions[idx].Value;
       } else {

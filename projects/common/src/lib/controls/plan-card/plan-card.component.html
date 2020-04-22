@@ -1,0 +1,31 @@
+<div [ngClass]="{'basic': Plan?.PlanGroup === PlanGroups[0], 
+                 'pro': Plan?.PlanGroup === PlanGroups[1],
+                 'inter': Plan?.PlanGroup === PlanGroups[2]}" fxLayout="column">
+
+  <div *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</div>
+  <div *ngIf="Plan?.PlanGroup === FeaturedPlanGroup" class="featured-plan">Most Popular</div>
+  <!-- <p *ngIf="Plan?.PlanGroup !== FeaturedPlanGroup"></p> -->
+  <!-- <p *ngIf="Plan?.Name" fxLayoutAlign="center center">{{Plan.Name}}</p> -->
+
+  <p *ngIf="Plan?.Description" class="description" fxLayout="row" fxLayoutAlign="center center">
+    {{Plan.Description}}
+  </p>
+  <div *ngIf="Plan?.DiscountedFrom && Plan?.DiscountedFrom > 0" class="discounted-from" fxLayoutAlign="center center">${{Plan.DiscountedFrom}}</div>
+  <div *ngIf="Plan?.Price && Plan?.Interval" class="price" fxLayoutAlign="center center">${{Plan.Price}}/{{Plan.Interval}}</div>
+  <div class="products-recieved" fxLayout="column" fxLayoutAlign="center center">
+    <div *ngIf="Plan?.DataApps">{{Plan.DataApps}} Data Apps</div>
+    <div *ngIf="Plan?.DataFlows">{{Plan.DataFlows}} Data Flows</div>
+    <div *ngIf="Plan?.LCUs">{{Plan.LCUs}} LCUs</div>
+
+  </div>
+  <!-- <div>{{Plan.Features}}</div> -->
+  <lcu-interval-toggle *ngIf='ShowToggle && Intervals && Plan?.Interval'
+    class="interval-toggle"
+    [current-interval]="Plan.Interval"
+    [intervals]="Intervals" 
+    (interval-selected)="IntervalSelected($event)">
+  </lcu-interval-toggle>
+  <div *ngIf="ShowButton === true" class="button-container" fxLayoutAlign="center center">
+    <button mat-raised-button class="button" (click)="BuyNow(Plan)">Buy Now</button>
+  </div>
+</div>
