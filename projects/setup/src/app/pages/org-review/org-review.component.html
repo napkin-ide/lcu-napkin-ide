@@ -3,12 +3,12 @@
     {{ State.OrganizationName }} Setup Review
   </h1>
 
-  <h2
+  <!-- <h2
     fxLayoutAlign="center center"
     class="h2 paragraph-title-bold margin-bottom-3"
   >
     If you can Fathym it, you can build it.
-  </h2>
+  </h2> -->
 
   <mat-list class="spread">
     <ng-container *ngFor="let bootOption of State.BootOptions; let i = index">
@@ -19,11 +19,11 @@
           [color]="GetBootOptionColor(bootOption)"
         >
           <ng-container *ngIf="!bootOption.Loading">
-            <span *ngIf="bootOption.Status?.Code != 0" >
+            <span *ngIf="bootOption.Status?.Code != 0" class="boot-option-incomplete">
               radio_button_unchecked
             </span>
 
-            <span *ngIf="bootOption.Status?.Code == 0" >
+            <span *ngIf="bootOption.Status?.Code == 0" class="check-circle" style="background-color: primary;">
               check_circle
             </span>
           </ng-container>
@@ -105,7 +105,7 @@
       target="_parent"
       href="https://{{ State.Host }}/fathym-it"
     >
-      <mat-icon>launch</mat-icon> Open Enterprise IDE
+      Open Your IDE
     </a>
 
     <div class="spread mat-error mat-small" *ngIf="!State.Booted && State.Status && State.Status.Code != 0">{{ State.Status.Message  }}</div>

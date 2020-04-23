@@ -33,6 +33,7 @@
 @mixin component-themes($theme) {
   @include org($theme);
   @include modal($theme);
+  // @include org-review($theme);
 }
 
  .ivy-light-theme {

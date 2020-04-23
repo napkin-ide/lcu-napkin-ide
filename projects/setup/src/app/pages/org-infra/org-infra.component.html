@@ -7,7 +7,7 @@
       fxLayoutAlign="center center"
       class="mat-display-1 title margin-bottom-4"
     >
-      Microsoft Azure Subscription Set Up
+      Microsoft Azure Subscription
     </h1>
 
     <div>
@@ -24,7 +24,7 @@
           <input
             formControlName="azureAppId"
             matInput
-            placeholder="Azure App ID"
+            placeholder="Azure Application ID"
             [type]="HideAppId ? 'password' : 'text'"
             required
             autocomplete="new-password"
@@ -50,7 +50,7 @@
           (click)="OpenHelpPdf()"
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
-          >help_outline</mat-icon
+          >info_outline</mat-icon
         >
         <!-- matBadge="{{OrgInfraAzureAppId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
@@ -69,7 +69,7 @@
           <input
             formControlName="azureTenantId"
             matInput
-            placeholder="Azure Tenant (Directory) ID"
+            placeholder="Azure Tenant (Directory ID)"
             [type]="HideTenantId ? 'password' : 'text'"
             required
             autocomplete="new-password"
@@ -95,7 +95,7 @@
           (click)="OpenHelpPdf()"
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
-          >help_outline</mat-icon
+          >info_outline</mat-icon
         >
         <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
@@ -140,7 +140,7 @@
           (click)="OpenHelpPdf()"
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
-          >help_outline</mat-icon
+          >info_outline</mat-icon
         >
         <!-- matBadge="{{OrgInfraAzureSubId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
@@ -159,7 +159,7 @@
           <input
             formControlName="azureAppAuthKey"
             matInput
-            placeholder="Azure App Auth key"
+            placeholder="Azure Application Auth key"
             [type]="HideAuthKey ? 'password' : 'text'"
             required
             autocomplete="new-password"
@@ -185,7 +185,7 @@
           (click)="OpenHelpPdf()"
           matTooltip=" Obtain this value from Azure’s Certificates and Secrets page. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
-          >help_outline</mat-icon
+          >info_outline</mat-icon
         >
         <!-- matBadge="{{OrgInfraAzureAppAuthKey.value.length}}"  -->
         <!-- <mat-hint>32 Character Limit</mat-hint> -->
@@ -196,6 +196,7 @@
 
         <mat-select formControlName="infraTemplate" required>
           <mat-option
+            class="mat-option-dropdown"
             *ngFor="let infraOptKey of InfrastructureOptionKeys"
             [value]="infraOptKey"
           >

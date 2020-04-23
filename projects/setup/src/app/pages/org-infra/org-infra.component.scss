@@ -1,1 +1,8 @@
 @import '../../../../../common/src/styles/theme';
+
+.mat-option-dropdown{
+    background-color: white;
+}
+::ng-deep .mat-select-panel{
+    margin-top:40px;
+}

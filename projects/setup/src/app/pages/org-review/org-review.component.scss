@@ -1,4 +1,6 @@
 @import "../../../../../common/src/styles/theme";
+// @import "../../../../../../node_modules/@lcu/common/assets/styles/branding/colors/fathym-theme-colors";
+
 
 .weird-fix {
   font: 400 16px/28px Roboto, "Helvetica Neue", sans-serif;
@@ -59,20 +61,26 @@
     }
   }
 }
+
+.check-circle{
+  border-radius: 15px;
+  background-color: #4a918e;
+ // background-color: mat-color($primary);
+}
 .boot-option-name{
   text-decoration: underline;
 }
 
-// @mixin modal($theme) {
+
+// @mixin org-review($theme) {
 //   $primary: map-get($theme, primary);
 //   $accent: map-get($theme, accent);
 //   $warn: map-get($theme, warn);
-//   // @warn "current theme #{$theme}";
 
-// .thinky{
-//   background-image: fathym-logo(thinky-circle, #000000, .7);
-//   background-repeat:no-repeat;
-//   background-position: center;
-//   background-size: 100px;
+  .boot-option-incomplete{
+    // color: mat-color($primary);
+    color: #4a918e;
+  }
+  
 // }
-// }
+
