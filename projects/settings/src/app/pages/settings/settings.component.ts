@@ -2,8 +2,8 @@ import { MatListOption } from '@angular/material/list';
 import { MatSelectChange } from '@angular/material/select';
 import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IdeSettingsState, LowCodeUnitSetupConfig, IDESettingStepTypes } from '../../core/ide-settings.state';
-import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
+import { IDESettingsState, LowCodeUnitSetupConfig, IDESettingStepTypes } from '../../core/ide-settings.state';
+import { IDESettingsStateContext } from '../../core/ide-settings-state-manager.context';
 
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
 import { SettingsSetupComponent } from '../settings-setup/settings-setup.component';
@@ -33,9 +33,9 @@ export class SettingsComponent implements OnInit {
 
   public NewSideBarSectionForm: FormGroup;
 
-  public State: IdeSettingsState;
+  public State: IDESettingsState;
   //  Constructors
-  constructor(protected formBldr: FormBuilder, protected ideSettingsState: IdeSettingsStateManagerContext) {}
+  constructor(protected formBldr: FormBuilder, protected IDESettingsState: IDESettingsStateContext) {}
 
   //  Life Cycle
 
@@ -86,7 +86,7 @@ export class SettingsComponent implements OnInit {
       name: ['', Validators.required]
     });
 
-    this.ideSettingsState.Context.subscribe(state => {
+    this.IDESettingsState.Context.subscribe(state => {
       this.resetForms();
 
       this.State = state;
@@ -102,13 +102,13 @@ export class SettingsComponent implements OnInit {
   public AddDefaultDataAppsLCUs() {
     this.State.Loading = true;
 
-    this.ideSettingsState.AddDefaultDataAppsLCUs();
+    this.IDESettingsState.AddDefaultDataAppsLCUs();
   }
 
   public AddDefaultDataFlowsLCUs() {
     this.State.Loading = true;
 
-    this.ideSettingsState.AddDefaultDataFlowLCUs();
+    this.IDESettingsState.AddDefaultDataFlowLCUs();
   }
 
   public AddNewActivity() {
@@ -140,14 +140,14 @@ export class SettingsComponent implements OnInit {
   public AddSideBarSection() {
     this.State.Loading = true;
 
-    this.ideSettingsState.AddSideBarSection(this.NewSideBarSectionForm.controls.name.value);
+    this.IDESettingsState.AddSideBarSection(this.NewSideBarSectionForm.controls.name.value);
   }
 
   public DeleteActivity(activity: IdeActivity) {
     if (confirm(`Are you sure you want to delete ${activity.Title}?`)) {
       this.State.Loading = true;
 
-      this.ideSettingsState.DeleteActivity(activity.Lookup);
+      this.IDESettingsState.DeleteActivity(activity.Lookup);
     }
   }
 
@@ -155,7 +155,7 @@ export class SettingsComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${lcu.Lookup}?`)) {
       this.State.Loading = true;
 
-      this.ideSettingsState.DeleteLCU(lcu.Lookup);
+      this.IDESettingsState.DeleteLCU(lcu.Lookup);
     }
   }
 
@@ -163,7 +163,7 @@ export class SettingsComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${action.Action}?`)) {
       this.State.Loading = true;
 
-      this.ideSettingsState.DeleteSectionAction(action.Action, action.Group);
+      this.IDESettingsState.DeleteSectionAction(action.Action, action.Group);
     }
   }
 
@@ -171,7 +171,7 @@ export class SettingsComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${section}?`)) {
       this.State.Loading = true;
 
-      this.ideSettingsState.DeleteSideBarSection(section);
+      this.IDESettingsState.DeleteSideBarSection(section);
     }
   }
 
@@ -182,19 +182,19 @@ export class SettingsComponent implements OnInit {
   public SaveActivity(activity: IdeActivity) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SaveActivity(activity);
+    this.IDESettingsState.SaveActivity(activity);
   }
 
   public SaveLCU(lcu: LowCodeUnitSetupConfig) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SaveLCU(lcu);
+    this.IDESettingsState.SaveLCU(lcu);
   }
 
   public SaveLCUCapabilities(lcuLookup: string, capabilities: MatListOption[]) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SaveLCUCapabilities(
+    this.IDESettingsState.SaveLCUCapabilities(
       lcuLookup,
       this.State.Config.ActiveFiles,
       capabilities.map(c => this.State.Config.LCUConfig.Solutions.find(s => s.Name === c.value)),
@@ -205,43 +205,43 @@ export class SettingsComponent implements OnInit {
   public SaveSectionAction(action: IdeSideBarAction) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SaveSectionAction(action);
+    this.IDESettingsState.SaveSectionAction(action);
   }
 
   public SetConfigLCU(event: MatSelectChange) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SetConfigLCU(event.value);
+    this.IDESettingsState.SetConfigLCU(event.value);
   }
 
   public SetEditActivity(activity: IdeActivity) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SetEditActivity(activity ? activity.Lookup : null);
+    this.IDESettingsState.SetEditActivity(activity ? activity.Lookup : null);
   }
 
   public SetEditLCU(lcu: LowCodeUnitSetupConfig) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SetEditLCU(lcu ? lcu.Lookup : null);
+    this.IDESettingsState.SetEditLCU(lcu ? lcu.Lookup : null);
   }
 
   public SetEditSection(section: string) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SetEditSection(section);
+    this.IDESettingsState.SetEditSection(section);
   }
 
   public SetEditSectionAction(action: IdeSideBarAction) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SetEditSectionAction(action ? action.Action : null);
+    this.IDESettingsState.SetEditSectionAction(action ? action.Action : null);
   }
 
   public SetSideBarEditActivity(event: MatSelectChange) {
     this.State.Loading = true;
 
-    this.ideSettingsState.SetSideBarEditActivity(event.value);
+    this.IDESettingsState.SetSideBarEditActivity(event.value);
   }
 
   public SetStep(step: IDESettingStepTypes) {
@@ -251,26 +251,26 @@ export class SettingsComponent implements OnInit {
   public ToggleAddNewActivity() {
     this.State.Loading = true;
 
-    this.ideSettingsState.ToggleAddNewActivity();
+    this.IDESettingsState.ToggleAddNewActivity();
   }
 
   public ToggleAddNewLCU() {
     this.State.Loading = true;
 
-    this.ideSettingsState.ToggleAddNewLCU();
+    this.IDESettingsState.ToggleAddNewLCU();
   }
 
   public ToggleAddNewSectionAction() {
     this.State.Loading = true;
 
-    this.ideSettingsState.ToggleAddNewSectionAction();
+    this.IDESettingsState.ToggleAddNewSectionAction();
   }
 
   public UpdateLCU(lcu: LowCodeUnitSetupConfig) {
     if (confirm(`Are you sure you want to update ${lcu.Lookup} version ${lcu.PackageVersion} to latest?`)) {
       this.State.Loading = true;
 
-      this.ideSettingsState.SaveLCU({ ...lcu, PackageVersion: 'latest' });
+      this.IDESettingsState.SaveLCU({ ...lcu, PackageVersion: 'latest' });
     }
   }
 

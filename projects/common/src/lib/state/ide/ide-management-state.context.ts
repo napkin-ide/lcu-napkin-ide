@@ -5,7 +5,7 @@ import { IdeManagementState } from './ide-management.state';
 @Injectable({
   providedIn: 'root'
 })
-export class IdeStateStateManagerContext extends StateContext<IdeManagementState> {
+export class IDEStateManagementContext extends StateContext<IdeManagementState> {
   //  Properties
 
   //  Constructors

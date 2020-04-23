@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { ExternalDialogComponent, IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { ExternalDialogComponent, IDEStateManagementContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { IdeActivity } from '@lcu/common';
 
@@ -21,7 +21,7 @@ export class IdeActivityBarComponent implements OnInit {
   public RootActivities: IdeActivity[];
 
   constructor(
-    protected ideState: IdeStateStateManagerContext,
+    protected ideState: IDEStateManagementContext,
     protected dialog: MatDialog
   ) { }
 

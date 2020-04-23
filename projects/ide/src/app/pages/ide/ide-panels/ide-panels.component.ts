@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { IDEStateManagementContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { IdePanel } from '@lcu/common';
 
 @Component({
@@ -14,7 +14,7 @@ export class IdePanelsComponent implements OnInit {
   public ShowPanels: boolean;
 
   constructor(
-    protected ideState: IdeStateStateManagerContext
+    protected ideState: IDEStateManagementContext
   ) { }
 
   public ngOnInit(): void {

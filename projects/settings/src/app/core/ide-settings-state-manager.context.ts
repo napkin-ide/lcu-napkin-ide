@@ -1,12 +1,12 @@
-import { IdeSettingsState, LowCodeUnitSetupConfig, IdeSettingsConfigSolution } from './ide-settings.state';
-import { StateManagerContext } from '@lcu/common';
+import { IDESettingsState, LowCodeUnitSetupConfig, IdeSettingsConfigSolution } from './ide-settings.state';
+import { StateContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 import { IdeActivity, IdeSideBarAction, DataFlowModulePackSetup } from '@lcu/common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSettingsState> {
+export class IDESettingsStateContext extends StateContext<IDESettingsState> {
   //  Properties
 
   //  Constructors
@@ -193,14 +193,14 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
 
   //  Helpers
   protected defaultValue() {
-    return <IdeSettingsState>{ Loading: true };
+    return <IDESettingsState>{ Loading: true };
   }
 
-  protected loadStateKey(): Promise<string> {
-    return Promise.resolve('main');
+  protected loadStateKey(): string {
+    return 'settings';
   }
 
-  protected loadStateName(): Promise<string> {
-    return Promise.resolve('ide-settings');
+  protected loadStateName(): string {
+    return 'idemanagement';
   }
 }
