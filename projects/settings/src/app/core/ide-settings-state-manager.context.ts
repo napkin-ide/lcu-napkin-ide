@@ -34,7 +34,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         Section: section
       },
-      Type: 'add-side-bar-section'
+      Type: 'AddSideBarSection'
     });
   }
 
@@ -43,7 +43,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         Activity: activityLookup
       },
-      Type: 'delete-activity'
+      Type: 'DeleteActivity'
     });
   }
 
@@ -52,7 +52,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         LCU: lcuLookup
       },
-      Type: 'delete-lcu'
+      Type: 'DeleteLCU'
     });
   }
 
@@ -62,7 +62,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
         Action: action,
         Group: group
       },
-      Type: 'delete-section-action'
+      Type: 'DeleteSectionAction'
     });
   }
 
@@ -71,7 +71,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         Section: section
       },
-      Type: 'delete-side-bar-section'
+      Type: 'DeleteSideBarSection'
     });
   }
 
@@ -80,7 +80,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         Activity: activity
       },
-      Type: 'save-activity'
+      Type: 'SaveActivity'
     });
   }
 
@@ -89,7 +89,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         LCU: lcu
       },
-      Type: 'save-lcu'
+      Type: 'SaveLCU'
     });
   }
 
@@ -103,7 +103,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
         },
         LCULookup: lcuLookup
       },
-      Type: 'save-lcu-capabilities'
+      Type: 'SaveLCUCapabilities'
     });
   }
 
@@ -112,7 +112,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         Action: action
       },
-      Type: 'save-section-action'
+      Type: 'SaveSectionAction'
     });
   }
 
@@ -121,7 +121,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         LCU: lcuLookup
       },
-      Type: 'set-config-lcu'
+      Type: 'SetConfigLCU'
     });
   }
 
@@ -130,7 +130,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         Activity: activityLookup
       },
-      Type: 'set-edit-activity'
+      Type: 'SetEditActivity'
     });
   }
 
@@ -139,7 +139,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         LCU: lcuLookup
       },
-      Type: 'set-edit-lcu'
+      Type: 'SetEditLCU'
     });
   }
 
@@ -148,7 +148,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         Section: sectionLookup
       },
-      Type: 'set-edit-section'
+      Type: 'SetEditSection'
     });
   }
 
@@ -157,7 +157,7 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         Action: action
       },
-      Type: 'set-edit-section-action'
+      Type: 'SetEditSectionAction'
     });
   }
 
@@ -166,28 +166,28 @@ export class IDESettingsStateContext extends StateContext<IDESettingsState> {
       Arguments: {
         Activity: activityLookup
       },
-      Type: 'set-side-bar-edit-activity'
+      Type: 'SetSideBarEditActivity'
     });
   }
 
   public ToggleAddNewActivity() {
     this.Execute({
       Arguments: {},
-      Type: 'toggle-add-new-activity'
+      Type: 'ToggleAddNewActivity'
     });
   }
 
   public ToggleAddNewLCU() {
     this.Execute({
       Arguments: {},
-      Type: 'toggle-add-new-lcu'
+      Type: 'ToggleAddNewLCU'
     });
   }
 
   public ToggleAddNewSectionAction() {
     this.Execute({
       Arguments: {},
-      Type: 'toggle-add-new-section-action'
+      Type: 'ToggleAddNewSectionAction'
     });
   }
 
