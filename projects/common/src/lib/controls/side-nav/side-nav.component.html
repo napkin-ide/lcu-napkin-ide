@@ -7,11 +7,10 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async) && ShowSideNav"
   >
-    <lcu-nav-list
-      [nav-links]="NavLinks"
+    <lcu-nav-list [nav-links]="NavLinks"
       logo-class="primary-logo"
       logo-alt="Fathym Logo"
-    >
+      show-icon="true">
     </lcu-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
