@@ -59,6 +59,9 @@
     }
   }
 }
+.boot-option-name{
+  text-decoration: underline;
+}
 
 // @mixin modal($theme) {
 //   $primary: map-get($theme, primary);

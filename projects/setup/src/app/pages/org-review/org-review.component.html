@@ -33,10 +33,11 @@
             *ngIf="IsCurrentLoadingBootAction(bootOption)"
           ></mat-spinner>
         </mat-icon>
-
         <h3 matLine>
-          <span>{{ bootOption.Name }}</span>
+          <span class="boot-option-name">{{ bootOption.Name }}</span>
+          <!-- <hr fxLayout="start"> -->
         </h3>
+        
 
         <p matLine>
           {{

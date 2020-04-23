@@ -1,5 +1,5 @@
 @import '../src/app/pages/org/org.component.scss';
-// @import '../src/app/pages/org-review/org-review.component.scss';
+@import '../src/app/pages/org-review/org-review.component.scss';
 @import '../src/app/pages/confirmation-modal/confirmation-modal.component.scss';
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
 @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
@@ -32,7 +32,7 @@
 // for updating components with themes
 @mixin component-themes($theme) {
   @include org($theme);
-  @include modal($theme);
+  // @include modal($theme);
 }
 
  .ivy-light-theme {
