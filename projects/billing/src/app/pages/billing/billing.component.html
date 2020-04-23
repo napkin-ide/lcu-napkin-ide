@@ -71,11 +71,13 @@
 
               <!-- TOGGLE & BUTTON -->
               <div class="toggle-button-container" fxLayout="column" fxLayoutAlign="center center">
-                <div class="toggle-container" fxLayout="row" fxLayoutAlign="center center">
-                  <div>Annually &nbsp;</div>
-                  <mat-slide-toggle class="toggle" (change)="ToggleChanged($event)">Monthly
-                  </mat-slide-toggle>
-                </div>
+
+                <lcu-interval-toggle *ngIf="SelectedPlan"
+                [current-interval]="SelectedPlan.Interval"
+                [intervals]="Intervals"
+                (interval-selected)="ToggleChanged($event)">
+              </lcu-interval-toggle>
+
                 <div class="button-container" fxLayoutAlign="center center">
                   <button mat-raised-button id="payment-button" class='buy-now-button'
                   *ngIf="SelectedPlan"
@@ -93,7 +95,7 @@
   <!-- LOADING SCREEN -->
   <div [fxShow]="State.Loading">
     <p style="text-align: center;">
-      Behind the scenes Thinky is working hard to set up your Low Code Unit
+      <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
     </p>
 
     <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">

@@ -1,0 +1,7 @@
+<div *ngIf="Intervals"class="toggle-container" fxLayout="row" fxLayoutAlign="center center">
+  <div>{{Intervals[0]}} &nbsp;</div>
+  <mat-slide-toggle class="toggle" 
+  [checked]="ToggleValue"
+  (change)="ToggleChanged($event)" >{{Intervals[1]}}
+  </mat-slide-toggle>
+</div>

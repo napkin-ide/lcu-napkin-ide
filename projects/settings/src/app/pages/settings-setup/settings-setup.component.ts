@@ -5,6 +5,7 @@ import { IDESettingsStateContext } from '../../core/ide-settings-state-manager.c
 import { MatSelectChange } from '@angular/material/select';
 import { MatListOption } from '@angular/material/list';
 import { IdeActivity, IdeSideBarAction } from '@lcu/common';
+import { Constants } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-settings-setup',
@@ -28,6 +29,8 @@ export class SettingsSetupComponent implements OnInit {
   public CurrentSection: string;
 
   public IsNewSideBarSection: boolean = false;
+
+  public LCUText: string = Constants.LCU_TEXT;
 
   public NewActivityForm: FormGroup;
 

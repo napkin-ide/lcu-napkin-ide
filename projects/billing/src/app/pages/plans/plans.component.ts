@@ -13,6 +13,10 @@ export class PlansComponent implements OnInit {
   public State: any;
 
   public ShowButton: boolean;
+
+  public ShowToggle: boolean;
+
+  public Intervals: string[];
 /**
  * List the plan group names for the plan card
  */
@@ -27,6 +31,7 @@ export class PlansComponent implements OnInit {
     protected route: ActivatedRoute,
     protected router: Router) {
       this.ShowButton = true;
+      this.ShowToggle = true;
      }
 
   public ngOnInit() {
@@ -46,6 +51,16 @@ export class PlansComponent implements OnInit {
 
   }
 
+  public IntervalToggled(interval: string, planToChange: BillingPlanOption){
+    this.State.Plans.forEach((plan: BillingPlanOption) =>{
+      if(planToChange.PlanGroup === plan.PlanGroup && plan.Interval === interval){
+        //remove plan from displayedplans
+        this.DisplayedPlans.splice(this.DisplayedPlans.indexOf(planToChange),1,plan);
+      }
+      console.log("New plan: ", this.DisplayedPlans)
+    })
+  }
+
   protected stateChanged(): void {
     console.log('state plan page = ', this.State);
     // TODO below code causes infinite loop
@@ -56,15 +71,18 @@ export class PlansComponent implements OnInit {
 
     if (this.State.Plans) {
       this.PlanGroups = new Array<string>();
+      this.Intervals = new Array<string>();
       this.DisplayedPlans = new Array<BillingPlanOption>();
       this.State.Plans.forEach((plan: BillingPlanOption) => {
-        // let temp = this.DisplayedPlans.find(disPlan => disPlan === plan.PlanGroup);
-        // console.log("temp:", temp)
+        
         if (this.DisplayedPlans.filter(e => e.PlanGroup === plan.PlanGroup).length === 0) {
           this.DisplayedPlans.push(plan);
         }
         if(!this.PlanGroups.includes(plan.PlanGroup)){
           this.PlanGroups.push(plan.PlanGroup)
+        }
+        if(!this.Intervals.includes(plan.Interval)){
+          this.Intervals.push(plan.Interval)
         }
       });
       console.log('displayed plan groups', this.DisplayedPlans);
