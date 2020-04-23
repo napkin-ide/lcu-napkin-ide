@@ -32,7 +32,7 @@
 // for updating components with themes
 @mixin component-themes($theme) {
   @include org($theme);
-  // @include modal($theme);
+  @include modal($theme);
 }
 
  .ivy-light-theme {

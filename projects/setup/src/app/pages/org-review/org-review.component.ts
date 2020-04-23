@@ -48,7 +48,10 @@ export class OrgReviewComponent implements OnInit {
     this.SetStep = new EventEmitter();
   }
 
-  public ngOnInit() {}
+  public ngOnInit() {
+     // for testing
+    // this.OpenConfirmationDialog();
+  }
 
   public Boot() {
     this.State.Loading = true;
