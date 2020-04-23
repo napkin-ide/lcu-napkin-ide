@@ -18,7 +18,7 @@
               OrgInfraAzureAppId.value.length > 0 &&
               !OrgInfraAzureAppId.hasError('pattern')
             "
-            class="success"
+            [ngClass]="'success infra-check'"
             >check_circle</mat-icon
           >
           <input
@@ -63,7 +63,7 @@
               OrgInfraAzureTenatId.value.length > 0 &&
               !OrgInfraAzureTenatId.hasError('pattern')
             "
-            class="success"
+            [ngClass]="'success infra-check'"
             >check_circle</mat-icon
           >
           <input
@@ -108,7 +108,7 @@
               OrgInfraAzureSubId.value.length > 0 &&
               !OrgInfraAzureSubId.hasError('pattern')
             "
-            class="success"
+            [ngClass]="'success infra-check'"
             >check_circle</mat-icon
           >
           <input
@@ -153,7 +153,7 @@
               OrgInfraAzureAppAuthKey.value.length > 0 &&
               !OrgInfraAzureAppAuthKey.hasError('required')
             "
-            class="success"
+            [ngClass]="'success infra-check'"
             >check_circle</mat-icon
           >
           <input
