@@ -11,6 +11,7 @@ import { LcuTrademarkDirective } from './controls/trademark/trademark.directive'
 import { UserAccountSidenavComponent } from './controls/user-account-sidenav/user-account-sidenav.component';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { IntervalToggleComponent } from './controls/interval-toggle/interval-toggle.component';
+import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { IntervalToggleComponent } from './controls/interval-toggle/interval-tog
     LcuTrademarkDirective,
     UserAccountSidenavComponent,
     PlanCardComponent,
-    IntervalToggleComponent
+    IntervalToggleComponent,
+    LcuNapkinIdeWelcomeJourneysElementComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { IntervalToggleComponent } from './controls/interval-toggle/interval-tog
     LcuTrademarkDirective,
     UserAccountSidenavComponent,
     PlanCardComponent,
-    IntervalToggleComponent
+    IntervalToggleComponent,
+    LcuNapkinIdeWelcomeJourneysElementComponent
   ],
   entryComponents: [
     SideNavComponent,
@@ -47,7 +50,8 @@ import { IntervalToggleComponent } from './controls/interval-toggle/interval-tog
     LcuNapkinIdeShellHostElementComponent,
     UserAccountSidenavComponent,
     PlanCardComponent,
-    IntervalToggleComponent
+    IntervalToggleComponent,
+    LcuNapkinIdeWelcomeJourneysElementComponent
   ]
 })
 export class LcuNapkinIdeModule {}
