@@ -78,6 +78,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
     protected cdr: ChangeDetectorRef
   ) {
     this.HelpPdf = Constants.HELP_PDF;
+    this.InfraFormValid = false;
   }
 
   //  Life Cycle
@@ -147,6 +148,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
 
     if (this.State.SetupStep === NapkinIDESetupStepTypes.Complete) {
     }
+    // console.log("State: ", this.State)
   }
 
   /**

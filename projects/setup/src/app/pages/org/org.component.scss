@@ -2,6 +2,10 @@
   background-color: #4a918e !important;
 }
 
+@mixin mat-icon-steps{
+  color: #4a918e;
+}
+
 @mixin org($theme) {
 
   $primary: map-get($theme, primary);
@@ -82,4 +86,29 @@
         width: 70%;
       }
     }
+  }
+
+  .documentation-button{
+    margin-bottom: 15px;
+  }
+.list-icon{
+  @include mat-icon-steps();
+}
+  .step-checkbox{
+    margin-top:12px;
+  }
+
+  .completed-check{
+    border-radius: 15px;
+    background-color: #9cd8d6;
+    padding: 0px !important;
+    margin: 4px;
+  }
+
+  .hr-line{
+    border: 0.5px solid grey;
+  }
+
+  .reg-headers{
+    margin-left: 15px;
   }

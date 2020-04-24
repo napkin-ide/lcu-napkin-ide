@@ -5,6 +5,8 @@ import {
   UserManagementStateContext
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { BootOption } from 'projects/common/src/lcu.api';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'lcu-org-review',
@@ -40,11 +42,16 @@ export class OrgReviewComponent implements OnInit {
   @Input('state')
   public State: UserManagementState;
 
-  constructor(protected userMgr: UserManagementStateContext) {
+  constructor(protected userMgr: UserManagementStateContext,
+    public dialog: MatDialog,
+    ) {
     this.SetStep = new EventEmitter();
   }
 
-  public ngOnInit() {}
+  public ngOnInit() {
+     // for testing
+    // this.OpenConfirmationDialog();
+  }
 
   public Boot() {
     this.State.Loading = true;
@@ -86,5 +93,23 @@ export class OrgReviewComponent implements OnInit {
     }
   }
 
+  public OpenConfirmationDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      width: '575px',
+      position: {right:'11vw'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+
+      if(result === "confirm"){
+        this.Boot()
+      }
+    });
+  }
+
+
   //  Helpers
+
+  
 }
