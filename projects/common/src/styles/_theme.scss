@@ -1,19 +1,64 @@
-@import "~@angular/material/theming";
-@import '../../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
-@import '../../../../node_modules/@lcu/common/assets/theming/fathym-nide-theme';
-@import '../../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
-// @import '../../../../node_modules/@lcu/common/assets/theming/fathym-default-theme';
+// @import "~@angular/material/theming";
+// @import '../../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+// @import '../../../../node_modules/@lcu/common/assets/theming/fathym-nide-theme';
+// @import '../../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+// // @import '../../../../node_modules/@lcu/common/assets/theming/fathym-default-theme';
 
-// $nide-app-primary: mat-palette($nide-primary);
-// $nide-app-accent: mat-palette($nide-accent, A200, A100, A400);
-// $nide-app-warn: mat-palette($nide-warn);
+// // $nide-app-primary: mat-palette($nide-primary);
+// // $nide-app-accent: mat-palette($nide-accent, A200, A100, A400);
+// // $nide-app-warn: mat-palette($nide-warn);
 
-// // Create the theme object (a Sass map containing all of the palettes).
-// $nide-theme: mat-light-theme($nide-app-primary, $nide-app-accent, $nide-app-warn);
+// // // Create the theme object (a Sass map containing all of the palettes).
+// // $nide-theme: mat-light-theme($nide-app-primary, $nide-app-accent, $nide-app-warn);
 
-@mixin defaults($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
+// @mixin defaults($theme) {
+//   $primary: map-get($theme, primary);
+//   $accent: map-get($theme, accent);
 
-  @include reset();
+//   @include reset();
+// }
+
+///////////////////////////////////TEST//////////////////////////////////////////////////
+
+@import "../../../../node_modules/@lcu/common/assets/styles/fathym-global.styles";
+@import "../../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding";
+@import "../../../../node_modules/@lcu/common/assets/theming/fathym_themes";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap");
+
+$global-theme: fathym-ivy-theme();
+$global-primary: mat-color(map-get($global-theme, primary), 500);
+$global-accent: mat-color(map-get($global-theme, accent), 500);
+$global-warn: mat-color(map-get($global-theme, warn), 500);
+// .active-item {
+  /**
+  * theme-color is set within each theme palette, so when
+  * loading multiple palettes, theme-color is returned from the
+  * last palette loaded. TODO - Figure out a solution to prevent this
+  * and to not have to know a particular theme name - Shannon
+  */
+  // background-color: theme-color(primary, 500) !important;
+  /**
+  * palette-color is set within the main theme stylesheet and works like
+  * the above theme-color, however, in this instance you need to know
+  * the name of the palette you want to use($fathym-ivy-primary, $fathym-ivy-accent, $fathym-ivy-warn, etc.) - Shannon
+  */
+//   background-color: palette-color($fathym-ivy-primary, A400) !important;
+// }
+// .accent-divider {
+//   // background-color: palette-color($fathym-ivy-primary, A400) !important;
+//   background-color: mat-color(map-get($global-theme, primary), A400) !important;
+//   width: 1px;
+//   @extend .margin-top-3;
+//   @extend .padding-bottom-3;
+// }
+// .thinky-logo {
+//   background-image: fathym-logo(thinky-circle, mat-color(map-get($global-theme, warn), 500), .7);
+//   background-repeat:no-repeat;
+//   background-position: center;
+// }
+@mixin theme-setup($theme) {
+  @include angular-material-theme($theme);
+  @include theme-extras($theme);
+  @include fathym-branding($theme);
 }
+@include theme-setup($global-theme);

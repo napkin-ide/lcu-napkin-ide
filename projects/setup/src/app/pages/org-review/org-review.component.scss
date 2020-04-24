@@ -1,4 +1,4 @@
-// @import "../../../../../common/src/styles/theme";
+@import "../../../../../common/src/styles/theme";
 // @import "../../../../../../node_modules/@lcu/common/assets/styles/branding/colors/fathym-theme-colors";
 
 
@@ -64,7 +64,7 @@
 
 .check-circle{
   border-radius: 15px;
-  background-color: #4a918e;
+  background-color: $global-accent;
  // background-color: mat-color($primary);
 }
 .boot-option-name{
@@ -79,7 +79,7 @@
 
   .boot-option-incomplete{
     // color: mat-color($primary);
-    color: #4a918e;
+    color: mat-color(map-get($global-theme, primary), A700);
   }
   
 // }
