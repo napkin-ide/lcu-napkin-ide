@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {
   LcuNapkinIdeModule,
   SelectorLcuNapkinIdeShellHostElement,
-  LcuNapkinIdeShellHostElementComponent
+  LcuNapkinIdeShellHostElementComponent, LcuNapkinIdeWelcomeJourneysElementComponent, SELECTOR_LCU_NAPKIN_IDE_WELCOME_JOURNEYS_ELEMENT
 } from '@napkin-ide/lcu-napkin-ide-common';
 
 @NgModule({
@@ -23,5 +23,9 @@ export class AppModule implements DoBootstrap {
     const dfMgr = createCustomElement(LcuNapkinIdeShellHostElementComponent, { injector: this.injector });
 
     customElements.define(SelectorLcuNapkinIdeShellHostElement, dfMgr);
-  }
+  
+		const welcomeJourneys = createCustomElement(LcuNapkinIdeWelcomeJourneysElementComponent, { injector: this.injector });
+
+		customElements.define(SELECTOR_LCU_NAPKIN_IDE_WELCOME_JOURNEYS_ELEMENT, welcomeJourneys);
+	}
 }
