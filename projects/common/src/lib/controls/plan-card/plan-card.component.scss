@@ -1,113 +1,175 @@
+@import '../../../../../common/src/styles/theme';
+$Pro-primary: mat-color(map-get($global-theme, primary), A200);
+$Starter-primary: mat-color(map-get($global-theme, primary), A100);
+$Fathym-Grey: gray;
+$Light-BG:mat-color(map-get($global-theme, primary), A200,10%);
+$Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
 
-$Fathym-Green: #4a918e;
-$Purple: purple;
-$Orange: orange;
+// $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
+// $Purple: purple;
+// $Orange: mat-color(map-get($global-theme, primary), A200);
 //----------------------MIXINS------------------------//
-@mixin plan-card-basic {
+
+@mixin plan-card($theme-color){
     border: 1px solid;
-    width: 250px;
-    height: 370px;
+    width: 300px;
+    height: 450px;
     position: relative;
-    border-radius: 4px;;
-}
+    border-radius: 4px;
+    background-color: $Light-BG;
+    border-color: $theme-color;
+    .header{
+        border-bottom: 3px solid $Pro-primary;
+        background-color: white !important;
 
-@mixin title {
-    margin-top: 15px;
-}
+        .title{
+            margin-left:5px;
+            margin-bottom: 5px;
+        }
+        .package{
+            font-style: italic;
+            color: $theme-color;
+            margin-bottom: 5px;
+        }
+        .featured-plan{  
+            background-color: $theme-color;
+            width: 50px;
+            height: 50px;
+            position: relative;
+            top: -10px;
+            right: -45px;
+            text-align: center;
+            font-size: 12px;
+            clip-path: polygon(25% 100%, 50% 75%, 75% 100%, 75% 0, 25% 0);
+            .feat-text{
+                color:white;
+                margin-top:5px;
+                font-weight: 500 !important;
+                font-size:14px;
+            }
+        }
+    }
+    .pricing-container{
+        background-color: $Darker-BG;
+        border-bottom: 1px solid $theme-color;
+        .discounted-from{
+            color: $Fathym-Grey;
+            text-decoration: line-through;
+            padding-bottom: 5px;
+    
+        }
+        .price{
+            font-size: 45px;
+            font-weight: 700;
+        }
+        .dollar-symbol{
+            font-weight: 700;
+            font-size: 30px;
+            padding-bottom: 5px;
+    
+        }
+        .intervals{
+            color: $Fathym-Grey;
+            padding-bottom: 5px;
+    
+        }
+    }
+    .description{
+        text-align: center;
+        border-bottom: 1px solid $theme-color;
+        font-size: 12px;
+        padding: 10px 0px;
+        background-color: white !important;
+        height: 70px;
+    }
+    .feature-container{
+        // background-color: $Light-BG;
+        padding: 15px 29px;
+        .features{
+            font-size: 12px;
+            padding: 10px;
+            border: 1px solid $theme-color;
+            border-radius: 2px;
+            background-color: white;
+    
+            mat-icon{
+                font-size: 20px;
+                color: $theme-color;
+            }
+        }
+    }
+    .button-container{
+        position: absolute;
+        bottom: 15px;
+        left: 55px;
 
-@mixin button{
-    width: 100px;
-    border: 1px solid black;
-    color: white;
-}
-
-@mixin button-position{
-    position: absolute;
-    bottom: -30px;
-    left: 65px;
+        .button{
+            width: 160px;
+            color: white;
+            background-color:$theme-color;  
+        }
+    }
+    
 }
 //--------------------------END MIXINS--------------------------------------//
 .pro{
-    @include plan-card-basic();
-    border-color: $Fathym-Green;
-    .title{
-        @include title();
-        background-color: $Fathym-Green;
-    }
-    .button-container{
-        @include button-position();
-
-        .button{
-            @include button();
-            background-color:$Fathym-Green;  
-        }
-    }
-    
+    @include plan-card($Pro-primary);
 }
 
-.inter{
-    @include plan-card-basic();
-    border-color: $Purple;
-    .title{
-        @include title();
-        background-color: $Purple;
-    }
-    .button-container{
-        @include button-position();
-
-        .button{
-            @include button();
-            background-color:$Purple;  
-        }
-    }
-    
+.starter{
+    @include plan-card($Starter-primary); 
 }
 
-.basic{
-    @include plan-card-basic();
-    border-color: $Orange;
-    .title{
-        @include title();
-        background-color: $Orange;
-    }
-    .button-container{
-        @include button-position();
-        .button{
-            @include button();
-            background-color:$Orange;  
-        }
-    }
-    
-}
 
-.featured-plan{  
-    transform: rotate(40deg);
-    background-color: #00c2ff;
-    width: 140px;
-    position: relative;
-    top: -13px;
-    right: -144px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    text-align: center;
-    font-size: 12px;
-    clip-path: polygon(23% 0,77% 0,86% 100%,0 169%);
-}
 
-.description{
-    text-align: center;
-}
 
-.discounted-from{
-    text-decoration: line-through;
-}
 
-.price{
-    font-size: 30px;
-}
 
-.interval-toggle{
-    position: absolute;
-    bottom: 30px;
-    left: 50px;
-}
+// .pricing-container{
+//     background-color: $Darker-BG;
+//     border-bottom: 1px solid $Pro-primary;
+//     .discounted-from{
+//         color: $Fathym-Grey;
+//         text-decoration: line-through;
+//         padding-bottom: 5px;
+
+//     }
+//     .price{
+//         font-size: 45px;
+//         font-weight: 700;
+//     }
+//     .dollar-symbol{
+//         font-weight: 700;
+//         font-size: 30px;
+//         padding-bottom: 5px;
+
+//     }
+//     .intervals{
+//         color: $Fathym-Grey;
+//         padding-bottom: 5px;
+
+//     }
+// }
+// .feature-container{
+//     // background-color: $Light-BG;
+//     padding: 15px 29px;
+//     .features{
+//         font-size: 12px;
+//         padding: 10px;
+//         border: 1px solid $Pro-primary;
+//         border-radius: 2px;
+//         background-color: white;
+
+//         mat-icon{
+//             font-size: 20px;
+//             color: $Pro-primary;
+//         }
+//     }
+// }
+
+
+// .interval-toggle{
+//     position: absolute;
+//     bottom: 30px;
+//     left: 50px;
+// }
