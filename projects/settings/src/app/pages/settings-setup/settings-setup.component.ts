@@ -1,6 +1,19 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  ViewChildren,
+  QueryList,
+  ChangeDetectorRef,
+  Input,
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IDESettingsState, LowCodeUnitSetupConfig, IDESettingStepTypes } from '../../core/ide-settings.state';
+import {
+  IDESettingsState,
+  LowCodeUnitSetupConfig,
+  IDESettingStepTypes,
+} from '../../core/ide-settings.state';
 import { IDESettingsStateContext } from '../../core/ide-settings-state-manager.context';
 import { MatSelectChange } from '@angular/material/select';
 import { MatListOption } from '@angular/material/list';
@@ -10,16 +23,25 @@ import { Constants } from '@napkin-ide/lcu-napkin-ide-common';
 @Component({
   selector: 'lcu-settings-setup',
   templateUrl: './settings-setup.component.html',
-  styleUrls: ['./settings-setup.component.scss']
+  styleUrls: ['./settings-setup.component.scss'],
 })
 export class SettingsSetupComponent implements OnInit {
-
   public get ExpandActivityBar(): boolean {
-    return !!this.State.EditActivity || this.State.AddNew.Activity || !this.State.Activities || this.State.Activities.length <= 0;
+    return (
+      !!this.State.EditActivity ||
+      (this.State.AddNew && this.State.AddNew.Activity) ||
+      !this.State.Activities ||
+      this.State.Activities.length <= 0
+    );
   }
 
   public get ExpandSideBar(): boolean {
-    return !this.State.EditActivity && !this.State.AddNew.Activity && this.State.Activities && this.State.Activities.length > 0;
+    return (
+      !this.State.EditActivity &&
+      (!this.State.AddNew || !this.State.AddNew.Activity) &&
+      this.State.Activities &&
+      this.State.Activities.length > 0
+    );
   }
 
   public get LCUGroups(): string[] {
@@ -28,7 +50,7 @@ export class SettingsSetupComponent implements OnInit {
 
   public CurrentSection: string;
 
-  public IsNewSideBarSection: boolean = false;
+  public IsNewSideBarSection = false;
 
   public LCUText: string = Constants.LCU_TEXT;
 
@@ -50,9 +72,11 @@ export class SettingsSetupComponent implements OnInit {
   @Input('setting-step-types')
   public SettingStepTypes: IDESettingStepTypes;
 
-
   //  Constructors
-  constructor(protected formBldr: FormBuilder, protected IDESettingsState: IDESettingsStateContext) {}
+  constructor(
+    protected formBldr: FormBuilder,
+    protected IDESettingsState: IDESettingsStateContext
+  ) {}
 
   //  Life Cycle
 
@@ -65,32 +89,31 @@ export class SettingsSetupComponent implements OnInit {
       title: ['', Validators.required],
       lookup: ['', Validators.required],
       icon: ['', Validators.required],
-      iconSet: ['']
+      iconSet: [''],
     });
 
     this.NewLCUForm = this.formBldr.group({
       lookup: ['', Validators.required],
       npmPkg: ['', Validators.required],
-      pkgVer: ['', Validators.required]
+      pkgVer: ['', Validators.required],
     });
 
     this.NewSectionActionForm = this.formBldr.group({
       title: ['', Validators.required],
       action: ['', Validators.required],
-      group: ['', Validators.required]
+      group: ['', Validators.required],
     });
 
     this.NewSideBarSectionForm = this.formBldr.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
     });
 
-    this.IDESettingsState.Context.subscribe(state => {
+    this.IDESettingsState.Context.subscribe((state) => {
       this.resetForms();
 
       this.State = state;
     });
   }
-
 
   //  API methods
   public AddDefaultDataAppsLCUs() {
@@ -110,7 +133,7 @@ export class SettingsSetupComponent implements OnInit {
       Title: this.NewActivityForm.controls.title.value,
       Lookup: this.NewActivityForm.controls.lookup.value,
       Icon: this.NewActivityForm.controls.icon.value,
-      IconSet: this.NewActivityForm.controls.iconSet.value
+      IconSet: this.NewActivityForm.controls.iconSet.value,
     });
   }
 
@@ -118,7 +141,7 @@ export class SettingsSetupComponent implements OnInit {
     this.SaveLCU({
       Lookup: this.NewLCUForm.controls.lookup.value,
       NPMPackage: this.NewLCUForm.controls.npmPkg.value,
-      PackageVersion: this.NewLCUForm.controls.pkgVer.value
+      PackageVersion: this.NewLCUForm.controls.pkgVer.value,
     });
   }
 
@@ -127,14 +150,16 @@ export class SettingsSetupComponent implements OnInit {
       Title: this.NewSectionActionForm.controls.title.value,
       Section: this.State.EditSection,
       Action: this.NewSectionActionForm.controls.action.value,
-      Group: this.NewSectionActionForm.controls.group.value
+      Group: this.NewSectionActionForm.controls.group.value,
     });
   }
 
   public AddSideBarSection() {
     this.State.Loading = true;
     this.IsNewSideBarSection = false;
-    this.IDESettingsState.AddSideBarSection(this.NewSideBarSectionForm.controls.name.value);
+    this.IDESettingsState.AddSideBarSection(
+      this.NewSideBarSectionForm.controls.name.value
+    );
   }
 
   public DeleteActivity(activity: IdeActivity) {
@@ -170,7 +195,10 @@ export class SettingsSetupComponent implements OnInit {
   }
 
   public HasCapability(name: string) {
-    return this.State.Config.ActiveSolutions && !!this.State.Config.ActiveSolutions.find(s => s.Name === name);
+    return (
+      this.State.Config.ActiveSolutions &&
+      !!this.State.Config.ActiveSolutions.find((s) => s.Name === name)
+    );
   }
 
   public SaveActivity(activity: IdeActivity) {
@@ -191,7 +219,9 @@ export class SettingsSetupComponent implements OnInit {
     this.IDESettingsState.SaveLCUCapabilities(
       lcuLookup,
       this.State.Config.ActiveFiles,
-      capabilities.map(c => this.State.Config.LCUConfig.Solutions.find(s => s.Name === c.value)),
+      capabilities.map((c) =>
+        this.State.Config.LCUConfig.Solutions.find((s) => s.Name === c.value)
+      ),
       this.State.Config.ActiveModules
     );
   }
@@ -264,7 +294,11 @@ export class SettingsSetupComponent implements OnInit {
   }
 
   public UpdateLCU(lcu: LowCodeUnitSetupConfig) {
-    if (confirm(`Are you sure you want to update ${lcu.Lookup} version ${lcu.PackageVersion} to latest?`)) {
+    if (
+      confirm(
+        `Are you sure you want to update ${lcu.Lookup} version ${lcu.PackageVersion} to latest?`
+      )
+    ) {
       this.State.Loading = true;
 
       this.IDESettingsState.SaveLCU({ ...lcu, PackageVersion: 'latest' });
@@ -281,8 +315,4 @@ export class SettingsSetupComponent implements OnInit {
 
     this.NewSideBarSectionForm.reset();
   }
-
 }
-
-
-
