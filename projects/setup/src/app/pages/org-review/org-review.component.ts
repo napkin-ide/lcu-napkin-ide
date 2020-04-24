@@ -93,23 +93,23 @@ export class OrgReviewComponent implements OnInit {
     }
   }
 
-  public OpenConfirmationDialog(): void {
-    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
-      width: '575px',
-      position: {right:'11vw'}
-    });
+  // public OpenConfirmationDialog(): void {
+  //   const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+  //     width: '575px',
+  //     position: {right:'11vw'}
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed', result);
 
-      if(result === "confirm"){
-        this.Boot()
-      }
-    });
-  }
+  //     if(result === "confirm"){
+  //       this.Boot();
+  //     }
+  //   });
+  // }
 
 
   //  Helpers
 
-  
+
 }
