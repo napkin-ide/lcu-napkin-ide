@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { IDEStateManagementContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { IdeSideBar, IdeSideBarAction, IdeActivity } from '@lcu/common';
 
 @Component({
@@ -15,7 +15,7 @@ export class IdeSideBarComponent implements OnInit {
   @Input() public isHandset: boolean = false;
 
   constructor(
-    protected ideState: IdeStateStateManagerContext
+    protected ideState: IDEStateManagementContext
   ) { }
 
   // TODO: Trigger loading on any State actions

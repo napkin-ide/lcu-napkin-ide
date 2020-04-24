@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IdeStateStateManagerContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
+import { IDEStateManagementContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'nide-ide',
@@ -18,7 +18,7 @@ export class IdeComponent implements OnInit {
 
   constructor(
     protected breakpointObserver: BreakpointObserver,
-    protected ideState: IdeStateStateManagerContext
+    protected ideState: IDEStateManagementContext
   ) { }
 
   public ngOnInit(): void {

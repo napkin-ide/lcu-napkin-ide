@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { IDEStateManagementContext } from '@napkin-ide/lcu-napkin-ide-common';
 import { LazyElementConfig } from '@lowcodeunit/lazy-element';
 import { IdeEditor } from '@lcu/common';
 
@@ -15,7 +15,7 @@ export class IdeEditorsComponent implements OnInit {
   public Editors: IdeEditor[];
 
   constructor(
-    protected ideState: IdeStateStateManagerContext
+    protected ideState: IDEStateManagementContext
   ) { }
 
   // TODO: Trigger loading on any State actions

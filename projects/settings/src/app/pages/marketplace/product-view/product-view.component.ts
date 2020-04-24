@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IdeSettingsState, LowCodeUnitSetupConfig } from '../../../core/ide-settings.state';
-import { IdeSettingsStateManagerContext } from '../../../core/ide-settings-state-manager.context';
+import { IDESettingsState, LowCodeUnitSetupConfig } from '../../../core/ide-settings.state';
+import { IDESettingsStateContext } from '../../../core/ide-settings-state-manager.context';
 
 @Component({
   selector: 'lcu-product-view',
@@ -27,13 +27,13 @@ export class MarketplaceProductViewComponent implements OnInit {
   /**
    * Current state
    */
-  public State: IdeSettingsState;
+  public State: IDESettingsState;
 
   // CONSTRUCTORS
 
   constructor(
     protected activatedRoute: ActivatedRoute,
-    protected ideSettingsState: IdeSettingsStateManagerContext
+    protected IDESettingsState: IDESettingsStateContext
   ) {
     // Get the product info from the state instead of hard-coding it here:
     this.Product = { Title: this.activatedRoute.snapshot.paramMap.get('product_title') };
@@ -43,7 +43,7 @@ export class MarketplaceProductViewComponent implements OnInit {
   // LIFECYCLE
 
   ngOnInit() {
-    this.ideSettingsState.Context.subscribe(state => {
+    this.IDESettingsState.Context.subscribe(state => {
       this.State = state;
     });
   }
@@ -60,7 +60,7 @@ export class MarketplaceProductViewComponent implements OnInit {
     this.savedLCU = new LowCodeUnitSetupConfig();
 
     // map product into LowCodeUnitSetupConfig...
-    
+
     // hard coding this for now as functionality to populate this data from state is not yet complete
     this.savedLCU.Lookup = 'lcu-fathym-forecast-lcu';
     this.savedLCU.NPMPackage = '@habistack/lcu-fathym-forecast-lcu';
@@ -79,7 +79,7 @@ export class MarketplaceProductViewComponent implements OnInit {
    * takes an LCU setup configuration and sends it to the back to be saved
    */
   protected saveLCU(lcu: LowCodeUnitSetupConfig): void {
-    this.ideSettingsState.SaveLCU(lcu);
+    this.IDESettingsState.SaveLCU(lcu);
   }
 
 }

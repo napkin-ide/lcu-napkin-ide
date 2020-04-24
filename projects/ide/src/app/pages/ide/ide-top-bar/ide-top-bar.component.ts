@@ -10,7 +10,7 @@ import {
 import { MatSidenav } from '@angular/material/sidenav';
 import {
   // import { IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common/lcu.api';
-  IdeStateStateManagerContext,
+  IDEStateManagementContext,
   IdeManagementState,
   IDEActionTypes,
   ExternalDialogComponent,
@@ -41,7 +41,7 @@ export class IdeTopBarComponent implements OnInit {
   @Input() public isHandset = false;
 
   constructor(
-    protected ideState: IdeStateStateManagerContext,
+    protected ideState: IDEStateManagementContext,
     protected dialog: MatDialog
   ) {}
 
