@@ -5,9 +5,6 @@ $Fathym-Grey: gray;
 $Light-BG:mat-color(map-get($global-theme, primary), A200,10%);
 $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
 
-// $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
-// $Purple: purple;
-// $Orange: mat-color(map-get($global-theme, primary), A200);
 //----------------------MIXINS------------------------//
 
 @mixin plan-card($theme-color){
@@ -83,7 +80,6 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
         height: 70px;
     }
     .feature-container{
-        // background-color: $Light-BG;
         padding: 15px 29px;
         .features{
             font-size: 12px;
@@ -111,7 +107,7 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
     }
     
 }
-//--------------------------END MIXINS--------------------------------------//
+//--------------------------END MIXINS------------------------------//
 .pro{
     @include plan-card($Pro-primary);
 }
@@ -119,57 +115,3 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
 .starter{
     @include plan-card($Starter-primary); 
 }
-
-
-
-
-
-
-// .pricing-container{
-//     background-color: $Darker-BG;
-//     border-bottom: 1px solid $Pro-primary;
-//     .discounted-from{
-//         color: $Fathym-Grey;
-//         text-decoration: line-through;
-//         padding-bottom: 5px;
-
-//     }
-//     .price{
-//         font-size: 45px;
-//         font-weight: 700;
-//     }
-//     .dollar-symbol{
-//         font-weight: 700;
-//         font-size: 30px;
-//         padding-bottom: 5px;
-
-//     }
-//     .intervals{
-//         color: $Fathym-Grey;
-//         padding-bottom: 5px;
-
-//     }
-// }
-// .feature-container{
-//     // background-color: $Light-BG;
-//     padding: 15px 29px;
-//     .features{
-//         font-size: 12px;
-//         padding: 10px;
-//         border: 1px solid $Pro-primary;
-//         border-radius: 2px;
-//         background-color: white;
-
-//         mat-icon{
-//             font-size: 20px;
-//             color: $Pro-primary;
-//         }
-//     }
-// }
-
-
-// .interval-toggle{
-//     position: absolute;
-//     bottom: 30px;
-//     left: 50px;
-// }
