@@ -100,9 +100,13 @@ export class BillingComponent
    */
   public Intervals: string[];
 
-  // public stripeCardNumber: any;
-  // public stripeCardExpiry: any;
-  // public stripeCardCvc: any;
+  public stripeCardNumber: any;
+  public stripeCardExpiry: any;
+  public stripeCardCvc: any;
+
+  public SelectedInterval: string;
+
+  public SelectedPlanGroupPlans: BillingPlanOption[];
 
   //  Constructor
   constructor(
@@ -124,9 +128,7 @@ export class BillingComponent
       this.State = state;
       console.log('billing state: ', this.State);
       console.log('Plan id', this.planID);
-      // if(!this.State.Loading){
       this.stateChanged();
-      // }
     });
   }
 
@@ -146,10 +148,10 @@ export class BillingComponent
     this.stripe
       .createPaymentMethod({
         type: 'card',
-        // cardExpiry: this.stripeCardExpiry,
-        // cardNumber: this.stripeCardNumber,
-        // cardCvc: this.stripeCardCvc,
-        card: this.stripeCard,
+        cardExpiry: this.stripeCardExpiry,
+        cardNumber: this.stripeCardNumber,
+        cardCvc: this.stripeCardCvc,
+        // card: this.stripeCard,
         billing_details: {
           email: this.State.Username,
         },
@@ -159,15 +161,15 @@ export class BillingComponent
       });
   }
 
-  public ToggleChanged(toggleSelected: string): void {
+  public ToggleChanged(toggleSelected: any): void {
    
     // false === Annually
     // true === Monthly
-    // console.log("toggle changed: ", event.checked);
+    console.log("toggle changed: ", toggleSelected);
     this.State.Plans.forEach((plan: BillingPlanOption) => {
       if (
         this.SelectedPlan.PlanGroup === plan.PlanGroup &&
-        plan.Interval === toggleSelected
+        plan.Interval === toggleSelected.value
       ) {
         this.SelectedPlan = plan;
         this.planID = this.SelectedPlan.Lookup;
@@ -193,7 +195,8 @@ export class BillingComponent
       this.AcceptedEA &&
       this.AcceptedTOS &&
       this.StripeValid &&
-      this.BillingForm.value.userName
+      this.BillingForm.value.userName &&
+      this.SelectedInterval
     ) {
       return false;
     } else {
@@ -241,118 +244,118 @@ export class BillingComponent
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.stripePublicKey);
-      // this.setupStripeElements();
+      this.setupStripeElements();
       const elements = this.stripe.elements();
 
-      this.stripeCard = elements.create('card', {
-        style: {
-          base: {
-            color: 'black',
-            fontWeight: 600,
-            fontFamily: 'Arial, sans-serif',
-            fontSize: '16px',
-            fontSmoothing: 'antialiased',
+      // this.stripeCard = elements.create('card', {
+      //   style: {
+      //     base: {
+      //       color: 'black',
+      //       fontWeight: 600,
+      //       fontFamily: 'Arial, sans-serif',
+      //       fontSize: '16px',
+      //       fontSmoothing: 'antialiased',
 
-            ':focus': {
-              color: 'black',
-            },
+      //       ':focus': {
+      //         color: 'black',
+      //       },
 
-            '::placeholder': {
-              color: 'grey',
-            },
+      //       '::placeholder': {
+      //         color: 'grey',
+      //       },
 
-            ':focus::placeholder': {
-              color: 'black',
-            },
-          },
-          invalid: {
-            color: '#FA755A',
-            ':focus': {
-              color: '#FA755A',
-            },
-          },
-          '::placeholder': {
-            color: 'grey',
-          },
-        },
-      });
-      this.stripeCard.mount(document.getElementById('card-element'));
+      //       ':focus::placeholder': {
+      //         color: 'black',
+      //       },
+      //     },
+      //     invalid: {
+      //       color: '#FA755A',
+      //       ':focus': {
+      //         color: '#FA755A',
+      //       },
+      //     },
+      //     '::placeholder': {
+      //       color: 'grey',
+      //     },
+      //   },
+      // });
+      // this.stripeCard.mount(document.getElementById('card-element'));
 
-      this.stripeCard.addEventListener('change', (event: any) =>
-        this.handleCardChanged(event)
-      );
+      // this.stripeCard.addEventListener('change', (event: any) =>
+      //   this.handleCardChanged(event)
+      // );
 
-      //     this.stripeCardNumber.addEventListener('change', (event: any) =>
-      //     this.handleCardChanged(event)
-      //   );
+          this.stripeCardNumber.addEventListener('change', (event: any) =>
+          this.handleCardChanged(event)
+        );
 
-      // this.stripeCardExpiry.addEventListener('change', (event: any) =>
-      //     this.handleCardChanged(event)
-      //   );
+      this.stripeCardExpiry.addEventListener('change', (event: any) =>
+          this.handleCardChanged(event)
+        );
 
-      //   this.stripeCardCvc.addEventListener('change', (event: any) =>
-      //     this.handleCardChanged(event)
-      //   );
+        this.stripeCardCvc.addEventListener('change', (event: any) =>
+          this.handleCardChanged(event)
+        );
     }
   }
 
-  // protected setupStripeElements():void{
-  //   const elements = this.stripe.elements();
-  //   var elementStyles = {
-  //     base: {
-  //       color: '#fff',
-  //       fontWeight: 600,
-  //       fontFamily: 'Arial, sans-serif',
-  //       fontSize: '16px',
-  //       fontSmoothing: 'antialiased',
+  protected setupStripeElements():void{
+    const elements = this.stripe.elements();
+    var elementStyles = {
+      base: {
+        color: 'black',
+        fontWeight: 600,
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '16px',
+        fontSmoothing: 'antialiased',
 
-  //       ':focus': {
-  //         color: '#424770',
-  //       },
+        ':focus': {
+          color: 'black',
+        },
 
-  //       '::placeholder': {
-  //         color: '#9BACC8',
-  //       },
+        '::placeholder': {
+          color: 'grey',
+        },
 
-  //       ':focus::placeholder': {
-  //         color: '#CFD7DF',
-  //       },
-  //     },
-  //     invalid: {
-  //       color: '#fff',
-  //       ':focus': {
-  //         color: '#FA755A',
-  //       },
-  //       '::placeholder': {
-  //         color: '#FFCCA5',
-  //       },
-  //     },
-  //   };
+        ':focus::placeholder': {
+          color: 'black',
+        },
+      },
+      invalid: {
+        color: '#FA755A',
+        ':focus': {
+          color: '#FA755A',
+        },
+        '::placeholder': {
+          color: 'grey',
+        },
+      },
+    };
 
-  //   var elementClasses = {
-  //     focus: 'focus',
-  //     empty: 'empty',
-  //     invalid: 'invalid',
-  //   };
+    var elementClasses = {
+      focus: 'focus',
+      empty: 'empty',
+      invalid: 'invalid',
+    };
 
-  //   this.stripeCardNumber = elements.create('cardNumber', {
-  //     style: elementStyles,
-  //     classes: elementClasses,
-  //   });
-  //   this.stripeCardNumber.mount('#card-number');
+    this.stripeCardNumber = elements.create('cardNumber', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardNumber.mount('#card-number');
 
-  //   this.stripeCardExpiry = elements.create('cardExpiry', {
-  //     style: elementStyles,
-  //     classes: elementClasses,
-  //   });
-  //   this.stripeCardExpiry.mount('#card-expiry');
+    this.stripeCardExpiry = elements.create('cardExpiry', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardExpiry.mount('#card-expiry');
 
-  //   this.stripeCardCvc = elements.create('cardCvc', {
-  //     style: elementStyles,
-  //     classes: elementClasses,
-  //   });
-  //   this.stripeCardCvc.mount('#card-cvc');
-  // }
+    this.stripeCardCvc = elements.create('cardCvc', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardCvc.mount('#card-cvc');
+  }
 
   protected stateChanged() {
     if (this.State.Plans) {
@@ -387,6 +390,11 @@ export class BillingComponent
         (p: any) => p.Lookup === this.planID
       );
       console.log('SELECTED PLAN:', this.SelectedPlan);
+    }
+    if (!this.SelectedPlanGroupPlans && this.State.Plans){
+      this.SelectedPlanGroupPlans = new Array<BillingPlanOption>();
+      this.SelectedPlanGroupPlans= this.State.Plans.filter(plan => plan.PlanGroup === this.SelectedPlan.PlanGroup);
+      console.log("SPGP:", this.SelectedPlanGroupPlans);
     }
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
     // using *ngIf with external form properties

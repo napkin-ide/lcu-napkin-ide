@@ -1,6 +1,7 @@
 <div [ngClass]="{'pro': Plan?.PlanGroup === PlanGroups[0], 
                  'starter': Plan?.PlanGroup === PlanGroups[1],
-                 'inter': Plan?.PlanGroup === PlanGroups[2]}" fxLayout="column">
+                 'inter': Plan?.PlanGroup === PlanGroups[2]
+                }" fxLayout="column">
   <!-- <div class="plan-card" fxLayout="column"> -->
   <!-- HEADER -->
   <div class="header" fxLayout="row" fxLayoutAlign="start end">
@@ -19,8 +20,8 @@
     <div *ngIf="Plan?.Price" class="price" fxLayoutAlign="center center">
       {{Plan.Price}}&nbsp;</div>
     <div class="intervals" fxLayout="column">
-      <div>/{{Intervals[0]}}</div>
-      <div>or $666 {{Intervals[1]}}</div>
+      <div>/{{Plan.Interval}}</div>
+      <div>or ${{OtherPlan.Price}} {{OtherPlan.Interval}}</div>
     </div>
   </div>
 

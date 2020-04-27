@@ -1,6 +1,10 @@
-@import "../../../common";
+// @import "../../../common";
+@import '../../../../../common/src/styles/theme';
 
-$Fathym-Green: #4a918e;
+$Fathym-Green: mat-color(map-get($global-theme, primary), A200);
+$Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
+
+
 
 @mixin input-box {
   background-color: #f7f7f7;
@@ -13,14 +17,16 @@ $Fathym-Green: #4a918e;
 
 // @mixin billing-component($theme){
   .fathym-logo{
-    background-image: fathym-logo(thinky-full-logo, black, 1);
+    background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
     background-repeat: no-repeat;
-    background-size: 267px;
-    height: 70px;
-    width: 300px;
+    background-size: 100px;
+    height: 100px;
+    width: 100px;
   }
 // }
-
+.fathym-header{
+  margin-bottom: 0px;
+}
 
 .back-arrow{
   position: relative;
@@ -59,15 +65,29 @@ $Fathym-Green: #4a918e;
   
 }
 .stripe-container{
-  // background-color: green;
-  #card-element{
-    width: 500px;
-    // background-color: grey ;
-    // .ElementsApp input{
-    //   background-color: red;
-    // }
+  width: 510px;
+  .card-num-container{
+    // width: 230px;
+    margin-right: 40px;
+    #card-number{
+      width:160px;
+    }
+  }
+  .expiry-date-container{
+    margin-right: 40px;
+    #card-expiry{
+      width: 65px;
+    }
+
+  }
+  .cvc-num-container{
+    width: 100px;
+    #card-cvc{
+      width: 45px;
+    }
   }
 }
+
 }
 h2{
   text-align: center;
@@ -102,7 +122,7 @@ h2{
   color: black;
   font-weight: 600;
   font-size: 16px;
-  width: 500px;
+  width: 475px;
   outline: none;
   
   // margin-right: 22px;
@@ -110,6 +130,21 @@ h2{
   color: black;
   opacity: 1;
   }
+}
+::ng-deep .mat-radio-label{
+  margin: 5px 0px;
+}
+.price-interval{
+  margin: 5px 0px;
+
+}
+.plan-cost-selection-container{
+  width:500px;
+  background-color: $Fathym-Green-BG;
+  padding:10px;
+}
+.interval-radio-button{
+  margin-right: 100px;
 }
 
 .buy-now-button{

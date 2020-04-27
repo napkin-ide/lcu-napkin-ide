@@ -1,6 +1,7 @@
 @import '../../../../../common/src/styles/theme';
 $Pro-primary: mat-color(map-get($global-theme, primary), A200);
 $Starter-primary: mat-color(map-get($global-theme, primary), A100);
+$Inter-primary: mat-color(map-get($global-theme, primary), A300);
 $Fathym-Grey: gray;
 $Light-BG:mat-color(map-get($global-theme, primary), A200,10%);
 $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
@@ -18,6 +19,8 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
     .header{
         border-bottom: 3px solid $Pro-primary;
         background-color: white !important;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
 
         .title{
             margin-left:5px;
@@ -114,4 +117,8 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
 
 .starter{
     @include plan-card($Starter-primary); 
+}
+.inter{
+    @include plan-card($Inter-primary); 
+
 }

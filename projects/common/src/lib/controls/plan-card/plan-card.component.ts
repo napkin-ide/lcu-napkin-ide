@@ -10,9 +10,9 @@ import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 export class PlanCardComponent implements OnInit {
 
   /**
-   * All the plans from the state
+   * The Displayed plans from the state
    */
-  @Input('all-plans') AllPlans: BillingPlanOption[];
+  @Input('displayed-plans') DisplayedPlans: BillingPlanOption[];
 
   /**
    * The Featured Plan group to display the **Most Popular tag**
@@ -36,6 +36,11 @@ export class PlanCardComponent implements OnInit {
   @Input('plan-groups') PlanGroups: Array<string>;
 
   /**
+   * The plans coming back from the state to display the different prices
+   */
+  @Input('all-plans') AllPlans: Array<BillingPlanOption>;
+
+  /**
    * Whether or not to display the buy now button (Button for plan page only)
    */
   @Input('show-button') ShowButton: boolean;
@@ -54,13 +59,25 @@ export class PlanCardComponent implements OnInit {
    */
   @Output('interval-toggled') IntervalToggled: EventEmitter<string>;
 
+  /**
+   * The price of the other plan that is not displayed
+   */
+  public OtherIntervalPrice: any;
+
+  public OtherPlan: BillingPlanOption;
+
   constructor() { 
     this.BuyNowClicked = new EventEmitter<any>();
     this.IntervalToggled = new EventEmitter<string>();
   }
 
   ngOnInit() {
-    // console.log('Plan from plan card: ',this.Plan);
+    // console.log('All plans: ',this.AllPlans);
+    // this.getOtherIntervalPrice();
+  }
+  ngOnChanges(){
+    this.getOtherIntervalPrice();
+
   }
 
   public BuyNow(plan: any){
@@ -69,8 +86,14 @@ export class PlanCardComponent implements OnInit {
   }
 
   public IntervalSelected(interval: string){
-    this.IntervalToggled.emit(interval);
-    
+    this.IntervalToggled.emit(interval); 
+  }
+
+  protected getOtherIntervalPrice(){
+    let temp = this.AllPlans.filter(plan => plan.Interval !== this.Plan.Interval && plan.PlanGroup === this.Plan.PlanGroup);
+    this.OtherPlan = temp[0];
+    console.log("Other plan interval:", this.OtherPlan);
+    this.OtherIntervalPrice = this.OtherPlan.Price;
   }
   
 
