@@ -3,12 +3,13 @@
                  'inter': Plan?.PlanGroup === PlanGroups[2]
                 }" fxLayout="column">
   <!-- <div class="plan-card" fxLayout="column"> -->
+    
   <!-- HEADER -->
   <div class="header" fxLayout="row" fxLayoutAlign="start end">
     <h2 *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</h2>
     <div class="package">&nbsp;package</div>
     <div *ngIf="Plan?.PlanGroup === FeaturedPlanGroup" class="featured-plan">
-      <div class="feat-text">#1</div>
+      <div class="feat-text">&nbsp;Best Value</div>
     </div>
   </div>
 
@@ -39,15 +40,13 @@
         <div>14 Day Free Trial</div>
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="center center">
+    <ng-container *ngIf="PlanFeatures">
+      <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let feat of PlanFeatures">
         <mat-icon>check_circle_outline</mat-icon>
-        <div>1 User Account</div>
+        <div>{{feat}}</div>
       </div>
+    </ng-container>
 
-      <div fxLayout="row" fxLayoutAlign="center center">
-        <mat-icon>check_circle_outline</mat-icon>
-        <div>Personal IDE</div>
-      </div>
 
       <div fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
@@ -61,7 +60,7 @@
 
       <div fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
-        <div *ngIf="Plan?.LCUs">Fathym Low Code Unit &trade; Packages</div>
+        <div *ngIf="Plan?.LCUs">{{Plan.LCUs}} Fathym Low Code Unit &trade; Packages</div>
       </div>
     </div>
   </div>

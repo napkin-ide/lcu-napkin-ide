@@ -19,7 +19,7 @@
       <div class="billing-header-container" fxLayout="column" fxLayoutAlign="space-around center">
         <div class="fathym-logo"></div>
         <h1 class="fathym-header">Fathym it. Build it.</h1>
-        <h3>Payment Information</h3>
+        <h3 class="fathym-header">Payment Information</h3>
       </div>
 
       <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
@@ -32,62 +32,57 @@
 
             <div class="form-row" fxLayout="column" fxLayoutAlign="space-around center">
 
-              <div class="billing-info">
+              <div class="billing-info" >
                 <label fxLayout="column" fxLayoutAlign="space-around start">
                   <span id="input-span">Name on Card</span>
                   <div fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>account_circle</mat-icon>
+                    
                     <input name="cardholder-name" class="cardholder-name-input" id="cardholder-name-input"
                       formControlName="userName" placeholder="Cardholder Name" />
+                      <!-- <mat-icon matPrefix>account_circle</mat-icon> -->
                   </div>
                 </label>
               </div>
               <div class="billing-info">
-                <!-- <label for="card-element" fxLayout="column" fxLayoutAlign="space-around start">Credit Card</label> -->
-                <!-- <div id="card-element" class="stripe-card"></div> -->
-
+                <label for="card-element" fxLayout="column" fxLayoutAlign="space-around start">Credit Card</label>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                <!-- <mat-icon >credit_card</mat-icon> -->
+                 <div id="card-element" class="stripe-card"></div>
+                </div>
                 <div class="stripe-container" fxLayout="row" fxLayoutAlign="start start">
+                  
                   <!-- CARD NUMBER -->
-                  <div class="card-num-container" fxLayout="column">
+                  <!-- <div class="card-num-container" fxLayout="column">
                     <label for="card-number">Credit Card Number</label>
                     <div fxLayout="row" fxLayoutAlign="start center">
                       <mat-icon>credit_card</mat-icon>
                       <div id="card-number" class="stripe-card"></div>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- EXPIRATION DATE -->
-                  <div class="expiry-date-container" fxLayout="column">
+                  <!-- <div class="expiry-date-container" fxLayout="column">
                     <label for="card-expiry">Expiration Date</label>
                     <div fxLayout="row" fxLayoutAlign="start center">
                       <mat-icon>today</mat-icon>
                       <div id="card-expiry" class="stripe-card"></div>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- CVC NUMBER -->
-                  <div class="cvc-num-container" fxLayout="column">
+                  <!-- <div class="cvc-num-container" fxLayout="column">
                     <label for="card-cvc">CVC</label>
                     <div fxLayout="row" fxLayoutAlign="start center">
                       <mat-icon>lock</mat-icon>
                       <div id="card-cvc" class="stripe-card"></div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <div id="card-errors mat-error" role="alert" class="spread" *ngIf="StripeError">
                   {{ StripeError }}
                 </div>
               </div>
             </div>
-            <div *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="column"
-              fxLayoutAlign="center start">
-              <mat-checkbox *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
-                <a target='blank' href="https://fathym.com/terms-of-services/">Terms of Service</a>
-              </mat-checkbox>
-              <mat-checkbox *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
-                <a target="blank" href="https://fathym.com/enterprise-agreement/">Enterprise Agreement</a>
-              </mat-checkbox>
-
-            </div>
+            
 
             <!-- TOGGLE & BUTTON -->
             <div class="toggle-button-container" fxLayout="column" fxLayoutAlign="center center">
@@ -113,6 +108,18 @@
                   </div>
                 </div>
               </div>
+
+              <!-- TOS & EA CHECKBOXES -->
+            <div *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="column"
+              fxLayoutAlign="center start">
+              <mat-checkbox *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
+                <a target='blank' href="https://fathym.com/terms-of-services/">Terms of Service</a>
+              </mat-checkbox>
+              <mat-checkbox *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
+                <a target="blank" href="https://fathym.com/enterprise-agreement/">Enterprise Agreement</a>
+              </mat-checkbox>
+
+            </div>
 
               <div class="button-container" fxLayoutAlign="center center">
                 <button mat-raised-button id="payment-button" class='buy-now-button' *ngIf="SelectedPlan"

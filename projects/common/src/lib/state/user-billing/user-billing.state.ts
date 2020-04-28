@@ -40,4 +40,6 @@ export class BillingPlanOption {
   public PlanGroup?: string;
 
   public Price?: number;
+
+  public PlanFeatures?: string;
 }

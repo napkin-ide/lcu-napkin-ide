@@ -23,7 +23,7 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     UserAccountSidenavComponent,
     PlanCardComponent,
     IntervalToggleComponent,
-    LcuNapkinIdeWelcomeJourneysElementComponent
+    LcuNapkinIdeWelcomeJourneysElementComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +42,8 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     UserAccountSidenavComponent,
     PlanCardComponent,
     IntervalToggleComponent,
-    LcuNapkinIdeWelcomeJourneysElementComponent
+    LcuNapkinIdeWelcomeJourneysElementComponent,
+    
   ],
   entryComponents: [
     SideNavComponent,
@@ -51,7 +52,8 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     UserAccountSidenavComponent,
     PlanCardComponent,
     IntervalToggleComponent,
-    LcuNapkinIdeWelcomeJourneysElementComponent
+    LcuNapkinIdeWelcomeJourneysElementComponent,
+    
   ]
 })
 export class LcuNapkinIdeModule {}

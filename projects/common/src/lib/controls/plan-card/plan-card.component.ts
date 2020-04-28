@@ -66,6 +66,8 @@ export class PlanCardComponent implements OnInit {
 
   public OtherPlan: BillingPlanOption;
 
+  public PlanFeatures: string[];
+
   constructor() { 
     this.BuyNowClicked = new EventEmitter<any>();
     this.IntervalToggled = new EventEmitter<string>();
@@ -77,6 +79,7 @@ export class PlanCardComponent implements OnInit {
   }
   ngOnChanges(){
     this.getOtherIntervalPrice();
+    this.extractPlanFeatures();
 
   }
 
@@ -94,6 +97,12 @@ export class PlanCardComponent implements OnInit {
     this.OtherPlan = temp[0];
     console.log("Other plan interval:", this.OtherPlan);
     this.OtherIntervalPrice = this.OtherPlan.Price;
+  }
+
+  protected extractPlanFeatures(){
+    if(this.Plan.PlanFeatures){
+      this.PlanFeatures = this.Plan.PlanFeatures.split("|");
+    }
   }
   
 

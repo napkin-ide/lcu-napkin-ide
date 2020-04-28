@@ -6,7 +6,7 @@ import { PlansComponent } from './plans/plans.component';
 
 const routes: Routes = [
   {
-    path: 'complete',
+    path: 'complete/:id',
     component: CompleteComponent
   },
   {

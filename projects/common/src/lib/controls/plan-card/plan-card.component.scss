@@ -16,6 +16,7 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
     border-radius: 4px;
     background-color: $Light-BG;
     border-color: $theme-color;
+    
     .header{
         border-bottom: 3px solid $Pro-primary;
         background-color: white !important;
@@ -32,22 +33,28 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
             margin-bottom: 5px;
         }
         .featured-plan{  
+            transform: rotate(40deg);
             background-color: $theme-color;
-            width: 50px;
-            height: 50px;
+            
+            width: 90px;
+            height: 20px;
             position: relative;
-            top: -10px;
-            right: -45px;
+            top: -23px;
+            right: -125px;
             text-align: center;
             font-size: 12px;
-            clip-path: polygon(25% 100%, 50% 75%, 75% 100%, 75% 0, 25% 0);
+            clip-path: polygon(26% 0,80% 0,100% 100%,0 100%);
+            // clip-path: polygon(25% 100%, 50% 75%, 75% 100%, 75% 0, 25% 0); //ribbon
+            // width: 50px; //ribbon
+            // height: 50px; //ribbon
             .feat-text{
                 color:white;
-                margin-top:5px;
+                // margin-top:5px;
                 font-weight: 500 !important;
                 font-size:14px;
             }
         }
+        
     }
     .pricing-container{
         background-color: $Darker-BG;
@@ -83,7 +90,7 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
         height: 70px;
     }
     .feature-container{
-        padding: 15px 29px;
+        padding: 15px 20px;
         .features{
             font-size: 12px;
             padding: 10px;

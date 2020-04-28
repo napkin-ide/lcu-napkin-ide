@@ -26,6 +26,7 @@ $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
 // }
 .fathym-header{
   margin-bottom: 0px;
+  margin-top:5px;
 }
 
 .back-arrow{
@@ -63,6 +64,9 @@ $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
   }
 
   
+}
+#card-element{
+  width:500px;
 }
 .stripe-container{
   width: 510px;
@@ -122,7 +126,7 @@ h2{
   color: black;
   font-weight: 600;
   font-size: 16px;
-  width: 475px;
+  width: 500px;
   outline: none;
   
   // margin-right: 22px;

@@ -1,13 +1,55 @@
-$Fathym-Green: #4a918e;
-
-.success-container{
-  height: 250px;
+@import '../../../../../common/src/styles/theme';
+$Fathym-Green: mat-color(map-get($global-theme, primary), A200);
+.fathym-logo{
+  background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
+  background-repeat: no-repeat;
+  background-size: 90px;
+  height: 90px;
+  width: 90px;
 }
+.success-container{
+  height: 500px;
+
 .success-heading{
-  background-color: $Fathym-Green;
+  // background-color: $Fathym-Green;
   width: 100%;
+  .fathym-header{
+    margin:0px;
+    margin-top:10px;
+  }
+  .succ-text{
+    margin: 5px 0px;
+    font-size: 15px;
+  }
+}
+.order-summary-container{
+  width:500px;
+  
+  .order-summary{
+    width: 400px;
+    .item{
+    margin-bottom: 10px;
+    .note{
+      font-size: 12px;
+    }
+    }
+  }
+}
 }
 
 .redirect-button{
   background-color: $Fathym-Green;
+  width: 400px;
+}
+
+.bold{
+  font-weight: bold;
+}
+hr{
+  border: .5px solid black;
+    width: 400px;
+}
+.dashed-hr{
+  border:.5px dashed gray;
+  width: 400px;
 }
