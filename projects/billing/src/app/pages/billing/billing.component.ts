@@ -100,9 +100,13 @@ export class BillingComponent
    */
   public Intervals: string[];
 
-  // public stripeCardNumber: any;
-  // public stripeCardExpiry: any;
-  // public stripeCardCvc: any;
+  public stripeCardNumber: any;
+  public stripeCardExpiry: any;
+  public stripeCardCvc: any;
+
+  public SelectedInterval: string;
+
+  public SelectedPlanGroupPlans: BillingPlanOption[];
 
   //  Constructor
   constructor(
@@ -122,12 +126,11 @@ export class BillingComponent
     this.setupForms();
     this.userBillState.Context.subscribe((state: any) => {
       this.State = state;
-      console.log('billing state: ', this.State);
-      console.log('Plan id', this.planID);
-      // if(!this.State.Loading){
+      // console.log('billing state: ', this.State);
+      // console.log('Plan id', this.planID);
       this.stateChanged();
-      // }
     });
+
   }
 
   public ngAfterViewInit(): void {}
@@ -159,15 +162,15 @@ export class BillingComponent
       });
   }
 
-  public ToggleChanged(toggleSelected: string): void {
+  public ToggleChanged(toggleSelected: any): void {
    
     // false === Annually
     // true === Monthly
-    // console.log("toggle changed: ", event.checked);
+    // console.log("toggle changed: ", toggleSelected);
     this.State.Plans.forEach((plan: BillingPlanOption) => {
       if (
         this.SelectedPlan.PlanGroup === plan.PlanGroup &&
-        plan.Interval === toggleSelected
+        plan.Interval === toggleSelected.value
       ) {
         this.SelectedPlan = plan;
         this.planID = this.SelectedPlan.Lookup;
@@ -180,11 +183,11 @@ export class BillingComponent
   }
 
   public TOSChanged(event: any) {
-    console.log('TOS: ', event);
+    // console.log('TOS: ', event);
     this.AcceptedTOS = event.checked;
   }
   public EAChanged(event: any) {
-    console.log('EA: ', event);
+    // console.log('EA: ', event);
     this.AcceptedEA = event.checked;
   }
 
@@ -193,7 +196,8 @@ export class BillingComponent
       this.AcceptedEA &&
       this.AcceptedTOS &&
       this.StripeValid &&
-      this.BillingForm.value.userName
+      this.BillingForm.value.userName &&
+      this.SelectedInterval
     ) {
       return false;
     } else {
@@ -219,7 +223,7 @@ export class BillingComponent
       this.StripeError = result.error;
     } else {
       this.StripeError = '';
-      console.log('Billing Form: ', this.BillingForm);
+      // console.log('Billing Form: ', this.BillingForm);
       this.userBillState.CompletePayment(
         result.paymentMethod.id,
         this.BillingForm.value.userName,
@@ -296,67 +300,83 @@ export class BillingComponent
     }
   }
 
-  // protected setupStripeElements():void{
-  //   const elements = this.stripe.elements();
-  //   var elementStyles = {
-  //     base: {
-  //       color: '#fff',
-  //       fontWeight: 600,
-  //       fontFamily: 'Arial, sans-serif',
-  //       fontSize: '16px',
-  //       fontSmoothing: 'antialiased',
+  protected setupStripeElements():void{
+    const elements = this.stripe.elements();
+    var elementStyles = {
+      base: {
+        color: 'black',
+        fontWeight: 600,
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '16px',
+        fontSmoothing: 'antialiased',
 
-  //       ':focus': {
-  //         color: '#424770',
-  //       },
+        ':focus': {
+          color: 'black',
+        },
 
-  //       '::placeholder': {
-  //         color: '#9BACC8',
-  //       },
+        '::placeholder': {
+          color: 'grey',
+        },
 
-  //       ':focus::placeholder': {
-  //         color: '#CFD7DF',
-  //       },
-  //     },
-  //     invalid: {
-  //       color: '#fff',
-  //       ':focus': {
-  //         color: '#FA755A',
-  //       },
-  //       '::placeholder': {
-  //         color: '#FFCCA5',
-  //       },
-  //     },
-  //   };
+        ':focus::placeholder': {
+          color: 'black',
+        },
+      },
+      invalid: {
+        color: '#FA755A',
+        ':focus': {
+          color: '#FA755A',
+        },
+        '::placeholder': {
+          color: 'grey',
+        },
+      },
+    };
 
-  //   var elementClasses = {
-  //     focus: 'focus',
-  //     empty: 'empty',
-  //     invalid: 'invalid',
-  //   };
+    var elementClasses = {
+      focus: 'focus',
+      empty: 'empty',
+      invalid: 'invalid',
+    };
 
-  //   this.stripeCardNumber = elements.create('cardNumber', {
-  //     style: elementStyles,
-  //     classes: elementClasses,
-  //   });
-  //   this.stripeCardNumber.mount('#card-number');
+    this.stripeCardNumber = elements.create('cardNumber', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardNumber.mount('#card-number');
 
-  //   this.stripeCardExpiry = elements.create('cardExpiry', {
-  //     style: elementStyles,
-  //     classes: elementClasses,
-  //   });
-  //   this.stripeCardExpiry.mount('#card-expiry');
+    this.stripeCardExpiry = elements.create('cardExpiry', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardExpiry.mount('#card-expiry');
 
-  //   this.stripeCardCvc = elements.create('cardCvc', {
-  //     style: elementStyles,
-  //     classes: elementClasses,
-  //   });
-  //   this.stripeCardCvc.mount('#card-cvc');
-  // }
+    this.stripeCardCvc = elements.create('cardCvc', {
+      style: elementStyles,
+      classes: elementClasses,
+    });
+    this.stripeCardCvc.mount('#card-cvc');
+  }
 
   protected stateChanged() {
+    
+    this.assignGroupIntervals();
+    
+    this.determineCheckboxes();
+    // console.log("planID =", this.planID);
+    // if a plan has been passed in via param set the selected plan accordingly
+    this.findPlan();
+    this.buildSelectedPlanGroupPlans();
+    
+    // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
+    // using *ngIf with external form properties
+    // this.cdr.detectChanges();
+    this.determinePaymentStatus();
+    
+  }
+  protected assignGroupIntervals(){
     if (this.State.Plans) {
-      this.PlanGroups = new Array<string>();
+    this.PlanGroups = new Array<string>();
       this.Intervals = new Array<string>();
 
       this.State.Plans.forEach((plan: BillingPlanOption) => {
@@ -368,9 +388,11 @@ export class BillingComponent
         }
       });
 
-      console.log('plan groups', this.PlanGroups);
+      // console.log('plan groups', this.PlanGroups);
     }
+  }
 
+  protected determineCheckboxes(){
     if (this.State.RequiredOptIns) {
       if (!this.State.RequiredOptIns.includes('ToS')) {
         this.AcceptedTOS = true;
@@ -379,21 +401,28 @@ export class BillingComponent
         this.AcceptedEA = true;
       }
     }
-    // console.log("planID =", this.planID);
-    // if a plan has been passed in via param set the selected plan accordingly
+  }
 
+  protected findPlan(){
     if (this.planID && this.State.Plans) {
       this.SelectedPlan = this.State.Plans.find(
         (p: any) => p.Lookup === this.planID
       );
-      console.log('SELECTED PLAN:', this.SelectedPlan);
+      // console.log('SELECTED PLAN:', this.SelectedPlan);
     }
-    // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
-    // using *ngIf with external form properties
-    // this.cdr.detectChanges();
+  }
 
+  protected buildSelectedPlanGroupPlans(){
+    if (!this.SelectedPlanGroupPlans && this.State.Plans){
+      this.SelectedPlanGroupPlans = new Array<BillingPlanOption>();
+      this.SelectedPlanGroupPlans= this.State.Plans.filter((plan: BillingPlanOption) => plan.PlanGroup === this.SelectedPlan.PlanGroup);
+      // console.log("SPGP:", this.SelectedPlanGroupPlans);
+    }
+  }
+
+  protected determinePaymentStatus(){
     if (this.State.PaymentStatus) {
-      console.log('Payment Status', this.State.PaymentStatus);
+      // console.log('Payment Status', this.State.PaymentStatus);
       if (this.State.PaymentStatus.Code === 101) {
         this.stripe
           .confirmCardPayment('requires_action')
@@ -416,10 +445,18 @@ export class BillingComponent
       }
     }
   }
+
+  // protected getSaving(){
+  //   let temp = this.State.Plans.filter(plan => plan.PlanGroup === this.SelectedPlan.PlanGroup);
+  //   let Saving = temp[0].Price
+  //   // console.log("Other plan interval:", this.OtherPlan);
+  //   this.OtherIntervalPrice = this.OtherPlan.Price;
+  //   this.Saving
+  // }
   /**
    * When the payment returns Successfully
    */
   protected paymentSuccess(): void {
-    this.router.navigate(['complete']);
+    this.router.navigate(['complete', this.SelectedPlan.Lookup]);
   }
 }

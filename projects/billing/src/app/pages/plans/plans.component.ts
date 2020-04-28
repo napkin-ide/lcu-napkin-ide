@@ -38,7 +38,7 @@ export class PlansComponent implements OnInit {
     this.userBillState.Context.subscribe((state: any) => {
       this.State = state;
 
-      console.log('Plans: ', this.State.Plans);
+      // console.log('Plans: ', this.State.Plans);
 
       this.stateChanged();
     });
@@ -46,7 +46,7 @@ export class PlansComponent implements OnInit {
   }
 
   public BuyNowClicked(plan: any) {
-    console.log('Buy Now Clicked:', plan);
+    // console.log('Buy Now Clicked:', plan);
     this.router.navigate(['plan', plan.Lookup]);
 
   }
@@ -57,7 +57,7 @@ export class PlansComponent implements OnInit {
         //remove plan from displayedplans
         this.DisplayedPlans.splice(this.DisplayedPlans.indexOf(planToChange),1,plan);
       }
-      console.log("New plan: ", this.DisplayedPlans)
+      // console.log("New plan: ", this.DisplayedPlans)
     })
   }
 
@@ -85,7 +85,7 @@ export class PlansComponent implements OnInit {
           this.Intervals.push(plan.Interval)
         }
       });
-      console.log('displayed plan groups', this.DisplayedPlans);
+      // console.log('displayed plan groups', this.DisplayedPlans);
     }
   }
 
