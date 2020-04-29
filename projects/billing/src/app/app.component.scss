@@ -1,8 +1,24 @@
+
+@import '../../../common/src/styles/theme';
+
+$Fathym-Green: mat-color(map-get($global-theme, primary), A200);
+
+
 .billing-top-bar{
     width: 100%;
     height: 50px;
+    background-color: $Fathym-Green;
 }
 .user-account-sidenav{
     position: absolute;
-    left: 95vw;
+    left: 95%;
+}
+
+
+.billing-app-container{
+    background-image: url(../assets/img/bubble-clean.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
 }

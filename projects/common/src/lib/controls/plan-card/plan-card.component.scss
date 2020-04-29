@@ -14,12 +14,11 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
     height: 450px;
     position: relative;
     border-radius: 4px;
-    background-color: $Light-BG;
+    background-color: white;
     border-color: $theme-color;
     
     .header{
         border-bottom: 3px solid $Pro-primary;
-        background-color: white !important;
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
 
@@ -43,7 +42,7 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
             right: -125px;
             text-align: center;
             font-size: 12px;
-            clip-path: polygon(26% 0,80% 0,100% 100%,0 100%);
+            clip-path: polygon(25% 0,80% 0,99% 100%,0 95%);
             // clip-path: polygon(25% 100%, 50% 75%, 75% 100%, 75% 0, 25% 0); //ribbon
             // width: 50px; //ribbon
             // height: 50px; //ribbon
@@ -91,6 +90,8 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
     }
     .feature-container{
         padding: 15px 20px;
+        background-color: $Light-BG;
+
         .features{
             font-size: 12px;
             padding: 10px;

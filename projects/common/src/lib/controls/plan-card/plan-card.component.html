@@ -65,7 +65,7 @@
     </div>
   </div>
   <!-- BUTTON -->
-  <div *ngIf="ShowButton === true" class="button-container" fxLayoutAlign="center center">
-    <button mat-raised-button class="button" (click)="BuyNow(Plan)">Start Free Trial</button>
+  <div  class="button-container" fxLayoutAlign="center center">
+    <button *ngIf="ShowButton === true" mat-raised-button class="button" (click)="BuyNow(Plan)">Start Free Trial</button>
   </div>
 </div>
