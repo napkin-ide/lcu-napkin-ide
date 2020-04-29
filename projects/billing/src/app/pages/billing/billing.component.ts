@@ -51,6 +51,11 @@ export class BillingComponent
   /**
    * The plan lookup that is passed in via params
    */
+  protected planGroupID: any;
+
+  /**
+   * The plan ID to pass to stripe
+   */
   protected planID: any;
 
   protected get stripePublicKey(): string {
@@ -121,7 +126,7 @@ export class BillingComponent
   //  Life Cycle
   public ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      this.planID = params.get('id');
+      this.planGroupID = params.get('id');
     });
     this.setupForms();
     this.userBillState.Context.subscribe((state: any) => {
@@ -174,6 +179,7 @@ export class BillingComponent
       ) {
         this.SelectedPlan = plan;
         this.planID = this.SelectedPlan.Lookup;
+        // console.log("Toggled to: ", this.SelectedPlan);
       }
     });
   }
@@ -404,9 +410,9 @@ export class BillingComponent
   }
 
   protected findPlan(){
-    if (this.planID && this.State.Plans) {
+    if (this.planGroupID && this.State.Plans && !this.SelectedPlan) {
       this.SelectedPlan = this.State.Plans.find(
-        (p: any) => p.Lookup === this.planID
+        (p: BillingPlanOption) => p.PlanGroup === this.planGroupID
       );
       // console.log('SELECTED PLAN:', this.SelectedPlan);
     }
@@ -457,6 +463,7 @@ export class BillingComponent
    * When the payment returns Successfully
    */
   protected paymentSuccess(): void {
+    // console.log("selected plan on pay:", this.SelectedPlan)
     this.router.navigate(['complete', this.SelectedPlan.Lookup]);
   }
 }

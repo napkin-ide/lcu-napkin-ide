@@ -104,7 +104,7 @@ $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
     .button-container{
       margin: 10px;
       .buy-now-button{
-        width: 100%;
+        width: 300px;
         background-color: $Fathym-Green;
       }
     }
@@ -152,6 +152,7 @@ $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
 .plan-cost-selection-container{
   background-color: $Fathym-Green-BG;
   padding:10px;
+  border-radius: 3px;
 }
 
 .interval-radio-button{

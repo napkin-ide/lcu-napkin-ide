@@ -47,7 +47,7 @@ export class PlansComponent implements OnInit {
 
   public BuyNowClicked(plan: any) {
     // console.log('Buy Now Clicked:', plan);
-    this.router.navigate(['plan', plan.Lookup]);
+    this.router.navigate(['plan', plan.PlanGroup]);
 
   }
 

@@ -18,7 +18,7 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
     border-color: $theme-color;
     
     .header{
-        border-bottom: 3px solid $Pro-primary;
+        border-bottom: 3px solid $theme-color;
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
 
@@ -91,6 +91,8 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
     .feature-container{
         padding: 15px 20px;
         background-color: $Light-BG;
+        border-bottom: 1px solid $theme-color;
+
 
         .features{
             font-size: 12px;
@@ -108,7 +110,7 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
     .button-container{
         position: absolute;
         bottom: 15px;
-        left: 55px;
+        left: 65px;
 
         .button{
             width: 160px;
@@ -126,6 +128,7 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
 .starter{
     @include plan-card($Starter-primary); 
 }
+
 .inter{
     @include plan-card($Inter-primary); 
 
