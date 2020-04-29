@@ -1,15 +1,15 @@
-<!-- <div [className]="SelectedTheme" style="height: 100%">
-    <router-outlet></router-outlet>
-</div> -->
 <div [className]="SelectedTheme" style="height: 100%">
-  <!-- <lcu-side-nav logo-class="primary-logo" title="Fathym Setup"> -->
-    <div class="billing-top-bar"  fxLayout="row" fxLayoutAlign="end center">
-      <lcu-user-account-sidenav class="user-account-sidenav"[user-email]="Username" (logout-clicked)="LogoutClicked()"></lcu-user-account-sidenav>
-    </div>
-    <!-- style="height: 100%;" -->
+  <div class="billing-top-bar" fxLayout="row" fxLayoutAlign="end center">
+    <lcu-user-account-sidenav 
+      class="user-account-sidenav" 
+      [user-email]="Username" 
+      (logout-clicked)="LogoutClicked()">
+    </lcu-user-account-sidenav>
+  </div>
+  <div class="billing-app-container">
     <div class='router-container'>
       <router-outlet (activate)="OnActivate($event)"></router-outlet>
     </div>
-    <!-- <img class="bg-image" [src]="BackgroundImage" alt=""> -->
-  <!-- </lcu-side-nav> -->
+  </div>
+
 </div>

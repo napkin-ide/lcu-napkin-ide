@@ -4,31 +4,13 @@
 $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
 $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
 
-
-
 @mixin input-box {
   background-color: #f7f7f7;
   border-radius: 2px;
-  // margin-left: 20px;
   margin: 10px 0px;
   padding: 5px;
   border-bottom: 1px solid #d7d1c9;
 }
-
-// @mixin billing-component($theme){
-  .fathym-logo{
-    background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
-    background-repeat: no-repeat;
-    background-size: 100px;
-    height: 100px;
-    width: 100px;
-  }
-// }
-.fathym-header{
-  margin-bottom: 0px;
-  margin-top:5px;
-}
-
 .back-arrow{
   position: relative;
   top: -38px;
@@ -36,105 +18,127 @@ $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
   cursor: pointer;
   z-index: 1;
 }
-.welcome {
-  text-align: center;
+
+.stripe-billing-container{
+  // height: 100%;
+  background-color: white;
+  height:450px;
+  padding: 10px;
+  border: 1px solid $Fathym-Green;
+  border-radius: 3px;
+
+  .fathym-logo{
+    background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
+    background-repeat: no-repeat;
+    background-size: 100px;
+    height: 100px;
+    width: 100px;
+  }
+
+  .fathym-header{
+   margin-bottom: 0px;
+   margin-top:5px;
+  }
 }
-.billing-form{
-  height: 100%;
+
+
+
+
 .billing-page-container {
   padding: 20px;
-  background-color: #a4bab3;
-  height: 100%;
+  // background-color: $Fathym-Green-BG;
+  // height: 100%;
+  .plan-card-container{
+    // height: 100%;
+    overflow: auto;    
+  }
+  .payment-info-container{
+  .billing-form{
+    // height: 100%;
+    .cardholder-name-input{
+      @include input-box();
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      color: black;
+      font-weight: 600;
+      font-size: 16px;
+      width: 500px;
+      // width:100%;
+      outline: none;
+      
+      // margin-right: 22px;
+       ::placeholder{
+      color: black;
+      opacity: 1;
+      }
+    }
+    .stripe-card{
+      @include input-box();
+      width:500px;
+    }
+    // .stripe-container{
+    //   width: 510px;
+    //   .card-num-container{
+    //     // width: 230px;
+    //     margin-right: 40px;
+    //     #card-number{
+    //       width:160px;
+    //     }
+    //   }
+    //   .expiry-date-container{
+    //     margin-right: 40px;
+    //     #card-expiry{
+    //       width: 65px;
+    //     }
+    
+    //   }
+    //   .cvc-num-container{
+    //     width: 100px;
+    //     #card-cvc{
+    //       width: 45px;
+    //     }
+    //   }
+    // }
   
-
-  .pricing-container{
-    // background-color: lavenderblush;
-    height: 100%;
-    overflow: auto;
-
-    .product-plans {
-
-      .mat-radio-group {
+    .button-container{
+      margin: 10px;
+      .buy-now-button{
         width: 100%;
+        background-color: $Fathym-Green;
       }
     }
   }
-  .billing-container{
-    height: 100%;
-  }
-
   
 }
-#card-element{
-  width:500px;
-}
-.stripe-container{
-  width: 510px;
-  .card-num-container{
-    // width: 230px;
-    margin-right: 40px;
-    #card-number{
-      width:160px;
-    }
-  }
-  .expiry-date-container{
-    margin-right: 40px;
-    #card-expiry{
-      width: 65px;
-    }
 
-  }
-  .cvc-num-container{
-    width: 100px;
-    #card-cvc{
-      width: 45px;
-    }
-  }
-}
+
 
 }
-h2{
-  text-align: center;
-}
 
-.vertical-line{
-  border-left: 2px solid grey;
-  height: 430px;
-}
 
-.mat-payment-card{
-  margin-left: 10px;
-}
+// h2{
+//   text-align: center;
+// }
 
-.toggle-container{
-  margin: 10px;
-}
+// .vertical-line{
+//   border-left: 2px solid grey;
+//   height: 430px;
+// }
 
-.button-container{
-  margin: 10px;
-}
+// .mat-payment-card{
+//   margin-left: 10px;
+// }
 
-.stripe-card{
-  @include input-box();
-}
+// .toggle-container{
+//   margin: 10px;
+// }
 
-.cardholder-name-input{
-  @include input-box();
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  color: black;
-  font-weight: 600;
-  font-size: 16px;
-  width: 500px;
-  outline: none;
-  
-  // margin-right: 22px;
-   ::placeholder{
-  color: black;
-  opacity: 1;
-  }
-}
+
+
+
+
+
 ::ng-deep .mat-radio-label{
   margin: 5px 0px;
 }
@@ -142,30 +146,16 @@ h2{
   margin: 5px 0px;
 
 }
-.plan-cost-selection-container{
+.toggle-button-container{
   width:500px;
+
+.plan-cost-selection-container{
   background-color: $Fathym-Green-BG;
   padding:10px;
 }
+
 .interval-radio-button{
   margin-right: 100px;
 }
-
-.buy-now-button{
-  width: 500px;
-  background-color: $Fathym-Green;
-  
 }
 
-/******************************    Strip Styling    **************************************/
-// Main form styling
-.StripeElement {
-}
-
-// Focused field that user has text cursor in
-.StripeElement--focus {
-}
-
-// A field with an error or incomplete
-.StripeElement--invalid {
-}

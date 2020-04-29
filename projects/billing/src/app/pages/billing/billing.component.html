@@ -2,57 +2,63 @@
 
   <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon>
 
-  <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
+  <div class="billing-page-container" fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column"
+    fxLayoutAlign="center">
 
     <!-- PRICING CONTAINER -->
-    <div class='pricing-container' fxFlex="45%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="space-around center">
+    <div class='plan-card-container' fxFlex="35%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="space-around center">
 
       <lcu-plan-card *ngIf="State.Plans" [plan]="SelectedPlan" [plan-groups]="PlanGroups" [intervals]="Intervals"
         [all-plans]="State.Plans">
       </lcu-plan-card>
 
-      <div class='vertical-line'></div>
+      <!-- <div class='vertical-line'></div> -->
     </div>
 
     <!-- BILLING CONTAINER -->
-    <div class='billing-container' fxFlex="45%" fxFlex.lt-sm="80%">
+    <!-- <div fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center"></div> -->
+    <div class="stripe-billing-container" fxFlex="45%" fxFlex.lt-sm="80%">
       <div class="billing-header-container" fxLayout="column" fxLayoutAlign="space-around center">
         <div class="fathym-logo"></div>
         <h1 class="fathym-header">Fathym it. Build it.</h1>
         <h3 class="fathym-header">Payment Information</h3>
       </div>
 
-      <div class="billing-page-container" fxLayout="row-wrap" fxLayoutAlign="space-around center">
 
         <!-- STRIPE STUFF -->
-        <div class="payment-info-container">
+      <div class="billing-page-container" fxLayout="column" fxLayoutAlign="space-around center">
+
+        <div class="payment-info-container" fxLayout="column" fxLayoutAlign="center center">
 
           <form action="/charge" method="post" class="billing-form" id="payment-form" [formGroup]="BillingForm"
-            (ngSubmit)="SubmitBilling($event)">
+            (ngSubmit)="SubmitBilling($event)" fxFlex="80%">
 
             <div class="form-row" fxLayout="column" fxLayoutAlign="space-around center">
 
-              <div class="billing-info" >
-                <label fxLayout="column" fxLayoutAlign="space-around start">
-                  <span id="input-span">Name on Card</span>
-                  <div fxLayout="row" fxLayoutAlign="start center">
-                    
-                    <input name="cardholder-name" class="cardholder-name-input" id="cardholder-name-input"
-                      formControlName="userName" placeholder="Cardholder Name" />
-                      <!-- <mat-icon matPrefix>account_circle</mat-icon> -->
-                  </div>
-                </label>
+              <div class="billing-info" fxLayoutAlign="center center">
+                <!-- <label fxLayout="column" ></label> -->
+                  <!-- <span id="input-span">Name on Card</span> -->
+                  <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="80%"> -->
+                  <!-- <mat-icon>account_circle</mat-icon> -->
+
+                  <input name="cardholder-name" class="cardholder-name-input" id="cardholder-name-input"
+                    formControlName="userName" placeholder="Cardholder Name" fxFlex.lg="100%" fxFlex.md="80%"/>
+                  <!-- </div> -->
+                
               </div>
-              <div class="billing-info">
-                <label for="card-element" fxLayout="column" fxLayoutAlign="space-around start">Credit Card</label>
-                <div fxLayout="row" fxLayoutAlign="start center">
-                <!-- <mat-icon >credit_card</mat-icon> -->
-                 <div id="card-element" class="stripe-card"></div>
-                </div>
-                <div class="stripe-container" fxLayout="row" fxLayoutAlign="start start">
-                  
-                  <!-- CARD NUMBER -->
-                  <!-- <div class="card-num-container" fxLayout="column">
+              <div class="billing-info" fxLayoutAlign="center center">
+                <label for="card-element" fxLayout="column" ></label>
+                <div id="card-element" class="stripe-card" fxFlex="100%" fxFlex.md="80%"></div>
+
+                <!-- <div fxLayout="row" fxLayoutAlign="start center"> -->
+                  <!-- <mat-icon >credit_card</mat-icon> -->
+                <!-- </div> -->
+
+
+                <!-- <div class="stripe-container" fxLayout="row" fxLayoutAlign="start start"> -->
+
+                <!-- CARD NUMBER -->
+                <!-- <div class="card-num-container" fxLayout="column">
                     <label for="card-number">Credit Card Number</label>
                     <div fxLayout="row" fxLayoutAlign="start center">
                       <mat-icon>credit_card</mat-icon>
@@ -60,37 +66,37 @@
                     </div>
                   </div> -->
 
-                  <!-- EXPIRATION DATE -->
-                  <!-- <div class="expiry-date-container" fxLayout="column">
+                <!-- EXPIRATION DATE -->
+                <!-- <div class="expiry-date-container" fxLayout="column">
                     <label for="card-expiry">Expiration Date</label>
                     <div fxLayout="row" fxLayoutAlign="start center">
                       <mat-icon>today</mat-icon>
                       <div id="card-expiry" class="stripe-card"></div>
                     </div>
                   </div> -->
-                  <!-- CVC NUMBER -->
-                  <!-- <div class="cvc-num-container" fxLayout="column">
+                <!-- CVC NUMBER -->
+                <!-- <div class="cvc-num-container" fxLayout="column">
                     <label for="card-cvc">CVC</label>
                     <div fxLayout="row" fxLayoutAlign="start center">
                       <mat-icon>lock</mat-icon>
                       <div id="card-cvc" class="stripe-card"></div>
                     </div>
                   </div> -->
-                </div>
-                <div id="card-errors mat-error" role="alert" class="spread" *ngIf="StripeError">
-                  {{ StripeError }}
-                </div>
+                <!-- </div> -->
+                  <div id="card-errors mat-error" role="alert" class="spread" *ngIf="StripeError">
+                   {{ StripeError }}
+                  </div>
               </div>
             </div>
-            
+
 
             <!-- TOGGLE & BUTTON -->
-            <div class="toggle-button-container" fxLayout="column" fxLayoutAlign="center center">
+            <div class="toggle-button-container" fxLayout="column" fxLayoutAlign="center center" >
 
               <!-- <lcu-interval-toggle *ngIf="SelectedPlan" [current-interval]="SelectedPlan.Interval"
                 [intervals]="Intervals" (interval-selected)="ToggleChanged($event)">
               </lcu-interval-toggle> -->
-              <div class="plan-cost-selection-container" fxLayout="row" fxLayoutAlign="space-between">
+              <div class="plan-cost-selection-container" fxLayout="row" fxLayoutAlign="space-between" fxFlex.lg="100%" fxFlex.md="80%" >
                 <div *ngIf="SelectedPlan" class="interval-radio-container">
                   <mat-radio-group aria-labelledby="example-radio-group-label" class="interval-radio-group"
                     [(ngModel)]="SelectedInterval" [ngModelOptions]="{standalone: true}"
@@ -102,27 +108,27 @@
                   </mat-radio-group>
                 </div>
 
-                <div class="price-interval-container" fxLayout="column" >
+                <div class="price-interval-container" fxLayout="column">
                   <div *ngFor="let plan of SelectedPlanGroupPlans" class="price-interval">
-                      ${{plan.Price}}/{{plan.Interval}}
+                    ${{plan.Price}}/{{plan.Interval}}
                   </div>
                 </div>
               </div>
 
               <!-- TOS & EA CHECKBOXES -->
-            <div *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="column"
-              fxLayoutAlign="center start">
-              <mat-checkbox *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
-                <a target='blank' href="https://fathym.com/terms-of-services/">Terms of Service</a>
-              </mat-checkbox>
-              <mat-checkbox *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
-                <a target="blank" href="https://fathym.com/enterprise-agreement/">Enterprise Agreement</a>
-              </mat-checkbox>
+              <div *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="column"
+                fxLayoutAlign="center start">
+                <mat-checkbox *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
+                  <a target='blank' href="https://fathym.com/terms-of-services/">Terms of Service</a>
+                </mat-checkbox>
+                <mat-checkbox *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
+                  <a target="blank" href="https://fathym.com/enterprise-agreement/">Enterprise Agreement</a>
+                </mat-checkbox>
 
-            </div>
+              </div>
 
               <div class="button-container" fxLayoutAlign="center center">
-                <button mat-raised-button id="payment-button" class='buy-now-button' *ngIf="SelectedPlan"
+                <button mat-raised-button id="payment-button" class="buy-now-button" *ngIf="SelectedPlan"
                   [disabled]="IsButtonDisabled()">Register Now</button>
               </div>
 
@@ -137,7 +143,7 @@
 
 <!-- LOADING SCREEN -->
 <div [fxShow]="State.Loading">
-  <p style="text-align: center;">
+  <p style="text-align: center;margin-top: 0px;">
     <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
   </p>
 

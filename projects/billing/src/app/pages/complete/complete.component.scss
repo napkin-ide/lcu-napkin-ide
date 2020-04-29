@@ -8,7 +8,12 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
   width: 90px;
 }
 .success-container{
-  height: 500px;
+  // height: 500px;
+  background-color: white;
+  padding: 15px;
+    height: 550px;
+    margin-top: 10px;
+    border-radius: 2px;
 
 .success-heading{
   // background-color: $Fathym-Green;
