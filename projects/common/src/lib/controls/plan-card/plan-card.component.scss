@@ -1,20 +1,28 @@
 @import '../../../../../common/src/styles/theme';
+// PRO
 $Pro-primary: mat-color(map-get($global-theme, primary), A200);
+$Pro-trans: mat-color(map-get($global-theme, primary), A200,50%);
+// Starter
 $Starter-primary: mat-color(map-get($global-theme, primary), A100);
+$Starter-trans: mat-color(map-get($global-theme, primary), A100, 50%);
+// INTER
 $Inter-primary: mat-color(map-get($global-theme, primary), A300);
-$Fathym-Grey: gray;
-$Light-BG:mat-color(map-get($global-theme, primary), A200,10%);
-$Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
+$Inter-trans: mat-color(map-get($global-theme, primary), A300, 50%);
+
+$Fathym-Grey: darkslategray;
+$Plan-Card-BG: slategrey;
 
 //----------------------MIXINS------------------------//
-
-@mixin plan-card($theme-color){
+// @mixin accent-background-color($color) {
+//     background-color: rgba($color, .2);
+// }
+@mixin plan-card($theme-color, $trans){
     border: 1px solid;
     width: 300px;
     height: 450px;
     position: relative;
     border-radius: 4px;
-    background-color: white;
+    background-color: $Plan-Card-BG;
     border-color: $theme-color;
     
     .header{
@@ -47,7 +55,7 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
             // width: 50px; //ribbon
             // height: 50px; //ribbon
             .feat-text{
-                color:white;
+                color:$Fathym-Grey;
                 // margin-top:5px;
                 font-weight: 500 !important;
                 font-size:14px;
@@ -56,7 +64,10 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
         
     }
     .pricing-container{
-        background-color: $Darker-BG;
+        background-color: $trans;
+        // background-color: transparentize($theme-color, .3);
+        // background-color: rgba($theme-color, .2);
+        // @include accent-background-color($theme-color);
         border-bottom: 1px solid $theme-color;
         .discounted-from{
             color: $Fathym-Grey;
@@ -85,12 +96,12 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
         border-bottom: 1px solid $theme-color;
         font-size: 12px;
         padding: 10px 0px;
-        background-color: white !important;
+        // background-color: white !important;
         height: 70px;
     }
     .feature-container{
         padding: 15px 20px;
-        background-color: $Light-BG;
+        background-color: $trans;
         border-bottom: 1px solid $theme-color;
 
 
@@ -99,7 +110,7 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
             padding: 10px;
             border: 1px solid $theme-color;
             border-radius: 2px;
-            background-color: white;
+            background-color: $Plan-Card-BG;
     
             mat-icon{
                 font-size: 20px;
@@ -109,12 +120,12 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
     }
     .button-container{
         position: absolute;
-        bottom: 15px;
-        left: 65px;
+        bottom: 17px;
+        left: 69px;
 
         .button{
             width: 160px;
-            color: white;
+            color: $Fathym-Grey;
             background-color:$theme-color;  
         }
     }
@@ -122,14 +133,14 @@ $Darker-BG: mat-color(map-get($global-theme, primary), A200,20%);
 }
 //--------------------------END MIXINS------------------------------//
 .pro{
-    @include plan-card($Pro-primary);
+    @include plan-card($Pro-primary, $Pro-trans);
 }
 
 .starter{
-    @include plan-card($Starter-primary); 
+    @include plan-card($Starter-primary, $Starter-trans); 
 }
 
 .inter{
-    @include plan-card($Inter-primary); 
+    @include plan-card($Inter-primary, $Inter-trans); 
 
 }

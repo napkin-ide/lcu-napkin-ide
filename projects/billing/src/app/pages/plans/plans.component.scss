@@ -1,7 +1,9 @@
+$Text-Color: black;
+
 .choose-header{
     margin-top:0px;
     padding-top: 20px;
-    color: white;
+    color: $Text-Color;
 }
 
 .lcu-plan-card{
@@ -10,5 +12,5 @@
 }
 
 .tag-line{
-    color:white;
+    color:$Text-Color;
 }

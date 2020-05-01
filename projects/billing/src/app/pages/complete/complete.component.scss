@@ -1,5 +1,6 @@
 @import '../../../../../common/src/styles/theme';
 $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
+$BG-color: slategrey;
 .fathym-logo{
   background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
   background-repeat: no-repeat;
@@ -9,7 +10,7 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
 }
 .success-container{
   // height: 500px;
-  background-color: white;
+  background-color: $BG-color;
   padding: 15px;
     height: 550px;
     margin-top: 10px;

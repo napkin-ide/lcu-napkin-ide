@@ -1,5 +1,6 @@
 <div class='success-page' fxLayoutAlign="center center">
 <div class='success-container' fxLayout="column" fxLayoutAlign="space-around center">
+    <!-- HEADING -->
     <div class="fathym-logo"></div>
     <div class="success-heading" fxLayout="column" fxLayoutAlign="center center">
         <h2 class="fathym-header">Fathym it. Build it.</h2>
@@ -8,6 +9,7 @@
         <p *ngIf="FreeTrialEndDate" class="succ-text">Your card will be charged on <b>{{FreeTrialEndDate}}</b> unless you cancel.</p>
     </div>
     <hr>
+    <!-- ORDER SUMMARY -->
     <div class="order-summary-container" fxLayout="column" fxLayoutAlign="center center">
         <h3 fxLayoutAlign="center center">Order Summary</h3>
         <div class="order-summary" fxLayout="column">
@@ -38,7 +40,7 @@
 
     </div>
     <hr>
-
+<!-- BUTTON -->
     <a mat-raised-button 
     href="/workspace/new" 
     class="redirect-button" 
