@@ -397,13 +397,13 @@ export class BillingComponent
   // }
 
   protected stateChanged() {
-    
+    this.findPlan();
     this.determineIntervals();
     
     this.determineCheckboxes();
     // console.log("planID =", this.planID);
     // if a plan has been passed in via param set the selected plan accordingly
-    this.findPlan();
+    
     this.buildSelectedPlanGroupPlans();
     
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
@@ -453,6 +453,10 @@ export class BillingComponent
         (p: BillingPlanOption) => p.PlanGroup === this.planGroupID
       );
       // console.log('SELECTED PLAN:', this.SelectedPlan);
+    }
+    //if plan doesnt exist
+    if(!this.SelectedPlan){
+      this.router.navigate([""]);
     }
   }
 /**
