@@ -31,7 +31,7 @@ declare var Stripe: any;
   animations: [],
 })
 export class BillingComponent
-  implements OnInit, AfterViewInit, AfterViewChecked {
+  implements OnInit, AfterViewChecked {
   //  Fields
 
   @ViewChild('cardElement') cardElement: ElementRef;
@@ -81,6 +81,9 @@ export class BillingComponent
    */
   public StripeError: string;
 
+  /**
+   * Is credit card info valid
+   */
   public StripeValid: boolean;
 
   public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
@@ -105,12 +108,18 @@ export class BillingComponent
    */
   public Intervals: string[];
 
-  public stripeCardNumber: any;
-  public stripeCardExpiry: any;
-  public stripeCardCvc: any;
+  // public stripeCardNumber: any;
+  // public stripeCardExpiry: any;
+  // public stripeCardCvc: any;
 
+  /**
+   * Whether or not the user has selected an interval and which interval it is.
+   */
   public SelectedInterval: string;
 
+  /**
+   * The diferent plans within the plangroup
+   */
   public SelectedPlanGroupPlans: BillingPlanOption[];
 
   //  Constructor
@@ -121,7 +130,9 @@ export class BillingComponent
     protected cdr: ChangeDetectorRef,
     protected route: ActivatedRoute,
     protected router: Router
-  ) {}
+  ) {
+    this.PlanGroups = new Array<string>();
+  }
 
   //  Life Cycle
   public ngOnInit() {
@@ -131,21 +142,21 @@ export class BillingComponent
     this.setupForms();
     this.userBillState.Context.subscribe((state: any) => {
       this.State = state;
-      // console.log('billing state: ', this.State);
-      // console.log('Plan id', this.planID);
       this.stateChanged();
     });
 
   }
 
-  public ngAfterViewInit(): void {}
 
   public ngAfterViewChecked(): void {
     this.setupStripe();
   }
 
   //  API methods
-
+/**
+ * called when user submits form
+ * @param event 
+ */
   public SubmitBilling(event: Event) {
     this.State.Loading = true;
 
@@ -166,7 +177,10 @@ export class BillingComponent
         this.handleStripePaymentMethodCreated(result);
       });
   }
-
+/**
+ * Toggles planid and plan card to the selected plan
+ * @param toggleSelected 
+ */
   public ToggleChanged(toggleSelected: any): void {
    
     // false === Annually
@@ -183,20 +197,29 @@ export class BillingComponent
       }
     });
   }
-
+/**
+ * Back button clicked
+ */
   public GoBack() {
     this.router.navigate(['']);
   }
-
+/**
+   * determines if user has accepted the Terms of service from the check boxes
+   */
   public TOSChanged(event: any) {
     // console.log('TOS: ', event);
     this.AcceptedTOS = event.checked;
   }
+  /**
+   * determines if user has accepted the Enterprise agreement from the check boxes
+   */
   public EAChanged(event: any) {
     // console.log('EA: ', event);
     this.AcceptedEA = event.checked;
   }
-
+/**
+ * Determines if user has entered all fields and wether or not to show button
+ */
   public IsButtonDisabled(): boolean {
     if (
       this.AcceptedEA &&
@@ -212,6 +235,9 @@ export class BillingComponent
   }
 
   //  Helpers
+  /**
+   * Checks to see if card has error 
+   */
   protected handleCardChanged(event: any) {
     if (event.error) {
       this.StripeError = event.error.message;
@@ -223,7 +249,9 @@ export class BillingComponent
       this.StripeValid = true;
     }
   }
-
+/**
+ * Handles the stripe once user has confirmed payment
+ */
   protected handleStripePaymentMethodCreated(result: any) {
     if (result.error) {
       this.StripeError = result.error;
@@ -237,7 +265,9 @@ export class BillingComponent
       );
     }
   }
-
+/**
+ * Sets up Billing form
+ */
   protected setupForms() {
     this.BillingForm = this.formBldr.group({
       prodPlan: new FormControl('', [Validators.required]),
@@ -246,7 +276,9 @@ export class BillingComponent
 
     this.StripeValid = false;
   }
-
+/**
+ * Sets up the stripe credit card input and styles
+ */
   protected setupStripe() {
     if (!this.stripe) {
       // Your Stripe public key
@@ -306,67 +338,67 @@ export class BillingComponent
     }
   }
 
-  protected setupStripeElements():void{
-    const elements = this.stripe.elements();
-    var elementStyles = {
-      base: {
-        color: 'black',
-        fontWeight: 600,
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '16px',
-        fontSmoothing: 'antialiased',
+  // protected setupStripeElements():void{
+  //   const elements = this.stripe.elements();
+  //   var elementStyles = {
+  //     base: {
+  //       color: 'black',
+  //       fontWeight: 600,
+  //       fontFamily: 'Arial, sans-serif',
+  //       fontSize: '16px',
+  //       fontSmoothing: 'antialiased',
 
-        ':focus': {
-          color: 'black',
-        },
+  //       ':focus': {
+  //         color: 'black',
+  //       },
 
-        '::placeholder': {
-          color: 'grey',
-        },
+  //       '::placeholder': {
+  //         color: 'grey',
+  //       },
 
-        ':focus::placeholder': {
-          color: 'black',
-        },
-      },
-      invalid: {
-        color: '#FA755A',
-        ':focus': {
-          color: '#FA755A',
-        },
-        '::placeholder': {
-          color: 'grey',
-        },
-      },
-    };
+  //       ':focus::placeholder': {
+  //         color: 'black',
+  //       },
+  //     },
+  //     invalid: {
+  //       color: '#FA755A',
+  //       ':focus': {
+  //         color: '#FA755A',
+  //       },
+  //       '::placeholder': {
+  //         color: 'grey',
+  //       },
+  //     },
+  //   };
 
-    var elementClasses = {
-      focus: 'focus',
-      empty: 'empty',
-      invalid: 'invalid',
-    };
+  //   var elementClasses = {
+  //     focus: 'focus',
+  //     empty: 'empty',
+  //     invalid: 'invalid',
+  //   };
 
-    this.stripeCardNumber = elements.create('cardNumber', {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    this.stripeCardNumber.mount('#card-number');
+  //   this.stripeCardNumber = elements.create('cardNumber', {
+  //     style: elementStyles,
+  //     classes: elementClasses,
+  //   });
+  //   this.stripeCardNumber.mount('#card-number');
 
-    this.stripeCardExpiry = elements.create('cardExpiry', {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    this.stripeCardExpiry.mount('#card-expiry');
+  //   this.stripeCardExpiry = elements.create('cardExpiry', {
+  //     style: elementStyles,
+  //     classes: elementClasses,
+  //   });
+  //   this.stripeCardExpiry.mount('#card-expiry');
 
-    this.stripeCardCvc = elements.create('cardCvc', {
-      style: elementStyles,
-      classes: elementClasses,
-    });
-    this.stripeCardCvc.mount('#card-cvc');
-  }
+  //   this.stripeCardCvc = elements.create('cardCvc', {
+  //     style: elementStyles,
+  //     classes: elementClasses,
+  //   });
+  //   this.stripeCardCvc.mount('#card-cvc');
+  // }
 
   protected stateChanged() {
     
-    this.assignGroupIntervals();
+    this.determineIntervals();
     
     this.determineCheckboxes();
     // console.log("planID =", this.planID);
@@ -380,13 +412,15 @@ export class BillingComponent
     this.determinePaymentStatus();
     
   }
-  protected assignGroupIntervals(){
+/**
+ * determines the intervals to display in the radio buttons
+ */
+  protected determineIntervals(){
     if (this.State.Plans) {
-    this.PlanGroups = new Array<string>();
       this.Intervals = new Array<string>();
-
+      // this.PlanGroups = new Array<string>();
       this.State.Plans.forEach((plan: BillingPlanOption) => {
-        if (!this.PlanGroups.includes(plan.PlanGroup)) {
+        if(!this.PlanGroups.includes(plan.PlanGroup)){
           this.PlanGroups.push(plan.PlanGroup);
         }
         if(!this.Intervals.includes(plan.Interval)){
@@ -397,7 +431,9 @@ export class BillingComponent
       // console.log('plan groups', this.PlanGroups);
     }
   }
-
+/**
+ * Whether or not to display the Terms of service or the Enterprise agreement
+ */
   protected determineCheckboxes(){
     if (this.State.RequiredOptIns) {
       if (!this.State.RequiredOptIns.includes('ToS')) {
@@ -408,7 +444,9 @@ export class BillingComponent
       }
     }
   }
-
+/**
+ * Find the plan based on the params passed in via router
+ */
   protected findPlan(){
     if (this.planGroupID && this.State.Plans && !this.SelectedPlan) {
       this.SelectedPlan = this.State.Plans.find(
@@ -417,7 +455,11 @@ export class BillingComponent
       // console.log('SELECTED PLAN:', this.SelectedPlan);
     }
   }
-
+/**
+ * Extracts the plans that match the plan group param passed in to display
+ * 
+ * different prices and intervals
+ */
   protected buildSelectedPlanGroupPlans(){
     if (!this.SelectedPlanGroupPlans && this.State.Plans){
       this.SelectedPlanGroupPlans = new Array<BillingPlanOption>();
@@ -425,7 +467,9 @@ export class BillingComponent
       // console.log("SPGP:", this.SelectedPlanGroupPlans);
     }
   }
-
+/**
+ * Determines the payment status of the user
+ */
   protected determinePaymentStatus(){
     if (this.State.PaymentStatus) {
       // console.log('Payment Status', this.State.PaymentStatus);
@@ -452,13 +496,6 @@ export class BillingComponent
     }
   }
 
-  // protected getSaving(){
-  //   let temp = this.State.Plans.filter(plan => plan.PlanGroup === this.SelectedPlan.PlanGroup);
-  //   let Saving = temp[0].Price
-  //   // console.log("Other plan interval:", this.OtherPlan);
-  //   this.OtherIntervalPrice = this.OtherPlan.Price;
-  //   this.Saving
-  // }
   /**
    * When the payment returns Successfully
    */

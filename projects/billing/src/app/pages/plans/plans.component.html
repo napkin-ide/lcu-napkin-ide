@@ -1,5 +1,5 @@
+<!-- MAIN SCREEN -->
 <div [fxShow]="!State.Loading">
-  <!-- fxLayoutAlign="space-around center"  -->
   <h3 class="choose-header" fxLayoutAlign="center center">Choose Your Perfect Plan</h3>
   <div  fxLayout.lg="row wrap" fxLayout.sm="column" fxLayout.xs="column"
         fxLayoutAlign="center center"
@@ -11,14 +11,12 @@
         class='lcu-plan-card'
         [featured-plan-group]="State.FeaturedPlanGroup"
         [show-toggle]="ShowToggle"
-        [intervals]="Intervals"
         [plan]="plan"
         [all-plans]="State.Plans"
         [displayed-plans]="DisplayedPlans"
-        [plan-groups]="PlanGroups"
         [show-button]="ShowButton"
         (buy-now-clicked)="BuyNowClicked($event)"
-        (interval-toggled)="IntervalToggled($event, plan)">
+        >
       </lcu-plan-card>
 
     </div>

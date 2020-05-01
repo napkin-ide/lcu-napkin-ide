@@ -27,10 +27,21 @@ export class CompleteComponent implements OnInit {
   @Input('state')
   public State: UserBillingState;
 
+  /**
+   * passed in via routes, determines which plan to display in the order summary
+   */
   protected planID: string;
 
+  /**
+   * The plan based on the id passed in, info to display in order summary
+   */
   public SelectedPlan: BillingPlanOption;
 
+  /**
+   * the date that is calculated form point in time when 
+   * 
+   * this is run to determine when free trial will end
+   */
   public FreeTrialEndDate: string;
 
   //  Constructors
@@ -70,7 +81,11 @@ export class CompleteComponent implements OnInit {
       // console.log('purchased PLAN:', this.SelectedPlan);
     }
   }
-  protected calcDate(){
+
+  /**
+   * Calculates the free trial expiration date from point in time method is run
+   */
+    protected calcDate(){
     let endDate = new Date();
     endDate.setDate(endDate.getDate() + 14);
     // console.log("end date:", endDate);

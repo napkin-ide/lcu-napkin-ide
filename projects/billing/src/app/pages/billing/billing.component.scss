@@ -1,34 +1,41 @@
 // @import "../../../common";
 @import '../../../../../common/src/styles/theme';
 
-$Fathym-Green: mat-color(map-get($global-theme, primary), A200);
-$Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
+// PRO
+$Pro-primary: mat-color(map-get($global-theme, primary), A200);
+$Pro-trans: mat-color(map-get($global-theme, primary), A200,50%);
+// Starter
+$Starter-primary: mat-color(map-get($global-theme, primary), A100);
+$Starter-trans: mat-color(map-get($global-theme, primary), A100, 50%);
+// INTER
+$Inter-primary: mat-color(map-get($global-theme, primary), A300);
+$Inter-trans: mat-color(map-get($global-theme, primary), A300, 50%);
 
-@mixin input-box {
-  background-color: #f7f7f7;
+$Fathym-Grey: darkslategray;
+$Plan-Card-BG: slategrey;
+
+$Fathym-Green: mat-color(map-get($global-theme, primary), A200);
+$Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
+
+@mixin input-box($color) {
+  background-color: $color;
   border-radius: 2px;
   margin: 10px 0px;
   padding: 5px;
-  border-bottom: 1px solid #d7d1c9;
-}
-.back-arrow{
-  position: relative;
-  top: -38px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 1;
+  border-bottom: 1px solid darkslategray;
 }
 
-.stripe-billing-container{
+
+@mixin stripe-billing-container($theme-color, $trans){
   // height: 100%;
-  background-color: white;
+  background-color: slategrey;
   height:450px;
   padding: 10px;
-  border: 1px solid $Fathym-Green;
+  border: 1px solid $theme-color;
   border-radius: 3px;
 
   .fathym-logo{
-    background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
+    background-image: fathym-logo(thinky-circle, $theme-color, 1);
     background-repeat: no-repeat;
     background-size: 100px;
     height: 100px;
@@ -39,45 +46,90 @@ $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
    margin-bottom: 0px;
    margin-top:5px;
   }
-}
 
+  .billing-page-container {
+    padding: 20px;
+ 
+    .plan-card-container{
+      overflow: auto;    
+    }
+    .payment-info-container{
+      .billing-form{
+        .cardholder-name-input{
+          @include input-box($theme-color);
+          border-top: 0;
+          border-left: 0;
+          border-right: 0;
+          color: black;
+          font-weight: 600;
+          font-size: 16px;
+          width: 500px;
+          outline: none;
+          // ::placeholder{
+          //   color: black;
+          //   opacity: 1;
+          // }
+        }
+        .stripe-card{
+          @include input-box($theme-color);
+          width:500px;
+        }
+    
+        .toggle-button-container{
+          width:500px;
+    
+          .plan-cost-selection-container{
+            background-color: $trans;
+            padding:10px;
+            border-radius: 3px;
 
-
-
-.billing-page-container {
-  padding: 20px;
-  // background-color: $Fathym-Green-BG;
-  // height: 100%;
-  .plan-card-container{
-    // height: 100%;
-    overflow: auto;    
-  }
-  .payment-info-container{
-  .billing-form{
-    // height: 100%;
-    .cardholder-name-input{
-      @include input-box();
-      border-top: 0;
-      border-left: 0;
-      border-right: 0;
-      color: black;
-      font-weight: 600;
-      font-size: 16px;
-      width: 500px;
-      // width:100%;
-      outline: none;
-      
-      // margin-right: 22px;
-       ::placeholder{
-      color: black;
-      opacity: 1;
+            .price-interval{
+              margin: 5px 0px;
+            }
+          }
+          .interval-radio-button{
+            margin-right: 100px;
+          }
+        }
+        .button-container{
+          margin: 10px;
+          .buy-now-button{
+            width: 300px;
+            background-color: $theme-color;
+          }
+        }
       }
     }
-    .stripe-card{
-      @include input-box();
-      width:500px;
-    }
-    // .stripe-container{
+  }
+}
+
+.pro-billing{
+  @include stripe-billing-container($Pro-primary, $Pro-trans);
+}
+
+.starter-billing{
+  @include stripe-billing-container($Starter-primary, $Starter-trans);
+}
+
+.inter-billing{
+  @include stripe-billing-container($Inter-primary, $Inter-trans);
+}
+
+.back-arrow{
+  position: relative;
+  top: -38px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+::ng-deep .mat-radio-label{
+  margin: 5px 0px;
+}
+
+// OTHER STRIPE STYLES/////////////////////////////////////////////////
+
+// .stripe-container{
     //   width: 510px;
     //   .card-num-container{
     //     // width: 230px;
@@ -100,63 +152,3 @@ $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.2);
     //     }
     //   }
     // }
-  
-    .button-container{
-      margin: 10px;
-      .buy-now-button{
-        width: 300px;
-        background-color: $Fathym-Green;
-      }
-    }
-  }
-  
-}
-
-
-
-}
-
-
-// h2{
-//   text-align: center;
-// }
-
-// .vertical-line{
-//   border-left: 2px solid grey;
-//   height: 430px;
-// }
-
-// .mat-payment-card{
-//   margin-left: 10px;
-// }
-
-// .toggle-container{
-//   margin: 10px;
-// }
-
-
-
-
-
-
-::ng-deep .mat-radio-label{
-  margin: 5px 0px;
-}
-.price-interval{
-  margin: 5px 0px;
-
-}
-.toggle-button-container{
-  width:500px;
-
-.plan-cost-selection-container{
-  background-color: $Fathym-Green-BG;
-  padding:10px;
-  border-radius: 3px;
-}
-
-.interval-radio-button{
-  margin-right: 100px;
-}
-}
-
