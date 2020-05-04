@@ -167,7 +167,9 @@
                 State.SetupStep !== SetupStepTypes.Review &&
                 State.Host &&
                 State.TermsAccepted &&
-                State.SetupStep !== SetupStepTypes.Complete
+                State.SetupStep !== SetupStepTypes.Complete &&
+                !State.Booted
+              
               ">
               <mat-icon matListIcon class="list-icon">radio_button_unchecked</mat-icon>
 
@@ -177,17 +179,33 @@
                 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Finalize and Deploy</a>
             </mat-list-item>
 
+            <mat-list-item *ngIf="
+            State.SetupStep !== SetupStepTypes.Review &&
+            State.Host &&
+            State.TermsAccepted &&
+            State.SetupStep !== SetupStepTypes.Complete &&
+            State.Booted
+          ">
+          <mat-icon matListIcon class="completed-check">check_circle
+          </mat-icon>
+
+          <!-- <mat-icon matListIcon>chevron_right</mat-icon> -->
+
+          <a matLine (click)="SetStep(SetupStepTypes.Review)"
+            class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Finalize and Deploy</a>
+        </mat-list-item>
+
             <mat-list-item
               *ngIf="State.SetupStep === SetupStepTypes.Review || State.SetupStep === SetupStepTypes.Complete"
               class="active-mat-list-item">
               <!-- <mat-icon matListIcon>chevron_right</mat-icon> -->
               <div fxLayout="row" fxLayoutAlign="space-between start">
-                <mat-icon *ngIf="State.SetupStep === SetupStepTypes.Review " matListIcon
+                <mat-icon *ngIf="State.SetupStep === SetupStepTypes.Review  && !State.Booted" matListIcon
                   [ngClass]="'step-checkbox list-icon'">
                   radio_button_unchecked
                 </mat-icon>
 
-                <mat-icon *ngIf="State.SetupStep === SetupStepTypes.Complete" matListIcon
+                <mat-icon *ngIf="State.SetupStep === SetupStepTypes.Complete || State.Booted" matListIcon
                   [ngClass]="'step-checkbox success completed-check'">
                   check_circle
                 </mat-icon>

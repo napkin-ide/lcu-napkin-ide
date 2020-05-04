@@ -52,9 +52,7 @@ $Text-color: mat-color(map-get($global-theme, primary), 100);
 
   .billing-page-container {
     padding: 10px 20px;
-    .slogan{
-      color: $Text-color;
-    }
+    
     .plan-card-container{
       overflow: auto;    
     }
@@ -118,6 +116,10 @@ $Text-color: mat-color(map-get($global-theme, primary), 100);
       }
     }
   }
+  
+}
+.slogan{
+  color: $Text-color;
 }
 
 .pro-billing{

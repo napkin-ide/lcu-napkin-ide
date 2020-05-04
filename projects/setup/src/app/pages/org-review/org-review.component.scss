@@ -2,6 +2,7 @@
 // @import "../../../../../../node_modules/@lcu/common/assets/styles/branding/colors/fathym-theme-colors";
 
 
+$Fathym-Green: mat-color(map-get($global-theme, primary), A700);
 .weird-fix {
   font: 400 16px/28px Roboto, "Helvetica Neue", sans-serif;
   margin-left: 10%;
@@ -65,6 +66,7 @@
 .check-circle{
   border-radius: 15px;
   background-color: $global-accent;
+  color: $Fathym-Green;
  // background-color: mat-color($primary);
 }
 .boot-option-name{
