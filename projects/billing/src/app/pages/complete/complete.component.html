@@ -1,5 +1,5 @@
 <div class='success-page' fxLayoutAlign="center center">
-<div class='success-container' fxLayout="column" fxLayoutAlign="space-around center">
+<div class='success-container' fxLayout="column" fxLayoutAlign="space-around center" fxFlex.lg="50%" fxFlex.md="50%" fxFlex.xs="100%">
     <!-- HEADING -->
     <div class="fathym-logo"></div>
     <div class="success-heading" fxLayout="column" fxLayoutAlign="center center">
@@ -10,9 +10,9 @@
     </div>
     <hr>
     <!-- ORDER SUMMARY -->
-    <div class="order-summary-container" fxLayout="column" fxLayoutAlign="center center">
+    <div class="order-summary-container" fxLayout="column" fxLayoutAlign="center center" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
         <h3 fxLayoutAlign="center center">Order Summary</h3>
-        <div class="order-summary" fxLayout="column">
+        <div class="order-summary" fxLayout="column" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
             <div class="item" fxLayout="column">
                 <div *ngIf="SelectedPlan" class="bold">Fathym {{SelectedPlan.PlanGroup | titlecase}}</div>
                 <div class="free-trial-cost" fxLayout="row" fxLayoutAlign="space-between center">

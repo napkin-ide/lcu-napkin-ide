@@ -3,36 +3,39 @@
 
 // PRO
 $Pro-primary: mat-color(map-get($global-theme, primary), A200);
-$Pro-trans: mat-color(map-get($global-theme, primary), A200,50%);
+$Pro-trans: mat-color(map-get($global-theme, primary), A200,90%);
 // Starter
 $Starter-primary: mat-color(map-get($global-theme, primary), A100);
-$Starter-trans: mat-color(map-get($global-theme, primary), A100, 50%);
+$Starter-trans: mat-color(map-get($global-theme, primary), A100, 90%);
 // INTER
 $Inter-primary: mat-color(map-get($global-theme, primary), A300);
-$Inter-trans: mat-color(map-get($global-theme, primary), A300, 50%);
+$Inter-trans: mat-color(map-get($global-theme, primary), A300, 90%);
 
-$Fathym-Grey: darkslategray;
-$Plan-Card-BG: slategrey;
+$Fathym-Grey: slategray;
+$Billing-BG: mat-color(map-get($global-theme, primary), 100,90%);
+// $Plan-Card-BG: slategrey;
 
 $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
 $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
+$Text-color: mat-color(map-get($global-theme, primary), 100);
 
 @mixin input-box($color) {
   background-color: $color;
   border-radius: 2px;
   margin: 10px 0px;
   padding: 5px;
-  border-bottom: 1px solid darkslategray;
+  border-bottom: 1px solid $Fathym-Grey;
 }
 
 
 @mixin stripe-billing-container($theme-color, $trans){
   // height: 100%;
-  background-color: slategrey;
+  background-color: $Billing-BG;
   height:450px;
   padding: 10px;
   border: 1px solid $theme-color;
   border-radius: 3px;
+  width: 100%;
 
   .fathym-logo{
     background-image: fathym-logo(thinky-circle, $theme-color, 1);
@@ -49,39 +52,51 @@ $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
 
   .billing-page-container {
     padding: 10px 20px;
- 
+    .slogan{
+      color: $Text-color;
+    }
     .plan-card-container{
       overflow: auto;    
     }
     .payment-info-container{
+      width: 100%;
       .billing-form{
-        .cardholder-name-input{
-          @include input-box($theme-color);
-          border-top: 0;
-          border-left: 0;
-          border-right: 0;
-          color: black;
-          font-weight: 600;
-          font-size: 16px;
-          width: 500px;
-          outline: none;
-          // ::placeholder{
-          //   color: black;
-          //   opacity: 1;
-          // }
+        width: 100%;
+        .form-row{
+          .billing-info{
+            width: 100%;
+          .cardholder-name-input{
+            @include input-box($theme-color);
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+            color: black;
+            font-weight: 600;
+            font-size: 16px;
+            // width: 500px;
+            width:100%;
+            outline: none;
+            // ::placeholder{
+            //   color: black;
+            //   opacity: 1;
+            // }
+          }
+          .stripe-card{
+            @include input-box($theme-color);
+            // width:500px;
+            width:100%;
+          }
         }
-        .stripe-card{
-          @include input-box($theme-color);
-          width:500px;
         }
     
         .toggle-button-container{
-          width:500px;
+          width:100%;
     
           .plan-cost-selection-container{
             background-color: $trans;
             padding:10px;
             border-radius: 3px;
+            width:100%;
 
             .price-interval{
               margin: 5px 0px;
@@ -89,12 +104,14 @@ $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
           }
           .interval-radio-button{
             margin-right: 100px;
+            color: black !important;
           }
         }
         .button-container{
           margin: 10px;
+          width: 100%;
           .buy-now-button{
-            width: 300px;
+            width: 100%;
             background-color: $theme-color;
           }
         }
