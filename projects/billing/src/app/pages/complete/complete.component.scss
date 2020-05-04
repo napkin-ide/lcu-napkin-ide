@@ -1,6 +1,7 @@
 @import '../../../../../common/src/styles/theme';
 $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
-$BG-color: slategrey;
+$BG-color: transparentize(slategrey, .1);
+$Text-color: mat-color(map-get($global-theme, primary), 100);
 .fathym-logo{
   background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
   background-repeat: no-repeat;
@@ -9,12 +10,13 @@ $BG-color: slategrey;
   width: 90px;
 }
 .success-container{
-  // height: 500px;
+  height: 100%;
+  width: 100%;
   background-color: $BG-color;
   padding: 15px;
-    height: 550px;
-    margin-top: 10px;
-    border-radius: 2px;
+  margin-top: 10px;
+  border-radius: 2px;
+  color: $Text-color;
 
 .success-heading{
   // background-color: $Fathym-Green;
@@ -29,10 +31,10 @@ $BG-color: slategrey;
   }
 }
 .order-summary-container{
-  width:500px;
+  width:100%;
   
   .order-summary{
-    width: 400px;
+    width: 100%;
     .item{
     margin-bottom: 10px;
     .note{
@@ -45,17 +47,18 @@ $BG-color: slategrey;
 
 .redirect-button{
   background-color: $Fathym-Green;
-  width: 400px;
+  width: 90%;
+  color: $Text-color;
 }
 
 .bold{
   font-weight: bold;
 }
 hr{
-  border: .5px solid black;
-    width: 400px;
+  border: .5px solid $Text-color;
+    width: 90%;
 }
 .dashed-hr{
-  border:.5px dashed gray;
-  width: 400px;
+  border:.5px dashed $Text-color;
+  width: 90%;
 }

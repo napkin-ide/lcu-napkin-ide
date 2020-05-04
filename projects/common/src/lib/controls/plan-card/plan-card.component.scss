@@ -10,7 +10,11 @@ $Inter-primary: mat-color(map-get($global-theme, primary), A300);
 $Inter-trans: mat-color(map-get($global-theme, primary), A300, 50%);
 
 $Fathym-Grey: darkslategray;
-$Plan-Card-BG: slategrey;
+$Plan-Card-BG: transparentize(slategrey, .1);
+// $Plan-Card-BG: mat-color(map-get($global-theme, primary), 100);
+ $Main-font: mat-color(map-get($global-theme, primary), 100);
+//  $Main-font: black;
+
 
 //----------------------MIXINS------------------------//
 // @mixin accent-background-color($color) {
@@ -24,6 +28,7 @@ $Plan-Card-BG: slategrey;
     border-radius: 4px;
     background-color: $Plan-Card-BG;
     border-color: $theme-color;
+    color:$Main-font;
     
     .header{
         border-bottom: 3px solid $theme-color;
@@ -42,7 +47,6 @@ $Plan-Card-BG: slategrey;
         .featured-plan{  
             transform: rotate(40deg);
             background-color: $theme-color;
-            
             width: 90px;
             height: 20px;
             position: relative;
@@ -55,7 +59,7 @@ $Plan-Card-BG: slategrey;
             // width: 50px; //ribbon
             // height: 50px; //ribbon
             .feat-text{
-                color:$Fathym-Grey;
+                color:white;
                 // margin-top:5px;
                 font-weight: 500 !important;
                 font-size:14px;
@@ -125,7 +129,7 @@ $Plan-Card-BG: slategrey;
 
         .button{
             width: 160px;
-            color: $Fathym-Grey;
+            color: $Main-font;
             background-color:$theme-color;  
         }
     }
