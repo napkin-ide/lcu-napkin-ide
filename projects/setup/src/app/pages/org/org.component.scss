@@ -1,9 +1,14 @@
+@import '../../../../../common/src/styles/theme';
+
+
+$Theme-primary:  mat-color(map-get($global-theme, primary), A700);
+
 .tooltip-background {
-  background-color: #4a918e !important;
+  background-color: $Theme-primary !important;
 }
 
 @mixin mat-icon-steps{
-  color: #4a918e;
+  color: $Theme-primary;
 }
 
 @mixin org($theme) {
@@ -47,9 +52,13 @@
           min-height: inherit;
           box-sizing: border-box;
           justify-content: center;
-          background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.3));
+          // background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.3));
+          background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(assets/img/fathym-dew-it.jpg);
           background-repeat:no-repeat;
           background-position: center;
+          background-size: cover;
+          // background-blend-mode: darken;
+
         }
       }
 
@@ -70,7 +79,7 @@
       }
 
       .active-mat-list-item {
-        background-color: mat-color($primary, 600);
+        // background-color: mat-color($primary, 600);
       }
 
       .details {
@@ -79,7 +88,9 @@
         width: 30%;
         background-size: cover;
         background-position: 50% 0;
-        background-image: url('assets/img/green-bubbles.jpg');
+        background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.1));
+
+        // background-image: url('assets/img/green-bubbles.jpg');
       }
 
       .content {
@@ -103,6 +114,7 @@
     background-color: #9cd8d6;
     padding: 0px !important;
     margin: 4px;
+    color: $Theme-primary;
   }
 
   .hr-line{

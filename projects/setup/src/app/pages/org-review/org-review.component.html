@@ -19,11 +19,11 @@
           [color]="GetBootOptionColor(bootOption)"
         >
           <ng-container *ngIf="!bootOption.Loading">
-            <span *ngIf="bootOption.Status?.Code != 0" class="boot-option-incomplete">
+            <span *ngIf="bootOption.Status?.Code != 0 && !State.Booted" class="boot-option-incomplete">
               radio_button_unchecked
             </span>
 
-            <span *ngIf="bootOption.Status?.Code == 0" class="check-circle" >
+            <span *ngIf="bootOption.Status?.Code == 0 || State.Booted" class="check-circle" >
               check_circle
             </span>
           </ng-container>
