@@ -61,7 +61,7 @@ import { AppRoutingModule } from './app-routing.module';
           },
           circle: {
             type: 'image/png',
-            href: '../assets/favicons/thinky_circle_red.png',
+            href: '../favicon.ico',
             isDefault: true
           }
         },

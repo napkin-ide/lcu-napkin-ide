@@ -25,7 +25,8 @@
 
       .ide-activity-bar {
         border: none;
-        background-color: mat-color($primary, 400);
+        background-color: mat-color($primary, A700);
+        border-top: 1px solid black;
 
         .activity-settings {
           position: absolute;
@@ -55,7 +56,9 @@
           }
 
           &.active {
-            background-color: mat-color($primary, 700);
+            // background-color: mat-color($primary, 700);
+            background-color: rgba(0,0,0,.2);
+
           }
         }
       }

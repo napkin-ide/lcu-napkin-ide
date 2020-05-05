@@ -14,7 +14,7 @@
     </button>
 
     <div
-      class="primary-logo"
+      class="fathym-header-logo"
       alt="Fathym Framework"
       [ngClass]="{ small: isHandset, large: !isHandset }"
     ></div>
@@ -29,7 +29,9 @@
         mat-icon-button
         (click)="HeaderActionClicked(action)"
       >
-        <mat-icon>{{ action.Icon }}</mat-icon> <span>{{ action.Text }}</span>
+        <mat-icon>{{ action.Icon }}</mat-icon> 
+        <span>{{ action.Text }}</span>
+
       </button>
 
       <a
@@ -41,7 +43,15 @@
         [href]="action.Action"
         [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''"
       >
-        <mat-icon>{{ action.Icon }}</mat-icon> <span>{{ action.Text }}</span>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <mat-icon>{{ action.Icon }}</mat-icon>      
+          <span>{{ action.Text }}</span>
+        </div>
+        <hr class="vertical-line">
+      </div>
+
+
       </a>
     </ng-container>
   </span>
