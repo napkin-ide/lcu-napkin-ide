@@ -48,5 +48,10 @@
   [bounding-element-selector]="BotBoundingContainer"
   [enable-chat]="EnableChat"
   [enable-first-time-popup]="EnableFirstTimePopup"
-  [tour]="AppTour">
+  [tour]="AppTour"
+  [tour-buttons]="TourButtons"
+  (on-complete)="OnComplete()"
+  (on-skipped)="OnSkipped()"
+  (on-step-closed)="OnStepClosed($event)"
+  (on-step-opened)="OnStepOpened($event)">
 </lcu-guide-bot>

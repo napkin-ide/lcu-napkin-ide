@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IdeStateStateManagerContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
-import { GuidedTour, GuideBotScreenPosition, Orientation } from '@lowcodeunit/lcu-guided-tour-common';
+import { GuidedTour, GuideBotScreenPosition, OrientationTypes, TourStep, GuidedTourManagementStateContext, GuidedTourManagementState, GuidedTourService, ChatTourButton } from '@lowcodeunit/lcu-guided-tour-common';
 
 @Component({
   selector: 'nide-ide',
@@ -17,6 +17,10 @@ export class IdeComponent implements OnInit {
   public BotScreenPosition: GuideBotScreenPosition = GuideBotScreenPosition.BottomLeft;
   public EnableChat: boolean = true;
   public EnableFirstTimePopup: boolean = true;
+  public Tours: GuidedTour[] = [];
+  public IdeState: IdeManagementState;
+  public GuidedTourState: GuidedTourManagementState;
+  public TourButtons: ChatTourButton[];
 
   public IsHandset$: Observable<boolean>;
   public IsOpen: boolean = true;
@@ -25,9 +29,12 @@ export class IdeComponent implements OnInit {
 
   constructor(
     protected breakpointObserver: BreakpointObserver,
-    protected ideState: IdeStateStateManagerContext
+    protected elRef: ElementRef,
+    protected ideState: IdeStateStateManagerContext,
+    protected guidedTourState: GuidedTourManagementStateContext,
+    protected guidedTourService: GuidedTourService
   ) {
-    this.AppTour = this.createGuidedTour();
+    this.TourButtons = this.setTourButtons();
   }
 
   public ngOnInit(): void {
@@ -48,108 +55,236 @@ export class IdeComponent implements OnInit {
       );
 
     this.ideState.Context.subscribe((ideState: IdeManagementState) => {
+      console.log('IDE State: ', ideState);
+      this.IdeState = ideState;
       this.Loading = ideState.Loading;
       this.ShowPanels = ideState.ShowPanels;
+
+      this.handleStateChanged();
     });
+
+    this.guidedTourState.Context.subscribe((guidedTourState: GuidedTourManagementState) => {
+      console.log('GUIDED TOUR STATE: ', guidedTourState);
+      this.GuidedTourState = guidedTourState;
+      // this.AppTour = this.createGuidedTour();
+      this.AppTour = guidedTourState.CurrentTour;
+      this.Tours = guidedTourState.Tours;
+    });
+  }
+
+  protected handleStateChanged(): void {
+    this.determineTour();
+  }
+
+  protected determineTour(): void {
+    console.log('determineTour()');
+    const editor = this.IdeState.CurrentEditor?.Editor;
+
+    if (this.IdeState.CurrentActivity?.Lookup === 'limited-trial') {
+      switch (editor) {
+        case 'lcu-limited-trial-welcome-element':
+          // this.AppTour = this.Tours[1];
+          this.setCurrentTour('limited-trial-tour');
+          break;
+        case 'lcu-limited-trial-data-apps-element':
+          // this.AppTour = this.Tours[2];
+          this.setCurrentTour('data-applications-tour');
+          break;
+        case 'lcu-limited-trial-data-flow-element':
+          // this.AppTour = this.createGuidedTour();
+          // this.AppTour = this.Tours[3];
+          this.setCurrentTour('data-flow-management-tour');
+          if (!this.IdeState.Loading) {
+            this.findDataFlowManageButton();
+          }
+          break;
+        default:
+          this.setCurrentTour('limited-trial-tour');
+          break;
+      }
+    }
+  }
+
+  protected setCurrentTour(lookup: string): void {
+    if (this.GuidedTourState.CurrentTour?.Lookup !== lookup) {
+      this.guidedTourState.SetActiveTour(lookup);
+
+      setTimeout(() => {
+        if (this.GuidedTourState.CurrentTour?.IsFirstTimeViewing) {
+          this.guidedTourService.startTour(this.GuidedTourState.CurrentTour);
+        }
+      }, 500);
+    }
   }
 
   public OpenSideBar(): void {
     this.IsOpen = !this.IsOpen;
   }
 
-  private clickDataFlowManageButton() {
-    console.log('clickDataFlowManageButton()');
-    let clickEvent = new MouseEvent('click', { bubbles: true, view: window });
-    console.log('clickDataFlowManageButton() clickEvent: ', clickEvent);
+  private findDataFlowManageButton() {
+    console.log('findDataFlowManageButton()');
+    let element = this.elRef.nativeElement.querySelector('lcu-data-flow-list-element .mat-card:nth-of-type(1) button');
 
-    let element = document.querySelector('lcu-limited-trial-data-apps-element lcu-app-list .mat-card:nth-of-type(1) button');
-    console.log('clickDataFlowManageButton() element: ', element);
-
-    // let element = document.querySelector('.guided-tour-spotlight-overlay');
     if (element) {
-      console.log('clickDataFlowManageButton() dispatchEvent');
-      element.dispatchEvent(clickEvent);
+      element.addEventListener('click', this.startEmulatedDataFlowTour.bind(this));
+    } else {
+      console.warn('Could not find button for Emulated Data Flow');
+    }
+  }
+
+  public startEmulatedDataFlowTour(): void {
+    console.log('startEmulatedDataFlowTour()');
+    // this.AppTour = this.Tours[4];
+    this.guidedTourState.SetActiveTour('data-flow-tool-tour');
+
+    setTimeout(() => {
+      this.guidedTourService.startTour(this.AppTour);
+    }, 5500);
+  }
+
+
+  public OnComplete(): void {
+    console.log('Tour is Complete!');
+  }
+
+  public OnSkipped(): void {
+    console.log('Skipping the tour.');
+  }
+
+  public OnStepClosed(step: TourStep): void {
+    if (step.ID === '00000000-0000-0000-0000-000000000042') {
+      this.AppTour = this.Tours[4];
+    }
+  }
+
+  public OnStepOpened(step: TourStep): void {
+    if (step.ID === '00000000-0000-0000-0000-000000000021') {
+      this.ideState.SelectSideBarAction('welcome', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
+    }
+    if (step.ID === '00000000-0000-0000-0000-000000000041') {
+      this.findDataFlowManageButton();
+    }
+  }
+
+  protected setTourButtons(): ChatTourButton[] {
+    return [
+      {
+        Label: 'Intro',
+        Lookup: 'limited-trial-tour',
+        OpenAction: () => this.setSideBarAction('welcome')
+      },
+      {
+        Label: 'Data Apps',
+        Lookup: 'data-applications-tour',
+        OpenAction: () => this.setSideBarAction('data-apps')
+      },
+      {
+        Label: 'Data Flow Management',
+        Lookup: 'data-flow-management-tour',
+        OpenAction: () => this.setSideBarAction('data-flow')
+      },
+      {
+        Label: 'Data Flow Tools',
+        Lookup: 'data-flow-tool-tour',
+        OpenAction: () => {
+          this.setSideBarAction('data-flow');
+
+          const clickEvent = new MouseEvent('click', { bubbles: true, view: window });
+          const element = document.querySelector('lcu-data-flow-list-element .mat-card:nth-of-type(1) button');
+
+          if (element) {
+            element.dispatchEvent(clickEvent);
+          }
+
+          setTimeout(() => {
+            this.startEmulatedDataFlowTour();
+          }, 3000);
+        }
+      }
+    ];
+  }
+
+  protected setSideBarAction(lookup: string): void {
+    if (this.IdeState.CurrentEditor?.Lookup !== `lcu-limited-trial|${lookup}`) {
+      this.ideState.SelectSideBarAction(lookup, 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
     }
   }
 
   protected createGuidedTour(): GuidedTour {
     return {
-      tourId: 'app-tour',
-      useOrb: false,
-      steps: [
+      ID: 'app-tour',
+      IsFirstTimeViewing: true,
+      Lookup: 'limited-trial-tour',
+      UseOrb: false,
+      Steps: [
         {
-          title: 'Welcome to Fathym!',
-          subtitle: 'Welcome Tour',
-          content: `Welcome to Fathym's limited trial of our new and cutting-edge IDE! Building solutions
-          doesn’t have to be so time-consuming and resource intensive. Our low-code framework radically reduces
-          the time and resources required by your developer team. <br/><br/> Keep clicking to get the full tour!`
+          ID: '00000000-0000-0000-0000-000000000040',
+          Title: 'Data Flow Management',
+          Subtitle: 'Data Flow Management Tour',
+          Selector: '.mat-tab-body-wrapper',
+          Orientation: OrientationTypes.Left,
+          ActionDelay: 5000,
+          Content: `This is Bobby's test step.`
         },
         {
-          title: 'Trial Applications',
-          subtitle: 'Welcome Tour',
-          selector: '.mat-expansion-panel:first-of-type',
-          content: `Here you can find the list of applications that you have access to in this trial. With the
-          full version, you'll gain access to dozens of more applications!`,
-          orientation: Orientation.Right,
-          actionDelay: 300,
-          action: () => {
-            this.ideState.SelectSideBarAction('data-apps', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
-          }
+          ID: '00000000-0000-0000-0000-000000000041',
+          Title: 'Emulated Data Flows',
+          Subtitle: 'Data Flow Management Tour',
+          Selector: 'lcu-data-flow-list-element .mat-tab-label:nth-of-type(1)',
+          Orientation: OrientationTypes.Bottom,
+          Content: 'We have created a sample best practice IoT environment for you to explore using an emulated data flow.'
         },
         {
-          title: 'Data Applications',
-          subtitle: 'Welcome Tour',
-          selector: '.ide-side-bar-action:nth-of-type(3)',
-          content: `Let's start by taking a look at <b>Data Applications</b>. Data flow Applications everything you need to manage
-          your public and private applications.`,
-          orientation: Orientation.Right,
-        },
-        {
-          title: 'Data Applications',
-          subtitle: 'Data Applications Tour',
-          selector: '.mat-tab-body-wrapper',
-          content: `Data applications are quick and easy ways to build and deliver enterprise scalable experiences to your users.
-          Create your own, configure your own, or use pre-existing applications.`,
-          orientation: Orientation.Left
-        },
-        {
-          title: 'Manage an Existing Data Application',
-          subtitle: 'Data Applications Tour',
-          selector: 'lcu-limited-trial-data-apps-element lcu-app-list .mat-card:nth-of-type(1) button',
-          content: `Let's manage an existing data app, so that we can see how our app is currently configured. <br/><br/>
-          You can click the <b>Settings</b> button anytime to view/edit a Data Application.`,
-          orientation: Orientation.Left,
-          closeAction: () => {
-            // this.clickDataFlowManageButton();
-          }
-        },
-        {
-          title: 'What a Nice Data Application',
-          subtitle: 'Data Applications Tour',
-          selector: 'lcu-data-apps-config > .mat-card',
-          content: `Here's where we can manage and configure our data application. You can update the version of your
-          data app here, as well as the application details of it like its name, description, and even the path you want
-          to host it on. <br/><br/> Go ahead and start playing around! This is just a sandbox, so no need to worry about
-          accidently breaking anything.`,
-          orientation: Orientation.Left,
-          actionDelay: 500,
-          action: () => {
-            this.clickDataFlowManageButton();
-          }
+          ID: '00000000-0000-0000-0000-000000000042',
+          Title: 'Trial Data Flows',
+          Subtitle: 'Data Flow Management Tour',
+          Selector: 'lcu-data-flow-list-element .mat-tab-label:nth-of-type(2)',
+          Orientation: OrientationTypes.Bottom,
+          Content: 'Use our drag-and-drop interface to explore the tool and connect dummy Azure resources.'
         },
         // {
-        //   title: 'What a Nice Data Application',
-        //   subtitle: 'Data Applications Tour',
-        //   selector: 'lcu-data-apps-config > .mat-card',
-        //   content: `Here's where we can manage and configure our data application, in order to provision the resources we need for our
-        //   applications. This is a drag-and-drop interface, so everything we need to do can be done right from within
-        //   the UI! <br/><br/> Go ahead and start playing around! This is just a sandbox, so no need to worry about
-        //   accidently provisioning a bunch of Azure resources.`,
-        //   orientation: Orientation.Left,
-        //   actionDelay: 500,
-        //   action: () => {
-        //     this.clickDataFlowManageButton();
-        //   }
+        //   Title: 'Data Flows',
+        //   Subtitle: 'Limited Trial Tour',
+        //   Selector: '.ide-side-bar-action:nth-of-type(2)',
+        //   Content: `The <b>Data Flow Manager</b> is a powerful drag and drop interface for easily configuring and
+        //   provisioning end-to-end cloud infrastructure. Navigate here to explore further.`,
+        //   Orientation: OrientationTypes.Right,
+        // },
+        // {
+        //   Title: 'Data Applications',
+        //   Subtitle: 'Limited Trial Applications Tour',
+        //   Selector: '.ide-side-bar-action:nth-of-type(3)',
+        //   Content: `<b>Data applications</b> are quick and easy ways to build and deliver enterprise scalable experiences to your users.
+        //   Create your own, configure your own, or use pre-existing applications.`,
+        //   Orientation: OrientationTypes.Right
+        // },
+        // {
+        //   Title: 'Emulated Data Flows',
+        //   Subtitle: 'Data Flow Tour',
+        //   Selector: 'lcu-data-flow-list-element .mat-tab-label:nth-of-type(1)',
+        //   Orientation: OrientationTypes.Bottom,
+        //   Content: 'We have created a sample best practice IoT environment for you to explore using an emulated data flow.'
+        // },
+        // {
+        //   Title: 'Trial Data Flows',
+        //   Subtitle: 'Data Flow Tour',
+        //   Selector: 'lcu-data-flow-list-element .mat-tab-label:nth-of-type(2)',
+        //   Orientation: OrientationTypes.Bottom,
+        //   Content: 'Use our drag-and-drop interface to explore the tool and connect dummy Azure resources.'
+        // },
+        // {
+        //   Title: 'Emulator',
+        //   Subtitle: 'Emulated Data Flow Tour',
+        //   Selector: '.flowchart-object[data-jtk-node-id="e7457c9c-c9b2-4955-b0a2-330b6244982d"]', // selects by attribute selector
+        //   Orientation: OrientationTypes.Top,
+        //   Content: 'Testing the selector out.'
+        // },
+        // {
+        //   Title: 'Ingest',
+        //   Subtitle: 'Emulated Data Flow Tour',
+        //   Selector: '.flowchart-object[data-jtk-node-id="f0e0b225-5e51-44c2-8618-a48a0d7678de"]',
+        //   Orientation: OrientationTypes.Top,
+        //   Content: 'Testing the selector out.'
         // }
       ]
     };
