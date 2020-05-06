@@ -1,7 +1,11 @@
 @import '../src/app/pages/org/org.component.scss';
-@import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
-@import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
-@import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
+@import '../src/app/pages/org-review/org-review.component.scss';
+@import '../src/app/pages/confirmation-modal/confirmation-modal.component.scss';
+// @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+// @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+// @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
+// @import "../../common/assets/common-styles";
+@import "../../common/src/styles/theme";
 
 @mixin theme-setup($theme) {
   @include angular-material-theme($theme);
@@ -30,6 +34,8 @@
 // for updating components with themes
 @mixin component-themes($theme) {
   @include org($theme);
+  @include modal($theme);
+  // @include org-review($theme);
 }
 
  .ivy-light-theme {
@@ -47,4 +53,6 @@
   width: 150px;
   height: 50px;
 }
+
+@include theme-setup(fathym-ivy-theme());
 

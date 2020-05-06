@@ -3,12 +3,12 @@
     {{ State.OrganizationName }} Setup Review
   </h1>
 
-  <h2
+  <!-- <h2
     fxLayoutAlign="center center"
     class="h2 paragraph-title-bold margin-bottom-3"
   >
-    If you can Fathym It, you can Build It.
-  </h2>
+    If you can Fathym it, you can build it.
+  </h2> -->
 
   <mat-list class="spread">
     <ng-container *ngFor="let bootOption of State.BootOptions; let i = index">
@@ -19,11 +19,11 @@
           [color]="GetBootOptionColor(bootOption)"
         >
           <ng-container *ngIf="!bootOption.Loading">
-            <span *ngIf="bootOption.Status?.Code != 0">
-              check
+            <span *ngIf="bootOption.Status?.Code != 0 && !State.Booted" class="boot-option-incomplete">
+              radio_button_unchecked
             </span>
 
-            <span *ngIf="bootOption.Status?.Code == 0">
+            <span *ngIf="bootOption.Status?.Code == 0 || State.Booted" class="check-circle" >
               check_circle
             </span>
           </ng-container>
@@ -33,10 +33,11 @@
             *ngIf="IsCurrentLoadingBootAction(bootOption)"
           ></mat-spinner>
         </mat-icon>
-
         <h3 matLine>
-          <span>{{ bootOption.Name }}</span>
+          <span class="boot-option-name">{{ bootOption.Name }}</span>
+          <!-- <hr fxLayout="start"> -->
         </h3>
+
 
         <p matLine>
           {{
@@ -62,7 +63,7 @@
           <mat-icon>settings</mat-icon>
         </a>
 
-        <a
+        <!-- <a
           mat-icon-button
           color="primary"
           matTooltip="View Details"
@@ -78,7 +79,7 @@
           <mat-icon *ngIf="ActiveBootOptionDetails == bootOption"
             >expand_less</mat-icon
           >
-        </a>
+        </a> -->
       </mat-list-item>
 
       <mat-divider *ngIf="i != State.BootOptions.length - 1"></mat-divider>
@@ -93,7 +94,7 @@
       class="margin-top-3"
       (click)="Boot()"
     >
-      Finalize and Deploy your Project
+      Finalize and Deploy Workspace
     </button>
 
     <a
@@ -104,14 +105,14 @@
       target="_parent"
       href="https://{{ State.Host }}/fathym-it"
     >
-      <mat-icon>launch</mat-icon> Open Enterprise IDE
+      Open Your IDE
     </a>
 
     <div class="spread mat-error mat-small" *ngIf="!State.Booted && State.Status && State.Status.Code != 0">{{ State.Status.Message  }}</div>
 
     <div *ngIf="State.Loading" class="spread">
       <p style="text-align: center;">
-        Behind the scenes Thinky is working hard to set up your Low Code Unit
+        <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
       </p>
 
       <div

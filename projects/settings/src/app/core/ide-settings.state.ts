@@ -1,7 +1,7 @@
 import { IdeActivity, IdeSideBarAction, DataFlowModulePackSetup } from '@lcu/common';
 
 
-export class IdeSettingsState {
+export class IDESettingsState {
   public Activities: IdeActivity[];
 
   public Arch: IdeSettingsArchitechtureState;

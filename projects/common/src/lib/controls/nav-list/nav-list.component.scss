@@ -1,0 +1,21 @@
+@import '../../../../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
+
+.fathym-brand {
+  margin-top: 8px;
+  width: 170px;
+
+  .thinky-circle {
+    background-image: fathym-logo(thinky-circle,#282D35, 1);
+    background-repeat: no-repeat;
+    height: 47px;
+    width: 50px;
+  }
+
+  .fathym-name {
+    background-image: fathym-logo(fathym-logo,#282D35, 1);
+    background-repeat: no-repeat;
+    height: 47px;
+    margin-top: 7px;
+    width: 150px;
+  }
+}

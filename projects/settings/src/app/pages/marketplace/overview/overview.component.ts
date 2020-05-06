@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { IdeSettingsStateManagerContext } from '../../../core/ide-settings-state-manager.context';
-import { IdeSettingsState } from '../../../core/ide-settings.state';
+import { IDESettingsStateContext } from '../../../core/ide-settings-state-manager.context';
+import { IDESettingsState } from '../../../core/ide-settings.state';
 import { ServiceOfferingModel } from '../models/service-offering.model';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class MarketplaceOverviewComponent implements OnInit {
   /**
    * Current state
    */
-  public State: IdeSettingsState;
+  public State: IDESettingsState;
 
   public ServiceOfferings: Array<ServiceOfferingModel>;
   public FeaturedProduct: any; // will be product model
@@ -23,7 +23,7 @@ export class MarketplaceOverviewComponent implements OnInit {
   //  Constructors
   constructor(
     protected formBldr: FormBuilder,
-    protected ideSettingsState: IdeSettingsStateManagerContext,
+    protected IDESettingsState: IDESettingsStateContext,
     protected router: Router) {
       this.FeaturedProduct = {
         Title: 'Fathym Forecast API'
@@ -33,7 +33,7 @@ export class MarketplaceOverviewComponent implements OnInit {
   //  Life Cycle
 
   public ngOnInit() {
-    this.ideSettingsState.Context.subscribe(state => {
+    this.IDESettingsState.Context.subscribe(state => {
       this.resetForms();
 
       this.State = state;

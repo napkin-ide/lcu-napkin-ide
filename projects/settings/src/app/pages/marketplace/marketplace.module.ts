@@ -9,6 +9,7 @@ import { MarketplaceLayoutComponent } from './layout/layout.component';
 import { MarketplaceShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { MarketplaceProfileComponent } from './profile/profile.component';
 import { MarketplaceProductViewComponent } from './product-view/product-view.component';
+import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
 
 @NgModule({
   declarations: [MarketplaceLayoutComponent, MarketplaceOverviewComponent, MarketplaceShoppingCartComponent, MarketplaceProfileComponent, MarketplaceProductViewComponent],
@@ -18,7 +19,8 @@ import { MarketplaceProductViewComponent } from './product-view/product-view.com
     ReactiveFormsModule,
     MarketplaceRoutingModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    LcuNapkinIdeModule
   ],
   exports: [MarketplaceLayoutComponent, MarketplaceOverviewComponent],
   entryComponents: [MarketplaceLayoutComponent, MarketplaceOverviewComponent, MarketplaceShoppingCartComponent, MarketplaceProfileComponent]

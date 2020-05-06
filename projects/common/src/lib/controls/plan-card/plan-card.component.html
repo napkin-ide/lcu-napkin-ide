@@ -1,12 +1,70 @@
-<div [ngClass]="{'explorer': Plan?.Name === 'Explorer', 
-                 'developer': Plan?.Name === 'Developer',
-                 'enterprise': Plan?.Name === 'Enterprise Monthly'}" fxLayout="column">
+<div [ngClass]="{'pro': Plan?.PlanGroup === PlanGroups[0], 
+                 'starter': Plan?.PlanGroup === PlanGroups[1],
+                 'inter': Plan?.PlanGroup === PlanGroups[2]
+                }" fxLayout="column">
+    
+  <!-- HEADER -->
+  <div class="header" fxLayout="row" fxLayoutAlign="start end">
+    <h2 *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</h2>
+    <div class="package">&nbsp;package</div>
+    <div *ngIf="Plan?.PlanGroup === FeaturedPlanGroup" class="featured-plan">
+      <div class="feat-text">&nbsp;Best Value</div>
+    </div>
+  </div>
 
-  <div class="title" fxLayoutAlign="center center">{{Plan.Name}}</div>
-  <div class="description" fxLayoutAlign="center center">{{Plan.Description}}</div>
-  <!-- <div>{{Plan.Features}}</div> -->
-  <div class="price" fxLayoutAlign="center center">{{Plan.Price}}</div>
-  <div *ngIf="ShowButton === true" class="button-container" fxLayoutAlign="center center">
-    <button mat-raised-button class="button" (click)="BuyNow(Plan)">Buy Now</button>
+  <!-- PRICING -->
+  <div class="pricing-container" fxLayout="row" fxLayoutAlign="center end">
+    <div *ngIf="Plan?.DiscountedFrom && Plan?.DiscountedFrom > 0" class="discounted-from" fxLayoutAlign="center center">
+      ${{Plan.DiscountedFrom}}</div>
+    <div class="dollar-symbol">&nbsp;$</div>
+    <div *ngIf="Plan?.Price" class="price" fxLayoutAlign="center center">
+      {{Plan.Price}}&nbsp;</div>
+    <div class="intervals" fxLayout="column">
+      <div>/{{Plan.Interval}}</div>
+      <div>or ${{OtherPlan.Price}} {{OtherPlan.Interval}}</div>
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div *ngIf="Plan?.Description" class="description" fxLayout="row" fxLayoutAlign="center center">
+    {{Plan.Description}}
+  </div>
+
+  <!-- FEATURES -->
+  <div class="feature-container">
+    <div class="features" fxLayout="column" fxLayoutAlign="center start">
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>check_circle_outline</mat-icon>
+        <div>14 Day Free Trial</div>
+      </div>
+
+    <ng-container *ngIf="PlanFeatures">
+      <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let feat of PlanFeatures">
+        <mat-icon>check_circle_outline</mat-icon>
+        <div>{{feat}}</div>
+      </div>
+    </ng-container>
+
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>check_circle_outline</mat-icon>
+        <div *ngIf="Plan?.DataApps">{{Plan.DataApps}} Data Apps</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>check_circle_outline</mat-icon>
+        <div *ngIf="Plan?.DataFlows">{{Plan.DataFlows}} Data Flows</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>check_circle_outline</mat-icon>
+        <div *ngIf="Plan?.LCUs">{{Plan.LCUs}} Fathym Low Code Unit &trade; Packages</div>
+      </div>
+    </div>
+  </div>
+  <!-- BUTTON -->
+  <div  class="button-container" fxLayoutAlign="center center">
+    <button *ngIf="ShowButton === true" mat-raised-button class="button" (click)="BuyNow(Plan)">Start Free Trial</button>
   </div>
 </div>

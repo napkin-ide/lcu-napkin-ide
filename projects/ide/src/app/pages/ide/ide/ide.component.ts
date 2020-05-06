@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IdeStateStateManagerContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
+import { IDEStateManagementContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
 import { GuidedTour, GuideBotScreenPosition, OrientationTypes, TourStep, GuidedTourManagementStateContext, GuidedTourManagementState, GuidedTourService, ChatTourButton } from '@lowcodeunit/lcu-guided-tour-common';
 
 @Component({
@@ -30,7 +30,7 @@ export class IdeComponent implements OnInit {
   constructor(
     protected breakpointObserver: BreakpointObserver,
     protected elRef: ElementRef,
-    protected ideState: IdeStateStateManagerContext,
+    protected ideState: IDEStateManagementContext,
     protected guidedTourState: GuidedTourManagementStateContext,
     protected guidedTourService: GuidedTourService
   ) {

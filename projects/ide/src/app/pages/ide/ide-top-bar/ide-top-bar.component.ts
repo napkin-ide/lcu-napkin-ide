@@ -5,29 +5,31 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-} from "@angular/core";
+} from '@angular/core';
 // import { UserManagementState, UserManagementStateContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
-import { MatSidenav } from "@angular/material/sidenav";
+import { MatSidenav } from '@angular/material/sidenav';
 import {
   // import { IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common/lcu.api';
-  IdeStateStateManagerContext,
+  IDEStateManagementContext,
   IdeManagementState,
   IDEActionTypes,
   ExternalDialogComponent,
   UserInfoModel,
-} from "@napkin-ide/lcu-napkin-ide-common";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { Observable } from "rxjs";
+} from '@napkin-ide/lcu-napkin-ide-common';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: "nide-ide-top-bar",
-  templateUrl: "./ide-top-bar.component.html",
-  styleUrls: ["./ide-top-bar.component.scss"],
+  selector: 'nide-ide-top-bar',
+  templateUrl: './ide-top-bar.component.html',
+  styleUrls: ['./ide-top-bar.component.scss'],
 })
 export class IdeTopBarComponent implements OnInit {
   protected billingDialog: MatDialogRef<ExternalDialogComponent, any>;
 
-  protected SideBarOpened: boolean = false;
+  protected SideBarOpened = false;
+
+  public IDEActionTypes = IDEActionTypes;
 
   public State: IdeManagementState;
 
@@ -39,7 +41,7 @@ export class IdeTopBarComponent implements OnInit {
   @Input() public isHandset = false;
 
   constructor(
-    protected ideState: IdeStateStateManagerContext,
+    protected ideState: IDEStateManagementContext,
     protected dialog: MatDialog
   ) {}
 
@@ -59,9 +61,9 @@ export class IdeTopBarComponent implements OnInit {
 
   public LogoutClicked(event: any) {
     // TODO hook up to auth
-    console.log("Logout clicked: ", event);
+    console.log('Logout clicked: ', event);
 
-    window.location.replace("/.oauth/logout");
+    window.location.replace('/.oauth/logout');
   }
 
   public HeaderActionClicked(action: any) {
@@ -88,11 +90,11 @@ export class IdeTopBarComponent implements OnInit {
   }
 
   protected getUserInfo() {
-    console.log("State: ", this.State);
+    console.log('State: ', this.State);
   }
 
   protected stateChanged() {
-    console.log("State: ", this.State);
+    console.log('State: ', this.State);
     if (!this.UsersInfo) {
       this.UsersInfo = new UserInfoModel();
     }

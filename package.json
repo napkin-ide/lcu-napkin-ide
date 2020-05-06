@@ -17,7 +17,7 @@
     "demo:lcu": "npm run build:common && npm run build:lcu && npm run start:demo",
     "deploy": "npm version patch && npm run deploy:all",
     "deploy:all": "npm run deploy:common && npm run deploy:concurrently",
-    "deploy:concurrently": "concurrently \"npm run deploy:lcu\" \"npm run deploy:demo\" \"npm run deploy:setup\" && concurrently \"npm run deploy:ide\" \"npm run deploy:settings\" \"npm run deploy:shell-host\" && concurrently \"npm run deploy:user-access\" \"npm run deploy:billing\"",
+    "deploy:concurrently": "concurrently \"npm run deploy:lcu\" \"npm run deploy:demo\" \"npm run deploy:setup\" && concurrently \"npm run deploy:ide\" \"npm run deploy:settings\" && concurrently \"npm run deploy:user-access\" \"npm run deploy:billing\"",
     "deploy:common": "npm version patch --prefix projects/common && npm run build:common && npm publish ./dist/common --access public",
     "deploy:demo": "npm version patch --prefix projects/demo && npm run build:demo && npm publish ./dist/demo --access public",
     "deploy:ide": "npm version patch --prefix projects/ide && npm run build:ide && npm publish ./dist/ide --access public",
@@ -55,7 +55,7 @@
     "@angular/platform-browser-dynamic": "^9.0.1",
     "@angular/router": "^9.0.1",
     "@aspnet/signalr": "^1.1.4",
-    "@lcu/common": "^1.25.101",
+    "@lcu/common": "^1.30.124",
     "@lowcodeunit-devkit/ng-lcu": "^1.5.26",
     "@lowcodeunit/lazy-element": "0.0.13",
     "@lowcodeunit/lcu-guided-tour-common": "^1.3.27-integration",
@@ -95,7 +95,7 @@
     "protractor": "^5.4.3",
     "rimraf": "^2.6.3",
     "ts-node": "~7.0.0",
-    "tsickle": "^0.38.0",
+    "tsickle": "0.38.0",
     "tslint": "~5.15.0",
     "typescript": "~3.7.5"
   }

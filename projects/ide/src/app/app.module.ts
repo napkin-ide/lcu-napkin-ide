@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import {
-  IdeStateStateManagerContext,
+  IDEStateManagementContext,
   LcuNapkinIdeModule
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -30,7 +30,7 @@ import { AppRoutingModule } from './app-routing.module';
     LcuNapkinIdeModule
   ],
   providers: [
-    IdeStateStateManagerContext,
+    IDEStateManagementContext,
     {
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment)
@@ -61,7 +61,7 @@ import { AppRoutingModule } from './app-routing.module';
           },
           circle: {
             type: 'image/png',
-            href: '../assets/favicons/thinky_circle_red.png',
+            href: '../favicon.ico',
             isDefault: true
           }
         },

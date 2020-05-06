@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BillingFlowComponent } from './billing-flow.component';
+import { IntervalToggleComponent } from './interval-toggle.component';
 
-describe('BillingFlowComponent', () => {
-  let component: BillingFlowComponent;
-  let fixture: ComponentFixture<BillingFlowComponent>;
+describe('IntervalToggleComponent', () => {
+  let component: IntervalToggleComponent;
+  let fixture: ComponentFixture<IntervalToggleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BillingFlowComponent ]
+      declarations: [ IntervalToggleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BillingFlowComponent);
+    fixture = TestBed.createComponent(IntervalToggleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

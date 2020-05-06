@@ -4,22 +4,22 @@
   (ngSubmit)="SetOrgDetails()"
 >
   <h1 fxLayoutAlign="center center" class="mat-display-1 title margin-bottom-4">
-    Get Set Up Now
+    Set Up Your Fathym Workspace
   </h1>
 
   <mat-form-field class="mat-full-width">
     <input
       matInput
-      placeholder="Project Name"
+      placeholder="Workspace Name"
       formControlName="orgDetailName"
       required
     />
 
     <mat-icon
       matSuffix
-      matTooltip="Enter a unique name for your new project"
+      matTooltip="Enter a unique name for your new workspace"
       matTooltipClass="tooltip-background"
-      >help_outline</mat-icon
+      >info_outline</mat-icon
     >
   </mat-form-field>
 
@@ -42,9 +42,10 @@
   <mat-form-field class="mat-full-width">
     <input
       matInput
-      placeholder="Project Lookup"
+      placeholder="Workspace Path (URL)"
       formControlName="orgDetailLookup"
       required
+      class="input-boxes"
     />
 
     <mat-error *ngIf="OrgDetailLookupHasError">
@@ -53,10 +54,10 @@
 
     <mat-icon
       matSuffix
-      matTooltip="Enter a valid project lookup (lowercase alpha characters and '-' accepted)"
+      matTooltip="Enter a valid workspace lookup (lowercase alpha characters and '-' accepted)"
       matTooltipClass="tooltip-background"
     >
-      help_outline
+      info_outline
     </mat-icon>
   </mat-form-field>
 
@@ -79,6 +80,6 @@
     class="mat-full-width"
     [disabled]="!DetailsForm.valid"
   >
-    Set Up Project Infrastructure
+    Save Details
   </button>
 </form>
