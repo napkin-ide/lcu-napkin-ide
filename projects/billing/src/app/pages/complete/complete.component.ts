@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   UserBillingStateContext,
   UserBillingState,
-  NapkinIDESetupStepTypes,
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillingPlanOption } from 'projects/common/src/lcu.api';
@@ -20,11 +19,17 @@ export class CompleteComponent implements OnInit {
   //  Properties
 
   // tslint:disable-next-line:no-input-rename
-  @Input('setup-step-types')
-  public SetupStepTypes: NapkinIDESetupStepTypes;
-
+  // @Input('setup-step-types')
+  // public SetupStepTypes: NapkinIDESetupStepTypes;
+/**
+ * State being passed in to the complete page
+ */
   // tslint:disable-next-line:no-input-rename
-  @Input('state')
+  // @Input('state')
+
+  /**
+   * The user billing state to determine payment status
+   */
   public State: UserBillingState;
 
   /**
@@ -69,7 +74,7 @@ export class CompleteComponent implements OnInit {
   //  Helpers
   protected stateChanged() {
     // console.log('state success page: ', this.State);
-
+//avoid error if the user trys to manually navigate to the complete page
     if (!this.State.PaymentStatus) {
       this.router.navigate(['']);
     }

@@ -1,6 +1,7 @@
 <div class='success-page' fxLayoutAlign="center center">
-<div class='success-container' fxLayout="column" fxLayoutAlign="space-around center" fxFlex.lg="50%" fxFlex.md="50%" fxFlex.xs="100%">
+<mat-card class='success-container' fxLayout="column" fxLayoutAlign="space-around center" fxFlex.lg="50%" fxFlex.md="50%" fxFlex.xs="100%">
     <!-- HEADING -->
+    <mat-card-header fxLayout="column" fxLayoutAlign="center center">
     <div class="fathym-logo"></div>
     <div class="success-heading" fxLayout="column" fxLayoutAlign="center center">
         <h2 class="fathym-header">Fathym it. Build it.</h2>
@@ -8,9 +9,10 @@
         <p *ngIf="SelectedPlan" class="succ-text">You have successfully registered to be a <b>Fathym {{SelectedPlan.PlanGroup | titlecase }}</b>.</p>
         <p *ngIf="FreeTrialEndDate" class="succ-text">Your card will be charged on <b>{{FreeTrialEndDate}}</b> unless you cancel.</p>
     </div>
+</mat-card-header>
     <hr>
     <!-- ORDER SUMMARY -->
-    <div class="order-summary-container" fxLayout="column" fxLayoutAlign="center center" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
+    <mat-card-content class="order-summary-container" fxLayout="column" fxLayoutAlign="center center" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
         <h3 fxLayoutAlign="center center">Order Summary</h3>
         <div class="order-summary" fxLayout="column" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
             <div class="item" fxLayout="column">
@@ -38,14 +40,16 @@
 
         </div>
 
-    </div>
+    </mat-card-content>
     <hr>
 <!-- BUTTON -->
+<mat-card-actions class="actions-container">
     <a mat-raised-button 
     href="/workspace/new" 
     class="redirect-button" 
     target="_parent">Continue to Setup
     </a>
-</div>
+</mat-card-actions>
+</mat-card>
 
 </div>
