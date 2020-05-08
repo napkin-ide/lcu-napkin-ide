@@ -1,5 +1,5 @@
 <mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
-  <mat-grid-tile>
+  <mat-grid-tile [class.ide-thinky-bg]="!CurrentEditor">
     <div class="ide-overflowed">
       <mat-tab-group [selectedIndex]="CurrentEditorIndex()">
         <mat-tab *ngFor="let editor of Editors">
