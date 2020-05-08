@@ -1,12 +1,12 @@
 <form>
-<!-- <form *ngIf="State.Step === SettingStepTypes['Configuration']"> -->
+<!-- <form *ngIf="State.SetupStep === SettingStepTypes['Configuration']"> -->
   <mat-card>
   <div>
     <div class="mat-headline title title">
       Manage
 
       <mat-form-field>
-        <mat-select placeholder="Low Code Unit" [value]="State.Config.CurrentLCUConfig" (selectionChange)="SetConfigLCU($event)">
+        <mat-select placeholder="Select" [value]="State.Config.CurrentLCUConfig" (selectionChange)="SetConfigLCU($event)">
           <ng-container *ngFor="let lcu of State.Arch?.LCUs">
             <mat-option [value]="lcu.Lookup">
               {{ lcu.Lookup }} <small>({{ lcu.NPMPackage }}@{{ lcu.PackageVersion }})</small>
@@ -15,7 +15,7 @@
         </mat-select>
       </mat-form-field>
 
-      LCU Capabilities
+      <span lcuTrademark></span> Capabilities
     </div>
   </div>
 

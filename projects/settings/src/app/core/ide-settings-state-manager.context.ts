@@ -1,12 +1,12 @@
-import { IdeSettingsState, LowCodeUnitSetupConfig, IdeSettingsConfigSolution } from './ide-settings.state';
-import { StateManagerContext } from '@lcu/common';
+import { IDESettingsState, LowCodeUnitSetupConfig, IdeSettingsConfigSolution } from './ide-settings.state';
+import { StateContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 import { IdeActivity, IdeSideBarAction, DataFlowModulePackSetup } from '@lcu/common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSettingsState> {
+export class IDESettingsStateContext extends StateContext<IDESettingsState> {
   //  Properties
 
   //  Constructors
@@ -34,7 +34,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         Section: section
       },
-      Type: 'add-side-bar-section'
+      Type: 'AddSideBarSection'
     });
   }
 
@@ -43,7 +43,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         Activity: activityLookup
       },
-      Type: 'delete-activity'
+      Type: 'DeleteActivity'
     });
   }
 
@@ -52,7 +52,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         LCU: lcuLookup
       },
-      Type: 'delete-lcu'
+      Type: 'DeleteLCU'
     });
   }
 
@@ -62,7 +62,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
         Action: action,
         Group: group
       },
-      Type: 'delete-section-action'
+      Type: 'DeleteSectionAction'
     });
   }
 
@@ -71,7 +71,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         Section: section
       },
-      Type: 'delete-side-bar-section'
+      Type: 'DeleteSideBarSection'
     });
   }
 
@@ -80,7 +80,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         Activity: activity
       },
-      Type: 'save-activity'
+      Type: 'SaveActivity'
     });
   }
 
@@ -89,7 +89,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         LCU: lcu
       },
-      Type: 'save-lcu'
+      Type: 'SaveLCU'
     });
   }
 
@@ -103,7 +103,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
         },
         LCULookup: lcuLookup
       },
-      Type: 'save-lcu-capabilities'
+      Type: 'SaveLCUCapabilities'
     });
   }
 
@@ -112,7 +112,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         Action: action
       },
-      Type: 'save-section-action'
+      Type: 'SaveSectionAction'
     });
   }
 
@@ -121,7 +121,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         LCU: lcuLookup
       },
-      Type: 'set-config-lcu'
+      Type: 'SetConfigLCU'
     });
   }
 
@@ -130,7 +130,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         Activity: activityLookup
       },
-      Type: 'set-edit-activity'
+      Type: 'SetEditActivity'
     });
   }
 
@@ -139,7 +139,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         LCU: lcuLookup
       },
-      Type: 'set-edit-lcu'
+      Type: 'SetEditLCU'
     });
   }
 
@@ -148,7 +148,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         Section: sectionLookup
       },
-      Type: 'set-edit-section'
+      Type: 'SetEditSection'
     });
   }
 
@@ -157,7 +157,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         Action: action
       },
-      Type: 'set-edit-section-action'
+      Type: 'SetEditSectionAction'
     });
   }
 
@@ -166,41 +166,41 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
       Arguments: {
         Activity: activityLookup
       },
-      Type: 'set-side-bar-edit-activity'
+      Type: 'SetSideBarEditActivity'
     });
   }
 
   public ToggleAddNewActivity() {
     this.Execute({
       Arguments: {},
-      Type: 'toggle-add-new-activity'
+      Type: 'ToggleAddNewActivity'
     });
   }
 
   public ToggleAddNewLCU() {
     this.Execute({
       Arguments: {},
-      Type: 'toggle-add-new-lcu'
+      Type: 'ToggleAddNewLCU'
     });
   }
 
   public ToggleAddNewSectionAction() {
     this.Execute({
       Arguments: {},
-      Type: 'toggle-add-new-section-action'
+      Type: 'ToggleAddNewSectionAction'
     });
   }
 
   //  Helpers
   protected defaultValue() {
-    return <IdeSettingsState>{ Loading: true };
+    return <IDESettingsState>{ Loading: true };
   }
 
-  protected loadStateKey(): Promise<string> {
-    return Promise.resolve('main');
+  protected loadStateKey(): string {
+    return 'settings';
   }
 
-  protected loadStateName(): Promise<string> {
-    return Promise.resolve('ide-settings');
+  protected loadStateName(): string {
+    return 'idemanagement';
   }
 }

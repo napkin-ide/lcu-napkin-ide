@@ -11,6 +11,9 @@
 		"solutions": {
 			"data-flow-manager": {
 				"element": "lcu-napkin-ide-shell-host-element"
+			},
+			"welcome-journeys": {
+				"element": "lcu-napkin-ide-welcome-journeys-element"
 			}
 		},
 		"elements": {},

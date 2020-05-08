@@ -1,8 +1,8 @@
 <!-- <mat-toolbar> -->
-  <h1>My Low Code Units</h1>
+  <h1 lcuTrademark>My </h1>
 <!-- </mat-toolbar> -->
 <form>
-  <!-- <form *ngIf="State.Step === SettingStepTypes['Architecture']"> -->
+  <!-- <form *ngIf="State.SetupStep === SettingStepTypes['Architecture']"> -->
   <mat-card>
     <mat-nav-list>
       <ng-container *ngFor="let lcu of State.Arch?.LCUs">
@@ -71,7 +71,7 @@
         <a matLine (click)="ToggleAddNewLCU()">
           <mat-icon>add</mat-icon>
 
-          Add New LCU
+          <span lcuTrademark>Add New </span>
         </a>
       </mat-list-item>
 

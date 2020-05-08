@@ -1,159 +1,242 @@
-<div *ngIf="State.Step === SetupStepTypes['Review']">
+<div *ngIf="State.SetupStep === SetupStepTypes.Review">
+  <h1 fxLayoutAlign="center center" class="mat-display-1 title margin-bottom-4">
+    {{ State.OrganizationName }} Setup Review
+  </h1>
 
-    <h1
-      fxLayoutAlign="center center"
-      class="mat-display-1 title margin-bottom-4">
-      Adding {{ State.OrganizationName }} to the Ecosystem
-    </h1>
+  <!-- <h2
+    fxLayoutAlign="center center"
+    class="h2 paragraph-title-bold margin-bottom-3"
+  >
+    If you can Fathym it, you can build it.
+  </h2> -->
 
-    <h2
-      fxLayoutAlign="center center"
-      class="h2 paragraph-title-bold margin-bottom-3">
-      If you can Fathym It, you can Build It.
-    </h2>
+  <mat-list class="spread">
+    <ng-container *ngFor="let bootOption of State.BootOptions; let i = index">
+      <mat-list-item>
+        <mat-icon
+          matListIcon
+          class="icon-btn-spinner"
+          [color]="GetBootOptionColor(bootOption)"
+        >
+          <ng-container *ngIf="!bootOption.Loading">
+            <span *ngIf="bootOption.Status?.Code != 0 && !State.Booted" class="boot-option-incomplete">
+              radio_button_unchecked
+            </span>
 
-    <ng-container *ngIf="!State.HasDevOpsOAuth">
+            <span *ngIf="bootOption.Status?.Code == 0 || State.Booted" class="check-circle" >
+              check_circle
+            </span>
+          </ng-container>
+
+          <mat-spinner
+            diameter="24"
+            *ngIf="IsCurrentLoadingBootAction(bootOption)"
+          ></mat-spinner>
+        </mat-icon>
+        <h3 matLine>
+          <span class="boot-option-name">{{ bootOption.Name }}</span>
+          <!-- <hr fxLayout="start"> -->
+        </h3>
+
+
+        <p matLine>
+          {{
+            bootOption.Status
+              ? bootOption.Status.Message
+              : bootOption.Description
+          }}
+        </p>
+
+        <a
+          mat-icon-button
+          color="primary"
+          matTooltip="View Details and Customize"
+          matTooltipClass="tooltip-background"
+          matTooltipPosition="left"
+          (click)="ChangeStep(bootOption.SetupStep)"
+          *ngIf="
+            bootOption.SetupStep &&
+            bootOption.Status?.Code != 0 &&
+            !SetUpLoading()
+          "
+        >
+          <mat-icon>settings</mat-icon>
+        </a>
+
+        <!-- <a
+          mat-icon-button
+          color="primary"
+          matTooltip="View Details"
+          matTooltipClass="tooltip-background"
+          matTooltipPosition="left"
+          (click)="SetActiveBootOptionDetails(bootOption)"
+          *ngIf="bootOption.Status?.Code == 0 && !bootOption.Loading"
+        >
+          <mat-icon *ngIf="ActiveBootOptionDetails != bootOption"
+            >expand_more</mat-icon
+          >
+
+          <mat-icon *ngIf="ActiveBootOptionDetails == bootOption"
+            >expand_less</mat-icon
+          >
+        </a> -->
+      </mat-list-item>
+
+      <mat-divider *ngIf="i != State.BootOptions.length - 1"></mat-divider>
+    </ng-container>
+  </mat-list>
+
+  <div class="spread" style="text-align: center;">
+    <button
+      *ngIf="(!SetUpLoading() || (State.Status && State.Status.Code != 0)) && !State.Booted"
+      mat-raised-button
+      color="accent"
+      class="margin-top-3"
+      (click)="Boot()"
+    >
+      Finalize and Deploy Workspace
+    </button>
+
+    <a
+      *ngIf="!SetUpLoading() && State.Booted"
+      mat-raised-button
+      color="primary"
+      class="margin-top-3"
+      target="_parent"
+      href="https://{{ State.Host }}/fathym-it"
+    >
+      Open Your IDE
+    </a>
+
+    <div class="spread mat-error mat-small" *ngIf="!State.Booted && State.Status && State.Status.Code != 0">{{ State.Status.Message  }}</div>
+
+    <div *ngIf="State.Loading" class="spread">
+      <p style="text-align: center;">
+        <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
+      </p>
+
+      <div
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        class="spinner-container"
+      >
+        <mat-spinner diameter="75"></mat-spinner>
+        <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  <ng-container *ngIf="State.HasDevOpsOAuth">
+    <ng-container *ngIf="!State.EnterpriseBooted">
       <div fxLayout="column">
-        <!-- <h2 class="h2">
-          Get Connected with Azure DevOps
-        </h2> -->
+        <h2 class="h2">
+          Organization Infrastructure
+        </h2>
 
         <div fxLayout="row">
           <div fxFlex="20">
-              <img style="width: 140%; margin-top: 1em;" src="assets/img/Azure-logo.png" />
+            <img style="width: 140%;" src="assets/img/Azure-logo.png" />
           </div>
           <div fxFlex>
             <p class="weird-fix">
-                We are nearly finished!
+              Fathym does the following for your infrastructure:
             </p>
 
-            <a mat-raised-button color="accent" class="margin-top-3 weird-fix" [href]="AzureDevOpsOAuthURL">
-                Get Connected with Azure DevOps
-              </a>
-
-            <!-- <p class="weird-fix">
-              To get started, we need to get connected with an instance of Azure Dev Ops. Don't worry, you'll be able to migrate to
-              other systems in the future if you have a different prefered flavor.
-            </p> -->
+            <ul class="weird-fix">
+              <li>
+                Configures an enterprise-scalable, cost effective infrastructure
+                (free until you scale your organization)
+              </li>
+              <li>Deploys an SSL certificate for a secured application host</li>
+              <li>Manages Azure, other clouds, and legacy infrastructure</li>
+            </ul>
           </div>
         </div>
+      </div>
 
+      <div fxLayout="column" class="margin-top-5">
+        <h2 class="h2">
+          Comprehensive DevOps
+        </h2>
 
+        <div fxLayout="row">
+          <div fxFlex="20">
+            <img style="width: 130%;" src="assets/img/azure-dev-ops-logo.png" />
+          </div>
+          <div fxFlex>
+            <p class="weird-fix">
+              Fathym does the following for your DevOps:
+            </p>
+
+            <ul class="weird-fix">
+              <li>
+                Connects with your Azure DevOps instance and assists in managing
+                your code, builds, releases, and more
+              </li>
+              <li>
+                Sets up Git-based source control for your infrastructure and
+                connects it to builds for auto-deploying to Azure
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <button
+        mat-raised-button
+        color="accent"
+        class="margin-top-3 mat-full-width"
+        (click)="Boot()"
+      >
+        Get Connected & Launch Your Organization
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="State.EnterpriseBooted">
+      <div fxLayout="column">
+        <h2 class="h2">
+          Application Hosting
+        </h2>
+
+        <div fxLayout="row">
+          <div fxFlex="20">
+            <div style="height: 150px; width: auto" class="thinky-logo"></div>
+          </div>
+          <div fxFlex>
+            <p class="mat-subheading-2">
+              The Dynamic Application Framework provides a basis for delivering
+              javascript-based front ends in a secure and scalable manner.
+              Fathym simplifies the developer experience so you can focus on
+              your customers.
+            </p>
+
+            <p class="mat-subheading-2">
+              Fathym manages security, SSL hosting, and application serving as
+              long as you want, then we will help upgrade your infrastructure to
+              the services and scale you need.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="column">
+        <h2 class="h2">
+          Authorization
+        </h2>
+
+        <div fxLayout="row">
+          <div fxFlex="20">
+            <div style="height: 150px; width: auto" class="thinky-logo"></div>
+          </div>
+          <div fxFlex>
+            <p class="mat-subheading-2">
+              Fathym offers an easy-to-consume-and-use OAuth/Identity as a
+              service backed by the Auth/Auth provider you choose.
+            </p>
+          </div>
+        </div>
       </div>
     </ng-container>
-
-    <ng-container *ngIf="State.HasDevOpsOAuth">
-      <ng-container *ngIf="!State.EnterpriseBooted">
-        <div fxLayout="column">
-          <h2 class="h2">
-            Organization Infrastructure
-          </h2>
-
-          <div fxLayout="row">
-            <div fxFlex="20">
-                <img style="width: 140%;" src="assets/img/Azure-logo.png" />
-            </div>
-            <div fxFlex>
-              <p class="weird-fix">
-                Fathym does the following for your infrastructure:
-              </p>
-
-              <ul class="weird-fix">
-                <li>Configures an enterprise-scalable, cost effective infrastructure (free until you scale your organization) </li>
-                <li>Deploys an SSL certificate for a secured application host </li>
-                <li>Manages Azure, other clouds, and legacy infrastructure </li>
-              </ul>
-
-            </div>
-          </div>
-        </div>
-
-        <div fxLayout="column" class="margin-top-5">
-          <h2 class="h2">
-              Comprehensive DevOps
-          </h2>
-
-          <div fxLayout="row">
-              <div fxFlex="20">
-                  <img style="width: 130%;" src="assets/img/azure-dev-ops-logo.png" />
-              </div>
-              <div fxFlex>
-                  <p class="weird-fix">
-                    Fathym does the following for your DevOps:
-                    </p>
-
-                    <ul class="weird-fix">
-                      <li>Connects with your Azure DevOps instance and assists in managing your code, builds, releases, and more </li>
-                      <li>Sets up Git-based source control for your infrastructure and connects it to builds for auto-deploying to Azure </li>
-                    </ul>
-              </div>
-            </div>
-        </div>
-
-        <button
-          mat-raised-button
-          color="accent"
-          class="margin-top-3 mat-full-width"
-          (click)="Boot()" >
-          Get Connected & Launch Your Organization
-        </button>
-      </ng-container>
-
-      <ng-container *ngIf="State.EnterpriseBooted">
-            <div fxLayout="column">
-                <h2 class="h2">
-                    Application Hosting
-                </h2>
-
-            <div fxLayout="row">
-              <div fxFlex="20">
-                  <div style="height: 150px; width: auto" class="thinky-logo"></div>
-              </div>
-              <div fxFlex>
-                <p class="mat-subheading-2">
-                    The Dynamic Application Framework provides a basis for delivering javascript-based front ends in a secure and scalable manner. Fathym simplifies the developer experience so you can focus on your customers.
-                </p>
-
-                <p class="mat-subheading-2">
-                    Fathym manages security, SSL hosting, and application serving as long as you want, then we will help upgrade your infrastructure to the services and scale you need.
-                </p>
-              </div>
-              </div>
-            </div>
-
-
-            <div fxLayout="column">
-                <h2 class="h2">
-                    Authorization
-                </h2>
-
-            <div fxLayout="row">
-              <div fxFlex="20">
-                  <div style="height: 150px; width: auto" class="thinky-logo"></div>
-              </div>
-              <div fxFlex>
-                <p class="mat-subheading-2">
-                    Fathym offers an easy-to-consume-and-use OAuth/Identity as a service backed by the Auth/Auth provider you choose.
-                </p>
-              </div>
-              </div>
-              <button
-               *ngIf="!FinalizeClicked"
-                mat-raised-button
-                color="accent"
-                class="margin-top-3 mat-full-width"
-                (click)="Finalize()"
-                [disabled]="!State || !State.TermsAccepted || !State.CanFinalize">
-
-                <mat-icon *ngIf="!State.CanFinalize" class="icon-btn-spinner" matTooltip="Provisioning infrastructure resources, please wait." matTooltipClass="tooltip-background">
-                  <mat-spinner diameter="24"></mat-spinner>
-                </mat-icon>
-
-                Finalize and Deploy your Organization
-                
-              </button>
-              <mat-progress-bar *ngIf="FinalizeClicked" mode="indeterminate"></mat-progress-bar>
-            </div>
-      </ng-container>
-    </ng-container>
-  </div>
+  </ng-container> -->
+</div>

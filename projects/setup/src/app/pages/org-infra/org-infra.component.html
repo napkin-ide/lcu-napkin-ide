@@ -1,5 +1,5 @@
 <form
-  *ngIf="State.Step == SetupStepTypes['AzureSetup']"
+  *ngIf="State.SetupStep == SetupStepTypes.AzureSetup"
   [formGroup]="InfraForm"
 >
   <div class="spread">
@@ -7,7 +7,7 @@
       fxLayoutAlign="center center"
       class="mat-display-1 title margin-bottom-4"
     >
-      Microsoft Azure Subscription Set Up
+      Microsoft Azure Subscription Setup
     </h1>
 
     <div>
@@ -15,24 +15,26 @@
         <div fxLayout="row" fxLayoutGap="10px">
           <mat-icon
             *ngIf="
-              OrgInfraAzureAppAppId.value.length > 0 &&
-              !OrgInfraAzureAppAppId.hasError('pattern')
+              OrgInfraAzureAppId.value.length > 0 &&
+              !OrgInfraAzureAppId.hasError('pattern')
             "
-            class="success"
+            [ngClass]="'success infra-check'"
             >check_circle</mat-icon
           >
           <input
             formControlName="azureAppId"
             matInput
-            placeholder="Azure App ID"
+            placeholder="Azure Application ID"
             [type]="HideAppId ? 'password' : 'text'"
             required
             autocomplete="new-password"
           />
         </div>
-        <mat-error *ngIf="OrgInfraAzureAppAppId.hasError('pattern')">
-          {{ GuidErrorMessage }}
+
+        <mat-error *ngIf="OrgInfraAzureAppIdHasError">
+          {{ OrgInfraAzureAppIdErrorMessage }}
         </mat-error>
+
         <mat-icon
           matBadgePosition="below after"
           matBadgeColor="primary"
@@ -48,9 +50,9 @@
           (click)="OpenHelpPdf()"
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
-          >help_outline</mat-icon
+          >info_outline</mat-icon
         >
-        <!-- matBadge="{{OrgInfraAzureAppAppId.value.length}}"  -->
+        <!-- matBadge="{{OrgInfraAzureAppId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
 
@@ -61,21 +63,23 @@
               OrgInfraAzureTenatId.value.length > 0 &&
               !OrgInfraAzureTenatId.hasError('pattern')
             "
-            class="success"
+            [ngClass]="'success infra-check'"
             >check_circle</mat-icon
           >
           <input
             formControlName="azureTenantId"
             matInput
-            placeholder="Azure Tenant (Directory) ID"
+            placeholder="Azure Tenant (Directory ID)"
             [type]="HideTenantId ? 'password' : 'text'"
             required
             autocomplete="new-password"
           />
         </div>
-        <mat-error *ngIf="OrgInfraAzureTenatId.hasError('pattern')">
-          {{ GuidErrorMessage }}
+
+        <mat-error *ngIf="OrgInfraAzureTenatIdHasError">
+          {{ OrgInfraAzureTenatIdErrorMessage }}
         </mat-error>
+
         <mat-icon
           matBadgePosition="below after"
           matBadgeColor="primary"
@@ -91,7 +95,7 @@
           (click)="OpenHelpPdf()"
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
-          >help_outline</mat-icon
+          >info_outline</mat-icon
         >
         <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
@@ -104,7 +108,7 @@
               OrgInfraAzureSubId.value.length > 0 &&
               !OrgInfraAzureSubId.hasError('pattern')
             "
-            class="success"
+            [ngClass]="'success infra-check'"
             >check_circle</mat-icon
           >
           <input
@@ -116,9 +120,11 @@
             autocomplete="new-password"
           />
         </div>
-        <mat-error *ngIf="OrgInfraAzureSubId.hasError('pattern')">
-          {{ GuidErrorMessage }}
+
+        <mat-error *ngIf="OrgInfraAzureSubIdHasError">
+          {{ OrgInfraAzureSubIdErrorMessage }}
         </mat-error>
+
         <mat-icon
           matBadgePosition="below after"
           matBadgeColor="primary"
@@ -134,7 +140,7 @@
           (click)="OpenHelpPdf()"
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
-          >help_outline</mat-icon
+          >info_outline</mat-icon
         >
         <!-- matBadge="{{OrgInfraAzureSubId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
@@ -147,21 +153,23 @@
               OrgInfraAzureAppAuthKey.value.length > 0 &&
               !OrgInfraAzureAppAuthKey.hasError('required')
             "
-            class="success"
+            [ngClass]="'success infra-check'"
             >check_circle</mat-icon
           >
           <input
             formControlName="azureAppAuthKey"
             matInput
-            placeholder="Azure App Auth key"
+            placeholder="Azure Application Auth key"
             [type]="HideAuthKey ? 'password' : 'text'"
             required
             autocomplete="new-password"
           />
         </div>
-        <mat-error *ngIf="OrgInfraAzureAppAuthKey.hasError">
-          Value is required
+
+        <mat-error *ngIf="OrgInfraAzureAppAuthKeyHasError">
+          {{ OrgInfraAzureAppAuthKeyErrorMessage }}
         </mat-error>
+
         <mat-icon
           matBadgePosition="below after"
           matBadgeColor="primary"
@@ -177,16 +185,32 @@
           (click)="OpenHelpPdf()"
           matTooltip=" Obtain this value from Azure’s Certificates and Secrets page. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
-          >help_outline</mat-icon
+          >info_outline</mat-icon
         >
         <!-- matBadge="{{OrgInfraAzureAppAuthKey.value.length}}"  -->
         <!-- <mat-hint>32 Character Limit</mat-hint> -->
       </mat-form-field>
+
+      <mat-form-field class="mat-full-width margin-top-4">
+        <mat-label>Infrastructure Template</mat-label>
+
+        <mat-select formControlName="infraTemplate" required>
+          <mat-option
+            class="mat-option-dropdown"
+            *ngFor="let infraOptKey of InfrastructureOptionKeys"
+            [value]="infraOptKey"
+          >
+            {{ State.InfrastructureOptions[infraOptKey] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
+    <div class="spread mat-small mat-error" *ngIf="State.Status && State.Status.Code != 0">{{ State.Status.Message  }}</div>
 
     <div class="margin-top-4">
       <button
-        matTooltip="Your best practices IoT cloud infrastructure is being set up. If you were doing this from scratch, it would take several days, but with Fathym it will only take up to 15 minutes."
+        matTooltip="Your best practices IoT cloud infrastructure will be set up. If you were doing this from scratch, it may take several days, but with Fathym it will only take up to 15 minutes."
         matTooltipClass="tooltip-background"
         mat-raised-button
         color="accent"
@@ -194,16 +218,15 @@
         (click)="Configure()"
         [disabled]="!InfraForm.valid"
       >
-        Set Up Organization Details
+        Review & Launch
       </button>
 
       <button
         mat-button
         class="mat-full-width"
-        color="warn"
-        (click)="ChangeStep(SetupStepTypes['OrgDetails'])"
+        (click)="ChangeStep(SetupStepTypes.OrgDetails)"
       >
-        Rename Organization
+        Back
       </button>
     </div>
   </div>

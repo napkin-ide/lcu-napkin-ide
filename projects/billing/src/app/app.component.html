@@ -1,0 +1,15 @@
+<div [className]="SelectedTheme" style="height: 100%">
+  <div class="billing-top-bar" fxLayout="row" fxLayoutAlign="end center" >
+    <lcu-user-account-sidenav 
+      class="user-account-sidenav" 
+      [user-email]="Username" 
+      (logout-clicked)="LogoutClicked()" fxFlex="100%">
+    </lcu-user-account-sidenav>
+  </div>
+  <div class="billing-app-container">
+    <div class='router-container'>
+      <router-outlet (activate)="OnActivate($event)"></router-outlet>
+    </div>
+  </div>
+
+</div>

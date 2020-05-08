@@ -1,9 +1,26 @@
+@import '../../../../../../common/src/styles/theme';
+
+$Text-Color: mat-color(map-get($global-theme, primary), 100);
+
 .ide-tool-bar{
     position: relative;
     z-index: 1000;
 }
 .toolbar-icon{
     font-size: 40px;
+    color: $Text-Color;
+    margin:0px 8px;
+}
+
+.fathym-header-logo{
+    background-image: fathym-logo(thinky-full-logo, $Text-Color);
+    background-repeat:no-repeat;
+    background-position: center;
+    width: 130px;
+    height: 100%;
+    background-size: 130px;
+    margin-left: 15px;
+    // margin-top: 7px;
 }
 
 .menu-button{
@@ -14,4 +31,36 @@
     margin-left: 25px;
 }
 
+.action-icons {
+    margin-right: 60px;
+    position: absolute;
+    right: 0;
+    top: 5;
 
+    button, a {
+        margin-top: 7px;
+        margin-right: 0.5em;
+    }
+    mat-icon {
+        font-size: 40px;
+        width: initial;
+        color: $Text-Color;
+    }
+    span{
+        color: $Text-Color;
+    }
+}
+
+.mat-icon-button {
+    width: initial;
+
+}
+.vertical-line{
+    height: 20px;
+    border: .5px solid $Text-Color;
+    margin: 0px;
+    margin-left: 10px;
+}
+.user-account{
+    margin-right: 20px;
+}

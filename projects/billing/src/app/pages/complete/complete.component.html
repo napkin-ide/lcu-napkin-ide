@@ -1,0 +1,51 @@
+<div class='success-page' fxLayoutAlign="center center">
+<div class='success-container' fxLayout="column" fxLayoutAlign="space-around center" fxFlex.lg="50%" fxFlex.md="50%" fxFlex.xs="100%">
+    <!-- HEADING -->
+    <div class="fathym-logo"></div>
+    <div class="success-heading" fxLayout="column" fxLayoutAlign="center center">
+        <h2 class="fathym-header">Fathym it. Build it.</h2>
+        <p class="succ-text">Congratulations!</p>
+        <p *ngIf="SelectedPlan" class="succ-text">You have successfully registered to be a <b>Fathym {{SelectedPlan.PlanGroup | titlecase }}</b>.</p>
+        <p *ngIf="FreeTrialEndDate" class="succ-text">Your card will be charged on <b>{{FreeTrialEndDate}}</b> unless you cancel.</p>
+    </div>
+    <hr>
+    <!-- ORDER SUMMARY -->
+    <div class="order-summary-container" fxLayout="column" fxLayoutAlign="center center" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
+        <h3 fxLayoutAlign="center center">Order Summary</h3>
+        <div class="order-summary" fxLayout="column" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
+            <div class="item" fxLayout="column">
+                <div *ngIf="SelectedPlan" class="bold">Fathym {{SelectedPlan.PlanGroup | titlecase}}</div>
+                <div class="free-trial-cost" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>- 14 Day Free Trial</div>
+                    <div>$0.00</div>
+                </div>
+            </div>
+
+            <div *ngIf="SelectedPlan" class="item" fxLayout="column">
+                <div class="bold">Fathym {{SelectedPlan.PlanGroup | titlecase}}</div>
+                <div class="paid-version-cost" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>- {{SelectedPlan.Interval | titlecase}}ly Subscription</div>
+                    <div>${{SelectedPlan.Price}}.00</div>
+                </div>
+                <div class="note">*Charge will occur after 14 day trial period</div>
+            </div>
+            <hr class="dashed-hr">
+
+            <div *ngIf="SelectedPlan" class="item" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="bold">Total</div>
+                <div class="bold">${{SelectedPlan.Price}}.00</div>
+            </div>
+
+        </div>
+
+    </div>
+    <hr>
+<!-- BUTTON -->
+    <a mat-raised-button 
+    href="/workspace/new" 
+    class="redirect-button" 
+    target="_parent">Continue to Setup
+    </a>
+</div>
+
+</div>

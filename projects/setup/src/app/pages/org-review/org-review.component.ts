@@ -1,6 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NapkinIDESetupStepTypes, NapkinIDESetupState } from '../../core/napkin-ide-setup.state';
-import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  NapkinIDESetupStepTypes,
+  UserManagementState,
+  UserManagementStateContext
+} from '@napkin-ide/lcu-napkin-ide-common';
+import { BootOption } from 'projects/common/src/lcu.api';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'lcu-org-review',
@@ -9,6 +15,8 @@ import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-s
 })
 export class OrgReviewComponent implements OnInit {
   // Properties
+  public ActiveBootOptionDetails: BootOption;
+
   public get OAuthRedirectURL(): string {
     return `${location.href}`;
   }
@@ -18,59 +26,90 @@ export class OrgReviewComponent implements OnInit {
   }
 
   /**
-   * indicates whether user has clicked to "Finalize" registration
+   * Event for changing step type
    */
-  public FinalizeClicked: boolean;
+  @Output('set-step')
+  public SetStep: EventEmitter<NapkinIDESetupStepTypes>;
 
   /**
-   * Setup step types
+   * Step types
    */
-  // tslint:disable-next-line:no-input-rename
-  @Input('setup-step-types')
-  public SetupStepTypes: NapkinIDESetupStepTypes;
+  public SetupStepTypes = NapkinIDESetupStepTypes;
 
   /**
    * Current state
    */
-  // tslint:disable-next-line:no-input-rename
   @Input('state')
-  public State: NapkinIDESetupState;
+  public State: UserManagementState;
 
-  constructor(protected nideState: NapkinIDESetupStateManagerContext) {
-    this.FinalizeClicked = false;
+  constructor(protected userMgr: UserManagementStateContext,
+    public dialog: MatDialog,
+    ) {
+    this.SetStep = new EventEmitter();
   }
 
-  ngOnInit() {
-    this.setupTempFinalizeTracker();
+  public ngOnInit() {
+     // for testing
+    // this.OpenConfirmationDialog();
   }
 
   public Boot() {
     this.State.Loading = true;
 
-    this.nideState.BootEnterprise();
+    this.userMgr.BootOrganization();
   }
 
-  public Finalize() {
-    this.State.Loading = true;
-
-    this.FinalizeClicked = true;
-
-    this.nideState.Finalize();
+  public ChangeStep(step: NapkinIDESetupStepTypes): void {
+    this.SetStep.emit(step);
   }
 
-  public CanFinalize() {
-    this.nideState.CanFinalize();
+  public GetBootOptionColor(bootOption: BootOption) {
+    return bootOption.Status
+      ? bootOption.Status.Code === 0
+        ? 'accent'
+        : bootOption.Status.Code === -1
+        ? 'primary'
+        : ''
+      : '';
   }
+
+  public IsCurrentLoadingBootAction(bootOption: BootOption): boolean {
+    const curLoading = this.State.BootOptions.find(bo => bo.Loading);
+
+    return curLoading === bootOption;
+  }
+
+  public SetUpLoading(): boolean {
+    return (
+      this.State.Loading || !!this.State.BootOptions.find(bo => bo.Loading)
+    );
+  }
+
+  public SetActiveBootOptionDetails(bootOption: BootOption): void {
+    if (this.ActiveBootOptionDetails !== bootOption) {
+      this.ActiveBootOptionDetails = bootOption;
+    } else {
+      this.ActiveBootOptionDetails = null;
+    }
+  }
+
+  // public OpenConfirmationDialog(): void {
+  //   const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+  //     width: '575px',
+  //     position: {right:'11vw'}
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed', result);
+
+  //     if(result === "confirm"){
+  //       this.Boot();
+  //     }
+  //   });
+  // }
+
 
   //  Helpers
-  protected setupTempFinalizeTracker() {
-    /** Interval to check if infrastructure has been provisioned - prevents user from continuing until so. */
-    const finalizedInterval: any = setInterval(() => {
-      if (!this.State.CanFinalize && this.State.EnterpriseBooted) {
-        this.CanFinalize();
-      } else {
-        clearInterval(finalizedInterval);
-      }
-    }, 30000);
-  }
+
+
 }

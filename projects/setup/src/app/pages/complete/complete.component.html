@@ -1,4 +1,4 @@
-<div *ngIf="State.Step === SetupStepTypes['Complete']">
+<div *ngIf="State.SetupStep === SetupStepTypes['Complete']">
 
     <h1
       fxLayoutAlign="center center"
@@ -24,7 +24,7 @@
           <div fxFlex>
               <p class="mat-subheading-2">
                   Some things are finalizing, and we'll redirect you to {{ State.Host }} in the next 30 seconds. Your SSL and hosts are
-                  being configured with the LCU Runtime, and once complete you'll be able to manage your world from your own infrastructure.
+                  being configured with the <span lcuTrademark></span> Runtime, and once complete you'll be able to manage your world from your own infrastructure.
                 </p>
 
                 <p class="mat-subheading-2">
@@ -62,7 +62,7 @@
         <mat-card-header>
           <mat-icon mat-card-avatar>lock</mat-icon>
 
-          <mat-card-title class="mat-headline title">LCU Management</mat-card-title>
+          <mat-card-title class="mat-headline title"><span lcuTrademark></span> Management</mat-card-title>
         </mat-card-header>
 
         <div>

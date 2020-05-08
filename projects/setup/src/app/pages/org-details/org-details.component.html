@@ -1,37 +1,85 @@
-<form *ngIf="State.Step === SetupStepTypes['OrgDetails']"
+<form
+  *ngIf="State.SetupStep == SetupStepTypes.OrgDetails"
   [formGroup]="DetailsForm"
-  (ngSubmit)="SetOrgDetails()">
-    <h1
-      fxLayoutAlign="center center"
-      class="mat-display-1 title margin-bottom-4">
-      Set Up Your Organization
-    </h1>
+  (ngSubmit)="SetOrgDetails()"
+>
+  <h1 fxLayoutAlign="center center" class="mat-display-1 title margin-bottom-4">
+    Set Up Your Fathym Workspace
+  </h1>
 
-    <mat-form-field class="mat-full-width">
-      <input matInput placeholder="Organization Name" formControlName="orgDetailName" required />
+  <mat-form-field class="mat-full-width">
+    <input
+      matInput
+      placeholder="Workspace Name"
+      formControlName="orgDetailName"
+      required
+    />
 
-      <mat-icon matSuffix matTooltip="Enter a unique name for your new organization" matTooltipClass="tooltip-background">help_outline</mat-icon>
-    </mat-form-field>
+    <mat-icon
+      matSuffix
+      matTooltip="Enter a unique name for your new workspace"
+      matTooltipClass="tooltip-background"
+      >info_outline</mat-icon
+    >
+  </mat-form-field>
 
-    <mat-form-field class="mat-full-width">
-      <textarea matInput placeholder="Description" formControlName="orgDetailDesc" required></textarea>
+  <!-- <mat-form-field class="mat-full-width">
+    <textarea
+      matInput
+      placeholder="Description"
+      formControlName="orgDetailDesc"
+      required
+    ></textarea>
 
-      <mat-icon matSuffix matTooltip="Enter a useful description for your new organization" matTooltipClass="tooltip-background">help_outline</mat-icon>
-    </mat-form-field>
+    <mat-icon
+      matSuffix
+      matTooltip="Enter a useful description for your new organization"
+      matTooltipClass="tooltip-background"
+      >help_outline</mat-icon
+    >
+  </mat-form-field> -->
 
-    <mat-form-field class="mat-full-width">
-      <input matInput placeholder="Organization Lookup" formControlName="orgDetailLookup" required />
+  <mat-form-field class="mat-full-width">
+    <input
+      matInput
+      placeholder="Workspace Path (URL)"
+      formControlName="orgDetailLookup"
+      required
+      class="input-boxes"
+    />
 
-      <mat-icon matSuffix matTooltip="Enter a valid organization lookup (lowercase alpha characters and '-' accepted)" matTooltipClass="tooltip-background">
-        help_outline
-      </mat-icon>
-    </mat-form-field>
+    <mat-error *ngIf="OrgDetailLookupHasError">
+      {{ OrgDetailLookupErrorMessage }}
+    </mat-error>
 
-    <button
-      mat-raised-button color="accent"
-      class="mat-full-width"
-      [disabled]="!DetailsForm.valid">
-      Submit
-    </button>
+    <mat-icon
+      matSuffix
+      matTooltip="Enter a valid workspace lookup (lowercase alpha characters and '-' accepted)"
+      matTooltipClass="tooltip-background"
+    >
+      info_outline
+    </mat-icon>
+  </mat-form-field>
 
-  </form>
+  <div class="spread">
+    <mat-checkbox formControlName="orgDetailTerms" required>
+      By checking this box, you agree to enter into and be bound by the
+      <a href="https://fathym.com/enterprise-agreement/">
+        Enterprise Agreement
+      </a>
+      and
+      <a href="https://fathym.com/terms-of-services/">
+        Fathym Terms of Services </a
+      >.
+    </mat-checkbox>
+  </div>
+
+  <button
+    mat-raised-button
+    color="accent"
+    class="mat-full-width"
+    [disabled]="!DetailsForm.valid"
+  >
+    Save Details
+  </button>
+</form>

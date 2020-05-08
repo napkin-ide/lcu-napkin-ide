@@ -1,24 +1,57 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NapkinIDESetupStepTypes, NapkinIDESetupState, AzureInfaSettings } from '../../core/napkin-ide-setup.state';
-import { AbstractControl, FormGroup, Validators, FormControl } from '@angular/forms';
-import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
+import {
+  AbstractControl,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { Guid } from '@lcu/common';
-import { Constants } from '@napkin-ide/lcu-napkin-ide-common';
+import {
+  Constants,
+  NapkinIDESetupStepTypes,
+  UserManagementStateContext,
+  UserManagementState,
+  AzureInfaSettings,
+} from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-org-infra',
   templateUrl: './org-infra.component.html',
-  styleUrls: ['./org-infra.component.scss']
+  styleUrls: ['./org-infra.component.scss'],
 })
 export class OrgInfraComponent implements OnInit {
+  // Fields
 
- // Fields
+  /**
+   * Infrastructure template lookup field
+   */
+  public get InfraTemplate(): AbstractControl {
+    return this.InfraForm.get('infraTemplate');
+  }
 
   /**
    * Access organization name field
    */
   public get OrgInfraAzureTenatId(): AbstractControl {
     return this.InfraForm.get('azureTenantId');
+  }
+
+  public get OrgInfraAzureTenatIdHasError(): boolean {
+    return (
+      this.OrgInfraAzureTenatId.hasError('pattern') ||
+      this.OrgInfraAzureTenatId.hasError('required') ||
+      this.OrgInfraAzureTenatId.hasError('status')
+    );
+  }
+
+  public get OrgInfraAzureTenatIdErrorMessage(): string {
+    if (this.OrgInfraAzureTenatId.hasError('pattern')) {
+      return this.GuidErrorMessage;
+    } else if (this.OrgInfraAzureTenatId.hasError('required')) {
+      return 'The Azure Tenant ID is required.';
+    } else if (this.OrgInfraAzureTenatId.hasError('status')) {
+      return 'The provided Azure Tenant ID is not valid.  Please check the value and try again.';
+    }
   }
 
   /**
@@ -28,11 +61,47 @@ export class OrgInfraComponent implements OnInit {
     return this.InfraForm.get('azureSubId');
   }
 
+  public get OrgInfraAzureSubIdHasError(): boolean {
+    return (
+      this.OrgInfraAzureSubId.hasError('pattern') ||
+      this.OrgInfraAzureSubId.hasError('required') ||
+      this.OrgInfraAzureSubId.hasError('status')
+    );
+  }
+
+  public get OrgInfraAzureSubIdErrorMessage(): string {
+    if (this.OrgInfraAzureSubId.hasError('pattern')) {
+      return this.GuidErrorMessage;
+    } else if (this.OrgInfraAzureSubId.hasError('required')) {
+      return 'The Azure Subscription ID is required.';
+    } else if (this.OrgInfraAzureSubId.hasError('status')) {
+      return 'The provided Azure Subscription ID is not valid.  Please check the value and try again.';
+    }
+  }
+
   /**
    * Access organization lookup field
    */
-  public get OrgInfraAzureAppAppId(): AbstractControl {
+  public get OrgInfraAzureAppId(): AbstractControl {
     return this.InfraForm.get('azureAppId');
+  }
+
+  public get OrgInfraAzureAppIdHasError(): boolean {
+    return (
+      this.OrgInfraAzureAppId.hasError('pattern') ||
+      this.OrgInfraAzureAppId.hasError('required') ||
+      this.OrgInfraAzureAppId.hasError('status')
+    );
+  }
+
+  public get OrgInfraAzureAppIdErrorMessage(): string {
+    if (this.OrgInfraAzureAppId.hasError('pattern')) {
+      return this.GuidErrorMessage;
+    } else if (this.OrgInfraAzureAppId.hasError('required')) {
+      return 'The Azure Application ID is required.';
+    } else if (this.OrgInfraAzureAppId.hasError('status')) {
+      return 'The provided Azure Application ID is not valid.  Please check the value and try again.';
+    }
   }
 
   /**
@@ -42,21 +111,37 @@ export class OrgInfraComponent implements OnInit {
     return this.InfraForm.get('azureAppAuthKey');
   }
 
+  public get OrgInfraAzureAppAuthKeyHasError(): boolean {
+    return (
+      this.OrgInfraAzureAppAuthKey.hasError('pattern') ||
+      this.OrgInfraAzureAppAuthKey.hasError('required') ||
+      this.OrgInfraAzureAppAuthKey.hasError('status')
+    );
+  }
+
+  public get OrgInfraAzureAppAuthKeyErrorMessage(): string {
+    if (this.OrgInfraAzureAppAuthKey.hasError('pattern')) {
+      return this.GuidErrorMessage;
+    } else if (this.OrgInfraAzureAppAuthKey.hasError('required')) {
+      return 'The Azure Application Client Secret is required.';
+    } else if (this.OrgInfraAzureAppAuthKey.hasError('status')) {
+      return 'The provided Azure Application Client Secret is not valid.  Please check the value and try again.';
+    }
+  }
+
   // Properties
 
   /**
-   * Setup step types
+   * Step types
    */
-  // tslint:disable-next-line:no-input-rename
-  @Input('setup-step-types')
-  public SetupStepTypes: NapkinIDESetupStepTypes;
+  public SetupStepTypes = NapkinIDESetupStepTypes;
 
   /**
    * Current state
    */
   // tslint:disable-next-line:no-input-rename
   @Input('state')
-  public State: NapkinIDESetupState;
+  public State: UserManagementState;
 
   /**
    * Event for changing step type
@@ -95,47 +180,82 @@ export class OrgInfraComponent implements OnInit {
    */
   public InfraForm: FormGroup;
 
-  constructor(protected nideState: NapkinIDESetupStateManagerContext) {
+  /**
+   * Infrastructure option keys
+   */
+  public get InfrastructureOptionKeys(): string[] {
+    return this.State.InfrastructureOptions
+      ? Object.keys(this.State.InfrastructureOptions)
+      : [];
+  }
+
+  constructor(protected userMgr: UserManagementStateContext) {
     this.SetStep = new EventEmitter();
     this.setFieldToggles();
 
-    this.GuidErrorMessage = 'Value must be a valid Guid ( ' + Guid.Empty + ' )' ;
-   }
+    this.GuidErrorMessage = 'Value must be a valid Guid ( ' + Guid.Empty + ' )';
+  }
 
-// life Cycle
+  // life Cycle
 
   ngOnInit() {
     this.setupForm();
+
     this.setupState();
   }
 
-// API Methods
+  // API Methods
 
-/**
- * Configure azure setup
- */
-public Configure() {
-  this.State.Loading = true;
+  public ChangeStep(step: NapkinIDESetupStepTypes): void {
+    this.SetStep.emit(step);
+  }
 
-  // if (!this.State.EnvSettings) {
-  this.State.EnvSettings = new AzureInfaSettings();
- // }
+  /**
+   * Configure azure setup
+   */
+  public Configure() {
+    this.State.Loading = true;
 
-  this.State.EnvSettings.AzureTenantID = this.OrgInfraAzureTenatId.value;
+    const envSettings = {
+      ...(this.State.EnvSettings || new AzureInfaSettings()),
+    };
 
-  this.State.EnvSettings.AzureSubID = this.OrgInfraAzureSubId.value;
+    envSettings.AzureTenantID = this.OrgInfraAzureTenatId.value;
 
-  this.State.EnvSettings.AzureAppID = this.OrgInfraAzureAppAppId.value;
+    envSettings.AzureSubID = this.OrgInfraAzureSubId.value;
 
-  this.State.EnvSettings.AzureAppAuthKey = this.OrgInfraAzureAppAuthKey.value;
+    envSettings.AzureAppID = this.OrgInfraAzureAppId.value;
 
-  this.nideState.ConfigureInfrastructure('Azure', true, this.State.EnvSettings);
-}
+    envSettings.AzureAppAuthKey = this.OrgInfraAzureAppAuthKey.value;
 
-public OpenHelpPdf(){
-  window.open(Constants.HELP_PDF)
-}
+    this.userMgr.ConfigureInfrastructure(
+      'Azure',
+      true,
+      envSettings,
+      this.InfraTemplate.value
+    );
+  }
+
+  public OpenHelpPdf() {
+    window.open(Constants.HELP_PDF);
+  }
+
   // helpers
+  protected loadControlByErrorFrom(errorFrom: string): AbstractControl {
+    switch (errorFrom) {
+      case 'AzureTenantID':
+        return this.OrgInfraAzureTenatId;
+
+      case 'AzureAppID':
+        return this.OrgInfraAzureAppId;
+
+      case 'AzureAppAuthKey':
+        return this.OrgInfraAzureAppAuthKey;
+
+      case 'AzureSubID':
+        return this.OrgInfraAzureSubId;
+    }
+  }
 
   /**
    * Setup toggled fields
@@ -156,16 +276,41 @@ public OpenHelpPdf(){
     // });
 
     this.InfraForm = new FormGroup({
-      azureTenantId: new FormControl ('',  {validators: Validators.compose([
-        Validators.required,
-        Validators.pattern(Guid.GuidValidator)]), updateOn: 'change'}),
-      azureAppId: new FormControl ('',  {validators: Validators.compose([
-        Validators.required,
-        Validators.pattern(Guid.GuidValidator)]), updateOn: 'change'}),
-      azureAppAuthKey: new FormControl ('', {validators: [Validators.required], updateOn: 'change'}),
-      azureSubId: new FormControl ('',  {validators: Validators.compose([
-        Validators.required,
-        Validators.pattern(Guid.GuidValidator)]), updateOn: 'change'})
+      azureTenantId: new FormControl('', {
+        validators: Validators.compose([
+          Validators.required,
+          Validators.pattern(Guid.GuidValidator),
+          this.statusValidatorFactory('AzureTenantID'),
+        ]),
+        updateOn: 'change',
+      }),
+      azureAppId: new FormControl('', {
+        validators: Validators.compose([
+          Validators.required,
+          Validators.pattern(Guid.GuidValidator),
+          this.statusValidatorFactory('AzureAppID'),
+        ]),
+        updateOn: 'change',
+      }),
+      azureAppAuthKey: new FormControl('', {
+        validators: [
+          Validators.required,
+          this.statusValidatorFactory('AzureAppAuthKey'),
+        ],
+        updateOn: 'change',
+      }),
+      azureSubId: new FormControl('', {
+        validators: Validators.compose([
+          Validators.required,
+          Validators.pattern(Guid.GuidValidator),
+          this.statusValidatorFactory('AzureSubID'),
+        ]),
+        updateOn: 'change',
+      }),
+      infraTemplate: new FormControl('', {
+        validators: Validators.compose([Validators.required]),
+        updateOn: 'change',
+      }),
     });
 
     this.onFormChanges();
@@ -175,15 +320,14 @@ public OpenHelpPdf(){
    * Monitor form changes
    */
   protected onFormChanges(): void {
-    this.InfraForm.valueChanges.subscribe(val => {
-    });
+    this.InfraForm.valueChanges.subscribe((val) => {});
   }
 
   /**
    * Setup state mechanism
    */
   protected setupState(): void {
-    this.nideState.Context.subscribe(state => {
+    this.userMgr.Context.subscribe((state: UserManagementState) => {
       this.State = state;
 
       this.stateChanged();
@@ -195,20 +339,59 @@ public OpenHelpPdf(){
    */
   protected stateChanged(): void {
     if (this.State.EnvSettings) {
-      this.OrgInfraAzureTenatId.setValue(this.State.EnvSettings.AzureTenantID || '');
+      this.OrgInfraAzureTenatId.setValue(
+        this.State.EnvSettings.AzureTenantID || ''
+      );
 
       this.OrgInfraAzureSubId.setValue(this.State.EnvSettings.AzureSubID || '');
 
-      this.OrgInfraAzureAppAppId.setValue(this.State.EnvSettings.AzureAppID || '');
+      this.OrgInfraAzureAppId.setValue(this.State.EnvSettings.AzureAppID || '');
 
-      this.OrgInfraAzureAppAuthKey.setValue(this.State.EnvSettings.AzureAppAuthKey || '');
+      this.OrgInfraAzureAppAuthKey.setValue(
+        this.State.EnvSettings.AzureAppAuthKey || ''
+      );
 
-      setTimeout(() => this.InfraForm.updateValueAndValidity());
+      this.InfraTemplate.setValue(this.State.Template || '');
+
+      this.OrgInfraAzureTenatId.markAsTouched();
+
+      this.OrgInfraAzureSubId.markAsTouched();
+
+      this.OrgInfraAzureAppId.markAsTouched();
+
+      this.OrgInfraAzureAppAuthKey.markAsTouched();
+
+      this.InfraTemplate.markAsTouched();
     }
   }
 
-  public ChangeStep(step: NapkinIDESetupStepTypes): void {
-    this.SetStep.emit(step);
-  }
+  /**
+   * Custm validator used to ensure status is successful
+   */
+  protected statusValidatorFactory(errorFor: string) {
+    return (control: FormControl) => {
+      const errorFrom = this.State.Status ? (this.State.Status as any).ErrorFrom : '';
 
+      if (
+        this.State.Status &&
+        this.State.Status.Code === 102 &&
+        errorFrom &&
+        errorFor === errorFrom &&
+        this.InfraForm
+      ) {
+        const formCtrl = this.loadControlByErrorFrom(errorFrom);
+
+        if (formCtrl && this.State.EnvSettings[errorFor] === formCtrl.value) {
+          return {
+            status: {
+              valid: false,
+              status: this.State.Status,
+            },
+          };
+        }
+      }
+
+      return null;
+    };
+  }
 }

@@ -84,7 +84,7 @@ export class JourneyComponent implements OnInit, AfterViewInit {
   // public AcceptTerms() {
   //   this.State.Loading = true;
 
-  //   this.nideState.AcceptTerms(this.State.Terms);
+  //   this.userMgr.AcceptTerms(this.State.Terms);
   // }
 
   public LoadJourneyDetails(detLookup: string) {

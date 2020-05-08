@@ -1,11 +1,23 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, ChangeDetectorRef, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  ViewChildren,
+  QueryList,
+  ChangeDetectorRef,
+  Input
+} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { NapkinIDESetupState, NapkinIDESetupStepTypes } from '../../core/napkin-ide-setup.state';
-import { NapkinIDESetupStateManagerContext } from '../../core/napkin-ide-setup-state-manager.context';
 import { OrgDetailsComponent } from '../org-details/org-details.component';
 import { OrgInfraComponent } from '../org-infra/org-infra.component';
-import { OrgHostComponent } from '../org-host/org-host.component';
-import { Constants } from '@napkin-ide/lcu-napkin-ide-common';
+import {
+  Constants,
+  UserManagementState,
+  UserManagementStateContext,
+  NapkinIDESetupStepTypes,
+  BootOption
+} from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'lcu-org',
@@ -14,9 +26,9 @@ import { Constants } from '@napkin-ide/lcu-napkin-ide-common';
   animations: []
 })
 export class OrgComponent implements OnInit, AfterViewInit {
-
   //  Fields
 
+  //  Properties
   /**
    * OrgDetailsComponent
    */
@@ -29,26 +41,11 @@ export class OrgComponent implements OnInit, AfterViewInit {
   @ViewChildren(OrgInfraComponent)
   public OrgInfraComponent: QueryList<OrgInfraComponent>;
 
-  /**
-   * Host component
-   */
-  @ViewChildren(OrgHostComponent)
-  public OrgHostComponent: QueryList<OrgHostComponent>;
-  // @ViewChild(OrgHostComponent, { static: false })
-  // public OrgHostComponent: OrgHostComponent;
-
-  //  Properties
-
   public get RootURL(): string {
     const port = location.port ? `:${location.port}` : '';
 
     return `${location.protocol}//${location.hostname}${port}`;
   }
-
-  /**
-   * host form validity
-   */
-  public HostFormValid: boolean;
 
   /**
    * detail form validity
@@ -68,7 +65,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
   /**
    * State mechanism
    */
-  public State: NapkinIDESetupState;
+  public State: UserManagementState;
 
   public Subdomain: string;
 
@@ -77,17 +74,16 @@ export class OrgComponent implements OnInit, AfterViewInit {
   //  Constructor
   constructor(
     protected formBldr: FormBuilder,
-    protected nideState: NapkinIDESetupStateManagerContext,
+    protected userMgr: UserManagementStateContext,
     protected cdr: ChangeDetectorRef
-    ) {
-     this.HostFormValid = false;
-     this.HelpPdf = Constants.HELP_PDF;
+  ) {
+    this.HelpPdf = Constants.HELP_PDF;
+    this.InfraFormValid = false;
   }
 
   //  Life Cycle
   public ngOnInit() {
-
-    this.nideState.Context.subscribe(state => {
+    this.userMgr.Context.subscribe(state => {
       this.State = state;
 
       this.stateChanged();
@@ -102,7 +98,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
   // public AcceptTerms() {
   //   this.State.Loading = true;
 
-  //   this.nideState.AcceptTerms(this.State.Terms);
+  //   this.userMgr.AcceptTerms(this.State.Terms);
   // }
 
   public Copy(inputElement: HTMLInputElement) {
@@ -132,14 +128,14 @@ export class OrgComponent implements OnInit, AfterViewInit {
   public ResetOrgDetails() {
     this.State.Loading = true;
 
-    this.nideState.SetOrganizationDetails(null, null, null);
+    this.userMgr.SetOrganizationDetails(null, null);
   }
 
   public SetStep(step: NapkinIDESetupStepTypes) {
-    if (this.State.Step !== NapkinIDESetupStepTypes.Complete) {
+    if (this.State.SetupStep !== NapkinIDESetupStepTypes.Complete) {
       this.State.Loading = true;
 
-      this.nideState.SetNapkinIDESetupStep(step);
+      this.userMgr.SetNapkinIDESetupStep(step);
     }
   }
 
@@ -150,8 +146,9 @@ export class OrgComponent implements OnInit, AfterViewInit {
     // using *ngIf with external form properties
     this.cdr.detectChanges();
 
-    if (this.State.Step === NapkinIDESetupStepTypes.Complete) {
+    if (this.State.SetupStep === NapkinIDESetupStepTypes.Complete) {
     }
+    // console.log("State: ", this.State)
   }
 
   /**
@@ -160,27 +157,23 @@ export class OrgComponent implements OnInit, AfterViewInit {
    * QueryList is used, because the component is undefined on load
    */
   protected setupChildrenForms(): void {
+    // detail form
+    this.OrgDetailsComponent.changes.subscribe(
+      (itm: QueryList<OrgDetailsComponent>) => {
+        if (itm.first && itm.first.DetailsForm) {
+          this.DetailsFormValid = itm.first.DetailsForm.valid;
+        }
+      }
+    );
 
     // detail form
-    this.OrgDetailsComponent.changes.subscribe((itm: QueryList<OrgDetailsComponent>) => {
-      if (itm.first) {
-        this.DetailsFormValid = itm.first.DetailsForm.valid;
+    this.OrgInfraComponent.changes.subscribe(
+      (itm: QueryList<OrgInfraComponent>) => {
+        if (itm.first && itm.first.InfraForm) {
+          this.InfraFormValid = itm.first.InfraForm.valid;
+        }
       }
-     });
-
-    // detail form
-    this.OrgInfraComponent.changes.subscribe((itm: QueryList<OrgInfraComponent>) => {
-      if (itm.first) {
-        this.InfraFormValid = itm.first.InfraForm.valid;
-      }
-    });
-
-    // host form
-    this.OrgHostComponent.changes.subscribe((itm: QueryList<OrgHostComponent>) => {
-     if (itm.first) {
-        this.HostFormValid = itm.first.HostForm.valid;
-     }
-    });
+    );
 
     // this.ParentForm.addControl('InfraForm', this.OrgInfraComponent.InfraForm);
     // this.OrgInfraComponent.InfraForm.setParent(this.ParentForm);

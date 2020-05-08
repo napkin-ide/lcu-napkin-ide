@@ -1,0 +1,19 @@
+@import '../../../../../common/src/styles/theme';
+
+$Text-Color: mat-color(map-get($global-theme, primary), 100);
+// $Main-font: mat-color(map-get($global-theme, primary), 50);
+
+.choose-header{
+    margin-top:0px;
+    padding-top: 20px;
+    color: $Text-Color;
+}
+
+.lcu-plan-card{
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+.tag-line{
+    color:$Text-Color;
+}

@@ -7,7 +7,11 @@ import { NavListComponent } from './controls/nav-list/nav-list.component';
 import { RouterModule } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LcuTrademarkDirective } from './controls/trademark/trademark.directive';
 import { UserAccountSidenavComponent } from './controls/user-account-sidenav/user-account-sidenav.component';
+import { PlanCardComponent } from './controls/plan-card/plan-card.component';
+import { IntervalToggleComponent } from './controls/interval-toggle/interval-toggle.component';
+import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
 
 
 @NgModule({
@@ -15,7 +19,11 @@ import { UserAccountSidenavComponent } from './controls/user-account-sidenav/use
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    UserAccountSidenavComponent
+    LcuTrademarkDirective,
+    UserAccountSidenavComponent,
+    PlanCardComponent,
+    IntervalToggleComponent,
+    LcuNapkinIdeWelcomeJourneysElementComponent,
   ],
   imports: [
     CommonModule,
@@ -30,13 +38,22 @@ import { UserAccountSidenavComponent } from './controls/user-account-sidenav/use
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    UserAccountSidenavComponent
+    LcuTrademarkDirective,
+    UserAccountSidenavComponent,
+    PlanCardComponent,
+    IntervalToggleComponent,
+    LcuNapkinIdeWelcomeJourneysElementComponent,
+    
   ],
   entryComponents: [
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
-    UserAccountSidenavComponent
+    UserAccountSidenavComponent,
+    PlanCardComponent,
+    IntervalToggleComponent,
+    LcuNapkinIdeWelcomeJourneysElementComponent,
+    
   ]
 })
 export class LcuNapkinIdeModule {}

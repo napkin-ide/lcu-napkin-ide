@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IdeSettingsState } from '../../../core/ide-settings.state';
-import { IdeSettingsStateManagerContext } from '../../../core/ide-settings-state-manager.context';
+import { IDESettingsState } from '../../../core/ide-settings.state';
+import { IDESettingsStateContext } from '../../../core/ide-settings-state-manager.context';
 
 @Component({
   selector: 'lcu-marketplace-profile',
@@ -62,11 +62,11 @@ export class MarketplaceProfileComponent implements OnInit {
   /**
    * the current state
    */
-  public State: IdeSettingsState;
+  public State: IDESettingsState;
 
   // CONSTRUCTORS
 
-  constructor(protected ideSettingsState: IdeSettingsStateManagerContext) {
+  constructor(protected IDESettingsState: IDESettingsStateContext) {
     // get user / company from state...
     this.UserEntity = {
       Name: 'Chris P. Bacon',
@@ -103,7 +103,7 @@ export class MarketplaceProfileComponent implements OnInit {
   // LIFECYCLE
 
   ngOnInit() {
-    this.ideSettingsState.Context.subscribe(state => {
+    this.IDESettingsState.Context.subscribe(state => {
       this.State = state;
     });
   }

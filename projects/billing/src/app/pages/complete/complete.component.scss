@@ -1,0 +1,64 @@
+@import '../../../../../common/src/styles/theme';
+$Fathym-Green: mat-color(map-get($global-theme, primary), A200);
+$BG-color: transparentize(slategrey, .1);
+$Text-color: mat-color(map-get($global-theme, primary), 100);
+.fathym-logo{
+  background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
+  background-repeat: no-repeat;
+  background-size: 90px;
+  height: 90px;
+  width: 90px;
+}
+.success-container{
+  height: 100%;
+  width: 100%;
+  background-color: $BG-color;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 2px;
+  color: $Text-color;
+
+.success-heading{
+  // background-color: $Fathym-Green;
+  width: 100%;
+  .fathym-header{
+    margin:0px;
+    margin-top:10px;
+  }
+  .succ-text{
+    margin: 5px 0px;
+    font-size: 15px;
+  }
+}
+.order-summary-container{
+  width:100%;
+  
+  .order-summary{
+    width: 100%;
+    .item{
+    margin-bottom: 10px;
+    .note{
+      font-size: 12px;
+    }
+    }
+  }
+}
+}
+
+.redirect-button{
+  background-color: $Fathym-Green;
+  width: 90%;
+  color: $Text-color;
+}
+
+.bold{
+  font-weight: bold;
+}
+hr{
+  border: .5px solid $Text-color;
+    width: 90%;
+}
+.dashed-hr{
+  border:.5px dashed $Text-color;
+  width: 90%;
+}

@@ -1,8 +1,11 @@
-@import '../../../../../common/src/styles/theme';
+@import "../../../../../common/src/styles/theme";
+// @import "../../../../../../node_modules/@lcu/common/assets/styles/branding/colors/fathym-theme-colors";
 
-.weird-fix{
-    font:400 16px/28px Roboto, "Helvetica Neue", sans-serif;
-    margin-left: 10%;
+
+$Fathym-Green: mat-color(map-get($global-theme, primary), A700);
+.weird-fix {
+  font: 400 16px/28px Roboto, "Helvetica Neue", sans-serif;
+  margin-left: 10%;
 }
 
 .icon-btn-spinner {
@@ -10,3 +13,76 @@
   top: 5px;
   left: 10px;
 }
+
+::ng-deep {
+  .mat-card .mat-divider-horizontal {
+    position: relative;
+  }
+}
+
+:host ::ng-deep {
+  .mat-list-base {
+    .mat-list-item {
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+      height: auto !important;
+      // border-bottom: solid 1px #000;
+      border-collapse: collapse;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .mat-list-item-content {
+        padding: 0 0 0 16px;
+
+        .mat-list-icon {
+          position: absolute;
+        }
+
+        .mat-list-text {
+          margin-left: 30px;
+        }
+      }
+
+      .mat-raised-button {
+        float: right;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        white-space: normal !important;
+      }
+
+      .mat-line {
+        white-space: normal !important;
+      }
+    }
+  }
+}
+
+.check-circle{
+  border-radius: 15px;
+  background-color: $global-accent;
+  color: $Fathym-Green;
+ // background-color: mat-color($primary);
+}
+.boot-option-name{
+  text-decoration: underline;
+}
+
+
+// @mixin org-review($theme) {
+//   $primary: map-get($theme, primary);
+//   $accent: map-get($theme, accent);
+//   $warn: map-get($theme, warn);
+
+  .boot-option-incomplete{
+    // color: mat-color($primary);
+    color: mat-color(map-get($global-theme, primary), A700);
+  }
+  
+// }
+

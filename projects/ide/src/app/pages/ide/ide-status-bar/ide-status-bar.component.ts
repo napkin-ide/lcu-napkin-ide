@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeStateStateManagerContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { IDEStateManagementContext } from '@napkin-ide/lcu-napkin-ide-common';
 
 @Component({
   selector: 'nide-ide-status-bar',
@@ -13,7 +13,7 @@ export class IdeStatusBarComponent implements OnInit {
   public Status: string;
 
   constructor(
-    protected ideState: IdeStateStateManagerContext
+    protected ideState: IDEStateManagementContext
   ) {
     this.Status = '';
   }

@@ -8,10 +8,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CompleteComponent } from './complete/complete.component';
 import { OrgDetailsComponent } from './org-details/org-details.component';
 import { OrgInfraComponent } from './org-infra/org-infra.component';
-import { OrgHostComponent } from './org-host/org-host.component';
 import { OrgReviewComponent } from './org-review/org-review.component';
 import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
-import { OrgTermsComponent } from './org-terms/org-terms.component';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +18,8 @@ import { OrgTermsComponent } from './org-terms/org-terms.component';
     CompleteComponent,
     OrgDetailsComponent,
     OrgInfraComponent,
-    OrgHostComponent,
     OrgReviewComponent,
-    OrgTermsComponent
+    ConfirmationModalComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +31,8 @@ import { OrgTermsComponent } from './org-terms/org-terms.component';
     LcuNapkinIdeModule,
     PipeModule
  ],
-  exports: [OrgComponent],
-  providers: []
+  exports: [OrgComponent, ConfirmationModalComponent],
+  providers: [],
+  entryComponents: [ConfirmationModalComponent]
 })
 export class PagesModule {}

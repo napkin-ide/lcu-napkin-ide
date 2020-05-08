@@ -1,12 +1,12 @@
 <div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
-  <div fxFlex="30%" fxFlex.lt-md="100%" class="details">
+  <div fxFlex="35%" fxFlex.lt-md="100%" class="details">
     <div class="inner">
       <mat-nav-list>
         <mat-list-item>
-          <div matLine class="slogan" style="height: 6em; margin: 1em 0 1em 0">
+          <div matLine class="slogan" style="height: 6em; margin: 1em 0 1em 0;">
             <!-- <div class="logo"> -->
-              <!-- <div *ngIf="LogoClass" [ngClass]="LogoClass"></div> not really using this-->
-              <!-- <div class="primary-logo"></div> -->
+            <!-- <div *ngIf="LogoClass" [ngClass]="LogoClass"></div> not really using this-->
+            <!-- <div class="primary-logo"></div> -->
             <!-- </div> -->
             <!-- <h1 class="center title">
               <img src="../../../assets/img/fathym_logo_screen.png" />
@@ -17,225 +17,231 @@
 
         <mat-divider></mat-divider>
 
-        <ng-container *ngIf="State.Step">
+        <ng-container *ngIf="State.SetupStep">
           <ng-container>
-            <mat-list-item *ngIf="State.Step === SetupStepTypes.OrgDetails" class="active-mat-list-item">
-              <mat-icon matListIcon>chevron_right</mat-icon>
+            <mat-list-item *ngIf="State.SetupStep == SetupStepTypes.OrgDetails" class="active-mat-list-item">
+              <div fxLayout="row" fxLayoutAlign="space-between start">
+                <mat-icon *ngIf="!State.OrganizationLookup  && !State.OrganizationName" matListIcon
+                  [ngClass]="'step-checkbox list-icon'">
+                  radio_button_unchecked
+                </mat-icon>
 
-              <div matLine>
-                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Organization Details</h2>
+                <mat-icon
+                  *ngIf="(State.SetupStep === 'OrgDetails') && (State.OrganizationLookup && State.OrganizationName)"
+                  matListIcon [ngClass]="'step-checkbox success completed-check'">
+                  check_circle
+                </mat-icon>
 
-                <p class="mat-subheading-2">
-                  Fathym’s low-code framework is designed for organizations of any size. It's built to give developers the freedom and best practice workflows to rapidly create IoT and data-driven applications that are agnostic to tools, platforms and clouds.</p>
-
-                <!-- <p class="mat-subheading-1">
-                  <strong class="plain-text-bold">Organization Lookup</strong> - This is used to describe many aspects of your default setup (updateable later), and
-                  gives the assets we create for you unique names for the various systems. The following rules apply...
-                </p> -->
-              </div>
-            </mat-list-item>
-
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.OrgDetails && DetailsFormValid">
-              <mat-icon matListIcon class="success">check_circle</mat-icon>
-
-              <a matLine (click)="SetStep(SetupStepTypes.OrgDetails)">Organization Details Configured</a>
-            </mat-list-item>
-          </ng-container>
-
-          <mat-divider></mat-divider>
-
-          <ng-container>
-            <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.AzureSetup && !InfraFormValid">
-              <mat-icon matListIcon class="error">highlight_off</mat-icon>
-
-              <h1 matLine>Set Up Organization Infrastructure</h1>
-            </mat-list-item>
-
-            <mat-list-item *ngIf="State.Step === SetupStepTypes.AzureSetup" class="active-mat-list-item">
-              <mat-icon matListIcon>chevron_right</mat-icon>
-
-              <div matLine>
-
-                <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Set Up Organization Infrastructure</h2>
-
-                <h2 class="mat-subheading-2">
-                  You will need to have a Microsoft Azure account to get started. Create a new account or use an existing account.
-                </h2>
-
-                <div class="btn-split">
-                  <a mat-raised-button href="https://azure.microsoft.com/free/" color="primary" class="mat-full-width" target="_blank">
-                    <img matListIcon src="assets/img/Azure-logo.png" />
-
-                    Create &nbsp; a &nbsp; Free &nbsp; Azure &nbsp; Account
+                <div matLine class='reg-headers'>
+                  <h2>
+                    Workspace Set Up
+                  </h2>
+                  <hr class="hr-line">
+                  <p class="mat-subheading-2">
+                    Fathym’s low-code framework is designed for projects of any
+                    size. It's built to give developers the freedom and best
+                    practice workflows to rapidly create IoT and data-driven
+                    applications that are agnostic to tools, platforms and clouds.
+                  </p>
+                  <a mat-raised-button class="documentation-button" color="primary" target="blank"
+                    href="https://support.fathym.com/docs/registration" fxLayoutAlign="center">
+                    <mat-icon>description</mat-icon>
+                    View Registration Documentation
                   </a>
                 </div>
-
-                <h2 class="mat-subheading-2" style="margin-top:15px;">
-                  Fathym needs access to your Azure subscription to help you manage your infrastructure.
-                </h2>
+              </div>
+            </mat-list-item>
 
 
-                <div class="btn-split">
-                  <a
-                    mat-raised-button
-                    href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in."
-                    color="primary"
-                    class="mat-full-width"
-                    target="_blank"
-                  >
-                    <mat-icon>settings</mat-icon>
+            <mat-list-item *ngIf="
+                State.SetupStep != SetupStepTypes.OrgDetails && DetailsFormValid
+              ">
+              <mat-icon matListIcon class="success completed-check">check_circle</mat-icon>
 
-                    Locate Your Configuration Information
-                  </a>
+              <a matLine (click)="SetStep(SetupStepTypes.OrgDetails)" *ngIf="!State.NewEnterpriseAPIKey"
+                class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">
+                Workspace Set Up
+              </a>
+
+              <h2 matLine *ngIf="State.NewEnterpriseAPIKey"
+                class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">
+                Workspace Set Up
+              </h2>
+
+            </mat-list-item>
+          </ng-container>
+
+          <mat-divider></mat-divider>
+
+          <ng-container>
+            <mat-list-item class="list-item-disabled" *ngIf="
+                State.SetupStep !== SetupStepTypes.AzureSetup && !InfraFormValid
+              ">
+              <mat-icon matListIcon class="list-icon">radio_button_unchecked</mat-icon>
+
+              <h1 matLine>Workspace Infrastructure Set Up</h1>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="State.SetupStep === SetupStepTypes.AzureSetup" class="active-mat-list-item">
+              <div fxLayout="row" fxLayoutAlign="space-between start">
+                <div class="icon-container">
+                  <mat-icon *ngIf="State.SetupStep === SetupStepTypes.AzureSetup && !InfraFormValid" matListIcon
+                    [ngClass]="'step-checkbox list-icon'">
+                    radio_button_unchecked
+                  </mat-icon>
+
+                  <mat-icon *ngIf="State.SetupStep === SetupStepTypes.AzureSetup && InfraFormValid" matListIcon
+                    [ngClass]="'step-checkbox success completed-check'">
+                    check_circle
+                  </mat-icon>
                 </div>
 
-                <div class="spread">
-                  <h3 class="mat-subheading-1">Additional infrastructure options coming soon!</h3>
+                <div matLine class="reg-headers">
+                  <h2>
+                    Workspace Infrastructure Set Up
+                  </h2>
+                  <hr class="hr-line">
+                  <h2 class="mat-subheading-2">
+                    You will need a Microsoft Azure account to get
+                    started. Create a new account or use an existing account.
+                  </h2>
+
+                  <div class="btn-split">
+                    <a mat-raised-button href="https://azure.microsoft.com/free/" color="primary" class="mat-full-width"
+                      target="_blank">
+                      <img matListIcon src="assets/img/Azure-logo.png" />
+
+                      Create/Connect a Microsoft Azure Account
+                    </a>
+                  </div>
+
+                  <h2 class="mat-subheading-2" style="margin-top: 15px;">
+                    Fathym needs access to your Azure subscription in order to
+                    manage your infrastructure. Access your configuration information through
+                    the link below.
+                  </h2>
+
+                  <div class="btn-split">
+                    <a mat-raised-button href="https://support.fathym.com/docs/registration" color="primary"
+                      class="mat-full-width" target="_blank">
+                      <mat-icon>search</mat-icon>
+
+                      Find Your Azure Configuration Information
+                    </a>
+                  </div>
+
+                  <div class="spread">
+                    <!-- <h3 class="mat-subheading-1">
+                    Additional infrastructure options coming soon!
+                  </h3> -->
+                  </div>
                 </div>
               </div>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step !== SetupStepTypes.AzureSetup && InfraFormValid">
-              <mat-icon matListIcon class="success">check_circle</mat-icon>
+            <mat-list-item *ngIf="
+                State.SetupStep !== SetupStepTypes.AzureSetup && InfraFormValid
+              ">
+              <mat-icon matListIcon class="success completed-check">check_circle</mat-icon>
 
-              <a matLine (click)="SetStep(SetupStepTypes.AzureSetup)">Organization Infrastructure Set Up</a>
+              <a matLine (click)="SetStep(SetupStepTypes.AzureSetup)"
+                class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Workspace Infrastructure Set Up</a>
             </mat-list-item>
           </ng-container>
 
           <mat-divider></mat-divider>
 
           <ng-container>
-            <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.HostConfig && !HostFormValid">
-              <mat-icon matListIcon class="error">highlight_off</mat-icon>
+            <!-- <mat-list-item *ngIf="State.SetupStep != SetupStepTypes.Review && (!HostForm.valid || !State.Host || !State.TermsAccepted)"> -->
+            <mat-list-item class="list-item-disabled" *ngIf="
+                State.SetupStep !== SetupStepTypes.Review &&
+                (!State.Host || !State.TermsAccepted)
+              ">
+              <!-- <mat-icon matListIcon class="error">highlight_off</mat-icon> -->
+              <mat-icon matListIcon class="list-icon">radio_button_unchecked</mat-icon>
 
-              <h1 matLine>Configure Organization Host</h1>
+              <h1 matLine>Finalize and Deploy</h1>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step === SetupStepTypes.HostConfig" class="active-mat-list-item">
-              <mat-icon matListIcon>chevron_right</mat-icon>
+            <mat-list-item *ngIf="
+                State.SetupStep !== SetupStepTypes.Review &&
+                State.Host &&
+                State.TermsAccepted &&
+                State.SetupStep !== SetupStepTypes.Complete &&
+                !State.Booted
+              
+              ">
+              <mat-icon matListIcon class="list-icon">radio_button_unchecked</mat-icon>
 
-              <div matLine>
-                  <h2 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Configure Organization Host</h2>
+              <!-- <mat-icon matListIcon>chevron_right</mat-icon> -->
 
-                <ng-container *ngIf="State.HostFlow === null">
-                  <h2 class="mat-subheading-2">
-                    If you have your own organization domain, follow that flow to validate domain ownership.
-                  </h2>
-
-                  <h2 class="mat-subheading-2">
-                    If you would like to use a shared domain, please follow that flow to secure your unused domain.
-                  </h2>
-                </ng-container>
-
-                <ng-container *ngIf="State.HostFlow === 'shared'">
-                  <h2 class="mat-subheading-2">
-                      Get started with Fathym’s community edition on a free domain.
-                  </h2>
-
-                  <!-- <h2 class="mat-subheading-2" *ngIf="HostForm.controls['root'].value"> -->
-                  <h2 class="mat-subheading-2" *ngIf="OrgHostComponent?.first?.RootDomainControl.value || ''">
-                      Fathym creates SSL-secured data applications for your subdomain.
-                  </h2>
-                </ng-container>
-
-                <ng-container *ngIf="State.HostFlow === 'private'">
-                  <h2 class="mat-subheading-2">
-                    Enter the full domain that you would like to use for your site. Something like:
-                  </h2>
-
-                  <h2 class="mat-subheading-2">
-                    www.my-domain.com
-                  </h2>
-
-                  <h2 *ngIf="OrgHostComponent?.first?.ValidHost" class="mat-subheading-2">
-                    Then you will need to add a CNAME record for your domain provider. The record should have '{{ OrgHostComponent.first.Subdomain }}' point to
-                    'lcu-prd.fathym.com'
-                  </h2>
-                </ng-container>
-              </div>
+              <a matLine (click)="SetStep(SetupStepTypes.Review)"
+                class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Finalize and Deploy</a>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step !== SetupStepTypes.HostConfig && HostFormValid">
-              <mat-icon matListIcon class="success">check_circle</mat-icon>
+            <mat-list-item *ngIf="
+            State.SetupStep !== SetupStepTypes.Review &&
+            State.Host &&
+            State.TermsAccepted &&
+            State.SetupStep !== SetupStepTypes.Complete &&
+            State.Booted
+          ">
+          <mat-icon matListIcon class="completed-check">check_circle
+          </mat-icon>
 
-              <a matLine (click)="SetStep(SetupStepTypes.HostConfig)">Organization Host Configured</a>
-            </mat-list-item>
-          </ng-container>
+          <!-- <mat-icon matListIcon>chevron_right</mat-icon> -->
 
-          <mat-divider></mat-divider>
-
-          <ng-container>
-            <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.Terms && !State.TermsAccepted">
-              <mat-icon matListIcon class="error">highlight_off</mat-icon>
-
-              <h1 matLine>Accept Fathym's Terms</h1>
-            </mat-list-item>
-
-            <mat-list-item *ngIf="State.Step === SetupStepTypes.Terms" class="active-mat-list-item">
-              <mat-icon matListIcon>chevron_right</mat-icon>
-
-              <div matLine>
-                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Accept Fathym's Terms</h1>
-
-                <h2 class="mat-subheading-2">
-                  Accepting Fathym’s Terms & Privacy agreements allows you access to our open core systems.
-                </h2>
-
-                <h2 class="mat-subheading-2">
-                  For more information on privacy, terms, and conditions visit www.fathym-it.com/terms
-                </h2>
-              </div>
-            </mat-list-item>
-
-            <mat-list-item *ngIf="State.Step != SetupStepTypes.Terms && State.TermsAccepted">
-              <mat-icon matListIcon class="success">check_circle</mat-icon>
-
-              <a matLine (click)="SetStep(SetupStepTypes.Terms)">Fathym Terms Accepted</a>
-            </mat-list-item>
-          </ng-container>
-
-          <mat-divider></mat-divider>
-
-          <ng-container>
-            <!-- <mat-list-item *ngIf="State.Step != SetupStepTypes.Review && (!HostForm.valid || !State.Host || !State.TermsAccepted)"> -->
-                <mat-list-item class="list-item-disabled" *ngIf="State.Step !== SetupStepTypes.Review && !HostFormValid || !State.Host || !State.TermsAccepted">
-              <mat-icon matListIcon class="error">highlight_off</mat-icon>
-
-              <h1 matLine>Permissions & Launch</h1>
-            </mat-list-item>
+          <a matLine (click)="SetStep(SetupStepTypes.Review)"
+            class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Finalize and Deploy</a>
+        </mat-list-item>
 
             <mat-list-item
-              *ngIf="State.Step !== SetupStepTypes.Review && State.Host && State.TermsAccepted && State.Step != SetupStepTypes.Complete"
-            >
-              <mat-icon matListIcon>chevron_right</mat-icon>
+              *ngIf="State.SetupStep === SetupStepTypes.Review || State.SetupStep === SetupStepTypes.Complete"
+              class="active-mat-list-item">
+              <!-- <mat-icon matListIcon>chevron_right</mat-icon> -->
+              <div fxLayout="row" fxLayoutAlign="space-between start">
+                <mat-icon *ngIf="State.SetupStep === SetupStepTypes.Review  && !State.Booted" matListIcon
+                  [ngClass]="'step-checkbox list-icon'">
+                  radio_button_unchecked
+                </mat-icon>
 
-              <a matLine (click)="SetStep(SetupStepTypes.Review)">Permissions & Launch</a>
-            </mat-list-item>
+                <mat-icon *ngIf="State.SetupStep === SetupStepTypes.Complete || State.Booted" matListIcon
+                  [ngClass]="'step-checkbox success completed-check'">
+                  check_circle
+                </mat-icon>
 
-            <mat-list-item *ngIf="State.Step === SetupStepTypes.Review" class="active-mat-list-item">
-              <mat-icon matListIcon>chevron_right</mat-icon>
+                <div matLine class='reg-headers'>
+                  <h2>
+                    Finalize and Deploy
+                  </h2>
+                  <hr class="hr-line">
+                  <h2 class="mat-subheading-2">
+                    Fathym will set up a best practice IoT infrastructure for your
+                    workspace. Once set up, you can adjust the architecture as
+                    needed.
+                  </h2>
 
-              <div matLine>
-                <h1 class="h2 paragraph-title-bold margin-bottom-3 margin-top-3">Permissions & Launch</h1>
 
-                <h2 class="mat-subheading-2">
-                    Fathym will set up a best practice IoT infrastructure for your project. Once set up, you can adjust the architecture as needed for your organization.
+                  <!-- <h2 class="mat-subheading-2" *ngIf="State.EnterpriseBooted">
+                  The initial configuration of your project has been set up. The
+                  final step will deploy and configure the Fathym Framework on
+                  the domain you've chosen.
+                </h2> -->
+
+
+                  <!-- <h2 class="mat-subheading-2">
+                  For more information, checkout the following documentation
+                  link...
                 </h2>
-
-                <h2 class="mat-subheading-2" *ngIf="State.EnterpriseBooted">
-                  The initial configuration of your organization has been set up. The final step will deploy and configure the Fathym
-                  Framework on the domain you've chosen.
-                </h2>
-
-                <h2 class="mat-subheading-2">
-                  For more information, checkout the following documentation link...
-                </h2>
-                <a [href]="HelpPdf" target="_blank">Fathym Registration Help PDF</a>
+                <a [href]="HelpPdf" target="_blank"
+                  >Fathym Registration Help PDF</a
+                > -->
+                </div>
               </div>
             </mat-list-item>
 
-            <mat-list-item *ngIf="State.Step === SetupStepTypes.Complete">
-              <mat-icon matListIcon class="success">check_circle</mat-icon>
+            <mat-list-item *ngIf="State.SetupStep === SetupStepTypes.Complete">
+              <mat-icon matListIcon class="success completed-check">check_circle</mat-icon>
 
               <h1 matLine>Fathym Framework Setup Complete</h1>
             </mat-list-item>
@@ -245,68 +251,46 @@
     </div>
   </div>
 
-
-
-
-  <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
+  <div fxFlex="65%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
     <div class="inner">
-      <div>
-        <div >
+      <div style="width: 100%;">
+        <div class="spread">
           <mat-card>
-            <!-- when the state is loading *ngIf="State.Loading" -->
-            <div *ngIf="State.Loading">
-              <p  style="text-align: center;">Behind the scenes Thinky is working hard to set up your Low Code Unit</p>
+            <div *ngIf="State.Loading && State.SetupStep !== SetupStepTypes.Review">
+              <p style="text-align: center;">
+                <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
+              </p>
 
               <!-- <p style="text-align: center;"></p> -->
 
               <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
-                <mat-spinner diameter="75"></mat-spinner >
+                <mat-spinner diameter="75"></mat-spinner>
                 <div class="spinner-logo" logo-alt="Fathym Logo"></div>
               </div>
-
-
             </div>
-          <!-- Organization details form -->
-          <lcu-org-details *ngIf="!State.Loading"
-          #OrgDetailsComponent
-          [setup-step-types]="SetupStepTypes"
-          [state]="State"></lcu-org-details>
 
-          <!-- Organization infrastructure form -->
-          <lcu-org-infra *ngIf="!State.Loading"
-          #OrgInfraComponent
-          [setup-step-types]="SetupStepTypes"
-          [state]="State"
-          (set-step)="SetStep($event)"></lcu-org-infra>
+            <ng-container *ngIf="
+                !State.Loading || State.SetupStep === SetupStepTypes.Review
+              ">
+              <lcu-org-details #OrgDetailsComponent [state]="State"></lcu-org-details>
 
-          <!-- Organization host form -->
-          <lcu-org-host *ngIf="!State.Loading"
-          #OrgHostComponent
-          [setup-step-types]="SetupStepTypes"
-          [state]="State"
-          (set-step)="SetStep($event)"></lcu-org-host>
+              <lcu-org-infra #OrgInfraComponent [state]="State" (set-step)="SetStep($event)"></lcu-org-infra>
 
-          <!--Terms and conditions form-->
-          <lcu-org-terms *ngIf="!State.Loading"
-          [setup-step-types]="SetupStepTypes"
-          [state]="State"></lcu-org-terms>
+              <lcu-org-review [state]="State" (set-step)="SetStep($event)"></lcu-org-review>
 
-          <lcu-org-review *ngIf="!State.Loading"
-            [setup-step-types]="SetupStepTypes"
-            [state]="State"></lcu-org-review>
+              <lcu-complete [setup-step-types]="SetupStepTypes" [state]="State"></lcu-complete>
+            </ng-container>
+          </mat-card>
 
-          <lcu-complete *ngIf="!State.Loading"
-            [setup-step-types]="SetupStepTypes"
-            [state]="State"></lcu-complete>
-
-        </mat-card>
+          <!-- <mat-card>
+            <pre>{{ State | json }}</pre>
+          </mat-card> -->
         </div>
         <!-- original spinner  refer to line 265 and 270 for alt spinners-->
         <!-- <div *ngIf="State.Loading">
           <div class="spinner" logo-alt="Fathym Logo"></div>
           <mat-spinner></mat-spinner>
         </div> -->
-
       </div>
     </div>
   </div>

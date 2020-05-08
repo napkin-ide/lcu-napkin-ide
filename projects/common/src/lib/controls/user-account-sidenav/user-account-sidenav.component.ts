@@ -14,6 +14,9 @@ export class UserAccountSidenavComponent implements OnInit {
   @Input('user-info')
   public UserInfo: UserInfoModel;
 
+  @Input('user-email')
+  public UserEmail: string;
+
   @Output('logout-clicked')
   public LogoutClicked: EventEmitter<any>;
 
@@ -22,11 +25,15 @@ export class UserAccountSidenavComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (!this.UserInfo) {
-      this.UserInfo = new UserInfoModel;
-    }
-    if (!this.UserInfo.Email) {
-      this.UserInfo.Email = "Guest";
+    // if (!this.UserInfo) {
+    //   this.UserInfo = new UserInfoModel;
+    // }
+    // console.log("User Email = ", this.UserInfo.Email)
+    // if (!this.UserInfo.Email) {
+    //   this.UserInfo.Email = "Guest";
+    // }
+    if (!this.UserEmail) {
+      this.UserEmail = "Guest";
     }
   }
 
