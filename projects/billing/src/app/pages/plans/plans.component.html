@@ -4,7 +4,7 @@
   <div  fxLayout.lg="row wrap" fxLayout.sm="column" fxLayout.xs="column"
         fxLayoutAlign="center center"
         fxLayoutGap="30px">
-        
+
     <div *ngFor="let plan of DisplayedPlans">
 
       <lcu-plan-card
@@ -26,7 +26,7 @@
  <!-- LOADING SCREEN -->
  <div [fxShow]="State.Loading">
   <p style="text-align: center; margin-top: 0px;">
-    <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
+    <span lcuTrademark>Behind the scenes, Thinky&trade; is working hard to set up your </span>
   </p>
 
   <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
