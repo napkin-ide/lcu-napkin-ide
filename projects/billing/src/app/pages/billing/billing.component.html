@@ -1,6 +1,6 @@
 <div [fxShow]="!State.Loading">
 
-  <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon>
+  <!-- <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon> -->
 
   <div class="billing-page-container" fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column"
     fxLayoutAlign="center end" fxLayoutGap.lg="10px" fxLayoutGap.sm="30px">
@@ -21,7 +21,7 @@
     <mat-card [ngClass]="{'pro-billing': SelectedPlan?.PlanGroup === PlanGroups[0],
     'starter-billing': SelectedPlan?.PlanGroup === PlanGroups[1],
     'inter-billing': SelectedPlan?.PlanGroup === PlanGroups[2]
-   }" fxFlex="45%" fxFlex.xs="15%">
+   }" fxFlex="45%" fxFlex.xs="15%" style="height: 100%">
 
       <mat-card-header class="billing-header-container" fxLayout="column" fxLayoutAlign="space-around center">
         <div class="fathym-logo"></div>
@@ -47,7 +47,7 @@
                   <!-- <mat-icon>account_circle</mat-icon> -->
                     <mat-form-field class="cardholder-name-input">
                       <mat-label>&nbsp; Cardholder Name</mat-label>
-                      <mat-icon matPrefix style="color: #d4d7de;">account_circle</mat-icon>
+                      <mat-icon matPrefix style="color: #d4d7de;" fxLayoutAlign="center end">account_circle</mat-icon>
                   <input matInput name="cardholder-name"  id="cardholder-name-input"
                     formControlName="userName" placeholder="Cardholder Name" fxFlex="100%" />
                   </mat-form-field>
@@ -125,12 +125,12 @@
               </div>
 
               <!-- TOS & EA CHECKBOXES -->
-              <div *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="row"
-                fxLayoutAlign="space-between center">
-                <mat-checkbox *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
+              <div  *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="row"
+                fxLayoutAlign="space-around center">
+                <mat-checkbox  *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
                   <a target='blank' href="https://fathym.com/terms-of-services/">Terms of Service</a>
                 </mat-checkbox>
-                <mat-checkbox *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
+                <mat-checkbox  *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
                   <a target="blank" href="https://fathym.com/enterprise-agreement/">Enterprise Agreement</a>
                 </mat-checkbox>
 

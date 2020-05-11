@@ -200,9 +200,9 @@ export class BillingComponent
 /**
  * Back button clicked
  */
-  public GoBack() {
-    this.router.navigate(['']);
-  }
+  // public GoBack() {
+  //   this.router.navigate(['']);
+  // }
 /**
    * determines if user has accepted the Terms of service from the check boxes
    */

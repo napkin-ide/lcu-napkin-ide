@@ -12,6 +12,7 @@ import { UserAccountSidenavComponent } from './controls/user-account-sidenav/use
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { IntervalToggleComponent } from './controls/interval-toggle/interval-toggle.component';
 import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
+import { ToolbarComponent } from './controls/toolbar/toolbar.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     PlanCardComponent,
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
+    ToolbarComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     PlanCardComponent,
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
+    ToolbarComponent,
     
   ],
   entryComponents: [
@@ -53,6 +56,7 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     PlanCardComponent,
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
+    ToolbarComponent,
     
   ]
 })

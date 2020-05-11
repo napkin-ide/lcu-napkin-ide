@@ -4,15 +4,15 @@
 $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
 
 
-.billing-top-bar{
-    // width: 100%;
-    height: 50px;
-    background-color: $Fathym-Green;
-}
-.user-account-sidenav{
-    position: absolute;
-    left: 89%;
-}
+// .billing-top-bar{
+//     // width: 100%;
+//     height: 50px;
+//     background-color: $Fathym-Green;
+// }
+// .user-account-sidenav{
+//     position: absolute;
+//     left: 89%;
+// }
 
 
 .billing-app-container{
@@ -22,5 +22,6 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    height: 100%;
+    height: calc(100% - 50px);
+    padding-top: 50px;
 }
