@@ -172,6 +172,14 @@
         height: calc(100% - 60px);
       }
     }
+
+    .ide-thinky-bg {
+      background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.3));
+      background-position: center;
+      background-repeat:no-repeat;
+      background-size: 70%;
+      box-sizing: border-box;
+    }
   }
 
   ::-webkit-scrollbar {

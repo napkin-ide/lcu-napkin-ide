@@ -445,7 +445,8 @@
               }
             ],
             "styles": [
-              "projects/ide/src/styles.scss"
+              "projects/ide/src/styles.scss",
+              "node_modules/@lowcodeunit/lcu-guided-tour-common/assets/styles/lcu-guided-tour.scss"
             ],
             "scripts": []
           },
