@@ -1,0 +1,33 @@
+import { StateContext, Application } from '@lcu/common';
+import { Injectable, Injector } from '@angular/core';
+import { LimitedJourneysManagementState } from './journeys.state';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LimitedJourneysManagementStateContext extends StateContext<
+  LimitedJourneysManagementState
+> {
+  //  Properties
+
+  //  Constructors
+  constructor(protected injector: Injector) {
+    super(injector);
+  }
+
+  //  API Methods
+
+  //  Helpers
+  protected defaultValue() {
+    return { Loading: true } as LimitedJourneysManagementState;
+  }
+
+  protected loadStateKey(): string {
+    return 'journeys';
+  }
+
+  protected loadStateName(): string {
+    return 'limitedtrial';
+    // return 'guidedtour'; // change when new version is deployed
+  }
+}

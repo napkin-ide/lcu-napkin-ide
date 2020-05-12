@@ -11,7 +11,8 @@ import { LcuTrademarkDirective } from './controls/trademark/trademark.directive'
 import { UserAccountSidenavComponent } from './controls/user-account-sidenav/user-account-sidenav.component';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { IntervalToggleComponent } from './controls/interval-toggle/interval-toggle.component';
-import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
+import { LcuNapkinIdeWelcomeJourneysElementComponent, SafePipe } from './elements/welcome-journeys/welcome-journeys.component';
+import { JourneyCardComponent } from './elements/welcome-journeys/journey-card/journey-card.component';
 
 
 @NgModule({
@@ -24,6 +25,8 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     PlanCardComponent,
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
+    JourneyCardComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,

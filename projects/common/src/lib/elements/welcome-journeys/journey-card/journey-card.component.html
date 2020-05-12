@@ -1,0 +1,28 @@
+<mat-card style="height: 90%;">
+    <div class="coming-soon-overlay" *ngIf="JourneyData.ComingSoon">
+        <h1>Coming Soon!</h1>
+    </div>
+    <mat-card-header>
+        <mat-card-title>{{ JourneyData.Name }}</mat-card-title>
+        <mat-card-subtitle>{{ JourneyData.Uses.join(', ') }}</mat-card-subtitle>
+    </mat-card-header>
+    <div fxLayout="row">
+        <div fxFlex="50" class="mat-body">{{ JourneyData.Description }}</div>
+        
+        <div>
+            <iframe 
+                *ngIf="JourneyData.ContentType === JourneyContentTypes.Video" 
+                [src]="JourneyData.ContentURL | safe" 
+                width="100%"
+                height="100px" 
+                webkitallowfullscreen 
+                mozallowfullscreen 
+                allowfullscreen></iframe>
+
+            <img 
+                *ngIf="JourneyData.ContentType === JourneyContentTypes.Image"
+                [src]="JourneyData.ContentURL"
+                class="journey-image" />
+        </div>
+    </div>
+</mat-card>
