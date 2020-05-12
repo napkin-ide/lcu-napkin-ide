@@ -27,7 +27,6 @@ export class LimitedJourneysManagementStateContext extends StateContext<
   }
 
   protected loadStateName(): string {
-    return 'limitedtrial';
-    // return 'guidedtour'; // change when new version is deployed
+    return 'guidedtour';
   }
 }
