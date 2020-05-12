@@ -9,7 +9,7 @@
 			"wc/lcu-napkin-ide.lcu.js"
 		],
 		"solutions": {
-			"data-flow-manager": {
+			"shell-host": {
 				"element": "lcu-napkin-ide-shell-host-element"
 			},
 			"welcome-journeys": {
