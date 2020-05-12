@@ -200,7 +200,7 @@
           class="mat-full-width"
           (click)="ValidateInfra()"
         >
-          Validate Infrastructure
+          Validate Infrastructure Settings
         </button>
 
         <button
@@ -210,6 +210,10 @@
         >
           Back
         </button>
+      </div>
+
+      <div class="margin-top-4" *ngIf="AzureInfrastructureValid">
+        <h2>Infrastructure Settings Valid</h2>
       </div>
     </div>
 

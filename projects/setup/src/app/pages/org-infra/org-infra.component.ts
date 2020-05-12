@@ -300,10 +300,12 @@ export class OrgInfraComponent implements OnInit {
 
     envSettings.AzureRegion = this.OrgInfraAzureRegion.value;
 
-    if (envSettings.AzureRegion) {
+    if (envSettings.AzureRegion && this.State.AzureLocationOptions) {
       envSettings.AzureLocation = this.State.AzureLocationOptions[
         envSettings.AzureRegion
       ];
+    } else {
+      envSettings.AzureLocation = null;
     }
 
     return envSettings;
