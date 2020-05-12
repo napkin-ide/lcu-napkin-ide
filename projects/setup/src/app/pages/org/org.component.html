@@ -222,7 +222,7 @@
               class="list-item-disabled"
               *ngIf="
                 State.SetupStep !== SetupStepTypes.Review &&
-                (!State.Host || !State.TermsAccepted)
+                (!State.EnvSettings?.AzureLocation)
               "
             >
               <!-- <mat-icon matListIcon class="error">highlight_off</mat-icon> -->
@@ -238,6 +238,7 @@
                 State.SetupStep !== SetupStepTypes.Review &&
                 State.Host &&
                 State.TermsAccepted &&
+                State.EnvSettings?.AzureLocation &&
                 State.SetupStep !== SetupStepTypes.Complete &&
                 !State.Booted
               "
