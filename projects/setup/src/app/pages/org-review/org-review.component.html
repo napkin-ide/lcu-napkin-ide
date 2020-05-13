@@ -88,7 +88,7 @@
 
   <div class="spread" style="text-align: center;">
     <button
-      *ngIf="(!SetUpLoading() || (State.Status && State.Status.Code != 0)) && !State.Booted"
+      *ngIf="(!SetUpLoading() || (State.Status && State.Status.Code != 0 && State.Status.Metadata?.Exception)) && !State.Booted"
       mat-raised-button
       color="accent"
       class="margin-top-3"
