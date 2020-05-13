@@ -1,17 +1,27 @@
-<div [ngClass]="{'pro': Plan?.PlanGroup === PlanGroups[0], 
+<mat-card [ngClass]="{'pro': Plan?.PlanGroup === PlanGroups[0], 
                  'starter': Plan?.PlanGroup === PlanGroups[1],
                  'inter': Plan?.PlanGroup === PlanGroups[2]
                 }" fxLayout="column">
     
   <!-- HEADER -->
-  <div class="header" fxLayout="row" fxLayoutAlign="start end">
-    <h2 *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</h2>
+  <mat-card-header class="header" fxLayout="row" fxLayoutAlign="start end">
+    <mat-card-title *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</mat-card-title>
+    <div class="package-line" fxLayout="row" fxLayoutAlign="start center">
     <div class="package">&nbsp;package</div>
-    <div *ngIf="Plan?.PlanGroup === FeaturedPlanGroup" class="featured-plan">
-      <div class="feat-text">&nbsp;Best Value</div>
+    <div class="hr-container" fxLayoutAlign="start start">
+      <hr class="title-hr">
     </div>
   </div>
+    <div *ngIf="Plan?.PlanGroup === FeaturedPlanGroup" class="featured-plan" fxLayoutAlign="center center">
+      <div class="feat-text">&nbsp;BEST VALUE</div>
+    </div>
+  </mat-card-header>
 
+  <mat-card-content>
+     <!-- DESCRIPTION -->
+  <div *ngIf="Plan?.Description" class="description" fxLayout="row" fxLayoutAlign="center center">
+    {{Plan.Description}}
+  </div>
   <!-- PRICING -->
   <div class="pricing-container" fxLayout="row" fxLayoutAlign="center end">
     <div *ngIf="Plan?.DiscountedFrom && Plan?.DiscountedFrom > 0" class="discounted-from" fxLayoutAlign="center center">
@@ -25,10 +35,7 @@
     </div>
   </div>
 
-  <!-- DESCRIPTION -->
-  <div *ngIf="Plan?.Description" class="description" fxLayout="row" fxLayoutAlign="center center">
-    {{Plan.Description}}
-  </div>
+ 
 
   <!-- FEATURES -->
   <div class="feature-container">
@@ -39,10 +46,16 @@
         <div>14 Day Free Trial</div>
       </div>
 
+      <div class="vl"></div>
+
     <ng-container *ngIf="PlanFeatures">
-      <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let feat of PlanFeatures">
-        <mat-icon>check_circle_outline</mat-icon>
-        <div>{{feat}}</div>
+      <div fxLayout="column"  *ngFor="let feat of PlanFeatures">
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <mat-icon>check_circle_outline</mat-icon>
+          <div>{{feat}}</div>
+        </div>
+        <div class="vl"></div>
+
       </div>
     </ng-container>
 
@@ -52,10 +65,14 @@
         <div *ngIf="Plan?.DataApps">{{Plan.DataApps}} Data Apps</div>
       </div>
 
+      <div class="vl"></div>
+
       <div fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
         <div *ngIf="Plan?.DataFlows">{{Plan.DataFlows}} Data Flows</div>
       </div>
+
+      <div class="vl"></div>
 
       <div fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
@@ -63,8 +80,10 @@
       </div>
     </div>
   </div>
+
+</mat-card-content>
   <!-- BUTTON -->
-  <div  class="button-container" fxLayoutAlign="center center">
+  <mat-card-actions  class="button-container" fxLayoutAlign="center center">
     <button *ngIf="ShowButton === true" mat-raised-button class="button" (click)="BuyNow(Plan)">Start Free Trial</button>
-  </div>
-</div>
+  </mat-card-actions>
+</mat-card>

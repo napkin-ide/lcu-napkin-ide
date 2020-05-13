@@ -1,12 +1,12 @@
 <div [fxShow]="!State.Loading">
 
-  <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon>
+  <!-- <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon> -->
 
   <div class="billing-page-container" fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column"
-    fxLayoutAlign="center center" fxLayoutGap="30px">
+    fxLayoutAlign="center end" fxLayoutGap.lg="10px" fxLayoutGap.sm="30px">
 
     <!-- PRICING CONTAINER -->
-    <div class='plan-card-container' fxFlex="35%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="start center">
+    <div class='plan-card-container' fxFlex="27%" fxFlex.lg="22%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="start center">
 
       <lcu-plan-card *ngIf="State.Plans"
         [plan]="SelectedPlan"
@@ -18,20 +18,20 @@
 
     <!-- BILLING CONTAINER -->
     <!-- <div fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center"></div> -->
-    <div [ngClass]="{'pro-billing': SelectedPlan?.PlanGroup === PlanGroups[0],
+    <mat-card [ngClass]="{'pro-billing': SelectedPlan?.PlanGroup === PlanGroups[0],
     'starter-billing': SelectedPlan?.PlanGroup === PlanGroups[1],
     'inter-billing': SelectedPlan?.PlanGroup === PlanGroups[2]
-   }" fxFlex="45%" fxFlex.xs="15%">
+   }" fxFlex="45%" fxFlex.xs="15%" style="height: 100%">
 
-      <div class="billing-header-container" fxLayout="column" fxLayoutAlign="space-around center">
+      <mat-card-header class="billing-header-container" fxLayout="column" fxLayoutAlign="space-around center">
         <div class="fathym-logo"></div>
         <h1 class="fathym-header">Fathym it. Build it.</h1>
         <h3 class="fathym-header">Payment Information</h3>
-      </div>
+      </mat-card-header>
 
 
         <!-- STRIPE STUFF -->
-      <div class="billing-page-container" fxLayout="column" fxLayoutAlign="space-around center">
+      <mat-card-content class="billing-page-container" fxLayout="column" fxLayoutAlign="space-around center">
 
         <div class="payment-info-container" fxLayout="column" fxLayoutAlign="center center">
 
@@ -45,9 +45,12 @@
                   <!-- <span id="input-span">Name on Card</span> -->
                   <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="80%"> -->
                   <!-- <mat-icon>account_circle</mat-icon> -->
-
-                  <input name="cardholder-name" class="cardholder-name-input" id="cardholder-name-input"
+                    <mat-form-field class="cardholder-name-input">
+                      <mat-label>&nbsp; Cardholder Name</mat-label>
+                      <mat-icon matPrefix style="color: #d4d7de;" fxLayoutAlign="center end">account_circle</mat-icon>
+                  <input matInput name="cardholder-name"  id="cardholder-name-input"
                     formControlName="userName" placeholder="Cardholder Name" fxFlex="100%" />
+                  </mat-form-field>
                   <!-- </div> -->
 
               </div>
@@ -122,12 +125,12 @@
               </div>
 
               <!-- TOS & EA CHECKBOXES -->
-              <div *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="row"
-                fxLayoutAlign="space-between center">
-                <mat-checkbox *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
+              <div  *ngIf="State?.RequiredOptIns?.length > 0" class="required-opt-ins" fxLayout="row"
+                fxLayoutAlign="space-around center">
+                <mat-checkbox  *ngIf="State.RequiredOptIns.includes('ToS')" (change)="TOSChanged($event)">
                   <a target='blank' href="https://fathym.com/terms-of-services/">Terms of Service</a>
                 </mat-checkbox>
-                <mat-checkbox *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
+                <mat-checkbox  *ngIf="State.RequiredOptIns.includes('EA')" (change)="EAChanged($event)">
                   <a target="blank" href="https://fathym.com/enterprise-agreement/">Enterprise Agreement</a>
                 </mat-checkbox>
 
@@ -142,8 +145,8 @@
           </form>
         </div>
 
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
   </div>
   <h1 fxLayoutAlign="center center" class="slogan">If you can Fathym it, you can build it.</h1>
 

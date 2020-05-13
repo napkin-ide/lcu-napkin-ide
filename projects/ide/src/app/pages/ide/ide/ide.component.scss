@@ -6,19 +6,19 @@
   .ide-parent-container {
     height: 100%;
 
-    .ide-top-bar {
-      .mat-toolbar,
-      .mat-toolbar-single-row {
-        height: auto;
-        padding: 0;
-        background-color: mat-color($primary, A700);
-      }
+    // .ide-top-bar {
+    //   .mat-toolbar,
+    //   .mat-toolbar-single-row {
+    //     height: auto;
+    //     padding: 0;
+    //     background-color: mat-color($primary, A700);
+    //   }
 
-      .logo {
-        width: 150px;
-        margin: 0.5rem;
-      }
-    }
+      // .logo {
+      //   width: 150px;
+      //   margin: 0.5rem;
+      // }
+    // }
 
     .ide-center-content {
       height: 100%;

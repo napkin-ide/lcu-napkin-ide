@@ -1,7 +1,8 @@
 @import '../../../../../common/src/styles/theme';
 
-$Text-Color: mat-color(map-get($global-theme, primary), 100);
+// $Text-Color: mat-color(map-get($global-theme, primary), 100);
 // $Main-font: mat-color(map-get($global-theme, primary), 50);
+$Text-Color: black;
 
 .choose-header{
     margin-top:0px;
