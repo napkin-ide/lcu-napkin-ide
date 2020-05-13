@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SideNavComponent } from './controls/side-nav/side-nav.component';
-import { MaterialModule } from '@lcu/common';
+import { MaterialModule, FathymSharedModule } from '@lcu/common';
 import { NavListComponent } from './controls/nav-list/nav-list.component';
 import { RouterModule } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
@@ -30,10 +30,8 @@ import { ToolbarComponent } from './controls/toolbar/toolbar.component';
     ToolbarComponent,
   ],
   imports: [
-    CommonModule,
+    FathymSharedModule,
     MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
     RouterModule,
    // LcuThemePickerModule,
     FlexLayoutModule
