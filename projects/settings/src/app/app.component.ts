@@ -16,7 +16,7 @@ export class AppComponent {
 
   public ngOnInit(): void {
     this.resetTheme();
-    this.SettingsTitle = 'Enterprise IDE Settings';
+    this.SettingsTitle = 'IDE Settings';
 
     this.SettingsLinks = [
       { Label: 'Setup', RouterURL: '/setup', Icon: 'build'},
