@@ -1,0 +1,22 @@
+@import '../../../node_modules/@lcu/common/assets/theming/common-theme';
+@import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
+@import '../src/lib/controls/toolbar/toolbar.component.scss';
+
+$global-theme: fathym-ivy-theme(false);
+
+/**
+* Set the theme and generate dynamic variant theme classes,
+* theme-setup is inside of Ref Arch (common-theme)
+* 
+* If we skip this include, the default theme is 'fathym-ivy-theme
+*/
+@include theme-setup($global-theme, false);
+
+@mixin component-themes($theme) {
+    @include toolbar-component($theme);
+}
+
+/**
+* Apply theme to nested components
+*/
+@include component-themes($global-theme);

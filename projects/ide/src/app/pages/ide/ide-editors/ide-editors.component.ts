@@ -25,8 +25,19 @@ export class IdeEditorsComponent implements OnInit {
       this.CurrentEditor = ideState.CurrentEditor;
 
       if (this.CurrentEditor) {
+       // this.Config = {
+        //   Assets: [this.CurrentEditor.Toolkit],
+        //   ElementName: this.CurrentEditor.Editor
+        // };
+
+        /** FOR TESTING ***************************************
+         * This is for testing limited trial locally - Shannon
+         * Don't check this in, use the above config for that
+         * Also, need to change APIRoot in index.html
+         * ****************************************************
+         */
         this.Config = {
-          Assets: [this.CurrentEditor.Toolkit],
+          Assets: ['https://limited.fathym-int.com/_lcu/lcu-limited-trial/wc/lcu-limited-trial.lcu.js'],
           ElementName: this.CurrentEditor.Editor
         };
       }

@@ -1,101 +1,29 @@
-@import '../src/app/pages/ide/ide/ide.component.scss';
-@import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
-@import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
-@import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
+/**
+* Common theme for sharing $global-theme and dynamically
+* created variant theme color classes
+*/
+@import "../../common/assets/common-theme";
+@import "../src/app/pages/ide/ide/ide.component.scss";
 @import "../../../node_modules/@lowcodeunit/lcu-guided-tour-common/assets/styles/lcu-guided-tour.scss";
 
-@mixin theme-setup($theme) {
-  @include angular-material-theme($theme);
-  @include fathym-branding($theme);
-  @include theme-extras($theme);
-  @include component-themes($theme);
-}
-
-@mixin primary-logo($logo, $color, $opacity) {
-  .primary-logo {
-    background-image: fathym-logo($logo, $color, $opacity);
-    height: 40px;
-    margin: 0.5rem;
-    width: 150px;
-  }
-}
+/**
+* Set $global-theme, which is inside of Ref Arch (common-theme)
+*
+* Setting $global-theme here allows it to be overwritten in
+* common-theme
+*/
+// $global-theme: fathym-contrast-theme(true);
 
 @mixin component-themes($theme) {
   @include thinky-bot($theme);
   @include thinky-bounce($theme);
   @include thinky-chat($theme);
   @include guided-tour($theme);
-  @include ide($theme);
+  @include ide-component($theme);
 
-  html, body {
-    height: 100%;
-  }
-
-  body {
-    margin: 0;
-  }
-
-  .mat-card {
-    background-color: mat-color(map-get($theme, background), card) !important;
-  }
 }
 
-.arctic-theme {
-  $theme: fathym-arctic-theme();
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, rgba(0, 0, 0, 0.87), 1);
-}
-
-.contrast-theme {
-  $theme: fathym-contrast-theme();
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, rgba(0, 0, 0, 0.87), 1);
-}
-
-.cool-candy-theme {
-  $theme: fathym-cool-candy-theme();
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, rgba(0, 0, 0, 0.87), 1);
-}
-
-.flipper-theme {
-  $theme: fathym-flipper-theme();
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, rgba(0, 0, 0, 0.87), 1);
-}
-
-.ice-theme {
-  $theme: fathym-ice-theme();
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, rgba(0, 0, 0, 0.87), 1);
-}
-
-.sea-green-theme {
-  $theme: fathym-sea-green-theme();
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, rgba(0, 0, 0, 0.87), 1);
-}
-
-.white-mint-theme {
-  $theme: fathym-white-mint-theme();
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, rgba(0, 0, 0, 0.87), 1);
-}
-
-.ivy-light-theme {
-  $theme: fathym-ivy-theme();
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, rgba(0, 0, 0, 0.87), 1);
-}
-
-.ivy-dark-theme {
-  $theme: fathym-ivy-theme(true);
-  @include theme-setup($theme);
-  @include primary-logo(thinky-full-logo, rgba(255, 255, 255, 1), 1);
-}
-
-/** IMPORTANT ***************************************************************************************************
- ** This in needed in order to correctly apply Material styles to the inner Web Components (aka Angular Elements).
- ** TODO: Dynamically set the theme based on selected, in case of user configurable themes later down the road.
- ****************************************************************************************************************/
-@include theme-setup(fathym-ivy-theme());
+/**
+* Apply theme to nested components
+*/
+@include component-themes($global-theme);
