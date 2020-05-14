@@ -1,5 +1,5 @@
 @import "../../../../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding";
-@import "../../../../../../node_modules/@lcu/common/assets/styles/branding/colors/fathym-theme-colors";
+@import "../../../../../../node_modules/@lcu/common/assets/styles/branding/theme-colors/fathym-theme-colors";
 @mixin modal($theme) {
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
