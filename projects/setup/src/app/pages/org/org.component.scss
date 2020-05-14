@@ -2,6 +2,7 @@
 
 
 $Theme-primary:  mat-color(map-get($global-theme, primary), A700);
+$Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
 
 .tooltip-background {
   background-color: $Theme-primary !important;
@@ -35,6 +36,10 @@ $Theme-primary:  mat-color(map-get($global-theme, primary), A700);
     width: 75px;
     margin-left: 43%;
   }
+  .org-card{
+    background-image: linear-gradient($Theme-trans, $Theme-trans),url('assets/img/thinky-outside-the-box.jpg') !important;
+  }
+  
 
   // :host {
     .identity {
