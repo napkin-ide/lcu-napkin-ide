@@ -70,6 +70,7 @@ export class IdeComponent implements OnInit {
     });
 
     this.guidedTourState.Context.subscribe((guidedTourState: GuidedTourManagementState) => {
+      // console.log('GUIDED TOUR STATE: ', guidedTourState);
       this.GuidedTourState = guidedTourState;
       this.AppTour = guidedTourState.CurrentTour;
       this.Tours = guidedTourState.Tours;
@@ -131,7 +132,9 @@ export class IdeComponent implements OnInit {
           break;
         case 'lcu-limited-trial-data-flow-element':
           this.setCurrentTour('data-flow-management-tour');
-          this.findDataFlowManageButton();
+          setTimeout(() => {
+            this.findDataFlowManageButton();
+          }, 3000);
           break;
         default:
           this.setCurrentTour('limited-trial-tour');
