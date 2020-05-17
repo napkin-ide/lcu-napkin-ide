@@ -6,34 +6,34 @@ import {
   ChangeDetectorRef,
   ElementRef,
   AfterViewChecked,
-} from "@angular/core";
+} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl,
-} from "@angular/forms";
+} from '@angular/forms';
 import {
   UserBillingStateContext,
   UserBillingState,
   NapkinIDESetupStepTypes,
   BillingPlanOption,
-} from "@napkin-ide/lcu-napkin-ide-common";
-import { LCUServiceSettings } from "@lcu/common";
-import { ActivatedRoute, Router } from "@angular/router";
+} from '@napkin-ide/lcu-napkin-ide-common';
+import { LCUServiceSettings } from '@lcu/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 declare var Stripe: any;
 
 @Component({
-  selector: "lcu-billing",
-  templateUrl: "./billing.component.html",
-  styleUrls: ["./billing.component.scss"],
+  selector: 'lcu-billing',
+  templateUrl: './billing.component.html',
+  styleUrls: ['./billing.component.scss'],
   animations: [],
 })
 export class BillingComponent implements OnInit, AfterViewChecked {
   //  Fields
 
-  @ViewChild("cardElement") cardElement: ElementRef;
+  @ViewChild('cardElement') cardElement: ElementRef;
   /**
    * Stripe card info
    */
@@ -60,7 +60,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected get stripePublicKey(): string {
     const stateCfg: any = (window as any).LCU.State;
 
-    return stateCfg && stateCfg.Stripe ? stateCfg.Stripe.PublicKey : "";
+    return stateCfg && stateCfg.Stripe ? stateCfg.Stripe.PublicKey : '';
   }
 
   //  Properties
@@ -136,7 +136,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   //  Life Cycle
   public ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      this.planGroupID = params.get("id");
+      this.planGroupID = params.get('id');
     });
     this.setupForms();
     this.userBillState.Context.subscribe((state: any) => {
@@ -164,7 +164,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
 
     this.stripe
       .createPaymentMethod({
-        type: "card",
+        type: 'card',
         // cardExpiry: this.stripeCardExpiry,
         // cardNumber: this.stripeCardNumber,
         // cardCvc: this.stripeCardCvc,
@@ -243,7 +243,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
 
       this.StripeValid = false;
     } else if (event.complete) {
-      this.StripeError = "";
+      this.StripeError = '';
 
       this.StripeValid = true;
     }
@@ -255,7 +255,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     if (result.error) {
       this.StripeError = result.error;
     } else {
-      this.StripeError = "";
+      this.StripeError = '';
       // console.log('Billing Form: ', this.BillingForm);
       this.userBillState.CompletePayment(
         result.paymentMethod.id,
@@ -269,8 +269,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    */
   protected setupForms() {
     this.BillingForm = this.formBldr.group({
-      prodPlan: new FormControl("", [Validators.required]),
-      userName: new FormControl("", [Validators.required]),
+      prodPlan: new FormControl('', [Validators.required]),
+      userName: new FormControl('', [Validators.required]),
     });
 
     this.StripeValid = false;
@@ -285,41 +285,41 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       // this.setupStripeElements();
       const elements = this.stripe.elements();
 
-      this.stripeCard = elements.create("card", {
+      this.stripeCard = elements.create('card', {
         style: {
           base: {
-            color: "black",
+            color: 'black',
             fontWeight: 600,
-            fontFamily: "Arial, sans-serif",
-            fontSize: "16px",
-            fontSmoothing: "antialiased",
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '16px',
+            fontSmoothing: 'antialiased',
 
-            ":focus": {
-              color: "black",
+            ':focus': {
+              color: 'black',
             },
 
-            "::placeholder": {
-              color: "grey",
+            '::placeholder': {
+              color: 'grey',
             },
 
-            ":focus::placeholder": {
-              color: "black",
+            ':focus::placeholder': {
+              color: 'black',
             },
           },
           invalid: {
-            color: "#FA755A",
-            ":focus": {
-              color: "#FA755A",
+            color: '#FA755A',
+            ':focus': {
+              color: '#FA755A',
             },
           },
-          "::placeholder": {
-            color: "grey",
+          '::placeholder': {
+            color: 'grey',
           },
         },
       });
-      this.stripeCard.mount(document.getElementById("card-element"));
+      this.stripeCard.mount(document.getElementById('card-element'));
 
-      this.stripeCard.addEventListener("change", (event: any) =>
+      this.stripeCard.addEventListener('change', (event: any) =>
         this.handleCardChanged(event)
       );
 
@@ -434,10 +434,10 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    */
   protected determineCheckboxes() {
     if (this.State.RequiredOptIns) {
-      if (!this.State.RequiredOptIns.includes("ToS")) {
+      if (!this.State.RequiredOptIns.includes('ToS')) {
         this.AcceptedTOS = true;
       }
-      if (!this.State.RequiredOptIns.includes("EA")) {
+      if (!this.State.RequiredOptIns.includes('EA')) {
         this.AcceptedEA = true;
       }
     }
@@ -453,7 +453,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
 
       // if plan doesnt exist
       if (!this.SelectedPlan) {
-        this.router.navigate([""]);
+        this.router.navigate(['']);
       }
     }
   }
@@ -480,8 +480,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       // console.log('Payment Status', this.State.PaymentStatus);
       if (this.State.PaymentStatus.Code === 101) {
         this.stripe
-          .confirmCardPayment("requires_action")
-          .then(function (result: any) {
+          .confirmCardPayment('requires_action')
+          .then(function(result: any) {
             if (result.error) {
               // Display error message in  UI.
               this.StripeError = this.State.PaymentStatus.Message;
@@ -506,6 +506,6 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    */
   protected paymentSuccess(): void {
     // console.log("selected plan on pay:", this.SelectedPlan)
-    this.router.navigate(["complete", this.SelectedPlan.Lookup]);
+    this.router.navigate(['complete', this.SelectedPlan.Lookup]);
   }
 }
