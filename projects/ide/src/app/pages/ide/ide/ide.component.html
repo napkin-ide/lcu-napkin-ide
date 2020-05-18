@@ -46,7 +46,7 @@
   </div>
 </div>
 
-<lcu-guide-bot *ngIf="!Loading"
+<lcu-guide-bot *ngIf="!Loading && IdeState.CurrentActivity.Lookup === 'limited-trial'"
   [bot-padding]="BotPadding"
   [bot-screen-position]="BotScreenPosition"
   [bounding-element-selector]="BotBoundingContainer"
