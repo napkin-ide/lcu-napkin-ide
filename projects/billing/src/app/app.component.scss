@@ -22,6 +22,6 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    height: calc(100% - 50px);
+    min-height: calc(100% - 50px);
     padding-top: 50px;
 }

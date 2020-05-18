@@ -1,4 +1,4 @@
-<mat-toolbar class="ide-tool-bar" fxLayout="row" fxLayoutAlign="space-between">
+<mat-toolbar class="ide-tool-bar" color="primary" fxLayout="row" fxLayoutAlign="space-between">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <button
         class="menu-button"
@@ -22,7 +22,7 @@
         [ngClass]="{ small: isHandset, large: !isHandset }"
       ></div>
     </div>
-  
+
     <!-- use state to insert the actions -->
     <span class="action-icons">
       <ng-container *ngFor="let action of State.HeaderActions">
@@ -34,9 +34,9 @@
         >
           <mat-icon>{{ action.Icon }}</mat-icon>
           <span>{{ action.Text }}</span>
-  
+
         </button>
-  
+
         <a
           *ngIf="
             action.Type == IDEActionTypes.Link ||
@@ -53,8 +53,8 @@
           </div>
           <hr class="toolbar-vertical-line">
         </div>
-  
-  
+
+
         </a>
       </ng-container>
     </span>
@@ -73,4 +73,4 @@
     >
     </lcu-user-account-sidenav> -->
   </mat-toolbar>
-  
+

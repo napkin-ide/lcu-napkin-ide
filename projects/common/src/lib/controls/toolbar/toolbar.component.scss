@@ -1,27 +1,24 @@
-// @import '../../../styles/theme';
-// @import "../../../../assets/common-theme";
+@import "../../../../assets/common-theme";
 
-@mixin toolbar-component($theme) {
-    $Text-Color: mat-color(map-get($theme, primary), 100);
-    $Toolbar-color: mat-color(map-get($theme, primary), A700);
+/** ISSUE ************************************************
+* For some reason, using a mixin breaks the spacing in the
+* links of the top bar
+* TODO: fix this, don't really want to import common-theme
+**********************************************************
+*/
+// @mixin ide-top-bar-component($theme) {
+    $Text-Color: mat-color(map-get($global-theme, primary), 100);
 
     .ide-tool-bar{
         position: relative;
         z-index: 1000;
-        background-color: $Toolbar-color;
-        padding: 0px;
-        height: 50px;
     }
     .toolbar-icon{
         font-size: 40px;
         color: $Text-Color;
         margin:0px 8px;
     }
-    .back-arrow{
-        color: $Text-Color;
-        position: inherit;
-        margin-left:10px;
-    }
+
     .fathym-header-logo{
         background-image: fathym-logo(thinky-full-logo, $Text-Color);
         background-repeat:no-repeat;
@@ -48,7 +45,7 @@
         top: 5;
 
         button, a {
-            margin-top: 15px;
+            margin-top: 7px;
             margin-right: 0.5em;
         }
         mat-icon {
@@ -65,16 +62,13 @@
         width: initial;
 
     }
-    .toolbar-vertical-line{
+    .vertical-line{
         height: 20px;
-        // border: .5px solid $Text-Color;
+        border: .5px solid $Text-Color;
         margin: 0px;
         margin-left: 10px;
-        width: .5px;
-        background-color:  $Text-Color;
-        border: none;
     }
     .user-account{
         margin-right: 20px;
     }
-}
+// }

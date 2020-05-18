@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
 import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, SettingsComponent],
@@ -16,6 +17,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FathymSharedModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
     LcuNapkinIdeModule,
