@@ -37,7 +37,7 @@
 
         </button>
 
-        <a
+        <a fxLayout="row"
           *ngIf="
             action.Type == IDEActionTypes.Link ||
             action.Type == IDEActionTypes.ExternalLink
@@ -47,8 +47,8 @@
           [href]="action.Action"
           [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''"
         >
-        <div fxLayout="row" fxLayoutAlign="center center">
-          <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="row">
+          <div fxLayout="row">
             <mat-icon>{{ action.Icon }}</mat-icon>
           </div>
           <hr class="toolbar-vertical-line">

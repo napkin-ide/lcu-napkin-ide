@@ -1,4 +1,6 @@
-@import "../../../../assets/common-theme";
+// @import "../../../../assets/common-theme";
+
+@mixin toolbar-component($theme) {
 
 /** ISSUE ************************************************
 * For some reason, using a mixin breaks the spacing in the
@@ -7,7 +9,7 @@
 **********************************************************
 */
 // @mixin ide-top-bar-component($theme) {
-    $Text-Color: mat-color(map-get($global-theme, primary), 100);
+    $Text-Color: mat-color(map-get($theme, primary), 100);
 
     .ide-tool-bar{
         position: relative;
@@ -75,4 +77,4 @@
     .user-account{
         margin-right: 20px;
     }
-// }
+}
