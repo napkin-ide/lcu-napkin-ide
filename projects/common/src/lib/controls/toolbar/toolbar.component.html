@@ -1,4 +1,4 @@
-<mat-toolbar class="ide-tool-bar" color="primary" fxLayout="row" fxLayoutAlign="space-between">
+<mat-toolbar class="ide-tool-bar" fxLayout="row" fxLayoutAlign="space-between">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <button
         class="menu-button"
@@ -14,7 +14,7 @@
       </button>
     <ng-container *ngIf="ShowBackButton">
       <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon>
-          <hr class="toolbar-vertical-line">
+          <hr class="toolbar-vertical-line" style="height: 20px;">
         </ng-container>
       <div
         class="fathym-header-logo"
@@ -24,7 +24,7 @@
     </div>
 
     <!-- use state to insert the actions -->
-    <span class="action-icons">
+    <span class="action-icons" fxLayout="row" fxLayoutAlign="center center">
       <ng-container *ngFor="let action of State.HeaderActions">
         <button
           *ngIf="action.Type == IDEActionTypes.Modal"
@@ -47,24 +47,23 @@
           [href]="action.Action"
           [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''"
         >
-        <div fxLayout="row" fxLayoutAlign="center center">
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <mat-icon>{{ action.Icon }}</mat-icon>
+          <div fxLayout="row">
+            <div fxLayout="row">
+              <mat-icon>{{ action.Icon }}</mat-icon>
+            </div>
+            <hr class="toolbar-vertical-line">
           </div>
-          <hr class="toolbar-vertical-line">
-        </div>
-
-
         </a>
       </ng-container>
-    </span>
-
-    <lcu-user-account-sidenav
+      <lcu-user-account-sidenav
       class="user-account"
       [user-email]="State.Username"
       (logout-clicked)="LogoutClicked($event)"
     >
     </lcu-user-account-sidenav>
+    </span>
+
+    
     <!-- <lcu-user-account-sidenav
       class="user-account"
       [user-info]="UsersInfo"
