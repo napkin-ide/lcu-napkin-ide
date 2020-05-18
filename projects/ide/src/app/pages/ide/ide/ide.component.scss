@@ -174,11 +174,19 @@
     }
 
     .ide-thinky-bg {
-      background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.3));
+      background-image: fathym-logo(thinky-circle, rgba(mat-color(map-get($global-theme, primary), A700), 0.3));
       background-position: center;
       background-repeat:no-repeat;
-      background-size: 70%;
+      background-size: contain;
       box-sizing: border-box;
+      border: 1em solid transparent;
+    }
+
+    .ide-empty-tab-group {
+
+      .mat-tab-header {
+        border-bottom: none !important;
+      }
     }
   }
 
