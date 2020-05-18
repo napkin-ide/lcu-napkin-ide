@@ -260,7 +260,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       this.userBillState.CompletePayment(
         result.paymentMethod.id,
         this.BillingForm.value.userName,
-        this.SelectedPlan.Lookup
+        this.SelectedPlan.Lookup,
+        this.SelectedPlan.TrialPeriodDays
       );
     }
   }

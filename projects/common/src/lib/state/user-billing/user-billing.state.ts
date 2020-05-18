@@ -42,4 +42,6 @@ export class BillingPlanOption {
   public Price?: number;
 
   public PlanFeatures?: string;
+
+  public TrialPeriodDays?: number;
 }

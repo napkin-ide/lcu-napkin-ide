@@ -14,12 +14,13 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   //  API Methods
-  public CompletePayment(methodId: string, customerName: string, plan: string) {
+  public CompletePayment(methodId: string, customerName: string, plan: string, trialPeriodDays: number) {
     this.Execute({
       Arguments: {
         CustomerName: customerName,
         MethodID: methodId,
-        Plan: plan
+        Plan: plan,
+        TrialPeriodDays: trialPeriodDays
       },
       Type: 'CompletePayment',
     });
