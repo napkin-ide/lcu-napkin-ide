@@ -1,6 +1,6 @@
 // @import "../../../../assets/common-theme";
 
-@mixin toolbar-component($theme) {
+@mixin toolbar-component($global-theme) {
 
 /** ISSUE ************************************************
 * For some reason, using a mixin breaks the spacing in the
@@ -8,12 +8,13 @@
 * TODO: fix this, don't really want to import common-theme
 **********************************************************
 */
-// @mixin ide-top-bar-component($theme) {
-    $Text-Color: mat-color(map-get($theme, primary), 100);
+// @mixin ide-top-bar-component($global-theme) {
+    $Text-Color: mat-color(map-get($global-theme, primary), 100);
 
     .ide-tool-bar{
         position: relative;
         z-index: 1000;
+        background-color: mat-color(map-get($global-theme, primary), A700);
     }
     .toolbar-icon{
         font-size: 40px;
@@ -72,7 +73,7 @@
         width: .5px;
         background-color:  $Text-Color;
         height: 20px;
-        // border: none;
+        border: none;
     }
 
     .back-arrow{

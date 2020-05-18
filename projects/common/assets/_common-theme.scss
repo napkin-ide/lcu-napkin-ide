@@ -1,6 +1,7 @@
 @import '../../../node_modules/@lcu/common/assets/theming/common-theme';
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
 @import '../src/lib/controls/toolbar/toolbar.component.scss';
+
 $global-theme: fathym-ivy-theme(true);
 
 /**
