@@ -65,15 +65,22 @@
 
     }
     .vertical-line{
-        height: 20px;
-        border: .5px solid $Text-Color;
-        margin-left: 10px;
         
+        // border: .5px solid $Text-Color;
+        margin-left: 10px;
         margin-right: 10px;
         width: .5px;
         background-color:  $Text-Color;
-        border: none;
+        height: 20px;
+        // border: none;
     }
+
+    .back-arrow{
+        color: $Text-Color;
+        position: inherit;
+        margin-left:10px;
+    }
+
     .user-account{
         // margin-right: 20px;
     }
