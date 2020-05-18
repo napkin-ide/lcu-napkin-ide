@@ -41,14 +41,14 @@
     }
 
     .action-icons {
-        margin-right: 60px;
-        position: absolute;
+       // margin-right: 60px;
+        // position: absolute;
         right: 0;
-        top: 5;
+        // top: 5px;
 
         button, a {
             margin-top: 7px;
-            margin-right: 0.5em;
+            margin-right: 5px !important;
         }
         mat-icon {
             font-size: 40px;
@@ -67,14 +67,14 @@
     .vertical-line{
         height: 20px;
         border: .5px solid $Text-Color;
-        // margin: 0px;
         margin-left: 10px;
+        
         margin-right: 10px;
         width: .5px;
         background-color:  $Text-Color;
         border: none;
     }
     .user-account{
-        margin-right: 20px;
+        // margin-right: 20px;
     }
 }

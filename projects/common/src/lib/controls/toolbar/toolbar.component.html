@@ -24,7 +24,7 @@
     </div>
 
     <!-- use state to insert the actions -->
-    <span class="action-icons">
+    <span class="action-icons" fxLayout="row" fxLayoutAlign="center center">
       <ng-container *ngFor="let action of State.HeaderActions">
         <button
           *ngIf="action.Type == IDEActionTypes.Modal"
@@ -37,7 +37,7 @@
 
         </button>
 
-        <a fxLayout="row"
+        <a
           *ngIf="
             action.Type == IDEActionTypes.Link ||
             action.Type == IDEActionTypes.ExternalLink
@@ -47,22 +47,23 @@
           [href]="action.Action"
           [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''"
         >
-        <div fxLayout="row">
           <div fxLayout="row">
-            <mat-icon>{{ action.Icon }}</mat-icon>
+            <div fxLayout="row">
+              <mat-icon>{{ action.Icon }}</mat-icon>
+            </div>
+            <hr class="toolbar-vertical-line">
           </div>
-          <hr class="toolbar-vertical-line">
-        </div>
         </a>
       </ng-container>
-    </span>
-
-    <lcu-user-account-sidenav
+      <lcu-user-account-sidenav
       class="user-account"
       [user-email]="State.Username"
       (logout-clicked)="LogoutClicked($event)"
     >
     </lcu-user-account-sidenav>
+    </span>
+
+    
     <!-- <lcu-user-account-sidenav
       class="user-account"
       [user-info]="UsersInfo"
