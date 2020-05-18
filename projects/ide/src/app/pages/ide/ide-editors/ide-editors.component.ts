@@ -36,9 +36,9 @@ export class IdeEditorsComponent implements OnInit {
          * Also, need to change APIRoot in index.html
          * ****************************************************
          */
-        // this.Config = {
-        //   Assets: ['https://limited.fathym-int.com/_lcu/lcu-limited-trial/wc/lcu-limited-trial.lcu.js'],
-        //   ElementName: this.CurrentEditor.Editor
+        //  this.Config = {
+        //    Assets: ['https://limited.fathym-int.com/_lcu/lcu-limited-trial/wc/lcu-limited-trial.lcu.js'],
+        //    ElementName: this.CurrentEditor.Editor
         // };
       }
     });
