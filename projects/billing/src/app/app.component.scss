@@ -1,5 +1,7 @@
 
-@import '../../../common/src/styles/theme';
+// @import '../../../common/src/styles/theme';
+// @import "../../common/assets/common-theme";
+@import "../../../common/assets/common-theme";
 
 $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
 

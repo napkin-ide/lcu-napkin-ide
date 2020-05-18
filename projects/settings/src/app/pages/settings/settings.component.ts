@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit {
 
   public State: IDESettingsState;
   //  Constructors
-  constructor(protected formBldr: FormBuilder, protected IDESettingsState: IDESettingsStateContext) {}
+  constructor(protected formBldr: FormBuilder, protected iDESettingsState: IDESettingsStateContext) {}
 
   //  Life Cycle
 

@@ -2,6 +2,7 @@
 @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
 @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 @import '../../billing/src/app/pages/billing/billing.component.scss';
+@import "../../common/assets/common-theme";
 
 @mixin theme-setup($theme) {
   @include angular-material-theme($theme);
