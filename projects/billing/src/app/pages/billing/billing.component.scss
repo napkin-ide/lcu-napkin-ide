@@ -83,6 +83,9 @@ $Input-box-color: #f5f5f5;
             //   opacity: 1;
             // }
           }
+          .user-input-icon{
+             color: #d4d7de;
+          }
           .stripe-card{
             @include input-box($Input-box-color);
             // width:500px;

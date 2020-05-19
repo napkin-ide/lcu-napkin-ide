@@ -2,11 +2,11 @@
 
   <!-- <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon> -->
 
-  <div class="billing-page-container" fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column"
-    fxLayoutAlign="center end" fxLayoutGap.lg="10px" fxLayoutGap.sm="30px">
+  <div class="billing-page-container" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column"
+    fxLayoutAlign="center end" fxLayoutGap.lg="10px" fxLayoutGap.md="10px" fxLayoutGap.sm="30px">
 
     <!-- PRICING CONTAINER -->
-    <div class='plan-card-container' fxFlex="27%" fxFlex.lg="22%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="start center">
+    <div class='plan-card-container' fxFlex="27%" fxFlex.lg="23%" fxFlex.lt-sm="20%" fxLayout="row" fxLayoutAlign="start center">
 
       <lcu-plan-card *ngIf="State.Plans"
         [plan]="SelectedPlan"
@@ -47,14 +47,14 @@
                   <!-- <mat-icon>account_circle</mat-icon> -->
                     <mat-form-field class="cardholder-name-input">
                       <mat-label>&nbsp; Cardholder Name</mat-label>
-                      <mat-icon matPrefix style="color: #d4d7de;" fxLayoutAlign="center end">account_circle</mat-icon>
+                      <mat-icon matPrefix class="user-input-icon" fxLayoutAlign="center end">account_circle</mat-icon>
                   <input matInput name="cardholder-name"  id="cardholder-name-input"
                     formControlName="userName" placeholder="Cardholder Name" fxFlex="100%" />
                   </mat-form-field>
                   <!-- </div> -->
 
               </div>
-              <div class="billing-info" fxLayoutAlign="center center">
+              <div class="billing-info" fxLayout="column" fxLayoutAlign="center center">
                 <label for="card-element" fxLayout="column" ></label>
                 <div id="card-element" class="stripe-card" fxFlex="100%" ></div>
 

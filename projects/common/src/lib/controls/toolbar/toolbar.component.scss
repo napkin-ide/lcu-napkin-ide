@@ -33,6 +33,16 @@
         // margin-top: 7px;
     }
 
+    .toolbar-vertical-line{
+        // margin-left: 10px;
+        // margin-right: 10px;
+        width: .5px;
+        background-color:  $Text-Color;
+        height: 20px;
+        border: 0.5px solid;
+        margin-left: 3px;
+    }
+
     .menu-button{
         margin-left: 3px;
         margin-top: 3px;
@@ -55,34 +65,31 @@
             font-size: 40px;
             width: initial;
             color: $Text-Color;
+            margin: 0px;
         }
         span{
             color: $Text-Color;
         }
+        
     }
 
     .mat-icon-button {
         width: initial;
 
     }
-    .vertical-line{
-        
-        // border: .5px solid $Text-Color;
-        margin-left: 10px;
-        margin-right: 10px;
-        width: .5px;
-        background-color:  $Text-Color;
-        height: 20px;
-        border: none;
-    }
+    
 
     .back-arrow{
         color: $Text-Color;
         position: inherit;
         margin-left:10px;
+        margin-right: 10px;;
     }
 
     .user-account{
         // margin-right: 20px;
+        margin-top: 10px;
     }
+    
 }
+
