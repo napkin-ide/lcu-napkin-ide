@@ -2,7 +2,7 @@
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
 @import '../src/lib/controls/toolbar/toolbar.component.scss';
 
-$global-theme: fathym-sea-green-theme(true);
+$global-theme: fathym-ivy-theme(true);
 
 /**
 * Set the theme and generate dynamic variant theme classes,
@@ -14,7 +14,7 @@ $global-theme: fathym-sea-green-theme(true);
 
 @mixin component-themes($theme) {
     @include toolbar-component($theme);
-}
+} 
 
 /**
 * Apply theme to nested components
