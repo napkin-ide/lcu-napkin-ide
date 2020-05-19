@@ -5,7 +5,8 @@
 // @import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
 // @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 // @import "../../common/assets/common-styles";
-@import "../../common/src/styles/theme";
+// @import "../../common/src/styles/theme";
+@import "../../common/assets/common-theme";
 
 @mixin theme-setup($theme) {
   @include angular-material-theme($theme);
