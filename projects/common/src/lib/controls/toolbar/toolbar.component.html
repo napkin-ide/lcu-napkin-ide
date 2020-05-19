@@ -14,7 +14,7 @@
       </button>
     <ng-container *ngIf="ShowBackButton">
       <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon>
-          <hr class="toolbar-vertical-line" style="height: 20px;">
+          <hr class="toolbar-vertical-line">
         </ng-container>
       <div
         class="fathym-header-logo"
@@ -47,20 +47,24 @@
           [href]="action.Action"
           [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''"
         >
-          <div fxLayout="row">
-            <div fxLayout="row">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <!-- <div fxLayout="row"> -->
               <mat-icon>{{ action.Icon }}</mat-icon>
-            </div>
+            <!-- </div> -->
             <hr class="toolbar-vertical-line">
           </div>
         </a>
+        <!-- <hr class="toolbar-vertical-line"> -->
+
       </ng-container>
+      <!-- <div fxLayoutAlign="center center" > -->
       <lcu-user-account-sidenav
       class="user-account"
       [user-email]="State.Username"
       (logout-clicked)="LogoutClicked($event)"
     >
     </lcu-user-account-sidenav>
+  <!-- </div> -->
     </span>
 
     
