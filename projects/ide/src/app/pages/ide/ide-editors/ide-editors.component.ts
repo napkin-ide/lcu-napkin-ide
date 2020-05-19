@@ -40,7 +40,7 @@ export class IdeEditorsComponent implements OnInit {
       //      Assets: ['https://limited.fathym-int.com/_lcu/lcu-limited-trial/wc/lcu-limited-trial.lcu.js'],
       //      ElementName: this.CurrentEditor.Editor
       //   };
-      // }
+      }
     });
   }
 
