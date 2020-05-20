@@ -18,6 +18,9 @@ export class UserBillingState {
   public Status?: Status;
 
   public Username?: string;
+
+  public PurchasedPlanLookup?: string; 
+
 }
 
 export class BillingPlanOption {

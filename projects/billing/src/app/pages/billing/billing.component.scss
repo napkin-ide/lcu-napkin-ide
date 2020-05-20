@@ -17,7 +17,7 @@ $Billing-BG: #f5f5f5;
 
 $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
 $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
-$Text-color: mat-color(map-get($global-theme, primary), 100);
+$Text-color: black;
 $Input-box-color: #f5f5f5;
 
 @mixin input-box($color) {
