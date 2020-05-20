@@ -17,9 +17,12 @@
         <div class="order-summary" fxLayout="column" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
             <div class="item" fxLayout="column">
                 <div *ngIf="SelectedPlan" class="bold">Fathym {{SelectedPlan.PlanGroup | titlecase}}</div>
-                <div class="free-trial-cost" fxLayout="row" fxLayoutAlign="space-between center">
-                    <div>- 14 Day Free Trial</div>
-                    <div>$0.00</div>
+                <div *ngIf="SelectedPlan.TrialPeriodDays"
+                    class="free-trial-cost" 
+                    fxLayout="row" 
+                    fxLayoutAlign="space-between center">
+                        <div>- {{SelectedPlan.TrialPeriodDays}} Day Free Trial</div>
+                        <div>$0.00</div>
                 </div>
             </div>
 
@@ -29,7 +32,7 @@
                     <div>- {{SelectedPlan.Interval | titlecase}}ly Subscription</div>
                     <div>${{SelectedPlan.Price}}.00</div>
                 </div>
-                <div class="note">*Charge will occur after 14 day trial period</div>
+                <div class="note" *ngIf="SelectedPlan.TrialPeriodDays">*Charge will occur after {{SelectedPlan.TrialPeriodDays}} day trial period</div>
             </div>
             <hr class="dashed-hr">
 
