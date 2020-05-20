@@ -23,7 +23,7 @@ export class PlansComponent implements OnInit {
   public DisplayedPlans: Array<BillingPlanOption>;
 
   constructor(
-    protected userBillState: UserBillingStateContext,
+    protected userBillStateCtx: UserBillingStateContext,
     protected route: ActivatedRoute,
     protected router: Router
   ) {
@@ -32,7 +32,7 @@ export class PlansComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.userBillState.Context.subscribe((state: any) => {
+    this.userBillStateCtx.Context.subscribe((state: any) => {
       this.State = state;
 
       // console.log('Plans: ', this.State.Plans);
@@ -48,9 +48,10 @@ export class PlansComponent implements OnInit {
    * billing component with the delected plan group
    *
    */
-  public BuyNowClicked(plan: any) {
+  public BuyNowClicked(plan: BillingPlanOption) {
     // console.log('Buy Now Clicked:', plan);
-    this.router.navigate(['plan', plan.PlanGroup]);
+
+    this.router.navigate(['plan', plan.LicenseType, plan.PlanGroup]);
   }
   /**
    * runs when state returns

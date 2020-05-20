@@ -26,9 +26,9 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
     });
   }
 
-  public ResetState(){
+  public ResetState(licenseType: string){
     this.Execute({
-      Arguments:{},
+      Arguments:{ LicenseType: licenseType },
       Type: 'ResetStateCheck',
     });
   }

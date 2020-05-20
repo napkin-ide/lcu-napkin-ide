@@ -6,16 +6,20 @@ import { PlansComponent } from './plans/plans.component';
 
 const routes: Routes = [
   {
-    path: 'complete/:id',
+    path: 'complete/:licenseType/:id',
     component: CompleteComponent
   },
   {
-    path: 'plan/:id',
+    path: 'plan/:licenseType/:id',
     component: BillingComponent
   },
   {
-    path: '**',
+    path: ':licenseType',
     component: PlansComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'LCU'
   }
 ];
 

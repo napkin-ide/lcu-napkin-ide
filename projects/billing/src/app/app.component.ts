@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
  * Called when the toolbar back button has been clicked
  */
   public BackButtonClicked(){
-    console.log("route", this.router.url);
+    // console.log("route", this.router.url);
     let planReg = new RegExp("(\/plan\/*)");
     let completeReg = new RegExp("(\/complete\/*)");
 
