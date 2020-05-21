@@ -1,3 +1,8 @@
+/**
+* Common theme for sharing $global-theme and dynamically
+* created variant theme color classes
+*/
+@import "../../common/assets/common-theme";
 @import "../src/app/pages/org/org.component.scss";
 @import "../src/app/pages/org-review/org-review.component.scss";
 @import "../src/app/pages/confirmation-modal/confirmation-modal.component.scss";
@@ -6,7 +11,6 @@
 // @import '../../../node_modules/@lcu/common/assets/theming/fathym_themes';
 // @import "../../common/assets/common-styles";
 // @import "../../common/src/styles/theme";
-@import "../../common/assets/common-theme";
 
 @mixin theme-setup($theme) {
   @include angular-material-theme($theme);

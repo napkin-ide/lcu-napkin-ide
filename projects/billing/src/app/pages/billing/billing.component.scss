@@ -1,5 +1,4 @@
-// @import "../../../common";
-@import '../../../../../common/src/styles/theme';
+@import '../../../styles.scss';
 
 // PRO
 $Pro-primary: mat-color(map-get($global-theme, primary), A200);
@@ -11,14 +10,15 @@ $Starter-trans: mat-color(map-get($global-theme, primary), A100, 90%);
 $Inter-primary: mat-color(map-get($global-theme, primary), A300);
 $Inter-trans: mat-color(map-get($global-theme, primary), A300, 90%);
 
-$Fathym-Grey: slategray;
-$Billing-BG: #f5f5f5;
 // $Plan-Card-BG: slategrey;
 
 $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
 $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
-$Text-color: black;
+$Text-color: mat-color(map-get($global-theme, primary), default-contrast);
+
+$Billing-BG: #f5f5f5;
 $Input-box-color: #f5f5f5;
+$Fathym-Grey: slategray;
 
 @mixin input-box($color) {
   background-color: $color;
@@ -28,18 +28,17 @@ $Input-box-color: #f5f5f5;
   border-bottom: 1px solid $Fathym-Grey;
 }
 
-
-@mixin stripe-billing-container($theme-color, $trans){
+@mixin stripe-billing-container($global-theme-color, $trans){
   // height: 100%;
-  background-color: $Billing-BG !important;
+  // background-color: $Billing-BG !important;
   height:450px;
   padding: 10px;
-  border: 1px solid $theme-color;
+  border: 1px solid $global-theme-color;
   border-radius: 3px;
   width: 100%;
 
   .fathym-logo{
-    background-image: fathym-logo(thinky-circle, $theme-color, 1);
+    background-image: fathym-logo(thinky-circle, $global-theme-color, 1);
     background-repeat: no-repeat;
     background-size: 100px;
     height: 100px;
@@ -47,8 +46,8 @@ $Input-box-color: #f5f5f5;
   }
 
   .fathym-header{
-   margin-bottom: 0px;
-   margin-top:5px;
+  margin-bottom: 0px;
+  margin-top:5px;
   }
 
   .billing-page-container {
@@ -84,7 +83,7 @@ $Input-box-color: #f5f5f5;
             // }
           }
           .user-input-icon{
-             color: #d4d7de;
+            color: #d4d7de;
           }
           .stripe-card{
             @include input-box($Input-box-color);
@@ -121,64 +120,66 @@ $Input-box-color: #f5f5f5;
           width: 100%;
           .buy-now-button{
             width: 100%;
-            background-color: $theme-color;
+            background-color: $global-theme-color;
           }
         }
       }
     }
+  } 
+}
+
+  .slogan{
+    color: $Text-color;
   }
-  
-}
-.slogan{
-  color: $Text-color;
-}
 
-.pro-billing{
-  @include stripe-billing-container($Pro-primary, $Pro-trans);
-}
+  .pro-billing{
+    @include stripe-billing-container($Pro-primary, $Pro-trans);
+  }
 
-.starter-billing{
-  @include stripe-billing-container($Starter-primary, $Starter-trans);
-}
+  .starter-billing{
+    @include stripe-billing-container($Starter-primary, $Starter-trans);
+  }
 
-.inter-billing{
-  @include stripe-billing-container($Inter-primary, $Inter-trans);
-}
+  .inter-billing{
+    @include stripe-billing-container($Inter-primary, $Inter-trans);
+  }
 
-.back-arrow{
-  position: relative;
-  top: -38px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 1;
-}
+  // .back-arrow{
+  //   position: relative;
+  //   top: -38px;
+  //   left: 20px;
+  //   cursor: pointer;
+  //   z-index: 1;
+  // }
 
-::ng-deep .mat-radio-label{
-  margin: 5px 0px;
-}
+  ::ng-deep .mat-radio-label{
+    margin: 5px 0px;
+  }
 
-// OTHER STRIPE STYLES/////////////////////////////////////////////////
+  // OTHER STRIPE STYLES/////////////////////////////////////////////////
 
-// .stripe-container{
-    //   width: 510px;
-    //   .card-num-container{
-    //     // width: 230px;
-    //     margin-right: 40px;
-    //     #card-number{
-    //       width:160px;
-    //     }
-    //   }
-    //   .expiry-date-container{
-    //     margin-right: 40px;
-    //     #card-expiry{
-    //       width: 65px;
-    //     }
-    
-    //   }
-    //   .cvc-num-container{
-    //     width: 100px;
-    //     #card-cvc{
-    //       width: 45px;
-    //     }
-    //   }
-    // }
+  // .stripe-container{
+      //   width: 510px;
+      //   .card-num-container{
+      //     // width: 230px;
+      //     margin-right: 40px;
+      //     #card-number{
+      //       width:160px;
+      //     }
+      //   }
+      //   .expiry-date-container{
+      //     margin-right: 40px;
+      //     #card-expiry{
+      //       width: 65px;
+      //     }
+      
+      //   }
+      //   .cvc-num-container{
+      //     width: 100px;
+      //     #card-cvc{
+      //       width: 45px;
+      //     }
+      //   }
+      // }
+// }
+
