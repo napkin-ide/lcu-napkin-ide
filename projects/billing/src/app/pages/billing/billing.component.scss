@@ -8,8 +8,8 @@ $Pro-trans: mat-color(map-get($global-theme, primary), A200,90%);
 $Starter-primary: mat-color(map-get($global-theme, primary), A100);
 $Starter-trans: mat-color(map-get($global-theme, primary), A100, 90%);
 // INTER
-$Inter-primary: mat-color(map-get($global-theme, primary), A300);
-$Inter-trans: mat-color(map-get($global-theme, primary), A300, 90%);
+$Inter-primary: mat-color(map-get($global-theme, primary), A400);
+$Inter-trans: mat-color(map-get($global-theme, primary), A400, 90%);
 
 $Fathym-Grey: slategray;
 $Billing-BG: #f5f5f5;
@@ -133,15 +133,20 @@ $Input-box-color: #f5f5f5;
   color: $Text-color;
 }
 
-.pro-billing{
-  @include stripe-billing-container($Pro-primary, $Pro-trans);
-}
-
-.starter-billing{
+.one-billing{
   @include stripe-billing-container($Starter-primary, $Starter-trans);
+
 }
 
-.inter-billing{
+.two-billing{
+  @include stripe-billing-container($Pro-primary, $Pro-trans);
+
+}
+
+.three-billing{
+  @include stripe-billing-container($Inter-primary, $Inter-trans);
+}
+.four-billing{
   @include stripe-billing-container($Inter-primary, $Inter-trans);
 }
 

@@ -66,7 +66,9 @@ export class CompleteComponent implements OnInit {
 
       this.stateChanged();
     });
-    this.calcDate();
+    if(this.SelectedPlan.TrialPeriodDays){
+      this.calcDate();
+    }
   }
 
   //  API methods
