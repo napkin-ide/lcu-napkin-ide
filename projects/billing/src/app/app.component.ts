@@ -148,7 +148,6 @@ export class AppComponent implements OnInit {
                   (!this.State.LicenseType ||
                     this.State.LicenseType.Lookup !== args.licenseType)
                 ) {
-                  debugger;
                   this.userBillState.$Refresh(args);
                 }
               }
