@@ -1,11 +1,18 @@
 import { BillingPlanOption, UserBillingState } from './user-billing.state';
-import { StateContext } from '@lcu/common';
+import { StateContext, Status } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
+import { forkJoin, combineLatest } from 'rxjs';
+import { Router, ActivationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserBillingStateContext extends StateContext<UserBillingState> {
+  //  Fields
+
   //  Properties
 
   //  Constructors
@@ -14,27 +21,33 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   //  API Methods
-  public CompletePayment(methodId: string, customerName: string, plan: string, trialPeriodDays: number) {
+  public CompletePayment(
+    methodId: string,
+    customerName: string,
+    plan: string,
+    trialPeriodDays: number
+  ) {
     this.Execute({
       Arguments: {
         CustomerName: customerName,
         MethodID: methodId,
         Plan: plan,
-        TrialPeriodDays: trialPeriodDays
+        TrialPeriodDays: trialPeriodDays,
       },
       Type: 'CompletePayment',
     });
   }
 
-  public ResetState(licenseType: string){
+  public ResetState(licenseType: string) {
     this.Execute({
-      Arguments:{ LicenseType: licenseType },
+      Arguments: { LicenseType: licenseType },
       Type: 'ResetStateCheck',
     });
   }
 
-
   //  Helpers
+  protected callRefresh() {}
+
   protected defaultValue() {
     return { Loading: true } as UserBillingState;
   }

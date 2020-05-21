@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'LCU'
+    redirectTo: 'lcu'
   }
 ];
 
