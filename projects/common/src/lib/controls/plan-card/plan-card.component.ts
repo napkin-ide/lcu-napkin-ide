@@ -21,6 +21,11 @@ export class PlanCardComponent implements OnInit {
   @Input('featured-plan-group') FeaturedPlanGroup: string;
 
   /**
+   * The Popular plan group to display the **Most Popular tag**
+   */
+  @Input('popular-plan-group') PopularPlanGroup: string;
+
+  /**
    * an array of the intervals to display in the toggle
    */
   // @Input('intervals') Intervals: string[];
@@ -103,13 +108,16 @@ export class PlanCardComponent implements OnInit {
     let temp = this.AllPlans.filter(plan => plan.Interval !== this.Plan.Interval && plan.PlanGroup === this.Plan.PlanGroup);
     this.OtherPlan = temp[0];
     // console.log("Other plan interval:", this.OtherPlan);
+    if(this.OtherPlan){
     this.OtherIntervalPrice = this.OtherPlan.Price;
+    }
   }
 
   protected extractPlanFeatures(){
     if(this.Plan.PlanFeatures){
       this.PlanFeatures = this.Plan.PlanFeatures.split("|");
     }
+    // console.log("Plan feats = ", this.PlanFeatures)
   }
 
   protected determinePlanGroups(){

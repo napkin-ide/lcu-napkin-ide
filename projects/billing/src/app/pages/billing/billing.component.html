@@ -18,9 +18,10 @@
 
     <!-- BILLING CONTAINER -->
     <!-- <div fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center"></div> -->
-    <mat-card [ngClass]="{'pro-billing': SelectedPlan?.PlanGroup === PlanGroups[0],
-    'starter-billing': SelectedPlan?.PlanGroup === PlanGroups[1],
-    'inter-billing': SelectedPlan?.PlanGroup === PlanGroups[2]
+    <mat-card [ngClass]="{'one-billing': SelectedPlan?.PlanGroup === PlanGroups[0],
+    'two-billing': SelectedPlan?.PlanGroup === PlanGroups[1],
+    'three-billing': SelectedPlan?.PlanGroup === PlanGroups[2],
+    'four-billing': SelectedPlan?.PlanGroup === PlanGroups[3]
    }" fxFlex="45%" fxFlex.xs="15%" style="height: 100%">
 
       <mat-card-header class="billing-header-container" fxLayout="column" fxLayoutAlign="space-around center">

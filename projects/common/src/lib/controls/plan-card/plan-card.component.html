@@ -1,6 +1,7 @@
-<mat-card [ngClass]="{'pro': Plan?.PlanGroup === PlanGroups[0], 
-                 'starter': Plan?.PlanGroup === PlanGroups[1],
-                 'inter': Plan?.PlanGroup === PlanGroups[2]
+<mat-card [ngClass]="{'one': Plan?.PlanGroup === PlanGroups[0], 
+                 'two': Plan?.PlanGroup === PlanGroups[1],
+                 'three': Plan?.PlanGroup === PlanGroups[2],
+                 'four' : Plan?.PlanGroup === PlanGroups[3]
                 }" fxLayout="column">
     
   <!-- HEADER -->
@@ -15,6 +16,9 @@
     <div *ngIf="Plan?.PlanGroup === FeaturedPlanGroup" class="featured-plan" fxLayoutAlign="center center">
       <div class="feat-text">&nbsp;BEST VALUE</div>
     </div>
+    <div *ngIf="Plan?.PlanGroup === PopularPlanGroup" class="popular-plan" fxLayoutAlign="center center">
+      <div class="feat-text">&nbsp;POPULAR</div>
+    </div>
   </mat-card-header>
 
   <mat-card-content>
@@ -24,15 +28,20 @@
   </div>
   <!-- PRICING -->
   <div class="pricing-container" fxLayout="row" fxLayoutAlign="center end">
-    <div *ngIf="Plan?.DiscountedFrom && Plan?.DiscountedFrom > 0" class="discounted-from" fxLayoutAlign="center center">
-      ${{Plan.DiscountedFrom}}</div>
-    <div class="dollar-symbol">&nbsp;$</div>
-    <div *ngIf="Plan?.Price" class="price" fxLayoutAlign="center center">
-      {{Plan.Price}}&nbsp;</div>
-    <div class="intervals" fxLayout="column">
-      <div>/{{Plan.Interval}}</div>
-      <div>or ${{OtherPlan.Price}} {{OtherPlan.Interval}}</div>
-    </div>
+    <ng-container class="priced-content" *ngIf="Plan?.DiscountedFrom > 0">
+      <div *ngIf="Plan?.DiscountedFrom" class="discounted-from" fxLayoutAlign="center center">
+        ${{Plan.DiscountedFrom}}</div>
+      <div class="dollar-symbol">&nbsp;$</div>
+      <div *ngIf="Plan?.Price" class="price" fxLayoutAlign="center center">
+        {{Plan.Price}}&nbsp;</div>
+      <div class="intervals" fxLayout="column">
+        <div>/{{Plan.Interval}}</div>
+        <div>or ${{OtherPlan.Price}} {{OtherPlan.Interval}}</div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="Plan?.DiscountedFrom === 0" class="free-content">
+      <div class="price">FREE</div>
+    </ng-container>
   </div>
 
  
@@ -41,12 +50,12 @@
   <div class="feature-container">
     <div class="features" fxLayout="column" fxLayoutAlign="center start">
 
-      <div fxLayout="row" fxLayoutAlign="center center">
+      <div *ngIf="Plan?.TrialPeriodDays" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
-        <div>14 Day Free Trial</div>
+        <div>{{Plan.TrialPeriodDays}} Day Free Trial</div>
       </div>
 
-      <div class="vl"></div>
+      <div *ngIf="Plan?.TrialPeriodDays" class="vl"></div>
 
     <ng-container *ngIf="PlanFeatures">
       <div fxLayout="column"  *ngFor="let feat of PlanFeatures">
@@ -60,23 +69,28 @@
     </ng-container>
 
 
-      <div fxLayout="row" fxLayoutAlign="center center">
+      <div *ngIf="Plan?.DataApps" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
-        <div *ngIf="Plan?.DataApps">{{Plan.DataApps}} Data Apps</div>
+        <div >{{Plan.DataApps}} Data Apps</div>
       </div>
 
-      <div class="vl"></div>
+      <div *ngIf="Plan?.DataApps" class="vl"></div>
 
-      <div fxLayout="row" fxLayoutAlign="center center">
+      <div *ngIf="Plan?.DataFlows" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
-        <div *ngIf="Plan?.DataFlows">{{Plan.DataFlows}} Data Flows</div>
+        <div >{{Plan.DataFlows}} Data Flows</div>
       </div>
 
-      <div class="vl"></div>
+      <div *ngIf="Plan?.DataFlows" class="vl"></div>
 
-      <div fxLayout="row" fxLayoutAlign="center center">
+      <div *ngIf="Plan?.LCUs" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
-        <div *ngIf="Plan?.LCUs">{{Plan.LCUs}} Fathym Low Code Unit &trade; Packages</div>
+        <div >{{Plan.LCUs}} Fathym Low Code Unit &trade; Packages</div>
+      </div>
+
+      <div *ngIf="Plan?.PointQueries" fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon>check_circle_outline</mat-icon>
+        <div >Up to {{Plan.PointQueries | nthPowerToString}} point queries per month</div>
       </div>
     </div>
   </div>

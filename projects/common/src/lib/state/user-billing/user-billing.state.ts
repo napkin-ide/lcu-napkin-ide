@@ -15,6 +15,8 @@ export class UserBillingState {
 
   public Plans?: BillingPlanOption[];
 
+  public PopularPlanGroup?: string;
+
   public RequiredOptIns?: string[];
 
   public Status?: Status;
@@ -51,6 +53,8 @@ export class BillingPlanOption {
   public PlanFeatures?: string;
 
   public TrialPeriodDays?: number;
+
+  public PointQueries?: string;
 }
 export class LicenseTypeDetails {
   public Lookup: string; // Would contain the actual license type value 'LCU' or 'forecaster' or whatever else comes down the line

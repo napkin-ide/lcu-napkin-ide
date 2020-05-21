@@ -1,7 +1,7 @@
 <!-- MAIN SCREEN -->
 <div [fxShow]="!State.Loading" class="plan-page-container" style="height: 100%" fxLayout="column" fxLayoutAlign="center center" >
   <h3 class="choose-header" fxLayoutAlign="center center">Choose Your Perfect Plan</h3>
-  <div  fxLayout.lg="row wrap" fxLayout.sm="column" fxLayout.xs="column"
+  <div  fxLayout.lg="row wrap" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column"
         fxLayoutAlign="center center"
         fxLayoutGap="30px">
 
@@ -10,6 +10,7 @@
       <lcu-plan-card
         class='lcu-plan-card'
         [featured-plan-group]="State.FeaturedPlanGroup"
+        [popular-plan-group] = "State.PopularPlanGroup"
         [plan]="plan"
         [all-plans]="State.Plans"
         [displayed-plans]="DisplayedPlans"
