@@ -1,11 +1,11 @@
 import { IdeUserAccessState, } from './ide-user-access.state';
-import { StateManagerContext } from '@lcu/common';
+import { StateContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IdeUserAccessStateManagerContext extends StateManagerContext<IdeUserAccessState> {
+export class IdeUserAccessStateManagerContext extends StateContext<IdeUserAccessState> {
   //  Properties
 
   //  Constructors
