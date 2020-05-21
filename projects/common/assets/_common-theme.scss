@@ -1,8 +1,7 @@
 @import '../../../node_modules/@lcu/common/assets/theming/common-theme';
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
-@import '../src/lib/controls/toolbar/toolbar.component.scss';
 
-$global-theme: fathym-ivy-theme(true);
+$global-theme: fathym-ivy-theme(false);
 
 /**
 * Set the theme and generate dynamic variant theme classes,
@@ -12,11 +11,3 @@ $global-theme: fathym-ivy-theme(true);
 */
 @include theme-setup($global-theme, false);
 
-@mixin component-themes($theme) {
-    @include toolbar-component($theme);
-} 
-
-/**
-* Apply theme to nested components
-*/
-@include component-themes($global-theme);

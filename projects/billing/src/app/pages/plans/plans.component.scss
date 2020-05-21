@@ -1,20 +1,18 @@
-@import '../../../../../common/src/styles/theme';
+@mixin plans-component($theme) {
+    $Text-Color: mat-color(map-get($theme, primary), default-contrast);
 
-// $Text-Color: mat-color(map-get($global-theme, primary), 100);
-// $Main-font: mat-color(map-get($global-theme, primary), 50);
-$Text-Color: black;
+    .choose-header{
+        margin-top:0px;
+        padding-top: 20px;
+        color: $Text-Color;
+    }
 
-.choose-header{
-    margin-top:0px;
-    padding-top: 20px;
-    color: $Text-Color;
-}
+    .lcu-plan-card{
+        margin-top:10px;
+        margin-bottom: 10px;
+    }
 
-.lcu-plan-card{
-    margin-top:10px;
-    margin-bottom: 10px;
-}
-
-.tag-line{
-    color:$Text-Color;
+    .tag-line{
+        color:$Text-Color;
+    }
 }
