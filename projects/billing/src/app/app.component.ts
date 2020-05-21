@@ -1,47 +1,62 @@
 import { Component, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { ToggleThemeUtil } from '@lcu/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserBillingStateContext, UserBillingState } from '@napkin-ide/lcu-napkin-ide-common';
+import { ToggleThemeUtil, Status } from '@lcu/common';
+import {
+  ActivatedRoute,
+  Router,
+  ActivationEnd,
+  ActivatedRouteSnapshot,
+} from '@angular/router';
+import {
+  UserBillingStateContext,
+  UserBillingState,
+} from '@napkin-ide/lcu-napkin-ide-common';
+import { PagesRoutingModule } from './pages/pages-routing.module';
+import { combineLatest, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'lcu-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-/**
- * The Selected theme colors
- */
+  protected routerEventSub: Subscription;
+
+  protected connectedToStateSub: Subscription;
+
+  /**
+   * The Selected theme colors
+   */
   public SelectedTheme: string;
-/**
- * The path to return to in case user selects back button from plan page
- */
+  /**
+   * The path to return to in case user selects back button from plan page
+   */
   public RedirectUri: string;
-/**
- * The billing state
- */
+  /**
+   * The billing state
+   */
   public State: UserBillingState;
-/**
- * whether or not to display the back button in the toolbar
- */
+  /**
+   * whether or not to display the back button in the toolbar
+   */
   public ShowBackButton: boolean;
 
   constructor(
     protected overlayContainer: OverlayContainer,
     protected route: ActivatedRoute,
     protected router: Router,
-    protected userBillState: UserBillingStateContext,) {
-      
-      this.route.queryParams.subscribe(params => {
-        this.RedirectUri = params['redirectUri'];  // Set redirectUri to some local property on the component
-      });
-      this.router.events.subscribe(path => {
-        // console.log('path = ', path);
-        this.determineBackButtonVisibility();
+    protected userBillState: UserBillingStateContext
+  ) {
+    this.route.queryParams.subscribe((params) => {
+      this.RedirectUri = params.redirectUri; // Set redirectUri to some local property on the component
+    });
 
-      });
-    }
+    this.router.events.subscribe((path) => {
+      // console.log('path = ', path);
+      this.determineBackButtonVisibility();
+    });
+  }
 
   public ngOnInit(): void {
     this.userBillState.Context.subscribe((state: any) => {
@@ -53,7 +68,7 @@ export class AppComponent implements OnInit {
 
   /**
    * Component loaded when routes change
-   * 
+   *
    * @param evt router event
    */
   public OnActivate(evt: Event): void {
@@ -64,18 +79,18 @@ export class AppComponent implements OnInit {
   //   window.location.replace("/.oauth/logout");
   // }
 
-/**
- * Called when the toolbar back button has been clicked
- */
-  public BackButtonClicked(){
-    console.log("route", this.router.url);
-    let planReg = new RegExp("(\/plan\/*)");
-    let completeReg = new RegExp("(\/complete\/*)");
+  /**
+   * Called when the toolbar back button has been clicked
+   */
+  public BackButtonClicked() {
+    // console.log("route", this.router.url);
+    const planReg = new RegExp('(/plan/*)');
+    const completeReg = new RegExp('(/complete/*)');
 
-    if(this.router.url === '/'){
+    if (this.router.url === '/') {
       this.router.navigate([this.RedirectUri]);
     }
-    if(planReg.test(this.router.url) || completeReg.test(this.router.url)){
+    if (planReg.test(this.router.url) || completeReg.test(this.router.url)) {
       this.router.navigate(['']);
     }
   }
@@ -99,32 +114,67 @@ export class AppComponent implements OnInit {
 
     const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
     classList.add(ToggleThemeUtil.Toggle(element.classList, val));
-   }
+  }
 
-   /**
-    * Called when state changes
-    */
-   protected stateChanged(){
-     console.log("Billing App State Changed", this.State);
+  /**
+   * Called when state changes
+   */
+  protected stateChanged() {
+    console.log('Billing App State Changed', this.State);
     this.determineBackButtonVisibility();
-    
-   }
-/**
- * Determines if the back button should be visible or not
- */
-   protected determineBackButtonVisibility(){
-     //regex works in online test but does not work in browser...
+
+    console.log(status);
+    if (!this.routerEventSub) {
+      this.routerEventSub = this.router.events
+        .pipe(
+          filter((e) => {
+            return (
+              e instanceof ActivationEnd &&
+              Object.keys(e.snapshot.params).length > 0
+            );
+          }),
+          map((e) => {
+            return e instanceof ActivationEnd ? e.snapshot : {};
+          })
+        )
+        .subscribe((snapshot: ActivatedRouteSnapshot) => {
+          const args = { ...snapshot.queryParams, ...snapshot.params };
+
+          if (!this.connectedToStateSub) {
+            this.connectedToStateSub = this.userBillState.ConnectedToState.subscribe(
+              (status: Status) => {
+                if (
+                  status.Code === 0 &&
+                  (!this.State.LicenseType ||
+                    this.State.LicenseType.Lookup !== args.licenseType)
+                ) {
+                  this.userBillState.$Refresh(args);
+                }
+              }
+            );
+          }
+        });
+    }
+  }
+  /**
+   * Determines if the back button should be visible or not
+   */
+  protected determineBackButtonVisibility() {
+    // regex works in online test but does not work in browser...
     // let routePathRegEx = new RegExp('(\/\w+\/\w+)');
-    let planReg = new RegExp("(\/plan\/*)");
-    let completeReg = new RegExp("(\/complete\/*)");
+    const planReg = new RegExp('(/plan/*)');
+    const completeReg = new RegExp('(/complete/*)');
     // console.log("router url =","'" + this.router.url+"'")
     // console.log("? = ", routePathRegEx.test(this.router.url))
-    if(planReg.test(this.router.url) || completeReg.test(this.router.url) || this.RedirectUri){
+    if (
+      planReg.test(this.router.url) ||
+      completeReg.test(this.router.url) ||
+      this.RedirectUri
+    ) {
       this.ShowBackButton = true;
       // console.log("show back =", this.ShowBackButton)
-    }
-    else{ 
+    } else {
       this.ShowBackButton = false;
     }
-   }
+  }
 }

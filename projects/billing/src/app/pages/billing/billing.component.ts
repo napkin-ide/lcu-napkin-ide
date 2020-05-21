@@ -124,7 +124,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   //  Constructor
   constructor(
     protected formBldr: FormBuilder,
-    protected userBillState: UserBillingStateContext,
+    protected userBillStateCtx: UserBillingStateContext,
     protected lcuSettings: LCUServiceSettings,
     protected cdr: ChangeDetectorRef,
     protected route: ActivatedRoute,
@@ -139,7 +139,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       this.planGroupID = params.get('id');
     });
     this.setupForms();
-    this.userBillState.Context.subscribe((state: any) => {
+    this.userBillStateCtx.Context.subscribe((state: any) => {
       this.State = state;
 
       if (this.State) {
@@ -176,6 +176,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       .then((result: any) => {
         this.handleStripePaymentMethodCreated(result);
       });
+      // this.userBillStateCtx.ResetState(this.SelectedPlan.LicenseType.Lookup)
   }
   /**
    * Toggles planid and plan card to the selected plan
@@ -257,7 +258,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     } else {
       this.StripeError = '';
       // console.log('Billing Form: ', this.BillingForm);
-      this.userBillState.CompletePayment(
+      this.userBillStateCtx.CompletePayment(
         result.paymentMethod.id,
         this.BillingForm.value.userName,
         this.SelectedPlan.Lookup,
@@ -508,7 +509,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected paymentSuccess(): void {
     // console.log("selected plan on pay:", this.SelectedPlan)
     // this.router.navigate(['complete', this.SelectedPlan.Lookup]);
-    this.router.navigate(['complete', this.State.PurchasedPlanLookup]);
+    console.log("LicenseType", this.SelectedPlan.LicenseType)
+    this.router.navigate(['complete', this.SelectedPlan.LicenseType, this.State.PurchasedPlanLookup]);
 
   }
 }

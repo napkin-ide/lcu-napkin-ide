@@ -2,9 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SideNavComponent } from './controls/side-nav/side-nav.component';
-import { MaterialModule, FathymSharedModule, DirectiveModule } from '@lcu/common';
+import {
+  MaterialModule,
+  FathymSharedModule,
+  DirectiveModule,
+} from '@lcu/common';
 import { NavListComponent } from './controls/nav-list/nav-list.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LcuTrademarkDirective } from './controls/trademark/trademark.directive';
@@ -14,7 +18,6 @@ import { IntervalToggleComponent } from './controls/interval-toggle/interval-tog
 import { JourneyCardComponent } from './elements/welcome-journeys/journey-card/journey-card.component';
 import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
 import { ToolbarComponent } from './controls/toolbar/toolbar.component';
-
 
 @NgModule({
   declarations: [
@@ -33,7 +36,7 @@ import { ToolbarComponent } from './controls/toolbar/toolbar.component';
     FathymSharedModule,
     MaterialModule,
     RouterModule,
-   // LcuThemePickerModule,
+    // LcuThemePickerModule,
     FlexLayoutModule,
     DirectiveModule,
   ],
@@ -46,8 +49,7 @@ import { ToolbarComponent } from './controls/toolbar/toolbar.component';
     PlanCardComponent,
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
-    ToolbarComponent,
-
+    ToolbarComponent
   ],
   entryComponents: [
     SideNavComponent,
@@ -58,7 +60,6 @@ import { ToolbarComponent } from './controls/toolbar/toolbar.component';
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
     ToolbarComponent,
-
-  ]
+  ],
 })
 export class LcuNapkinIdeModule {}
