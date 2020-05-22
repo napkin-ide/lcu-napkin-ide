@@ -3,19 +3,3 @@
 * created variant theme color classes
 */
 @import "../../common/assets/common-theme";
-// @import '../../billing/src/app/pages/billing/billing.component.scss';
-// @import '../../billing/src/app/pages/complete/complete.component.scss';
-// @import '../../billing/src/app/pages/plans/plans.component.scss';
-
-
-// for updating components with themes
-@mixin component-themes($theme) {
-  // @include billing-component($theme);
-  // @include complete-component($theme);
-  // @include plans-component($theme);
-}
-
-/**
-* Apply theme to nested components
-*/
-@include component-themes($global-theme);
