@@ -1,4 +1,5 @@
-@import '../../../../../common/src/styles/theme';
+@import '../../../styles/styles.scss';
+
 // PRO
 $Pro-primary: mat-color(map-get($global-theme, primary), A200);
 $Pro-trans: mat-color(map-get($global-theme, primary), A200,50%);
