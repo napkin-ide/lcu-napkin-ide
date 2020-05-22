@@ -27,10 +27,15 @@
     {{Plan.Description}}
   </div>
   <!-- PRICING -->
-  <div class="pricing-container" fxLayout="row" fxLayoutAlign="center end">
-    <ng-container class="priced-content" *ngIf="Plan?.DiscountedFrom > 0">
-      <div *ngIf="Plan?.DiscountedFrom" class="discounted-from" fxLayoutAlign="center center">
-        ${{Plan.DiscountedFrom}}</div>
+  <div *ngIf="Plan?.DiscountedFrom > 0" class="pricing-container" fxLayout="row" fxLayoutAlign="space-around center">
+    <!-- TOGGLE -->
+    <div class="toggle-content" fxLayout="column" fxLayoutAlign="center center">
+      <mat-slide-toggle (change)="IntervalSelected($event)" [checked]="ToggleChecked"></mat-slide-toggle> 
+      <div *ngIf="Plan?.Interval">{{Plan.Interval | titlecase}}ly</div> 
+    </div>
+    <div class="priced-content"  fxLayout="row" fxLayoutAlign="center end">
+      <!-- <div *ngIf="Plan?.DiscountedFrom" class="discounted-from" fxLayoutAlign="center center">
+        ${{Plan.DiscountedFrom}}</div> -->
       <div class="dollar-symbol">&nbsp;$</div>
       <div *ngIf="Plan?.Price" class="price" fxLayoutAlign="center center">
         {{Plan.Price}}&nbsp;</div>
@@ -38,8 +43,10 @@
         <div>/{{Plan.Interval}}</div>
         <div>or ${{OtherPlan.Price}} {{OtherPlan.Interval}}</div>
       </div>
-    </ng-container>
-    <ng-container *ngIf="Plan?.DiscountedFrom === 0" class="free-content">
+    </div>
+  </div>
+  <div class="pricing-container" *ngIf="Plan?.DiscountedFrom === 0" fxLayoutAlign="center center">
+    <ng-container class="free-content">
       <div class="price">FREE</div>
     </ng-container>
   </div>
@@ -97,7 +104,14 @@
 
 </mat-card-content>
   <!-- BUTTON -->
-  <mat-card-actions  class="button-container" fxLayoutAlign="center center">
-    <button *ngIf="ShowButton === true" mat-raised-button class="button" (click)="BuyNow(Plan)">Start Free Trial</button>
+  <mat-card-actions  *ngIf="ShowButton === true" class="button-container" fxLayoutAlign="center center">
+    <button  mat-raised-button class="button" (click)="BuyNow(Plan)">Start Free Trial</button>
   </mat-card-actions>
+
+  <mat-card-actions *ngIf="ShowBackButton" class="button-container" fxLayoutAlign="start center">
+  <button  mat-raised-button class="back-button" (click)="GoBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</mat-card-actions>
+
 </mat-card>

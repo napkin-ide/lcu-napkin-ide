@@ -1,13 +1,13 @@
 <div class='success-page' fxLayoutAlign="center center">
 <mat-card class='success-container' fxLayout="column" fxLayoutAlign="space-around center" fxFlex.lg="50%" fxFlex.md="50%" fxFlex.xs="100%">
     <!-- HEADING -->
-    <mat-card-header fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-header fxLayout="row" fxLayoutAlign="start start">
     <div class="fathym-logo"></div>
-    <div class="success-heading" fxLayout="column" fxLayoutAlign="center center">
-        <h2 class="fathym-header">Fathym it. Build it.</h2>
-        <p class="succ-text">Congratulations!</p>
-        <p *ngIf="SelectedPlan" class="succ-text">You have successfully registered for a <b>{{State.LicenseType.Name | titlecase}} {{SelectedPlan.PlanGroup | titlecase }}</b> account.</p>
-        <p *ngIf="FreeTrialEndDate" class="succ-text">Your card will be charged on <b>{{FreeTrialEndDate}}</b> unless you cancel.</p>
+    <div class="success-heading" fxLayout="column" fxLayoutAlign="start start">
+        <h1 class="fathym-header">{{HeaderName}}</h1>
+        <h3 >Success! You are registered as a <b>Fathym {{SelectedPlan.PlanGroup | titlecase}}!</b> </h3>
+        <p *ngIf="FreeTrialEndDate" class="succ-text">Subscription will automatically begin after trial period ends, cancel</p>
+        <p *ngIf="FreeTrialEndDate" class="succ-text">anytime before {{FreeTrialEndDate}} to avoid being charged.</p>
     </div>
 </mat-card-header>
     <hr>

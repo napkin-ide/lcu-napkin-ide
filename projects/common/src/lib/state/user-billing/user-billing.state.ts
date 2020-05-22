@@ -42,7 +42,7 @@ export class BillingPlanOption {
 
   public Lookup?: string;
 
-  public LicenseType?: LicenseTypeDetails;
+  public LicenseType?: string;
 
   public Name?: string;
 
