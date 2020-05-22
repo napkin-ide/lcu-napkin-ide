@@ -9,6 +9,17 @@ $global-theme: fathym-ivy-theme(false);
 *
 * If we skip this include, the default theme is 'fathym-ivy-theme
 */
-@include theme-setup($global-theme, false);
+@include theme-setup($global-theme, true);
 
-
+/**
+* Common styles for Napkin-IDE projects
+*
+* If this starts to get big, think about moving these to another stylesheet
+*/
+.spinner-logo {
+    position: absolute;
+    background-image: fathym-logo(thinky-logo,black, 1 );
+    height: 70% !important;
+    width: 70% !important;
+    background-repeat:no-repeat;
+}
