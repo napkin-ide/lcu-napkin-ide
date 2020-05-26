@@ -88,7 +88,7 @@
 
   <div class="spread" style="text-align: center;">
     <button
-      *ngIf="(!SetUpLoading() || (State.Status && State.Status.Code != 0)) && !State.Booted"
+      *ngIf="(!SetUpLoading() || (State.Status && State.Status.Code != 0 && State.Status.Metadata?.Exception)) && !State.Booted"
       mat-raised-button
       color="accent"
       class="margin-top-3"
@@ -112,7 +112,7 @@
 
     <div *ngIf="State.Loading" class="spread">
       <p style="text-align: center;">
-        <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
+        <span lcuTrademark>Behind the scenes, Thinky&trade; is working hard to set up your </span>
       </p>
 
       <div

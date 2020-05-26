@@ -1,15 +1,16 @@
 <!-- MAIN SCREEN -->
-<div [fxShow]="!State.Loading">
+<div [fxShow]="!State.Loading" class="plan-page-container" style="height: 100%" fxLayout="column" fxLayoutAlign="center center" >
   <h3 class="choose-header" fxLayoutAlign="center center">Choose Your Perfect Plan</h3>
-  <div  fxLayout.lg="row wrap" fxLayout.sm="column" fxLayout.xs="column"
+  <div  fxLayout.lg="row wrap" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column"
         fxLayoutAlign="center center"
         fxLayoutGap="30px">
-        
+
     <div *ngFor="let plan of DisplayedPlans">
 
       <lcu-plan-card
         class='lcu-plan-card'
         [featured-plan-group]="State.FeaturedPlanGroup"
+        [popular-plan-group] = "State.PopularPlanGroup"
         [plan]="plan"
         [all-plans]="State.Plans"
         [displayed-plans]="DisplayedPlans"
@@ -26,7 +27,7 @@
  <!-- LOADING SCREEN -->
  <div [fxShow]="State.Loading">
   <p style="text-align: center; margin-top: 0px;">
-    <span lcuTrademark>Behind the scenes, Thinky is working hard to set up your </span>
+    <span lcuTrademark>Behind the scenes, Thinky&trade; is working hard to set up your </span>
   </p>
 
   <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">

@@ -2,17 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SideNavComponent } from './controls/side-nav/side-nav.component';
-import { MaterialModule } from '@lcu/common';
+import {
+  MaterialModule,
+  FathymSharedModule,
+  DirectiveModule,
+} from '@lcu/common';
 import { NavListComponent } from './controls/nav-list/nav-list.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LcuTrademarkDirective } from './controls/trademark/trademark.directive';
 import { UserAccountSidenavComponent } from './controls/user-account-sidenav/user-account-sidenav.component';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { IntervalToggleComponent } from './controls/interval-toggle/interval-toggle.component';
+import { JourneyCardComponent } from './elements/welcome-journeys/journey-card/journey-card.component';
 import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
-
+import { ToolbarComponent } from './controls/toolbar/toolbar.component';
+import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pipe';
+import { PackageIntervalPipe } from './utils/pipes/package-interval.pipe';
 
 @NgModule({
   declarations: [
@@ -24,15 +31,18 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     PlanCardComponent,
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
+    JourneyCardComponent,
+    ToolbarComponent,
+    NthPowerToStringPipe,
+    PackageIntervalPipe
   ],
   imports: [
-    CommonModule,
+    FathymSharedModule,
     MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
     RouterModule,
-   // LcuThemePickerModule,
-    FlexLayoutModule
+    // LcuThemePickerModule,
+    FlexLayoutModule,
+    DirectiveModule,
   ],
   exports: [
     SideNavComponent,
@@ -43,7 +53,7 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     PlanCardComponent,
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
-    
+    ToolbarComponent
   ],
   entryComponents: [
     SideNavComponent,
@@ -53,7 +63,7 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
     PlanCardComponent,
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
-    
-  ]
+    ToolbarComponent,
+  ],
 })
 export class LcuNapkinIdeModule {}

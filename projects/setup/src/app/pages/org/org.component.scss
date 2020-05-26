@@ -1,40 +1,28 @@
-@import '../../../../../common/src/styles/theme';
-
+@import '../../../styles.scss';
 
 $Theme-primary:  mat-color(map-get($global-theme, primary), A700);
+$Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
 
 .tooltip-background {
   background-color: $Theme-primary !important;
 }
-
-@mixin mat-icon-steps{
-  color: $Theme-primary;
-}
-
-@mixin org($theme) {
-
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
 
   .slogan{
     background-image: fathym-logo(thinky-slogan, #000000, .7);
     background-repeat:no-repeat;
     background-position: center;
   }
-  .spinner-logo{
-    position: absolute;
-    background-image: fathym-logo(thinky-logo,black, 1 );
-    height: 70% !important;
-    width: 70% !important;
-    background-repeat:no-repeat;
-  }
+ 
   .spinner-container {
     position: relative;
     height: 75px;
     width: 75px;
     margin-left: 43%;
   }
+  .org-card{
+    background-image: linear-gradient($Theme-trans, $Theme-trans),url('/assets/img/thinky-outside-the-box.jpg') !important;
+  }
+  
 
   // :host {
     .identity {
@@ -53,7 +41,7 @@ $Theme-primary:  mat-color(map-get($global-theme, primary), A700);
           box-sizing: border-box;
           justify-content: center;
           // background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.3));
-          background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(assets/img/fathym-dew-it.jpg);
+          background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('/assets/img/fathym-dew-it.jpg');
           background-repeat:no-repeat;
           background-position: center;
           background-size: cover;
@@ -97,14 +85,15 @@ $Theme-primary:  mat-color(map-get($global-theme, primary), A700);
         width: 70%;
       }
     }
-  }
 
   .documentation-button{
     margin-bottom: 15px;
   }
-.list-icon{
-  @include mat-icon-steps();
-}
+
+  .list-icon{
+    color: $global-primary;
+  }
+
   .step-checkbox{
     margin-top:12px;
   }

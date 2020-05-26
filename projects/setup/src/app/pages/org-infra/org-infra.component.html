@@ -27,7 +27,7 @@
             placeholder="Azure Application ID"
             [type]="HideAppId ? 'password' : 'text'"
             required
-            autocomplete="new-password"
+            [disabled]="AzureInfrastructureValid"
           />
         </div>
 
@@ -72,7 +72,7 @@
             placeholder="Azure Tenant (Directory ID)"
             [type]="HideTenantId ? 'password' : 'text'"
             required
-            autocomplete="new-password"
+            [disabled]="AzureInfrastructureValid"
           />
         </div>
 
@@ -117,7 +117,7 @@
             placeholder="Azure Subscription ID"
             [type]="HideSubId ? 'password' : 'text'"
             required
-            autocomplete="new-password"
+            [disabled]="AzureInfrastructureValid"
           />
         </div>
 
@@ -162,7 +162,7 @@
             placeholder="Azure Application Auth key"
             [type]="HideAuthKey ? 'password' : 'text'"
             required
-            autocomplete="new-password"
+            [disabled]="AzureInfrastructureValid"
           />
         </div>
 
@@ -191,6 +191,53 @@
         <!-- <mat-hint>32 Character Limit</mat-hint> -->
       </mat-form-field>
 
+      <div class="margin-top-4" *ngIf="!AzureInfrastructureValid">
+        <button
+          matTooltip="Validate your azure infrastructure settings to complete setting up your infrastructure."
+          matTooltipClass="tooltip-background"
+          mat-raised-button
+          color="accent"
+          class="mat-full-width"
+          (click)="ValidateInfra()"
+        >
+          Validate Infrastructure Settings
+        </button>
+
+        <button
+          mat-button
+          class="mat-full-width"
+          (click)="ChangeStep(SetupStepTypes.OrgDetails)"
+        >
+          Back
+        </button>
+      </div>
+
+      <div class="margin-top-4" *ngIf="AzureInfrastructureValid">
+        <h2>Infrastructure Settings Valid</h2>
+      </div>
+    </div>
+
+    <ng-container *ngIf="AzureInfrastructureValid">
+      <mat-form-field class="mat-full-width margin-top-4">
+        <mat-label>Azure Region (Location)</mat-label>
+
+        <mat-select
+          formControlName="azureRegion"
+          [disabled]="
+            !AzureRegionOptionKeys || AzureRegionOptionKeys.length == 0
+          "
+          required
+        >
+          <mat-option
+            class="mat-option-dropdown"
+            *ngFor="let regOptKey of AzureRegionOptionKeys"
+            [value]="regOptKey"
+          >
+            {{ State.AzureLocationOptions[regOptKey] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <mat-form-field class="mat-full-width margin-top-4">
         <mat-label>Infrastructure Template</mat-label>
 
@@ -204,30 +251,35 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-    <div class="spread mat-small mat-error" *ngIf="State.Status && State.Status.Code != 0">{{ State.Status.Message  }}</div>
-
-    <div class="margin-top-4">
-      <button
-        matTooltip="Your best practices IoT cloud infrastructure will be set up. If you were doing this from scratch, it may take several days, but with Fathym it will only take up to 15 minutes."
-        matTooltipClass="tooltip-background"
-        mat-raised-button
-        color="accent"
-        class="mat-full-width"
-        (click)="Configure()"
-        [disabled]="!InfraForm.valid"
+      <div
+        class="spread mat-small mat-error"
+        *ngIf="State.Status && State.Status.Code != 0"
       >
-        Review & Launch
-      </button>
+        {{ State.Status.Message }}
+      </div>
 
-      <button
-        mat-button
-        class="mat-full-width"
-        (click)="ChangeStep(SetupStepTypes.OrgDetails)"
-      >
-        Back
-      </button>
-    </div>
+      <div class="margin-top-4">
+        <button
+          matTooltip="Your best practices IoT cloud infrastructure will be set up. If you were doing this from scratch, it may take several days, but with Fathym it will only take up to 15 minutes."
+          matTooltipClass="tooltip-background"
+          mat-raised-button
+          color="accent"
+          class="mat-full-width"
+          (click)="Configure()"
+          [disabled]="!InfraForm.valid"
+        >
+          Review & Launch
+        </button>
+
+        <button
+          mat-button
+          class="mat-full-width"
+          (click)="ChangeStep(SetupStepTypes.OrgDetails)"
+        >
+          Back
+        </button>
+      </div>
+    </ng-container>
   </div>
 </form>

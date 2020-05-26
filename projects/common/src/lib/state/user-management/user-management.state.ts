@@ -1,6 +1,10 @@
 import { Status } from '@lcu/common';
 
 export class UserManagementState {
+  public AzureInfrastructureValid?: Status;
+
+  public AzureLocationOptions?: { [region: string]: string };
+
   public Booted?: boolean;
 
   public BootOptions?: BootOption[];
@@ -55,7 +59,7 @@ export class UserManagementState {
 
   public SubscribersLimited: Array<string>;
 
-  public SubscribersActive: Array<string>; 
+  public SubscribersActive: Array<string>;
 }
 
 export class JourneyPersona {
@@ -98,6 +102,10 @@ export class AzureInfaSettings {
   public AzureAppID?: string;
 
   public AzureAppAuthKey?: string;
+
+  public AzureLocation?: string;
+
+  public AzureRegion?: string;
 }
 
 export enum NapkinIDESetupStepTypes {

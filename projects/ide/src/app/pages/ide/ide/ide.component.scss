@@ -1,4 +1,4 @@
-@mixin ide($theme) {
+@mixin ide-component($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
@@ -6,19 +6,19 @@
   .ide-parent-container {
     height: 100%;
 
-    .ide-top-bar {
-      .mat-toolbar,
-      .mat-toolbar-single-row {
-        height: auto;
-        padding: 0;
-        background-color: mat-color($primary, A700);
-      }
+    // .ide-top-bar {
+    //   .mat-toolbar,
+    //   .mat-toolbar-single-row {
+    //     height: auto;
+    //     padding: 0;
+    //     background-color: mat-color($primary, A700);
+    //   }
 
-      .logo {
-        width: 150px;
-        margin: 0.5rem;
-      }
-    }
+      // .logo {
+      //   width: 150px;
+      //   margin: 0.5rem;
+      // }
+    // }
 
     .ide-center-content {
       height: 100%;
@@ -170,6 +170,22 @@
 
       &.activities {
         height: calc(100% - 60px);
+      }
+    }
+
+    .ide-thinky-bg {
+      background-image: fathym-logo(thinky-circle, rgba(mat-color(map-get($global-theme, primary), A700), 0.3));
+      background-position: center;
+      background-repeat:no-repeat;
+      background-size: contain;
+      box-sizing: border-box;
+      border: 1em solid transparent;
+    }
+
+    .ide-empty-tab-group {
+
+      .mat-tab-header {
+        border-bottom: none !important;
       }
     }
   }

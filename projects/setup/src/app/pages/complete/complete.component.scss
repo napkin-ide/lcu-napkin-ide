@@ -1,12 +1,6 @@
-@import '../../../../../common/src/styles/theme';
+@import '../../../styles.scss';
 
-@mixin org($theme) {
-  
   $config: mat-typography-config();
-
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
 
   :host {
     .identity {
@@ -71,11 +65,11 @@
 
       .details {
         width: 30%;
-        color: $nide-white;
+        color: white;
         background-size: cover;
         background-position: 50% 0;
-        background-image: linear-gradient(transparentize(mat-color($primary), 0.2), transparentize(mat-color($primary), 0.2)),
-          url(https://c1.staticflickr.com/8/7451/26797700615_76d3215c42_b.jpg);
+        background-image: linear-gradient(transparentize($global-primary, 0.2), transparentize($global-primary, 0.2)),
+          url('https://c1.staticflickr.com/8/7451/26797700615_76d3215c42_b.jpg');
 
         // a {
         //   width: 80%;
@@ -116,6 +110,3 @@
       }
     }
   }
-}
-
-// @include org($nide-theme);

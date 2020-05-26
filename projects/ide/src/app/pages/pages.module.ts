@@ -12,6 +12,7 @@ import { IdeTopBarComponent } from './ide/ide-top-bar/ide-top-bar.component';
 import { LazyElementModule } from '@lowcodeunit/lazy-element';
 import { ExternalDialogModule, LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LcuGuidedTourModule } from '@lowcodeunit/lcu-guided-tour-common';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     PagesRoutingModule,
     FlexLayoutModule,
     ExternalDialogModule,
-    LcuNapkinIdeModule
+    LcuNapkinIdeModule,
+    LcuGuidedTourModule.forRoot()
  ],
   exports: [IdeComponent],
   providers: []

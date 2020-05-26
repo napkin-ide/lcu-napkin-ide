@@ -1,10 +1,14 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" class="ide-parent-container">
 
   <div fxLayout="row" fxFlexAlign="stretch" class="ide-top-bar">
-    <nide-ide-top-bar fxFlex
+    <!-- <nide-ide-top-bar fxFlex
       [isHandset]="(IsHandset$ | async)"
       (openSideBarEvent)="OpenSideBar()">
-    </nide-ide-top-bar>
+    </nide-ide-top-bar> -->
+    <lcu-toolbar fxFlex
+      [isHandset]="(IsHandset$ | async)"
+      (openSideBarEvent)="OpenSideBar()">
+  </lcu-toolbar>
   </div>
 
   <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
@@ -41,3 +45,17 @@
     <nide-ide-status-bar fxFlex></nide-ide-status-bar>
   </div>
 </div>
+
+<lcu-guide-bot *ngIf="!Loading && IdeState.CurrentActivity.Lookup === 'limited-trial'"
+  [bot-padding]="BotPadding"
+  [bot-screen-position]="BotScreenPosition"
+  [bounding-element-selector]="BotBoundingContainer"
+  [enable-chat]="EnableChat"
+  [enable-first-time-popup]="EnableFirstTimePopup"
+  [tour]="GuidedTourState.CurrentTour"
+  [tour-buttons]="TourButtons"
+  (on-complete)="OnComplete($event)"
+  (on-skipped)="OnSkipped($event)"
+  (on-step-closed)="OnStepClosed($event)"
+  (on-step-opened)="OnStepOpened($event)">
+</lcu-guide-bot>

@@ -129,6 +129,13 @@ export class OrgInfraComponent implements OnInit {
     }
   }
 
+  /**
+   * Access organization lookup field
+   */
+  public get OrgInfraAzureRegion(): AbstractControl {
+    return this.InfraForm.get('azureRegion');
+  }
+
   // Properties
 
   /**
@@ -180,12 +187,25 @@ export class OrgInfraComponent implements OnInit {
    */
   public InfraForm: FormGroup;
 
+  public get AzureInfrastructureValid(): boolean {
+    return (
+      this.State.AzureInfrastructureValid &&
+      this.State.AzureInfrastructureValid.Code === 0
+    );
+  }
+
   /**
    * Infrastructure option keys
    */
   public get InfrastructureOptionKeys(): string[] {
     return this.State.InfrastructureOptions
       ? Object.keys(this.State.InfrastructureOptions)
+      : [];
+  }
+
+  public get AzureRegionOptionKeys(): string[] {
+    return this.State.AzureLocationOptions
+      ? Object.keys(this.State.AzureLocationOptions)
       : [];
   }
 
@@ -216,28 +236,36 @@ export class OrgInfraComponent implements OnInit {
   public Configure() {
     this.State.Loading = true;
 
-    const envSettings = {
-      ...(this.State.EnvSettings || new AzureInfaSettings()),
-    };
-
-    envSettings.AzureTenantID = this.OrgInfraAzureTenatId.value;
-
-    envSettings.AzureSubID = this.OrgInfraAzureSubId.value;
-
-    envSettings.AzureAppID = this.OrgInfraAzureAppId.value;
-
-    envSettings.AzureAppAuthKey = this.OrgInfraAzureAppAuthKey.value;
+    const envSettings = this.populateEnvSettings();
 
     this.userMgr.ConfigureInfrastructure(
       'Azure',
       true,
       envSettings,
-      this.InfraTemplate.value
+      this.InfraTemplate.value,
+      true
     );
   }
 
   public OpenHelpPdf() {
     window.open(Constants.HELP_PDF);
+  }
+
+  /**
+   * Validate azure setup
+   */
+  public ValidateInfra() {
+    this.State.Loading = true;
+
+    const envSettings = this.populateEnvSettings();
+
+    this.userMgr.ConfigureInfrastructure(
+      'Azure',
+      true,
+      envSettings,
+      this.InfraTemplate.value,
+      false
+    );
   }
 
   // helpers
@@ -255,6 +283,32 @@ export class OrgInfraComponent implements OnInit {
       case 'AzureSubID':
         return this.OrgInfraAzureSubId;
     }
+  }
+
+  protected populateEnvSettings(): AzureInfaSettings {
+    const envSettings = {
+      ...(this.State.EnvSettings || new AzureInfaSettings()),
+    };
+
+    envSettings.AzureTenantID = this.OrgInfraAzureTenatId.value;
+
+    envSettings.AzureSubID = this.OrgInfraAzureSubId.value;
+
+    envSettings.AzureAppID = this.OrgInfraAzureAppId.value;
+
+    envSettings.AzureAppAuthKey = this.OrgInfraAzureAppAuthKey.value;
+
+    envSettings.AzureRegion = this.OrgInfraAzureRegion.value;
+
+    if (envSettings.AzureRegion && this.State.AzureLocationOptions) {
+      envSettings.AzureLocation = this.State.AzureLocationOptions[
+        envSettings.AzureRegion
+      ];
+    } else {
+      envSettings.AzureLocation = null;
+    }
+
+    return envSettings;
   }
 
   /**
@@ -307,6 +361,10 @@ export class OrgInfraComponent implements OnInit {
         ]),
         updateOn: 'change',
       }),
+      azureRegion: new FormControl('', {
+        validators: [Validators.required],
+        updateOn: 'change',
+      }),
       infraTemplate: new FormControl('', {
         validators: Validators.compose([Validators.required]),
         updateOn: 'change',
@@ -351,6 +409,10 @@ export class OrgInfraComponent implements OnInit {
         this.State.EnvSettings.AzureAppAuthKey || ''
       );
 
+      this.OrgInfraAzureRegion.setValue(
+        this.State.EnvSettings.AzureRegion || ''
+      );
+
       this.InfraTemplate.setValue(this.State.Template || '');
 
       this.OrgInfraAzureTenatId.markAsTouched();
@@ -361,6 +423,8 @@ export class OrgInfraComponent implements OnInit {
 
       this.OrgInfraAzureAppAuthKey.markAsTouched();
 
+      this.OrgInfraAzureRegion.markAsTouched();
+
       this.InfraTemplate.markAsTouched();
     }
   }
@@ -370,7 +434,9 @@ export class OrgInfraComponent implements OnInit {
    */
   protected statusValidatorFactory(errorFor: string) {
     return (control: FormControl) => {
-      const errorFrom = this.State.Status ? (this.State.Status as any).ErrorFrom : '';
+      const errorFrom = this.State.Status
+        ? (this.State.Status as any).ErrorFrom
+        : '';
 
       if (
         this.State.Status &&

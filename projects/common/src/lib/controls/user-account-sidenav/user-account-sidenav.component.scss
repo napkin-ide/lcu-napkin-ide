@@ -1,4 +1,4 @@
-@import '../../../../../common/src/styles/theme';
+@import '../../../styles/styles.scss';
 
 $Font-Color: mat-color(map-get($global-theme, primary), 100);
 
@@ -6,12 +6,9 @@ $Font-Color: mat-color(map-get($global-theme, primary), 100);
     background-color: transparent !important;
 }
 .user-account-sidenav-content{
-    width: 40px;
-    height: 50px;
+    // height: 39px !important;
     color: $Font-Color !important;
-    position: relative;
-    top: 8px;
-    // left: -3px;
+    // top: -3px;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 20px;

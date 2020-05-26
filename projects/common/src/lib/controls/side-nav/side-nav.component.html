@@ -14,25 +14,6 @@
     </lcu-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" fxLayout="row">
-      <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="(isHandset$ | async) && ShowSideNav"
-        >
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
-
-        <div class="mat-display-2 title margin-top-2 margin-bottom-3">
-          {{ Title }}
-        </div>
-        <!-- <lcu-theme-picker></lcu-theme-picker> -->
-      </div>
-    </mat-toolbar>
-
     <!-- Content is injected here -->
     <ng-content></ng-content>
   </mat-sidenav-content>

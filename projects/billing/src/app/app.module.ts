@@ -23,7 +23,7 @@ import { LcuNapkinIdeModule, UserBillingStateContext } from '@napkin-ide/lcu-nap
     ReactiveFormsModule,
     FormsModule,
     LcuNapkinIdeModule
-  ],
+    ],
   providers: [
     UserBillingStateContext,
     {

@@ -29,8 +29,7 @@
         mat-icon-button
         (click)="HeaderActionClicked(action)"
       >
-        <mat-icon>{{ action.Icon }}</mat-icon> 
-        <span>{{ action.Text }}</span>
+        <mat-icon>{{ action.Icon }}</mat-icon>
 
       </button>
 
@@ -39,14 +38,14 @@
           action.Type == IDEActionTypes.Link ||
           action.Type == IDEActionTypes.ExternalLink
         "
+        matTooltip="{{ action.Text }}"
         mat-icon-button
         [href]="action.Action"
         [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''"
       >
       <div fxLayout="row" fxLayoutAlign="center center">
         <div fxLayout="row" fxLayoutAlign="center center">
-          <mat-icon>{{ action.Icon }}</mat-icon>      
-          <span>{{ action.Text }}</span>
+          <mat-icon>{{ action.Icon }}</mat-icon>
         </div>
         <hr class="vertical-line">
       </div>

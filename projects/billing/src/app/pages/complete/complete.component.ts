@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   UserBillingStateContext,
   UserBillingState,
-  NapkinIDESetupStepTypes,
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillingPlanOption } from 'projects/common/src/lcu.api';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'lcu-complete',
@@ -20,11 +20,19 @@ export class CompleteComponent implements OnInit {
   //  Properties
 
   // tslint:disable-next-line:no-input-rename
-  @Input('setup-step-types')
-  public SetupStepTypes: NapkinIDESetupStepTypes;
-
+  // @Input('setup-step-types')
+  // public SetupStepTypes: NapkinIDESetupStepTypes;
+/**
+ * State being passed in to the complete page
+ */
   // tslint:disable-next-line:no-input-rename
-  @Input('state')
+  // @Input('state')
+
+  public HeaderName: string;
+
+  /**
+   * The user billing state to determine payment status
+   */
   public State: UserBillingState;
 
   /**
@@ -44,12 +52,30 @@ export class CompleteComponent implements OnInit {
    */
   public FreeTrialEndDate: string;
 
+  /**
+   * The Tax (if any) to be collected
+   */
+  public TaxCollected: number;
+
+  /**
+   * The total amount of tax collected
+   */
+  public TotalTax: string;
+
+  /**
+   * The total cost 
+   */
+  public Total: string;
+
+
   //  Constructors
   constructor(
     protected userMgr: UserBillingStateContext,
     protected route: ActivatedRoute,
     protected router: Router
-  ) {}
+  ) {
+    this.TaxCollected = 0.00;
+  }
 
   //  Life Cycle
   public ngOnInit() {
@@ -61,15 +87,17 @@ export class CompleteComponent implements OnInit {
 
       this.stateChanged();
     });
-    this.calcDate();
+    if(this.SelectedPlan && this.SelectedPlan.TrialPeriodDays){
+      this.calcDate();
+    }
   }
 
   //  API methods
 
   //  Helpers
   protected stateChanged() {
-    // console.log('state success page: ', this.State);
-
+    console.log('state success page: ', this.State);
+//avoid error if the user trys to manually navigate to the complete page
     if (!this.State.PaymentStatus) {
       this.router.navigate(['']);
     }
@@ -80,6 +108,9 @@ export class CompleteComponent implements OnInit {
       );
       // console.log('purchased PLAN:', this.SelectedPlan);
     }
+    if(this.SelectedPlan){
+      this.convertName();
+    }
   }
 
   /**
@@ -87,14 +118,35 @@ export class CompleteComponent implements OnInit {
    */
     protected calcDate(){
     let endDate = new Date();
-    endDate.setDate(endDate.getDate() + 14);
+    endDate.setDate(endDate.getDate() + this.SelectedPlan.TrialPeriodDays);
     // console.log("end date:", endDate);
 
     let tempDate = endDate.toString().split(" ");
 
     // console.log("tempDate:", tempDate);
 
-    this.FreeTrialEndDate = tempDate[0] + " " +tempDate[1] + " " + tempDate[2];
+    this.FreeTrialEndDate = tempDate[1] + " " + tempDate[2];
 
+    this.calcTotal();
+    this.calcTax();
+
+  }
+
+  protected convertName(){
+    //   console.log("pipe =", value)
+    if(this.SelectedPlan.LicenseType === "lcu"){
+        this.HeaderName ="Fathym Low Code Unit Framework";
+    }
+    else if(this.SelectedPlan.LicenseType === "forecast"){
+        this.HeaderName = "Fathym Forecaster API";
+    }
+  }
+
+  protected calcTotal(){
+    this.Total= (this.TaxCollected + this.SelectedPlan.Price).toFixed(2);
+  }
+
+  protected calcTax(){
+    this.TotalTax = this.TaxCollected.toFixed(2);
   }
 }

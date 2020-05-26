@@ -30,8 +30,7 @@ declare var Stripe: any;
   styleUrls: ['./billing.component.scss'],
   animations: [],
 })
-export class BillingComponent
-  implements OnInit, AfterViewChecked {
+export class BillingComponent implements OnInit, AfterViewChecked {
   //  Fields
 
   @ViewChild('cardElement') cardElement: ElementRef;
@@ -58,6 +57,11 @@ export class BillingComponent
    */
   protected planID: any;
 
+  /**
+   * The interval passed in via route params 
+   */
+  protected planInterval: string;
+
   protected get stripePublicKey(): string {
     const stateCfg: any = (window as any).LCU.State;
 
@@ -65,7 +69,16 @@ export class BillingComponent
   }
 
   //  Properties
+  /**
+   * The billing form
+   */
   public BillingForm: FormGroup;
+
+
+/**
+ * The string to display in the billing form
+ */
+  public HeaderName: string;
 
   // public productPlan: any;
 
@@ -86,6 +99,11 @@ export class BillingComponent
    */
   public StripeValid: boolean;
 
+  /**
+   * Whether or not to show the back button in the plan card
+   */
+  public ShowBackButton: boolean = true;
+
   public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
 
   /**
@@ -102,6 +120,8 @@ export class BillingComponent
    */
 
   public PlanGroups: Array<string>;
+
+
 
   /**
    * An array of the intervals to pass to the Interval Toggle
@@ -125,7 +145,7 @@ export class BillingComponent
   //  Constructor
   constructor(
     protected formBldr: FormBuilder,
-    protected userBillState: UserBillingStateContext,
+    protected userBillStateCtx: UserBillingStateContext,
     protected lcuSettings: LCUServiceSettings,
     protected cdr: ChangeDetectorRef,
     protected route: ActivatedRoute,
@@ -138,25 +158,27 @@ export class BillingComponent
   public ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       this.planGroupID = params.get('id');
+      this.planInterval = params.get('interval');
     });
     this.setupForms();
-    this.userBillState.Context.subscribe((state: any) => {
+    this.userBillStateCtx.Context.subscribe((state: any) => {
       this.State = state;
-      this.stateChanged();
+
+      if (this.State) {
+        this.stateChanged();
+      }
     });
-
   }
-
 
   public ngAfterViewChecked(): void {
     this.setupStripe();
   }
 
   //  API methods
-/**
- * called when user submits form
- * @param event 
- */
+  /**
+   * called when user submits form
+   * @param event
+   */
   public SubmitBilling(event: Event) {
     this.State.Loading = true;
 
@@ -176,57 +198,64 @@ export class BillingComponent
       .then((result: any) => {
         this.handleStripePaymentMethodCreated(result);
       });
+      // this.userBillStateCtx.ResetState(this.SelectedPlan.LicenseType.Lookup)
   }
-/**
- * Toggles planid and plan card to the selected plan
- * @param toggleSelected 
- */
-  public ToggleChanged(toggleSelected: any): void {
-   
+
+  public IntervalToggled(plan: BillingPlanOption){
+    this.SelectedPlan = plan;
+  }
+  /**
+   * Toggles planid and plan card to the selected plan
+   * @param toggleSelected
+   */
+  // public ToggleChanged(toggleSelected: any): void {
     // false === Annually
     // true === Monthly
     // console.log("toggle changed: ", toggleSelected);
-    this.State.Plans.forEach((plan: BillingPlanOption) => {
-      if (
-        this.SelectedPlan.PlanGroup === plan.PlanGroup &&
-        plan.Interval === toggleSelected.value
-      ) {
-        this.SelectedPlan = plan;
-        this.planID = this.SelectedPlan.Lookup;
-        // console.log("Toggled to: ", this.SelectedPlan);
-      }
-    });
-  }
-/**
- * Back button clicked
- */
-  public GoBack() {
-    this.router.navigate(['']);
-  }
-/**
-   * determines if user has accepted the Terms of service from the check boxes
+  //   this.State.Plans.forEach((plan: BillingPlanOption) => {
+  //     if (
+  //       this.SelectedPlan.PlanGroup === plan.PlanGroup &&
+  //       plan.Interval === toggleSelected.value
+  //     ) {
+  //       this.SelectedPlan = plan;
+  //       this.planID = this.SelectedPlan.Lookup;
+  //       // console.log("Toggled to: ", this.SelectedPlan);
+  //     }
+  //   });
+  // }
+
+  /**
+   * Back button clicked
    */
-  public TOSChanged(event: any) {
-    // console.log('TOS: ', event);
+  public GoBackClicked(event: any) {
+    // console.log("should be going back: ", event)
+    this.router.navigate([event]);
+  }
+  /**
+   * determines if user has accepted the Terms of service  and enterprise agreement from the check boxes
+   */
+  public ReqOptsChanged(event: any) {
+    // console.log('TOS & EA: ', event);
     this.AcceptedTOS = event.checked;
+    this.AcceptedEA = event.checked;
+
   }
   /**
    * determines if user has accepted the Enterprise agreement from the check boxes
    */
-  public EAChanged(event: any) {
-    // console.log('EA: ', event);
-    this.AcceptedEA = event.checked;
-  }
-/**
- * Determines if user has entered all fields and wether or not to show button
- */
+  // public EAChanged(event: any) {
+  //   // console.log('EA: ', event);
+  //   this.AcceptedEA = event.checked;
+  // }
+  /**
+   * Determines if user has entered all fields and wether or not to show button
+   */
   public IsButtonDisabled(): boolean {
     if (
       this.AcceptedEA &&
       this.AcceptedTOS &&
       this.StripeValid &&
-      this.BillingForm.value.userName &&
-      this.SelectedInterval
+      this.BillingForm.value.userName
     ) {
       return false;
     } else {
@@ -236,7 +265,7 @@ export class BillingComponent
 
   //  Helpers
   /**
-   * Checks to see if card has error 
+   * Checks to see if card has error
    */
   protected handleCardChanged(event: any) {
     if (event.error) {
@@ -249,25 +278,26 @@ export class BillingComponent
       this.StripeValid = true;
     }
   }
-/**
- * Handles the stripe once user has confirmed payment
- */
+  /**
+   * Handles the stripe once user has confirmed payment
+   */
   protected handleStripePaymentMethodCreated(result: any) {
     if (result.error) {
       this.StripeError = result.error;
     } else {
       this.StripeError = '';
       // console.log('Billing Form: ', this.BillingForm);
-      this.userBillState.CompletePayment(
+      this.userBillStateCtx.CompletePayment(
         result.paymentMethod.id,
         this.BillingForm.value.userName,
-        this.SelectedPlan.Lookup
+        this.SelectedPlan.Lookup,
+        this.SelectedPlan.TrialPeriodDays
       );
     }
   }
-/**
- * Sets up Billing form
- */
+  /**
+   * Sets up Billing form
+   */
   protected setupForms() {
     this.BillingForm = this.formBldr.group({
       prodPlan: new FormControl('', [Validators.required]),
@@ -276,9 +306,9 @@ export class BillingComponent
 
     this.StripeValid = false;
   }
-/**
- * Sets up the stripe credit card input and styles
- */
+  /**
+   * Sets up the stripe credit card input and styles
+   */
   protected setupStripe() {
     if (!this.stripe) {
       // Your Stripe public key
@@ -399,31 +429,33 @@ export class BillingComponent
   protected stateChanged() {
     this.findPlan();
     this.determineIntervals();
-    
+
     this.determineCheckboxes();
     // console.log("planID =", this.planID);
     // if a plan has been passed in via param set the selected plan accordingly
-    
+
     this.buildSelectedPlanGroupPlans();
-    
+
     // use change detection to prevent ExpressionChangedAfterItHasBeenCheckedError, when
     // using *ngIf with external form properties
     // this.cdr.detectChanges();
     this.determinePaymentStatus();
-    
+    if(this.SelectedPlan){
+      this.convertName();
+    }
   }
-/**
- * determines the intervals to display in the radio buttons
- */
-  protected determineIntervals(){
+  /**
+   * determines the intervals to display in the radio buttons
+   */
+  protected determineIntervals() {
     if (this.State.Plans) {
       this.Intervals = new Array<string>();
       // this.PlanGroups = new Array<string>();
       this.State.Plans.forEach((plan: BillingPlanOption) => {
-        if(!this.PlanGroups.includes(plan.PlanGroup)){
+        if (!this.PlanGroups.includes(plan.PlanGroup)) {
           this.PlanGroups.push(plan.PlanGroup);
         }
-        if(!this.Intervals.includes(plan.Interval)){
+        if (!this.Intervals.includes(plan.Interval)) {
           this.Intervals.push(plan.Interval);
         }
       });
@@ -431,10 +463,10 @@ export class BillingComponent
       // console.log('plan groups', this.PlanGroups);
     }
   }
-/**
- * Whether or not to display the Terms of service or the Enterprise agreement
- */
-  protected determineCheckboxes(){
+  /**
+   * Whether or not to display the Terms of service or the Enterprise agreement
+   */
+  protected determineCheckboxes() {
     if (this.State.RequiredOptIns) {
       if (!this.State.RequiredOptIns.includes('ToS')) {
         this.AcceptedTOS = true;
@@ -444,37 +476,40 @@ export class BillingComponent
       }
     }
   }
-/**
- * Find the plan based on the params passed in via router
- */
-  protected findPlan(){
+  /**
+   * Find the plan based on the params passed in via router
+   */
+  protected findPlan() {
     if (this.planGroupID && this.State.Plans && !this.SelectedPlan) {
       this.SelectedPlan = this.State.Plans.find(
-        (p: BillingPlanOption) => p.PlanGroup === this.planGroupID
+        (p: BillingPlanOption) => p.PlanGroup === this.planGroupID && p.Interval === this.planInterval
       );
-      // console.log('SELECTED PLAN:', this.SelectedPlan);
-    }
-    //if plan doesnt exist
-    if(!this.SelectedPlan){
-      this.router.navigate([""]);
+
+      // if plan doesnt exist
+      if (!this.SelectedPlan) {
+        this.router.navigate(['']);
+      }
     }
   }
-/**
- * Extracts the plans that match the plan group param passed in to display
- * 
- * different prices and intervals
- */
-  protected buildSelectedPlanGroupPlans(){
-    if (!this.SelectedPlanGroupPlans && this.State.Plans){
+  /**
+   * Extracts the plans that match the plan group param passed in to display
+   *
+   * different prices and intervals
+   */
+  protected buildSelectedPlanGroupPlans() {
+    if (!this.SelectedPlanGroupPlans && this.State.Plans) {
       this.SelectedPlanGroupPlans = new Array<BillingPlanOption>();
-      this.SelectedPlanGroupPlans= this.State.Plans.filter((plan: BillingPlanOption) => plan.PlanGroup === this.SelectedPlan.PlanGroup);
+      this.SelectedPlanGroupPlans = this.State.Plans.filter(
+        (plan: BillingPlanOption) =>
+          plan.PlanGroup === this.SelectedPlan.PlanGroup
+      );
       // console.log("SPGP:", this.SelectedPlanGroupPlans);
     }
   }
-/**
- * Determines the payment status of the user
- */
-  protected determinePaymentStatus(){
+  /**
+   * Determines the payment status of the user
+   */
+  protected determinePaymentStatus() {
     if (this.State.PaymentStatus) {
       // console.log('Payment Status', this.State.PaymentStatus);
       if (this.State.PaymentStatus.Code === 101) {
@@ -505,6 +540,20 @@ export class BillingComponent
    */
   protected paymentSuccess(): void {
     // console.log("selected plan on pay:", this.SelectedPlan)
-    this.router.navigate(['complete', this.SelectedPlan.Lookup]);
+    // this.router.navigate(['complete', this.SelectedPlan.Lookup]);
+    console.log("LicenseType", this.SelectedPlan.LicenseType)
+    this.router.navigate(['complete', this.SelectedPlan.LicenseType, this.State.PurchasedPlanLookup]);
+
   }
+
+  protected convertName(){
+      //   console.log("pipe =", value)
+      if(this.SelectedPlan.LicenseType === "lcu"){
+          this.HeaderName ="Fathym Low Code Framework";
+      }
+      else if(this.SelectedPlan.LicenseType === "forecast"){
+          this.HeaderName = "Fathym Forecaster API";
+      }
+    }
+  
 }

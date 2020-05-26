@@ -7,17 +7,24 @@ export class UserBillingState {
 
   public Loading?: boolean;
 
+  public LicenseType?: LicenseTypeDetails;
+
   public PaymentMethodID?: string;
 
   public PaymentStatus?: Status;
 
   public Plans?: BillingPlanOption[];
 
+  public PopularPlanGroup?: string;
+
   public RequiredOptIns?: string[];
 
   public Status?: Status;
 
   public Username?: string;
+
+  public PurchasedPlanLookup?: string; 
+
 }
 
 export class BillingPlanOption {
@@ -35,6 +42,8 @@ export class BillingPlanOption {
 
   public Lookup?: string;
 
+  public LicenseType?: string;
+
   public Name?: string;
 
   public PlanGroup?: string;
@@ -42,4 +51,13 @@ export class BillingPlanOption {
   public Price?: number;
 
   public PlanFeatures?: string;
+
+  public TrialPeriodDays?: number;
+
+  public PointQueries?: string;
+}
+export class LicenseTypeDetails {
+  public Lookup: string; // Would contain the actual license type value 'LCU' or 'forecaster' or whatever else comes down the line
+
+  public Name: string;  //  Use this value for display the license type name to a user
 }
