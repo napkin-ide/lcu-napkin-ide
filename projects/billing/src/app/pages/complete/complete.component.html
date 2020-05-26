@@ -1,24 +1,28 @@
 <div class='success-page' fxLayoutAlign="center center">
 <mat-card class='success-container' fxLayout="column" fxLayoutAlign="space-around center" fxFlex.lg="50%" fxFlex.md="50%" fxFlex.xs="100%">
     <!-- HEADING -->
-    <mat-card-header fxLayout="column" fxLayoutAlign="center center">
-    <div class="fathym-logo"></div>
-    <div class="success-heading" fxLayout="column" fxLayoutAlign="center center">
-        <h2 class="fathym-header">Fathym it. Build it.</h2>
-        <p class="succ-text">Congratulations!</p>
-        <p *ngIf="SelectedPlan" class="succ-text">You have successfully registered for a <b>{{State.LicenseType.Name | titlecase}} {{SelectedPlan.PlanGroup | titlecase }}</b> account.</p>
-        <p *ngIf="FreeTrialEndDate" class="succ-text">Your card will be charged on <b>{{FreeTrialEndDate}}</b> unless you cancel.</p>
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between start">
+    <div class="fathym-logo" fxLayoutAlign="center center"></div>
+    <div *ngIf="SelectedPlan?.PlanGroup"class="success-heading" fxLayout="column" fxLayoutAlign="start start">
+        <h1 class="fathym-header">{{HeaderName}}</h1>
+        <h3 >Success! You are registered as a <b>Fathym {{SelectedPlan.PlanGroup | titlecase}}!</b> </h3>
+        <p *ngIf="FreeTrialEndDate" class="succ-text">Subscription will automatically begin after trial period ends, cancel anytime before {{FreeTrialEndDate}} to avoid being charged.</p>
+        <!-- <p *ngIf="FreeTrialEndDate" class="succ-text"></p> -->
     </div>
 </mat-card-header>
-    <hr>
+    <!-- <hr> -->
     <!-- ORDER SUMMARY -->
     <mat-card-content class="order-summary-container" fxLayout="column" fxLayoutAlign="center center" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
-        <h3 fxLayoutAlign="center center">Order Summary</h3>
+        <div class="order-summary-header" fxLayout="row" fxLayoutAlign="start start">
+        <h2 class="order-summary-header-text" fxLayoutAlign="center center">Order Summary</h2>
+        <div class="hr-container" fxLayoutAlign="start start">
+            <hr class="title-hr">
+          </div>
+        </div>
         <div class="order-summary" fxLayout="column" fxFlex="100%" fxFlex.md="80%" fxFlex.xs="65%">
-            <div class="item" fxLayout="column">
-                <div *ngIf="SelectedPlan && SelectedPlan.TrialPeriodDays" class="bold"> {{State.LicenseType.Name | titlecase}} {{SelectedPlan.PlanGroup | titlecase}}</div>
-                <div *ngIf="SelectedPlan.TrialPeriodDays"
-                    class="free-trial-cost" 
+            <div *ngIf="SelectedPlan && SelectedPlan.TrialPeriodDays" class="item" fxLayout="column">
+                <div  class="bold"> {{State.LicenseType.Name | titlecase}} {{SelectedPlan.PlanGroup | titlecase}}</div>
+                <div class="free-trial-cost" 
                     fxLayout="row" 
                     fxLayoutAlign="space-between center">
                         <div>- {{SelectedPlan.TrialPeriodDays}} Day Free Trial</div>
@@ -32,13 +36,27 @@
                     <div>- {{SelectedPlan.Interval | titlecase}}ly Subscription</div>
                     <div>${{SelectedPlan.Price}}.00</div>
                 </div>
-                <div class="note" *ngIf="SelectedPlan.TrialPeriodDays">*Charge will occur after {{SelectedPlan.TrialPeriodDays}} day trial period</div>
+                <!-- <div class="note" *ngIf="SelectedPlan.TrialPeriodDays">*Charge will occur after {{SelectedPlan.TrialPeriodDays}} day trial period</div> -->
+            </div>
+            <hr class="dashed-hr">
+
+            <div *ngIf="SelectedPlan" class="item" fxLayout="column">
+                <!-- <div class="bold">{{State.LicenseType.Name | titlecase}} {{SelectedPlan.PlanGroup | titlecase}}</div> -->
+                <div class="paid-version-cost" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>Subtotal</div>
+                    <div>${{SelectedPlan.Price}}.00</div>
+                </div>
+                <div  class="paid-version-cost" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>Tax</div>
+                    <div>${{TotalTax}}</div>
+                </div>
+                <!-- <div class="note" *ngIf="SelectedPlan.TrialPeriodDays">*Charge will occur after {{SelectedPlan.TrialPeriodDays}} day trial period</div> -->
             </div>
             <hr class="dashed-hr">
 
             <div *ngIf="SelectedPlan" class="item" fxLayout="row" fxLayoutAlign="space-between center">
                 <div class="bold">Total</div>
-                <div class="bold">${{SelectedPlan.Price}}.00</div>
+                <div class="bold">${{Total}}</div>
             </div>
 
         </div>
@@ -46,12 +64,15 @@
     </mat-card-content>
     <hr>
 <!-- BUTTON -->
-<mat-card-actions class="actions-container">
+<mat-card-actions class="actions-container" fxLayoutAlign="end end">
+    <div class="button-container">
     <a mat-raised-button 
     href="/workspace/new" 
     class="redirect-button" 
-    target="_parent">Continue to Setup
+    target="_parent"
+    >Continue to Setup
     </a>
+</div>
 </mat-card-actions>
 </mat-card>
 

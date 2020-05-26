@@ -6,6 +6,7 @@ import {
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillingPlanOption } from 'projects/common/src/lcu.api';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'lcu-complete',
@@ -26,6 +27,8 @@ export class CompleteComponent implements OnInit {
  */
   // tslint:disable-next-line:no-input-rename
   // @Input('state')
+
+  public HeaderName: string;
 
   /**
    * The user billing state to determine payment status
@@ -49,12 +52,30 @@ export class CompleteComponent implements OnInit {
    */
   public FreeTrialEndDate: string;
 
+  /**
+   * The Tax (if any) to be collected
+   */
+  public TaxCollected: number;
+
+  /**
+   * The total amount of tax collected
+   */
+  public TotalTax: string;
+
+  /**
+   * The total cost 
+   */
+  public Total: string;
+
+
   //  Constructors
   constructor(
     protected userMgr: UserBillingStateContext,
     protected route: ActivatedRoute,
     protected router: Router
-  ) {}
+  ) {
+    this.TaxCollected = 0.00;
+  }
 
   //  Life Cycle
   public ngOnInit() {
@@ -66,7 +87,7 @@ export class CompleteComponent implements OnInit {
 
       this.stateChanged();
     });
-    if(this.SelectedPlan.TrialPeriodDays){
+    if(this.SelectedPlan && this.SelectedPlan.TrialPeriodDays){
       this.calcDate();
     }
   }
@@ -87,6 +108,9 @@ export class CompleteComponent implements OnInit {
       );
       // console.log('purchased PLAN:', this.SelectedPlan);
     }
+    if(this.SelectedPlan){
+      this.convertName();
+    }
   }
 
   /**
@@ -101,7 +125,28 @@ export class CompleteComponent implements OnInit {
 
     // console.log("tempDate:", tempDate);
 
-    this.FreeTrialEndDate = tempDate[0] + " " +tempDate[1] + " " + tempDate[2];
+    this.FreeTrialEndDate = tempDate[1] + " " + tempDate[2];
 
+    this.calcTotal();
+    this.calcTax();
+
+  }
+
+  protected convertName(){
+    //   console.log("pipe =", value)
+    if(this.SelectedPlan.LicenseType === "lcu"){
+        this.HeaderName ="Fathym Low Code Unit Framework";
+    }
+    else if(this.SelectedPlan.LicenseType === "forecast"){
+        this.HeaderName = "Fathym Forecaster API";
+    }
+  }
+
+  protected calcTotal(){
+    this.Total= (this.TaxCollected + this.SelectedPlan.Price).toFixed(2);
+  }
+
+  protected calcTax(){
+    this.TotalTax = this.TaxCollected.toFixed(2);
   }
 }

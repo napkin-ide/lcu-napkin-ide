@@ -51,7 +51,7 @@ export class PlansComponent implements OnInit {
   public BuyNowClicked(plan: BillingPlanOption) {
     // console.log('Buy Now Clicked:', plan);
 
-    this.router.navigate(['plan', plan.LicenseType, plan.PlanGroup]);
+    this.router.navigate(['plan', plan.LicenseType, plan.PlanGroup, plan.Interval]);
   }
   /**
    * runs when state returns
