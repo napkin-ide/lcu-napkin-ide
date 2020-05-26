@@ -9,15 +9,17 @@
   .fathym-logo{
     background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
     background-repeat: no-repeat;
-    background-size: 90px;
-    height: 90px;
-    width: 90px;
+    background-size: 135px;
+    height: 135px;
+    width: 205px;
+    margin-left: -20px;
+    margin-top: 10px;
   }
   .success-container{
     height: 100%;
     width: 100%;
     background-color: $BG-color !important;
-    padding: 15px;
+    padding: 20px;
     margin-top: 10px;
     border-radius: 2px;
     color: $Text-color;
@@ -25,6 +27,7 @@
   .success-heading{
     // background-color: $Fathym-Green;
     width: 100%;
+    margin-bottom: 10px;
     .fathym-header{
       margin:0px;
       margin-top:10px;
@@ -37,6 +40,25 @@
   .order-summary-container{
     width:100%;
     padding: 0px 25px;
+
+    .order-summary-header{
+      width:100%;
+      .order-summary-header-text{
+        width:221px;
+        margin-top:0px;
+
+      }
+      .hr-container{
+        width: 100%;
+            .title-hr{
+                width: 100%;
+                margin-left: 5px;
+                margin-top:10px;
+                background-color: $Fathym-Green;
+                border: .5px solid $Fathym-Green;
+            }
+        }
+    }
     
     .order-summary{
       width: 100%;
@@ -49,12 +71,15 @@
     }
   }
   .actions-container{
-    width: 90%;
+    width: 100%;
     margin-bottom: 10px;
+    margin-right:22px;
     .redirect-button{
       background-color: $Fathym-Green;
       width: 100%;
-      color: $Text-color;
+      color: $BG-color;
+      letter-spacing: 1px;
+      font-size: 19px;
     }
   }
   }
@@ -64,10 +89,10 @@
     font-weight: bold;
   }
   hr{
-    border: .5px solid $Text-color;
-      width: 100%;
+    border: .5px solid $Fathym-Green;
+      width: 95%;
   }
   .dashed-hr{
-    border:.5px dashed $Text-color;
+    border:.5px dashed $Fathym-Green;
     width: 100%;
   }

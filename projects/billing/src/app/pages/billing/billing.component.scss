@@ -30,7 +30,7 @@ $Fathym-Grey: slategray;
 
 @mixin stripe-billing-container($global-theme-color, $trans){
   // height: 100%;
-  // background-color: $Billing-BG !important;
+  background-color: $Billing-BG !important;
   height:450px;
   padding: 10px;
   // border: 1px solid $theme-color;
@@ -150,10 +150,11 @@ $Fathym-Grey: slategray;
 }
 .slogan{
   color: $Text-color;
+  margin-bottom: 0px;
 }
 
 .billing-card{
-  @include stripe-billing-container($Starter-primary, $Starter-trans);
+  @include stripe-billing-container($Pro-primary, $Pro-trans);
 }
 // .one-billing{
 //   @include stripe-billing-container($Starter-primary, $Starter-trans);

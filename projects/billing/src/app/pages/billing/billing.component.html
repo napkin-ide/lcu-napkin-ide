@@ -10,7 +10,8 @@
       fxLayoutAlign="start center">
 
       <lcu-plan-card *ngIf="State.Plans" [plan]="SelectedPlan" [all-plans]="State.Plans"
-        [show-back-button]="ShowBackButton" (interval-toggled)="IntervalToggled($event)"
+        [show-back-button]="ShowBackButton" [featured-plan-group]="State.FeaturedPlanGroup"
+        [popular-plan-group] = "State.PopularPlanGroup"(interval-toggled)="IntervalToggled($event)"
         (go-back-clicked)="GoBackClicked($event)">
       </lcu-plan-card>
 
