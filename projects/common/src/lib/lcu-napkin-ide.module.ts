@@ -19,7 +19,6 @@ import { JourneyCardComponent } from './elements/welcome-journeys/journey-card/j
 import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
 import { ToolbarComponent } from './controls/toolbar/toolbar.component';
 import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pipe';
-import { PackageIntervalPipe } from './utils/pipes/package-interval.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import { PackageIntervalPipe } from './utils/pipes/package-interval.pipe';
     JourneyCardComponent,
     ToolbarComponent,
     NthPowerToStringPipe,
-    PackageIntervalPipe
   ],
   imports: [
     FathymSharedModule,
