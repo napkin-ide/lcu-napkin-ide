@@ -1,6 +1,4 @@
-@import "../../../../../common/src/styles/theme";
-// @import "../../../../../../node_modules/@lcu/common/assets/styles/branding/theme-colors/fathym-theme-colors";
-
+@import '../../../styles.scss';
 
 $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
 .weird-fix {
@@ -72,12 +70,6 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
 .boot-option-name{
   text-decoration: underline;
 }
-
-
-// @mixin org-review($theme) {
-//   $primary: map-get($theme, primary);
-//   $accent: map-get($theme, accent);
-//   $warn: map-get($theme, warn);
 
   .boot-option-incomplete{
     // color: mat-color($primary);

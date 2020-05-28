@@ -57,6 +57,11 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    */
   protected planID: any;
 
+  /**
+   * The interval passed in via route params 
+   */
+  protected planInterval: string;
+
   protected get stripePublicKey(): string {
     const stateCfg: any = (window as any).LCU.State;
 
@@ -64,7 +69,16 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   }
 
   //  Properties
+  /**
+   * The billing form
+   */
   public BillingForm: FormGroup;
+
+
+/**
+ * The string to display in the billing form
+ */
+  public HeaderName: string;
 
   // public productPlan: any;
 
@@ -85,6 +99,11 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    */
   public StripeValid: boolean;
 
+  /**
+   * Whether or not to show the back button in the plan card
+   */
+  public ShowBackButton: boolean = true;
+
   public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
 
   /**
@@ -101,6 +120,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    */
 
   public PlanGroups: Array<string>;
+
+
 
   /**
    * An array of the intervals to pass to the Interval Toggle
@@ -137,6 +158,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   public ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       this.planGroupID = params.get('id');
+      this.planInterval = params.get('interval');
     });
     this.setupForms();
     this.userBillStateCtx.Context.subscribe((state: any) => {
@@ -178,45 +200,53 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       });
       // this.userBillStateCtx.ResetState(this.SelectedPlan.LicenseType.Lookup)
   }
+
+  public IntervalToggled(plan: BillingPlanOption){
+    this.SelectedPlan = plan;
+  }
   /**
    * Toggles planid and plan card to the selected plan
    * @param toggleSelected
    */
-  public ToggleChanged(toggleSelected: any): void {
+  // public ToggleChanged(toggleSelected: any): void {
     // false === Annually
     // true === Monthly
     // console.log("toggle changed: ", toggleSelected);
-    this.State.Plans.forEach((plan: BillingPlanOption) => {
-      if (
-        this.SelectedPlan.PlanGroup === plan.PlanGroup &&
-        plan.Interval === toggleSelected.value
-      ) {
-        this.SelectedPlan = plan;
-        this.planID = this.SelectedPlan.Lookup;
-        // console.log("Toggled to: ", this.SelectedPlan);
-      }
-    });
-  }
+  //   this.State.Plans.forEach((plan: BillingPlanOption) => {
+  //     if (
+  //       this.SelectedPlan.PlanGroup === plan.PlanGroup &&
+  //       plan.Interval === toggleSelected.value
+  //     ) {
+  //       this.SelectedPlan = plan;
+  //       this.planID = this.SelectedPlan.Lookup;
+  //       // console.log("Toggled to: ", this.SelectedPlan);
+  //     }
+  //   });
+  // }
+
   /**
    * Back button clicked
    */
-  // public GoBack() {
-  //   this.router.navigate(['']);
-  // }
+  public GoBackClicked(event: any) {
+    // console.log("should be going back: ", event)
+    this.router.navigate([event]);
+  }
   /**
-   * determines if user has accepted the Terms of service from the check boxes
+   * determines if user has accepted the Terms of service  and enterprise agreement from the check boxes
    */
-  public TOSChanged(event: any) {
-    // console.log('TOS: ', event);
+  public ReqOptsChanged(event: any) {
+    // console.log('TOS & EA: ', event);
     this.AcceptedTOS = event.checked;
+    this.AcceptedEA = event.checked;
+
   }
   /**
    * determines if user has accepted the Enterprise agreement from the check boxes
    */
-  public EAChanged(event: any) {
-    // console.log('EA: ', event);
-    this.AcceptedEA = event.checked;
-  }
+  // public EAChanged(event: any) {
+  //   // console.log('EA: ', event);
+  //   this.AcceptedEA = event.checked;
+  // }
   /**
    * Determines if user has entered all fields and wether or not to show button
    */
@@ -225,8 +255,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       this.AcceptedEA &&
       this.AcceptedTOS &&
       this.StripeValid &&
-      this.BillingForm.value.userName &&
-      this.SelectedInterval
+      this.BillingForm.value.userName
     ) {
       return false;
     } else {
@@ -411,6 +440,9 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     // using *ngIf with external form properties
     // this.cdr.detectChanges();
     this.determinePaymentStatus();
+    if(this.SelectedPlan){
+      this.convertName();
+    }
   }
   /**
    * determines the intervals to display in the radio buttons
@@ -450,7 +482,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected findPlan() {
     if (this.planGroupID && this.State.Plans && !this.SelectedPlan) {
       this.SelectedPlan = this.State.Plans.find(
-        (p: BillingPlanOption) => p.PlanGroup === this.planGroupID
+        (p: BillingPlanOption) => p.PlanGroup === this.planGroupID && p.Interval === this.planInterval
       );
 
       // if plan doesnt exist
@@ -513,4 +545,15 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     this.router.navigate(['complete', this.SelectedPlan.LicenseType, this.State.PurchasedPlanLookup]);
 
   }
+
+  protected convertName(){
+      //   console.log("pipe =", value)
+      if(this.SelectedPlan.LicenseType === "lcu"){
+          this.HeaderName ="Fathym Low Code Framework";
+      }
+      else if(this.SelectedPlan.LicenseType === "forecast"){
+          this.HeaderName = "Fathym Forecaster API";
+      }
+    }
+  
 }

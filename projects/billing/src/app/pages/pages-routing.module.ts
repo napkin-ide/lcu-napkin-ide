@@ -10,7 +10,7 @@ const routes: Routes = [
     component: CompleteComponent
   },
   {
-    path: 'plan/:licenseType/:id',
+    path: 'plan/:licenseType/:id/:interval',
     component: BillingComponent
   },
   {

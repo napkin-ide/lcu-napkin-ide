@@ -18,6 +18,7 @@ import { IntervalToggleComponent } from './controls/interval-toggle/interval-tog
 import { JourneyCardComponent } from './elements/welcome-journeys/journey-card/journey-card.component';
 import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
 import { ToolbarComponent } from './controls/toolbar/toolbar.component';
+import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ToolbarComponent } from './controls/toolbar/toolbar.component';
     LcuNapkinIdeWelcomeJourneysElementComponent,
     JourneyCardComponent,
     ToolbarComponent,
+    NthPowerToStringPipe,
   ],
   imports: [
     FathymSharedModule,

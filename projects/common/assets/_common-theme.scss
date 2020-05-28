@@ -1,8 +1,7 @@
 @import '../../../node_modules/@lcu/common/assets/theming/common-theme';
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
-@import '../src/lib/controls/toolbar/toolbar.component.scss';
 
-$global-theme: fathym-ivy-theme(true);
+$global-theme: fathym-ivy-theme(false);
 
 /**
 * Set the theme and generate dynamic variant theme classes,
@@ -10,13 +9,17 @@ $global-theme: fathym-ivy-theme(true);
 *
 * If we skip this include, the default theme is 'fathym-ivy-theme
 */
-@include theme-setup($global-theme, false);
-
-@mixin component-themes($theme) {
-    @include toolbar-component($theme);
-} 
+@include theme-setup($global-theme, true);
 
 /**
-* Apply theme to nested components
+* Common styles for Napkin-IDE projects
+*
+* If this starts to get big, think about moving these to another stylesheet
 */
-@include component-themes($global-theme);
+.spinner-logo {
+    position: absolute;
+    background-image: fathym-logo(thinky-logo,black, 1 );
+    height: 50px !important;
+    width: 50px !important;
+    background-repeat:no-repeat;
+}

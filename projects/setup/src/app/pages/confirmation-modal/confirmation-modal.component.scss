@@ -1,25 +1,13 @@
-@import "../../../../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding";
-@import "../../../../../../node_modules/@lcu/common/assets/styles/branding/theme-colors/fathym-theme-colors";
-@mixin modal($theme) {
-    $primary: map-get($theme, primary);
-    $accent: map-get($theme, accent);
-    $warn: map-get($theme, warn);
-    // @warn "current theme #{$theme}";
- 
-    .thinky-image{
-        background-image: fathym-logo(thinky-circle, mat-color($accent), .7);
-        background-repeat:no-repeat;
-        background-position: center;
-        background-size: 100px;
-        height:100px;
-      }
-}
+@import '../../../styles.scss';
 
-//   .buttons{
-//       background-color: #9cd8d6;
-//   }
+.thinky-image{
+    background-image: fathym-logo(thinky-circle, $global-accent, .7);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: 100px;
+    height:100px;
+    }
 
 ::ng-deep .mat-dialog-container{
     background-color: white;
 }
-// palette-color($fathym-ivy-primary, A100) !important
