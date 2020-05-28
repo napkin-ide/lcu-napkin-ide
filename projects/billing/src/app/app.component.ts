@@ -123,7 +123,6 @@ export class AppComponent implements OnInit {
     console.log('Billing App State Changed', this.State);
     this.determineBackButtonVisibility();
 
-    console.log(status);
     if (!this.routerEventSub) {
       this.routerEventSub = this.router.events
         .pipe(
