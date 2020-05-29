@@ -99,11 +99,10 @@ export class ToolbarComponent implements OnInit {
   }
 
   protected getUserInfo() {
-    console.log('State: ', this.State);
+    // console.log('State: ', this.State);
   }
 
   protected stateChanged() {
-    console.log('State: ', this.State);
     if (!this.UsersInfo) {
       this.UsersInfo = new UserInfoModel();
     }

@@ -37,7 +37,6 @@ export class IdeActivityBarComponent implements OnInit {
         this.OpenRootActivity(this.RootActivities[0]);
       }
     });
-    console.log('ideState =', this.ideState);
   }
 
   public OpenRootActivity(act: IdeActivity): void {
