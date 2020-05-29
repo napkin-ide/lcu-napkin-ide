@@ -25,6 +25,8 @@ export class UserBillingState {
 
   public PurchasedPlanLookup?: string; 
 
+  public SuccessRedirect? : string;
+
 }
 
 export class BillingPlanOption {
