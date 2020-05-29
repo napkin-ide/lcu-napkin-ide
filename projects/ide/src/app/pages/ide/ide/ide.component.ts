@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IDEStateManagementContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
 import {
@@ -10,7 +10,8 @@ import {
   GuidedTourManagementStateContext,
   GuidedTourManagementState,
   GuidedTourService,
-  ChatTourButton
+  ChatTourButton,
+  GuideBotSubItem
 } from '@lowcodeunit/lcu-guided-tour-common';
 
 @Component({
@@ -19,16 +20,18 @@ import {
   styleUrls: ['./ide.component.scss']
 })
 export class IdeComponent implements OnInit {
-  public AppTour: GuidedTour;
   public BotBoundingContainer: string = '#ideMainSideBar';
   public BotPadding: number = 5;
   public BotScreenPosition: GuideBotScreenPosition = GuideBotScreenPosition.BottomLeft;
+  public BotSubItems: GuideBotSubItem[];
+  public CurrentTour: GuidedTour;
   public EnableChat: boolean = true;
   public EnableFirstTimePopup: boolean = true;
   public GuidedTourState: GuidedTourManagementState;
   public IdeState: IdeManagementState;
   public IsHandset$: Observable<boolean>;
   public IsOpen: boolean = true;
+  public IsTourOpen: boolean = false;
   public Loading: boolean = false;
   public ShowPanels: boolean = false;
   public TourButtons: ChatTourButton[];
@@ -37,11 +40,18 @@ export class IdeComponent implements OnInit {
   constructor(
     protected breakpointObserver: BreakpointObserver,
     protected elRef: ElementRef,
-    protected ideState: IDEStateManagementContext,
+    protected guidedTourService: GuidedTourService,
     protected guidedTourState: GuidedTourManagementStateContext,
-    protected guidedTourService: GuidedTourService
+    protected ideState: IDEStateManagementContext
   ) {
+    this.BotSubItems = this.setBotSubItems();
     this.TourButtons = this.setTourButtons();
+
+    this.guidedTourService.isTourOpenStream.subscribe(
+      (tourLookup: string) => {
+        this.IsTourOpen = tourLookup ? true : false;
+      }
+    );
   }
 
   public ngOnInit(): void {
@@ -62,61 +72,62 @@ export class IdeComponent implements OnInit {
       );
 
     this.ideState.Context.subscribe((ideState: IdeManagementState) => {
+      console.log('IDE State: ', ideState);
       this.IdeState = ideState;
       this.Loading = ideState.Loading;
       this.ShowPanels = ideState.ShowPanels;
 
-      this.handleStateChanged();
+      this.determineTour();
     });
 
     this.guidedTourState.Context.subscribe((guidedTourState: GuidedTourManagementState) => {
       // console.log('GUIDED TOUR STATE: ', guidedTourState);
       this.GuidedTourState = guidedTourState;
-      this.AppTour = guidedTourState.CurrentTour;
       this.Tours = guidedTourState.Tours;
-
-      if (guidedTourState.CurrentTour && (this.AppTour?.Lookup !== guidedTourState.CurrentTour.Lookup)) {
-        this.AppTour = this.Tours.find((tour: GuidedTour) => tour.Lookup === guidedTourState.CurrentTour.Lookup);
-
-        if (this.AppTour?.IsFirstTimeViewing) {
-          this.guidedTourService.startTour(this.AppTour);
-        }
-      }
 
     });
   }
 
-  public OpenSideBar(): void {
-    this.IsOpen = !this.IsOpen;
-  }
-
-  public OnStepClosed(step: TourStep): void {
-    if (step.ID === '00000000-0000-0000-0000-000000000020') {
-      this.ideState.SelectSideBarAction('welcome', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
-    }
-    if (step.ID === '00000000-0000-0000-0000-000000000031') {
-      this.findDataAppSettingsButton();
-    }
-  }
-
-  public OnStepOpened(step: TourStep): void {
-    if (step.ID === '00000000-0000-0000-0000-000000000041') {
-      this.findDataFlowManageButton();
-    }
-  }
-
   public OnComplete(tour: GuidedTour): void {
-    console.log(`OnComplete() The tour: '${tour.Lookup}' is complete.`);
-    // TODO: Update 'IsFirstTimeViewing' flag to false in State when tour is complete
+    console.log(`The tour: '${tour.Lookup}' is complete.`);
   }
 
   public OnSkipped(tour: GuidedTour): void {
-    console.log(`OnSkipped() The tour: '${tour.Lookup}' has been skipped.`);
-    // TODO: Update 'IsFirstTimeViewing' flag to false in State when tour is skipped
+    console.log(`The tour: '${tour.Lookup}' has been skipped.`);
   }
 
-  protected handleStateChanged(): void {
-    this.determineTour();
+  public OnStepClosed(step: TourStep): void {
+    switch (step.ID) {
+      case '00000000-0000-0000-0000-000000000020':
+        this.ideState.SelectSideBarAction('welcome', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
+        break;
+      case '00000000-0000-0000-0000-000000000031':
+        this.dispatchClickEvent('lcu-app-list .mat-card:nth-of-type(1) button');
+        break;
+      case '00000000-0000-0000-0000-000000000060':
+        this.ideState.SelectSideBarAction('data-flow', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
+        break;
+      case '00000000-0000-0000-0000-000000000061':
+        this.dispatchClickEvent('lcu-data-flow-list-element .mat-card:nth-of-type(1) button');
+        break;
+      case '00000000-0000-0000-0000-000000000062':
+        this.ideState.SelectSideBarAction('data-apps', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
+        break;
+      case '00000000-0000-0000-0000-000000000063':
+        this.dispatchClickEvent('lcu-app-list .mat-card:nth-of-type(1) button');
+        break;
+      case '00000000-0000-0000-0000-000000000065':
+        this.ideState.SelectSideBarAction('welcome', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
+        break;
+      default:
+        break;
+    }
+  }
+
+  public OnStepOpened(step: TourStep): void { }
+
+  public OpenSideBar(): void {
+    this.IsOpen = !this.IsOpen;
   }
 
   protected determineTour(): void {
@@ -126,15 +137,14 @@ export class IdeComponent implements OnInit {
       switch (editor) {
         case 'lcu-limited-trial-welcome-element':
           this.setCurrentTour('limited-trial-tour');
+          this.pollForElement('lcu-limited-trial-welcome-element #startIotDevJourneyBtn', this.startIoTDeveloperTour);
           break;
         case 'lcu-limited-trial-data-apps-element':
           this.setCurrentTour('data-applications-tour');
           break;
         case 'lcu-limited-trial-data-flow-element':
           this.setCurrentTour('data-flow-management-tour');
-          setTimeout(() => {
-            this.findDataFlowManageButton();
-          }, 3000);
+          this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour);
           break;
         default:
           this.setCurrentTour('limited-trial-tour');
@@ -143,35 +153,80 @@ export class IdeComponent implements OnInit {
     }
   }
 
-  protected setCurrentTour(lookup: string): void {
-    if (this.GuidedTourState.CurrentTour?.Lookup !== lookup) {
-      this.guidedTourState.SetActiveTour(lookup);
-    }
-  }
-
-  protected findDataAppSettingsButton(): void {
-    const element = this.elRef.nativeElement.querySelector('lcu-app-list .mat-card:nth-of-type(1) button');
+  protected dispatchClickEvent(selector: string): void {
+    const element = this.elRef.nativeElement.querySelector(selector);
     const clickEvent = new MouseEvent('click', { bubbles: true, view: window });
 
     if (element) {
       element.dispatchEvent(clickEvent);
     } else {
-      console.warn('Could not find button for Data Apps Settings');
+      console.warn(`Could not dispatch click event for selector: ${selector}`);
     }
   }
 
-  protected findDataFlowManageButton(): void {
-    const element = this.elRef.nativeElement.querySelector('lcu-data-flow-list-element .mat-card:nth-of-type(1) button');
+  protected openExternalLink(link: string): void {
+    window.open(link, '_blank');
+  }
 
-    if (element) {
-      element.addEventListener('click', this.startEmulatedDataFlowTour.bind(this));
-    } else {
-      console.warn('Could not find button for Emulated Data Flow');
+  protected pollForElement(selector: string, bindingFunction: any, dispatch?: boolean): void {
+    let timeElapsed = 0;
+    const timeInt = 100;
+    const maxTimeElapsed = 10000;
+
+    const visiblePoller$ = timer(0, timeInt).subscribe(
+      (_: any) => {
+        timeElapsed += timeInt;
+
+        const selectedElement = this.elRef.nativeElement.querySelector(selector);
+
+        if (selectedElement) {
+          selectedElement.addEventListener('click', bindingFunction.bind(this));
+          if (dispatch) {
+            this.dispatchClickEvent(selector);
+          }
+          visiblePoller$.unsubscribe();
+        } else if (!selectedElement && timeElapsed >= maxTimeElapsed) {
+          console.warn(`The element: '${selector}' could not be found on the screen.`);
+          visiblePoller$.unsubscribe();
+        }
+      }
+    );
+  }
+
+  protected setBotSubItems(): GuideBotSubItem[] {
+    return [
+      new GuideBotSubItem({
+        label: 'Start Tour',
+        icon: 'launch',
+        action: () => this.startTour()
+      }),
+      new GuideBotSubItem({
+        label: 'Support',
+        icon: 'support',
+        action: () => this.openExternalLink('https://support.fathym.com/')
+      }),
+      new GuideBotSubItem({
+        label: 'About Thinky',
+        icon: 'info_outline',
+        action: () => this.openExternalLink('https://fathym.com/2019/08/08/a-new-look-how-we-created-a-refreshed-brand-for-fathym/')
+      })
+    ];
+  }
+
+  protected setCurrentTour(lookup: string): void {
+    if (!this.IsTourOpen) {
+      this.CurrentTour = this.Tours ? this.Tours.find((tour: GuidedTour) => tour.Lookup === lookup) : null;
+
+      if (this.GuidedTourState.CurrentTour?.Lookup !== lookup) {
+        this.guidedTourState.SetActiveTour(lookup);
+      }
     }
   }
 
-  protected startEmulatedDataFlowTour(): void {
-    this.setCurrentTour('data-flow-tool-tour');
+  protected setSideBarAction(lookup: string): void {
+    if (this.IdeState.CurrentEditor?.Lookup !== `lcu-limited-trial|${lookup}`) {
+      this.ideState.SelectSideBarAction(lookup, 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
+    }
   }
 
   protected setTourButtons(): ChatTourButton[] {
@@ -196,24 +251,23 @@ export class IdeComponent implements OnInit {
         Lookup: 'data-flow-tool-tour',
         OpenAction: () => {
           this.setSideBarAction('data-flow');
-
-          const clickEvent = new MouseEvent('click', { bubbles: true, view: window });
-          const element = document.querySelector('lcu-data-flow-list-element .mat-card:nth-of-type(1) button');
-
-          if (element) {
-            element.dispatchEvent(clickEvent);
-          }
-
-          this.startEmulatedDataFlowTour();
+          this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour, true);
         }
       }
     ];
   }
 
-  protected setSideBarAction(lookup: string): void {
-    if (this.IdeState.CurrentEditor?.Lookup !== `lcu-limited-trial|${lookup}`) {
-      this.ideState.SelectSideBarAction(lookup, 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
-    }
+  protected startEmulatedDataFlowTour(): void {
+    this.setCurrentTour('data-flow-tool-tour');
+  }
+
+  protected startIoTDeveloperTour(): void {
+    this.setCurrentTour('iot-developer-journey-tour');
+    this.startTour();
+  }
+
+  protected startTour(tour?: GuidedTour): void {
+    this.guidedTourService.startTour(tour ? tour : this.CurrentTour);
   }
 
 }
