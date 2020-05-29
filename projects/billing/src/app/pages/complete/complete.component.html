@@ -6,7 +6,7 @@
     <div *ngIf="SelectedPlan?.PlanGroup"class="success-heading" fxLayout="column" fxLayoutAlign="start start">
         <h1 class="fathym-header">{{HeaderName}}</h1>
         <h3 >Success! You are registered as a <b>Fathym {{SelectedPlan.PlanGroup | titlecase}}!</b> </h3>
-        <p *ngIf="FreeTrialEndDate" class="succ-text">Subscription will automatically begin after trial period ends, cancel anytime before {{FreeTrialEndDate}} to avoid being charged.</p>
+        <p *ngIf="FreeTrialEndDate && SelectedPlan.TrialPeriodDays > 0" class="succ-text">Subscription will automatically begin after trial period ends, cancel anytime before {{FreeTrialEndDate}} to avoid being charged.</p>
         <!-- <p *ngIf="FreeTrialEndDate" class="succ-text"></p> -->
     </div>
 </mat-card-header>
@@ -65,9 +65,9 @@
     <hr>
 <!-- BUTTON -->
 <mat-card-actions class="actions-container" fxLayoutAlign="end end">
-    <div class="button-container">
+    <div *ngIf="State.SuccessRedirect" class="button-container">
     <a mat-raised-button 
-    href="/workspace/new" 
+    [href]="State.SuccessRedirect" 
     class="redirect-button" 
     target="_parent"
     >Continue to Setup
