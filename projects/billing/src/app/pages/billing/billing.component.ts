@@ -541,7 +541,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected paymentSuccess(): void {
     // console.log("selected plan on pay:", this.SelectedPlan)
     // this.router.navigate(['complete', this.SelectedPlan.Lookup]);
-    console.log("LicenseType", this.SelectedPlan.LicenseType)
+    // console.log("LicenseType", this.SelectedPlan.LicenseType)
     this.router.navigate(['complete', this.SelectedPlan.LicenseType, this.State.PurchasedPlanLookup]);
 
   }

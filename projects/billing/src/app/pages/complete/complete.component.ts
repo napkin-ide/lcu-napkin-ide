@@ -96,7 +96,7 @@ export class CompleteComponent implements OnInit {
 
   //  Helpers
   protected stateChanged() {
-    console.log('state success page: ', this.State);
+    // console.log('state success page: ', this.State);
 //avoid error if the user trys to manually navigate to the complete page
     if (!this.State.PaymentStatus) {
       this.router.navigate(['']);
