@@ -20,7 +20,7 @@ export class IdeEditorsComponent implements OnInit {
 
   // TODO: Trigger loading on any State actions
   public ngOnInit(): void {
-    this.ideState.Context.subscribe(ideState => {
+    this.ideState.Context.subscribe((ideState: any)  => {
       this.Editors = ideState.Editors;
       this.CurrentEditor = ideState.CurrentEditor;
 
@@ -46,6 +46,8 @@ export class IdeEditorsComponent implements OnInit {
 
   public CurrentEditorIndex(): number {
     return this.Editors ? this.Editors.findIndex(e => e.Lookup === this.CurrentEditor.Lookup) : -1;
+
+    
   }
 
   public Remove(editor: IdeEditor, event: MouseEvent): void {
