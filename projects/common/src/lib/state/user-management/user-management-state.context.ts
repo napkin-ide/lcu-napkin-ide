@@ -100,6 +100,15 @@ export class UserManagementStateContext extends StateContext<
     });
   }
 
+  public SetUserDetails(name: string, country: string, status: string) {
+    // this.Execute({
+    //   Arguments: {
+    //     UserType: userType
+    //   },
+    //   Type: 'SetUserDetails'
+    // });
+  }
+
   //  Helpers
   protected defaultValue() {
     return { Loading: true } as UserManagementState;
