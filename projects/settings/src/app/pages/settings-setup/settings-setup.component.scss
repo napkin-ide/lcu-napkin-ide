@@ -1,0 +1,8 @@
+@import '../../../styles.scss';
+
+$primary: map-get($global-theme, primary);
+
+.mat-expansion-panel {
+    background-color: transparentize(mat-color($primary), 0.2);
+    // background-color: transparentize($global-primary, 0.2);
+  }

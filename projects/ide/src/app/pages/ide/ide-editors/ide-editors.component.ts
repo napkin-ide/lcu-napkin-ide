@@ -20,7 +20,7 @@ export class IdeEditorsComponent implements OnInit {
 
   // TODO: Trigger loading on any State actions
   public ngOnInit(): void {
-    this.ideState.Context.subscribe(ideState => {
+    this.ideState.Context.subscribe((ideState: any)  => {
       this.Editors = ideState.Editors;
       this.CurrentEditor = ideState.CurrentEditor;
 
@@ -40,12 +40,19 @@ export class IdeEditorsComponent implements OnInit {
       //      Assets: ['https://limited.fathym-int.com/_lcu/lcu-limited-trial/wc/lcu-limited-trial.lcu.js'],
       //      ElementName: this.CurrentEditor.Editor
       //   };
+
+        //  this.Config = {
+        //    Assets: ['https:/www.fathym-int.com/_lcu/lcu-napkin-ide-lcu/wc/lcu-napkin-ide.lcu.js'],
+        //    ElementName: this.CurrentEditor.Editor
+        // };
       }
     });
   }
 
   public CurrentEditorIndex(): number {
     return this.Editors ? this.Editors.findIndex(e => e.Lookup === this.CurrentEditor.Lookup) : -1;
+
+    
   }
 
   public Remove(editor: IdeEditor, event: MouseEvent): void {
