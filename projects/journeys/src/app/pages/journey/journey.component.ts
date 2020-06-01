@@ -13,7 +13,7 @@ import {
   Constants,
   UserManagementStateContext,
   UserManagementState,
-  UserManagementStepTypes,
+  // UserManagementStepTypes,
   UserTypes,
   JourneyPersona,
   JourneyDetail
@@ -88,7 +88,7 @@ export class JourneyComponent implements OnInit, AfterViewInit {
   // }
 
   public LoadJourneyDetails(detLookup: string) {
-    return this.State.Details.find(det => det.Lookup === detLookup);
+    return this.State.Details.find((det: any) => det.Lookup === detLookup);
   }
 
   public SetUserDetails() {

@@ -25,10 +25,10 @@ export class IdeEditorsComponent implements OnInit {
       this.CurrentEditor = ideState.CurrentEditor;
 
       if (this.CurrentEditor) {
-       this.Config = {
-          Assets: [this.CurrentEditor.Toolkit],
-          ElementName: this.CurrentEditor.Editor
-        };
+      //  this.Config = {
+      //     Assets: [this.CurrentEditor.Toolkit],
+      //     ElementName: this.CurrentEditor.Editor
+      //   };
 
         /** FOR TESTING ***************************************
          * This is for testing limited trial locally - Shannon
@@ -40,6 +40,11 @@ export class IdeEditorsComponent implements OnInit {
       //      Assets: ['https://limited.fathym-int.com/_lcu/lcu-limited-trial/wc/lcu-limited-trial.lcu.js'],
       //      ElementName: this.CurrentEditor.Editor
       //   };
+
+         this.Config = {
+           Assets: ['https:/www.fathym-int.com/_lcu/lcu-napkin-ide-lcu/wc/lcu-napkin-ide.lcu.js'],
+           ElementName: this.CurrentEditor.Editor
+        };
       }
     });
   }
