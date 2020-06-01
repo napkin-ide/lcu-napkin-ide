@@ -105,7 +105,11 @@
 
 </mat-card-content>
   <!-- BUTTON -->
-  <mat-card-actions  *ngIf="ShowButton === true" class="button-container" fxLayoutAlign="center center">
+  <mat-card-actions  *ngIf="ShowButton === true && Plan.TrialPeriodDays === 0" class="button-container" fxLayoutAlign="center center">
+    <button  mat-raised-button class="button" (click)="BuyNow(Plan)">Buy Now</button>
+  </mat-card-actions>
+
+  <mat-card-actions  *ngIf="ShowButton === true && Plan.TrialPeriodDays > 0" class="button-container" fxLayoutAlign="center center">
     <button  mat-raised-button class="button" (click)="BuyNow(Plan)">Start Free Trial</button>
   </mat-card-actions>
 

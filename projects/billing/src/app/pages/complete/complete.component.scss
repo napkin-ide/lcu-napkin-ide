@@ -24,29 +24,36 @@
     border-radius: 2px;
     color: $Text-color;
 
-  .success-heading{
-    // background-color: $Fathym-Green;
-    width: 100%;
-    margin-bottom: 10px;
-    .fathym-header{
-      margin:0px;
-      margin-top:10px;
+    .mat-card-header{
+      width:100%;    
+
+      .success-heading{
+        width: 100%;
+        margin-bottom: 10px;
+
+        .fathym-header{
+          margin:0px;
+          margin-top:10px;
+        }
+
+        .succ-text{
+          margin: 5px 0px;
+          font-size: 15px;
+        }
+      }
     }
-    .succ-text{
-      margin: 5px 0px;
-      font-size: 15px;
-    }
-  }
   .order-summary-container{
     width:100%;
     padding: 0px 25px;
 
     .order-summary-header{
       width:100%;
+      margin: 20px 0px;
       .order-summary-header-text{
-        width:221px;
+        width:180px;
         margin-top:0px;
-
+        font-size: 18px;
+        font-weight: bold;
       }
       .hr-container{
         width: 100%;

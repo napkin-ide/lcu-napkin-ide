@@ -120,7 +120,7 @@ export class AppComponent implements OnInit {
    * Called when state changes
    */
   protected stateChanged() {
-    console.log('Billing App State Changed', this.State);
+    // console.log('Billing App State Changed', this.State);
     this.determineBackButtonVisibility();
 
     if (!this.routerEventSub) {

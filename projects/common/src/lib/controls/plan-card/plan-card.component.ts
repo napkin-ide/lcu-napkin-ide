@@ -126,7 +126,7 @@ export class PlanCardComponent implements OnInit {
   public BuyNow(plan: any){
     // console.log("Plan selected from plan page: ", plan);
     this.BuyNowClicked.emit(plan);
-    console.log("plan passed = ", plan)
+    // console.log("plan passed = ", plan)
   }
 
   public IntervalSelected(interval: string){
@@ -167,7 +167,7 @@ export class PlanCardComponent implements OnInit {
  }
 
   protected getOtherIntervalPrice(selectedPlan: BillingPlanOption){
-    console.log("selected plan = ", selectedPlan);
+    // console.log("selected plan = ", selectedPlan);
     let temp = this.AllPlans.filter(plan => plan.Interval !== selectedPlan.Interval && plan.PlanGroup === selectedPlan.PlanGroup);
     this.OtherPlan = temp[0];
     // console.log("Other plan interval:", this.OtherPlan);
