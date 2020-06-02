@@ -1,136 +1,15 @@
-@import '../../../node_modules/@angular/material/prebuilt-themes/pink-bluegrey';
-@import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
-@import '../../../node_modules/@lcu/common/assets/styles/branding/fathym-branding';
-// @import '../../../node_modules/@lcu/common/assets/theming/fathym-default-theme';
+/**
+* Common theme for sharing $global-theme and dynamically
+* created variant theme color classes
+*/
+@import "../../common/assets/common-theme";
 
-@import '../src/app/controls/flex-layout/flex-layout.component.scss';
-@import './assets/themes/fathym-themes.scss';
-
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
-.font-test {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
-}
-// .primary-logo {
-//   background-image: url($fathym-white-logo);
-// }
-
-.foreground-color {
- color: mat-color($primary) !important;
-}
-
-@mixin set-theme($theme) {
- // @include custom-theme($theme);
-  @include component-themes($theme);
-}
+$primary: map-get($global-theme, primary);
 
 @mixin opacity($opacity) {
   opacity: $opacity;
   filter: alpha(opacity=$opacity); /* For IE8 and earlier */
 }
-
-@mixin mat-icon-size($size: 24px) {
-  font-size: $size;
-  height: $size;
-  width: $size;
-}
-
-// for updating components with themes
-@mixin component-themes($theme) {
-  @include flex-layout-component-theme($theme);
-  // @include user-list-component-theme($theme);
-  // @include side-nav-component-theme($theme);
-}
-
-  .app-background {
-    display: flex;
-    flex-direction: column;
-    min-height: -webkit-fill-available;
-    min-width: 300px;
-    max-height: -webkit-fill-available;
-  }
-
-  .arctic-theme {
-    @include set-theme($arctic-theme);
-    .primary-logo {
-      background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
-    }
-   }
-
-   .contrast-theme {
-    @include set-theme($contrast-theme);
-    .primary-logo {
-    background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
-    }
-
-    .thinky-logo {
-      background-repeat: no-repeat;
-      top: 100px;
-      left: 300px;
-      width: 100px;
-      height: 100px;
-      background-color: mat-color($accent);
-      background-image: fathym-logo('logo', thinky-logo, mat-color($primary));
-    }
-   }
-
-   .cool-candy-theme {
-    @include set-theme($cool-candy-theme);
-    .primary-logo {
-      background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
-    }
-   }
-
-   .flipper-theme {
-    @include set-theme($flipper-theme);
-    .primary-logo {
-      background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
-    }
-   }
-
-   .ice-theme {
-    @include set-theme($ice-theme);
-    .primary-logo {
-      background-image: fathym-logo('full', thinky-full-logo, mat-color($primary));
-    }
-   }
-
-   .sea-green-theme {
-    @include set-theme($sea-green-theme);
-    .primary-logo {
-      background-image: fathym-logo('full', thinky-full-logo, mat-color($accent));
-    }
-
-    .thinky-logo {
-      background-repeat: no-repeat;
-      top: 100px;
-      left: 300px;
-      width: 100px;
-      height: 100px;
-      background-color: mat-color($accent, 100);
-      background-image: fathym-logo('logo', thinky-logo, mat-color($accent));
-    }
-   }
-
-   .white-mint-theme {
-    @include set-theme($white-mint-theme);
-    .primary-logo {
-      // background-image: fathym-logo('full', thinky-full-logo, mat-color($warn));
-    }
-
-    .thinky-logo {
-      background-repeat: no-repeat;
-      top: 100px;
-      left: 300px;
-      width: 100px;
-      height: 100px;
-      background-image: fathym-logo('logo', thinky-logo, mat-color($accent));
-    }
-   }
-
-  .disabled {
-    @include opacity(.5);
-   }
 
   .bg-image {
     z-index: -100;
@@ -150,15 +29,9 @@
     @include opacity(.35);
   }
 
-  .cursor-pointer {
-    cursor: pointer;
-  }
-
   @media screen and (max-width: 1024px) { /* Specific to this particular image */
     .bg-image {
       left: 50%;
       margin-left: -512px;   /* 50% */
     }
-
-
   }
