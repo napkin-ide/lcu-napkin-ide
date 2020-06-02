@@ -2,7 +2,8 @@
     <lcu-side-nav
         [nav-links]="Links" 
         logo-class="primary-logo"
-        logo-alt="Fathym Logo">
+        logo-alt="Fathym Logo"
+        show-side-nav="true">
         <div class="router-container " style="height: 90%;">
             <router-outlet (activate)="OnActivate($event)"></router-outlet>
         </div>
