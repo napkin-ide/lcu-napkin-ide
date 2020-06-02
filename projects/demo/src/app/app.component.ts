@@ -49,11 +49,11 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void {
     this.Links = NavigationConstants.MENU_ITEMS;
 
-    this.themesSubscriptions = this.sharedNotificationService.ThemeChanged.subscribe((val: string) => {
-      this.changeTheme(val);
-    });
+    // this.themesSubscriptions = this.sharedNotificationService.ThemeChanged.subscribe((val: string) => {
+    //   this.changeTheme(val);
+    // });
 
-    this.resetTheme();
+    // this.resetTheme();
     this.resetFavicon();
   }
 
@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
    * Set default theme
    */
   protected resetTheme(): void {
-    this.changeTheme('sea-green-theme');
+   //  this.changeTheme('sea-green-theme');
   }
 
   /**
@@ -94,18 +94,18 @@ export class AppComponent implements OnInit {
    *
    * @param val theme to change to
    */
-  protected changeTheme(val: string): void {
-    this.SelectedTheme = val;
+//   protected changeTheme(val: string): void {
+//     this.SelectedTheme = val;
 
-    const element: HTMLElement = this.overlayContainer.getContainerElement();
-    const classList: DOMTokenList = element.classList;
+//     const element: HTMLElement = this.overlayContainer.getContainerElement();
+//     const classList: DOMTokenList = element.classList;
 
-    const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
-    classList.add(ToggleThemeUtil.Toggle(element.classList, val));
+//     const toggleTheme: ToggleThemeUtil = new ToggleThemeUtil();
+//     classList.add(ToggleThemeUtil.Toggle(element.classList, val));
 
-    // update favicon when theme changes
-    this.changeFavicon(this.SelectedTheme);
- }
+//     // update favicon when theme changes
+//     this.changeFavicon(this.SelectedTheme);
+//  }
 
   protected routeChanged(): void {
 

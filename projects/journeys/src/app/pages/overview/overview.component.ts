@@ -13,7 +13,7 @@ import {
   Constants,
   UserManagementStateContext,
   UserManagementState,
-  UserManagementStepTypes,
+  // UserManagementStepTypes,
   UserTypes,
   JourneyPersona
 } from '@napkin-ide/lcu-napkin-ide-common';

@@ -87,16 +87,16 @@ export class CompleteComponent implements OnInit {
 
       this.stateChanged();
     });
-    if(this.SelectedPlan && this.SelectedPlan.TrialPeriodDays){
-      this.calcDate();
-    }
+    // if(this.SelectedPlan && this.SelectedPlan.TrialPeriodDays){
+    //   this.calcDate();
+    // }
   }
 
   //  API methods
 
   //  Helpers
   protected stateChanged() {
-    console.log('state success page: ', this.State);
+    // console.log('state success page: ', this.State);
 //avoid error if the user trys to manually navigate to the complete page
     if (!this.State.PaymentStatus) {
       this.router.navigate(['']);
@@ -110,7 +110,13 @@ export class CompleteComponent implements OnInit {
     }
     if(this.SelectedPlan){
       this.convertName();
+      this.calcTotal();
+      this.calcTax();
     }
+    if(this.SelectedPlan && this.SelectedPlan.TrialPeriodDays){
+      this.calcDate();
+    }
+
   }
 
   /**
@@ -127,8 +133,7 @@ export class CompleteComponent implements OnInit {
 
     this.FreeTrialEndDate = tempDate[1] + " " + tempDate[2];
 
-    this.calcTotal();
-    this.calcTax();
+    
 
   }
 
@@ -143,6 +148,7 @@ export class CompleteComponent implements OnInit {
   }
 
   protected calcTotal(){
+    // console.log("total = ", this.TaxCollected + this.SelectedPlan.Price);
     this.Total= (this.TaxCollected + this.SelectedPlan.Price).toFixed(2);
   }
 
