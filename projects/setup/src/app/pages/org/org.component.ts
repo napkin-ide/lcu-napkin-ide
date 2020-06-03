@@ -68,7 +68,9 @@ export class OrgComponent implements OnInit, AfterViewInit {
   public State: UserManagementState;
 
   public Subdomain: string;
-
+/**
+ * The link to the fathym support documentation
+ */
   public SupportPage: string;
 
   //  Constructor
@@ -148,7 +150,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
 
     if (this.State.SetupStep === NapkinIDESetupStepTypes.Complete) {
     }
-    console.log("State: ", this.State)
+    // console.log("State: ", this.State)
   }
 
   /**
