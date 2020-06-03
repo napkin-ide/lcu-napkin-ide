@@ -1,0 +1,29 @@
+@import '../../../styles/styles.scss';
+
+$Font-Color: mat-color(map-get($global-theme, primary), 100);
+$Button-color: mat-color(map-get($global-theme, primary), 700);
+$Button-hover-color: mat-color(map-get($global-theme, primary), 500);
+
+
+.user-account-button{
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    outline: none;
+    cursor: pointer;
+    .menu-icon{
+        font-size: 40px !important;
+        height:40px;
+        width: 40px;
+        color: $Font-Color;
+    }
+}
+.user-menu{
+    .user-menu-button .mat-focus-indicator .mat-menu-item{
+        background-color: $Button-color !important;
+        :hover{
+            background-color: $Button-hover-color !important;
+        }
+    }
+}
+
