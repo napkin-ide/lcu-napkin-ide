@@ -3,10 +3,11 @@
   <!-- <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon> -->
 
   <div class="billing-page-container" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column"
-    fxLayoutAlign="center end" fxLayoutGap.lg="10px" fxLayoutGap.md="10px" fxLayoutGap.sm="30px">
+  fxLayoutAlign.xl="center end" fxLayoutAlign.lg="center end" fxLayoutAlign.md="center end" fxLayoutAlign.sm="center center" fxLayoutAlign.xs="center center"
+  fxLayoutGap.xl="50px" fxLayoutGap.lg="50px" fxLayoutGap.md="50px" fxLayoutGap.sm="30px" fxLayoutGap.xs="30px">
 
     <!-- PRICING CONTAINER -->
-    <div class='plan-card-container' fxFlex="27%" fxFlex.lg="23%" fxFlex.lt-sm="20%" fxLayout="row"
+    <div class='plan-card-container' fxLayout="row"
       fxLayoutAlign="start center">
 
       <lcu-plan-card *ngIf="State.Plans" [plan]="SelectedPlan" [all-plans]="State.Plans"
@@ -29,7 +30,9 @@
     <mat-card class="billing-card" fxFlex="45%" fxFlex.xs="15%" style="height: 100%" fxLayout="column">
 
       <mat-card-header class="billing-header-container" fxLayout="row" fxLayoutAlign="start center">
-        <div class="fathym-logo"></div>
+        <div class="fathym-logo-container">
+          <div class="fathym-logo"></div>
+        </div>
         <div class="billing-header-section" fxLayout="column" fxLayoutAlign="start start">
           <h2 class="fathym-header" *ngIf="SelectedPlan?.LicenseType">{{HeaderName}}</h2>
           <h3 class="fathym-header" *ngIf="SelectedPlan?.PlanGroup && SelectedPlan?.Interval">
