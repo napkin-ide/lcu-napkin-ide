@@ -45,13 +45,19 @@
           class="cursor-pointer"
           >{{ HideAppId ? "visibility_off" : "visibility" }}
         </mat-icon>
+        <a
+        matSuffix
+        [href]="SupportPage"
+        target="_blank"
+        class="help-anchor"
+      >
         <mat-icon
           matSuffix
-          (click)="OpenHelpPdf()"
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
           >info_outline</mat-icon
         >
+      </a>
         <!-- matBadge="{{OrgInfraAzureAppId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
@@ -90,13 +96,19 @@
           class="cursor-pointer"
           >{{ HideTenantId ? "visibility_off" : "visibility" }}
         </mat-icon>
+        <a
+        matSuffix
+        [href]="SupportPage"
+        target="_blank"
+        class="help-anchor"
+      >
         <mat-icon
           matSuffix
-          (click)="OpenHelpPdf()"
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
           >info_outline</mat-icon
         >
+        </a>
         <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
@@ -135,13 +147,19 @@
           class="cursor-pointer"
           >{{ HideSubId ? "visibility_off" : "visibility" }}
         </mat-icon>
+        <a
+        matSuffix
+        [href]="SupportPage"
+        target="_blank"
+        class="help-anchor"
+      >
         <mat-icon
           matSuffix
-          (click)="OpenHelpPdf()"
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
           >info_outline</mat-icon
         >
+        </a>
         <!-- matBadge="{{OrgInfraAzureSubId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
@@ -180,13 +198,19 @@
           class="cursor-pointer"
           >{{ HideAuthKey ? "visibility_off" : "visibility" }}
         </mat-icon>
+        <a
+        matSuffix
+        [href]="SupportPage"
+        target="_blank"
+        class="help-anchor"
+      >
         <mat-icon
           matSuffix
-          (click)="OpenHelpPdf()"
           matTooltip=" Obtain this value from Azure’s Certificates and Secrets page. Click for more detailed instructions."
           matTooltipClass="tooltip-background"
           >info_outline</mat-icon
         >
+        </a>
         <!-- matBadge="{{OrgInfraAzureAppAuthKey.value.length}}"  -->
         <!-- <mat-hint>32 Character Limit</mat-hint> -->
       </mat-form-field>

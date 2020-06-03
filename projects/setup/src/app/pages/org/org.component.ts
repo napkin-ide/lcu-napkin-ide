@@ -68,8 +68,10 @@ export class OrgComponent implements OnInit, AfterViewInit {
   public State: UserManagementState;
 
   public Subdomain: string;
-
-  public HelpPdf: string;
+/**
+ * The link to the fathym support documentation
+ */
+  public SupportPage: string;
 
   //  Constructor
   constructor(
@@ -77,8 +79,8 @@ export class OrgComponent implements OnInit, AfterViewInit {
     protected userMgr: UserManagementStateContext,
     protected cdr: ChangeDetectorRef
   ) {
-    this.HelpPdf = Constants.HELP_PDF;
     this.InfraFormValid = false;
+    this.SupportPage = Constants.SUPPORT_WEBPAGE;
   }
 
   //  Life Cycle
@@ -148,7 +150,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
 
     if (this.State.SetupStep === NapkinIDESetupStepTypes.Complete) {
     }
-    console.log("State: ", this.State)
+    // console.log("State: ", this.State)
   }
 
   /**

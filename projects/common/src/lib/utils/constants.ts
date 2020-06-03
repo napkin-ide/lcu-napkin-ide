@@ -4,8 +4,9 @@
  */
 
 export class Constants {
-  public static readonly HELP_PDF: string = 'assets/pdf/Fathym_Framework_Registration.pdf';
+  // public static readonly HELP_PDF: string = 'assets/pdf/Fathym_Framework_Registration.pdf';
   public static readonly LCU_TEXT: string = 'Low-Code Unit';
+  public static readonly SUPPORT_WEBPAGE: string = 'https://support.fathym.com/docs/registration';
 }
 
 
