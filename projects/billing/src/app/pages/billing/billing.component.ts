@@ -268,6 +268,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Checks to see if card has error
    */
   protected handleCardChanged(event: any) {
+    console.log("Error = ", event);
     if (event.error) {
       this.StripeError = event.error.message;
 
@@ -282,6 +283,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Handles the stripe once user has confirmed payment
    */
   protected handleStripePaymentMethodCreated(result: any) {
+    console.log("payment result: ", result.error)
     if (result.error) {
       this.StripeError = result.error;
     } else {
@@ -510,6 +512,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Determines the payment status of the user
    */
   protected determinePaymentStatus() {
+    console.log("Payment Status = ", this.State.PaymentStatus);
     if (this.State.PaymentStatus) {
       // console.log('Payment Status', this.State.PaymentStatus);
       if (this.State.PaymentStatus.Code === 101) {
@@ -519,6 +522,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
             if (result.error) {
               // Display error message in  UI.
               this.StripeError = this.State.PaymentStatus.Message;
+
               // The card was declined (i.e. insufficient funds, card has expired, etc)
             } else {
               // Show a success message to your customer
@@ -526,7 +530,9 @@ export class BillingComponent implements OnInit, AfterViewChecked {
             }
           });
       } else if (this.State.PaymentStatus.Code === 1) {
-        this.StripeError = this.State.PaymentStatus.Message;
+        // this.StripeError = this.State.PaymentStatus.Message;
+        this.StripeError = "There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.";
+
       } else if (this.State.PaymentStatus.Code === 0) {
         this.paymentSuccess();
       } else {
