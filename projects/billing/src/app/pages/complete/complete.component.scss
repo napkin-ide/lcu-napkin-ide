@@ -20,9 +20,10 @@
     width: 100%;
     background-color: $BG-color !important;
     padding: 20px;
-    margin-top: 10px;
+    margin: 10px 0px;
     border-radius: 2px;
     color: $Text-color;
+    box-shadow: 1px 1px 3px !important;
 
     .mat-card-header{
       width:100%;    

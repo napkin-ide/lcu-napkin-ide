@@ -148,7 +148,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
 
     if (this.State.SetupStep === NapkinIDESetupStepTypes.Complete) {
     }
-    // console.log("State: ", this.State)
+    console.log("State: ", this.State)
   }
 
   /**

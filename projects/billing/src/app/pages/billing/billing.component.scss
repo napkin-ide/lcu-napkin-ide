@@ -37,15 +37,20 @@ $Fathym-Grey: slategray;
   // border-radius: 3px;
   width: 100%;
   padding: 20px;
+  box-shadow: 1px 1px 3px !important;
 
-  .fathym-logo{
-    background-image: fathym-logo(thinky-circle, $global-theme-color, 1);
-    background-repeat: no-repeat;
-    background-size: 100px;
+  .fathym-logo-container{
     height: 100px;
-    width: 100px;
-    background-color: $trans;
-    border-radius: 50px;
+    width:100px;
+    .fathym-logo{
+      background-image: fathym-logo(thinky-circle, $global-theme-color, 1);
+      background-repeat: no-repeat;
+      background-size: 100px;
+      height: 100px;
+      width: 100px;
+      background-color: $trans;
+      border-radius: 50px;
+    }
   }
   .billing-header-section{
     margin-left: 20px;
@@ -179,6 +184,7 @@ $Fathym-Grey: slategray;
 
  .spread{
    width: 100%;
+   color: red;
  }
 
   // .back-arrow{
