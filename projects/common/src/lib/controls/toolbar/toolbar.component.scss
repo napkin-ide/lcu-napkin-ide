@@ -17,9 +17,9 @@
         background-image: fathym-logo(thinky-full-logo, $Text-Color);
         background-repeat:no-repeat;
         background-position: center;
-        width: 130px;
+        width: 170px;
         height: 100%;
-        background-size: 130px;
+        background-size: 170px;
         // margin-left: 15px;
         // margin-top: 7px;
     }
@@ -37,6 +37,7 @@
         // position: absolute;
         // right: 0;
         // top: 5px;
+        padding-top: 10px;
 
         button, a {
             margin-top: 7px;
@@ -44,6 +45,8 @@
         }
         mat-icon {
             font-size: 40px;
+            height:40px;
+            width:40px;
             width: initial;
             color: $Text-Color;
         }
@@ -70,4 +73,5 @@
 
     .user-account {
         // margin-right: 20px;
+        z-index: 10;
     }
