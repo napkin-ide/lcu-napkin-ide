@@ -69,7 +69,7 @@ export class OrgComponent implements OnInit, AfterViewInit {
 
   public Subdomain: string;
 
-  public HelpPdf: string;
+  public SupportPage: string;
 
   //  Constructor
   constructor(
@@ -77,8 +77,8 @@ export class OrgComponent implements OnInit, AfterViewInit {
     protected userMgr: UserManagementStateContext,
     protected cdr: ChangeDetectorRef
   ) {
-    this.HelpPdf = Constants.HELP_PDF;
     this.InfraFormValid = false;
+    this.SupportPage = Constants.SUPPORT_WEBPAGE;
   }
 
   //  Life Cycle
