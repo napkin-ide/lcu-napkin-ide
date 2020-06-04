@@ -19,6 +19,7 @@ import { JourneyCardComponent } from './elements/welcome-journeys/journey-card/j
 import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
 import { ToolbarComponent } from './controls/toolbar/toolbar.component';
 import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pipe';
+import { UserAccountMenuComponent } from './controls/user-account-menu/user-account-menu.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pip
     JourneyCardComponent,
     ToolbarComponent,
     NthPowerToStringPipe,
+    UserAccountMenuComponent,
   ],
   imports: [
     FathymSharedModule,
@@ -51,7 +53,8 @@ import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pip
     PlanCardComponent,
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    UserAccountMenuComponent
   ],
   entryComponents: [
     SideNavComponent,
@@ -62,6 +65,7 @@ import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pip
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
     ToolbarComponent,
+    UserAccountMenuComponent,
   ],
 })
 export class LcuNapkinIdeModule {}
