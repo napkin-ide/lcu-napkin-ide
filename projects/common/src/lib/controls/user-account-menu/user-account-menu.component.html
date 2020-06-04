@@ -2,7 +2,12 @@
     <mat-icon class="menu-icon">account_circle</mat-icon>
 </button>
 <mat-menu #userAccountMenu="matMenu" xPosition="before" class="user-menu">
-    <div >Hello {{UserEmail}}</div>
-    <button mat-menu-item class="user-menu-button" id="logout-button" (click)="Logout()" fxLayoutAlign="center center">Logout</button>
-  
+    <div mat-menu-item class="greeting">Hello {{UserEmail}}</div>
+    <div mat-menu-item fxLayoutAlign="center center">
+        <button class="user-menu-button" id="logout-button" 
+        type="submit" mat-raised-button color="primary"  
+        (click)="Logout()">
+            LOGOUT
+        </button>
+    </div>  
 </mat-menu>

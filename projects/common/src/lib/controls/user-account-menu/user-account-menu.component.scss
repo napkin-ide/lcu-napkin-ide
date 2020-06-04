@@ -19,6 +19,9 @@ $Button-hover-color: mat-color(map-get($global-theme, primary), 500);
     }
 }
 .user-menu{
+    .greeting{
+        padding: 20px !important;
+    }
     .user-menu-button .mat-focus-indicator .mat-menu-item{
         background-color: $Button-color !important;
         :hover{

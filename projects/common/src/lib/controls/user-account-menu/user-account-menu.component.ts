@@ -12,15 +12,21 @@ export class UserAccountMenuComponent implements OnInit {
    */
   @Input('user-email') UserEmail: string;
 
+  /**
+   * Emits that the logout button has been clicked
+   */
   @Output('logout-clicked') LogoutClicked: EventEmitter<any>;
 
   constructor() {
     this.LogoutClicked = new EventEmitter<any>();
+    this.UserEmail = "Guest";
    }
 
   ngOnInit(): void {
   }
-
+/**
+ * Called when Log out button has been clicked
+ */
   public Logout(){
     this.LogoutClicked.emit();
   }
