@@ -58,7 +58,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected planID: any;
 
   /**
-   * The interval passed in via route params 
+   * The interval passed in via route params
    */
   protected planInterval: string;
 
@@ -201,7 +201,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       // this.userBillStateCtx.ResetState(this.SelectedPlan.LicenseType.Lookup)
   }
 
-  public IntervalToggled(plan: BillingPlanOption){
+  public IntervalToggled(plan: BillingPlanOption) {
     this.SelectedPlan = plan;
   }
   /**
@@ -268,7 +268,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Checks to see if card has error
    */
   protected handleCardChanged(event: any) {
-    console.log("Error = ", event);
+    console.log('Error = ', event);
     if (event.error) {
       this.StripeError = event.error.message;
 
@@ -283,7 +283,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Handles the stripe once user has confirmed payment
    */
   protected handleStripePaymentMethodCreated(result: any) {
-    console.log("payment result: ", result.error)
+    console.log('payment result: ', result.error);
     if (result.error) {
       this.StripeError = result.error;
     } else {
@@ -442,7 +442,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     // using *ngIf with external form properties
     // this.cdr.detectChanges();
     this.determinePaymentStatus();
-    if(this.SelectedPlan){
+    if (this.SelectedPlan) {
       this.convertName();
     }
   }
@@ -512,7 +512,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Determines the payment status of the user
    */
   protected determinePaymentStatus() {
-    console.log("Payment Status = ", this.State.PaymentStatus);
+    console.log('Payment Status = ', this.State.PaymentStatus);
     if (this.State.PaymentStatus) {
       // console.log('Payment Status', this.State.PaymentStatus);
       if (this.State.PaymentStatus.Code === 101) {
@@ -531,7 +531,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
           });
       } else if (this.State.PaymentStatus.Code === 1) {
         // this.StripeError = this.State.PaymentStatus.Message;
-        this.StripeError = "There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.";
+        this.StripeError = 'There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.';
 
       } else if (this.State.PaymentStatus.Code === 0) {
         this.paymentSuccess();
@@ -546,20 +546,19 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    */
   protected paymentSuccess(): void {
     // console.log("selected plan on pay:", this.SelectedPlan)
-    // this.router.navigate(['complete', this.SelectedPlan.Lookup]);
+    // this.router.navigate([this.SelectedPlan.Lookup, 'complete']);
     // console.log("LicenseType", this.SelectedPlan.LicenseType)
-    this.router.navigate(['complete', this.SelectedPlan.LicenseType, this.State.PurchasedPlanLookup]);
+    this.router.navigate([this.SelectedPlan.LicenseType, 'complete', this.State.PurchasedPlanLookup]);
 
   }
 
-  protected convertName(){
+  protected convertName() {
       //   console.log("pipe =", value)
-      if(this.SelectedPlan.LicenseType === "lcu"){
-          this.HeaderName ="Fathym Low Code Framework";
-      }
-      else if(this.SelectedPlan.LicenseType === "forecast"){
-          this.HeaderName = "Fathym Forecaster API";
+      if (this.SelectedPlan.LicenseType === 'lcu') {
+          this.HeaderName = 'Fathym Low Code Framework';
+      } else if (this.SelectedPlan.LicenseType === 'forecast') {
+          this.HeaderName = 'Fathym Forecaster API';
       }
     }
-  
+
 }
