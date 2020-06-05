@@ -9,8 +9,8 @@
       </div>
 </mat-toolbar>
 
-<mat-nav-list *ngFor="let link of NavLinks">
-  <a mat-list-item [routerLink]="link.RouterURL" routerLinkActive="active">
+<mat-nav-list *ngFor="let link of NavLinks; let i = index;">
+  <a mat-list-item id="{{ link.Id ? link.Id : 'navLink' + i }}" [routerLink]="link.RouterURL" routerLinkActive="active">
       <mat-icon color="primary" *ngIf="link.Icon">{{ link.Icon }}</mat-icon>
       <span>{{ link.Label }}</span>
   </a>
