@@ -1,0 +1,13 @@
+<button  class="user-account-button"[matMenuTriggerFor]="userAccountMenu">
+    <mat-icon class="menu-icon" matTooltip="My Account">account_circle</mat-icon>
+</button>
+<mat-menu #userAccountMenu="matMenu" xPosition="before" class="user-menu">
+    <div mat-menu-item class="greeting">Hello {{UserEmail}}</div>
+    <div mat-menu-item fxLayoutAlign="center center">
+        <button class="user-menu-button" id="logout-button" 
+        type="submit" mat-raised-button color="primary"  
+        (click)="Logout()">
+            LOGOUT
+        </button>
+    </div>  
+</mat-menu>

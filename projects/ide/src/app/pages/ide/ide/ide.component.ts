@@ -90,41 +90,51 @@ export class IdeComponent implements OnInit {
 
   public OnComplete(tour: GuidedTour): void {
     console.log(`The tour: '${tour.Lookup}' is complete.`);
+    if (tour.Lookup === 'iot-developer-journey-tour') {
+      this.setSideBarAction('welcome');
+    }
   }
 
   public OnSkipped(tour: GuidedTour): void {
     console.log(`The tour: '${tour.Lookup}' has been skipped.`);
   }
 
-  public OnStepClosed(step: TourStep): void {
+  public OnStepChanged(step: TourStep): void {
+    // console.warn(`onStepChanged() lookup: ${step.Lookup}`);
     switch (step.ID) {
-      case '00000000-0000-0000-0000-000000000020':
-        this.ideState.SelectSideBarAction('welcome', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
+      case '00000000-0000-0000-0000-000000000021':
+        this.setSideBarAction('welcome');
         break;
-      case '00000000-0000-0000-0000-000000000031':
+
+      case '00000000-0000-0000-0000-000000000032':
         this.dispatchClickEvent('lcu-app-list .mat-card:nth-of-type(1) button');
         break;
-      case '00000000-0000-0000-0000-000000000060':
-        this.ideState.SelectSideBarAction('data-flow', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
-        break;
+
       case '00000000-0000-0000-0000-000000000061':
-        this.dispatchClickEvent('lcu-data-flow-list-element .mat-card:nth-of-type(1) button');
+        this.setSideBarAction('data-flow');
         break;
+
       case '00000000-0000-0000-0000-000000000062':
-        this.ideState.SelectSideBarAction('data-apps', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
+        if (this.IdeState.CurrentEditor?.Lookup !== `lcu-limited-trial|data-flow`) {
+          this.setSideBarAction('data-flow');
+          this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', null, true);
+        } else {
+          this.dispatchClickEvent('lcu-data-flow-list-element .mat-card:nth-of-type(1) button');
+        }
         break;
+
       case '00000000-0000-0000-0000-000000000063':
+        this.setSideBarAction('data-apps');
+        break;
+
+      case '00000000-0000-0000-0000-000000000064':
         this.dispatchClickEvent('lcu-app-list .mat-card:nth-of-type(1) button');
         break;
-      case '00000000-0000-0000-0000-000000000065':
-        this.ideState.SelectSideBarAction('welcome', 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
-        break;
+
       default:
         break;
     }
   }
-
-  public OnStepOpened(step: TourStep): void { }
 
   public OpenSideBar(): void {
     this.IsOpen = !this.IsOpen;
@@ -168,7 +178,7 @@ export class IdeComponent implements OnInit {
     window.open(link, '_blank');
   }
 
-  protected pollForElement(selector: string, bindingFunction: any, dispatch?: boolean): void {
+  protected pollForElement(selector: string, bindingFunction?: any, dispatch?: boolean): void {
     let timeElapsed = 0;
     const timeInt = 100;
     const maxTimeElapsed = 10000;
@@ -180,7 +190,9 @@ export class IdeComponent implements OnInit {
         const selectedElement = this.elRef.nativeElement.querySelector(selector);
 
         if (selectedElement) {
-          selectedElement.addEventListener('click', bindingFunction.bind(this));
+          if (bindingFunction) {
+            selectedElement.addEventListener('click', bindingFunction.bind(this));
+          }
           if (dispatch) {
             this.dispatchClickEvent(selector);
           }

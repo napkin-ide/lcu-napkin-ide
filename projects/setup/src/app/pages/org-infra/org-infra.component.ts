@@ -187,6 +187,11 @@ export class OrgInfraComponent implements OnInit {
    */
   public InfraForm: FormGroup;
 
+  /**
+   * The link to the Fathym Support page
+   */
+  public SupportPage: string;
+
   public get AzureInfrastructureValid(): boolean {
     return (
       this.State.AzureInfrastructureValid &&
@@ -212,6 +217,8 @@ export class OrgInfraComponent implements OnInit {
   constructor(protected userMgr: UserManagementStateContext) {
     this.SetStep = new EventEmitter();
     this.setFieldToggles();
+    this.SupportPage = Constants.SUPPORT_WEBPAGE;
+
 
     this.GuidErrorMessage = 'Value must be a valid Guid ( ' + Guid.Empty + ' )';
   }
@@ -247,9 +254,6 @@ export class OrgInfraComponent implements OnInit {
     );
   }
 
-  public OpenHelpPdf() {
-    window.open(Constants.HELP_PDF);
-  }
 
   /**
    * Validate azure setup
