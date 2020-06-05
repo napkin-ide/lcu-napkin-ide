@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { ExternalDialogComponent, IDEStateManagementContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { ExternalDialogComponent, IDEStateManagementContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { IdeActivity } from '@lcu/common';
 
@@ -27,7 +27,7 @@ export class IdeActivityBarComponent implements OnInit {
 
   // TODO: Trigger loading on any State actions
   public ngOnInit(): void {
-    this.ideState.Context.subscribe(ideState => {
+    this.ideState.Context.subscribe((ideState: IdeManagementState) => {
       this.Activities = ideState.Activities;
       this.CurrentActivity = ideState.CurrentActivity;
       this.InfraConfigured = ideState.InfrastructureConfigured;
@@ -43,6 +43,7 @@ export class IdeActivityBarComponent implements OnInit {
     if (!this.rootActDialog) {
       this.rootActDialog = this.dialog.open(ExternalDialogComponent, {
         width: '90%',
+        panelClass: 'settings-dialog-overlay',
         data: { ExternalPath: act.Lookup }
       });
 
