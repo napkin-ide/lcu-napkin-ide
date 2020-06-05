@@ -6,11 +6,11 @@ import { PlansComponent } from './plans/plans.component';
 
 const routes: Routes = [
   {
-    path: 'complete/:licenseType/:id',
+    path: ':licenseType/complete/:id',
     component: CompleteComponent
   },
   {
-    path: 'plan/:licenseType/:id/:interval',
+    path: ':licenseType/plan/:id/:interval',
     component: BillingComponent
   },
   {
