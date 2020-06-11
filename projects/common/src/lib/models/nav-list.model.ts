@@ -9,6 +9,11 @@ export class NavListModel {
     public Icon?: string;
 
     /**
+     * Unique ID for template
+     */
+    public Id?: string;
+
+    /**
      * Menu label
      */
     public Label: string;
@@ -23,10 +28,7 @@ export class NavListModel {
      */
     public RouterURL: string;
 
-    constructor(label: string, rounterURL: string, icon?: string, param?: object) {
-        this.Icon = icon;
-        this.Label = label;
-        this.RouterURL = rounterURL;
-        this.Param = param;
+    constructor(opts: NavListModel) {
+      Object.assign(this, opts);
     }
 }

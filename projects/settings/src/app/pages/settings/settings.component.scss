@@ -8,11 +8,6 @@ $primary: map-get($global-theme, primary);
   height: 100%;
   min-height: 500px;
 
-  .mat-expansion-panel {
-    background-color: transparentize(mat-color($primary), 0.2);
-    // background-color: transparentize($global-primary, 0.2);
-  }
-
   .content {
     .inner {
       height: 100%;
