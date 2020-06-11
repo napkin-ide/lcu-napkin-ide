@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ExternalDialogComponent, IDEStateManagementContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { IdeActivity } from '@lcu/common';
@@ -19,6 +19,8 @@ export class IdeActivityBarComponent implements OnInit {
   public InfraConfigured: boolean;
 
   public RootActivities: IdeActivity[];
+
+  @Output('settings-opened') public emitSettingsOpened: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     protected ideState: IDEStateManagementContext,
@@ -46,10 +48,12 @@ export class IdeActivityBarComponent implements OnInit {
         panelClass: 'settings-dialog-overlay',
         data: { ExternalPath: act.Lookup }
       });
+      this.emitSettingsOpened.emit(true);
 
       this.rootActDialog.afterClosed().subscribe((result: Observable<any>) => {
         this.ideState.$Refresh();
         this.rootActDialog = null;
+        this.emitSettingsOpened.emit(false);
       });
     }
   }
