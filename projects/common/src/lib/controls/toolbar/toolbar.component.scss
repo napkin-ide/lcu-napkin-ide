@@ -6,6 +6,8 @@
         // position: relative;
         z-index: 1000;
         background-color: mat-color(map-get($global-theme, primary), A700);
+        height: 60px;
+        padding: 0px 10px;
     }
     .toolbar-icon{
         font-size: 40px;
@@ -37,7 +39,7 @@
         // position: absolute;
         // right: 0;
         // top: 5px;
-        padding-top: 10px;
+        // padding-top: 10px;
 
         button, a {
             margin-top: 7px;
@@ -49,6 +51,7 @@
             width:40px;
             width: initial;
             color: $Text-Color;
+            // margin-top: -10px;
         }
         span{
             color: $Text-Color;
@@ -61,6 +64,7 @@
     }
   
     .toolbar-vertical-line {
+        margin-top: 10px;
         height: 20px;
         width: .5px;
         background-color: $Text-Color;
@@ -72,6 +76,5 @@
     }
 
     .user-account {
-        // margin-right: 20px;
-        z-index: 10;
+        // margin-top: -20px !important;
     }

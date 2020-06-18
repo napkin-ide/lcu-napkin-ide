@@ -1,0 +1,64 @@
+<mat-dialog-content class="account-container" fxLayout="column" fxLayoutAlign="center start">
+    <!-- HEADER -->
+    <div class="account-header" fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-icon class="toolbar-icon">account_circle</mat-icon>
+        <div class="user-names" fxLayout="column" fxLayoutAlign="center start">
+            <div class="greeting" id="username">Users name goes here</div>
+            <div class="greeting" id="email">{{ IdeState.Username }}</div>
+        </div>
+        <mat-icon class="edit-icon">create</mat-icon>
+    </div>
+    <div class="user-package">Users package goes here</div>
+
+    <div *ngIf="!ManagingSubscription">
+        <div class="user-info">Registered Since</div>
+    </div>
+
+    <div *ngIf="ManagingSubscription">
+        <div class="user-info">Registered Since</div>
+        <div class="user-info">Free Trial End Date</div>
+        <div class="user-info">Billing Cycle</div>
+        <div class="user-info">Next Billing Date</div>
+    </div>
+
+
+    
+</mat-dialog-content>
+<div class="dialog-actions-container" fxLayout="row" fxLayoutAlign="start center">
+
+    <div *ngIf="!ManagingSubscription"  fxLayout="row" fxLayoutAlign="start center">
+    <div class="dialog-action" 
+        id="logout-button"  
+        (click)="Logout()">
+        LOGOUT
+    </div>
+
+<div class="dialog-action" 
+    id="manage-subscription"  
+    (click)="ManageSubscription()">
+    MANAGE SUBSCRIPTION
+</div>
+</div>
+
+<div *ngIf="ManagingSubscription" fxLayout="row" fxLayoutAlign="start center">
+
+    <mat-icon 
+        class="dialog-action" 
+        id="back-icon"
+        (click)="GoBack()">
+        keyboard_backspace
+    </mat-icon>
+
+    <div class="dialog-action" 
+        id="upgrade-button"  
+        (click)="Upgrade()">
+        UPGRADE
+    </div>
+
+    <div class="dialog-action" 
+        id="cancel-subscription"  
+        (click)="CancelSubscription()">
+        CANCEL SUBSCRIPTION
+    </div>
+</div>
+</div>
