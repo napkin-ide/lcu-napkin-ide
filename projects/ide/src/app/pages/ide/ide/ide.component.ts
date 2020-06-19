@@ -297,7 +297,9 @@ export class IdeComponent implements OnInit {
         Lookup: 'data-flow-tool-tour',
         OpenAction: () => {
           this.setSideBarAction('data-flow');
-          this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour, true);
+          setTimeout(() => {
+            this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour, true);
+          }, 500);
         }
       }
     ];
