@@ -15,12 +15,16 @@
         <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon>
         <div class="toolbar-vertical-line"></div>
       </div>
-      
-      <div
+
+      <a id="fathymHomeLogo"
         class="fathym-header-logo"
+        href="https://www.fathym.com/"
+        target="_blank"
         alt="Fathym Framework"
+        matTooltip="Fathym Framework"
+        matTooltipPosition="right"
         [ngClass]="{ small: isHandset, large: !isHandset }">
-      </div>
+      </a>
     </div>
 
     <!-- use state to insert the actions -->
@@ -46,12 +50,12 @@
           [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''">
             <div fxLayout="row" fxLayoutAlign="center center">
               <div fxLayout="row" fxLayoutGap="2px">
-                <mat-icon>{{ action.Icon }}</mat-icon> 
+                <mat-icon>{{ action.Icon }}</mat-icon>
                 <div class="toolbar-vertical-line"></div>
               </div>
             </div>
         </a>
-        
+
       <!-- </div> -->
       </ng-container>
       <!-- <lcu-user-account-sidenav
@@ -60,7 +64,7 @@
       (logout-clicked)="LogoutClicked($event)"
       >
       </lcu-user-account-sidenav> -->
-      <lcu-user-account-menu 
+      <lcu-user-account-menu
       class="user-account"
       [user-email]="State.Username"
       (logout-clicked)="LogoutClicked($event)">

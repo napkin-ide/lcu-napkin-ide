@@ -1,7 +1,7 @@
 @import '../../../node_modules/@lcu/common/assets/theming/common-theme';
 @import '../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
 
-$global-theme: fathym-ivy-theme(false);
+$global-theme: fathym-ivy-theme(true);
 
 /**
 * Set the theme and generate dynamic variant theme classes,
@@ -9,7 +9,7 @@ $global-theme: fathym-ivy-theme(false);
 *
 * If we skip this include, the default theme is 'fathym-ivy-theme
 */
-@include theme-setup($global-theme, true);
+@include theme-setup($global-theme, false);
 
 /**
 * Common styles for Napkin-IDE projects

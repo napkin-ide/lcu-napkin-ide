@@ -77,7 +77,7 @@ export class IdeComponent implements OnInit {
       this.Loading = ideState.Loading;
       this.ShowPanels = ideState.ShowPanels;
 
-      this.determineTour();
+      this.handleStateChanges();
     });
 
     this.guidedTourState.Context.subscribe((guidedTourState: GuidedTourManagementState) => {
@@ -92,6 +92,12 @@ export class IdeComponent implements OnInit {
     console.log(`The tour: '${tour.Lookup}' is complete.`);
     if (tour.Lookup === 'iot-developer-journey-tour') {
       this.setSideBarAction('welcome');
+    }
+  }
+
+  public OnSettingsOpened(isOpen: boolean) {
+    if (isOpen) {
+      this.setCurrentTour('pro-settings-tour');
     }
   }
 
@@ -131,6 +137,10 @@ export class IdeComponent implements OnInit {
         this.dispatchClickEvent('lcu-app-list .mat-card:nth-of-type(1) button');
         break;
 
+      case '00000000-0000-0000-0000-000000000082':
+        this.dispatchClickEvent('#dataAppsAddNewAppBtn');
+        break;
+
       default:
         break;
     }
@@ -140,26 +150,41 @@ export class IdeComponent implements OnInit {
     this.IsOpen = !this.IsOpen;
   }
 
-  protected determineTour(): void {
+  protected determineProTours(): void {
     const editor = this.IdeState.CurrentEditor?.Editor;
 
-    if (this.IdeState.CurrentActivity?.Lookup === 'limited-trial') {
-      switch (editor) {
-        case 'lcu-limited-trial-welcome-element':
-          this.setCurrentTour('limited-trial-tour');
-          this.pollForElement('lcu-limited-trial-welcome-element #startIotDevJourneyBtn', this.startIoTDeveloperTour);
-          break;
-        case 'lcu-limited-trial-data-apps-element':
-          this.setCurrentTour('data-applications-tour');
-          break;
-        case 'lcu-limited-trial-data-flow-element':
-          this.setCurrentTour('data-flow-management-tour');
-          this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour);
-          break;
-        default:
-          this.setCurrentTour('limited-trial-tour');
-          break;
-      }
+    switch (editor) {
+      case 'lcu-data-apps-config-manager-element':
+        this.setCurrentTour('pro-data-applications-tour');
+        break;
+      case 'lcu-data-flow-manager-element':
+        this.pollForElement('lcu-data-flow-manager-element lcu-data-flow-list-element .mat-list-item a.mat-raised-button',
+          this.startProDataFlowTour);
+        break;
+      default:
+        this.setCurrentTour('pro-welcome-tour');
+        break;
+    }
+  }
+
+  protected determineTrialTours(): void {
+    const editor = this.IdeState.CurrentEditor?.Editor;
+
+    switch (editor) {
+      case 'lcu-limited-trial-welcome-element':
+        this.setCurrentTour('limited-trial-tour');
+        this.pollForElement('lcu-limited-trial-welcome-element #startIotDevJourneyBtn', this.startIoTDeveloperTour);
+        break;
+      case 'lcu-limited-trial-data-apps-element':
+        this.setCurrentTour('data-applications-tour');
+        break;
+      case 'lcu-limited-trial-data-flow-element':
+        this.setCurrentTour('data-flow-management-tour');
+        this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour);
+        break;
+      default:
+        this.setCurrentTour('limited-trial-tour');
+        break;
     }
   }
 
@@ -171,6 +196,15 @@ export class IdeComponent implements OnInit {
       element.dispatchEvent(clickEvent);
     } else {
       console.warn(`Could not dispatch click event for selector: ${selector}`);
+    }
+  }
+
+  protected handleStateChanges(): void {
+    if (this.IdeState.CurrentActivity?.Lookup !== 'limited-trial') {
+      this.determineProTours();
+    }
+    if (this.IdeState.CurrentActivity?.Lookup === 'limited-trial') {
+      this.determineTrialTours();
     }
   }
 
@@ -229,7 +263,7 @@ export class IdeComponent implements OnInit {
     if (!this.IsTourOpen) {
       this.CurrentTour = this.Tours ? this.Tours.find((tour: GuidedTour) => tour.Lookup === lookup) : null;
 
-      if (this.GuidedTourState.CurrentTour?.Lookup !== lookup) {
+      if (this.GuidedTourState?.CurrentTour?.Lookup !== lookup) {
         this.guidedTourState.SetActiveTour(lookup);
       }
     }
@@ -263,10 +297,16 @@ export class IdeComponent implements OnInit {
         Lookup: 'data-flow-tool-tour',
         OpenAction: () => {
           this.setSideBarAction('data-flow');
-          this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour, true);
+          setTimeout(() => {
+            this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour, true);
+          }, 500);
         }
       }
     ];
+  }
+
+  protected startProDataFlowTour(): void {
+    this.setCurrentTour('pro-data-flow-tour');
   }
 
   protected startEmulatedDataFlowTour(): void {

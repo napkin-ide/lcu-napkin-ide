@@ -19,10 +19,10 @@ export class AppComponent {
     this.SettingsTitle = 'IDE Settings';
 
     this.SettingsLinks = [
-      { Label: 'Setup', RouterURL: '/setup', Icon: 'build'},
-      { Label: 'Configuration', RouterURL: '/configuration', Icon: 'perm_data_setting'},
-      { Label: 'Architecture', RouterURL: '/architecture', Icon: 'square_foot'},
-      { Label: 'Marketplace', RouterURL: '/marketplace', Icon: 'shopping_basket'}
+      { Label: 'Architecture', RouterURL: '/architecture', Icon: 'square_foot', Id: 'settingsArchitectureNavLink' },
+      { Label: 'Configuration', RouterURL: '/configuration', Icon: 'perm_data_setting', Id: 'settingsConfigurationNavLink' },
+      { Label: 'Setup', RouterURL: '/setup', Icon: 'build', Id: 'settingsSetupNavLink' },
+      { Label: 'Marketplace', RouterURL: '/marketplace', Icon: 'shopping_basket', Id: 'settingsMarketplaceNavLink' }
     ];
   }
 
