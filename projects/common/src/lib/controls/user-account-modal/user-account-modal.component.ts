@@ -5,6 +5,10 @@ import { UserManagementStateContext } from '../../state/user-management/user-man
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
 import { IdeManagementState } from '../../state/ide/ide-management.state';
 import { IDEStateManagementContext } from '../../state/ide/ide-management-state.context';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Constants } from '../../utils/constants';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'lcu-user-account-modal',
@@ -28,12 +32,35 @@ public BillingState: UserBillingState;
  */
 public IdeState: IdeManagementState;
 
+/**
+ * Determines which state the modal is in user account info or cancellation 
+ */
+public IsUserAccount: boolean;
+
+/**
+ * Determines if the user is on the main user account slide or the managing subscription slide
+ */
 public ManagingSubscription: boolean;
 
-constructor(private usersStateCtx: UserManagementStateContext,
+/**
+ * Determines which text to show on the cansellation modal when user is confirming
+ */
+public IsInitialReason: boolean;
+
+public Reasons: Array<string> = Constants.REASONS_FOR_LEAVING;
+
+public ReasonForLeaving: string;
+
+public CancellationFeedback: string;
+
+constructor(protected dialogRef: MatDialogRef<UserAccountModalComponent>,
+  private usersStateCtx: UserManagementStateContext,
   private billingStateCtx: UserBillingStateContext,
-  private ideStateCtx:IDEStateManagementContext) {
+  private ideStateCtx:IDEStateManagementContext
+  ) {
     this.ManagingSubscription = false;
+    this.IsUserAccount = true;
+    this.IsInitialReason = true;
   // this.LogoutClicked = new EventEmitter<any>();
 }
 
@@ -78,13 +105,32 @@ public ManageSubscription(){
 public GoBack(){
   this.ManagingSubscription = false;
 }
+
+public GoBackToUserAccount(){
+  this.IsUserAccount = true;
+  this.dialogRef.updatePosition({right:'0px', top: '60px'});
+  this.dialogRef.updateSize('260');
+}
 /**
- * Cancels subscription
- * 
- * TODO hook up to state function
+ * Leads to subscription cancellation modal
  */
+public DisplayCancelSubscription(){
+  console.log("display cancel Subscription selected");
+  // center the dialog on the screen
+  this.dialogRef.updatePosition({});
+  //width x height
+  this.dialogRef.updateSize('300px', '500px');
+
+  this.IsUserAccount = false;
+  
+}
+
 public CancelSubscription(){
-  console.log("cancel Subscription selected");
+  console.log("User Feedback: ", this.CancellationFeedback);
+  console.log("User reason for cancelling", this.ReasonForLeaving);
+  this.IsInitialReason = false;
+
+  //TODO Hook up to state and proceed to next step once cancelation is complete
 }
 
 /**
@@ -93,7 +139,28 @@ public CancelSubscription(){
  * TODO figure out where to send the user
  */
 public Upgrade(){
+
   console.log("Upgarde selected");
+
+}
+
+/**
+ * Checks to see if the user has selected a reason why 
+ * they are canceling to enable the confirmation button
+ */
+public CheckIfReasonGiven(){
+  if( this.ReasonForLeaving && this.ReasonForLeaving.length > 0){
+    return false;
+  }
+  else{
+    return true;
+  }
+}
+
+public Close(){
+  console.log("close selected");
+  console.log("User Feedback: ", this.CancellationFeedback);
+  this.dialogRef.close();
 }
 
 }

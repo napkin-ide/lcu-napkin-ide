@@ -3,6 +3,8 @@
 
 $Font-Color: mat-color(map-get($global-theme, primary), 100);
 
+$Thinky-color: mat-color(map-get($global-theme, primary), A700);
+
 .account-container{
     // padding: 0px 10px !important;
 }
@@ -62,3 +64,59 @@ $Font-Color: mat-color(map-get($global-theme, primary), 100);
     width:20px;
     font-size: 20px;
 }
+/////////////////////////Cancel screen///////////////
+.cancel-content-container{
+    // height: 100%;
+    overflow: hidden;
+}
+.cancel-header{
+    width: 100%;
+    padding: 15px 15px 0px; //60px with text area
+}
+.fathym-header-logo{
+    background-image: fathym-logo(thinky-circle, $Thinky-color);
+    background-repeat:no-repeat;
+    background-position: center;
+    width: 100px;
+    height: 100px;
+    background-size: 100px;
+    // margin-left: 15px;
+    // margin-top: 7px;
+}
+
+.vertical-line {
+    margin-top: 10px;
+    height: 80px;
+    width: .5px;
+    background-color: $Thinky-color;
+}
+
+.cancel-header-text{
+    font-size: 25px;
+    color: $Thinky-color;
+}
+.content-container{
+    padding: 15px;
+    color: $Font-Color;
+}
+.p-text{
+    font-weight: bold;
+    color: $Font-Color;
+
+}
+
+.reason-radio-button{
+    margin: 5px;
+}
+.feedback-field{
+    width: 100%;
+
+    .feedback-textarea{
+        width: 100%;
+    }
+}
+
+.cancel-button-container{
+    height: 60px;
+}
+
