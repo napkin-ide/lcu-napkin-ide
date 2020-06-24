@@ -32,25 +32,29 @@ export class OrgInfraComponent implements OnInit {
   /**
    * Access organization name field
    */
-  public get OrgInfraAzureTenatId(): AbstractControl {
+  public get OrgInfraAzureTenantId(): AbstractControl {
     return this.InfraForm.get('azureTenantId');
   }
 
-  public get OrgInfraAzureTenatIdHasError(): boolean {
+  public get OrgInfraAzureTenantIdHasError(): boolean {
     return (
-      this.OrgInfraAzureTenatId.hasError('pattern') ||
-      this.OrgInfraAzureTenatId.hasError('required') ||
-      this.OrgInfraAzureTenatId.hasError('status')
+      this.OrgInfraAzureTenantId.hasError('pattern') ||
+      this.OrgInfraAzureTenantId.hasError('required') ||
+      this.OrgInfraAzureTenantId.hasError('status')
     );
   }
 
-  public get OrgInfraAzureTenatIdErrorMessage(): string {
-    if (this.OrgInfraAzureTenatId.hasError('pattern')) {
-      return this.GuidErrorMessage;
-    } else if (this.OrgInfraAzureTenatId.hasError('required')) {
-      return 'The Azure Tenant ID is required.';
-    } else if (this.OrgInfraAzureTenatId.hasError('status')) {
-      return 'The provided Azure Tenant ID is not valid.  Please check the value and try again.';
+  public get OrgInfraAzureTenantIdErrorMessage(): string {
+    if (this.State.AzureInfrastructureInvalidComponent && this.State.AzureInfrastructureInvalidComponent === 'AzureTenantID') {
+      return this.State.AzureInfrastructureInvalidComponentError;
+    } else {
+      if (this.OrgInfraAzureTenantId.hasError('pattern')) {
+        return this.GuidErrorMessage;
+      } else if (this.OrgInfraAzureTenantId.hasError('required')) {
+        return 'The Azure Tenant ID is required.';
+      } else if (this.OrgInfraAzureTenantId.hasError('status')) {
+        return 'The provided Azure Tenant ID is not valid.  Please check the value and try again.';
+      }
     }
   }
 
@@ -70,12 +74,16 @@ export class OrgInfraComponent implements OnInit {
   }
 
   public get OrgInfraAzureSubIdErrorMessage(): string {
-    if (this.OrgInfraAzureSubId.hasError('pattern')) {
-      return this.GuidErrorMessage;
-    } else if (this.OrgInfraAzureSubId.hasError('required')) {
-      return 'The Azure Subscription ID is required.';
-    } else if (this.OrgInfraAzureSubId.hasError('status')) {
-      return 'The provided Azure Subscription ID is not valid.  Please check the value and try again.';
+    if (this.State.AzureInfrastructureInvalidComponent && this.State.AzureInfrastructureInvalidComponent === 'AzureSubID') {
+      return this.State.AzureInfrastructureInvalidComponentError;
+    } else {
+      if (this.OrgInfraAzureSubId.hasError('pattern')) {
+        return this.GuidErrorMessage;
+      } else if (this.OrgInfraAzureSubId.hasError('required')) {
+        return 'The Azure Subscription ID is required.';
+      } else if (this.OrgInfraAzureSubId.hasError('status')) {
+        return 'The provided Azure Subscription ID is not valid.  Please check the value and try again.';
+      }
     }
   }
 
@@ -95,12 +103,16 @@ export class OrgInfraComponent implements OnInit {
   }
 
   public get OrgInfraAzureAppIdErrorMessage(): string {
-    if (this.OrgInfraAzureAppId.hasError('pattern')) {
-      return this.GuidErrorMessage;
-    } else if (this.OrgInfraAzureAppId.hasError('required')) {
-      return 'The Azure Application ID is required.';
-    } else if (this.OrgInfraAzureAppId.hasError('status')) {
-      return 'The provided Azure Application ID is not valid.  Please check the value and try again.';
+    if (this.State.AzureInfrastructureInvalidComponent && this.State.AzureInfrastructureInvalidComponent === 'AzureAppID') {
+      return this.State.AzureInfrastructureInvalidComponentError;
+    } else {
+      if (this.OrgInfraAzureAppId.hasError('pattern')) {
+        return this.GuidErrorMessage;
+      } else if (this.OrgInfraAzureAppId.hasError('required')) {
+        return 'The Azure Application ID is required.';
+      } else if (this.OrgInfraAzureAppId.hasError('status')) {
+        return 'The provided Azure Application ID is not valid.  Please check the value and try again.';
+      }
     }
   }
 
@@ -120,12 +132,16 @@ export class OrgInfraComponent implements OnInit {
   }
 
   public get OrgInfraAzureAppAuthKeyErrorMessage(): string {
-    if (this.OrgInfraAzureAppAuthKey.hasError('pattern')) {
-      return this.GuidErrorMessage;
-    } else if (this.OrgInfraAzureAppAuthKey.hasError('required')) {
-      return 'The Azure Application Client Secret is required.';
-    } else if (this.OrgInfraAzureAppAuthKey.hasError('status')) {
-      return 'The provided Azure Application Client Secret is not valid.  Please check the value and try again.';
+    if (this.State.AzureInfrastructureInvalidComponent && this.State.AzureInfrastructureInvalidComponent === 'AzureAppAuthKey') {
+      return this.State.AzureInfrastructureInvalidComponentError;
+    } else {
+      if (this.OrgInfraAzureAppAuthKey.hasError('pattern')) {
+        return this.GuidErrorMessage;
+      } else if (this.OrgInfraAzureAppAuthKey.hasError('required')) {
+        return 'The Azure Application Client Secret is required.';
+      } else if (this.OrgInfraAzureAppAuthKey.hasError('status')) {
+        return 'The provided Azure Application Client Secret is not valid.  Please check the value and try again.';
+      }
     }
   }
 
@@ -276,7 +292,7 @@ export class OrgInfraComponent implements OnInit {
   protected loadControlByErrorFrom(errorFrom: string): AbstractControl {
     switch (errorFrom) {
       case 'AzureTenantID':
-        return this.OrgInfraAzureTenatId;
+        return this.OrgInfraAzureTenantId;
 
       case 'AzureAppID':
         return this.OrgInfraAzureAppId;
@@ -294,7 +310,7 @@ export class OrgInfraComponent implements OnInit {
       ...(this.State.EnvSettings || new AzureInfaSettings()),
     };
 
-    envSettings.AzureTenantID = this.OrgInfraAzureTenatId.value;
+    envSettings.AzureTenantID = this.OrgInfraAzureTenantId.value;
 
     envSettings.AzureSubID = this.OrgInfraAzureSubId.value;
 
@@ -401,7 +417,7 @@ export class OrgInfraComponent implements OnInit {
    */
   protected stateChanged(): void {
     if (this.State.EnvSettings) {
-      this.OrgInfraAzureTenatId.setValue(
+      this.OrgInfraAzureTenantId.setValue(
         this.State.EnvSettings.AzureTenantID || ''
       );
 
@@ -419,7 +435,7 @@ export class OrgInfraComponent implements OnInit {
 
       this.InfraTemplate.setValue(this.State.Template || '');
 
-      this.OrgInfraAzureTenatId.markAsTouched();
+      this.OrgInfraAzureTenantId.markAsTouched();
 
       this.OrgInfraAzureSubId.markAsTouched();
 
