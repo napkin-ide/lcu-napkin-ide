@@ -16,21 +16,21 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
 $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
 $Text-color: mat-color(map-get($global-theme, primary), default-contrast);
 
-$Billing-BG: #f5f5f5;
-$Input-box-color: #f5f5f5;
-$Fathym-Grey: slategray;
+// $Billing-BG: #f5f5f5;
+// $Input-box-color: #f5f5f5;
+// $Fathym-Grey: slategray;
 
-@mixin input-box($color) {
-  background-color: $color;
+@mixin input-box() {
+  // background-color: $color;
   border-radius: 2px;
   margin: 10px 0px;
   padding: 5px;
-  border-bottom: 1px solid $Fathym-Grey;
+  // border-bottom: 1px solid $Fathym-Grey;
 }
 
 @mixin stripe-billing-container($global-theme-color, $trans){
   // height: 100%;
-  background-color: $Billing-BG !important;
+  // background-color: $Billing-BG !important;
   height:450px;
   padding: 10px;
   // border: 1px solid $theme-color;
@@ -76,14 +76,12 @@ $Fathym-Grey: slategray;
           .billing-info{
             width: 100%;
           .cardholder-name-input{
-            @include input-box($Input-box-color);
-            // border-top: 0;
-            // border-left: 0;
-            // border-right: 0;
+            // @include input-box($Input-box-color);
+            @include input-box();
             margin: 0px;
             padding: 0px;
             border: none;
-            color: black;
+            // color: black;
             font-weight: 600;
             font-size: 16px;
             // width: 500px;
@@ -95,10 +93,12 @@ $Fathym-Grey: slategray;
             // }
           }
           .user-input-icon{
-            color: #d4d7de;
+            // color: #d4d7de;
           }
           .stripe-card{
-            @include input-box($Input-box-color);
+            // @include input-box($Input-box-color);
+            @include input-box();
+
             // width:500px;
             width:100%;
           }
@@ -109,7 +109,7 @@ $Fathym-Grey: slategray;
           width:100%;
     
           .plan-cost-selection-container{
-            background-color: $trans;
+            // background-color: $trans;
             padding:10px;
             border-radius: 3px;
             width:100%;
@@ -120,7 +120,7 @@ $Fathym-Grey: slategray;
           }
           .interval-radio-button{
             margin-right: 100px;
-            color: black !important;
+            // color: black !important;
           }
         }
         .required-opt-ins{
@@ -136,16 +136,34 @@ $Fathym-Grey: slategray;
             }
           }
         }
-        .button-container{
+        .billing-card-footer{
           width: 100%;
+          
+
+          .important-note-container{
+            padding: 5px 10px;
+            border-radius: 3px;
+            background-color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            .asterisk{
+              color: red;
+            }
+            .important-note{
+              font-style: italic;
+            }
+          }
+        
+        .button-container{
+          // width: 100%;
           padding: 10px 0px 0px;
           .buy-now-button{
             width: 150px;
-            background-color: $global-theme-color;
-            color: white;
+            // background-color: $global-theme-color;
+            // color: white;
             letter-spacing: 1px;
           }
         }
+      }
         
       }
     }
@@ -154,7 +172,7 @@ $Fathym-Grey: slategray;
   
 }
 .slogan{
-  color: $Text-color;
+  // color: $Text-color;
   margin-bottom: 0px;
 }
 
@@ -179,8 +197,10 @@ $Fathym-Grey: slategray;
 // }
 
   .slogan{
-    color: $Text-color;
+    // color: $Text-color;
   }
+
+  
 
  .spread{
    width: 100%;
