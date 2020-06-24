@@ -25,7 +25,7 @@ export class IdeComponent implements OnInit {
   public BotScreenPosition: GuideBotScreenPosition = GuideBotScreenPosition.BottomLeft;
   public BotSubItems: GuideBotSubItem[];
   public CurrentTour: GuidedTour;
-  public EnableChat: boolean = true;
+  public EnableChat: boolean = false;
   public EnableFirstTimePopup: boolean = true;
   public GuidedTourState: GuidedTourManagementState;
   public IdeState: IdeManagementState;
