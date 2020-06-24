@@ -62,12 +62,12 @@
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
 
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <div fxLayout="row" fxLayoutGap="10px">
           <mat-icon
             *ngIf="
-              OrgInfraAzureTenatId.value.length > 0 &&
-              !OrgInfraAzureTenatId.hasError('pattern')
+              OrgInfraAzureTenantId.value.length > 0 &&
+              !OrgInfraAzureTenantId.hasError('pattern')
             "
             [ngClass]="'success infra-check'"
             >check_circle</mat-icon
@@ -82,8 +82,8 @@
           />
         </div>
 
-        <mat-error *ngIf="OrgInfraAzureTenatIdHasError">
-          {{ OrgInfraAzureTenatIdErrorMessage }}
+        <mat-error *ngIf="OrgInfraAzureTenantIdHasError">
+          {{ OrgInfraAzureTenantIdErrorMessage }}
         </mat-error>
 
         <mat-icon
@@ -109,11 +109,11 @@
           >info_outline</mat-icon
         >
         </a>
-        <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
+        <!-- matBadge="{{OrgInfraAzureTenantId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
 
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <div fxLayout="row" fxLayoutGap="10px">
           <mat-icon
             *ngIf="
@@ -164,7 +164,7 @@
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
 
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <div fxLayout="row" fxLayoutGap="10px">
           <mat-icon
             *ngIf="
@@ -242,7 +242,7 @@
     </div>
 
     <ng-container *ngIf="AzureInfrastructureValid">
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <mat-label>Azure Region (Location)</mat-label>
 
         <mat-select
@@ -262,7 +262,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <mat-label>Infrastructure Template</mat-label>
 
         <mat-select formControlName="infraTemplate" required>
