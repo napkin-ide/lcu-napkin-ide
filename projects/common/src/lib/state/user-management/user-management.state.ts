@@ -1,6 +1,10 @@
 import { Status } from '@lcu/common';
 
 export class UserManagementState {
+  public AzureInfrastructureInvalidComponent?: string;
+
+  public AzureInfrastructureInvalidComponentError?: string;
+
   public AzureInfrastructureValid?: Status;
 
   public AzureLocationOptions?: { [region: string]: string };
