@@ -45,7 +45,6 @@ export class IdeComponent implements OnInit {
     protected ideState: IDEStateManagementContext
   ) {
     this.BotSubItems = this.setBotSubItems();
-    this.TourButtons = this.setTourButtons();
 
     this.guidedTourService.isTourOpenStream.subscribe(
       (tourLookup: string) => {
@@ -202,9 +201,11 @@ export class IdeComponent implements OnInit {
   protected handleStateChanges(): void {
     if (this.IdeState.CurrentActivity?.Lookup !== 'limited-trial') {
       this.determineProTours();
+      this.TourButtons = null;
     }
     if (this.IdeState.CurrentActivity?.Lookup === 'limited-trial') {
       this.determineTrialTours();
+      this.TourButtons = this.setTourButtons();
     }
   }
 
