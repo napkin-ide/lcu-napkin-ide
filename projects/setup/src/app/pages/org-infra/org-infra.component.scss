@@ -1,17 +1,11 @@
-// @import '../../../../../common/src/styles/theme';
 @import '../../../styles.scss';
 
-.mat-option-dropdown{
-    background-color: white;
-}
-::ng-deep .mat-select-panel{
-    margin-top:40px;
-}
-.infra-check{
+.infra-check {
     border-radius: 15px;
     background-color: $global-accent;
 }
-.help-anchor{
+
+.help-anchor {
     text-decoration: none;
     color: $global-primary-contrast
 }
