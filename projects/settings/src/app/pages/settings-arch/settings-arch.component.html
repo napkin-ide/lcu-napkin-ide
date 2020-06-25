@@ -6,7 +6,7 @@
   <mat-card>
     <mat-nav-list>
       <ng-container *ngFor="let lcu of State.Arch?.LCUs">
-        <mat-list-item *ngIf="State.Arch.EditLCU != lcu.Lookup">
+        <mat-list-item *ngIf="State.Arch.EditLCU != lcu.Lookup" matTooltip="{{lcu.Lookup}} ({{lcu.NPMPackage}}@{{lcu.PackageVersion}})">
           <a matLine (click)="SetEditLCU(lcu)">
             {{ lcu.Lookup }}
             <small>({{ lcu.NPMPackage }}@{{ lcu.PackageVersion }})</small>

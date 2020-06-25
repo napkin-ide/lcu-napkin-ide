@@ -8,7 +8,7 @@
       <mat-form-field>
         <mat-select placeholder="Select" [value]="State.Config.CurrentLCUConfig" (selectionChange)="SetConfigLCU($event)">
           <ng-container *ngFor="let lcu of State.Arch?.LCUs">
-            <mat-option [value]="lcu.Lookup">
+            <mat-option [value]="lcu.Lookup" matTooltip="{{lcu.Lookup}} ({{lcu.NPMPackage}}@{{lcu.PackageVersion}})">
               {{ lcu.Lookup }} <small>({{ lcu.NPMPackage }}@{{ lcu.PackageVersion }})</small>
             </mat-option>
           </ng-container>

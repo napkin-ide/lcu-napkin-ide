@@ -58,6 +58,7 @@
   <div class="feature-container">
     <div class="features" fxLayout="column" fxLayoutAlign="center start">
 
+
       <div *ngIf="Plan?.TrialPeriodDays" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
         <div>{{Plan.TrialPeriodDays}} Day Free Trial</div>
@@ -67,6 +68,7 @@
 
     <ng-container *ngIf="PlanFeatures">
       <div fxLayout="column"  *ngFor="let feat of PlanFeatures">
+
         <div fxLayout="row" fxLayoutAlign="center center">
           <mat-icon>check_circle_outline</mat-icon>
           <div>{{feat}}</div>
@@ -75,26 +77,25 @@
 
       </div>
     </ng-container>
-
+      <!-- <div *ngIf="Plan?.DataApps" class="vl"></div> -->
 
       <div *ngIf="Plan?.DataApps" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
         <div >{{Plan.DataApps}} Data Apps</div>
       </div>
 
-      <div *ngIf="Plan?.DataApps" class="vl"></div>
+      <div *ngIf="Plan?.DataFlows" class="vl"></div>
 
       <div *ngIf="Plan?.DataFlows" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
         <div >{{Plan.DataFlows}} Data Flows</div>
       </div>
 
-      <div *ngIf="Plan?.DataFlows" class="vl"></div>
 
-      <div *ngIf="Plan?.LCUs" fxLayout="row" fxLayoutAlign="center center">
+      <!-- <div *ngIf="Plan?.LCUs" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
         <div >Low-Code Unit&trade; Packages</div>
-      </div>
+      </div> -->
 
       <div *ngIf="Plan?.PointQueries" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
