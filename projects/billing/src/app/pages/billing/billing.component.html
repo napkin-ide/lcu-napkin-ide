@@ -150,10 +150,16 @@
 
                 </mat-checkbox>
               </div>
-              <div class="button-container" fxLayoutAlign="end end" fxFlex="100%">
+              <div class="billing-card-footer" fxLayout="row" fxLayoutAlign="end end">
+              <div *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="important-note-container"fxLayout="row" fxFlex="70%">
+                <span class="asterisk">*</span>
+                <div class="important-note">&nbsp;Fathym will only charge your card if you go over 10 thousand point queries per month and you will be upgraded to the starter pricing tier.</div>
+              </div>
+              <div class="button-container" fxLayoutAlign="end end" fxFlex="30%">
                 <button mat-raised-button id="payment-button" class="buy-now-button" *ngIf="SelectedPlan"
                   [disabled]="IsButtonDisabled()">REGISTER NOW</button>
               </div>
+            </div>
             </div>
 
             
