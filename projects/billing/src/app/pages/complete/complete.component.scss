@@ -1,8 +1,8 @@
 @import '../../../styles.scss';
 
   $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
-  $BG-color: transparentize(#f5f5f5, .1);
-  $Text-color: mat-color(map-get($global-theme, primary), default-contrast);
+  // $BG-color: transparentize(#f5f5f5, .1);
+  $Text-color: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
 
   .success-page{
     height: 100%;
@@ -18,7 +18,7 @@
   .success-container{
     height: 100%;
     width: 100%;
-    background-color: $BG-color !important;
+    // background-color: $BG-color !important;
     padding: 20px;
     margin: 10px 0px;
     border-radius: 2px;
@@ -83,9 +83,9 @@
     margin-bottom: 10px;
     margin-right:22px;
     .redirect-button{
-      background-color: $Fathym-Green;
+      // background-color: $Fathym-Green;
       width: 100%;
-      color: $BG-color;
+      color: $Text-color;
       letter-spacing: 1px;
       font-size: 19px;
     }

@@ -321,22 +321,23 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       this.stripeCard = elements.create('card', {
         style: {
           base: {
-            color: 'black',
+            iconColor: '#c7c7c7',
+            color: '#c7c7c7',
             fontWeight: 600,
             fontFamily: 'Arial, sans-serif',
             fontSize: '16px',
             fontSmoothing: 'antialiased',
 
             ':focus': {
-              color: 'black',
+              color: '#c7c7c7',
             },
 
             '::placeholder': {
-              color: 'grey',
+              color: '#c7c7c7',
             },
 
             ':focus::placeholder': {
-              color: 'black',
+              color: '#c7c7c7',
             },
           },
           invalid: {
