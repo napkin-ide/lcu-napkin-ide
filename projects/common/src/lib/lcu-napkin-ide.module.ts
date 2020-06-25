@@ -20,6 +20,7 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
 import { ToolbarComponent } from './controls/toolbar/toolbar.component';
 import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pipe';
 import { UserAccountMenuComponent } from './controls/user-account-menu/user-account-menu.component';
+import { UserAccountModalComponent } from './controls/user-account-modal/user-account-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UserAccountMenuComponent } from './controls/user-account-menu/user-acco
     ToolbarComponent,
     NthPowerToStringPipe,
     UserAccountMenuComponent,
+    UserAccountModalComponent,
   ],
   imports: [
     FathymSharedModule,
@@ -54,7 +56,8 @@ import { UserAccountMenuComponent } from './controls/user-account-menu/user-acco
     IntervalToggleComponent,
     LcuNapkinIdeWelcomeJourneysElementComponent,
     ToolbarComponent,
-    UserAccountMenuComponent
+    UserAccountMenuComponent,
+    UserAccountModalComponent,
   ],
   entryComponents: [
     SideNavComponent,
@@ -66,6 +69,7 @@ import { UserAccountMenuComponent } from './controls/user-account-menu/user-acco
     LcuNapkinIdeWelcomeJourneysElementComponent,
     ToolbarComponent,
     UserAccountMenuComponent,
+    UserAccountModalComponent,
   ],
 })
 export class LcuNapkinIdeModule {}

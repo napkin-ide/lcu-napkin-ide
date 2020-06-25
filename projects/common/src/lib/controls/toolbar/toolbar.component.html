@@ -36,7 +36,7 @@
           matTooltip="{{ action.Text }}"
           mat-icon-button
           (click)="HeaderActionClicked(action)">
-          <mat-icon>{{ action.Icon }}</mat-icon>
+          <mat-icon [inline]="true">{{ action.Icon }}</mat-icon>
           <span>{{ action.Text }}</span>
         </button>
         <a
@@ -50,7 +50,7 @@
           [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''">
             <div fxLayout="row" fxLayoutAlign="center center">
               <div fxLayout="row" fxLayoutGap="2px">
-                <mat-icon>{{ action.Icon }}</mat-icon>
+                <mat-icon [inline]="true">{{ action.Icon }}</mat-icon>
                 <div class="toolbar-vertical-line"></div>
               </div>
             </div>
@@ -58,17 +58,25 @@
 
       <!-- </div> -->
       </ng-container>
+      <button
+      mat-icon-button
+      matTooltip="My Account"
+      disableRipple
+      (click)="OpenMyAccount()"
+      >
+        <mat-icon class="user-account" [inline]="true" disableRipple>account_circle</mat-icon>
+      </button>
       <!-- <lcu-user-account-sidenav
       class="user-account"
       [user-email]="State.Username"
       (logout-clicked)="LogoutClicked($event)"
       >
       </lcu-user-account-sidenav> -->
-      <lcu-user-account-menu
+      <!-- <lcu-user-account-menu
       class="user-account"
       [user-email]="State.Username"
       (logout-clicked)="LogoutClicked($event)">
-      </lcu-user-account-menu>
+      </lcu-user-account-menu> -->
     </span>
   </mat-toolbar>
 

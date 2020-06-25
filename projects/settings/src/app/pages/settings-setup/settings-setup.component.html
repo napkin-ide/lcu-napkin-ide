@@ -19,7 +19,7 @@
 
       <mat-nav-list class="activities">
         <ng-container *ngFor="let activity of State.Activities">
-          <mat-list-item *ngIf="State.EditActivity != activity.Lookup">
+          <mat-list-item *ngIf="State.EditActivity != activity.Lookup" >
             <a matLine (click)="SetEditActivity(activity)">
               <mat-icon>{{ activity.Icon }}</mat-icon>
 

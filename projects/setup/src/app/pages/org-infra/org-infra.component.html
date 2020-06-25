@@ -259,7 +259,14 @@
           >
             {{ State.AzureLocationOptions[regOptKey] }}
           </mat-option>
+         
         </mat-select>
+        <mat-icon
+        matSuffix
+        matTooltip="Select the Azure server region that best fits your location."
+        matTooltipClass="tooltip-background"
+        >info_outline</mat-icon
+      >
       </mat-form-field>
 
       <mat-form-field class="mat-full-width margin-top-5">
@@ -274,6 +281,12 @@
             {{ State.InfrastructureOptions[infraOptKey] }}
           </mat-option>
         </mat-select>
+        <mat-icon
+        matSuffix
+        matTooltip="Choose your infrastructure template. The Low-Code Unit™ Runtime template installs the Azure resources for building and hosting applications and APIs. The Low-Code Unit™ Runtime w/ IoT template provisions all of the above and the infrastructure to connect devices and real-time data flows, enabling Internet of Things (IoT) projects."
+        matTooltipClass="tooltip-background"
+        >info_outline</mat-icon
+      >
       </mat-form-field>
 
       <div
@@ -285,7 +298,7 @@
 
       <div class="margin-top-4">
         <button
-          matTooltip="Your best practices IoT cloud infrastructure will be set up. If you were doing this from scratch, it may take several days, but with Fathym it will only take up to 15 minutes."
+          matTooltip="Your best practice cloud infrastructure environment will be set up. If you were doing this from scratch, it may take several days, but with Fathym it will only take up to 15 minutes."
           matTooltipClass="tooltip-background"
           mat-raised-button
           color="accent"
