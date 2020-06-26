@@ -1,10 +1,10 @@
-<!-- <mat-card [ngClass]="{'one': Plan?.PlanGroup === PlanGroups[0], 
+<!-- <mat-card [ngClass]="{'one': Plan?.PlanGroup === PlanGroups[0],
                  'two': Plan?.PlanGroup === PlanGroups[1],
                  'three': Plan?.PlanGroup === PlanGroups[2],
                  'four' : Plan?.PlanGroup === PlanGroups[3]
                 }" fxLayout="column"> -->
 <mat-card class="card" fxLayout="column">
-    
+
   <!-- HEADER -->
   <mat-card-header class="header" fxLayout="row" fxLayoutAlign="start end">
     <mat-card-title *ngIf="Plan?.PlanGroup" class="title" fxLayoutAlign="center center">{{Plan.PlanGroup}}</mat-card-title>
@@ -31,8 +31,8 @@
   <div *ngIf="Plan?.DiscountedFrom > 0" class="pricing-container" fxLayout="row" fxLayoutAlign="space-around center">
     <!-- TOGGLE -->
     <div class="toggle-content" fxLayout="column" fxLayoutAlign="center center">
-      <mat-slide-toggle (change)="IntervalSelected($event)" [checked]="ToggleChecked"></mat-slide-toggle> 
-      <div *ngIf="Plan?.Interval">{{Plan.Interval | titlecase}}ly</div> 
+      <mat-slide-toggle (change)="IntervalSelected($event)" [checked]="ToggleChecked"></mat-slide-toggle>
+      <div *ngIf="Plan?.Interval">{{Plan.Interval | titlecase}}ly</div>
     </div>
     <div class="priced-content"  fxLayout="row" fxLayoutAlign="center end">
       <!-- <div *ngIf="Plan?.DiscountedFrom" class="discounted-from" fxLayoutAlign="center center">
@@ -52,11 +52,12 @@
     </ng-container>
   </div>
 
- 
+
 
   <!-- FEATURES -->
   <div class="feature-container">
     <div class="features" fxLayout="column" fxLayoutAlign="center start">
+
 
       <div *ngIf="Plan?.TrialPeriodDays" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
@@ -67,6 +68,7 @@
 
     <ng-container *ngIf="PlanFeatures">
       <div fxLayout="column"  *ngFor="let feat of PlanFeatures">
+
         <div fxLayout="row" fxLayoutAlign="center center">
           <mat-icon>check_circle_outline</mat-icon>
           <div>{{feat}}</div>
@@ -75,26 +77,25 @@
 
       </div>
     </ng-container>
-
+      <!-- <div *ngIf="Plan?.DataApps" class="vl"></div> -->
 
       <div *ngIf="Plan?.DataApps" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
         <div >{{Plan.DataApps}} Data Apps</div>
       </div>
 
-      <div *ngIf="Plan?.DataApps" class="vl"></div>
+      <div *ngIf="Plan?.DataFlows" class="vl"></div>
 
       <div *ngIf="Plan?.DataFlows" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
         <div >{{Plan.DataFlows}} Data Flows</div>
       </div>
 
-      <div *ngIf="Plan?.DataFlows" class="vl"></div>
 
-      <div *ngIf="Plan?.LCUs" fxLayout="row" fxLayoutAlign="center center">
+      <!-- <div *ngIf="Plan?.LCUs" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>
-        <div >{{Plan.LCUs}} Fathym Low Code Unit &trade; Packages</div>
-      </div>
+        <div >Low-Code Unit&trade; Packages</div>
+      </div> -->
 
       <div *ngIf="Plan?.PointQueries" fxLayout="row" fxLayoutAlign="center center">
         <mat-icon>check_circle_outline</mat-icon>

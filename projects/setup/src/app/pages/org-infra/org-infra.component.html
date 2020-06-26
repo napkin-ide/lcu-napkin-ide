@@ -62,12 +62,12 @@
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
 
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <div fxLayout="row" fxLayoutGap="10px">
           <mat-icon
             *ngIf="
-              OrgInfraAzureTenatId.value.length > 0 &&
-              !OrgInfraAzureTenatId.hasError('pattern')
+              OrgInfraAzureTenantId.value.length > 0 &&
+              !OrgInfraAzureTenantId.hasError('pattern')
             "
             [ngClass]="'success infra-check'"
             >check_circle</mat-icon
@@ -82,8 +82,8 @@
           />
         </div>
 
-        <mat-error *ngIf="OrgInfraAzureTenatIdHasError">
-          {{ OrgInfraAzureTenatIdErrorMessage }}
+        <mat-error *ngIf="OrgInfraAzureTenantIdHasError">
+          {{ OrgInfraAzureTenantIdErrorMessage }}
         </mat-error>
 
         <mat-icon
@@ -109,11 +109,11 @@
           >info_outline</mat-icon
         >
         </a>
-        <!-- matBadge="{{OrgInfraAzureTenatId.value.length}}"  -->
+        <!-- matBadge="{{OrgInfraAzureTenantId.value.length}}"  -->
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
 
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <div fxLayout="row" fxLayoutGap="10px">
           <mat-icon
             *ngIf="
@@ -164,7 +164,7 @@
         <mat-hint>Guid Value</mat-hint>
       </mat-form-field>
 
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <div fxLayout="row" fxLayoutGap="10px">
           <mat-icon
             *ngIf="
@@ -242,7 +242,7 @@
     </div>
 
     <ng-container *ngIf="AzureInfrastructureValid">
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <mat-label>Azure Region (Location)</mat-label>
 
         <mat-select
@@ -259,10 +259,17 @@
           >
             {{ State.AzureLocationOptions[regOptKey] }}
           </mat-option>
+         
         </mat-select>
+        <mat-icon
+        matSuffix
+        matTooltip="Select the Azure server region that best fits your location."
+        matTooltipClass="tooltip-background"
+        >info_outline</mat-icon
+      >
       </mat-form-field>
 
-      <mat-form-field class="mat-full-width margin-top-4">
+      <mat-form-field class="mat-full-width margin-top-5">
         <mat-label>Infrastructure Template</mat-label>
 
         <mat-select formControlName="infraTemplate" required>
@@ -274,6 +281,12 @@
             {{ State.InfrastructureOptions[infraOptKey] }}
           </mat-option>
         </mat-select>
+        <mat-icon
+        matSuffix
+        matTooltip="Choose your infrastructure template. The Low-Code Unit™ Runtime template installs the Azure resources for building and hosting applications and APIs. The Low-Code Unit™ Runtime w/ IoT template provisions all of the above and the infrastructure to connect devices and real-time data flows, enabling Internet of Things (IoT) projects."
+        matTooltipClass="tooltip-background"
+        >info_outline</mat-icon
+      >
       </mat-form-field>
 
       <div
@@ -285,7 +298,7 @@
 
       <div class="margin-top-4">
         <button
-          matTooltip="Your best practices IoT cloud infrastructure will be set up. If you were doing this from scratch, it may take several days, but with Fathym it will only take up to 15 minutes."
+          matTooltip="Your best practice cloud infrastructure environment will be set up. If you were doing this from scratch, it may take several days, but with Fathym it will only take up to 15 minutes."
           matTooltipClass="tooltip-background"
           mat-raised-button
           color="accent"

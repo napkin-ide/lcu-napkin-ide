@@ -15,12 +15,16 @@
         <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon>
         <div class="toolbar-vertical-line"></div>
       </div>
-      
-      <div
+
+      <a id="fathymHomeLogo"
         class="fathym-header-logo"
+        href="https://www.fathym.com/"
+        target="_blank"
         alt="Fathym Framework"
+        matTooltip="Fathym Framework"
+        matTooltipPosition="right"
         [ngClass]="{ small: isHandset, large: !isHandset }">
-      </div>
+      </a>
     </div>
 
     <!-- use state to insert the actions -->
@@ -32,7 +36,7 @@
           matTooltip="{{ action.Text }}"
           mat-icon-button
           (click)="HeaderActionClicked(action)">
-          <mat-icon>{{ action.Icon }}</mat-icon>
+          <mat-icon [inline]="true">{{ action.Icon }}</mat-icon>
           <span>{{ action.Text }}</span>
         </button>
         <a
@@ -46,25 +50,33 @@
           [target]="action.Type == IDEActionTypes.ExternalLink ? '_blank' : ''">
             <div fxLayout="row" fxLayoutAlign="center center">
               <div fxLayout="row" fxLayoutGap="2px">
-                <mat-icon>{{ action.Icon }}</mat-icon> 
+                <mat-icon [inline]="true">{{ action.Icon }}</mat-icon>
                 <div class="toolbar-vertical-line"></div>
               </div>
             </div>
         </a>
-        
+
       <!-- </div> -->
       </ng-container>
+      <button
+      mat-icon-button
+      matTooltip="My Account"
+      disableRipple
+      (click)="OpenMyAccount()"
+      >
+        <mat-icon class="user-account" [inline]="true" disableRipple>account_circle</mat-icon>
+      </button>
       <!-- <lcu-user-account-sidenav
       class="user-account"
       [user-email]="State.Username"
       (logout-clicked)="LogoutClicked($event)"
       >
       </lcu-user-account-sidenav> -->
-      <lcu-user-account-menu 
+      <!-- <lcu-user-account-menu
       class="user-account"
       [user-email]="State.Username"
       (logout-clicked)="LogoutClicked($event)">
-      </lcu-user-account-menu>
+      </lcu-user-account-menu> -->
     </span>
   </mat-toolbar>
 

@@ -16,7 +16,7 @@
   <div fxLayout="row" fxLayout.lt-md="column" class="ide-center-content">
     <mat-sidenav-container  fxFlex="1 5 30%" fxFlex.lt-md="1 1 100%" [ngClass]="{'opened': IsOpen, 'closed': !IsOpen}">
       <mat-sidenav fxFlex="1 1 60px" class="ide-activity-bar" mode="side" opened>
-        <nide-ide-activity-bar fxFlex></nide-ide-activity-bar>
+        <nide-ide-activity-bar fxFlex (settings-opened)="OnSettingsOpened($event)"></nide-ide-activity-bar>
       </mat-sidenav>
 
       <mat-sidenav-content fxFlex="1 1 calc(100% - 60px)" fxLayoutAlign="start stretch">
@@ -30,7 +30,7 @@
       </mat-sidenav-content>
     </mat-sidenav-container>
 
-    <mat-drawer-container fxFlex="3 1 70%" fxFlex.lt-md="1 1 100%">
+    <mat-drawer-container fxFlex="3 1 75%" fxFlex.lt-md="1 1 100%">
       <mat-drawer-content [class.hide-panels]="!ShowPanels">
         <mat-grid-list class="ide-editors-container" cols="1" rows="2" rowHeight="fit">
           <mat-grid-tile class="ide-editors" rowspan="2">
@@ -46,7 +46,7 @@
   </div>
 </div>
 
-<lcu-guide-bot *ngIf="!Loading && IdeState.CurrentActivity.Lookup === 'limited-trial'"
+<lcu-guide-bot *ngIf="!Loading"
   [bot-padding]="BotPadding"
   [bot-screen-position]="BotScreenPosition"
   [bot-sub-items]="BotSubItems"

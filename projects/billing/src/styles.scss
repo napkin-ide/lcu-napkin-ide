@@ -3,3 +3,8 @@
 * created variant theme color classes
 */
 @import "../../common/assets/common-theme";
+
+.user-account-dialog-container .mat-dialog-container{
+    padding:5px !important;
+    overflow: hidden;
+  }

@@ -1,5 +1,8 @@
 @import '../../../../assets/common-theme';
 
+$primary: map-get($global-theme, primary);
+$fg-color: mat-color(map-get($global-theme, foreground), text);
+
 .fathym-brand {
   margin-top: 8px;
   width: 170px;
@@ -17,5 +20,21 @@
     height: 47px;
     margin-top: 7px;
     width: 150px;
+  }
+}
+
+.active {
+  background-color: mat-color($primary, A700);
+  color: white !important;
+  font-weight: bold;
+}
+
+.mat-nav-list {
+  .mat-list-item {
+    color: $fg-color !important;
+
+    &:focus, &:hover {
+      background-color: mat-color($primary, A400) !important;
+    }
   }
 }

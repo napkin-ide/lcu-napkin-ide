@@ -13,6 +13,19 @@
   @include guided-tour($theme);
   // @include ide-component($theme);
 
+  .settings-dialog-overlay {
+    position: relative !important;
+
+    .mat-dialog-container {
+      padding: 0 !important;
+    }
+  }
+
+}
+
+.user-account-dialog-container .mat-dialog-container{
+  padding:5px !important;
+  overflow: hidden;
 }
 
 /**

@@ -8,6 +8,8 @@
         // position: relative;
         z-index: 1000;
         background-color: $primary;
+        // height: 60px;
+        // padding: 0px 10px;
     }
 
     .toolbar-icon{
@@ -40,7 +42,7 @@
         // position: absolute;
         // right: 0;
         // top: 5px;
-        padding-top: 10px;
+        // padding-top: 10px;
 
         button, a {
             margin-top: 7px;
@@ -64,6 +66,7 @@
     }
   
     .toolbar-vertical-line {
+        margin-top: 10px;
         height: 20px;
         width: .5px;
         background-color: $accent;
@@ -75,8 +78,7 @@
     }
 
     .user-account {
-        // margin-right: 20px;
-        z-index: 10;
+        // margin-top: -20px !important;
     }
 }
 

@@ -1,8 +1,26 @@
 @import '../../../styles.scss';
 
 $primary: map-get($global-theme, primary);
+$card-color: mat-color(map-get($global-theme, background), card);
 
-.mat-expansion-panel {
-    background-color: transparentize(mat-color($primary), 0.2);
-    // background-color: transparentize($global-primary, 0.2);
+.inner-accordion {
+  .mat-expansion-panel {
+    background-color: lighten($card-color, 10%);
+
+    .mat-expansion-panel-header {
+        background-color: mat-color($primary, A700);
+
+        > span {
+          height: 100% !important;
+        }
+
+        .mat-expansion-panel-header-title {
+          margin: 1em !important;
+        }
+    }
   }
+
+  .mat-content {
+    height: 100% !important;
+  }
+}

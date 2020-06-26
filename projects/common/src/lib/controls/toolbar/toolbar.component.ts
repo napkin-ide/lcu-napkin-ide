@@ -14,6 +14,7 @@ import { ExternalDialogComponent } from '../external-dialog/external-dialog.comp
 import { IdeManagementState, IDEActionTypes } from '../../state/ide/ide-management.state';
 import { UserInfoModel } from '../../models/user-info.model';
 import { IDEStateManagementContext } from '../../state/ide/ide-management-state.context';
+import { UserAccountModalComponent } from '../user-account-modal/user-account-modal.component';
 
 @Component({
   selector: 'lcu-toolbar',
@@ -47,7 +48,8 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     protected ideState: IDEStateManagementContext,
-    protected dialog: MatDialog
+    protected dialog: MatDialog,
+    protected userAccountDialog: MatDialog
   ) {
     this.BackButtonClickedEvent = new EventEmitter<any>();
   }
@@ -85,6 +87,15 @@ export class ToolbarComponent implements OnInit {
 
   public GoBack(){
     this.BackButtonClickedEvent.emit();
+  }
+
+  public OpenMyAccount(){
+   this.userAccountDialog.open(UserAccountModalComponent,
+      {
+        position: {top: '60px', right:'0px'},
+        width: '260px',
+        panelClass: 'user-account-dialog-container' 
+      });
   }
 
   protected openLinkInModal(linkUrl: string): void {

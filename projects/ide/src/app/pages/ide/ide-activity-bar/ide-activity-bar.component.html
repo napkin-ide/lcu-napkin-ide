@@ -3,7 +3,7 @@
     <div class="ide-overflowed">
       <div class="activities" *ngIf="InfraConfigured">
         <ng-container *ngFor="let activity of Activities">
-          <a class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipPosition="after"
+          <a id="{{activity.Lookup | stringPipes: 'camelcase' }}ActivityLink" class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipPosition="after"
             (click)="SelectActivity(activity)" [class.active]="activity.Lookup == CurrentActivity?.Lookup">
             <mat-icon *ngIf="activity.IconSet" color="accent" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
             <mat-icon *ngIf="!activity.IconSet" color="accent">{{ activity.Icon }}</mat-icon>
@@ -12,7 +12,7 @@
       </div>
 
       <div class="activity-settings">
-        <a class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipPosition="after"
+        <a id="settingsLink" class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipPosition="after"
           (click)="OpenRootActivity(activity)" *ngFor="let activity of RootActivities">
           <mat-icon *ngIf="activity.IconSet" color="accent" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
 

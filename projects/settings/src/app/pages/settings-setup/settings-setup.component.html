@@ -19,7 +19,7 @@
 
       <mat-nav-list class="activities">
         <ng-container *ngFor="let activity of State.Activities">
-          <mat-list-item *ngIf="State.EditActivity != activity.Lookup">
+          <mat-list-item *ngIf="State.EditActivity != activity.Lookup" >
             <a matLine (click)="SetEditActivity(activity)">
               <mat-icon>{{ activity.Icon }}</mat-icon>
 
@@ -185,14 +185,14 @@
       ></mat-progress-bar>
 
       <mat-nav-list class="activities">
-        <mat-accordion>
+        <mat-accordion class="inner-accordion">
           <ng-container *ngFor="let section of State.SideBarSections">
             <mat-expansion-panel
               [expanded]="CurrentSection === section"
               (opened)="SetEditSection(section)"
             >
               <mat-expansion-panel-header>
-                <mat-panel-title style="margin-top: 0.75em;">
+                <mat-panel-title>
                   {{ section }}
                 </mat-panel-title>
 

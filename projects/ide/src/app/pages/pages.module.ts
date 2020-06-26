@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
-import { MaterialModule } from '@lcu/common';
+import { MaterialModule, PipeModule } from '@lcu/common';
 import { IdeActivityBarComponent } from './ide/ide-activity-bar/ide-activity-bar.component';
 import { IdeComponent } from './ide/ide/ide.component';
 import { IdeEditorsComponent } from './ide/ide-editors/ide-editors.component';
@@ -30,6 +30,7 @@ import { LcuGuidedTourModule } from '@lowcodeunit/lcu-guided-tour-common';
     MaterialModule,
     PagesRoutingModule,
     FlexLayoutModule,
+    PipeModule,
     ExternalDialogModule,
     LcuNapkinIdeModule,
     LcuGuidedTourModule.forRoot()
