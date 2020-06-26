@@ -78,7 +78,7 @@ $Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
         width: 30%;
         background-size: cover;
         background-position: 50% 0;
-        background-image: fathym-logo(thinky-circle, mat-color($primary), 0.1);
+        background-image: fathym-logo(thinky-circle, $primary, 0.1);
 
         // background-image: url('assets/img/green-bubbles.jpg');
       }
