@@ -178,7 +178,7 @@
     }
 
     .ide-thinky-bg {
-      background-image: fathym-logo(thinky-circle, rgba(mat-color(map-get($global-theme, primary), A700), 0.3));
+      background-image: fathym-logo(thinky-circle, rgba(mat-color(map-get($global-theme, primary)), 0.3));
       background-position: center;
       background-repeat:no-repeat;
       background-size: contain;
