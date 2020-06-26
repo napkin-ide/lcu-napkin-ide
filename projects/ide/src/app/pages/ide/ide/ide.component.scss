@@ -1,7 +1,11 @@
+@import '../../../../../../common/assets/common-theme';
+
 @mixin ide-component($theme) {
   $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
+
+  .test {
+    background-color: purple;
+  }
 
   .ide-parent-container {
     height: 100%;
@@ -25,7 +29,7 @@
 
       .ide-activity-bar {
         border: none;
-        background-color: mat-color($primary, A700);
+        background-color: mat-color($primary);
         border-top: 1px solid black;
 
         .activity-settings {
@@ -174,7 +178,7 @@
     }
 
     .ide-thinky-bg {
-      background-image: fathym-logo(thinky-circle, rgba(mat-color(map-get($global-theme, primary), A700), 0.3));
+      background-image: fathym-logo(thinky-circle, rgba(mat-color(map-get($global-theme, primary)), 0.3));
       background-position: center;
       background-repeat:no-repeat;
       background-size: contain;
@@ -199,3 +203,5 @@
     background: mat-color($primary, A700);
   }
 }
+
+@include ide-component($global-theme);
