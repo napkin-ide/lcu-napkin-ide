@@ -1,6 +1,7 @@
-@import '../../../styles.scss';
+// @import '../../../styles.scss';
+@import '../../../../../common/assets/common-theme';
 
-$Fathym-Green: mat-color(map-get($global-theme, primary), A700);
+$Fathym-Green: mat-color(map-get($global-theme, primary));
 .weird-fix {
   font: 400 16px/28px Roboto, "Helvetica Neue", sans-serif;
   margin-left: 10%;
