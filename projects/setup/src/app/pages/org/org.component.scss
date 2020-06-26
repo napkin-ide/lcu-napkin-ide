@@ -1,12 +1,12 @@
 // @import '../../../styles.scss';
 @import '../../../../../common/assets/common-theme';
 
-$Theme-primary:  mat-color(map-get($global-theme, primary));
+$primary:  mat-color(map-get($global-theme, primary));
 $background-color: map-get(map-get($global-theme, background), 'background');
 $Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
 
 .tooltip-background {
-  background-color: $Theme-primary !important;
+  background-color: $primary !important;
 }
 
   .slogan{
@@ -105,7 +105,7 @@ $Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
     background-color: #9cd8d6;
     padding: 0px !important;
     margin: 4px;
-    color: $Theme-primary;
+    color: $primary;
   }
 
   .hr-line{
