@@ -1,20 +1,23 @@
 @import '../../../../assets/common-theme';
 
-    $Text-Color: mat-color(map-get($global-theme, primary), 100);
+@mixin toolbar-component($theme) {
+    $primary: mat-color(map-get($theme, primary));
+    $accent: mat-color(map-get($theme, accent));
 
     .ide-tool-bar{
         // position: relative;
         z-index: 1000;
-        background-color: mat-color(map-get($global-theme, primary), A700);
+        background-color: $primary;
     }
+
     .toolbar-icon{
         font-size: 40px;
-        color: $Text-Color;
+        color: $accent;
         margin:0px 8px;
     }
 
     .fathym-header-logo{
-        background-image: fathym-logo(thinky-full-logo, $Text-Color);
+        background-image: fathym-logo(thinky-full-logo, $accent);
         background-repeat:no-repeat;
         background-position: center;
         width: 170px;
@@ -48,10 +51,10 @@
             height:40px;
             width:40px;
             width: initial;
-            color: $Text-Color;
+            color: $accent;
         }
-        span{
-            color: $Text-Color;
+        span {
+            color: $accent;
         }
     }
 
@@ -63,11 +66,11 @@
     .toolbar-vertical-line {
         height: 20px;
         width: .5px;
-        background-color: $Text-Color;
+        background-color: $accent;
     }
 
     .back-arrow {
-        color: $Text-Color;
+        color: $accent;
         @extend .cursor-pointer;
     }
 
@@ -75,3 +78,6 @@
         // margin-right: 20px;
         z-index: 10;
     }
+}
+
+@include toolbar-component($global-theme);

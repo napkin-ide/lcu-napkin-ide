@@ -36,7 +36,8 @@ export class AppComponent implements OnInit {
    * Reset material theme
    */
   protected resetTheme(): void {
-    this.changeTheme('ivy-light-theme');
+    // this.changeTheme('ivy-light-theme');
+    this.changeTheme('contrast');
   }
 
   /**
@@ -46,7 +47,7 @@ export class AppComponent implements OnInit {
    */
   protected changeTheme(val: string): void {
     this.SelectedTheme = val;
-
+    
     const element: HTMLElement = this.overlayContainer.getContainerElement();
     const classList: DOMTokenList = element.classList;
 

@@ -20,6 +20,8 @@ import { IDEStateManagementContext } from '../../state/ide/ide-management-state.
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
+
+
 export class ToolbarComponent implements OnInit {
 
   protected billingDialog: MatDialogRef<ExternalDialogComponent, any>;

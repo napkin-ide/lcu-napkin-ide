@@ -1,0 +1,11 @@
+@import '../styles.scss';
+
+.contrast {
+    $global-theme: fathym-contrast-theme(true);
+    // @warn #{mat-get($global-theme)};
+    @include theme-setup($global-theme);
+}
+
+.ivy {
+    $global-theme: fathym-ivy-theme(true);
+}

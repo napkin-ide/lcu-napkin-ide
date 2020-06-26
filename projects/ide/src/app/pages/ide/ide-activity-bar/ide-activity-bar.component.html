@@ -5,9 +5,8 @@
         <ng-container *ngFor="let activity of Activities">
           <a class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipPosition="after"
             (click)="SelectActivity(activity)" [class.active]="activity.Lookup == CurrentActivity?.Lookup">
-            <mat-icon *ngIf="activity.IconSet" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
-
-            <mat-icon *ngIf="!activity.IconSet">{{ activity.Icon }}</mat-icon>
+            <mat-icon *ngIf="activity.IconSet" color="accent" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
+            <mat-icon *ngIf="!activity.IconSet" color="accent">{{ activity.Icon }}</mat-icon>
           </a>
         </ng-container>
       </div>
@@ -15,9 +14,9 @@
       <div class="activity-settings">
         <a class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipPosition="after"
           (click)="OpenRootActivity(activity)" *ngFor="let activity of RootActivities">
-          <mat-icon *ngIf="activity.IconSet" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
+          <mat-icon *ngIf="activity.IconSet" color="accent" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
 
-          <mat-icon *ngIf="!activity.IconSet">{{ activity.Icon }}</mat-icon>
+          <mat-icon *ngIf="!activity.IconSet" color="accent">{{ activity.Icon }}</mat-icon>
         </a>
       </div>
     </div>
