@@ -1,5 +1,9 @@
 @import '../../../../../common/assets/common-theme';
 
+@mixin background-color($color) {
+    background-color: $color;
+  }
+
 // @mixin flex-layout-component-theme($theme) {
   $primary: map-get($global-theme, primary);
   $accent:  map-get($global-theme, accent);
@@ -103,9 +107,7 @@ div.colorNested>div>div:nth-child(10n), div.coloredChildren>div:nth-child(10n), 
 
 // }
 
-@mixin background-color($color) {
-    background-color: $color;
-  }
+
 
  
 
