@@ -1,8 +1,6 @@
-@import '../../../styles.scss';
+@import '../../../../../common/assets/common-theme';
 
-.tooltip-background {
-  background-color: #4a918e !important;
-}
+$background-color: map-get(map-get($global-theme, background), 'background');
 
 .mat-list-base .mat-list-item .mat-line {
   white-space: normal;
@@ -24,13 +22,13 @@
   $warn: map-get($global-theme, warn);
 
   .slogan {
-    background-image: fathym-logo(thinky-slogan, #000000, 0.7);
+    background-image: fathym-logo(thinky-slogan, $background-color, 0.7);
     background-repeat: no-repeat;
     background-position: center;
   }
   .spinner-logo {
     position: absolute;
-    background-image: fathym-logo(thinky-logo, black, 1);
+    background-image: fathym-logo(thinky-logo, $background-color, 1);
     height: 70% !important;
     width: 70% !important;
     background-repeat: no-repeat;
@@ -57,7 +55,7 @@
         min-height: inherit;
         box-sizing: border-box;
         justify-content: center;
-        background-image: fathym-logo(thinky-circle, rgba(74, 145, 142, 0.3));
+        background-image: fathym-logo(thinky-circle, mat-color($primary), 0.3);
         background-repeat: no-repeat;
         background-position: center;
       }

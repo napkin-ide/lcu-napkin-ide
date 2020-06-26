@@ -1,6 +1,8 @@
-@import '../../../styles.scss';
+// @import '../../../styles.scss';
+@import '../../../../../common/assets/common-theme';
 
-$Theme-primary:  mat-color(map-get($global-theme, primary), A700);
+$Theme-primary:  mat-color(map-get($global-theme, primary));
+$background-color: map-get(map-get($global-theme, background), 'background');
 $Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
 
 .tooltip-background {
@@ -8,7 +10,7 @@ $Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
 }
 
   .slogan{
-    background-image: fathym-logo(thinky-slogan, #000000, .7);
+    background-image: fathym-logo(thinky-slogan, $background-color, .7);
     background-repeat:no-repeat;
     background-position: center;
   }
@@ -76,7 +78,7 @@ $Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
         width: 30%;
         background-size: cover;
         background-position: 50% 0;
-        background-image: fathym-logo(thinky-circle, rgba(74,145,142,0.1));
+        background-image: fathym-logo(thinky-circle, mat-color($primary), 0.1);
 
         // background-image: url('assets/img/green-bubbles.jpg');
       }
