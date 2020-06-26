@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed:900&display=swap');
+@import '../../../../../../common/assets/common-theme';
+
+$primary: mat-color(map-get($global-theme, primary));
+$accent: mat-color(map-get($global-theme, accent));
 
 $profile-inset: 10px;
 
@@ -51,13 +55,13 @@ $profile-inset: 10px;
     padding-left: 25px;
     padding-right: 25px;
     font-size: 24pt;
-    background-color: #4a918e ;
+    background-color: $accent ;
     border: none;
     font-family: 'Encode Sans Semi Condensed', sans-serif;
 }
 
 .active-option {
-    background-color: #4a918e  !important;
+    background-color: $accent  !important;
 }
 
 .input-edit-indication {
