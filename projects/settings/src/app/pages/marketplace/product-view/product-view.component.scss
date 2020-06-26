@@ -3,9 +3,9 @@
 // @mixin settings($theme) {
     // $config: mat-typography-config();
   
-    $primary: map-get($global-theme, primary);
-    $accent: map-get($global-theme, accent);
-    $warn: map-get($global-theme, warn);
+$primary: mat-color(map-get($global-theme, primary));
+$accent: mat-color(map-get($global-theme, accent));
+$warn: mat-color(map-get($global-theme, warn));
     
 // }
 
@@ -40,6 +40,6 @@ mat-spinner {
     padding-left: 25px;
     padding-right: 25px;
     font-size: 24pt;
-    background-color: $accent ;
+    background-color: $accent;
     border: none;
 }
