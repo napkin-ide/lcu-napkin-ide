@@ -1,9 +1,13 @@
-@import '~@angular/material/theming';
+@import '../../../../../common/assets/common-theme';
 
-@mixin flex-layout-component-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent:  map-get($theme, accent);
-  $warn:  map-get($theme, warn);
+@mixin background-color($color) {
+    background-color: $color;
+  }
+
+// @mixin flex-layout-component-theme($theme) {
+  $primary: map-get($global-theme, primary);
+  $accent:  map-get($global-theme, accent);
+  $warn:  map-get($global-theme, warn);
 
     .parent-one {
         height: 100px;
@@ -101,11 +105,9 @@ div.colorNested>div>div:nth-child(10n), div.coloredChildren>div:nth-child(10n), 
     @include background-color(mat-color($primary, 700));
 }
 
-}
+// }
 
-@mixin background-color($color) {
-    background-color: $color;
-  }
+
 
  
 

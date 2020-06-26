@@ -1,6 +1,8 @@
-@import '../../../styles.scss';
+// @import '../../../styles.scss';
+@import '../../../../../common/assets/common-theme';
 
 $primary: map-get($global-theme, primary);
+$background-color: map-get(map-get($global-theme, background), 'background');
 // $accent: map-get($global-theme, accent);
 // $warn: map-get($global-theme, warn);
 
@@ -18,7 +20,7 @@ $primary: map-get($global-theme, primary);
       min-height: inherit;
       box-sizing: border-box;
       justify-content: center;
-      background-image: fathym-logo(thinky-circle, rgba(74, 145, 142, 0.3));
+      background-image: fathym-logo(thinky-circle, $background-color, 0.3);
       background-repeat: no-repeat;
       background-position: center;
     }

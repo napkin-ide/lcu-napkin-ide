@@ -21,6 +21,8 @@ import { UserAccountModalComponent } from '../user-account-modal/user-account-mo
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
+
+
 export class ToolbarComponent implements OnInit {
 
   protected billingDialog: MatDialogRef<ExternalDialogComponent, any>;

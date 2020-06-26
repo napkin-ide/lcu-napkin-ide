@@ -1,9 +1,8 @@
-@import '../../../styles/styles.scss';
+@import '../../../../assets/common-theme';
 
-$Font-Color: mat-color(map-get($global-theme, primary), 100);
-$Button-color: mat-color(map-get($global-theme, primary), 700);
-$Button-hover-color: mat-color(map-get($global-theme, primary), 500);
-
+$Font-Color: mat-color(map-get($global-theme, accent));
+$Button-color: mat-color(map-get($global-theme, primary));
+$Button-hover-color: mat-color(map-get($global-theme, primary));
 
 .user-account-button{
     background-color: transparent;

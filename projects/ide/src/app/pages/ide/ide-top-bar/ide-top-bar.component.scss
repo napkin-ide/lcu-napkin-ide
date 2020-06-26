@@ -7,8 +7,9 @@
 **********************************************************
 */
 // @mixin ide-top-bar-component($theme) {
-    $Text-Color: mat-color(map-get($global-theme, primary), 100);
+    $Text-Color: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
 
+    
     .ide-tool-bar{
         position: relative;
         z-index: 1000;
