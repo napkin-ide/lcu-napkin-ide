@@ -16,10 +16,10 @@ $background-color: map-get(map-get($global-theme, background), 'background');
   height: calc(100% - 50px);
 }
 
-@mixin org($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
+// @mixin org($theme) {
+  $primary: map-get($global-theme, primary);
+  $accent: map-get($global-theme, accent);
+  $warn: map-get($global-theme, warn);
 
   .slogan {
     background-image: fathym-logo(thinky-slogan, $background-color, 0.7);
@@ -90,4 +90,4 @@ $background-color: map-get(map-get($global-theme, background), 'background');
       width: 70%;
     }
   }
-}
+// }

@@ -1,8 +1,8 @@
 @import '../../../../assets/common-theme';
 
 @mixin toolbar-component($theme) {
-    $primary: mat-color(map-get($theme, primary));
-    $accent: mat-color(map-get($theme, accent));
+    $primary: mat-color(map-get($global-theme, primary));
+    $accent: mat-color(map-get($global-theme, accent));
 
     .ide-tool-bar{
         // position: relative;
