@@ -1,6 +1,6 @@
 {
   "name": "@napkin-ide/lcu-napkin-ide",
-  "version": "0.0.3",
+  "version": "0.0.11",
   "scripts": {
     "build:all": "npm run build common && npm run build demo && npm run build ide && npm run build settings && npm run build setup && npm run build sign-up",
     "build:common": "ng build common",
