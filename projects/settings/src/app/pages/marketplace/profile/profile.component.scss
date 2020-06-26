@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed:900&display=swap');
 @import '../../../../../../common/assets/common-theme';
 
-$primary: mat-color(map-get($theme, primary));
-$accent: mat-color(map-get($theme, accent));
+$primary: mat-color(map-get($global-theme, primary));
+$accent: mat-color(map-get($global-theme, accent));
 
 $profile-inset: 10px;
 
