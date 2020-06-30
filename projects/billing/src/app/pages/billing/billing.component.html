@@ -68,7 +68,7 @@
               </div>
               <div class="billing-info" fxLayout="column" fxLayoutAlign="center center">
                 <label for="card-element" fxLayout="column"></label>
-                <div id="card-element" class="stripe-card" fxFlex="100%"></div>
+                <div id="card-element" [ngClass]="{'stripe-card': !StripeError, 'stripe-card-error': StripeError}"  fxFlex="100%"></div>
 
                 <!-- <div fxLayout="row" fxLayoutAlign="start center"> -->
                 <!-- <mat-icon >credit_card</mat-icon> -->

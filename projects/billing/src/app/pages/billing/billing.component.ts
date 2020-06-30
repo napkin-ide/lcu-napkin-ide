@@ -270,13 +270,17 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected handleCardChanged(event: any) {
     console.log('Error = ', event);
     if (event.error) {
-      this.StripeError = event.error.message;
-
-      this.StripeValid = false;
-    } else if (event.complete) {
+        this.StripeError = event.error.message;
+        this.StripeValid = false;
+    }
+    else if (event.complete === true) {
       this.StripeError = '';
 
       this.StripeValid = true;
+    }
+    else{
+      this.StripeValid = false;
+  
     }
   }
   /**
