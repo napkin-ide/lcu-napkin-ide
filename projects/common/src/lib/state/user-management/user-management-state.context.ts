@@ -50,9 +50,7 @@ export class UserManagementStateContext extends StateContext<
   public ListLicenses(){
     console.log("calling list licenses")
     this.Execute({
-      Arguments:{
-      
-      },
+      Arguments:{},
       Type: 'ListLicenses'
     })
   }
