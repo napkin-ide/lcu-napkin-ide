@@ -57,6 +57,8 @@ export class UserManagementState {
 
   public TermsAccepted?: boolean;
 
+  public UserLicenses?: Array<any>;
+
   public Username?: string;
 
   public UserType?: UserTypes;

@@ -47,6 +47,14 @@ export class UserManagementStateContext extends StateContext<
     });
   }
 
+  public ListLicenses(){
+    console.log("calling list licenses")
+    this.Execute({
+      Arguments:{},
+      Type: 'ListLicenses'
+    })
+  }
+
   public SetNapkinIDESetupStep(step: NapkinIDESetupStepTypes) {
     this.Execute({
       Arguments: {
