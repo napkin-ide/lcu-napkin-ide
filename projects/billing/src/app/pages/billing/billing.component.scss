@@ -107,18 +107,16 @@ $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background
             color:$Main-font !important;
             // width:500px;
             width:100%;
-            &:focus {
-                color: purple !important;
-                background-color: white;
-              }
-  
-              &::placeholder {
-                color: pink !important;
-              }
-  
-              &:focus::placeholder {
-                color: green !important;
-              }
+            border-bottom: 1px solid $Main-font;
+            border-radius: 0px;
+          }
+            
+            .stripe-card-error{
+              @include input-box();
+              color:red !important;
+              width:100%;
+              border-bottom: 1px solid red;
+              border-radius: 0px;
           }
         }
         }
@@ -191,6 +189,9 @@ $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background
   
   
 }
+
+
+
 .slogan{
   // color: $Text-color;
   margin-bottom: 0px;

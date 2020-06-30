@@ -92,7 +92,7 @@ export class ToolbarComponent implements OnInit {
   public OpenMyAccount(){
    this.userAccountDialog.open(UserAccountModalComponent,
       {
-        position: {top: '60px', right:'0px'},
+        position: {top: '64px', right:'0px'},
         width: '260px',
         panelClass: 'user-account-dialog-container' 
       });
