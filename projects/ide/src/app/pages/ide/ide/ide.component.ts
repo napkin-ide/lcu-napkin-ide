@@ -199,13 +199,14 @@ export class IdeComponent implements OnInit {
   }
 
   protected handleStateChanges(): void {
-    if (this.IdeState.CurrentActivity?.Lookup !== 'limited-trial') {
+    if (this.IdeState.CurrentActivity?.Lookup === 'core' || this.IdeState.CurrentActivity?.Lookup === 'data-flow') {
       this.determineProTours();
       this.TourButtons = null;
-    }
-    if (this.IdeState.CurrentActivity?.Lookup === 'limited-trial') {
+    } else if (this.IdeState.CurrentActivity?.Lookup === 'limited-trial') {
       this.determineTrialTours();
       this.TourButtons = this.setTourButtons();
+    } else {
+      this.setCurrentTour(null);
     }
   }
 
