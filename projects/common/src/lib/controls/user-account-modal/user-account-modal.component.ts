@@ -115,7 +115,7 @@ public GoBack(){
 
 public GoBackToUserAccount(){
   this.IsUserAccount = true;
-  this.dialogRef.updatePosition({right:'0px', top: '60px'});
+  this.dialogRef.updatePosition({right:'0px', top: '64px'});
   this.dialogRef.updateSize('260');
 }
 /**

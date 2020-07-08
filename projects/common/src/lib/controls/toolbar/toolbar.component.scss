@@ -72,6 +72,10 @@
         background-color: $accent;
     }
 
+    #back-button-vertical-line{
+        margin-top: 0px !important;
+    }
+
     .back-arrow {
         color: $accent;
         @extend .cursor-pointer;
