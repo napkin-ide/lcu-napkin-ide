@@ -69,6 +69,7 @@ public ngOnInit(): void {
   this.usersStateCtx.Context.subscribe((state: UserManagementState) => {
     this.UserState = state;
     // console.log("Users State: ", this.UserState);
+    // this.userStateChanged();
   });
 
   this.billingStateCtx.Context.subscribe((state: UserBillingState) => {
@@ -81,6 +82,12 @@ public ngOnInit(): void {
     // console.log("IDE State: ", this.IdeState);
 
   });
+
+  if(this.UserState){
+    let licenses = this.usersStateCtx.ListLicenses();
+    console.log("LICENSES FROM MODAL: ", licenses);
+    console.log("STATE", this.UserState);
+  }
   
 }
 
@@ -108,7 +115,7 @@ public GoBack(){
 
 public GoBackToUserAccount(){
   this.IsUserAccount = true;
-  this.dialogRef.updatePosition({right:'0px', top: '60px'});
+  this.dialogRef.updatePosition({right:'0px', top: '64px'});
   this.dialogRef.updateSize('260');
 }
 /**
@@ -162,5 +169,10 @@ public Close(){
   console.log("User Feedback: ", this.CancellationFeedback);
   this.dialogRef.close();
 }
+
+protected userStateChanged(){
+  
+}
+
 
 }
