@@ -139,7 +139,7 @@
               <!-- TOS & EA CHECKBOXES *ngIf="State?.RequiredOptIns?.length > 0"-->
               <!-- *ngIf="State.RequiredOptIns.includes('ToS') || State.RequiredOptIns.includes('EA')" -->
               <div class="required-opt-ins" fxLayout="row" fxLayoutAlign="start center"
-              *ngIf="State?.RequiredOptIns?.length > 0"
+              *ngIf="State?.RequiredOptIns?.length === 0"
                 >
                 <mat-checkbox (change)="ReqOptsChanged($event)" class="checkbox-label">
                   By checking this box, you agree to Fathym's
