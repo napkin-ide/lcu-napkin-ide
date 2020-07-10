@@ -58,6 +58,7 @@ import { UserAccountModalComponent } from './controls/user-account-modal/user-ac
     ToolbarComponent,
     UserAccountMenuComponent,
     UserAccountModalComponent,
+    DirectiveModule
   ],
   entryComponents: [
     SideNavComponent,
