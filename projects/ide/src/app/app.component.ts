@@ -32,12 +32,20 @@ export class AppComponent implements OnInit {
     this.faviconsService.reset();
   }
 
+  public ButtonClickTest(): void {
+    this.testChange();
+  }
+
+  protected testChange(): void {
+    this.changeTheme('test-theme');
+    debugger;
+  }
+
   /**
    * Reset material theme
    */
   protected resetTheme(): void {
     // this.changeTheme('ivy-light-theme');
-    this.changeTheme('contrast');
   }
 
   /**
