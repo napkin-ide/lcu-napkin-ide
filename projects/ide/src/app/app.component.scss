@@ -28,11 +28,11 @@
 }
 
 
-.test-theme {
-    $test: var(--global-theme);
-    @warn #{$test};
-    $global-theme: fathym-ivy-theme(false);
-    @include theme-setup($global-theme);
+// .test-theme {
+//     $test: var(--global-theme);
+//     @warn #{$test};
+//     $global-theme: fathym-ivy-theme(false);
+//     @include theme-setup($global-theme);
 
-    @include color-test($global-theme);
-}
+//     @include color-test($global-theme);
+// }
