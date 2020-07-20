@@ -57,26 +57,27 @@ export class AccessComponent implements OnInit {
     return this.Form.get('orgControl');
   }
 
-  // constructor(protected userAccessState: IdeUserAccessStateManagerContext) {
- constructor() {
+  constructor(protected userAccessState: IdeUserAccessStateManagerContext) {
+ // constructor() {
     this.UnathorizedSelected = null;
     this.Loading = false;
   }
 
   public ngOnInit(): void {
     this.setupForm();
+    this.setupState();
   }
 
   /**
    * Request organization access
    */
   public RequestAccess(evt: Event): void {
-    // this.userAccessState.RequestUserAccess();
+    this.userAccessState.RequestUserAccess();
 
     // for testing
-    setTimeout (() => {
-      this.DisableRequestButton = false;
-     }, 3000);
+    // setTimeout (() => {
+    //   this.DisableRequestButton = false;
+    //  }, 3000);
   }
 
   /**
@@ -107,12 +108,12 @@ export class AccessComponent implements OnInit {
    * Setup state
    */
   protected setupState(): void {
-    // this.userAccessState.Context.subscribe(state => {
-    //   this.State = state;
-    //   this.Loading = state.Loading;
+    this.userAccessState.Context.subscribe(state => {
+      this.State = state;
+      this.Loading = state.Loading;
 
-    //   this.stateChanged();
-    // });
+      this.stateChanged();
+    });
   }
 
   /**
