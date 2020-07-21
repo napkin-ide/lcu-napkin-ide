@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserManagementState } from '../../state/user-management/user-management.state';
 import { UserBillingState } from '../../state/user-billing/user-billing.state';
 import { UserManagementStateContext } from '../../state/user-management/user-management-state.context';
@@ -6,7 +6,7 @@ import { UserBillingStateContext } from '../../state/user-billing/user-billing-s
 import { IdeManagementState } from '../../state/ide/ide-management.state';
 import { IDEStateManagementContext } from '../../state/ide/ide-management-state.context';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Constants } from '../../utils/constants';
 import { FormControl } from '@angular/forms';
 
@@ -18,14 +18,35 @@ import { FormControl } from '@angular/forms';
 export class UserAccountModalComponent implements OnInit {
 
   /**
- * The Users State
+ * Optional feedback given by user
  */
-public UserState: UserManagementState;
+public CancellationFeedback: string;
+
+/**
+ * The Billing cycle for the lcu
+ */
+public BillingCycle: string;
 
 /**
  * The Users Billing State
  */
 public BillingState: UserBillingState;
+
+/**
+ * The Expiration date of the free trial for the given user
+ */
+public ExpirationDate: Date;
+
+  /**
+ * The Users State
+ */
+public UserState: UserManagementState;
+
+/**
+ * The users username from the state
+ */
+public Username: string;
+
 
 /**
  * The IDE state 
@@ -43,51 +64,59 @@ public IsUserAccount: boolean;
 public ManagingSubscription: boolean;
 
 /**
+ * The next billing date converted to string
+ */
+public NextBillingDate: Date;
+
+/**
  * Determines which text to show on the cansellation modal when user is confirming
  */
 public IsInitialReason: boolean;
 
+/**
+ * The users Package
+ */
+public Package: string;
+
+/**
+ * Reasons for leaving the platform to be displayed when user cancels
+ */
 public Reasons: Array<string> = Constants.REASONS_FOR_LEAVING;
 
+/**
+ * Selected reason for leaving
+ */
 public ReasonForLeaving: string;
 
-public CancellationFeedback: string;
+/**
+ * Date the user has been rgistered since
+ */
+public RegisteredSince: Date;
+
+
 
 constructor(protected dialogRef: MatDialogRef<UserAccountModalComponent>,
-  private usersStateCtx: UserManagementStateContext,
-  private billingStateCtx: UserBillingStateContext,
-  private ideStateCtx:IDEStateManagementContext
+  protected usersStateCtx: UserManagementStateContext,
+  protected billingStateCtx: UserBillingStateContext,
+  protected ideStateCtx:IDEStateManagementContext,
+  @Inject(MAT_DIALOG_DATA) public data: UserManagementState
   ) {
     this.ManagingSubscription = false;
     this.IsUserAccount = true;
     this.IsInitialReason = true;
+    // console.log("DATA: ", this.data);
+    this.UserState = this.data;
+    this.userStateChanged()
   // this.LogoutClicked = new EventEmitter<any>();
 }
 
 public ngOnInit(): void {
 
-  this.usersStateCtx.Context.subscribe((state: UserManagementState) => {
-    this.UserState = state;
-    // console.log("Users State: ", this.UserState);
-    // this.userStateChanged();
-  });
-
-  this.billingStateCtx.Context.subscribe((state: UserBillingState) => {
-    this.BillingState = state;
-    // console.log("Users Billing State: ", this.BillingState);
-  });
-
-  this.ideStateCtx.Context.subscribe((state: IdeManagementState) => {
-    this.IdeState = state;
-    // console.log("IDE State: ", this.IdeState);
-
-  });
-
-  if(this.UserState){
-    let licenses = this.usersStateCtx.ListLicenses();
-    console.log("LICENSES FROM MODAL: ", licenses);
-    console.log("STATE", this.UserState);
-  }
+  // this.usersStateCtx.Context.subscribe((state: UserManagementState) => {
+  //   this.UserState = state;
+  //   console.log("Users State: ", this.UserState);
+  //   this.userStateChanged();
+  // });
   
 }
 
@@ -114,6 +143,10 @@ public GoBack(){
 }
 
 public GoBackToUserAccount(){
+  // console.log("User Given Feedback", this.CancellationFeedback);
+  if(this.CancellationFeedback){
+    this.usersStateCtx.SendReasonFeedback(this.CancellationFeedback);
+  }
   this.IsUserAccount = true;
   this.dialogRef.updatePosition({right:'0px', top: '64px'});
   this.dialogRef.updateSize('260');
@@ -122,7 +155,7 @@ public GoBackToUserAccount(){
  * Leads to subscription cancellation modal
  */
 public DisplayCancelSubscription(){
-  console.log("display cancel Subscription selected");
+  // console.log("display cancel Subscription selected");
   // center the dialog on the screen
   this.dialogRef.updatePosition({});
   //width x height
@@ -131,13 +164,12 @@ public DisplayCancelSubscription(){
   this.IsUserAccount = false;
   
 }
-
+/**
+ * Cancels the subscription and toggles IsInitialReason to false to go to next screen
+ */
 public CancelSubscription(){
-  console.log("User Feedback: ", this.CancellationFeedback);
-  console.log("User reason for cancelling", this.ReasonForLeaving);
   this.IsInitialReason = false;
-
-  //TODO Hook up to state and proceed to next step once cancelation is complete
+  this.usersStateCtx.CancelSubscription(this.ReasonForLeaving);
 }
 
 /**
@@ -164,15 +196,35 @@ public CheckIfReasonGiven(){
   }
 }
 
+/**
+ * Closes the dialog while also checking to see if the user supplied any additional feedback
+ */
 public Close(){
-  console.log("close selected");
-  console.log("User Feedback: ", this.CancellationFeedback);
+  if(this.CancellationFeedback){
+    this.usersStateCtx.SendReasonFeedback(this.CancellationFeedback);
+  }
   this.dialogRef.close();
 }
-
+/**
+ * Assigns the info that is displayed in the user account
+ */
 protected userStateChanged(){
-  
-}
+  if(this.UserState.SubscriptionDetails){
+    this.NextBillingDate = new Date(this.UserState.SubscriptionDetails.BillingPeriodEnd);
+    this.RegisteredSince = new Date(this.UserState.SubscriptionDetails.SubscriptionCreated);
+  }
 
+  if(this.UserState.UserLicenses){
+    this.UserState.UserLicenses.forEach(lic => {
+      if(lic.LicenseType =  "lcu"){
+        this.BillingCycle = lic.Interval +"ly";
+        this.ExpirationDate = new Date(lic.ExpirationDate);
+        this.Username = lic.Username;
+        this.Package = lic.Name;
+      }
+    })
+  }
+
+}
 
 }
