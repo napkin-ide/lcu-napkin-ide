@@ -66,6 +66,9 @@ export class UserManagementState {
   public SubscribersLimited: Array<string>;
 
   public SubscribersActive: Array<string>;
+
+  public SubscriptionDetails?: StripeSubscriptionDetails; 
+
 }
 
 export class JourneyPersona {
@@ -112,6 +115,24 @@ export class AzureInfaSettings {
   public AzureLocation?: string;
 
   public AzureRegion?: string;
+}
+
+export class StripeSubscriptionDetails{
+  public BillingPeriodStart: Date;
+
+  public BillingPeriodEnd: Date; 
+  
+  public BillingStatus: string; 
+  
+  public CollectionMethod: string; 
+  
+  public SubscriptionCreated: Date; 
+  
+  public CustomerId: string;
+  
+  public SubscriptionId: string;
+
+  public NextBillingDate: Date;
 }
 
 export enum NapkinIDESetupStepTypes {
