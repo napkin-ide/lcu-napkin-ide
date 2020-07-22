@@ -117,10 +117,19 @@ export class UserManagementStateContext extends StateContext<
     // });
   }
 
-  public CancelSubscription(subscriptionId: any) {
+  public SendReasonFeedback(feedback: string){
+    this.Execute({
+      Arguments:{
+        FeedbackReason: feedback
+      },
+      Type: 'SendFeedback'
+    });
+  }
+
+  public CancelSubscription(reason: string) {
     this.Execute({
       Arguments: {
-        SubscriptionID: subscriptionId
+        CancellationReason: reason
       },
       Type: 'CancelSubscription'
     });

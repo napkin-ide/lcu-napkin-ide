@@ -4,10 +4,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild,
 } from '@angular/core';
 // import { UserManagementState, UserManagementStateContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
-import { MatSidenav } from '@angular/material/sidenav';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { ExternalDialogComponent } from '../external-dialog/external-dialog.component';
@@ -15,6 +13,8 @@ import { IdeManagementState, IDEActionTypes } from '../../state/ide/ide-manageme
 import { UserInfoModel } from '../../models/user-info.model';
 import { IDEStateManagementContext } from '../../state/ide/ide-management-state.context';
 import { UserAccountModalComponent } from '../user-account-modal/user-account-modal.component';
+import { UserManagementStateContext } from '../../state/user-management/user-management-state.context';
+import { UserManagementState } from '../../state/user-management/user-management.state';
 
 @Component({
   selector: 'lcu-toolbar',
@@ -24,7 +24,9 @@ import { UserAccountModalComponent } from '../user-account-modal/user-account-mo
 
 
 export class ToolbarComponent implements OnInit {
-
+/**
+ * Dialog for the billing component to open in
+ */
   protected billingDialog: MatDialogRef<ExternalDialogComponent, any>;
 
   protected SideBarOpened = false;
@@ -34,6 +36,12 @@ export class ToolbarComponent implements OnInit {
   public State: IdeManagementState;
 
   public UsersInfo: UserInfoModel;
+
+  /**
+   * The Users state that is passed into the useraccount modal
+   */
+  public UsersState: UserManagementState;
+
 
   @Output()
   public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -48,6 +56,7 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     protected ideState: IDEStateManagementContext,
+    protected userStateCtx: UserManagementStateContext,
     protected dialog: MatDialog,
     protected userAccountDialog: MatDialog
   ) {
@@ -60,7 +69,12 @@ export class ToolbarComponent implements OnInit {
 
       this.stateChanged();
 
-      this.getUserInfo();
+      // this.getUserInfo();
+    });
+
+    this.userStateCtx.Context.subscribe((ustate: UserManagementState) => {
+      this.UsersState = ustate;
+      // console.log("Users state on toolbar", this.UsersState)
     });
   }
 
@@ -70,7 +84,7 @@ export class ToolbarComponent implements OnInit {
 
   public LogoutClicked(event: any) {
     // TODO hook up to auth
-    console.log('Logout clicked: ', event);
+    // console.log('Logout clicked: ', event);
 
     window.location.replace('/.oauth/logout');
   }
@@ -89,12 +103,18 @@ export class ToolbarComponent implements OnInit {
     this.BackButtonClickedEvent.emit();
   }
 
+  /**
+   * Opens the users account modal passing in the users state so there is no lag in 
+   * 
+   * filling out user info
+   */
   public OpenMyAccount(){
    this.userAccountDialog.open(UserAccountModalComponent,
       {
         position: {top: '64px', right:'0px'},
         width: '260px',
-        panelClass: 'user-account-dialog-container' 
+        panelClass: 'user-account-dialog-container',
+        data: this.UsersState 
       });
   }
 
@@ -111,9 +131,9 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  protected getUserInfo() {
+  // protected getUserInfo() {
     // console.log('State: ', this.State);
-  }
+  // }
 
   protected stateChanged() {
     if (!this.UsersInfo) {
