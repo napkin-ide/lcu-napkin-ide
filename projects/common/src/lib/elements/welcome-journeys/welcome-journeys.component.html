@@ -93,7 +93,7 @@
             <h2>Streaming Data Process</h2>
 
             <ngx-charts-line-chart
-              [scheme]="colorScheme"
+              [scheme]="IoTDataColorScheme"
               [legend]="true"
               [showXAxisLabel]="true"
               [showYAxisLabel]="true"
@@ -102,7 +102,7 @@
               xAxisLabel="Timestamp"
               yAxisLabel="Temperature"
               [timeline]="true"
-              [results]="multi"
+              [results]="IoTDataResults"
             >
             </ngx-charts-line-chart>
           </mat-card>

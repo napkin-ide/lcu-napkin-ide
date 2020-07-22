@@ -30,12 +30,7 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   //  Fields
 
   //  Properties
-  multi: any[];
-
-  // options
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
-  };
+  results: any[];
 
   /**
    * Content Types
@@ -49,6 +44,30 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
     JourneyName: string;
     Journeys: Array<any>;
   }> = [];
+
+  public get IoTDataColorScheme() {
+    return {
+      domain: !this.State.IoTData ? [] : this.State.IoTData.map(data => {
+        return {
+          name: data.Name
+        };
+      })
+    };
+  }
+
+  public get IoTDataResults(): any[] {
+    return !this.State.IoTData ? [] : this.State.IoTData.map(data => {
+      return {
+        name: data.Name,
+        series: Object.keys(data.Data).map(dk => {
+          return {
+            name: dk,
+            value: data.Data[dk]
+          };
+        })
+      };
+    });
+  }
 
   /**
    * Current state
@@ -71,7 +90,7 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   public ngOnInit() {
     super.ngOnInit();
 
-    this.multi = [
+    this.results = [
       {
         name: 'Bhutan',
         series: [
