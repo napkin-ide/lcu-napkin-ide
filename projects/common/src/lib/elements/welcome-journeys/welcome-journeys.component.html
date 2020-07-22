@@ -1,41 +1,81 @@
-<mat-card *ngIf="!State.Loading">
+<ng-container *ngIf="!State.Loading">
+  <mat-card>
     <mat-card-header>
-        <mat-card-title><h1>Welcome to Fathym!</h1></mat-card-title>
+      <mat-card-title><h1>Welcome to Fathym!</h1></mat-card-title>
     </mat-card-header>
+
     <div fxLayout="row">
-        <div fxFlex="20" class="mat-body margin-top-5 margin-right-1">
-            <p>The Fathym Low-Code Framework enables you to host, manage and deploy data-driven applications.</p>
-            <p>Each element of the Low-Code Framework is built from Low Code Units – modular and reusable building blocks of code that can be as large as an application, or as small as a data visualization.</p>
-            <p>The framework drastically cuts down development time by automating and applying best practice workflows for cloud infrastructure automation and application management. You can create data applications without having to manage and maintain the underlying infrastructure.</p>
-        </div>
-        
-        <div class="accent-divider"></div>
-        
-        <div fxFlex="80" style="padding: 5px">
-            <mat-tab-group mat-align-tabs="left">
-                <mat-tab *ngFor="let journeySet of DividedJourneys" label="{{ journeySet.JourneyName }}">
-                    <div 
-                        fxLayout="row wrap" 
-                        fxLayoutAlign="space-between"
-                        fxLayout.sm="column">
-        
-                        <div *ngFor="let journey of journeySet.Journeys"
-                            [fxFlex.sm]="100"
-                            [fxFlex.md]="50"
-                            [fxFlex.lg]="33"
-                            class="mat-body margin-top-3">
-                            <lcu-journey-card
-                                *ngIf="ContainsRoleType(journey, journeySet.JourneyName) && journey.Active"
-                                [journey-data]="journey"></lcu-journey-card>
-                        </div>
-        
-                    </div>
-                </mat-tab>
-            </mat-tab-group>
-        </div>
+      <div fxFlex="20" class="mat-body margin-top-5 margin-right-1">
+        <ng-container *ngIf="State.IsIoTStarter">
+          <p>
+            To start your IoT journey, we have setup a few things automatically
+            for you. This will allow you to start working with your devices and
+            data immediately. Start exploring below to see your data visualized
+            in minutes on a best practice cloud setup for Azure.
+          </p>
+        </ng-container>
+
+        <ng-container *ngIf="!State.IsIoTStarter">
+          <p>
+            The Fathym Low-Code Framework enables you to host, manage and deploy
+            data-driven applications.
+          </p>
+
+          <p>
+            Each element of the Low-Code Framework is built from Low Code Units
+            – modular and reusable building blocks of code that can be as large
+            as an application, or as small as a data visualization.
+          </p>
+
+          <p>
+            The framework drastically cuts down development time by automating
+            and applying best practice workflows for cloud infrastructure
+            automation and application management. You can create data
+            applications without having to manage and maintain the underlying
+            infrastructure.
+          </p>
+        </ng-container>
+      </div>
+
+      <div class="accent-divider"></div>
+
+      <div fxFlex="80" style="padding: 5px;">
+        <ng-container *ngIf="State.IsIoTStarter">
+
+        </ng-container>
+        <mat-tab-group mat-align-tabs="left">
+          <mat-tab
+            *ngFor="let journeySet of DividedJourneys"
+            label="{{ journeySet.JourneyName }}"
+          >
+            <div
+              fxLayout="row wrap"
+              fxLayoutAlign="space-between"
+              fxLayout.sm="column"
+            >
+              <div
+                *ngFor="let journey of journeySet.Journeys"
+                [fxFlex.sm]="100"
+                [fxFlex.md]="50"
+                [fxFlex.lg]="33"
+                class="mat-body margin-top-3"
+              >
+                <lcu-journey-card
+                  *ngIf="
+                    ContainsRoleType(journey, journeySet.JourneyName) &&
+                    journey.Active
+                  "
+                  [journey-data]="journey"
+                ></lcu-journey-card>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
     </div>
-</mat-card>
+  </mat-card>
+</ng-container>
 
 <div class="spread" *ngIf="State.Loading">
-    <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>

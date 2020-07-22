@@ -4,9 +4,11 @@ import { Application, DAFViewApplicationConfig } from '@lcu/common';
  * Model class for state data
  */
 export class LimitedJourneysManagementState {
-  public Loading?: boolean;
+  public IsIoTStarter?: boolean;
 
   public Journeys?: JourneyOption[];
+
+  public Loading?: boolean;
 }
 
 export class JourneyOption {
