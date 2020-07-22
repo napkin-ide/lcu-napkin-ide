@@ -35,7 +35,7 @@ export class PlansComponent implements OnInit {
     this.userBillStateCtx.Context.subscribe((state: any) => {
       this.State = state;
 
-      // console.log('Plans: ', this.State.Plans);
+      console.log('Users Billing State: ', this.State);
 
       if (this.State) {
         this.stateChanged();
