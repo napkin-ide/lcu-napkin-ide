@@ -7,6 +7,7 @@ import {
   FathymSharedModule,
   DirectiveModule,
 } from '@lcu/common';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NavListComponent } from './controls/nav-list/nav-list.component';
 import { RouterModule, Router } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
@@ -39,6 +40,7 @@ import { UserAccountModalComponent } from './controls/user-account-modal/user-ac
     MaterialModule,
     RouterModule,
     // LcuThemePickerModule,
+    NgxChartsModule,
     FlexLayoutModule,
     DirectiveModule,
   ],
@@ -52,7 +54,8 @@ import { UserAccountModalComponent } from './controls/user-account-modal/user-ac
     LcuNapkinIdeWelcomeJourneysElementComponent,
     ToolbarComponent,
     UserAccountModalComponent,
-    DirectiveModule
+    DirectiveModule,
+    NgxChartsModule,
   ],
   entryComponents: [
     SideNavComponent,

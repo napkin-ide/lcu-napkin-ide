@@ -10,8 +10,13 @@
           <p>
             To start your IoT journey, we have setup a few things automatically
             for you. This will allow you to start working with your devices and
-            data immediately. Start exploring below to see your data visualized
-            in minutes on a best practice cloud setup for Azure.
+            data immediately. Start exploring to see your data visualized in
+            minutes on a best practice cloud setup for Azure.
+          </p>
+
+          <p>
+            Your data is ready to begin using. Connect it with your favorite
+            tools or let us help you walk through learning some new ones.
           </p>
         </ng-container>
 
@@ -40,9 +45,219 @@
       <div class="accent-divider"></div>
 
       <div fxFlex="80" style="padding: 5px;">
-        <ng-container *ngIf="State.IsIoTStarter">
+        <div
+          gdColumns="40% 60%"
+          gdColumns.lt-md="30% 70%"
+          gdColumns.lt-sm="100%"
+          gdGap="2em"
+          gdGap.lt-sm="1em"
+          class="spread"
+          *ngIf="State.IsIoTStarter"
+        >
+          <mat-card>
+            <h2>Visualize Your Data Flow</h2>
 
+            <div class="spread">
+              <p>
+                View a Real-Time Dashboard built with Open Source tool
+              </p>
+
+              <a
+                mat-raised-button
+                color="primary"
+                href="/real-time/freeboard"
+                target="_blank"
+              >
+                Freeboard
+              </a>
+            </div>
+
+            <div class="spread">
+              <p>
+                View a Customizable Real-Time Dashboard built with Fathym's
+                Charting Low Code Unit
+              </p>
+
+              <a
+                mat-raised-button
+                color="primary"
+                href="/real-time/charts"
+                target="_blank"
+              >
+                Low Code Unit - Charts
+              </a>
+            </div>
+          </mat-card>
+
+          <mat-card>
+            <h2>Streaming Data Process</h2>
+
+            <ngx-charts-line-chart
+              [scheme]="colorScheme"
+              [legend]="true"
+              [showXAxisLabel]="true"
+              [showYAxisLabel]="true"
+              [xAxis]="true"
+              [yAxis]="true"
+              xAxisLabel="Timestamp"
+              yAxisLabel="Temperature"
+              [timeline]="true"
+              [results]="multi"
+            >
+            </ngx-charts-line-chart>
+          </mat-card>
+
+          <mat-card gdColumn="auto / span 2">
+            <h2>Send Your Own Data</h2>
+
+            <p>
+              We've set your IoT Data Flow up in the easiest possible, best
+              practice starting point. Sending data into your flow is as simple
+              as sending an REST request. We've got a few ways to get you
+              started.
+            </p>
+
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Test From Here
+                  </mat-panel-title>
+
+                  <mat-panel-description>
+                    (Web Form)
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <p>
+                  The simplest way to get testing straight away is our embedded
+                  form:
+                </p>
+
+                <form>
+                  <mat-form-field class="mat-full-width">
+                    <input
+                      matInput
+                      placeholder="DeviceID"
+                      value="my-test-device-1"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="mat-full-width">
+                    <input
+                      matInput
+                      placeholder="DeviceType"
+                      value="my-test-device"
+                    />
+                  </mat-form-field>
+
+                  <fieldset>
+                    <legend>Device Data</legend>
+
+                    <mat-form-field class="mat-full-width">
+                      <input
+                        matInput
+                        placeholder="Latitude"
+                        value="44.9153586"
+                      />
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-full-width">
+                      <input
+                        matInput
+                        placeholder="Longitude"
+                        value="-83.4399405"
+                      />
+                    </mat-form-field>
+
+                    <div>
+                      <div fxFlex></div>
+
+                      <button type="submit" mat-raised-button color="accent">
+                        Send Device Data
+                      </button>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <legend>Sensor Readings</legend>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Temperature" value="98" />
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="WindHeading" value="274" />
+                    </mat-form-field>
+                  </fieldset>
+                </form>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Using API Testing Tools
+                  </mat-panel-title>
+
+                  <mat-panel-description>
+                    (Postman & Insomnia)
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <p>hey</p>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Using Code
+                  </mat-panel-title>
+
+                  <mat-panel-description>
+                    (cURL, C# & JS)
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <p>hey</p>
+
+                <pre
+                  >{{ "{" }}
+  'DeviceID': 'xxx',
+  'DeviceType': 'a-thing',
+  'Version': 'xxx',
+  'Timestamp': 'xxx',
+  'DeviceData': {{ "{" }}
+      'Latitude': xxxx,
+      'Longitude': xxxx,
+      'Floor': 12,
+      'Room': 'Conference Chuck'
+      'key': 'value',
+      'pairs': 'of-data'
+    },
+    'SensorReadings': {{ "{" }}
+        'Temp': 98.8,
+        'OtherSensor': 'vertical'
+    },
+    'SensorMetadata': {{ "{" }}
+        'Temp': {{ "{" }}
+            'Battery': .2,
+            'Tilt': .8
+        }
+    }
+}
+                </pre>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card>
+        </div>
+
+        <ng-container *ngIf="State.IsIoTStarter">
+          <p>
+            Use the Journeys below to familiarize yourself with the rest of what
+            you can do with Fathym!
+          </p>
         </ng-container>
+
         <mat-tab-group mat-align-tabs="left">
           <mat-tab
             *ngFor="let journeySet of DividedJourneys"
