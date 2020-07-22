@@ -1,11 +1,6 @@
-import { BillingPlanOption, UserBillingState } from './user-billing.state';
-import { StateContext, Status } from '@lcu/common';
+import { UserBillingState } from './user-billing.state';
+import { StateContext } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
-import { forkJoin, combineLatest } from 'rxjs';
-import { Router, ActivationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root',
