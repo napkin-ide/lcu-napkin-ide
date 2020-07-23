@@ -143,11 +143,12 @@
                   form:
                 </p>
 
-                <form>
+                <form (ngSubmit)="SendDeviceData()" [formGroup]="IoTDataForm">
                   <mat-form-field class="mat-full-width">
                     <input
                       matInput
                       placeholder="DeviceID"
+                      name="deviceId"
                       value="my-test-device-1"
                     />
                   </mat-form-field>
@@ -156,6 +157,7 @@
                     <input
                       matInput
                       placeholder="DeviceType"
+                      name="deviceType"
                       value="my-test-device"
                     />
                   </mat-form-field>
@@ -167,6 +169,7 @@
                       <input
                         matInput
                         placeholder="Latitude"
+                        name="latitude"
                         value="44.9153586"
                       />
                     </mat-form-field>
@@ -175,6 +178,7 @@
                       <input
                         matInput
                         placeholder="Longitude"
+                        name="longitude"
                         value="-83.4399405"
                       />
                     </mat-form-field>
@@ -184,11 +188,21 @@
                     <legend>Sensor Readings</legend>
 
                     <mat-form-field class="mat-full-width">
-                      <input matInput placeholder="Temperature" value="98" />
+                      <input
+                        matInput
+                        name="temp"
+                        placeholder="Temperature"
+                        value="98"
+                      />
                     </mat-form-field>
 
                     <mat-form-field class="mat-full-width">
-                      <input matInput placeholder="WindHeading" value="274" />
+                      <input
+                        matInput
+                        name="windHeading"
+                        placeholder="WindHeading"
+                        value="274"
+                      />
                     </mat-form-field>
                   </fieldset>
 

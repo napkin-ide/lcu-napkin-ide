@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { SideNavComponent } from './controls/side-nav/side-nav.component';
 import {
   MaterialModule,
@@ -39,6 +40,9 @@ import { IotDataChartComponent } from './elements/welcome-journeys/iot-data-char
   ],
   imports: [
     FathymSharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     MaterialModule,
     RouterModule,
     // LcuThemePickerModule,
@@ -47,6 +51,8 @@ import { IotDataChartComponent } from './elements/welcome-journeys/iot-data-char
     DirectiveModule,
   ],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     SideNavComponent,
     NavListComponent,
     LcuNapkinIdeShellHostElementComponent,
@@ -58,6 +64,7 @@ import { IotDataChartComponent } from './elements/welcome-journeys/iot-data-char
     UserAccountModalComponent,
     DirectiveModule,
     ChartsModule,
+    HttpClientModule,
   ],
   entryComponents: [
     SideNavComponent,

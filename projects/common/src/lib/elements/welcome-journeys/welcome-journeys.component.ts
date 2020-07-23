@@ -1,4 +1,10 @@
 import { Component, OnInit, Injector } from '@angular/core';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from '@angular/common/http';
+
 import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -11,6 +17,14 @@ import {
 import { LimitedJourneysManagementStateContext } from '../../state/journeys/journeys-state.context';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 export class LcuNapkinIdeWelcomeJourneysElementState {}
 
@@ -30,6 +44,11 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   extends LcuElementComponent<LcuNapkinIdeWelcomeJourneysContext>
   implements OnInit {
   //  Fields
+  protected httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
 
   //  Properties
 
@@ -71,6 +90,8 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
 
   public IoTChartOptions: ChartOptions;
 
+  public IoTDataForm: FormGroup;
+
   public IoTDataLabels: Label[];
 
   public IoTDataResults: ChartDataSets[];
@@ -87,6 +108,8 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   //  Constructors
   constructor(
     protected injector: Injector,
+    protected formBldr: FormBuilder,
+    protected http: HttpClient,
     protected state: LimitedJourneysManagementStateContext
   ) {
     super(injector);
@@ -95,6 +118,15 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   //  Life Cycle
   public ngOnInit() {
     super.ngOnInit();
+
+    this.IoTDataForm = this.formBldr.group({
+      deviceId: ['', Validators.required],
+      deviceType: ['', Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
+      temp: ['', Validators.required],
+      windHeading: ['', Validators.required],
+    });
 
     this.state.Context.subscribe((state: any) => {
       this.State = state;
@@ -108,6 +140,27 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   //  API Methods
   public ContainsRoleType(journey: JourneyOption, roleType: JourneyRoleTypes) {
     return !!journey.Roles.find((r) => r === roleType);
+  }
+
+  public SendDeviceData() {
+    const data = {
+      DeviceID: this.IoTDataForm.controls.deviceId.value,
+      DeviceType: this.IoTDataForm.controls.deviceType.value,
+      Version: '1',
+      Timestamp: new Date(),
+      DeviceData: {
+        Latitude: this.IoTDataForm.controls.latitude.value,
+        Longitude: this.IoTDataForm.controls.longitude.value,
+      },
+      SensorReadings: {
+        Temperature: this.IoTDataForm.controls.temp.value,
+        WindHeading: this.IoTDataForm.controls.windHeading.value,
+      },
+    };
+
+    this.http
+      .post('/api/data-flow/iot/data-stream', data, this.httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   //  Helpers
@@ -146,6 +199,7 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
           };
         });
   }
+
   /**
    * Divides the journeys from the state into individual arrays of role-based journeys
    */
@@ -161,6 +215,21 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
         );
       });
     });
+  }
+
+  protected handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
+    }
+    // Return an observable with a user-facing error message.
+    return throwError('Something bad happened; please try again later.');
   }
 
   /**
