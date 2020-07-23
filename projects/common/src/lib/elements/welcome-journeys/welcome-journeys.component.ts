@@ -143,6 +143,7 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   }
 
   public SendDeviceData() {
+    debugger;
     const data = {
       DeviceID: this.IoTDataForm.controls.deviceId.value,
       DeviceType: this.IoTDataForm.controls.deviceType.value,
