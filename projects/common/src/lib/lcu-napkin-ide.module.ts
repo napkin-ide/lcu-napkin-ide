@@ -7,7 +7,7 @@ import {
   FathymSharedModule,
   DirectiveModule,
 } from '@lcu/common';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartsModule  } from 'ng2-charts';
 import { NavListComponent } from './controls/nav-list/nav-list.component';
 import { RouterModule, Router } from '@angular/router';
 import { LcuNapkinIdeShellHostElementComponent } from './elements/shell-host/shell-host.component';
@@ -20,6 +20,7 @@ import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-
 import { ToolbarComponent } from './controls/toolbar/toolbar.component';
 import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pipe';
 import { UserAccountModalComponent } from './controls/user-account-modal/user-account-modal.component';
+import { IotDataChartComponent } from './elements/welcome-journeys/iot-data-chart/iot-data-chart.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +35,14 @@ import { UserAccountModalComponent } from './controls/user-account-modal/user-ac
     ToolbarComponent,
     NthPowerToStringPipe,
     UserAccountModalComponent,
+    IotDataChartComponent,
   ],
   imports: [
     FathymSharedModule,
     MaterialModule,
     RouterModule,
     // LcuThemePickerModule,
-    NgxChartsModule,
+    ChartsModule,
     FlexLayoutModule,
     DirectiveModule,
   ],
@@ -55,7 +57,7 @@ import { UserAccountModalComponent } from './controls/user-account-modal/user-ac
     ToolbarComponent,
     UserAccountModalComponent,
     DirectiveModule,
-    NgxChartsModule,
+    ChartsModule,
   ],
   entryComponents: [
     SideNavComponent,

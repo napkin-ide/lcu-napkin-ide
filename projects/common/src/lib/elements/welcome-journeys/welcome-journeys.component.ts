@@ -9,6 +9,8 @@ import {
   JourneyContentTypes,
 } from '../../state/journeys/journeys.state';
 import { LimitedJourneysManagementStateContext } from '../../state/journeys/journeys-state.context';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label, Color } from 'ng2-charts';
 
 export class LcuNapkinIdeWelcomeJourneysElementState {}
 
@@ -30,7 +32,6 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   //  Fields
 
   //  Properties
-  results: any[];
 
   /**
    * Content Types
@@ -45,29 +46,34 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
     Journeys: Array<any>;
   }> = [];
 
-  public get IoTDataColorScheme() {
-    return {
-      domain: !this.State.IoTData ? [] : this.State.IoTData.map(data => {
-        return {
-          name: data.Name
-        };
-      })
-    };
-  }
+  public ChartData: ChartDataSets[] = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Device 1' },
+    { data: [65, 55, 40, 59, 80, 81, 56], label: 'Device 2' },
+  ];
 
-  public get IoTDataResults(): any[] {
-    return !this.State.IoTData ? [] : this.State.IoTData.map(data => {
-      return {
-        name: data.Name,
-        series: Object.keys(data.Data).map(dk => {
-          return {
-            name: dk,
-            value: data.Data[dk]
-          };
-        })
-      };
-    });
-  }
+  public ChartLabels: Label[] = [
+    'Friday',
+    'Saturday',
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+  ];
+
+  public ChartLegend = true;
+
+  public ChartType: ChartType = 'line';
+
+  public ChartPlugins: any[] = [];
+
+  public IoTChartColors: Color[];
+
+  public IoTChartOptions: ChartOptions;
+
+  public IoTDataLabels: Label[];
+
+  public IoTDataResults: ChartDataSets[];
 
   /**
    * Current state
@@ -90,134 +96,6 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   public ngOnInit() {
     super.ngOnInit();
 
-    this.results = [
-      {
-        name: 'Bhutan',
-        series: [
-          {
-            value: 6330,
-            name: '2016-09-19T04:05:57.165Z',
-          },
-          {
-            value: 6131,
-            name: '2016-09-13T00:33:21.791Z',
-          },
-          {
-            value: 4893,
-            name: '2016-09-14T01:43:18.351Z',
-          },
-          {
-            value: 3743,
-            name: '2016-09-12T21:30:52.261Z',
-          },
-          {
-            value: 3007,
-            name: '2016-09-18T07:39:26.686Z',
-          },
-        ],
-      },
-      {
-        name: 'Niue',
-        series: [
-          {
-            value: 6864,
-            name: '2016-09-19T04:05:57.165Z',
-          },
-          {
-            value: 3331,
-            name: '2016-09-13T00:33:21.791Z',
-          },
-          {
-            value: 5786,
-            name: '2016-09-14T01:43:18.351Z',
-          },
-          {
-            value: 2647,
-            name: '2016-09-12T21:30:52.261Z',
-          },
-          {
-            value: 6990,
-            name: '2016-09-18T07:39:26.686Z',
-          },
-        ],
-      },
-      {
-        name: 'French Polynesia',
-        series: [
-          {
-            value: 2118,
-            name: '2016-09-19T04:05:57.165Z',
-          },
-          {
-            value: 3692,
-            name: '2016-09-13T00:33:21.791Z',
-          },
-          {
-            value: 6688,
-            name: '2016-09-14T01:43:18.351Z',
-          },
-          {
-            value: 2625,
-            name: '2016-09-12T21:30:52.261Z',
-          },
-          {
-            value: 4815,
-            name: '2016-09-18T07:39:26.686Z',
-          },
-        ],
-      },
-      {
-        name: 'Switzerland',
-        series: [
-          {
-            value: 2370,
-            name: '2016-09-19T04:05:57.165Z',
-          },
-          {
-            value: 2817,
-            name: '2016-09-13T00:33:21.791Z',
-          },
-          {
-            value: 5096,
-            name: '2016-09-14T01:43:18.351Z',
-          },
-          {
-            value: 5787,
-            name: '2016-09-12T21:30:52.261Z',
-          },
-          {
-            value: 5312,
-            name: '2016-09-18T07:39:26.686Z',
-          },
-        ],
-      },
-      {
-        name: 'Azerbaijan',
-        series: [
-          {
-            value: 4094,
-            name: '2016-09-19T04:05:57.165Z',
-          },
-          {
-            value: 3355,
-            name: '2016-09-13T00:33:21.791Z',
-          },
-          {
-            value: 4014,
-            name: '2016-09-14T01:43:18.351Z',
-          },
-          {
-            value: 3910,
-            name: '2016-09-12T21:30:52.261Z',
-          },
-          {
-            value: 3319,
-            name: '2016-09-18T07:39:26.686Z',
-          },
-        ],
-      },
-    ];
-
     this.state.Context.subscribe((state: any) => {
       this.State = state;
 
@@ -233,6 +111,41 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
   }
 
   //  Helpers
+  protected configureCharts() {
+    this.IoTChartOptions = { responsive: true, maintainAspectRatio: false };
+
+    this.IoTChartColors = [
+      { borderColor: 'black', backgroundColor: 'rgba(255,0,0,0.3)' },
+    ];
+
+    // this.IoTDataLabels = [
+    //   'January',
+    //   'February',
+    //   'March',
+    //   'April',
+    //   'May',
+    //   'June',
+    //   'July',
+    // ];
+    this.IoTDataLabels = !this.State.IoTData
+      ? []
+      : Object.keys(this.State.IoTData[0].Data);
+
+    // this.IoTDataResults = [
+    //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Device 1' },
+    //   { data: [65, 55, 40, 59, 80, 81, 56], label: 'Device 2' },
+    // ];
+    this.IoTDataResults = !this.State.IoTData
+      ? []
+      : this.State.IoTData.map((data) => {
+          return {
+            label: data.Name,
+            data: Object.keys(data.Data).map((dk) => {
+              return data.Data[dk];
+            }),
+          };
+        });
+  }
   /**
    * Divides the journeys from the state into individual arrays of role-based journeys
    */
@@ -257,5 +170,7 @@ export class LcuNapkinIdeWelcomeJourneysElementComponent
     if (this.State.Journeys) {
       this.divideJourneys();
     }
+
+    this.configureCharts();
   }
 }

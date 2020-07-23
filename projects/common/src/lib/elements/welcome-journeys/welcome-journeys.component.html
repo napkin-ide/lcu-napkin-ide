@@ -4,8 +4,8 @@
       <mat-card-title><h1>Welcome to Fathym!</h1></mat-card-title>
     </mat-card-header>
 
-    <div fxLayout="row">
-      <div fxFlex="20" class="mat-body margin-top-5 margin-right-1">
+    <div fxLayout="row wrap">
+      <div fxFlex="100%" class="mat-body">
         <ng-container *ngIf="State.IsIoTStarter">
           <p>
             To start your IoT journey, we have setup a few things automatically
@@ -42,73 +42,82 @@
         </ng-container>
       </div>
 
-      <div class="accent-divider"></div>
+      <!-- <div class="accent-divider"></div> -->
 
-      <div fxFlex="80" style="padding: 5px;">
+      <div fxFlex="100%">
         <div
-          gdColumns="40% 60%"
-          gdColumns.lt-md="30% 70%"
-          gdColumns.lt-sm="100%"
+          gdColumns="30% 70%"
+          gdColumns.lt-sm="40% 60%"
+          gdColumns.lt-xs="100%"
           gdGap="2em"
           gdGap.lt-sm="1em"
           class="spread"
           *ngIf="State.IsIoTStarter"
         >
           <mat-card>
-            <h2>Visualize Your Data Flow</h2>
+            <mat-nav-list>
+              <mat-list-item>
+                <h3>Visualize Your Data Flow</h3>
 
-            <div class="spread">
-              <p>
-                View a Real-Time Dashboard built with Open Source tool
-              </p>
+                <p>
+                  Some default applications to get you started with your data.
+                </p>
+              </mat-list-item>
 
-              <a
-                mat-raised-button
-                color="primary"
-                href="/real-time/freeboard"
-                target="_blank"
-              >
-                Freeboard
-              </a>
-            </div>
+              <mat-list-item>
+                <a
+                  matLine
+                  color="primary"
+                  href="/real-time/freeboard"
+                  target="_blank"
+                >
+                  Freeboard - Open Source Dashboard
+                </a>
+              </mat-list-item>
 
-            <div class="spread">
-              <p>
-                View a Customizable Real-Time Dashboard built with Fathym's
-                Charting Low Code Unit
-              </p>
-
-              <a
-                mat-raised-button
-                color="primary"
-                href="/real-time/charts"
-                target="_blank"
-              >
-                Low Code Unit - Charts
-              </a>
-            </div>
+              <mat-list-item>
+                <a
+                  matLine
+                  color="primary"
+                  href="/real-time/charts"
+                  target="_blank"
+                >
+                  LCU Charts - Data Visualization
+                </a>
+              </mat-list-item>
+            </mat-nav-list>
           </mat-card>
 
-          <mat-card>
-            <h2>Streaming Data Process</h2>
+          <mat-card class="streaming-data">
+            <mat-card-header>
+              <mat-card-title>
+                <h3>Streaming Data</h3>
+              </mat-card-title>
+            </mat-card-header>
 
-            <ngx-charts-line-chart
-              [scheme]="IoTDataColorScheme"
-              [legend]="true"
-              [showXAxisLabel]="true"
-              [showYAxisLabel]="true"
-              [xAxis]="true"
-              [yAxis]="true"
-              xAxisLabel="Timestamp"
-              yAxisLabel="Temperature"
-              [timeline]="true"
-              [results]="IoTDataResults"
-            >
-            </ngx-charts-line-chart>
+            <mat-card-content>
+              <lcu-iot-data-chart
+                *ngIf="IoTDataResults"
+                [data-set]="IoTDataResults"
+                [labels]="IoTDataLabels"
+              ></lcu-iot-data-chart>
+              <!-- <canvas
+                *ngIf="IoTDataResults"
+                baseChart
+                [datasets]="IoTDataResults"
+                [labels]="IoTDataLabels"
+                [options]="IoTChartOptions"
+                [colors]="IoTChartColors"
+                [legend]="ChartLegend"
+                [chartType]="ChartType"
+                [plugins]="ChartPlugins"
+              >
+              </canvas> -->
+            </mat-card-content>
           </mat-card>
 
           <mat-card gdColumn="auto / span 2">
-            <h2>Send Your Own Data</h2>
+            <h3>Send Your Own Data</h3>
 
             <p>
               We've set your IoT Data Flow up in the easiest possible, best
@@ -169,14 +178,6 @@
                         value="-83.4399405"
                       />
                     </mat-form-field>
-
-                    <div>
-                      <div fxFlex></div>
-
-                      <button type="submit" mat-raised-button color="accent">
-                        Send Device Data
-                      </button>
-                    </div>
                   </fieldset>
 
                   <fieldset>
@@ -190,6 +191,14 @@
                       <input matInput placeholder="WindHeading" value="274" />
                     </mat-form-field>
                   </fieldset>
+
+                  <div>
+                    <div fxFlex></div>
+
+                    <button type="submit" mat-raised-button color="accent">
+                      Send Device Data
+                    </button>
+                  </div>
                 </form>
               </mat-expansion-panel>
 
@@ -249,43 +258,44 @@
               </mat-expansion-panel>
             </mat-accordion>
           </mat-card>
-        </div>
 
-        <ng-container *ngIf="State.IsIoTStarter">
-          <p>
-            Use the Journeys below to familiarize yourself with the rest of what
-            you can do with Fathym!
-          </p>
-        </ng-container>
+          <mat-card gdColumn="auto / span 2">
+            <h3>What's Next?</h3>
 
-        <mat-tab-group mat-align-tabs="left">
-          <mat-tab
-            *ngFor="let journeySet of DividedJourneys"
-            label="{{ journeySet.JourneyName }}"
-          >
-            <div
-              fxLayout="row wrap"
-              fxLayoutAlign="space-between"
-              fxLayout.sm="column"
-            >
-              <div
-                *ngFor="let journey of journeySet.Journeys"
-                [fxFlex.sm]="100"
-                [fxFlex.md]="50"
-                [fxFlex.lg]="33"
-                class="mat-body margin-top-3"
+            <p>
+              Use the Journeys below to familiarize yourself with the rest of
+              what you can do with Fathym!
+            </p>
+
+            <mat-tab-group mat-align-tabs="left">
+              <mat-tab
+                *ngFor="let journeySet of DividedJourneys"
+                label="{{ journeySet.JourneyName }}"
               >
-                <lcu-journey-card
-                  *ngIf="
-                    ContainsRoleType(journey, journeySet.JourneyName) &&
-                    journey.Active
-                  "
-                  [journey-data]="journey"
-                ></lcu-journey-card>
-              </div>
-            </div>
-          </mat-tab>
-        </mat-tab-group>
+                <div
+                  fxLayout="row wrap"
+                  fxLayoutAlign="space-between"
+                  fxLayout.sm="column"
+                >
+                  <div
+                    *ngFor="let journey of journeySet.Journeys"
+                    [fxFlex.sm]="100"
+                    [fxFlex.md]="50"
+                    [fxFlex.lg]="33"
+                    class="mat-body margin-top-3"
+                  >
+                    <lcu-journey-card
+                      *ngIf="
+                        ContainsRoleType(journey, journeySet.JourneyName) &&
+                        journey.Active
+                      "
+                      [journey-data]="journey"
+                    ></lcu-journey-card>
+                  </div>
+                </div>
+              </mat-tab> </mat-tab-group
+          ></mat-card>
+        </div>
       </div>
     </div>
   </mat-card>

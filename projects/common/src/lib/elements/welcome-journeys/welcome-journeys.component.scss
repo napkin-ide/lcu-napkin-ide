@@ -2,4 +2,12 @@
   fieldset {
     margin-bottom: 1.25em;
   }
+
+  .streaming-data {
+    height: 300px;
+
+    .mat-card-content {
+      height: calc(100% - 84.3px);
+    }
+  }
 }
