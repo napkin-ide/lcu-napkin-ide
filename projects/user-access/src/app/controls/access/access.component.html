@@ -63,13 +63,12 @@
       (limit-click)="RequestAccess($event)"
       [clicks-allowed]=1
       [disable-button]="DisableRequestButton">
+      <mat-icon *ngIf="State.Loading">
+        <mat-spinner diameter="20"></mat-spinner>
+      </mat-icon>
       Request Access
     </button>
   </mat-card-actions>
   <mat-error *ngIf="State.RequestAuthorizationSent == 'False'">There was an error with your request</mat-error>
 </mat-card>
 </form>
-
-<div *ngIf="State.Loading">
-  <mat-spinner></mat-spinner>
-</div>

@@ -72,13 +72,8 @@ export class AccessComponent implements OnInit {
    * Request organization access
    */
   public RequestAccess(evt: Event): void {
-    this.Loading = true;
+    this.State.Loading = true;
     this.userAccessState.RequestUserAccess();
-
-    // for testing
-    // setTimeout (() => {
-    //   this.DisableRequestButton = false;
-    //  }, 3000);
   }
 
   /**
