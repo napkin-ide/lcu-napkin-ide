@@ -72,6 +72,7 @@ export class AccessComponent implements OnInit {
    * Request organization access
    */
   public RequestAccess(evt: Event): void {
+    this.Loading = true;
     this.userAccessState.RequestUserAccess();
 
     // for testing
