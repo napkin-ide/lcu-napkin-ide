@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { JourneyContentTypes } from '../../../state/journeys/journeys.state';
+import { JourneyContentTypes, JourneyOption } from '../../../state/journeys/journeys.state';
 
 @Component({
   selector: 'lcu-journey-card',
@@ -11,16 +11,9 @@ export class JourneyCardComponent implements OnInit {
   /**
    * the individual journey data to be displayed in the card
    */
-  // tslint:disable-next-line
-  protected _journeyData: any;
 
-  @Input('journey-data')
-  set JourneyData(val: any) {
-    this._journeyData = val;
-  }
-  get JourneyData(): any {
-    return this._journeyData;
-  }
+  @Input('journey')
+  public Journey: JourneyOption;
 
   get JourneyContentTypes(): any {
     return JourneyContentTypes;
@@ -29,7 +22,7 @@ export class JourneyCardComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
 }

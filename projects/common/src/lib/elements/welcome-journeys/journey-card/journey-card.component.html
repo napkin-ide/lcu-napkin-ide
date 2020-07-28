@@ -1,28 +1,41 @@
 <mat-card style="height: 90%;">
-    <div class="coming-soon-overlay" *ngIf="JourneyData.ComingSoon">
-        <h1>Coming Soon!</h1>
-    </div>
-    <mat-card-header>
-        <mat-card-title>{{ JourneyData.Name }}</mat-card-title>
-        <mat-card-subtitle>{{ JourneyData.Uses.join(', ') }}</mat-card-subtitle>
-    </mat-card-header>
-    <div fxLayout="row">
-        <div fxFlex="50" class="mat-body">{{ JourneyData.Description }}</div>
-        
-        <div>
-            <iframe 
-                *ngIf="JourneyData.ContentType === JourneyContentTypes.Video" 
-                [src]="JourneyData.ContentURL | safe" 
-                width="100%"
-                height="120px" 
-                webkitallowfullscreen 
-                mozallowfullscreen 
-                allowfullscreen></iframe>
+  <mat-card-header>
+    <mat-card-title>{{ Journey.Name }}</mat-card-title>
 
-            <img 
-                *ngIf="JourneyData.ContentType === JourneyContentTypes.Image"
-                [src]="JourneyData.ContentURL"
-                class="journey-image" />
-        </div>
+    <mat-card-subtitle>{{ Journey.Uses.join(", ") }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <div fxLayout="row">
+    <div fxFlex="50" class="mat-body">{{ Journey.Description }}</div>
+
+    <div>
+      <iframe
+        *ngIf="Journey.ContentType === JourneyContentTypes.Video"
+        [src]="Journey.ContentURL | safe"
+        width="100%"
+        height="120px"
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen
+      ></iframe>
+
+      <img
+        *ngIf="Journey.ContentType === JourneyContentTypes.Image"
+        [src]="Journey.ContentURL"
+        class="journey-image"
+      />
     </div>
+  </div>
+
+  <div class="coming-soon-overlay" *ngIf="Journey.ComingSoon">
+    <h1>Coming Soon!</h1>
+  </div>
 </mat-card>
+<!--
+<div
+gdColumns="33% 33% 33%"
+gdColumns.lt-sm="50% 50%"
+gdColumns.lt-xs="100%"
+gdGap="2em"
+gdGap.lt-sm="1em"
+></div> -->
