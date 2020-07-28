@@ -1,29 +1,29 @@
-import { Component, OnInit, Injector } from "@angular/core";
+import { Component, OnInit, Injector } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
-} from "@angular/common/http";
+} from '@angular/common/http';
 
-import { LCUElementContext, LcuElementComponent } from "@lcu/common";
-import { Pipe, PipeTransform } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
+import { LCUElementContext, LcuElementComponent } from '@lcu/common';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   LimitedJourneysManagementState,
   JourneyOption,
   JourneyContentTypes,
-} from "../../state/journeys/journeys.state";
-import { LimitedJourneysManagementStateContext } from "../../state/journeys/journeys-state.context";
-import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
-import { Label, Color } from "ng2-charts";
+} from '../../state/journeys/journeys.state';
+import { LimitedJourneysManagementStateContext } from '../../state/journeys/journeys-state.context';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label, Color } from 'ng2-charts';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl,
-} from "@angular/forms";
-import { catchError } from "rxjs/operators";
-import { throwError } from "rxjs";
+} from '@angular/forms';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 export class LcuNapkinIdeWelcomeJourneysElementState {}
 
@@ -32,12 +32,12 @@ export class LcuNapkinIdeWelcomeJourneysContext extends LCUElementContext<
 > {}
 
 export const SELECTOR_LCU_NAPKIN_IDE_WELCOME_JOURNEYS_ELEMENT =
-  "lcu-napkin-ide-welcome-journeys-element";
+  'lcu-napkin-ide-welcome-journeys-element';
 
 @Component({
   selector: SELECTOR_LCU_NAPKIN_IDE_WELCOME_JOURNEYS_ELEMENT,
-  templateUrl: "./welcome-journeys.component.html",
-  styleUrls: ["./welcome-journeys.component.scss"],
+  templateUrl: './welcome-journeys.component.html',
+  styleUrls: ['./welcome-journeys.component.scss'],
 })
 export class LcuNapkinIdeWelcomeJourneysElementComponent
   extends LcuElementComponent<LcuNapkinIdeWelcomeJourneysContext>
