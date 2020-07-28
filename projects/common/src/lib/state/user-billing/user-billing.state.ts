@@ -9,6 +9,8 @@ export class UserBillingState {
 
   public LicenseType?: LicenseTypeDetails;
 
+  public NextBillingDate?: Date;
+
   public PaymentMethodID?: string;
 
   public PaymentStatus?: Status;
@@ -58,6 +60,23 @@ export class BillingPlanOption {
 
   public PointQueries?: string;
 }
+
+// export class StripeSubscriptionDetails{
+//   public BillingPeriodStart: Date;
+
+//   public BillingPeriodEnd: Date; 
+  
+//   public BillingStatus: string; 
+  
+//   public CollectionMethod: string; 
+  
+//   public SubscriptionCreated: Date; 
+  
+//   public CustomerId: string;
+  
+//   public SubscriptionId: string;
+// }
+
 export class LicenseTypeDetails {
   public Lookup: string; // Would contain the actual license type value 'LCU' or 'forecaster' or whatever else comes down the line
 

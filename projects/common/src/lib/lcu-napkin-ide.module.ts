@@ -52,6 +52,7 @@ import { UserAccountModalComponent } from './controls/user-account-modal/user-ac
     LcuNapkinIdeWelcomeJourneysElementComponent,
     ToolbarComponent,
     UserAccountModalComponent,
+    DirectiveModule
   ],
   entryComponents: [
     SideNavComponent,
