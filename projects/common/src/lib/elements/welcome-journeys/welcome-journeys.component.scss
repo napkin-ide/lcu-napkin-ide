@@ -10,4 +10,12 @@
       height: calc(100% - 84.3px);
     }
   }
+
+  .highlighted-journey {
+    .journey-image {
+      width: 33%;
+      float: left;
+      margin-right: 2em;
+    }
+  }
 }

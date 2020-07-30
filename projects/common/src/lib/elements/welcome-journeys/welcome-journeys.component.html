@@ -56,7 +56,7 @@
             ></lcu-journey-card>
           </div>
 
-          <mat-card gdColumn="auto / span 2">
+          <mat-card gdColumn="auto / span 2" class="spread">
             <h3>What's Next?</h3>
 
             <p>
@@ -70,17 +70,14 @@
                 label="{{ journeySet.JourneyName }}"
               >
                 <div
-                  fxLayout="row wrap"
-                  fxLayoutAlign="space-between"
-                  fxLayout.sm="column"
+                  gdColumns="32% 32% 32%"
+                  gdColumns.lt-sm="48% 48%"
+                  gdColumns.lt-xs="100%"
+                  gdGap="2em"
+                  gdGap.lt-sm="1em"
+                  class="spread"
                 >
-                  <div
-                    *ngFor="let journey of journeySet.Journeys"
-                    [fxFlex.sm]="100"
-                    [fxFlex.md]="50"
-                    [fxFlex.lg]="33"
-                    class="mat-body margin-top-3"
-                  >
+                  <ng-container *ngFor="let journey of journeySet.Journeys">
                     <lcu-journey-card
                       *ngIf="
                         ContainsRoleType(journey, journeySet.JourneyName) &&
@@ -88,7 +85,7 @@
                       "
                       [journey]="journey"
                     ></lcu-journey-card>
-                  </div>
+                  </ng-container>
                 </div>
               </mat-tab>
             </mat-tab-group>
