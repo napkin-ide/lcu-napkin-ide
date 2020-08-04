@@ -16,13 +16,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { LcuTrademarkDirective } from './controls/trademark/trademark.directive';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { IntervalToggleComponent } from './controls/interval-toggle/interval-toggle.component';
-import { JourneyCardComponent } from './elements/welcome-journeys/journey-card/journey-card.component';
-import { LcuNapkinIdeWelcomeJourneysElementComponent } from './elements/welcome-journeys/welcome-journeys.component';
 import { ToolbarComponent } from './controls/toolbar/toolbar.component';
 import { NthPowerToStringPipe } from './utils/pipes/nth-power-to-string-pipe.pipe';
 import { UserAccountModalComponent } from './controls/user-account-modal/user-account-modal.component';
-import { IotDataChartComponent } from './elements/welcome-journeys/iot-data-chart/iot-data-chart.component';
-import { JourneyDetailsComponent } from './elements/welcome-journeys/journey-details/journey-details.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +28,9 @@ import { JourneyDetailsComponent } from './elements/welcome-journeys/journey-det
     LcuTrademarkDirective,
     PlanCardComponent,
     IntervalToggleComponent,
-    LcuNapkinIdeWelcomeJourneysElementComponent,
     ToolbarComponent,
     NthPowerToStringPipe,
     UserAccountModalComponent,
-    JourneyCardComponent,
-    IotDataChartComponent,
-    JourneyDetailsComponent,
   ],
   imports: [
     FathymSharedModule,
@@ -61,13 +53,11 @@ import { JourneyDetailsComponent } from './elements/welcome-journeys/journey-det
     LcuTrademarkDirective,
     PlanCardComponent,
     IntervalToggleComponent,
-    LcuNapkinIdeWelcomeJourneysElementComponent,
     ToolbarComponent,
     UserAccountModalComponent,
     DirectiveModule,
     ChartsModule,
     HttpClientModule,
-    JourneyDetailsComponent,
   ],
   entryComponents: [
     SideNavComponent,
@@ -75,7 +65,6 @@ import { JourneyDetailsComponent } from './elements/welcome-journeys/journey-det
     LcuNapkinIdeShellHostElementComponent,
     PlanCardComponent,
     IntervalToggleComponent,
-    LcuNapkinIdeWelcomeJourneysElementComponent,
     ToolbarComponent,
     UserAccountModalComponent,
   ],
