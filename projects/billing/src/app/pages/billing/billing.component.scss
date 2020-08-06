@@ -30,7 +30,20 @@ $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background
   border-radius: 2px;
   margin: 10px 0px;
   padding: 5px;
-  color:$Main-font;
+  color:$Main-font !important;
+  // input:-webkit-autofill,
+  // input:-webkit-autofill:hover, 
+  // input:-webkit-autofill:focus,
+  // textarea:-webkit-autofill,
+  // textarea:-webkit-autofill:hover,
+  // textarea:-webkit-autofill:focus,
+  // select:-webkit-autofill,
+  // select:-webkit-autofill:hover,
+  // select:-webkit-autofill:focus {
+  //     transition: background-color 5000s !important;
+  //     color:$Main-font !important;
+
+  // }
 }
 
 @mixin stripe-billing-container($global-theme-color, $trans){
@@ -93,13 +106,16 @@ $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background
             // width: 500px;
             width:100%;
             outline: none;
-            // ::placeholder{
-            //   color: black;
-            //   opacity: 1;
-            // }
+            
+            
+          }
+          .cardholder-label{
+            margin-left: -6px;
           }
           .user-input-icon{
             color: $Main-font;
+            margin-right: 8px;
+            margin-left: 5px;
           }
           .stripe-card{
             // @include input-box($Input-box-color);
@@ -189,6 +205,7 @@ $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background
   
   
 }
+
 
 
 
