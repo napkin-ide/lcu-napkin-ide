@@ -152,6 +152,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     protected router: Router
   ) {
     this.PlanGroups = new Array<string>();
+    this.AcceptedTOS = false;
+    this.AcceptedEA = false;
   }
 
   //  Life Cycle
@@ -251,6 +253,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Determines if user has entered all fields and wether or not to show button
    */
   public IsButtonDisabled(): boolean {
+    // console.log("TERMS = ", this.AcceptedEA, this.AcceptedTOS)
     if (
       this.AcceptedEA &&
       this.AcceptedTOS &&
@@ -268,7 +271,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Checks to see if card has error
    */
   protected handleCardChanged(event: any) {
-    console.log('Error = ', event);
+    // console.log('Error = ', event);
     if (event.error) {
         this.StripeError = event.error.message;
         this.StripeValid = false;
@@ -287,7 +290,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Handles the stripe once user has confirmed payment
    */
   protected handleStripePaymentMethodCreated(result: any) {
-    console.log('payment result: ', result.error);
+    // console.log('payment result: ', result.error);
     if (result.error) {
       this.StripeError = result.error;
     } else {
@@ -437,7 +440,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     this.findPlan();
     this.determineIntervals();
 
-    this.determineCheckboxes();
+    // this.determineCheckboxes();
     console.log("state: ", this.State)
     // console.log("planID =", this.planID);
     // if a plan has been passed in via param set the selected plan accordingly

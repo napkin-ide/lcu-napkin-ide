@@ -104,7 +104,7 @@ constructor(protected dialogRef: MatDialogRef<UserAccountModalComponent>,
     this.ManagingSubscription = false;
     this.IsUserAccount = true;
     this.IsInitialReason = true;
-    // console.log("DATA: ", this.data);
+    console.log("DATA: ", this.data);
     this.UserState = this.data;
     this.userStateChanged()
   // this.LogoutClicked = new EventEmitter<any>();
