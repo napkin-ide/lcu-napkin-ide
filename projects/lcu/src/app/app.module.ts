@@ -9,6 +9,8 @@ import {
   LcuNapkinIdeShellHostElementComponent,
 } from '@napkin-ide/lcu-napkin-ide-common';
 import { environment } from '../environments/environment';
+//   LcuNapkinIdeWelcomeJourneysElementComponent,  SELECTOR_LCU_NAPKIN_IDE_WELCOME_JOURNEYS_ELEMENT,
+
 
 @NgModule({
   declarations: [],
@@ -38,5 +40,15 @@ export class AppModule implements DoBootstrap {
 
     customElements.define(SelectorLcuNapkinIdeShellHostElement, dfMgr);
 
+
+    // const welcomeJourneys = createCustomElement(
+    //   LcuNapkinIdeWelcomeJourneysElementComponent,
+    //   { injector: this.injector }
+    // );
+
+    // customElements.define(
+    //   SELECTOR_LCU_NAPKIN_IDE_WELCOME_JOURNEYS_ELEMENT,
+    //   welcomeJourneys
+    // );
   }
 }
