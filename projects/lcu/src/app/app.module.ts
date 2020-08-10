@@ -40,6 +40,7 @@ export class AppModule implements DoBootstrap {
 
     customElements.define(SelectorLcuNapkinIdeShellHostElement, dfMgr);
 
+
     // const welcomeJourneys = createCustomElement(
     //   LcuNapkinIdeWelcomeJourneysElementComponent,
     //   { injector: this.injector }
