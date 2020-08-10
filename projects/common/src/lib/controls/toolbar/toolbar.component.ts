@@ -74,7 +74,7 @@ export class ToolbarComponent implements OnInit {
 
     this.userStateCtx.Context.subscribe((ustate: UserManagementState) => {
       this.UsersState = ustate;
-      // console.log("Users state on toolbar", this.UsersState)
+      console.log("Users state on toolbar", this.UsersState)
     });
   }
 

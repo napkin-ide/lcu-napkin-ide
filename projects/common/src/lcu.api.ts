@@ -17,5 +17,8 @@ export * from './lib/state/ide/state-change-types';
 // export * from './lib/config/auth.config';
 export * from './lib/utils/constants';
 export * from './lib/elements/shell-host/shell-host.component';
+<<<<<<< HEAD
 export * from './lib/elements/welcome-journeys/welcome-journeys.component';
 export * from './lib/state/user-management/user-management.state';
+=======
+>>>>>>> integration
