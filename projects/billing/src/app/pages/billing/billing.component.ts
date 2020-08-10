@@ -76,7 +76,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
 
 
 /**
- * The string to display in the billing form
+ * The header to display in the billing form
  */
   public HeaderName: string;
 
@@ -271,7 +271,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Checks to see if card has error
    */
   protected handleCardChanged(event: any) {
-    // console.log('Error = ', event);
+    console.log('Error = ', event);
     if (event.error) {
         this.StripeError = event.error.message;
         this.StripeValid = false;
@@ -564,7 +564,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected convertName() {
       //   console.log("pipe =", value)
       if (this.SelectedPlan.LicenseType === 'lcu') {
-          this.HeaderName = 'Fathym Low Code Framework';
+          this.HeaderName = 'Fathym | The Data Application Framework';
       } else if (this.SelectedPlan.LicenseType === 'forecast') {
           this.HeaderName = 'Fathym Forecaster API';
       }
