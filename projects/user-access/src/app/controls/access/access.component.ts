@@ -72,12 +72,8 @@ export class AccessComponent implements OnInit {
    * Request organization access
    */
   public RequestAccess(evt: Event): void {
+    this.State.Loading = true;
     this.userAccessState.RequestUserAccess();
-
-    // for testing
-    // setTimeout (() => {
-    //   this.DisableRequestButton = false;
-    //  }, 3000);
   }
 
   /**
@@ -120,7 +116,7 @@ export class AccessComponent implements OnInit {
    * When state changes
    */
   protected stateChanged() {
-  
+  debugger;
   }
 
 }

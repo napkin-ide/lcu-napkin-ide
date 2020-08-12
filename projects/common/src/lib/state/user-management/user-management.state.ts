@@ -90,6 +90,8 @@ export class JourneyDetail {
 }
 
 export class BootOption {
+  public CompletedSteps?: number;
+
   public Descriptions?: string[];
 
   public Loading?: boolean;
@@ -101,6 +103,8 @@ export class BootOption {
   public SetupStep?: NapkinIDESetupStepTypes;
 
   public Status?: Status;
+
+  public TotalSteps?: number;
 }
 
 export class AzureInfaSettings {

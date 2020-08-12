@@ -27,10 +27,12 @@ export class IdeUserAccessStateManagerContext extends StateContext<IdeUserAccess
   }
 
   protected loadStateKey(): any {
-    return Promise.resolve('init');
+    // return Promise.resolve('init');
+    return 'init';
   }
 
   protected loadStateName(): any {
-    return Promise.resolve('napkin-ide-setup');
+    // return Promise.resolve('napkin-ide-setup');
+    return 'usermanagement';
   }
 }
