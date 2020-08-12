@@ -12,7 +12,7 @@ $Pro-trans: mat-color(map-get($global-theme, primary), A200,50%);
 
 // $Fathym-Grey: darkslategray;
 
-$Fathym-Grey: mat-color(map-get($global-theme, primary), 300);
+$Fathym-Grey: mat-color(map-get($global-theme, primary), 100);
 $Plan-Card-BG: transparentize(#f5f5f5, .1);
 // $Plan-Card-BG: mat-color(map-get($global-theme, primary), 100);
  $Main-font: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
