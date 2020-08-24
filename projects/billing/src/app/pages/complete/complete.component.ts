@@ -140,7 +140,7 @@ export class CompleteComponent implements OnInit {
   protected convertName(){
     //   console.log("pipe =", value)
     if(this.SelectedPlan.LicenseType === "lcu"){
-        this.HeaderName ="Fathym Low Code Unit Framework";
+        this.HeaderName ="Fathym | The Data Application Framework";
     }
     else if(this.SelectedPlan.LicenseType === "forecast"){
         this.HeaderName = "Fathym Forecaster API";
