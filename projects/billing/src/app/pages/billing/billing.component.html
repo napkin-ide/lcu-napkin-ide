@@ -35,8 +35,11 @@
         </div>
         <div class="billing-header-section" fxLayout="column" fxLayoutAlign="start start">
           <h2 class="fathym-header" *ngIf="SelectedPlan?.LicenseType">{{HeaderName}}</h2>
+          <div fxLayout="row">
           <h3 class="fathym-header" *ngIf="SelectedPlan?.PlanGroup && SelectedPlan?.Interval">
             {{SelectedPlan.PlanGroup | titlecase}} Package - {{SelectedPlan.Interval | titlecase}}ly Billing</h3>
+          <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk">*</span>
+        </div>
           <p class="fathym-header">Enter payment information</p>
         </div>
       </mat-card-header>
