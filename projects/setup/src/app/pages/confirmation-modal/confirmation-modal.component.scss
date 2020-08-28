@@ -4,7 +4,7 @@
 @import '../../../../../../node_modules/@lcu/common/assets/styles/fathym-global.styles';
 
 .thinky-image{
-    background-image: fathym-logo(thinky-circle, $global-accent, .7);
+    background-image: fathym-logo(thinky-circle, mat-color($fathym-accent), .7);
     background-repeat:no-repeat;
     background-position: center;
     background-size: 100px;

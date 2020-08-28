@@ -64,7 +64,7 @@ $Fathym-Green: mat-color(map-get($global-theme, primary));
 
 .check-circle{
   border-radius: 15px;
-  background-color: $global-accent;
+  background-color: mat-color($fathym-accent);
   color: $Fathym-Green;
  // background-color: mat-color($primary);
 }

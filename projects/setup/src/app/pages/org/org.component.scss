@@ -96,7 +96,7 @@ $Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
   }
 
   .list-icon{
-    color: $global-primary;
+    color: mat-color($fathym-primary);
   }
 
   .step-checkbox{
