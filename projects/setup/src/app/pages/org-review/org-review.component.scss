@@ -64,7 +64,7 @@ $Fathym-Green: mat-color(map-get($global-theme, primary));
 
 .check-circle{
   border-radius: 15px;
-  background-color: $global-accent;
+  // background-color: $global-accent;
   color: $Fathym-Green;
  // background-color: mat-color($primary);
 }
@@ -84,7 +84,7 @@ $Fathym-Green: mat-color(map-get($global-theme, primary));
   .boot-option-font-incomplete {
     color: mat-color(map-get($global-theme, accent), 500, .5);
   }
-  
+
   .boot-option-font-loading {
     color: mat-color(map-get($global-theme, accent));
   }
