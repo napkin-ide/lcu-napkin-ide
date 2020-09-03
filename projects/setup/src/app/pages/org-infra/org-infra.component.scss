@@ -3,10 +3,11 @@
 
 .infra-check {
     border-radius: 15px;
-    // background-color: $global-accent;
+    background-color: mat-color($fathym-accent);
 }
 
 .help-anchor {
     text-decoration: none;
-    // color: $global-primary-contrast
+    // color: mat-color($fathym-primary, );
+    color: mat-color(map-get($global-theme, primary), default-contrast);
 }
