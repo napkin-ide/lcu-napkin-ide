@@ -69,8 +69,8 @@
         color: white;
         background-size: cover;
         background-position: 50% 0;
-        // background-image: linear-gradient(transparentize($global-primary, 0.2), transparentize($global-primary, 0.2)),
-        //   url('https://c1.staticflickr.com/8/7451/26797700615_76d3215c42_b.jpg');
+        background-image: linear-gradient(transparentize(mat-color($fathym-primary, 500), 0.2), transparentize(mat-color($fathym-primary, 500), 0.2)),
+          url('https://c1.staticflickr.com/8/7451/26797700615_76d3215c42_b.jpg');
 
         // a {
         //   width: 80%;
