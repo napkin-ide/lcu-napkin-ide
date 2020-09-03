@@ -84,7 +84,7 @@ $Fathym-Green: mat-color(map-get($global-theme, primary));
   .boot-option-font-incomplete {
     color: mat-color(map-get($global-theme, accent), 500, .5);
   }
-  
+
   .boot-option-font-loading {
     color: mat-color(map-get($global-theme, accent));
   }

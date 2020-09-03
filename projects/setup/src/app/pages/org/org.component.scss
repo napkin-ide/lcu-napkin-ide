@@ -15,19 +15,19 @@ $Theme-trans: mat-color(map-get($global-theme, primary), A700, 0.2);
     background-repeat:no-repeat;
     background-position: center;
   }
- 
+
   .spinner-container {
     position: relative;
     height: 75px;
     width: 75px;
     margin-left: 43%;
   }
-  
+
   .org-card {
     // this background image doesn't conform to theme colors
     // background-image: linear-gradient($Theme-trans, $Theme-trans),url('/assets/img/thinky-outside-the-box.jpg') !important;
   }
-  
+
 
   // :host {
     .identity {
