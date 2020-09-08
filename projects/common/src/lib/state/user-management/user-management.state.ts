@@ -57,6 +57,8 @@ export class UserManagementState {
 
   public TermsAccepted?: boolean;
 
+  public UserLicenses?: Array<any>;
+
   public Username?: string;
 
   public UserType?: UserTypes;
@@ -64,6 +66,9 @@ export class UserManagementState {
   public SubscribersLimited: Array<string>;
 
   public SubscribersActive: Array<string>;
+
+  public SubscriptionDetails?: StripeSubscriptionDetails; 
+
 }
 
 export class JourneyPersona {
@@ -85,6 +90,8 @@ export class JourneyDetail {
 }
 
 export class BootOption {
+  public CompletedSteps?: number;
+
   public Descriptions?: string[];
 
   public Loading?: boolean;
@@ -96,6 +103,8 @@ export class BootOption {
   public SetupStep?: NapkinIDESetupStepTypes;
 
   public Status?: Status;
+
+  public TotalSteps?: number;
 }
 
 export class AzureInfaSettings {
@@ -110,6 +119,24 @@ export class AzureInfaSettings {
   public AzureLocation?: string;
 
   public AzureRegion?: string;
+}
+
+export class StripeSubscriptionDetails{
+  public BillingPeriodStart: Date;
+
+  public BillingPeriodEnd: Date; 
+  
+  public BillingStatus: string; 
+  
+  public CollectionMethod: string; 
+  
+  public SubscriptionCreated: Date; 
+  
+  public CustomerId: string;
+  
+  public SubscriptionId: string;
+
+  public NextBillingDate: Date;
 }
 
 export enum NapkinIDESetupStepTypes {

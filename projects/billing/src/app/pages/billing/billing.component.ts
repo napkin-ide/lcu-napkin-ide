@@ -76,7 +76,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
 
 
 /**
- * The string to display in the billing form
+ * The header to display in the billing form
  */
   public HeaderName: string;
 
@@ -152,6 +152,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     protected router: Router
   ) {
     this.PlanGroups = new Array<string>();
+    this.AcceptedTOS = false;
+    this.AcceptedEA = false;
   }
 
   //  Life Cycle
@@ -251,6 +253,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Determines if user has entered all fields and wether or not to show button
    */
   public IsButtonDisabled(): boolean {
+    // console.log("TERMS = ", this.AcceptedEA, this.AcceptedTOS)
     if (
       this.AcceptedEA &&
       this.AcceptedTOS &&
@@ -270,20 +273,24 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected handleCardChanged(event: any) {
     console.log('Error = ', event);
     if (event.error) {
-      this.StripeError = event.error.message;
-
-      this.StripeValid = false;
-    } else if (event.complete) {
+        this.StripeError = event.error.message;
+        this.StripeValid = false;
+    }
+    else if (event.complete === true) {
       this.StripeError = '';
 
       this.StripeValid = true;
+    }
+    else{
+      this.StripeValid = false;
+  
     }
   }
   /**
    * Handles the stripe once user has confirmed payment
    */
   protected handleStripePaymentMethodCreated(result: any) {
-    console.log('payment result: ', result.error);
+    // console.log('payment result: ', result.error);
     if (result.error) {
       this.StripeError = result.error;
     } else {
@@ -321,22 +328,23 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       this.stripeCard = elements.create('card', {
         style: {
           base: {
-            color: 'black',
+            iconColor: '#c7c7c7',
+            color: '#c7c7c7',
             fontWeight: 600,
             fontFamily: 'Arial, sans-serif',
             fontSize: '16px',
             fontSmoothing: 'antialiased',
 
             ':focus': {
-              color: 'black',
+              color: '#c7c7c7',
             },
 
             '::placeholder': {
-              color: 'grey',
+              color: '#c7c7c7',
             },
 
             ':focus::placeholder': {
-              color: 'black',
+              color: '#c7c7c7',
             },
           },
           invalid: {
@@ -432,7 +440,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     this.findPlan();
     this.determineIntervals();
 
-    this.determineCheckboxes();
+    // this.determineCheckboxes();
+    console.log("state: ", this.State)
     // console.log("planID =", this.planID);
     // if a plan has been passed in via param set the selected plan accordingly
 
@@ -555,7 +564,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected convertName() {
       //   console.log("pipe =", value)
       if (this.SelectedPlan.LicenseType === 'lcu') {
-          this.HeaderName = 'Fathym Low Code Framework';
+          this.HeaderName = 'Fathym | The Data Application Framework';
       } else if (this.SelectedPlan.LicenseType === 'forecast') {
           this.HeaderName = 'Fathym Forecaster API';
       }

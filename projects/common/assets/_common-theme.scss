@@ -3,13 +3,24 @@
 
 $global-theme: fathym-ivy-theme(true);
 
+// :root {
+//     --global-theme: $global-theme;
+    
+// }
+
+/**
+* Or, can call create-theme and pass in your own palatte colors
+*/
+// $global-theme: create-theme($fathym-primary, $fathym-accent, $fathym-warn, true);
+$global-background: map-get(map-get($global-theme, background), 'background');
+
 /**
 * Set the theme and generate dynamic variant theme classes,
 * theme-setup is inside of Ref Arch (common-theme)
 *
-* If we skip this include, the default theme is 'fathym-ivy-theme
+* If we skip this @include, the default theme is 'fathym-ivy-theme'
 */
-@include theme-setup($global-theme, false);
+@include theme-setup($global-theme);
 
 /**
 * Common styles for Napkin-IDE projects

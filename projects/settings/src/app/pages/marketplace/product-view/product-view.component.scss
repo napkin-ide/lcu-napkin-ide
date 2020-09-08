@@ -1,11 +1,13 @@
-@mixin settings($theme) {
+@import '../../../../../../common/assets/common-theme';
+
+// @mixin settings($theme) {
     // $config: mat-typography-config();
   
-    $primary: map-get($theme, primary);
-    $accent: map-get($theme, accent);
-    $warn: map-get($theme, warn);
+$primary: mat-color(map-get($global-theme, primary));
+$accent: mat-color(map-get($global-theme, accent));
+$warn: mat-color(map-get($global-theme, warn));
     
-}
+// }
 
 h1, h2, h3, h4, h5, h6, p, span {
     font-family: Arial, Helvetica, sans-serif;
@@ -38,6 +40,6 @@ mat-spinner {
     padding-left: 25px;
     padding-right: 25px;
     font-size: 24pt;
-    background-color: #4a918e ;
+    background-color: $accent;
     border: none;
 }

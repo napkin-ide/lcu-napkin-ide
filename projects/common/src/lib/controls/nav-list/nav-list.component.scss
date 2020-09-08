@@ -1,4 +1,4 @@
-@import '../../../styles/styles.scss';
+@import '../../../../assets/common-theme';
 
 $primary: map-get($global-theme, primary);
 $fg-color: mat-color(map-get($global-theme, foreground), text);

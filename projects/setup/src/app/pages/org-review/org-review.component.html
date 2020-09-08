@@ -2,6 +2,9 @@
   <h1 fxLayoutAlign="center center" class="mat-display-1 title margin-bottom-4">
     {{ State.OrganizationName }} Setup Review
   </h1>
+  <p fxLayoutAlign="start center" class="margin-left-4">
+    Fathym will set up a best practice cloud infrastructure environment for your workspace. Once set up, you can adjust the architecture as needed. This process will take around 15 minutes, so relax and grab a coffee.
+  </p>
 
   <!-- <h2
     fxLayoutAlign="center center"
@@ -16,37 +19,38 @@
         <mat-icon
           matListIcon
           class="icon-btn-spinner"
-          [color]="GetBootOptionColor(bootOption)"
-        >
+          [color]="GetBootOptionColor(bootOption)">
           <ng-container *ngIf="!bootOption.Loading">
             <span *ngIf="bootOption.Status?.Code != 0 && !State.Booted" class="boot-option-incomplete">
               radio_button_unchecked
             </span>
-
+          
             <span *ngIf="bootOption.Status?.Code == 0 || State.Booted" class="check-circle" >
               check_circle
             </span>
           </ng-container>
 
-          <mat-spinner
-            diameter="24"
-            *ngIf="IsCurrentLoadingBootAction(bootOption)"
-          ></mat-spinner>
+          <mat-spinner diameter="24" *ngIf="IsCurrentLoadingBootAction(bootOption)"></mat-spinner>
         </mat-icon>
-        <h3 matLine>
-          <span class="boot-option-name">{{ bootOption.Name }}</span>
-          <!-- <hr fxLayout="start"> -->
-        </h3>
 
-
-        <p matLine>
+        <!-- <p matLine [lcuThemeColor]="bootOption.Loading ? 'primary-500' : 'warn-500'"> -->
+          <!-- <p matLine> -->
+          <p matLine [ngClass]="{'boot-option-font-loading': bootOption.Loading && bootOption.Status?.Code == -1,
+                                'boot-option-font-incomplete': !bootOption.Status,
+                                'boot-option-font-complete': bootOption.CompletedSteps == bootOption.TotalSteps}">
           {{
-            bootOption.Status
-              ? bootOption.Status.Message
-              : bootOption.Description
+            bootOption.Status ? bootOption.Status.Message : bootOption.Description
           }}
         </p>
 
+        <div style="width: 150px" *ngIf="IsCurrentLoadingBootAction(bootOption)">
+          <mat-progress-bar
+            [color]="GetBootPercentColor(State)"
+            mode="determinate"
+            [value]="GetBootPercent(bootOption)">
+          </mat-progress-bar>
+        </div>
+  
         <a
           mat-icon-button
           color="primary"
@@ -57,9 +61,7 @@
           *ngIf="
             bootOption.SetupStep &&
             bootOption.Status?.Code != 0 &&
-            !SetUpLoading()
-          "
-        >
+            !SetUpLoading()">
           <mat-icon>settings</mat-icon>
         </a>
 

@@ -1,0 +1,38 @@
+@import '../styles.scss';
+
+.contrast {
+    $global-theme: fathym-contrast-theme(true);
+    // @warn #{mat-get($global-theme)};
+    @include theme-setup($global-theme);
+}
+
+.ivy {
+    $global-theme: fathym-ivy-theme(true);
+}
+
+.fill-test {
+    z-index: 1000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+    // @extend .color-test;
+} 
+
+@mixin color-test($theme) {
+    $test-color: mat-color(map-get($theme, primary));
+    background-color: $test-color;
+}
+
+
+// .test-theme {
+//     $test: var(--global-theme);
+//     @warn #{$test};
+//     $global-theme: fathym-ivy-theme(false);
+//     @include theme-setup($global-theme);
+
+//     @include color-test($global-theme);
+// }

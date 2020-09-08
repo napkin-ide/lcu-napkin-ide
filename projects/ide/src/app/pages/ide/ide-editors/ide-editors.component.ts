@@ -21,8 +21,10 @@ export class IdeEditorsComponent implements OnInit {
   // TODO: Trigger loading on any State actions
   public ngOnInit(): void {
     this.ideState.Context.subscribe((ideState: any)  => {
-      this.Editors = ideState.Editors;
-      this.CurrentEditor = ideState.CurrentEditor;
+      if(ideState.Editors && ideState.CurrentEditor){
+        this.Editors = ideState.Editors;
+        this.CurrentEditor = ideState.CurrentEditor;
+      }
 
       if (this.CurrentEditor) {
        this.Config = {

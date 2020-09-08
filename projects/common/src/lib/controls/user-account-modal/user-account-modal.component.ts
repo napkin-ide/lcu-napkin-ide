@@ -1,0 +1,230 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { UserManagementState } from '../../state/user-management/user-management.state';
+import { UserBillingState } from '../../state/user-billing/user-billing.state';
+import { UserManagementStateContext } from '../../state/user-management/user-management-state.context';
+import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
+import { IdeManagementState } from '../../state/ide/ide-management.state';
+import { IDEStateManagementContext } from '../../state/ide/ide-management-state.context';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Constants } from '../../utils/constants';
+import { FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'lcu-user-account-modal',
+  templateUrl: './user-account-modal.component.html',
+  styleUrls: ['./user-account-modal.component.scss']
+})
+export class UserAccountModalComponent implements OnInit {
+
+  /**
+ * Optional feedback given by user
+ */
+public CancellationFeedback: string;
+
+/**
+ * The Billing cycle for the lcu
+ */
+public BillingCycle: string;
+
+/**
+ * The Users Billing State
+ */
+public BillingState: UserBillingState;
+
+/**
+ * The Expiration date of the free trial for the given user
+ */
+public ExpirationDate: Date;
+
+  /**
+ * The Users State
+ */
+public UserState: UserManagementState;
+
+/**
+ * The users username from the state
+ */
+public Username: string;
+
+
+/**
+ * The IDE state 
+ */
+public IdeState: IdeManagementState;
+
+/**
+ * Determines which state the modal is in user account info or cancellation 
+ */
+public IsUserAccount: boolean;
+
+/**
+ * Determines if the user is on the main user account slide or the managing subscription slide
+ */
+public ManagingSubscription: boolean;
+
+/**
+ * The next billing date converted to string
+ */
+public NextBillingDate: Date;
+
+/**
+ * Determines which text to show on the cansellation modal when user is confirming
+ */
+public IsInitialReason: boolean;
+
+/**
+ * The users Package
+ */
+public Package: string;
+
+/**
+ * Reasons for leaving the platform to be displayed when user cancels
+ */
+public Reasons: Array<string> = Constants.REASONS_FOR_LEAVING;
+
+/**
+ * Selected reason for leaving
+ */
+public ReasonForLeaving: string;
+
+/**
+ * Date the user has been rgistered since
+ */
+public RegisteredSince: Date;
+
+
+
+constructor(protected dialogRef: MatDialogRef<UserAccountModalComponent>,
+  protected usersStateCtx: UserManagementStateContext,
+  protected billingStateCtx: UserBillingStateContext,
+  protected ideStateCtx:IDEStateManagementContext,
+  @Inject(MAT_DIALOG_DATA) public data: UserManagementState
+  ) {
+    this.ManagingSubscription = false;
+    this.IsUserAccount = true;
+    this.IsInitialReason = true;
+    console.log("DATA: ", this.data);
+    this.UserState = this.data;
+    this.userStateChanged()
+  // this.LogoutClicked = new EventEmitter<any>();
+}
+
+public ngOnInit(): void {
+
+  // this.usersStateCtx.Context.subscribe((state: UserManagementState) => {
+  //   this.UserState = state;
+  //   console.log("Users State: ", this.UserState);
+  //   this.userStateChanged();
+  // });
+  
+}
+
+/**
+ * Logs out the user
+ */
+public Logout() {
+  window.location.replace('/.oauth/logout');
+}
+
+/**
+ * Toggles ManagingSubscription to true
+ * 
+ * (May build out further functionality later)
+ */
+public ManageSubscription(){
+  this.ManagingSubscription = true;
+}
+/**
+ * Toggles ManagingSubscription to false in order to exit the editing state
+ */
+public GoBack(){
+  this.ManagingSubscription = false;
+}
+
+public GoBackToUserAccount(){
+  // console.log("User Given Feedback", this.CancellationFeedback);
+  if(this.CancellationFeedback){
+    this.usersStateCtx.SendReasonFeedback(this.CancellationFeedback);
+  }
+  this.IsUserAccount = true;
+  this.dialogRef.updatePosition({right:'0px', top: '64px'});
+  this.dialogRef.updateSize('260');
+}
+/**
+ * Leads to subscription cancellation modal
+ */
+public DisplayCancelSubscription(){
+  // console.log("display cancel Subscription selected");
+  // center the dialog on the screen
+  this.dialogRef.updatePosition({});
+  //width x height
+  this.dialogRef.updateSize('300px', '500px');
+
+  this.IsUserAccount = false;
+  
+}
+/**
+ * Cancels the subscription and toggles IsInitialReason to false to go to next screen
+ */
+public CancelSubscription(){
+  this.IsInitialReason = false;
+  this.usersStateCtx.CancelSubscription(this.ReasonForLeaving);
+}
+
+/**
+ * Sends user to area where they can upgade their plan
+ * 
+ * TODO figure out where to send the user
+ */
+public Upgrade(){
+
+  console.log("Upgarde selected");
+
+}
+
+/**
+ * Checks to see if the user has selected a reason why 
+ * they are canceling to enable the confirmation button
+ */
+public CheckIfReasonGiven(){
+  if( this.ReasonForLeaving && this.ReasonForLeaving.length > 0){
+    return false;
+  }
+  else{
+    return true;
+  }
+}
+
+/**
+ * Closes the dialog while also checking to see if the user supplied any additional feedback
+ */
+public Close(){
+  if(this.CancellationFeedback){
+    this.usersStateCtx.SendReasonFeedback(this.CancellationFeedback);
+  }
+  this.dialogRef.close();
+}
+/**
+ * Assigns the info that is displayed in the user account
+ */
+protected userStateChanged(){
+  if(this.UserState.SubscriptionDetails){
+    this.NextBillingDate = new Date(this.UserState.SubscriptionDetails.BillingPeriodEnd);
+    this.RegisteredSince = new Date(this.UserState.SubscriptionDetails.SubscriptionCreated);
+  }
+
+  if(this.UserState.UserLicenses){
+    this.UserState.UserLicenses.forEach(lic => {
+      if(lic.LicenseType =  "lcu"){
+        this.BillingCycle = lic.Interval +"ly";
+        this.ExpirationDate = new Date(lic.ExpirationDate);
+        this.Username = lic.Username;
+        this.Package = lic.Name;
+      }
+    })
+  }
+
+}
+
+}

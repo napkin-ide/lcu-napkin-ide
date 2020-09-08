@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserAccountMenuComponent } from './user-account-menu.component';
+import { UserAccountModalComponent } from './user-account-modal.component';
 
-describe('UserAccountMenuComponent', () => {
-  let component: UserAccountMenuComponent;
-  let fixture: ComponentFixture<UserAccountMenuComponent>;
+describe('UserAccountModalComponent', () => {
+  let component: UserAccountModalComponent;
+  let fixture: ComponentFixture<UserAccountModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserAccountMenuComponent ]
+      declarations: [ UserAccountModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserAccountMenuComponent);
+    fixture = TestBed.createComponent(UserAccountModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,7 @@
-@import '../../../styles.scss';
+// @import '../../../styles.scss';
+@import '../../../../../common/assets/common-theme';
 
-$Fathym-Green: mat-color(map-get($global-theme, primary), A700);
+$Fathym-Green: mat-color(map-get($global-theme, primary));
 .weird-fix {
   font: 400 16px/28px Roboto, "Helvetica Neue", sans-serif;
   margin-left: 10%;
@@ -8,7 +9,7 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
 
 .icon-btn-spinner {
   position: absolute;
-  top: 5px;
+  // top: 5px;
   left: 10px;
 }
 
@@ -63,7 +64,7 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
 
 .check-circle{
   border-radius: 15px;
-  background-color: $global-accent;
+  background-color: mat-color($fathym-accent);
   color: $Fathym-Green;
  // background-color: mat-color($primary);
 }
@@ -72,9 +73,21 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
 }
 
   .boot-option-incomplete{
-    // color: mat-color($primary);
+    // color: mat-color(map-get($global-theme, accent));
     color: mat-color(map-get($global-theme, primary), A700);
   }
-  
+
+  .boot-option-font-complete {
+    color: #f1f1f1;
+  }
+
+  .boot-option-font-incomplete {
+    color: mat-color(map-get($global-theme, accent), 500, .5);
+  }
+
+  .boot-option-font-loading {
+    color: mat-color(map-get($global-theme, accent));
+  }
+
 // }
 

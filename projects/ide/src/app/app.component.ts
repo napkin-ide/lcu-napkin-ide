@@ -32,11 +32,20 @@ export class AppComponent implements OnInit {
     this.faviconsService.reset();
   }
 
+  public ButtonClickTest(): void {
+    this.testChange();
+  }
+
+  protected testChange(): void {
+    this.changeTheme('test-theme');
+    debugger;
+  }
+
   /**
    * Reset material theme
    */
   protected resetTheme(): void {
-    this.changeTheme('ivy-light-theme');
+    // this.changeTheme('ivy-light-theme');
   }
 
   /**
@@ -46,7 +55,7 @@ export class AppComponent implements OnInit {
    */
   protected changeTheme(val: string): void {
     this.SelectedTheme = val;
-
+    
     const element: HTMLElement = this.overlayContainer.getContainerElement();
     const classList: DOMTokenList = element.classList;
 

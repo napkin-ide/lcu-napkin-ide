@@ -1,6 +1,7 @@
 @import '../../../styles.scss';
 
 $Text-Color: mat-color(map-get($global-theme, primary), default-contrast);
+$Black: black;
 
 .plan-page-container{
     height: 100%;
@@ -9,7 +10,7 @@ $Text-Color: mat-color(map-get($global-theme, primary), default-contrast);
 .choose-header{
     margin-top:0px;
     padding-top: 20px;
-    color: $Text-Color;
+    // color: $Black;
 }
 
 .lcu-plan-card{
@@ -18,5 +19,5 @@ $Text-Color: mat-color(map-get($global-theme, primary), default-contrast);
 }
 
 .tag-line{
-    color:$Text-Color;
+    // color:$Black;
 }

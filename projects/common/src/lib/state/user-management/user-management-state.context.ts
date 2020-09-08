@@ -47,6 +47,14 @@ export class UserManagementStateContext extends StateContext<
     });
   }
 
+  public ListLicenses(){
+    console.log("calling list licenses")
+    this.Execute({
+      Arguments:{},
+      Type: 'ListLicenses'
+    })
+  }
+
   public SetNapkinIDESetupStep(step: NapkinIDESetupStepTypes) {
     this.Execute({
       Arguments: {
@@ -107,6 +115,24 @@ export class UserManagementStateContext extends StateContext<
     //   },
     //   Type: 'SetUserDetails'
     // });
+  }
+
+  public SendReasonFeedback(feedback: string){
+    this.Execute({
+      Arguments:{
+        FeedbackReason: feedback
+      },
+      Type: 'SendFeedback'
+    });
+  }
+
+  public CancelSubscription(reason: string) {
+    this.Execute({
+      Arguments: {
+        CancellationReason: reason
+      },
+      Type: 'CancelSubscription'
+    });
   }
 
   //  Helpers
