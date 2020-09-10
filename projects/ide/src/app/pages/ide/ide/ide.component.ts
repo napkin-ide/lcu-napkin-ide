@@ -21,8 +21,6 @@ import {
 })
 export class IdeComponent implements OnInit {
 
-  protected startingBubbles: Array<any> = [];
-
   public BotBoundingContainer: string = '#ideMainSideBar';
   public BotPadding: number = 5;
   public BotScreenPosition: GuideBotScreenPosition = GuideBotScreenPosition.BottomLeft;
@@ -39,6 +37,7 @@ export class IdeComponent implements OnInit {
   public ShowPanels: boolean = false;
   public TourButtons: ChatTourButton[];
   public Tours: GuidedTour[] = [];
+  public ViewingForecast: boolean = false;
 
   constructor(
     protected breakpointObserver: BreakpointObserver,
@@ -48,7 +47,6 @@ export class IdeComponent implements OnInit {
     protected ideState: IDEStateManagementContext
   ) {
     this.BotSubItems = this.setBotSubItems();
-    this.startingBubbles = this.setBotSubItems();
 
     this.guidedTourService.isTourOpenStream.subscribe(
       (tourLookup: string) => {
@@ -81,7 +79,7 @@ export class IdeComponent implements OnInit {
       this.ShowPanels = ideState.ShowPanels;
 
       this.handleStateChanges();
-      this.removeThinkyTourStartFromForecast();
+      this.removeThinkyFromForecast();
     });
 
     this.guidedTourState.Context.subscribe((guidedTourState: GuidedTourManagementState) => {
@@ -92,15 +90,13 @@ export class IdeComponent implements OnInit {
     });
   }
 
-  protected removeThinkyTourStartFromForecast() {
+  protected removeThinkyFromForecast() {
     if (!this.IdeState || this.IdeState.Loading) { return; }
 
-    console.log('THE IDE STATE WHEN SWITCHING: ', this.IdeState)
-
     if (this.IdeState.CurrentActivity.Lookup === 'fathym-forecast') {
-      this.BotSubItems = this.BotSubItems.filter(item => item.label !== 'Start Tour');
+      this.ViewingForecast = true;
     } else {
-      this.BotSubItems = this.startingBubbles;
+      this.ViewingForecast = false;
     }
   }
 
