@@ -20,6 +20,7 @@ import {
   styleUrls: ['./ide.component.scss']
 })
 export class IdeComponent implements OnInit {
+
   public BotBoundingContainer: string = '#ideMainSideBar';
   public BotPadding: number = 5;
   public BotScreenPosition: GuideBotScreenPosition = GuideBotScreenPosition.BottomLeft;
@@ -36,6 +37,7 @@ export class IdeComponent implements OnInit {
   public ShowPanels: boolean = false;
   public TourButtons: ChatTourButton[];
   public Tours: GuidedTour[] = [];
+  public ViewingForecast: boolean = false;
 
   constructor(
     protected breakpointObserver: BreakpointObserver,
@@ -77,6 +79,7 @@ export class IdeComponent implements OnInit {
       this.ShowPanels = ideState.ShowPanels;
 
       this.handleStateChanges();
+      this.removeThinkyFromForecast();
     });
 
     this.guidedTourState.Context.subscribe((guidedTourState: GuidedTourManagementState) => {
@@ -85,6 +88,16 @@ export class IdeComponent implements OnInit {
       this.Tours = guidedTourState.Tours;
 
     });
+  }
+
+  protected removeThinkyFromForecast() {
+    if (!this.IdeState || this.IdeState.Loading) { return; }
+
+    if (this.IdeState.CurrentActivity.Lookup === 'fathym-forecast') {
+      this.ViewingForecast = true;
+    } else {
+      this.ViewingForecast = false;
+    }
   }
 
   public OnComplete(tour: GuidedTour): void {
