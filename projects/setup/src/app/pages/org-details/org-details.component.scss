@@ -1,0 +1,10 @@
+@import '../../../../../common/assets/common-theme';
+
+//For the mat-checkbox-label to wrap and not extend out of view
+::ng-deep .mat-checkbox-layout { 
+    white-space: normal !important; 
+}
+
+.link{
+    color: map-get(map-get($global-theme, accent), 'A700');
+}
