@@ -23,6 +23,7 @@ export class IdeComponent implements OnInit {
 
   public BotBoundingContainer: string = '#ideMainSideBar';
   public BotPadding: number = 5;
+  public BotZIndex: number =1000;
   public BotScreenPosition: GuideBotScreenPosition = GuideBotScreenPosition.BottomLeft;
   public BotSubItems: GuideBotSubItem[];
   public CurrentTour: GuidedTour;
