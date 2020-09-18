@@ -12,7 +12,7 @@
       </div>
 
       <div class="activity-settings">
-        <a id="settingsLink" class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipPosition="after"
+        <a id="settingsLink" class="activity-action" mat-icon-button [matTooltip]="activity.Title" matTooltipClass="activity-tooltip" matTooltipPosition="after"
           (click)="OpenRootActivity(activity)" *ngFor="let activity of RootActivities">
           <mat-icon *ngIf="activity.IconSet" color="accent" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
 
