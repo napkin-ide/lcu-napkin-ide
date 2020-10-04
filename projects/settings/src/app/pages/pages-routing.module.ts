@@ -23,7 +23,7 @@ const routes: Routes = [
     loadChildren: './marketplace/marketplace.module#MarketplaceModule'
   },
   {
-    path: '**', redirectTo: 'architecture'
+    path: '**', redirectTo: 'configuration'
   }
 ];
 
