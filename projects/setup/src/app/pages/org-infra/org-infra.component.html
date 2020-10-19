@@ -39,17 +39,17 @@
           matBadgePosition="below after"
           matBadgeColor="primary"
           matBadgeOverlap="false"
-          color="warn"
+          color="accent"
           matSuffix
           (click)="HideAppId = !HideAppId"
           class="cursor-pointer"
           >{{ HideAppId ? "visibility_off" : "visibility" }}
         </mat-icon>
-        <a
+        <a tabindex="-1"
         matSuffix
         [href]="SupportPage"
         target="_blank"
-        class="help-anchor"
+        class="help-anchor margin-left-2"
       >
         <mat-icon
           matSuffix
@@ -90,17 +90,17 @@
           matBadgePosition="below after"
           matBadgeColor="primary"
           matBadgeOverlap="false"
-          color="warn"
+          color="accent"
           matSuffix
           (click)="HideTenantId = !HideTenantId"
           class="cursor-pointer"
           >{{ HideTenantId ? "visibility_off" : "visibility" }}
         </mat-icon>
-        <a
+        <a tabindex="-1"
         matSuffix
         [href]="SupportPage"
         target="_blank"
-        class="help-anchor"
+        class="help-anchor margin-left-2"
       >
         <mat-icon
           matSuffix
@@ -141,18 +141,18 @@
           matBadgePosition="below after"
           matBadgeColor="primary"
           matBadgeOverlap="false"
-          color="warn"
+          color="accent"
           matSuffix
           (click)="HideSubId = !HideSubId"
           class="cursor-pointer"
           >{{ HideSubId ? "visibility_off" : "visibility" }}
         </mat-icon>
-        <a
-        matSuffix
-        [href]="SupportPage"
-        target="_blank"
-        class="help-anchor"
-      >
+          <a tabindex="-1"
+          matSuffix
+          [href]="SupportPage"
+          target="_blank"
+          class="help-anchor margin-left-2"
+        >
         <mat-icon
           matSuffix
           matTooltip="Obtain this value from the App Registration in Azure’s Active Directory. Click for more detailed instructions."
@@ -192,17 +192,17 @@
           matBadgePosition="below after"
           matBadgeColor="primary"
           matBadgeOverlap="false"
-          color="warn"
+          color="accent"
           matSuffix
           (click)="HideAuthKey = !HideAuthKey"
           class="cursor-pointer"
           >{{ HideAuthKey ? "visibility_off" : "visibility" }}
         </mat-icon>
-        <a
+        <a tabindex="-1"
         matSuffix
         [href]="SupportPage"
         target="_blank"
-        class="help-anchor"
+        class="help-anchor margin-left-2"
       >
         <mat-icon
           matSuffix
