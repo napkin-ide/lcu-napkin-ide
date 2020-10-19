@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import {
   AbstractControl,
   FormGroup,
@@ -234,7 +234,6 @@ export class OrgInfraComponent implements OnInit {
     this.SetStep = new EventEmitter();
     this.setFieldToggles();
     this.SupportPage = Constants.SUPPORT_WEBPAGE;
-
 
     this.GuidErrorMessage = 'Value must be a valid Guid ( ' + Guid.Empty + ' )';
   }
