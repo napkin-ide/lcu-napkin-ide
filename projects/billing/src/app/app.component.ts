@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   /**
    * whether or not to display the back button in the toolbar
    */
-  public ShowBackButton: boolean;
+  // public ShowBackButton: boolean;
 
   constructor(
     protected overlayContainer: OverlayContainer,
@@ -52,10 +52,10 @@ export class AppComponent implements OnInit {
       this.RedirectUri = params.redirectUri; // Set redirectUri to some local property on the component
     });
 
-    this.router.events.subscribe((path) => {
-      // console.log('path = ', path);
-      this.determineBackButtonVisibility();
-    });
+    // this.router.events.subscribe((path) => {
+    //   // console.log('path = ', path);
+    //   this.determineBackButtonVisibility();
+    // });
   }
 
   public ngOnInit(): void {
@@ -82,18 +82,18 @@ export class AppComponent implements OnInit {
   /**
    * Called when the toolbar back button has been clicked
    */
-  public BackButtonClicked() {
-    // console.log("route", this.router.url);
-    const planReg = new RegExp('(/plan/*)');
-    const completeReg = new RegExp('(/complete/*)');
+  // public BackButtonClicked() {
+  //   // console.log("route", this.router.url);
+  //   const planReg = new RegExp('(/plan/*)');
+  //   const completeReg = new RegExp('(/complete/*)');
 
-    if (this.router.url === '/') {
-      this.router.navigate([this.RedirectUri]);
-    }
-    if (planReg.test(this.router.url) || completeReg.test(this.router.url)) {
-      this.router.navigate(['']);
-    }
-  }
+  //   if (this.router.url === '/') {
+  //     this.router.navigate([this.RedirectUri]);
+  //   }
+  //   if (planReg.test(this.router.url) || completeReg.test(this.router.url)) {
+  //     this.router.navigate(['']);
+  //   }
+  // }
   /**
    * Reset material theme
    */
@@ -121,7 +121,7 @@ export class AppComponent implements OnInit {
    */
   protected stateChanged() {
     // console.log('Billing App State Changed', this.State);
-    this.determineBackButtonVisibility();
+    // this.determineBackButtonVisibility();
 
     if (!this.routerEventSub) {
       this.routerEventSub = this.router.events
@@ -158,22 +158,22 @@ export class AppComponent implements OnInit {
   /**
    * Determines if the back button should be visible or not
    */
-  protected determineBackButtonVisibility() {
-    // regex works in online test but does not work in browser...
-    // let routePathRegEx = new RegExp('(\/\w+\/\w+)');
-    const planReg = new RegExp('(/plan/*)');
-    const completeReg = new RegExp('(/complete/*)');
-    // console.log("router url =","'" + this.router.url+"'")
-    // console.log("? = ", routePathRegEx.test(this.router.url))
-    if (
-      planReg.test(this.router.url) ||
-      completeReg.test(this.router.url) ||
-      this.RedirectUri
-    ) {
-      this.ShowBackButton = true;
-      // console.log("show back =", this.ShowBackButton)
-    } else {
-      this.ShowBackButton = false;
-    }
-  }
+  // protected determineBackButtonVisibility() {
+  //   // regex works in online test but does not work in browser...
+  //   // let routePathRegEx = new RegExp('(\/\w+\/\w+)');
+  //   const planReg = new RegExp('(/plan/*)');
+  //   const completeReg = new RegExp('(/complete/*)');
+  //   // console.log("router url =","'" + this.router.url+"'")
+  //   // console.log("? = ", routePathRegEx.test(this.router.url))
+  //   if (
+  //     planReg.test(this.router.url) ||
+  //     completeReg.test(this.router.url) ||
+  //     this.RedirectUri
+  //   ) {
+  //     this.ShowBackButton = true;
+  //     // console.log("show back =", this.ShowBackButton)
+  //   } else {
+  //     this.ShowBackButton = false;
+  //   }
+  // }
 }
