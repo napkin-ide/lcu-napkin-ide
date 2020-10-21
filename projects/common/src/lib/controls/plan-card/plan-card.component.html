@@ -116,7 +116,10 @@
 
   <mat-card-actions *ngIf="ShowBackButton" class="button-container" fxLayoutAlign="start center">
   <button  mat-raised-button class="back-button" (click)="GoBack()">
+    <div fxLayout="row" fxLayoutAlign="center center">
     <mat-icon>arrow_back</mat-icon>
+    Plans
+  </div>
   </button>
 </mat-card-actions>
 
