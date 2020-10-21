@@ -46,13 +46,13 @@ export class ToolbarComponent implements OnInit {
   @Output()
   public openSideBarEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @Output('back-button-clicked')
-  public BackButtonClickedEvent: EventEmitter<any>;
+  // @Output('back-button-clicked')
+  // public BackButtonClickedEvent: EventEmitter<any>;
 
   @Input() public isHandset = false;
 
-  @Input('show-back-button')
-  public ShowBackButton: boolean;
+  // @Input('show-back-button')
+  // public ShowBackButton: boolean;
 
   constructor(
     protected ideState: IDEStateManagementContext,
@@ -60,7 +60,7 @@ export class ToolbarComponent implements OnInit {
     protected dialog: MatDialog,
     protected userAccountDialog: MatDialog
   ) {
-    this.BackButtonClickedEvent = new EventEmitter<any>();
+    // this.BackButtonClickedEvent = new EventEmitter<any>();
   }
 
   public ngOnInit(): void {
@@ -99,9 +99,9 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  public GoBack(){
-    this.BackButtonClickedEvent.emit();
-  }
+  // public GoBack(){
+  //   this.BackButtonClickedEvent.emit();
+  // }
 
   /**
    * Opens the users account modal passing in the users state so there is no lag in 
