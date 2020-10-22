@@ -40,7 +40,7 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
     text-align: center;
     font-size: 12px;
     // -webkit-clip-path: polygon(27% 0,83% 0,92% 100%,0 100%);
-    clip-path: polygon(28% 0,83% 0,92% 100%,0 105%);
+    clip-path: polygon(27% 0,83% 0,92% 100%,0 100%);
     // clip-path: polygon(25% 100%, 50% 75%, 75% 100%, 75% 0, 25% 0); //ribbon
     // width: 50px; //ribbon
     // height: 50px; //ribbon
@@ -54,7 +54,7 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
 
 @mixin plan-card($theme-color, $trans){
     // border: 1px solid;
-    width: 300px;
+    width: 275px;
     height: 100%; //500px
     position: relative;
     border-radius: 4px;
