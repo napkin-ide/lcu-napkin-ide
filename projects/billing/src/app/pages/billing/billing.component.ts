@@ -283,7 +283,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     }
     else{
       this.StripeValid = false;
-  
+
     }
   }
   /**
@@ -557,7 +557,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     // console.log("selected plan on pay:", this.SelectedPlan)
     // this.router.navigate([this.SelectedPlan.Lookup, 'complete']);
     // console.log("LicenseType", this.SelectedPlan.LicenseType)
-    this.router.navigate([this.SelectedPlan.LicenseType, 'complete', this.State.PurchasedPlanLookup]);
+    this.router.navigate(['complete', this.State.PurchasedPlanLookup]);
 
   }
 
