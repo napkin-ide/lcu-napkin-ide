@@ -21,9 +21,15 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  protected routerEventSub: Subscription;
-
   protected connectedToStateSub: Subscription;
+
+  protected get licenseType(): string {
+    const stateCfg: any = (window as any).LCU.State;
+
+    return stateCfg ? stateCfg.LicenseType : '';
+  }
+
+  protected routerEventSub: Subscription;
 
   /**
    * The Selected theme colors
@@ -127,17 +133,18 @@ export class AppComponent implements OnInit {
       this.routerEventSub = this.router.events
         .pipe(
           filter((e) => {
-            return (
-              e instanceof ActivationEnd &&
-              Object.keys(e.snapshot.params).length > 0
-            );
+            return e instanceof ActivationEnd;
           }),
           map((e) => {
             return e instanceof ActivationEnd ? e.snapshot : {};
           })
         )
         .subscribe((snapshot: ActivatedRouteSnapshot) => {
-          const args = { ...snapshot.queryParams, ...snapshot.params };
+          const args = {
+            licenseType: this.licenseType,
+            ...snapshot.queryParams,
+            ...snapshot.params,
+          };
 
           if (!this.connectedToStateSub) {
             this.connectedToStateSub = this.userBillState.ConnectedToState.subscribe(
