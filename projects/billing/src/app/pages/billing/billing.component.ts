@@ -74,10 +74,9 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    */
   public BillingForm: FormGroup;
 
-
-/**
- * The header to display in the billing form
- */
+  /**
+   * The header to display in the billing form
+   */
   public HeaderName: string;
 
   // public productPlan: any;
@@ -120,8 +119,6 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    */
 
   public PlanGroups: Array<string>;
-
-
 
   /**
    * An array of the intervals to pass to the Interval Toggle
@@ -200,7 +197,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       .then((result: any) => {
         this.handleStripePaymentMethodCreated(result);
       });
-      // this.userBillStateCtx.ResetState(this.SelectedPlan.LicenseType.Lookup)
+    // this.userBillStateCtx.ResetState(this.SelectedPlan.LicenseType.Lookup)
   }
 
   public IntervalToggled(plan: BillingPlanOption) {
@@ -211,9 +208,9 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * @param toggleSelected
    */
   // public ToggleChanged(toggleSelected: any): void {
-    // false === Annually
-    // true === Monthly
-    // console.log("toggle changed: ", toggleSelected);
+  // false === Annually
+  // true === Monthly
+  // console.log("toggle changed: ", toggleSelected);
   //   this.State.Plans.forEach((plan: BillingPlanOption) => {
   //     if (
   //       this.SelectedPlan.PlanGroup === plan.PlanGroup &&
@@ -240,7 +237,6 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     // console.log('TOS & EA: ', event);
     this.AcceptedTOS = event.checked;
     this.AcceptedEA = event.checked;
-
   }
   /**
    * determines if user has accepted the Enterprise agreement from the check boxes
@@ -273,17 +269,14 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected handleCardChanged(event: any) {
     console.log('Error = ', event);
     if (event.error) {
-        this.StripeError = event.error.message;
-        this.StripeValid = false;
-    }
-    else if (event.complete === true) {
+      this.StripeError = event.error.message;
+      this.StripeValid = false;
+    } else if (event.complete === true) {
       this.StripeError = '';
 
       this.StripeValid = true;
-    }
-    else{
+    } else {
       this.StripeValid = false;
-
     }
   }
   /**
@@ -441,7 +434,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     this.determineIntervals();
 
     // this.determineCheckboxes();
-    console.log("state: ", this.State)
+    console.log('state: ', this.State);
     // console.log("planID =", this.planID);
     // if a plan has been passed in via param set the selected plan accordingly
 
@@ -451,9 +444,6 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     // using *ngIf with external form properties
     // this.cdr.detectChanges();
     this.determinePaymentStatus();
-    if (this.SelectedPlan) {
-      this.convertName();
-    }
   }
   /**
    * determines the intervals to display in the radio buttons
@@ -493,7 +483,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected findPlan() {
     if (this.planGroupID && this.State.Plans && !this.SelectedPlan) {
       this.SelectedPlan = this.State.Plans.find(
-        (p: BillingPlanOption) => p.PlanGroup === this.planGroupID && p.Interval === this.planInterval
+        (p: BillingPlanOption) =>
+          p.PlanGroup === this.planGroupID && p.Interval === this.planInterval
       );
 
       // if plan doesnt exist
@@ -527,7 +518,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       if (this.State.PaymentStatus.Code === 101) {
         this.stripe
           .confirmCardPayment('requires_action')
-          .then(function(result: any) {
+          .then(function (result: any) {
             if (result.error) {
               // Display error message in  UI.
               this.StripeError = this.State.PaymentStatus.Message;
@@ -540,8 +531,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
           });
       } else if (this.State.PaymentStatus.Code === 1) {
         // this.StripeError = this.State.PaymentStatus.Message;
-        this.StripeError = 'There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.';
-
+        this.StripeError =
+          'There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.';
       } else if (this.State.PaymentStatus.Code === 0) {
         this.paymentSuccess();
       } else {
@@ -558,16 +549,5 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     // this.router.navigate([this.SelectedPlan.Lookup, 'complete']);
     // console.log("LicenseType", this.SelectedPlan.LicenseType)
     this.router.navigate(['complete', this.State.PurchasedPlanLookup]);
-
   }
-
-  protected convertName() {
-      //   console.log("pipe =", value)
-      if (this.SelectedPlan.LicenseType === 'lcu') {
-          this.HeaderName = 'Fathym | The Data Application Framework';
-      } else if (this.SelectedPlan.LicenseType === 'forecast') {
-          this.HeaderName = 'Fathym Forecaster API';
-      }
-    }
-
 }

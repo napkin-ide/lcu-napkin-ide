@@ -34,7 +34,7 @@
           <div class="fathym-logo"></div>
         </div>
         <div class="billing-header-section" fxLayout="column" fxLayoutAlign="start start">
-          <h2 class="fathym-header" *ngIf="SelectedPlan?.LicenseType">{{HeaderName}}</h2>
+          <h2 class="fathym-header" *ngIf="SelectedPlan?.LicenseType">{{SelectedPlan?.HeaderName}}</h2>
           <div fxLayout="row">
           <h3 class="fathym-header" *ngIf="SelectedPlan?.PlanGroup && SelectedPlan?.Interval">
             {{SelectedPlan.PlanGroup | titlecase}} Package          <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk">*</span>
@@ -148,7 +148,7 @@
               <!-- TOS & EA CHECKBOXES *ngIf="State?.RequiredOptIns?.length > 0"-->
               <!-- *ngIf="State.RequiredOptIns.includes('ToS') || State.RequiredOptIns.includes('EA')" -->
               <div class="required-opt-ins" fxLayout="row" fxLayoutAlign="start center"
-              
+
                 >
                 <mat-checkbox (change)="ReqOptsChanged($event)" class="checkbox-label">
                   By checking this box, you agree to Fathym's
@@ -171,7 +171,7 @@
             </div>
             </div>
 
-            
+
           </form>
         </div>
 
