@@ -25,7 +25,7 @@ export class UserBillingState {
 
   public Username?: string;
 
-  public PurchasedPlanLookup?: string; 
+  public PurchasedPlanLookup?: string;
 
   public SuccessRedirect? : string;
 
@@ -40,11 +40,15 @@ export class BillingPlanOption {
 
   public DiscountedFrom?: string;
 
+  public HeaderName?: string;
+
   public Interval?: string;
 
   public LCUs?: number;
 
   public Lookup?: string;
+
+  public LicenseName?: string;
 
   public LicenseType?: string;
 
@@ -64,16 +68,16 @@ export class BillingPlanOption {
 // export class StripeSubscriptionDetails{
 //   public BillingPeriodStart: Date;
 
-//   public BillingPeriodEnd: Date; 
-  
-//   public BillingStatus: string; 
-  
-//   public CollectionMethod: string; 
-  
-//   public SubscriptionCreated: Date; 
-  
+//   public BillingPeriodEnd: Date;
+
+//   public BillingStatus: string;
+
+//   public CollectionMethod: string;
+
+//   public SubscriptionCreated: Date;
+
 //   public CustomerId: string;
-  
+
 //   public SubscriptionId: string;
 // }
 
