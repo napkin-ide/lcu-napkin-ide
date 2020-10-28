@@ -7,6 +7,11 @@ import { Injectable, Injector } from '@angular/core';
 })
 export class UserBillingStateContext extends StateContext<UserBillingState> {
   //  Fields
+  protected get licenseType(): string {
+    const stateCfg: any = (window as any).LCU.State;
+
+    return stateCfg ? stateCfg.LicenseType : '';
+  }
 
   //  Properties
 
@@ -48,7 +53,7 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   protected loadStateKey(): string {
-    return 'billing';
+    return `billing-${this.licenseType}`;
   }
 
   protected loadStateName(): string {
