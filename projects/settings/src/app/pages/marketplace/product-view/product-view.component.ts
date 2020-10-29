@@ -37,7 +37,7 @@ export class MarketplaceProductViewComponent implements OnInit {
   ) {
     // Get the product info from the state instead of hard-coding it here:
     this.Product = { Title: this.activatedRoute.snapshot.paramMap.get('product_title') };
-    this.Product.Description = 'More description things yay! This is an API; spend the moneys and you can use it, because capitalism.';
+    this.Product.Description = 'The Fathym Forecaster combines the world’s best weather forecasts with statistics-based, machine-learning techniques to tackle the largest datasets, including road weather.';
   }
 
   // LIFECYCLE
@@ -56,19 +56,19 @@ export class MarketplaceProductViewComponent implements OnInit {
    *
    * takes a product, converts it to an LCU setup configuration and saves it
    */
-  public AddToOrg(product: any): void {
-    this.savedLCU = new LowCodeUnitSetupConfig();
+  // public AddToOrg(product: any): void {
+    // this.savedLCU = new LowCodeUnitSetupConfig();
 
-    // map product into LowCodeUnitSetupConfig...
+    // // map product into LowCodeUnitSetupConfig...
 
-    // hard coding this for now as functionality to populate this data from state is not yet complete
-    this.savedLCU.Lookup = 'lcu-fathym-forecast-lcu';
-    this.savedLCU.NPMPackage = '@habistack/lcu-fathym-forecast-lcu';
-    this.savedLCU.PackageVersion = '0.9.75';
+    // // hard coding this for now as functionality to populate this data from state is not yet complete
+    // this.savedLCU.Lookup = 'lcu-fathym-forecast-lcu';
+    // this.savedLCU.NPMPackage = '@habistack/lcu-fathym-forecast-lcu';
+    // this.savedLCU.PackageVersion = '0.9.75';
 
-    this.State.Loading = true;
-    this.saveLCU(this.savedLCU);
-  }
+    // this.State.Loading = true;
+    // this.saveLCU(this.savedLCU);
+  // }
 
   // HELPERS
 
