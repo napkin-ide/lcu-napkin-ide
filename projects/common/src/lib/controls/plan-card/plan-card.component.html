@@ -90,12 +90,12 @@
     <div class="feature-container">
       <div class="features" fxLayout="column" fxLayoutAlign="center start">
         <ng-container *ngIf="PlanFeatures">
-          <div fxLayout="column" *ngFor="let feat of PlanFeatures">
+          <div fxLayout="column" *ngFor="let feat of PlanFeatures;index as i;">
             <div fxLayout="row" fxLayoutAlign="center center">
               <mat-icon>check_circle_outline</mat-icon>
               <div>{{ feat }}</div>
             </div>
-            <div class="vl"></div>
+            <div class="vl" *ngIf="DeterminePlanFeatIndex(i)"></div>
           </div>
         </ng-container>
       </div>
