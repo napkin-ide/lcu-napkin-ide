@@ -23,8 +23,8 @@
       >
         <h1 class="fathym-header">{{ SelectedPlan.HeaderName }}</h1>
         <h3>
-          Success! You are registered for
-          <b>Fathym {{ SelectedPlan.PlanGroup | titlecase }}!</b>
+          Success! You are registered for the
+          <b>Fathym - {{ SelectedPlan.PlanGroup | titlecase }} license!</b>
         </h3>
         <p
           *ngIf="FreeTrialEndDate && SelectedPlan.TrialPeriodDays > 0"
