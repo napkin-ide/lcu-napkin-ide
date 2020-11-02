@@ -100,7 +100,8 @@ export class CompleteComponent implements OnInit {
     if (!this.State.PaymentStatus) {
       this.router.navigate(['']);
     }
-    // console.log("PlanID: ", this.planID);
+    // console.log("PlanID: ", this.planID); 
+    //PurchasedPlanLookup
     if (this.planID && this.State.Plans) {
       this.SelectedPlan = this.State.Plans.find(
         (p: any) => p.Lookup === this.planID

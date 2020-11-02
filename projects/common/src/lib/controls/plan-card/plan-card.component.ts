@@ -136,6 +136,15 @@ export class PlanCardComponent implements OnInit {
     this.getOtherIntervalPrice(this.Plan);
   }
 
+  public DeterminePlanFeatIndex(index: any){
+    if(index < this.PlanFeatures.length -1){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   /**
   * Toggles planid and plan card to the selected plan
   * @param toggleSelected
