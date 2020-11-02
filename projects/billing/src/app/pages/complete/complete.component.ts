@@ -22,9 +22,9 @@ export class CompleteComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   // @Input('setup-step-types')
   // public SetupStepTypes: NapkinIDESetupStepTypes;
-/**
- * State being passed in to the complete page
- */
+  /**
+   * State being passed in to the complete page
+   */
   // tslint:disable-next-line:no-input-rename
   // @Input('state')
 
@@ -46,8 +46,8 @@ export class CompleteComponent implements OnInit {
   public SelectedPlan: BillingPlanOption;
 
   /**
-   * the date that is calculated form point in time when 
-   * 
+   * the date that is calculated form point in time when
+   *
    * this is run to determine when free trial will end
    */
   public FreeTrialEndDate: string;
@@ -63,10 +63,9 @@ export class CompleteComponent implements OnInit {
   public TotalTax: string;
 
   /**
-   * The total cost 
+   * The total cost
    */
   public Total: string;
-
 
   //  Constructors
   constructor(
@@ -74,7 +73,7 @@ export class CompleteComponent implements OnInit {
     protected route: ActivatedRoute,
     protected router: Router
   ) {
-    this.TaxCollected = 0.00;
+    this.TaxCollected = 0.0;
   }
 
   //  Life Cycle
@@ -97,7 +96,7 @@ export class CompleteComponent implements OnInit {
   //  Helpers
   protected stateChanged() {
     // console.log('state success page: ', this.State);
-//avoid error if the user trys to manually navigate to the complete page
+    // avoid error if the user trys to manually navigate to the complete page
     if (!this.State.PaymentStatus) {
       this.router.navigate(['']);
     }
@@ -108,51 +107,36 @@ export class CompleteComponent implements OnInit {
       );
       // console.log('purchased PLAN:', this.SelectedPlan);
     }
-    if(this.SelectedPlan){
-      this.convertName();
+    if (this.SelectedPlan) {
       this.calcTotal();
       this.calcTax();
     }
-    if(this.SelectedPlan && this.SelectedPlan.TrialPeriodDays){
+    if (this.SelectedPlan && this.SelectedPlan.TrialPeriodDays) {
       this.calcDate();
     }
-
   }
 
   /**
    * Calculates the free trial expiration date from point in time method is run
    */
-    protected calcDate(){
-    let endDate = new Date();
+  protected calcDate() {
+    const endDate = new Date();
     endDate.setDate(endDate.getDate() + this.SelectedPlan.TrialPeriodDays);
     // console.log("end date:", endDate);
 
-    let tempDate = endDate.toString().split(" ");
+    const tempDate = endDate.toString().split(' ');
 
     // console.log("tempDate:", tempDate);
 
-    this.FreeTrialEndDate = tempDate[1] + " " + tempDate[2];
-
-    
-
+    this.FreeTrialEndDate = tempDate[1] + ' ' + tempDate[2];
   }
 
-  protected convertName(){
-    //   console.log("pipe =", value)
-    if(this.SelectedPlan.LicenseType === "lcu"){
-        this.HeaderName ="Fathym | The Data Application Framework";
-    }
-    else if(this.SelectedPlan.LicenseType === "forecast"){
-        this.HeaderName = "Fathym Forecaster API";
-    }
-  }
-
-  protected calcTotal(){
+  protected calcTotal() {
     // console.log("total = ", this.TaxCollected + this.SelectedPlan.Price);
-    this.Total= (this.TaxCollected + this.SelectedPlan.Price).toFixed(2);
+    this.Total = (this.TaxCollected + this.SelectedPlan.Price).toFixed(2);
   }
 
-  protected calcTax(){
+  protected calcTax() {
     this.TotalTax = this.TaxCollected.toFixed(2);
   }
 }

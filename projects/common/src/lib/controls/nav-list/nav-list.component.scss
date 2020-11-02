@@ -24,7 +24,7 @@ $fg-color: mat-color(map-get($global-theme, foreground), text);
 }
 
 .active {
-  background-color: mat-color($primary, A700);
+  background-color: mat-color($primary, 500);
   color: white !important;
   font-weight: bold;
 }
@@ -34,7 +34,7 @@ $fg-color: mat-color(map-get($global-theme, foreground), text);
     color: $fg-color !important;
 
     &:focus, &:hover {
-      background-color: mat-color($primary, A400) !important;
+      background-color: mat-color($primary, 500) !important;
     }
   }
 }

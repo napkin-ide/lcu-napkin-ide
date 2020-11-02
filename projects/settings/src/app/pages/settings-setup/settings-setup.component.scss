@@ -8,7 +8,7 @@ $card-color: mat-color(map-get($global-theme, background), card);
     background-color: lighten($card-color, 10%);
 
     .mat-expansion-panel-header {
-        background-color: mat-color($primary, A700);
+        background-color: mat-color($primary, 500);
 
         > span {
           height: 100% !important;
