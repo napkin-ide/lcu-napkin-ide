@@ -22,7 +22,7 @@ export class AppComponent {
       // { Label: 'Architecture', RouterURL: '/architecture', Icon: 'square_foot', Id: 'settingsArchitectureNavLink' },
       { Label: 'Configuration', RouterURL: '/configuration', Icon: 'perm_data_setting', Id: 'settingsConfigurationNavLink' },
       { Label: 'Setup', RouterURL: '/setup', Icon: 'build', Id: 'settingsSetupNavLink' },
-      { Label: 'Marketplace', RouterURL: '/marketplace', Icon: 'shopping_basket', Id: 'settingsMarketplaceNavLink' }
+      // { Label: 'Marketplace', RouterURL: '/marketplace', Icon: 'shopping_basket', Id: 'settingsMarketplaceNavLink' }
     ];
   }
 
