@@ -267,7 +267,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Checks to see if card has error
    */
   protected handleCardChanged(event: any) {
-    console.log('Error = ', event);
+    // console.log('Error = ', event);
     if (event.error) {
       this.StripeError = event.error.message;
       this.StripeValid = false;
@@ -434,7 +434,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     this.determineIntervals();
 
     // this.determineCheckboxes();
-    console.log('state: ', this.State);
+    // console.log('state: ', this.State);
+    // console.log("selected plan: ", this.SelectedPlan)
     // console.log("planID =", this.planID);
     // if a plan has been passed in via param set the selected plan accordingly
 
