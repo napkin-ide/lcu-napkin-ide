@@ -24,7 +24,7 @@
             <span *ngIf="bootOption.Status?.Code != 0 && !State.Booted" class="boot-option-incomplete">
               radio_button_unchecked
             </span>
-          
+
             <span *ngIf="bootOption.Status?.Code == 0 || State.Booted" class="check-circle" >
               check_circle
             </span>
@@ -50,7 +50,7 @@
             [value]="GetBootPercent(bootOption)">
           </mat-progress-bar>
         </div>
-  
+
         <a
           mat-icon-button
           color="primary"
@@ -113,10 +113,6 @@
     <div class="spread mat-error mat-small" *ngIf="!State.Booted && State.Status && State.Status.Code != 0">{{ State.Status.Message  }}</div>
 
     <div *ngIf="State.Loading" class="spread">
-      <p style="text-align: center;">
-        <span lcuTrademark>Behind the scenes, Thinky&trade; is working hard to set up your </span>
-      </p>
-
       <div
         fxLayout="row"
         fxLayoutAlign="center center"
