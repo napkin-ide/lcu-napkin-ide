@@ -112,11 +112,17 @@ constructor(protected dialogRef: MatDialogRef<UserAccountModalComponent>,
 
 public ngOnInit(): void {
 
-  // this.usersStateCtx.Context.subscribe((state: UserManagementState) => {
-  //   this.UserState = state;
-  //   console.log("Users State: ", this.UserState);
-  //   this.userStateChanged();
-  // });
+  this.usersStateCtx.Context.subscribe((state: UserManagementState) => {
+    this.UserState = state;
+    console.log("Users State: ", this.UserState);
+    this.userStateChanged();
+  });
+
+  this.ideStateCtx.Context.subscribe((state: IdeManagementState) => {
+    this.IdeState = state;
+    console.log("IDE State: ", this.IdeState);
+    this.ideStateChanged();
+  });
   
 }
 
@@ -205,6 +211,12 @@ public Close(){
   }
   this.dialogRef.close();
 }
+
+protected ideStateChanged(){
+  if(this.IdeState.Username){
+    this.Username = this.IdeState.Username;
+  }
+}
 /**
  * Assigns the info that is displayed in the user account
  */
@@ -219,7 +231,7 @@ protected userStateChanged(){
       if(lic.LicenseType =  "lcu"){
         this.BillingCycle = lic.Interval +"ly";
         this.ExpirationDate = new Date(lic.ExpirationDate);
-        this.Username = lic.Username;
+        // this.Username = lic.Username;
         this.Package = lic.Name;
       }
     })
