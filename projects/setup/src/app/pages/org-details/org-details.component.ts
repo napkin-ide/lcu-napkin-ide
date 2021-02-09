@@ -46,17 +46,20 @@ export class OrgDetailsComponent implements OnInit {
     return (
       this.OrgDetailLookup.hasError('pattern') ||
       this.OrgDetailLookup.hasError('required') ||
-      this.OrgDetailLookup.hasError('status')
+      this.OrgDetailLookup.hasError('status') ||
+      this.OrgDetailLookup.hasError('maxlength')
     );
   }
 
   public get OrgDetailLookupErrorMessage(): string {
     if (this.OrgDetailLookup.hasError('pattern')) {
-      return `The Project lookup must contain 3 - 12 charaters, all lowercase with '-' and numbers 0-9. A '-' may not start or end the value.`;
+      return `The Project lookup must start with a letter, can contain 3-12 characters all lowercase including '-' and numbers 0-9. Cannot end with '-'.`;
     } else if (this.OrgDetailLookup.hasError('required')) {
       return 'The Project lookup is required.';
     } else if (this.OrgDetailLookup.hasError('status')) {
       return this.State.Status.Message;
+    } else if(this.OrgDetailLookup.hasError('maxlength')){
+      return 'Must contain 3-12 characters.'
     }
   }
 
@@ -118,7 +121,8 @@ export class OrgDetailsComponent implements OnInit {
       orgDetailLookup: new FormControl('', {
         validators: Validators.compose([
           Validators.required,
-          Validators.pattern('^[a-z0-9-]{3,12}$'),
+          Validators.pattern('^[a-z]+([a-z0-9-]*[a-z0-9]){2,11}$'),
+          Validators.maxLength(12),
           this.statusValidatorFactory(),
         ]),
         updateOn: 'change',
