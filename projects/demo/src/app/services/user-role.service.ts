@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { scan } from 'rxjs/operators';
-import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { ReplaySubject, BehaviorSubject } from 'rxjs';
 
 export interface Role {
   name: string;
