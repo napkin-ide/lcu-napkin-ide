@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StatesModel } from '../models/states.model';
-import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs/internal/observable/of';
+import { Observable, of } from 'rxjs';
 
 const states: Array<StatesModel> = [
     {

@@ -2,7 +2,7 @@ import { UserRolesService } from './../user-role.service';
 import { UsersService } from '../user.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild } from '@angular/router';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 import { UserConstants } from '../../utils/constants/user.constants';
 
 @Injectable({
