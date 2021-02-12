@@ -6,7 +6,7 @@ import { StatesModel } from '../../models/states.model';
 import { ReactiveFormService } from '../../services/reactive-form.service';
 import { ReactiveFormModel } from './../../models/reactive-form.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators/map';
+import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { PasswordValidator, EmailValidator, UserNameValidator, ValidationMessages, ZipcodeValidator } from '@lcu/common';
 import { startWith } from 'rxjs/operators';
