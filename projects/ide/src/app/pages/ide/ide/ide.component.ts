@@ -212,7 +212,7 @@ export class IdeComponent implements OnInit {
     }
   }
 
-  protected handleStatechanges(): void {
+  protected handleStateChanges(): void {
     // if (this.idestate.currentactivity?.lookup === 'core' || this.idestate.currentactivity?.lookup === 'data-flow') {
     //   this.determineprotours();
     //   this.tourbuttons = null;
