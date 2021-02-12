@@ -1,7 +1,7 @@
 import { TutorialModel } from './../models/tutorial.model';
 
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/internal/Subject';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
