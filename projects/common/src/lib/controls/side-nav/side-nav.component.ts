@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators/map';
+import { map } from 'rxjs/operators';
 import { NavListModel } from '../../models/nav-list.model';
 
 @Component({
