@@ -5,9 +5,9 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { StatesModel } from '../../models/states.model';
 import { ReactiveFormService } from '../../services/reactive-form.service';
 import { ReactiveFormModel } from './../../models/reactive-form.model';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/internal/operators/map';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators/map';
+import { Subscription } from 'rxjs';
 import { PasswordValidator, EmailValidator, UserNameValidator, ValidationMessages, ZipcodeValidator } from '@lcu/common';
 import { startWith } from 'rxjs/operators';
 

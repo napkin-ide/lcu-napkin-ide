@@ -1,6 +1,6 @@
 import { Directive, Input, Output, EventEmitter, HostListener, OnInit, OnDestroy, HostBinding, Renderer2, ElementRef } from '@angular/core';
-import { Subject } from 'rxjs/internal/Subject';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { debounceTime, take, timeout } from 'rxjs/operators';
 
 @Directive({

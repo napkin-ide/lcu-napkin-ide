@@ -2,7 +2,7 @@ import { UsersService } from './../../services/user.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'lcu-users-list',
