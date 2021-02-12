@@ -43,17 +43,17 @@ export class IdeComponent implements OnInit {
   constructor(
     protected breakpointObserver: BreakpointObserver,
     protected elRef: ElementRef,
-    protected guidedTourService: GuidedTourService,
-    protected guidedTourState: GuidedTourManagementStateContext,
+    // protected guidedTourService: GuidedTourService,
+    // protected guidedTourState: GuidedTourManagementStateContext,
     protected ideState: IDEStateManagementContext
   ) {
-    this.BotSubItems = this.setBotSubItems();
+    // this.BotSubItems = this.setBotSubItems();
 
-    this.guidedTourService.isTourOpenStream.subscribe(
-      (tourLookup: string) => {
-        this.IsTourOpen = tourLookup ? true : false;
-      }
-    );
+    // this.guidedTourService.isTourOpenStream.subscribe(
+    //   (tourLookup: string) => {
+    //     this.IsTourOpen = tourLookup ? true : false;
+    //   }
+    // );
   }
 
   public ngOnInit(): void {
@@ -80,26 +80,26 @@ export class IdeComponent implements OnInit {
       this.ShowPanels = ideState.ShowPanels;
 
       this.handleStateChanges();
-      this.removeThinkyFromForecast();
+      // this.removeThinkyFromForecast();
     });
 
-    this.guidedTourState.Context.subscribe((guidedTourState: GuidedTourManagementState) => {
-      // console.log('GUIDED TOUR STATE: ', guidedTourState);
-      this.GuidedTourState = guidedTourState;
-      this.Tours = guidedTourState.Tours;
+    // this.guidedTourState.Context.subscribe((guidedTourState: GuidedTourManagementState) => {
+    //   // console.log('GUIDED TOUR STATE: ', guidedTourState);
+    //   this.GuidedTourState = guidedTourState;
+    //   this.Tours = guidedTourState.Tours;
 
-    });
+    // });
   }
 
-  protected removeThinkyFromForecast() {
-    if (!this.IdeState || this.IdeState.Loading) { return; }
+  // protected removeThinkyFromForecast() {
+  //   if (!this.IdeState || this.IdeState.Loading) { return; }
 
-    if (this.IdeState.CurrentActivity.Lookup === 'fathym-forecast') {
-      this.ViewingForecast = true;
-    } else {
-      this.ViewingForecast = false;
-    }
-  }
+  //   if (this.IdeState.CurrentActivity.Lookup === 'fathym-forecast') {
+  //     this.ViewingForecast = true;
+  //   } else {
+  //     this.ViewingForecast = false;
+  //   }
+  // }
 
   public OnComplete(tour: GuidedTour): void {
     console.log(`The tour: '${tour.Lookup}' is complete.`);
@@ -108,11 +108,11 @@ export class IdeComponent implements OnInit {
     }
   }
 
-  public OnSettingsOpened(isOpen: boolean) {
-    if (isOpen) {
-      this.setCurrentTour('pro-settings-tour');
-    }
-  }
+  // public OnSettingsOpened(isOpen: boolean) {
+  //   if (isOpen) {
+  //     this.setCurrentTour('pro-settings-tour');
+  //   }
+  // }
 
   public OnSkipped(tour: GuidedTour): void {
     console.log(`The tour: '${tour.Lookup}' has been skipped.`);
@@ -163,43 +163,43 @@ export class IdeComponent implements OnInit {
     this.IsOpen = !this.IsOpen;
   }
 
-  protected determineProTours(): void {
-    const editor = this.IdeState.CurrentEditor?.Editor;
+  // protected determineProTours(): void {
+  //   const editor = this.IdeState.CurrentEditor?.Editor;
 
-    switch (editor) {
-      case 'lcu-data-apps-config-manager-element':
-        this.setCurrentTour('pro-data-applications-tour');
-        break;
-      case 'lcu-data-flow-manager-element':
-        this.pollForElement('lcu-data-flow-manager-element lcu-data-flow-list-element .mat-list-item a.mat-raised-button',
-          this.startProDataFlowTour);
-        break;
-      default:
-        this.setCurrentTour('pro-welcome-tour');
-        break;
-    }
-  }
+  //   switch (editor) {
+  //     case 'lcu-data-apps-config-manager-element':
+  //       this.setCurrentTour('pro-data-applications-tour');
+  //       break;
+  //     case 'lcu-data-flow-manager-element':
+  //       this.pollForElement('lcu-data-flow-manager-element lcu-data-flow-list-element .mat-list-item a.mat-raised-button',
+  //         this.startProDataFlowTour);
+  //       break;
+  //     default:
+  //       this.setCurrentTour('pro-welcome-tour');
+  //       break;
+  //   }
+  // }
 
-  protected determineTrialTours(): void {
-    const editor = this.IdeState.CurrentEditor?.Editor;
+  // protected determineTrialTours(): void {
+  //   const editor = this.IdeState.CurrentEditor?.Editor;
 
-    switch (editor) {
-      case 'lcu-limited-trial-welcome-element':
-        this.setCurrentTour('limited-trial-tour');
-        this.pollForElement('lcu-limited-trial-welcome-element #startIotDevJourneyBtn', this.startIoTDeveloperTour);
-        break;
-      case 'lcu-limited-trial-data-apps-element':
-        this.setCurrentTour('data-applications-tour');
-        break;
-      case 'lcu-limited-trial-data-flow-element':
-        this.setCurrentTour('data-flow-management-tour');
-        this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour);
-        break;
-      default:
-        this.setCurrentTour('limited-trial-tour');
-        break;
-    }
-  }
+  //   switch (editor) {
+  //     case 'lcu-limited-trial-welcome-element':
+  //       this.setCurrentTour('limited-trial-tour');
+  //       this.pollForElement('lcu-limited-trial-welcome-element #startIotDevJourneyBtn', this.startIoTDeveloperTour);
+  //       break;
+  //     case 'lcu-limited-trial-data-apps-element':
+  //       this.setCurrentTour('data-applications-tour');
+  //       break;
+  //     case 'lcu-limited-trial-data-flow-element':
+  //       this.setCurrentTour('data-flow-management-tour');
+  //       this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour);
+  //       break;
+  //     default:
+  //       this.setCurrentTour('limited-trial-tour');
+  //       break;
+  //   }
+  // }
 
   protected dispatchClickEvent(selector: string): void {
     const element = this.elRef.nativeElement.querySelector(selector);
@@ -212,16 +212,16 @@ export class IdeComponent implements OnInit {
     }
   }
 
-  protected handleStateChanges(): void {
-    if (this.IdeState.CurrentActivity?.Lookup === 'core' || this.IdeState.CurrentActivity?.Lookup === 'data-flow') {
-      this.determineProTours();
-      this.TourButtons = null;
-    } else if (this.IdeState.CurrentActivity?.Lookup === 'limited-trial') {
-      this.determineTrialTours();
-      this.TourButtons = this.setTourButtons();
-    } else {
-      this.setCurrentTour(null);
-    }
+  protected handlestatechanges(): void {
+    // if (this.idestate.currentactivity?.lookup === 'core' || this.idestate.currentactivity?.lookup === 'data-flow') {
+    //   this.determineprotours();
+    //   this.tourbuttons = null;
+    // } else if (this.idestate.currentactivity?.lookup === 'limited-trial') {
+    //   this.determinetrialtours();
+    //   this.tourbuttons = this.settourbuttons();
+    // } else {
+    //   this.setcurrenttour(null);
+    // }
   }
 
   protected openExternalLink(link: string): void {
@@ -255,35 +255,35 @@ export class IdeComponent implements OnInit {
     );
   }
 
-  protected setBotSubItems(): GuideBotSubItem[] {
-    return [
-      new GuideBotSubItem({
-        label: 'Start Tour',
-        icon: 'launch',
-        action: () => this.startTour()
-      }),
-      new GuideBotSubItem({
-        label: 'Support',
-        icon: 'support',
-        action: () => this.openExternalLink('https://support.fathym.com/')
-      }),
-      new GuideBotSubItem({
-        label: 'About Thinky',
-        icon: 'info_outline',
-        action: () => this.openExternalLink('https://fathym.com/2019/08/08/a-new-look-how-we-created-a-refreshed-brand-for-fathym/')
-      })
-    ];
-  }
+  // protected setBotSubItems(): GuideBotSubItem[] {
+  //   return [
+  //     new GuideBotSubItem({
+  //       label: 'Start Tour',
+  //       icon: 'launch',
+  //       action: () => this.startTour()
+  //     }),
+  //     new GuideBotSubItem({
+  //       label: 'Support',
+  //       icon: 'support',
+  //       action: () => this.openExternalLink('https://support.fathym.com/')
+  //     }),
+  //     new GuideBotSubItem({
+  //       label: 'About Thinky',
+  //       icon: 'info_outline',
+  //       action: () => this.openExternalLink('https://fathym.com/2019/08/08/a-new-look-how-we-created-a-refreshed-brand-for-fathym/')
+  //     })
+  //   ];
+  // }
 
-  protected setCurrentTour(lookup: string): void {
-    if (!this.IsTourOpen) {
-      this.CurrentTour = this.Tours ? this.Tours.find((tour: GuidedTour) => tour.Lookup === lookup) : null;
+  // protected setCurrentTour(lookup: string): void {
+  //   if (!this.IsTourOpen) {
+  //     this.CurrentTour = this.Tours ? this.Tours.find((tour: GuidedTour) => tour.Lookup === lookup) : null;
 
-      if (this.GuidedTourState?.CurrentTour?.Lookup !== lookup) {
-        this.guidedTourState.SetActiveTour(lookup);
-      }
-    }
-  }
+  //     if (this.GuidedTourState?.CurrentTour?.Lookup !== lookup) {
+  //       this.guidedTourState.SetActiveTour(lookup);
+  //     }
+  //   }
+  // }
 
   protected setSideBarAction(lookup: string): void {
     if (this.IdeState.CurrentEditor?.Lookup !== `lcu-limited-trial|${lookup}`) {
@@ -291,51 +291,51 @@ export class IdeComponent implements OnInit {
     }
   }
 
-  protected setTourButtons(): ChatTourButton[] {
-    return [
-      {
-        Label: 'Intro',
-        Lookup: 'limited-trial-tour',
-        OpenAction: () => this.setSideBarAction('welcome')
-      },
-      {
-        Label: 'Data Apps',
-        Lookup: 'data-applications-tour',
-        OpenAction: () => this.setSideBarAction('data-apps')
-      },
-      {
-        Label: 'Data Flow Management',
-        Lookup: 'data-flow-management-tour',
-        OpenAction: () => this.setSideBarAction('data-flow')
-      },
-      {
-        Label: 'Data Flow Tools',
-        Lookup: 'data-flow-tool-tour',
-        OpenAction: () => {
-          this.setSideBarAction('data-flow');
-          setTimeout(() => {
-            this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour, true);
-          }, 500);
-        }
-      }
-    ];
-  }
+  // protected setTourButtons(): ChatTourButton[] {
+  //   return [
+  //     {
+  //       Label: 'Intro',
+  //       Lookup: 'limited-trial-tour',
+  //       OpenAction: () => this.setSideBarAction('welcome')
+  //     },
+  //     {
+  //       Label: 'Data Apps',
+  //       Lookup: 'data-applications-tour',
+  //       OpenAction: () => this.setSideBarAction('data-apps')
+  //     },
+  //     {
+  //       Label: 'Data Flow Management',
+  //       Lookup: 'data-flow-management-tour',
+  //       OpenAction: () => this.setSideBarAction('data-flow')
+  //     },
+  //     {
+  //       Label: 'Data Flow Tools',
+  //       Lookup: 'data-flow-tool-tour',
+  //       OpenAction: () => {
+  //         this.setSideBarAction('data-flow');
+  //         setTimeout(() => {
+  //           this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', this.startEmulatedDataFlowTour, true);
+  //         }, 500);
+  //       }
+  //     }
+  //   ];
+  // }
 
-  protected startProDataFlowTour(): void {
-    this.setCurrentTour('pro-data-flow-tour');
-  }
+  // protected startProDataFlowTour(): void {
+  //   this.setCurrentTour('pro-data-flow-tour');
+  // }
 
-  protected startEmulatedDataFlowTour(): void {
-    this.setCurrentTour('data-flow-tool-tour');
-  }
+  // protected startEmulatedDataFlowTour(): void {
+  //   this.setCurrentTour('data-flow-tool-tour');
+  // }
 
-  protected startIoTDeveloperTour(): void {
-    this.setCurrentTour('iot-developer-journey-tour');
-    this.startTour();
-  }
+  // protected startIoTDeveloperTour(): void {
+  //   this.setCurrentTour('iot-developer-journey-tour');
+  //   this.startTour();
+  // }
 
-  protected startTour(tour?: GuidedTour): void {
-    this.guidedTourService.startTour(tour ? tour : this.CurrentTour);
-  }
+  // protected startTour(tour?: GuidedTour): void {
+  //   this.guidedTourService.startTour(tour ? tour : this.CurrentTour);
+  // }
 
 }

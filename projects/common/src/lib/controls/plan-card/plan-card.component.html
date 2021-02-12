@@ -64,8 +64,8 @@
         <div *ngIf="Plan?.Interval">{{ Plan.Interval | titlecase }}ly</div>
       </div>
       <div class="priced-content" fxLayout="row" fxLayoutAlign="center end">
-        <!-- <div *ngIf="Plan?.DiscountedFrom" class="discounted-from" fxLayoutAlign="center center">
-        ${{Plan.DiscountedFrom}}</div> -->
+        <div *ngIf="Plan?.DiscountedFrom" class="discounted-from" fxLayoutAlign="center center">
+        ${{Plan.DiscountedFrom}}</div>
         <div class="dollar-symbol">&nbsp;$</div>
         <div *ngIf="Plan?.Price" class="price" fxLayoutAlign="center center">
           {{ Plan.Price }}&nbsp;
