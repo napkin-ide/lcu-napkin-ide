@@ -4,9 +4,7 @@ import { UserRolesService } from './user-role.service';
 import { UserConstants } from '../utils/constants/user.constants';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user.model';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs/of';
-import { Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 const Users: Array<UserModel> = [
     {
@@ -47,7 +45,6 @@ const Users: Array<UserModel> = [
 @Injectable({
     providedIn: 'root'
 })
-
 export class UsersService {
 
     protected _currentUser: UserModel;

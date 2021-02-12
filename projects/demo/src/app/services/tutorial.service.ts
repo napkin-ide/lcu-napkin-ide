@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TutorialModel } from '../models/tutorial.model';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs/of';
+import { Observable, of } from 'rxjs';
 
 const tutorials: Array<TutorialModel> = [
     {
