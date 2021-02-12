@@ -1,7 +1,7 @@
 import { UsersService } from './../../services/user.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {MediaChange, MediaObserver} from '@angular/flex-layout';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'lcu-dashboard-non-admin',

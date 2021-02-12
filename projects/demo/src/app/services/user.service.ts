@@ -4,9 +4,7 @@ import { UserRolesService } from './user-role.service';
 import { UserConstants } from '../utils/constants/user.constants';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user.model';
-import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs/internal/observable/of';
-import { Subject } from 'rxjs/internal/Subject';
+import { Observable, of, Subject } from 'rxjs';
 
 const Users: Array<UserModel> = [
     {
@@ -47,7 +45,6 @@ const Users: Array<UserModel> = [
 @Injectable({
     providedIn: 'root'
 })
-
 export class UsersService {
 
     protected _currentUser: UserModel;
@@ -77,7 +74,7 @@ export class UsersService {
 
     /**
      * Return single user
-     * 
+     *
      * @param id identifier to find user
      */
     public GetUserById(id: number): UserModel {
@@ -87,7 +84,7 @@ export class UsersService {
 
     /**
      * Check if user's logged in
-     * 
+     *
      * @param id user id
      */
     public IsLoggedIn(): boolean {

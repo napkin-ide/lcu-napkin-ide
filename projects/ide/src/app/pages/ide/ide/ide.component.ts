@@ -1,8 +1,11 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, timer } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { IDEStateManagementContext, IdeManagementState } from '@napkin-ide/lcu-napkin-ide-common';
+import { Component, OnInit, ElementRef } from "@angular/core";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { Observable, timer } from "rxjs";
+import { map } from "rxjs/operators";
+import {
+  IDEStateManagementContext,
+  IdeManagementState,
+} from "@napkin-ide/lcu-napkin-ide-common";
 import {
   GuidedTour,
   GuideBotScreenPosition,
@@ -11,20 +14,20 @@ import {
   GuidedTourManagementState,
   GuidedTourService,
   ChatTourButton,
-  GuideBotSubItem
-} from '@lowcodeunit/lcu-guided-tour-common';
+  GuideBotSubItem,
+} from "@lowcodeunit/lcu-guided-tour-common";
 
 @Component({
-  selector: 'nide-ide',
-  templateUrl: './ide.component.html',
-  styleUrls: ['./ide.component.scss']
+  selector: "nide-ide",
+  templateUrl: "./ide.component.html",
+  styleUrls: ["./ide.component.scss"],
 })
 export class IdeComponent implements OnInit {
-
-  public BotBoundingContainer: string = '#ideMainSideBar';
+  public BotBoundingContainer: string = "#ideMainSideBar";
   public BotPadding: number = 5;
-  public BotZIndex: number =1000;
-  public BotScreenPosition: GuideBotScreenPosition = GuideBotScreenPosition.BottomLeft;
+  public BotZIndex: number = 1000;
+  public BotScreenPosition: GuideBotScreenPosition =
+    GuideBotScreenPosition.BottomLeft;
   public BotSubItems: GuideBotSubItem[];
   public CurrentTour: GuidedTour;
   public EnableChat: boolean = false;
@@ -48,7 +51,6 @@ export class IdeComponent implements OnInit {
     protected ideState: IDEStateManagementContext
   ) {
     // this.BotSubItems = this.setBotSubItems();
-
     // this.guidedTourService.isTourOpenStream.subscribe(
     //   (tourLookup: string) => {
     //     this.IsTourOpen = tourLookup ? true : false;
@@ -57,24 +59,25 @@ export class IdeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.IsHandset$ = this.breakpointObserver.observe([
+    this.IsHandset$ = this.breakpointObserver
+      .observe([
         Breakpoints.Handset,
         Breakpoints.HandsetLandscape,
         Breakpoints.HandsetPortrait,
         Breakpoints.Small,
-        Breakpoints.XSmall
+        Breakpoints.XSmall,
       ])
       .pipe(
         map((result) => {
-          if (this.breakpointObserver.isMatched('(min-width: 960px)')) {
+          if (this.breakpointObserver.isMatched("(min-width: 960px)")) {
             this.IsOpen = true;
           }
-          return this.breakpointObserver.isMatched('(max-width: 959px)');
+          return this.breakpointObserver.isMatched("(max-width: 959px)");
         })
       );
 
     this.ideState.Context.subscribe((ideState: IdeManagementState) => {
-      console.log('IDE State: ', ideState);
+      console.log("IDE State: ", ideState);
       this.IdeState = ideState;
       this.Loading = ideState.Loading;
       this.ShowPanels = ideState.ShowPanels;
@@ -103,16 +106,16 @@ export class IdeComponent implements OnInit {
 
   public OnComplete(tour: GuidedTour): void {
     console.log(`The tour: '${tour.Lookup}' is complete.`);
-    if (tour.Lookup === 'iot-developer-journey-tour') {
-      this.setSideBarAction('welcome');
+    if (tour.Lookup === "iot-developer-journey-tour") {
+      this.setSideBarAction("welcome");
     }
   }
 
-  // public OnSettingsOpened(isOpen: boolean) {
-  //   if (isOpen) {
-  //     this.setCurrentTour('pro-settings-tour');
-  //   }
-  // }
+  public OnSettingsOpened(isOpen: boolean) {
+    //   if (isOpen) {
+    //     this.setCurrentTour('pro-settings-tour');
+    //   }
+  }
 
   public OnSkipped(tour: GuidedTour): void {
     console.log(`The tour: '${tour.Lookup}' has been skipped.`);
@@ -121,37 +124,45 @@ export class IdeComponent implements OnInit {
   public OnStepChanged(step: TourStep): void {
     // console.warn(`onStepChanged() lookup: ${step.Lookup}`);
     switch (step.ID) {
-      case '00000000-0000-0000-0000-000000000021':
-        this.setSideBarAction('welcome');
+      case "00000000-0000-0000-0000-000000000021":
+        this.setSideBarAction("welcome");
         break;
 
-      case '00000000-0000-0000-0000-000000000032':
-        this.dispatchClickEvent('lcu-app-list .mat-card:nth-of-type(1) button');
+      case "00000000-0000-0000-0000-000000000032":
+        this.dispatchClickEvent("lcu-app-list .mat-card:nth-of-type(1) button");
         break;
 
-      case '00000000-0000-0000-0000-000000000061':
-        this.setSideBarAction('data-flow');
+      case "00000000-0000-0000-0000-000000000061":
+        this.setSideBarAction("data-flow");
         break;
 
-      case '00000000-0000-0000-0000-000000000062':
-        if (this.IdeState.CurrentEditor?.Lookup !== `lcu-limited-trial|data-flow`) {
-          this.setSideBarAction('data-flow');
-          this.pollForElement('lcu-data-flow-list-element .mat-card:nth-of-type(1) button', null, true);
+      case "00000000-0000-0000-0000-000000000062":
+        if (
+          this.IdeState.CurrentEditor?.Lookup !== `lcu-limited-trial|data-flow`
+        ) {
+          this.setSideBarAction("data-flow");
+          this.pollForElement(
+            "lcu-data-flow-list-element .mat-card:nth-of-type(1) button",
+            null,
+            true
+          );
         } else {
-          this.dispatchClickEvent('lcu-data-flow-list-element .mat-card:nth-of-type(1) button');
+          this.dispatchClickEvent(
+            "lcu-data-flow-list-element .mat-card:nth-of-type(1) button"
+          );
         }
         break;
 
-      case '00000000-0000-0000-0000-000000000063':
-        this.setSideBarAction('data-apps');
+      case "00000000-0000-0000-0000-000000000063":
+        this.setSideBarAction("data-apps");
         break;
 
-      case '00000000-0000-0000-0000-000000000064':
-        this.dispatchClickEvent('lcu-app-list .mat-card:nth-of-type(1) button');
+      case "00000000-0000-0000-0000-000000000064":
+        this.dispatchClickEvent("lcu-app-list .mat-card:nth-of-type(1) button");
         break;
 
-      case '00000000-0000-0000-0000-000000000082':
-        this.dispatchClickEvent('#dataAppsAddNewAppBtn');
+      case "00000000-0000-0000-0000-000000000082":
+        this.dispatchClickEvent("#dataAppsAddNewAppBtn");
         break;
 
       default:
@@ -203,7 +214,7 @@ export class IdeComponent implements OnInit {
 
   protected dispatchClickEvent(selector: string): void {
     const element = this.elRef.nativeElement.querySelector(selector);
-    const clickEvent = new MouseEvent('click', { bubbles: true, view: window });
+    const clickEvent = new MouseEvent("click", { bubbles: true, view: window });
 
     if (element) {
       element.dispatchEvent(clickEvent);
@@ -212,7 +223,7 @@ export class IdeComponent implements OnInit {
     }
   }
 
-  protected handlestatechanges(): void {
+  protected handleStateChanges(): void {
     // if (this.idestate.currentactivity?.lookup === 'core' || this.idestate.currentactivity?.lookup === 'data-flow') {
     //   this.determineprotours();
     //   this.tourbuttons = null;
@@ -225,34 +236,38 @@ export class IdeComponent implements OnInit {
   }
 
   protected openExternalLink(link: string): void {
-    window.open(link, '_blank');
+    window.open(link, "_blank");
   }
 
-  protected pollForElement(selector: string, bindingFunction?: any, dispatch?: boolean): void {
+  protected pollForElement(
+    selector: string,
+    bindingFunction?: any,
+    dispatch?: boolean
+  ): void {
     let timeElapsed = 0;
     const timeInt = 100;
     const maxTimeElapsed = 10000;
 
-    const visiblePoller$ = timer(0, timeInt).subscribe(
-      (_: any) => {
-        timeElapsed += timeInt;
+    const visiblePoller$ = timer(0, timeInt).subscribe((_: any) => {
+      timeElapsed += timeInt;
 
-        const selectedElement = this.elRef.nativeElement.querySelector(selector);
+      const selectedElement = this.elRef.nativeElement.querySelector(selector);
 
-        if (selectedElement) {
-          if (bindingFunction) {
-            selectedElement.addEventListener('click', bindingFunction.bind(this));
-          }
-          if (dispatch) {
-            this.dispatchClickEvent(selector);
-          }
-          visiblePoller$.unsubscribe();
-        } else if (!selectedElement && timeElapsed >= maxTimeElapsed) {
-          console.warn(`The element: '${selector}' could not be found on the screen.`);
-          visiblePoller$.unsubscribe();
+      if (selectedElement) {
+        if (bindingFunction) {
+          selectedElement.addEventListener("click", bindingFunction.bind(this));
         }
+        if (dispatch) {
+          this.dispatchClickEvent(selector);
+        }
+        visiblePoller$.unsubscribe();
+      } else if (!selectedElement && timeElapsed >= maxTimeElapsed) {
+        console.warn(
+          `The element: '${selector}' could not be found on the screen.`
+        );
+        visiblePoller$.unsubscribe();
       }
-    );
+    });
   }
 
   // protected setBotSubItems(): GuideBotSubItem[] {
@@ -287,7 +302,11 @@ export class IdeComponent implements OnInit {
 
   protected setSideBarAction(lookup: string): void {
     if (this.IdeState.CurrentEditor?.Lookup !== `lcu-limited-trial|${lookup}`) {
-      this.ideState.SelectSideBarAction(lookup, 'lcu-limited-trial', 'Limited Low-Code Unit™ Trials');
+      this.ideState.SelectSideBarAction(
+        lookup,
+        "lcu-limited-trial",
+        "Limited Low-Code Unit™ Trials"
+      );
     }
   }
 
@@ -337,5 +356,4 @@ export class IdeComponent implements OnInit {
   // protected startTour(tour?: GuidedTour): void {
   //   this.guidedTourService.startTour(tour ? tour : this.CurrentTour);
   // }
-
 }
