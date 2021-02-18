@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { IntervalToggleComponent } from './interval-toggle.component';
 
@@ -6,7 +6,7 @@ describe('IntervalToggleComponent', () => {
   let component: IntervalToggleComponent;
   let fixture: ComponentFixture<IntervalToggleComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ IntervalToggleComponent ]
     })

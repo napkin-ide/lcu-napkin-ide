@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OrgInfraComponent } from './org-infra.component';
 
@@ -6,7 +6,7 @@ describe('OrgInfraComponent', () => {
   let component: OrgInfraComponent;
   let fixture: ComponentFixture<OrgInfraComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OrgInfraComponent ]
     })
