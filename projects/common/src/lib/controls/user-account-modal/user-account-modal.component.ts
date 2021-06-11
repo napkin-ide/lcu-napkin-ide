@@ -175,7 +175,7 @@ public DisplayCancelSubscription(){
  */
 public CancelSubscription(){
   this.IsInitialReason = false;
-  this.usersStateCtx.CancelSubscription(this.ReasonForLeaving);
+  this.billingStateCtx.CancelSubscription(this.ReasonForLeaving);
 }
 
 /**
@@ -224,12 +224,14 @@ protected userStateChanged(){
   if(this.UserState.SubscriptionDetails){
     this.NextBillingDate = new Date(this.UserState.SubscriptionDetails.BillingPeriodEnd);
     this.RegisteredSince = new Date(this.UserState.SubscriptionDetails.SubscriptionCreated);
+    this.BillingCycle = this.UserState.SubscriptionDetails.BillingCycle + "ly";
+    this.RegisteredSince = new Date(this.UserState.RegistrationDate);
   }
 
   if(this.UserState.UserLicenses){
     this.UserState.UserLicenses.forEach(lic => {
       if(lic.LicenseType =  "lcu"){
-        this.BillingCycle = lic.Interval +"ly";
+        // this.BillingCycle = lic.Interval +"ly";
         this.ExpirationDate = new Date(lic.ExpirationDate);
         // this.Username = lic.Username;
         this.Package = lic.Name;

@@ -126,15 +126,6 @@ export class UserManagementStateContext extends StateContext<
     });
   }
 
-  public CancelSubscription(reason: string) {
-    this.Execute({
-      Arguments: {
-        CancellationReason: reason
-      },
-      Type: 'CancelSubscription'
-    });
-  }
-
   //  Helpers
   protected defaultValue() {
     return { Loading: true } as UserManagementState;

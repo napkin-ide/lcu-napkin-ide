@@ -21,6 +21,17 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   //  API Methods
+
+  public CancelSubscription(reason: string) {
+    this.Execute({
+      Arguments: {
+        CancellationReason: reason,
+        LicenseType: this.licenseType
+      },
+      Type: 'CancelSubscription'
+    });
+  }
+
   public CompletePayment(
     methodId: string,
     customerName: string,

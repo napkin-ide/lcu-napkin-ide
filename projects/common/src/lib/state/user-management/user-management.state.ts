@@ -51,6 +51,8 @@ export class UserManagementState {
 
   public Status?: Status;
 
+  public RegistrationDate?: Date;
+
   public Template?: string;
 
   public Terms?: string;
@@ -125,6 +127,8 @@ export class StripeSubscriptionDetails{
   public BillingPeriodStart: Date;
 
   public BillingPeriodEnd: Date; 
+
+  public BillingCycle: string;
   
   public BillingStatus: string; 
   
